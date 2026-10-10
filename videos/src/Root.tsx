@@ -3,6 +3,7 @@ import {Composition} from 'remotion';
 import {PerdaoConsolo} from './PerdaoConsolo';
 import {Longe} from './Longe';
 import {LongeV2, V2_DURATION} from './LongeV2';
+import {Video2, V2_FRAMES} from './Video2';
 
 export const Root: React.FC = () => {
   return (
@@ -28,6 +29,14 @@ export const Root: React.FC = () => {
         component={LongeV2}
         durationInFrames={V2_DURATION}
         fps={25}
+        width={1080}
+        height={1920}
+      />
+      <Composition
+        id="Video2"
+        component={Video2}
+        durationInFrames={V2_FRAMES}
+        fps={24}
         width={1080}
         height={1920}
       />

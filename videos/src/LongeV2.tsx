@@ -44,7 +44,7 @@ const mC = (src: number) => src - C0 + START_C;
 const Clip: React.FC<{from: number; to: number; at: number}> = ({from, to, at}) => (
   <Sequence from={s(at)} durationInFrames={s(at + (to - from)) - s(at)}>
     <OffthreadVideo
-      src={staticFile('longe.mp4')}
+      src={staticFile('longe-cor.mp4')}
       trimBefore={s(from)}
       trimAfter={s(to)}
       style={{width: '100%', height: '100%', objectFit: 'cover'}}
@@ -140,17 +140,17 @@ export const LongeV2: React.FC = () => {
       {Q(0, LEN_A, <CallCardV2 />)}
 
       {Q(mB(2.52), mB(6.32), <MapCard tYou={0.45} tHer={1.65} tLine={0.65} />)}
-      {Q(mB(6.32), START_C, <EAgora />)}
+      {Q(mB(6.32), START_C, <EAgora />, 1180)}
 
       {Q(mC(9.8), mC(13.9), <TwoCards />)}
       {Q(mC(14.0), mC(16.0), <MedoRisco />)}
-      {Q(mC(16.0), mC(23.3), <Checklist />, 900)}
+      {Q(mC(16.0), mC(23.3), <Checklist />, 1000)}
       {Q(mC(23.4), mC(27.16), <Emergency />)}
-      {Q(mC(27.16), mC(29.6), <Checklist allNow />, 900)}
+      {Q(mC(27.16), mC(29.6), <Checklist allNow />, 1000)}
       {Q(mC(31.2), mC(33.68), <Sozinho />)}
       {Q(mC(33.68), mC(35.52), <PauseIcon />)}
       {Q(mC(35.52), mC(39.56), <Combinado />)}
-      {Q(mC(39.56), mC(44.6), <Plano />, 940)}
+      {Q(mC(39.56), mC(44.6), <Plano />, 1060)}
       {Q(mC(44.6), mC(47.04), <MapCard tYou={0} tHer={0} tLine={0.7} solid />)}
       {Q(mC(47.04), mC(END), <Cta />)}
 

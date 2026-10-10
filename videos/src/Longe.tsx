@@ -22,7 +22,7 @@ export const FPS = 25;
 export const s = (sec: number) => Math.round(sec * FPS);
 
 // Faixa dos quadros: entre o peito e a legenda do CapCut (que fica perto de 78% da altura)
-export const ZONE_TOP = 980;
+export const ZONE_TOP = 1100;
 
 export const clamp = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
 
@@ -294,12 +294,12 @@ const ITEMS: Array<[number, string]> = [
 
 export const Checklist: React.FC<{allNow?: boolean}> = ({allNow}) => (
   <Card>
-    <div style={{fontSize: 36, fontWeight: 700, opacity: 0.8, marginBottom: 22}}>
+    <div style={{fontSize: 32, fontWeight: 700, opacity: 0.8, marginBottom: 16}}>
       SE CONSEGUIR FALAR COM ELA
     </div>
     {ITEMS.map(([t, text]) => {
       const row = (
-        <div key={text} style={{display: 'flex', alignItems: 'center', gap: 24, marginBottom: 18}}>
+        <div key={text} style={{display: 'flex', alignItems: 'center', gap: 22, marginBottom: 12}}>
           <div
             style={{
               width: 40,
@@ -309,7 +309,7 @@ export const Checklist: React.FC<{allNow?: boolean}> = ({allNow}) => (
               borderRadius: 8,
             }}
           />
-          <div style={{fontSize: 42, lineHeight: 1.2}}>{text}</div>
+          <div style={{fontSize: 38, lineHeight: 1.15}}>{text}</div>
         </div>
       );
       return allNow ? row : (

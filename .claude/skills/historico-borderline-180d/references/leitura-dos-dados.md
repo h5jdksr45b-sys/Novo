@@ -3,8 +3,8 @@
 ## Origem e período
 
 - Conta: @drfabioschmidt (Instagram, id 17841401503370732), conector `instagram` do Windsor.
-- Período: publicações de 2026-04-13 a 2026-10-09. Coleta em 2026-10-10.
-- 356 publicações: 234 Reels, 119 carrosséis, 3 imagens. Cada conteúdo aparece uma vez. Reenvios do mesmo conteúdo ficam no campo `flags` como `cop=`.
+- Período: publicações de 2026-04-13 a 2026-10-10. Coleta em 2026-10-10. Hora de publicação e métricas dos últimos 14 dias atualizadas em 2026-10-10.
+- 357 publicações: 235 Reels, 119 carrosséis, 3 imagens. Cada conteúdo aparece uma vez. Reenvios do mesmo conteúdo ficam no campo `flags` como `cop=`.
 - Excluídos: dois posts de teste (legenda "FABIO", 3 views; Reel "Em 1960...", 1 view).
 
 ## Colunas
@@ -12,6 +12,7 @@
 | Coluna | O que é | Natureza |
 |---|---|---|
 | data | Dia da publicação (UTC) | fato do Instagram |
+| hora | Hora da publicação em Brasília (UTC-3), HH:MM. Atenção: posts entre 21h e 23h59 de Brasília aparecem com a data do dia seguinte, porque `data` é UTC | fato do Instagram |
 | fmt | R = Reel, C = carrossel, I = imagem | fato do Instagram |
 | codigo | Código do post. Reel: instagram.com/reel/CODIGO. Carrossel e imagem: instagram.com/p/CODIGO | fato do Instagram |
 | views | Visualizações do post | fato do Instagram |
@@ -59,6 +60,7 @@ Um eixo por publicação. É uma etiqueta para varrer o arquivo, não uma lista 
 - `terceiro`: reação a vídeo ou cena de outra pessoa.
 - `colab`: menção ou parceria com outro perfil.
 - `linehan`: cita Linehan (1993). Confirmar a referência antes de repetir.
+- `recente`: post com menos de 1 dia na coleta; métricas ainda zeradas.
 - `anomalia`: dado inconsistente no Instagram (alcance maior que views em DZfv2ivFB6W).
 - "(legenda genérica)" no fim da tese: legenda curta, sem situação concreta. Leitura minha, não um julgamento sobre o vídeo.
 
@@ -75,7 +77,7 @@ Um eixo por publicação. É uma etiqueta para varrer o arquivo, não uma lista 
 ## Como atualizar o arquivo
 
 1. `get_data` do conector `instagram`, conta 17841401503370732.
-2. Campos de conteúdo: `timestamp, media_id, media_type, media_permalink, media_caption, media_views, media_reach, media_shares, media_saved, media_total_like_count, media_total_comments_count`.
+2. Campos de conteúdo (o `timestamp` vem em UTC; grave a hora em Brasília, UTC-3): `timestamp, media_id, media_type, media_permalink, media_caption, media_views, media_reach, media_shares, media_saved, media_total_like_count, media_total_comments_count`.
 3. Campos de retenção, em chamada separada: `media_permalink, media_reel_avg_watch_time, media_reel_skip_rate`.
 4. Use janelas de 14 dias. Janelas de 60 dias deram timeout. A de 14 dias respondeu bem, em até seis chamadas paralelas.
 5. Cruze retenção e conteúdo pelo `media_permalink`.

@@ -16,7 +16,7 @@ import sys
 from collections import Counter
 
 ARQ = pathlib.Path(__file__).resolve().parent.parent / "references" / "posts-180d.psv"
-COLS = ["data", "fmt", "codigo", "views", "alcance", "compart", "salvos",
+COLS = ["data", "hora", "fmt", "codigo", "views", "alcance", "compart", "salvos",
         "curtidas", "coment", "ret_ms", "skip3s", "cta", "eixo", "flags", "tese"]
 FMT = {"R": "Reel", "C": "Carrossel", "I": "Imagem"}
 

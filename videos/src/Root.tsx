@@ -4,6 +4,9 @@ import {PerdaoConsolo} from './PerdaoConsolo';
 import {Longe} from './Longe';
 import {LongeV2, V2_DURATION} from './LongeV2';
 import {Video2, V2_FRAMES} from './Video2';
+import {CursoTPB, CURSO_FRAMES} from './CursoTPB';
+import {DilemaTPB, DILEMA_FRAMES} from './DilemaTPB';
+import {EscalonadoTPB, ESCALONADO_FRAMES} from './EscalonadoTPB';
 
 export const Root: React.FC = () => {
   return (
@@ -40,6 +43,16 @@ export const Root: React.FC = () => {
         width={1080}
         height={1920}
       />
+      <Composition
+        id="CursoTPB"
+        component={CursoTPB}
+        durationInFrames={CURSO_FRAMES}
+        fps={30}
+        width={1080}
+        height={1920}
+      />
+      <Composition id="DilemaTPB" component={DilemaTPB} durationInFrames={DILEMA_FRAMES} fps={30} width={1080} height={1920} />
+      <Composition id="EscalonadoTPB" component={EscalonadoTPB} durationInFrames={ESCALONADO_FRAMES} fps={30} width={1080} height={1920} />
     </>
   );
 };

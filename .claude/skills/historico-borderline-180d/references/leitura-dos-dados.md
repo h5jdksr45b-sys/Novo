@@ -60,6 +60,7 @@ Um eixo por publicação. É uma etiqueta para varrer o arquivo, não uma lista 
 - `terceiro`: reação a vídeo ou cena de outra pessoa.
 - `colab`: menção ou parceria com outro perfil.
 - `linehan`: cita Linehan (1993). Confirmar a referência antes de repetir.
+- `trial`: Reel tratado como trial (mostrado primeiro a quem não segue). A API não informa isso. Regra combinada com o Dr. Fabio em 10/10/2026: todo Reel com alcance abaixo de 600 é trial. Há um corte natural nos dados (66 Reels abaixo de 600 e só 4 entre 600 e 1.000 até 03/10). É inferência, não confirmação post a post. Em Reels novos, reaplique a regra depois de 7 dias.
 - `recente`: post com menos de 1 dia na coleta; métricas ainda zeradas.
 - `anomalia`: dado inconsistente no Instagram (alcance maior que views em DZfv2ivFB6W).
 - "(legenda genérica)" no fim da tese: legenda curta, sem situação concreta. Leitura minha, não um julgamento sobre o vídeo.

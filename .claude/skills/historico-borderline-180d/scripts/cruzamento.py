@@ -4,6 +4,7 @@
 Uso (a partir da pasta da skill):
     python3 -I scripts/cruzamento.py              # Reels
     python3 -I scripts/cruzamento.py --fmt C      # carrosseis
+    python3 -I scripts/cruzamento.py --trial      # so Reels trial (flag trial)
 
 Mostra mediana e n de cada grupo, metrica por metrica. Nao calcula nota,
 limiar nem previsao. Posts com menos de 7 dias ficam de fora.
@@ -62,9 +63,11 @@ def tabela(titulo, grupos, ordem, fmt):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--fmt", default="R", choices=["R", "C"])
+    ap.add_argument("--trial", action="store_true", help="mostra so os Reels trial")
     a = ap.parse_args()
     corte = dt.date.today() - dt.timedelta(days=7)
     ps = [r for r in carregar() if r["fmt"] == a.fmt and r["data"] <= corte and r["hora"]]
+    ps = [r for r in ps if ("trial" in r["flags"]) == a.trial]
     for r in ps:
         h, m = map(int, r["hora"].split(":"))
         d = r["data"]
@@ -72,7 +75,7 @@ def main():
             d -= dt.timedelta(days=1)
         r["_faixa"], r["_dia"], r["_mes"] = faixa(h), DIAS[d.weekday()], d.strftime("%Y-%m")
 
-    nome = "Reels" if a.fmt == "R" else "Carrosseis"
+    nome = ("Reels trial" if a.trial else "Reels sem trial") if a.fmt == "R" else "Carrosseis"
     print(f"{nome}: {len(ps)} posts ate {corte} (mediana por grupo; ret em segundos absolutos).")
     print("Descreve o que aconteceu. Grupos se confundem entre si (mes, tema, formato do video).")
 

@@ -13,21 +13,21 @@ import {
 } from 'remotion';
 
 // Paleta e tipografia da marca
-const RED = '#ff3b30';
-const WHITE = '#f4f1ea';
-const CARD = 'rgba(12,12,12,0.86)';
-const FONT = 'Inter, Helvetica, Arial, sans-serif';
+export const RED = '#ff3b30';
+export const WHITE = '#f4f1ea';
+export const CARD = 'rgba(12,12,12,0.86)';
+export const FONT = 'Inter, Helvetica, Arial, sans-serif';
 
-const FPS = 25;
-const s = (sec: number) => Math.round(sec * FPS);
+export const FPS = 25;
+export const s = (sec: number) => Math.round(sec * FPS);
 
 // Faixa dos quadros: entre o peito e a legenda do CapCut (que fica perto de 78% da altura)
-const ZONE_TOP = 980;
+export const ZONE_TOP = 980;
 
-const clamp = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
+export const clamp = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
 
 // Entrada e saída suaves para qualquer quadro
-const Appear: React.FC<{dur: number; children: React.ReactNode; top?: number}> = ({
+export const Appear: React.FC<{dur: number; children: React.ReactNode; top?: number}> = ({
   dur,
   children,
   top = ZONE_TOP,
@@ -56,7 +56,7 @@ const Appear: React.FC<{dur: number; children: React.ReactNode; top?: number}> =
   );
 };
 
-const Card: React.FC<{children: React.ReactNode; border?: string; pad?: string}> = ({
+export const Card: React.FC<{children: React.ReactNode; border?: string; pad?: string}> = ({
   children,
   border = 'rgba(244,241,234,0.35)',
   pad = '44px 52px',
@@ -74,7 +74,7 @@ const Card: React.FC<{children: React.ReactNode; border?: string; pad?: string}>
 );
 
 // Mostra o filho a partir de um instante local (em segundos dentro da Sequence)
-const At: React.FC<{t: number; children: React.ReactNode}> = ({t, children}) => {
+export const At: React.FC<{t: number; children: React.ReactNode}> = ({t, children}) => {
   const f = useCurrentFrame();
   const o = interpolate(f, [s(t), s(t) + 5], [0, 1], clamp);
   const y = interpolate(f, [s(t), s(t) + 7], [16, 0], clamp);
@@ -83,7 +83,7 @@ const At: React.FC<{t: number; children: React.ReactNode}> = ({t, children}) => 
 
 // ---------- Quadros ----------
 
-const Hook: React.FC = () => (
+export const Hook: React.FC = () => (
   <div style={{textAlign: 'center', fontWeight: 800, fontSize: 84, lineHeight: 1.1}}>
     <div style={{textShadow: '0 4px 24px rgba(0,0,0,0.6)'}}>ELA ESTÁ EM CRISE.</div>
     <At t={0.6}>
@@ -140,7 +140,7 @@ const Pin: React.FC<{x: number; t: number; label: string; color: string; pulse?:
 };
 
 // Mapa: dois pontos ligados por linha. Modo tracejado (distância) ou contínuo (ligação)
-const MapCard: React.FC<{tYou: number; tHer: number; tLine: number; solid?: boolean}> = ({
+export const MapCard: React.FC<{tYou: number; tHer: number; tLine: number; solid?: boolean}> = ({
   tYou,
   tHer,
   tLine,
@@ -217,7 +217,7 @@ const CallCard: React.FC = () => {
   );
 };
 
-const TwoCards: React.FC = () => {
+export const TwoCards: React.FC = () => {
   const f = useCurrentFrame();
   const both = f >= s(2.2); // 12,0 s global
   const box = (title: string, lines: React.ReactNode, accent: string) => (
@@ -268,7 +268,7 @@ const TwoCards: React.FC = () => {
   );
 };
 
-const MedoRisco: React.FC = () => {
+export const MedoRisco: React.FC = () => {
   const f = useCurrentFrame();
   const h = interpolate(f, [s(0.35), s(0.35) + 10], [0, 200], {...clamp, easing: Easing.out(Easing.cubic)});
   return (
@@ -292,7 +292,7 @@ const ITEMS: Array<[number, string]> = [
   [5.0, 'Está ferida ou pode tomar alguma coisa?'],
 ];
 
-const Checklist: React.FC<{allNow?: boolean}> = ({allNow}) => (
+export const Checklist: React.FC<{allNow?: boolean}> = ({allNow}) => (
   <Card>
     <div style={{fontSize: 36, fontWeight: 700, opacity: 0.8, marginBottom: 22}}>
       SE CONSEGUIR FALAR COM ELA
@@ -321,7 +321,7 @@ const Checklist: React.FC<{allNow?: boolean}> = ({allNow}) => (
   </Card>
 );
 
-const Emergency: React.FC = () => (
+export const Emergency: React.FC = () => (
   <Card border={RED}>
     <div style={{textAlign: 'center'}}>
       <div style={{fontSize: 70, fontWeight: 900, color: RED}}>EMERGÊNCIA</div>
@@ -335,7 +335,7 @@ const Emergency: React.FC = () => (
   </Card>
 );
 
-const Sozinho: React.FC = () => (
+export const Sozinho: React.FC = () => (
   <div style={{textAlign: 'center', textShadow: '0 4px 24px rgba(0,0,0,0.6)'}}>
     <div style={{fontSize: 48, fontWeight: 800}}>NÃO FIQUE</div>
     <div style={{fontSize: 120, fontWeight: 900, color: RED, lineHeight: 1}}>SOZINHO</div>
@@ -343,7 +343,7 @@ const Sozinho: React.FC = () => (
   </div>
 );
 
-const PauseIcon: React.FC = () => {
+export const PauseIcon: React.FC = () => {
   const f = useCurrentFrame();
   const {fps} = useVideoConfig();
   const sc = spring({frame: f - s(0.3), fps, config: {damping: 10}});
@@ -406,7 +406,7 @@ const Clock: React.FC = () => {
   );
 };
 
-const Combinado: React.FC = () => (
+export const Combinado: React.FC = () => (
   <Card>
     <div style={{display: 'flex', alignItems: 'center', gap: 44, justifyContent: 'center'}}>
       <At t={0.5}>
@@ -420,7 +420,7 @@ const Combinado: React.FC = () => (
   </Card>
 );
 
-const Plano: React.FC = () => {
+export const Plano: React.FC = () => {
   // começa em 39,56 s
   const col = (title: string, t: number) => (
     <At t={t}>
@@ -455,7 +455,7 @@ const Plano: React.FC = () => {
   );
 };
 
-const Cta: React.FC = () => (
+export const Cta: React.FC = () => (
   <Card>
     <div style={{textAlign: 'center'}}>
       <div style={{fontSize: 52, fontWeight: 800, lineHeight: 1.2}}>
@@ -482,7 +482,7 @@ const zoomAt = (f: number) => {
   return 1;
 };
 
-const Grain: React.FC = () => {
+export const Grain: React.FC = () => {
   const f = useCurrentFrame();
   const seed = Math.floor(f / 2);
   return (

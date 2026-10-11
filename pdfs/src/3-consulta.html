@@ -1,0 +1,89 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>Consulta com Dr. Fabio Schmidt</title><style>
+@page { size: A4; margin: 0 }
+* { box-sizing: border-box; margin: 0; padding: 0 }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact }
+body { font-family: 'Inter', sans-serif; color: #1E1E1E; font-size: 11.6pt; line-height: 1.5 }
+.serif { font-family: 'Bitstream Charter', 'Caladea', serif }
+.page { width: 210mm; height: 297mm; position: relative; overflow: hidden; background: #F3EFE8; padding: 22mm 20mm 24mm; page-break-after: always }
+.page:last-child { page-break-after: auto }
+.foot { position: absolute; left: 20mm; right: 20mm; bottom: 10mm; display: flex; justify-content: space-between; font-size: 8pt; color: #8A847C }
+.cover { background: #1F4E5A; color: #F4F1EC; padding: 28mm 22mm }
+.cover .tag { font-size: 9pt; letter-spacing: .14em; text-transform: uppercase; color: #E0A43A; font-weight: 600 }
+.cover h1 { font-family: 'Bitstream Charter', serif; font-size: 40pt; line-height: 1.05; letter-spacing: -.02em; margin: 90mm 0 10mm; font-weight: 700 }
+.cover p { font-size: 13pt; line-height: 1.45; max-width: 140mm; color: #D8E3E6 }
+.cover .by { position: absolute; left: 22mm; right: 22mm; bottom: 22mm; border-top: 1px solid rgba(244,241,236,.3); padding-top: 6mm; font-size: 10pt; color: #D8E3E6 }
+.cover .dot { width: 14px; height: 14px; border-radius: 99px; background: #E0A43A; display: inline-block; margin-right: 8px }
+.kicker { font-size: 9pt; letter-spacing: .12em; text-transform: uppercase; font-weight: 700; color: #B3603E; margin-bottom: 4mm }
+.num { font-family: 'Bitstream Charter', serif; font-size: 54pt; color: #B3603E; line-height: 1; margin-bottom: 2mm }
+h2 { font-family: 'Bitstream Charter', serif; font-size: 26pt; line-height: 1.08; letter-spacing: -.015em; margin-bottom: 6mm; color: #1F4E5A }
+h3 { font-family: 'Bitstream Charter', serif; font-size: 14pt; line-height: 1.2; margin-bottom: 2mm; color: #1F4E5A }
+p { margin-bottom: 4mm }
+.lead { font-size: 13.5pt; line-height: 1.5; color: #1E1E1E }
+.card { background: #FBFAF7; border-radius: 10px; padding: 6mm 7mm; box-shadow: 0 1px 0 rgba(0,0,0,.05) }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm }
+.tight .card { padding: 4mm 5.5mm } .tight .card p { font-size: 10pt; line-height: 1.4 } .tight h3 { font-size: 12.5pt }
+.grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4mm }
+.sky { background: #D3E3EA } .sage { background: #DCE6D2 } .blush { background: #F4DCCF } .sand { background: #F6E6C4 }
+.safety { border: 2px solid #B3603E; background: #FBFAF7; border-radius: 10px; padding: 5mm 6mm; font-size: 10pt }
+.safety b { color: #B3603E }
+.big { font-family: 'Bitstream Charter', serif; font-size: 17pt; line-height: 1.25; color: #1F4E5A; font-weight: 700 }
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; margin-bottom: 3mm }
+.pair div { border-radius: 8px; padding: 3.2mm 4.2mm; font-size: 10.6pt; line-height: 1.4 }
+.pair .no { background: #F4DCCF } .pair .yes { background: #DCE6D2 }
+.pair small { display: block; font-size: 7.4pt; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; margin-bottom: 1mm }
+.pair .no small { color: #B3603E } .pair .yes small { color: #3F6B45 }
+.why { font-size: 9.4pt; color: #5E5850; margin: -1mm 0 4.5mm 1mm }
+.sc { font-weight: 700; color: #1F4E5A; font-size: 11.6pt; margin: 0 0 1.5mm }
+ul.clean { list-style: none } ul.clean li { padding-left: 6mm; position: relative; margin-bottom: 2.2mm }
+ul.clean li::before { content: ''; position: absolute; left: 0; top: 2.4mm; width: 7px; height: 7px; border-radius: 99px; background: #B3603E }
+.flow { display: grid; grid-template-columns: 1fr 9mm 1fr 9mm 1fr; align-items: stretch; margin: 6mm 0 }
+.flow .arrow { display: flex; align-items: center; justify-content: center; color: #B3603E; font-size: 18pt }
+.flow .card { font-size: 10.4pt } .flow h3 { font-size: 12pt }
+.legal { font-size: 8pt; color: #6B655E; line-height: 1.4 }
+.price { font-family: 'Bitstream Charter', serif; font-size: 24pt; font-weight: 700; color: #1F4E5A; line-height: 1.1 }
+.btn { display: inline-block; background: #1F4E5A; color: #F4F1EC; font-weight: 700; font-size: 10pt; padding: 3mm 6mm; border-radius: 99px; text-decoration: none; margin: 1mm 2mm 1mm 0 }
+.btn.alt { background: #B3603E }
+a { color: inherit }
+.steps { counter-reset: s } .steps .card { display: grid; grid-template-columns: 12mm 1fr; gap: 4mm; align-items: start; margin-bottom: 3.5mm; padding: 4.5mm 6mm }
+.steps .card::before { counter-increment: s; content: counter(s); font-family: 'Bitstream Charter', serif; font-size: 24pt; color: #B3603E; line-height: 1 }
+.steps h3 { margin-bottom: 1mm } .steps p { margin: 0; font-size: 10.6pt }
+</style></head><body><section class="page cover">
+      <div class="tag"><span class="dot"></span>Consulta médica</div>
+      <h1>Consulta com Dr. Fabio Schmidt</h1>
+      <p>Cuidado médico dedicado ao transtorno de personalidade borderline, em adolescentes e adultos, com a família como parte do tratamento.</p>
+      <div class="by"><b>Dr. Fabio Schmidt</b><br>Médico · CRM-SP 183549 · Consultório em Mogi das Cruzes, SP</div></section><section class="page">
+      <div style="display:grid;grid-template-columns:58mm 1fr;gap:8mm;align-items:start">
+        <img src="foto-000.png" style="width:58mm;border-radius:10px;display:block">
+        <div><div class="kicker">Quem atende</div><h2 style="font-size:22pt">Dr. Fabio Schmidt</h2>
+        <p>Médico, pós-graduado em psiquiatria, com foco no transtorno de personalidade borderline. Dez anos de atuação em CAPS e consultório próprio em Mogi das Cruzes, SP. Atendimento individual e de casal. CRM-SP 183549.</p>
+        <p>Autor de <i>Quem Sofre Não Escolhe Como Gritar</i> e criador do Protocolo 7 Dias. Produz conteúdo educativo diário em @drfabioschmidt.</p></div></div>
+      <div class="card sky" style="margin-top:8mm"><div class="big">O transtorno de personalidade borderline tem tratamento.</div><p style="margin:3mm 0 0">Meu trabalho parte dessa convicção, com um cuidado realista e humano.</p></div>
+      <h3 style="margin-top:8mm">Como eu trabalho</h3>
+      <p>Adoto o GPM-A (Good Psychiatric Management for Adolescents), modelo desenvolvido no McLean Hospital, vinculado a Harvard. Na prática:</p>
+      <ul class="clean"><li>O diagnóstico é comunicado de forma aberta, clara e acolhedora, dissipando mitos.</li><li>O foco está na vida real fora do consultório: escola, trabalho e relacionamentos.</li><li>A família participa ativamente do tratamento, como rede de apoio e não como espectadora.</li><li>A medicação é prescrita de forma colaborativa, com alvos definidos e por tempo determinado.</li><li>Ajudo a entender e a nomear o que se sente, para ressignificar a vivência.</li></ul><div class="foot"><span>Dr. Fabio Schmidt · Médico · CRM-SP 183549</span><span>2 / 5</span></div></section><section class="page">
+      <div class="kicker">Consultas e pacotes</div><h2>Valores</h2>
+      <div class="grid2">
+        <div class="card sky"><div class="kicker">Primeira consulta</div><div class="price">R$ 700</div><p style="margin:2mm 0 0;font-size:10.6pt">Avaliação inicial completa e anamnese detalhada.</p></div>
+        <div class="card sky"><div class="kicker">Consulta de retorno</div><div class="price">R$ 650</div><p style="margin:2mm 0 0;font-size:10.6pt">Acompanhamento contínuo da evolução clínica.</p></div>
+        <div class="card sand"><div class="kicker">Pacote simples</div><div class="price">R$ 2.200</div><p style="margin:2mm 0 0;font-size:10.6pt">4 consultas, a R$ 550 cada. Parcelamento em até 3x no cartão.</p></div>
+        <div class="card sage"><div class="kicker">Plano suporte</div><div class="price">R$ 2.900</div><p style="margin:2mm 0 0;font-size:10.6pt">4 consultas com prioridade na agenda, suporte combinado via WhatsApp e materiais de apoio e orientações exclusivas.</p></div>
+      </div>
+      <p class="why" style="margin-top:4mm">O agendamento é confirmado após a confirmação do pagamento via Asaas.</p>
+      <div class="safety" style="margin-top:6mm"><b>Os pacotes não substituem atendimento de crise.</b> Em crise grave, procure o pronto-socorro mais próximo, ligue para o SAMU 192 ou para o CVV 188 (gratuito, 24 horas).</div><div class="foot"><span>Dr. Fabio Schmidt · Médico · CRM-SP 183549</span><span>3 / 5</span></div></section><section class="page">
+      <div class="kicker">Como agendar</div><h2>Em quatro passos</h2>
+      <div class="steps">
+        <div class="card sky"><div><h3>Escolha a modalidade</h3><p>Primeira consulta, retorno ou um dos pacotes, conforme a página de valores.</p></div></div>
+        <div class="card sand"><div><h3>Fale com a equipe</h3><p>Pelo site www.drfabioschmidt.net ou por mensagem direta no Instagram @drfabioschmidt, para combinar dia e horário.</p></div></div>
+        <div class="card sage"><div><h3>Confirme o pagamento</h3><p>O horário é confirmado após o pagamento via Asaas.</p></div></div>
+        <div class="card sky"><div><h3>Preencha a pré-consulta</h3><p>Um questionário de cerca de 2 minutos que ajuda a tornar a consulta mais assertiva. Anote também queixas, medicamentos em uso e dúvidas.</p></div></div>
+      </div>
+      <p style="margin-top:6mm"><a class="btn alt" href="https://consultadrfabio.base44.app/">Preencher a pré-consulta</a><a class="btn" href="https://www.drfabioschmidt.net">Agendar pelo site</a><a class="btn" href="https://instagram.com/drfabioschmidt">Mensagem no Instagram</a></p>
+      <p class="legal" style="margin-top:6mm">Dúvidas sobre agenda e horários: mensagem direta em @drfabioschmidt ou www.drfabioschmidt.net.</p><div class="foot"><span>Dr. Fabio Schmidt · Médico · CRM-SP 183549</span><span>4 / 5</span></div></section><section class="page">
+      <div class="kicker">Antes de vir</div><h2>O que levar e o que esperar</h2>
+      <div class="grid2">
+        <div class="card sky"><h3>Leve</h3><ul class="clean" style="margin:0;font-size:10.6pt"><li>Pré-consulta preenchida.</li><li>Lista dos medicamentos em uso.</li><li>Exames e relatórios anteriores, se houver.</li><li>Uma pessoa de confiança, se quiser. A família faz parte do cuidado.</li></ul></div>
+        <div class="card sage"><h3>Espere</h3><ul class="clean" style="margin:0;font-size:10.6pt"><li>Uma avaliação inicial completa, com história detalhada.</li><li>Conversa clara sobre o que está acontecendo, sem rótulo vazio.</li><li>Um plano combinado, com foco na sua vida real.</li></ul></div>
+      </div>
+      <div class="card" style="margin:6mm 0"><div class="big">Pedir ajuda é o começo do cuidado.</div></div>
+      <div class="safety"><b>Esta consulta não é atendimento de emergência.</b> Em risco imediato, ligue para o CVV 188 (gratuito, 24 horas), para o SAMU 192, ou procure o pronto-socorro mais próximo.</div>
+      <p class="legal" style="margin-top:10mm">Informações de caráter educativo e de divulgação do serviço médico. Não substituem avaliação individual e não oferecem diagnóstico, prescrição ou promessa de resultado. Dr. Fabio Schmidt · Médico · CRM-SP 183549 · www.drfabioschmidt.net · @drfabioschmidt</p><div class="foot"><span>Dr. Fabio Schmidt · Médico · CRM-SP 183549</span><span>5 / 5</span></div></section></body></html>

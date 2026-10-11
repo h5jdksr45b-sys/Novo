@@ -36,6 +36,7 @@ const LEGENDAS = [
   { from: a(5) + f(4.4), to: a(5) + f(6.6), text: "O link está aqui embaixo." },
 ];
 
+// Legenda inferior desativada a pedido. Reative incluindo <Legenda /> na composição.
 const Legenda: React.FC = () => {
   const frame = useCurrentFrame();
   const l = LEGENDAS.find((x) => frame >= x.from && frame < x.to);
@@ -86,6 +87,5 @@ export const OrigemNarrada: React.FC = () => (
         <Audio src={staticFile(`audio/${x.file}`)} />
       </Sequence>
     ))}
-    <Legenda />
   </AbsoluteFill>
 );

@@ -224,7 +224,7 @@ const Cena2Argumentos: React.FC = () => {
   );
 };
 
-const Cover: React.FC<{ width: number; rotate?: number }> = ({ width, rotate = 0 }) => (
+export const Cover: React.FC<{ width: number; rotate?: number }> = ({ width, rotate = 0 }) => (
   <div style={{ width, transform: `rotate(${rotate}deg)`, filter: "drop-shadow(0 40px 34px rgba(0,0,0,.28)) drop-shadow(0 3px 5px rgba(0,0,0,.15))" }}>
     <Img src={staticFile("capa.jpg")} style={{ width: "100%", display: "block", clipPath: "inset(0.6% 1.2% 0.6% 1.2% round 4px)" }} />
   </div>

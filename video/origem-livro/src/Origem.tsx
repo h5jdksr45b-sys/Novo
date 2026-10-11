@@ -72,7 +72,7 @@ const bubblePath = (() => {
   return `M${pts.join(" L")} Z`;
 })();
 
-const Cena1Grito: React.FC = () => {
+export const Cena1Grito: React.FC = () => {
   const frame = useCurrentFrame();
   const doc = useSpring(30, { damping: 11, mass: 0.9 });
   const bubble = useSpring(55, { damping: 9, mass: 0.7 });
@@ -185,7 +185,7 @@ const Palavra: React.FC<{ start: number; index: number }> = ({ start, index }) =
   );
 };
 
-const Cena2Argumentos: React.FC = () => {
+export const Cena2Argumentos: React.FC = () => {
   const frame = useCurrentFrame();
   const throws = [16, 16 + THROW_EVERY, 16 + THROW_EVERY * 2, 16 + THROW_EVERY * 3, 16 + THROW_EVERY * 4];
   const diploma = useSpring(4, { damping: 12, mass: 0.7 });
@@ -232,7 +232,7 @@ export const Cover: React.FC<{ width: number; rotate?: number }> = ({ width, rot
   </div>
 );
 
-const Cena3Nome: React.FC = () => {
+export const Cena3Nome: React.FC = () => {
   const frame = useCurrentFrame();
   const { width } = useVideoConfig();
   const swipe = useSpring(38, { damping: 16, mass: 0.9 });
@@ -321,13 +321,15 @@ const Card: React.FC<{ data: CardData; index: number; total: number }> = ({ data
   );
 };
 
-const Cena4Mecanismo: React.FC<{ lista?: CardData[]; cardDur?: number }> = ({ lista = cards, cardDur = CARD }) => {
+export const Cena4Mecanismo: React.FC<{ lista?: CardData[]; cardDur?: number; durs?: number[] }> = ({ lista = cards, cardDur = CARD, durs }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const CARD = cardDur;
   const CARDS = lista.length;
-  const active = Math.min(Math.floor(frame / CARD), CARDS - 1);
-  const local = frame - active * CARD;
+  const dd = durs ?? lista.map(() => cardDur);
+  const starts = dd.reduce<number[]>((a, d, i) => [...a, i === 0 ? 0 : a[i - 1] + dd[i - 1]], []);
+  let active = 0;
+  starts.forEach((st, i) => { if (frame >= st) active = i; });
+  const local = frame - starts[active];
   const hintIn = interpolate(frame, [20, 34, 70, 84], [0, 1, 1, 0], clamp);
   const hintX = interpolate(frame, [34, 70], [120, -160], { ...clamp, easing: Easing.inOut(Easing.cubic) });
   return (
@@ -336,8 +338,8 @@ const Cena4Mecanismo: React.FC<{ lista?: CardData[]; cardDur?: number }> = ({ li
         O que o livro explica
       </div>
       {lista.map((c, i) => {
-        const enter = i === 0 ? 1 : spring({ frame: frame - i * CARD, fps, config: { damping: 17, mass: 0.9 } });
-        const exit = i < CARDS - 1 ? spring({ frame: frame - (i + 1) * CARD + 8, fps, config: { damping: 17, mass: 0.9 } }) : 0;
+        const enter = i === 0 ? 1 : spring({ frame: frame - starts[i], fps, config: { damping: 17, mass: 0.9 } });
+        const exit = i < CARDS - 1 ? spring({ frame: frame - starts[i + 1] + 8, fps, config: { damping: 17, mass: 0.9 } }) : 0;
         if (i > active + 1 || (i < active && exit >= 0.999)) return null;
         const behind = i > active;
         const x = behind ? 0 : (1 - enter) * 1000 - exit * 1150;
@@ -400,7 +402,7 @@ const Cena4Mecanismo: React.FC<{ lista?: CardData[]; cardDur?: number }> = ({ li
   );
 };
 
-const Cena5Fechamento: React.FC<{ story?: boolean }> = ({ story = false }) => {
+export const Cena5Fechamento: React.FC<{ story?: boolean }> = ({ story = false }) => {
   const frame = useCurrentFrame();
   const book = useSpring(6, { damping: 13, mass: 0.9 });
   const line = useSpring(30);
@@ -495,7 +497,7 @@ export const Origem: React.FC = () => (
 );
 
 // Versão curta para story: 28s, três cartões, sem botão desenhado (espaço livre para o sticker de link).
-const cardsStory: CardData[] = [cards[0], cards[2], cards[4]];
+export const cardsStory: CardData[] = [cards[0], cards[2], cards[4]];
 const ST = { s1: 150, s2: 180, s3: 100, card: 100, s5: 130 };
 export const TOTAL_STORY = ST.s1 + ST.s2 + ST.s3 + ST.card * cardsStory.length + ST.s5;
 

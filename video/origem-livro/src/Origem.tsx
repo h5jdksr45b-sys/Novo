@@ -261,7 +261,7 @@ const cards: CardData[] = [
   { text: "Quem sofre não escolhe como gritar. Mas, com ajuda, pode aprender a escolher o que faz depois do grito.", dark: true },
 ];
 
-const Card: React.FC<{ data: CardData; index: number }> = ({ data, index }) => {
+const Card: React.FC<{ data: CardData; index: number; total: number }> = ({ data, index, total }) => {
   const Icon = data.icon;
   const fg = data.dark ? C.offwhite : C.ink;
   return (
@@ -297,7 +297,7 @@ const Card: React.FC<{ data: CardData; index: number }> = ({ data, index }) => {
           <div style={{ width: 22, height: 22, borderRadius: 999, background: C.terracotta }} />
         )}
         <div style={{ fontFamily: SANS, fontWeight: 600, fontSize: 32, color: data.dark ? "#9C968E" : C.grey }}>
-          {index + 1}/{cards.length}
+          {index + 1}/{total}
         </div>
       </div>
       <div
@@ -319,9 +319,11 @@ const Card: React.FC<{ data: CardData; index: number }> = ({ data, index }) => {
   );
 };
 
-const Cena4Mecanismo: React.FC = () => {
+const Cena4Mecanismo: React.FC<{ lista?: CardData[]; cardDur?: number }> = ({ lista = cards, cardDur = CARD }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
+  const CARD = cardDur;
+  const CARDS = lista.length;
   const active = Math.min(Math.floor(frame / CARD), CARDS - 1);
   const local = frame - active * CARD;
   const hintIn = interpolate(frame, [20, 34, 70, 84], [0, 1, 1, 0], clamp);
@@ -331,7 +333,7 @@ const Cena4Mecanismo: React.FC = () => {
       <div style={{ position: "absolute", top: 250, left: 110, fontFamily: SANS, fontWeight: 600, fontSize: 40, color: C.terracotta }}>
         O que o livro explica
       </div>
-      {cards.map((c, i) => {
+      {lista.map((c, i) => {
         const enter = i === 0 ? 1 : spring({ frame: frame - i * CARD, fps, config: { damping: 17, mass: 0.9 } });
         const exit = i < CARDS - 1 ? spring({ frame: frame - (i + 1) * CARD + 8, fps, config: { damping: 17, mass: 0.9 } }) : 0;
         if (i > active + 1 || (i < active && exit >= 0.999)) return null;
@@ -353,13 +355,13 @@ const Cena4Mecanismo: React.FC = () => {
               opacity,
             }}
           >
-            <Card data={c} index={i} />
+            <Card data={c} index={i} total={CARDS} />
           </div>
         );
       })}
       {/* pontos de progresso */}
       <div style={{ position: "absolute", top: 1395, left: 0, right: 0, display: "flex", justifyContent: "center", gap: 18 }}>
-        {cards.map((_, i) => (
+        {lista.map((_, i) => (
           <div
             key={i}
             style={{
@@ -396,7 +398,7 @@ const Cena4Mecanismo: React.FC = () => {
   );
 };
 
-const Cena5Fechamento: React.FC = () => {
+const Cena5Fechamento: React.FC<{ story?: boolean }> = ({ story = false }) => {
   const frame = useCurrentFrame();
   const book = useSpring(6, { damping: 13, mass: 0.9 });
   const line = useSpring(30);
@@ -427,7 +429,7 @@ const Cena5Fechamento: React.FC = () => {
       >
         Para quem vive o borderline e para quem convive
       </div>
-      <div style={{ position: "absolute", top: 1220, left: 0, right: 0, display: "flex", justifyContent: "center" }}>
+      <div style={{ position: "absolute", top: 1220, left: 0, right: 0, display: story ? "none" : "flex", justifyContent: "center" }}>
         <div
           style={{
             transform: `scale(${cta * pulse})`,
@@ -450,7 +452,7 @@ const Cena5Fechamento: React.FC = () => {
       <div
         style={{
           position: "absolute",
-          top: 1360,
+          top: story ? 1210 : 1360,
           left: 0,
           right: 0,
           textAlign: "center",
@@ -484,6 +486,33 @@ export const Origem: React.FC = () => (
       </Series.Sequence>
       <Series.Sequence durationInFrames={S5}>
         <Cena5Fechamento />
+      </Series.Sequence>
+    </Series>
+  </AbsoluteFill>
+);
+
+// Versão curta para story: 28s, três cartões, sem botão desenhado (espaço livre para o sticker de link).
+const cardsStory: CardData[] = [cards[0], cards[2], cards[4]];
+const ST = { s1: 150, s2: 180, s3: 100, card: 100, s5: 130 };
+export const TOTAL_STORY = ST.s1 + ST.s2 + ST.s3 + ST.card * cardsStory.length + ST.s5;
+
+export const OrigemStory: React.FC = () => (
+  <AbsoluteFill style={{ background: C.cream }}>
+    <Series>
+      <Series.Sequence durationInFrames={ST.s1}>
+        <Cena1Grito />
+      </Series.Sequence>
+      <Series.Sequence durationInFrames={ST.s2}>
+        <Cena2Argumentos />
+      </Series.Sequence>
+      <Series.Sequence durationInFrames={ST.s3}>
+        <Cena3Nome />
+      </Series.Sequence>
+      <Series.Sequence durationInFrames={ST.card * cardsStory.length}>
+        <Cena4Mecanismo lista={cardsStory} cardDur={ST.card} />
+      </Series.Sequence>
+      <Series.Sequence durationInFrames={ST.s5}>
+        <Cena5Fechamento story />
       </Series.Sequence>
     </Series>
   </AbsoluteFill>

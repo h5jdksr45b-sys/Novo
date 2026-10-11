@@ -80,6 +80,7 @@ const Cena1Grito: React.FC = () => {
   const shake = frame > 55 ? Math.sin(frame * 1.7) * 6 : 0;
   return (
     <AbsoluteFill style={{ background: C.cream }}>
+      <div style={{ position: "absolute", left: 170, top: 1020, width: 760, height: 760, borderRadius: 999, background: C.sky }} />
       <Caption>Tem profissional que ainda fala assim sobre quem tem borderline</Caption>
       <div
         style={{
@@ -106,6 +107,7 @@ const Cena1Grito: React.FC = () => {
         }}
       >
         <svg viewBox="0 0 100 100" preserveAspectRatio="none" style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}>
+          <path d={bubblePath} fill={C.ochre} transform="translate(1.2 2)" />
           <path d={bubblePath} fill="#FFFFFF" stroke={C.ink} strokeWidth={0.9} vectorEffect="non-scaling-stroke" />
         </svg>
         <svg viewBox="0 0 100 100" style={{ position: "absolute", left: "62%", top: "88%", width: 90, height: 120 }}>
@@ -164,9 +166,9 @@ const Palavra: React.FC<{ start: number; index: number }> = ({ start, index }) =
         width: 300,
         height: 80,
         borderRadius: 14,
-        background: index % 2 ? C.terracotta : C.ink,
+        background: [C.terracotta, C.petrol, C.ochre][index % 3],
         border: `5px solid ${C.ink}`,
-        color: C.offwhite,
+        color: index % 3 === 2 ? C.ink : C.offwhite,
         fontFamily: DISPLAY,
         fontWeight: 900,
         fontSize: 44,
@@ -193,7 +195,7 @@ const Cena2Argumentos: React.FC = () => {
   const jolt = hit ? Math.sin(frame * 3) * 10 : 0;
   const thrown = throws.filter((s) => frame >= s).length;
   return (
-    <AbsoluteFill style={{ background: C.cream }}>
+    <AbsoluteFill style={{ background: C.sage }}>
       <Caption>A pessoa explica. Ele levanta o diploma.</Caption>
       <div style={{ position: "absolute", left: 20, top: 860, width: 420, height: 760 }}>
         <Thrower throwT={throwT} frustration={Math.min(thrown / 5, 1)} />
@@ -235,8 +237,8 @@ const Cena3Nome: React.FC = () => {
   const { width } = useVideoConfig();
   const swipe = useSpring(38, { damping: 16, mass: 0.9 });
   return (
-    <AbsoluteFill style={{ background: C.cream }}>
-      <Caption>Foi daí que veio o nome do livro</Caption>
+    <AbsoluteFill style={{ background: C.petrol }}>
+      <Caption color={C.offwhite}>Foi daí que veio o nome do livro</Caption>
       <div
         style={{
           position: "absolute",
@@ -251,13 +253,13 @@ const Cena3Nome: React.FC = () => {
   );
 };
 
-type CardData = { icon?: React.FC<{ size?: number; color?: string; strokeWidth?: number }>; text: string; dark?: boolean };
+type CardData = { icon?: React.FC<{ size?: number; color?: string; strokeWidth?: number }>; text: string; dark?: boolean; bg?: string; accent?: string };
 
 const cards: CardData[] = [
-  { icon: Siren, text: "O medo de ser abandonado dispara um alarme por dentro." },
-  { icon: Zap, text: "A reação chega antes de a reflexão estar disponível." },
-  { icon: Hourglass, text: "Cobrar calma no pico é cobrar no único momento em que a pessoa não tem como pagar." },
-  { icon: RefreshCw, text: "A responsabilidade se constrói depois: no treino, na regulação e na reparação." },
+  { icon: Siren, text: "O medo de ser abandonado dispara um alarme por dentro.", bg: C.sky, accent: C.petrol },
+  { icon: Zap, text: "A reação chega antes de a reflexão estar disponível.", bg: "#F6E6C4", accent: "#9A6A14" },
+  { icon: Hourglass, text: "Cobrar calma no pico é cobrar no único momento em que a pessoa não tem como pagar.", bg: C.blush, accent: C.terracotta },
+  { icon: RefreshCw, text: "A responsabilidade se constrói depois: no treino, na regulação e na reparação.", bg: C.sage, accent: "#4E6B45" },
   { text: "Quem sofre não escolhe como gritar. Mas, com ajuda, pode aprender a escolher o que faz depois do grito.", dark: true },
 ];
 
@@ -270,7 +272,7 @@ const Card: React.FC<{ data: CardData; index: number; total: number }> = ({ data
         width: 860,
         height: 980,
         borderRadius: 56,
-        background: data.dark ? C.black : C.paper,
+        background: data.dark ? C.petrol : data.bg ?? C.paper,
         boxShadow: "0 40px 80px -30px rgba(0,0,0,.35), 0 2px 0 rgba(0,0,0,.04)",
         padding: "90px 80px",
         display: "flex",
@@ -285,18 +287,18 @@ const Card: React.FC<{ data: CardData; index: number; total: number }> = ({ data
               width: 170,
               height: 170,
               borderRadius: 999,
-              background: `${C.terracotta}1F`,
+              background: "rgba(255,255,255,.6)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
             }}
           >
-            <Icon size={92} color={C.terracotta} strokeWidth={1.8} />
+            <Icon size={92} color={data.accent ?? C.terracotta} strokeWidth={1.8} />
           </div>
         ) : (
-          <div style={{ width: 22, height: 22, borderRadius: 999, background: C.terracotta }} />
+          <div style={{ width: 22, height: 22, borderRadius: 999, background: C.ochre }} />
         )}
-        <div style={{ fontFamily: SANS, fontWeight: 600, fontSize: 32, color: data.dark ? "#9C968E" : C.grey }}>
+        <div style={{ fontFamily: SANS, fontWeight: 600, fontSize: 32, color: data.dark ? "#A9C2C8" : "rgba(30,30,30,.55)" }}>
           {index + 1}/{total}
         </div>
       </div>
@@ -312,7 +314,7 @@ const Card: React.FC<{ data: CardData; index: number; total: number }> = ({ data
       >
         {data.text}
       </div>
-      <div style={{ fontFamily: SANS, fontWeight: 500, fontSize: 30, color: data.dark ? "#9C968E" : C.grey }}>
+      <div style={{ fontFamily: SANS, fontWeight: 500, fontSize: 30, color: data.dark ? "#A9C2C8" : "rgba(30,30,30,.55)" }}>
         {data.dark ? "Trecho do livro" : "Quem sofre não escolhe como gritar"}
       </div>
     </div>
@@ -330,7 +332,7 @@ const Cena4Mecanismo: React.FC<{ lista?: CardData[]; cardDur?: number }> = ({ li
   const hintX = interpolate(frame, [34, 70], [120, -160], { ...clamp, easing: Easing.inOut(Easing.cubic) });
   return (
     <AbsoluteFill style={{ background: C.cream }}>
-      <div style={{ position: "absolute", top: 250, left: 110, fontFamily: SANS, fontWeight: 600, fontSize: 40, color: C.terracotta }}>
+      <div style={{ position: "absolute", top: 250, left: 110, fontFamily: SANS, fontWeight: 600, fontSize: 40, color: C.petrol }}>
         O que o livro explica
       </div>
       {lista.map((c, i) => {
@@ -406,6 +408,7 @@ const Cena5Fechamento: React.FC<{ story?: boolean }> = ({ story = false }) => {
   const pulse = 1 + Math.max(0, Math.sin((frame - 70) / 9)) * 0.03 * (frame > 70 ? 1 : 0);
   return (
     <AbsoluteFill style={{ background: C.cream }}>
+      <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: 760, background: C.sky }} />
       <div style={{ position: "absolute", top: 260, left: 0, right: 0, display: "flex", justifyContent: "center" }}>
         <div style={{ transform: `translateY(${(1 - book) * 120}px) scale(${0.9 + book * 0.1})`, opacity: book }}>
           <Cover width={520} rotate={-2} />
@@ -422,7 +425,7 @@ const Cena5Fechamento: React.FC<{ story?: boolean }> = ({ story = false }) => {
           fontWeight: 600,
           fontSize: 44,
           lineHeight: 1.25,
-          color: C.ink,
+          color: C.petrol,
           opacity: line,
           transform: `translateY(${(1 - line) * 30}px)`,
         }}
@@ -433,7 +436,7 @@ const Cena5Fechamento: React.FC<{ story?: boolean }> = ({ story = false }) => {
         <div
           style={{
             transform: `scale(${cta * pulse})`,
-            background: C.ink,
+            background: C.petrol,
             color: C.offwhite,
             fontFamily: SANS,
             fontWeight: 700,
@@ -445,7 +448,7 @@ const Cena5Fechamento: React.FC<{ story?: boolean }> = ({ story = false }) => {
             gap: 18,
           }}
         >
-          <span style={{ width: 16, height: 16, borderRadius: 999, background: C.terracotta, display: "inline-block" }} />
+          <span style={{ width: 16, height: 16, borderRadius: 999, background: C.ochre, display: "inline-block" }} />
           Saiba mais
         </div>
       </div>

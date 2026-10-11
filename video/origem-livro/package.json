@@ -1,0 +1,14 @@
+{
+  "name": "origem-livro",
+  "private": true,
+  "scripts": {
+    "render": "remotion render src/index.ts Origem out/origem-livro.mp4"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.534",
+    "lucide-react": "0.468.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "remotion": "4.0.534"
+  }
+}

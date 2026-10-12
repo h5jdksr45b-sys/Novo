@@ -160,10 +160,9 @@ Não mexa no preço agora. Mexa no que a pessoa leva por ele:
 
 Resolvido em 12/10: vendas da Hotmart (seção 0), pixel (2562728947535171), avaliações (não há), R$ 297 (nunca praticado).
 
-Fica:
-1. Pagamento da conta de anúncios regularizado. Só você faz isso, em Faturamento.
-2. Autorização para pausar a campanha do livro e para trocar o pixel dela.
-3. Order bump do Protocolo da Crise (R$ 27) ativado no checkout do curso, na Hotmart.
+Feito em 12/10: pagamento regularizado por você; campanha do livro (id 120258974058590001) pausada por mim via Windsor, reversível com enable_campaign; order bump do Protocolo da Crise combinado, você ativa na Hotmart.
+
+Próximo passo: produzir os cinco estáticos e subir a campanha nova com o pixel 2562728947535171. O público de remarketing (visitantes da página em 30 dias, engajamento no Instagram em 60 dias) precisa ser criado no Gerenciador de Anúncios, em Públicos; o conector não cria público personalizado.
 
 ## Limites desta análise
 

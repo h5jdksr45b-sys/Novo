@@ -1,0 +1,30 @@
+# TPB e neuroimagem: B-roll de 20 s
+
+Uso: consultório, lives e guias clínicos. Fora do feed.
+Formato: 1080x1920, 30 fps, 20 s. Vídeo sem áudio, com legenda queimada e tempos já ajustados à narração.
+
+## Narração (46 palavras, ritmo calmo)
+
+| Tempo | Fala | Na tela |
+|---|---|---|
+| 0:00 a 0:03 | A emoção dispara rápido e demora a baixar. | Gráfico esquemático: subida rápida, retorno lento |
+| 0:03 a 0:06 | Na neuroimagem, o alarme reage mais. Amígdala e ínsula. | Cérebro sagital, amígdala e ínsula acendem em dourado |
+| 0:06 a 0:10 | O freio do pré-frontal ativa menos. | Zoom na frente: CPFDL, COF e CCA em azul apagado |
+| 0:10 a 0:13 | E a conexão entre os dois é mais fraca. | Pulso lento da amígdala ao pré-frontal, perdendo força |
+| 0:13 a 0:16 | Em resumo, mais alarme e menos freio. | Tabela: região, achado médio, método |
+| 0:16 a 0:20 | São médias de grupo. E podem mudar com tratamento. | Três ressalvas com ícones |
+
+## Fontes citadas na tela
+
+- Schulze e col., 2016: hiperativação da amígdala (metanálise fMRI).
+- Ruocco e col., 2012: redução de volume do hipocampo e da amígdala (metanálise).
+- Chanen e col., 2008: redução de substância cinzenta no COF em adolescentes no primeiro episódio.
+- Goodman e col., 2014: redução da reatividade da amígdala após DBT.
+
+## Como editar e renderizar
+
+    npm install
+    npm run studio      # pré-visualização no navegador
+    npm run render      # gera out/tpb-cerebro.mp4
+
+Para trocar a narração, edite NARRACAO em src/TPBCerebro.tsx.

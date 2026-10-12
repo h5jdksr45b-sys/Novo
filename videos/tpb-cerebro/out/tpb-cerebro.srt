@@ -1,0 +1,23 @@
+1
+00:00:00,000 --> 00:00:02,800
+A emoção dispara rápido e demora a baixar.
+
+2
+00:00:02,933 --> 00:00:06,400
+Na neuroimagem, o alarme reage mais. Amígdala e ínsula.
+
+3
+00:00:06,533 --> 00:00:09,733
+O freio do pré-frontal ativa menos.
+
+4
+00:00:09,867 --> 00:00:13,067
+E a conexão entre os dois é mais fraca.
+
+5
+00:00:13,200 --> 00:00:16,400
+Em resumo, mais alarme e menos freio.
+
+6
+00:00:16,533 --> 00:00:20,000
+São médias de grupo. E podem mudar com tratamento.

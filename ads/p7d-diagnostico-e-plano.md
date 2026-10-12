@@ -86,7 +86,7 @@ Sua hipótese era que o anúncio não chega nas pessoas certas. Os dados dizem o
 
 A campanha do livro começou hoje, ampla, 18 a 65, R$ 55 por dia, otimizando para compra de R$ 69. O livro deixa cerca de R$ 52 líquidos por venda. Para empatar, o custo por compra precisa ficar abaixo de R$ 52. Com o CPM que a conta paga (R$ 44 a R$ 58), isso exige uma venda a cada mil impressões. O curso, com página e vídeo rodados, faz uma a cada sete mil. Mesmo que o livro converta três vezes melhor, fica em R$ 125 por venda e perde R$ 73 em cada uma.
 
-O dado novo da Hotmart muda uma coisa: "Quando Escolher Não É Possível" vende 11 em 60 dias sem anúncio. Tem demanda orgânica. Isso é argumento para o livro ser porta de entrada barata, não para pagar R$ 50 de CPM por ele. Ponto a confirmar: a campanha anuncia "Quem sofre não escolhe como gritar" e o link que você me deu (U103950622S) é o de "Quando Escolher Não É Possível". São dois livros ou o mesmo com título novo?
+O dado novo da Hotmart muda uma coisa: "Quando Escolher Não É Possível" vende 11 em 60 dias sem anúncio. Tem demanda orgânica. Isso é argumento para o livro ser porta de entrada barata, não para pagar R$ 50 de CPM por ele. Confirmado em 12/10: "Quem sofre não escolhe como gritar" é a segunda edição, expandida, de "Quando Escolher Não É Possível". Mesmo livro, mesmo link (U103950622S). As 11 vendas orgânicas valem como demanda do título novo.
 
 Recomendação mantida: pausar a campanha do livro antes de ela começar a entregar (hoje ela está no pixel errado e a conta está em carência), e usar o livro de dois jeitos que não custam mídia:
 - **Order bump no checkout do curso.** Quem está comprando o Protocolo vê o livro por R$ 69 (ou o Protocolo da Crise por R$ 27) com um clique. Isso sobe o ticket médio sem subir o CPA.
@@ -162,9 +162,8 @@ Resolvido em 12/10: vendas da Hotmart (seção 0), pixel (2562728947535171), ava
 
 Fica:
 1. Pagamento da conta de anúncios regularizado. Só você faz isso, em Faturamento.
-2. "Quem sofre não escolhe como gritar" e "Quando Escolher Não É Possível" são o mesmo livro?
-3. Autorização para pausar a campanha do livro e para trocar o pixel dela.
-4. Order bump do Protocolo da Crise (R$ 27) ativado no checkout do curso, na Hotmart.
+2. Autorização para pausar a campanha do livro e para trocar o pixel dela.
+3. Order bump do Protocolo da Crise (R$ 27) ativado no checkout do curso, na Hotmart.
 
 ## Limites desta análise
 

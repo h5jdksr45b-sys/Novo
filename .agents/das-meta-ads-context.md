@@ -8,7 +8,7 @@ _Idioma: português brasileiro · Objetivo principal: venda do Protocolo 7 Dias 
 - **Prateleira em que a pessoa procura:** "o que fazer quando ela entra em crise", "como lidar com filha borderline", "curso para família de borderline". Concorre com esperar a terapia dela resolver, terapia familiar, livros sobre TPB e conteúdo gratuito.
 - **Preço:** R$ 219 à vista ou 12x R$ 21,90. Líquido por venda entre R$ 178 e R$ 195 (Hotmart, out/2026). O R$ 297 riscado do hub nunca foi preço praticado: não usar. Garantia de 7 dias, reembolso sem perguntas. Checkout: pay.hotmart.com/S104212285E. Pixel que recebe a compra: 2562728947535171.
 - **Benefício central (a única coisa):** parar de improvisar na crise. Ter um procedimento para fazer em casa hoje à noite.
-- **Produtos ao redor (hub):** livro "Quando Escolher Não É Possível" R$ 69 (pay.hotmart.com/U103950622S); guia "Protocolo da Crise" R$ 27; "Kit de Regulação" R$ 27 (para a própria pessoa com TPB); consulta R$ 700.
+- **Produtos ao redor (hub):** livro "Quem sofre não escolhe como gritar", segunda edição expandida de "Quando Escolher Não É Possível", R$ 69 (pay.hotmart.com/U103950622S), 11 vendas orgânicas em 60 dias; guia "Protocolo da Crise" R$ 27; "Kit de Regulação" R$ 27 (para a própria pessoa com TPB); consulta R$ 700.
 
 ## 2. Persona
 

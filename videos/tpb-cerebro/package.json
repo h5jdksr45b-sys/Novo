@@ -3,7 +3,8 @@
   "private": true,
   "scripts": {
     "studio": "remotion studio src/index.ts",
-    "render": "remotion render src/index.ts TPBCerebro out/tpb-cerebro.mp4"
+    "render": "remotion render src/index.ts TPBCerebro out/tpb-cerebro.mp4",
+    "capa": "remotion still src/index.ts Capa out/capa.png --frame=250"
   },
   "dependencies": {
     "@remotion/cli": "4.0.535",

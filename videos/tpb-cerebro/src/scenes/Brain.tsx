@@ -19,7 +19,7 @@ const PHASE_CONN = 215;
 
 const clamp = { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' } as const;
 
-export const Brain: React.FC = () => {
+export const Brain: React.FC<{ cover?: boolean }> = ({ cover = false }) => {
   const f = useCurrentFrame();
   const fade = (a: number, b: number) => interpolate(f, [a, a + 14, b, b + 10], [0, 1, 1, 0.35], clamp);
   const pulse = 0.75 + 0.25 * Math.sin(f / 4);
@@ -41,7 +41,7 @@ export const Brain: React.FC = () => {
 
   return (
     <AbsoluteFill style={{ background: C.bg }}>
-      <div style={{ position: 'absolute', top: 150, left: 100, right: 100, height: 300 }}>
+      {!cover && (<div style={{ position: 'absolute', top: 150, left: 100, right: 100, height: 300 }}>
         <Sequence from={PHASE_ALARM} durationInFrames={PHASE_BRAKE} layout="none">
           <Tag>Sistema límbico</Tag>
           <div style={{ height: 22 }} />
@@ -57,12 +57,12 @@ export const Brain: React.FC = () => {
           <div style={{ height: 22 }} />
           <KineticTitle text="Conexão mais fraca" size={104} delay={2} />
         </Sequence>
-      </div>
+      </div>)}
 
       <div
         style={{
           position: 'absolute',
-          top: 480,
+          top: cover ? 760 : 480,
           left: 40,
           width: 1000,
           height: 760,
@@ -157,7 +157,7 @@ export const Brain: React.FC = () => {
         </svg>
       </div>
 
-      <div style={{ position: 'absolute', top: 1235, left: 100, right: 100, display: 'flex', flexDirection: 'column', gap: 14 }}>
+      {!cover && (<><div style={{ position: 'absolute', top: 1235, left: 100, right: 100, display: 'flex', flexDirection: 'column', gap: 14 }}>
         <Sequence from={PHASE_ALARM} durationInFrames={PHASE_BRAKE} layout="none">
           <Chip tone="up" label="Amígdala" value="mais ativação a estímulos negativos" delay={26} out={PHASE_BRAKE - 10} />
           <Chip tone="up" label="Ínsula" value="mais ativação na emoção negativa" delay={36} out={PHASE_BRAKE - 10} />
@@ -174,7 +174,7 @@ export const Brain: React.FC = () => {
       </div>
       <div style={{ position: 'absolute', top: 1198, left: 100, fontFamily: FONT, fontSize: 22, color: C.muted, opacity: dimDuringConn }}>
         Esquema simplificado, fora de escala
-      </div>
+      </div></>)}
     </AbsoluteFill>
   );
 };

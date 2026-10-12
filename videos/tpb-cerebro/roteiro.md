@@ -28,3 +28,27 @@ Formato: 1080x1920, 30 fps, 20 s. Vídeo sem áudio, com legenda queimada e temp
     npm run render      # gera out/tpb-cerebro.mp4
 
 Para trocar a narração, edite NARRACAO em src/TPBCerebro.tsx.
+
+## Capa
+
+Arquivo: out/capa.png (1080x1920). Texto dentro do recorte 4:5 do grid.
+Para regerar: npm run capa
+
+## Descrição
+
+Quando a emoção dispara e demora a baixar, muita gente ouve que é exagero.
+
+Estudos de neuroimagem no transtorno de personalidade borderline mostram, em média, duas coisas.
+Amígdala e ínsula, áreas ligadas ao alarme emocional, reagem mais.
+Áreas do pré-frontal, ligadas ao freio, ativam menos. E o sinal entre alarme e freio chega mais fraco.
+
+Isso não diagnostica ninguém. São médias de grupo, variam entre estudos e não provam causa. E podem mudar: um estudo encontrou a amígdala menos reativa depois de tratamento com DBT.
+
+Fontes: Schulze e col., 2016. Ruocco e col., 2012. Chanen e col., 2008. Goodman e col., 2014.
+
+Conteúdo educativo. Não substitui avaliação nem tratamento.
+Dr. Fabio Schmidt, médico, CRM-SP 183549, pós-graduado em psiquiatria.
+
+Envie para alguém próximo que quer entender por que a emoção demora a baixar.
+
+#borderline #tpb #saudemental

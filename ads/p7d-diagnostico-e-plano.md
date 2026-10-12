@@ -188,3 +188,19 @@ Antes de ligar, conferir no Gerenciador:
 1. A conta do Instagram aparece como identidade dos anúncios (o conector não definiu o Instagram; se aparecer "usar página do Facebook", trocar para @drfabioschmidt).
 2. A pré-visualização de cada anúncio no Feed, Stories e Reels.
 3. Na hora de ligar a nova, pausar a P7D | Vendas | Landing | Set26 para as duas não disputarem o mesmo público.
+
+## 7. No ar desde 12/10, 16h30 (horário de Brasília)
+
+Campanha **P7D | Vendas | Estaticos | Out26** (120258979808100001) ativa. Campanha antiga P7D | Vendas | Landing | Set26 (120258742429760001) pausada.
+
+| Conjunto | id | Público | Orçamento | Anúncios |
+|---|---|---|---|---|
+| A Estáticos | 120258979808960001 | Mulheres 35 a 65, amplo | R$ 40/dia | 6 estáticos novos + campeão estático |
+| B Vídeo | 120258979811340001 | Mulheres 35 a 65, amplo | R$ 30/dia | Minha filha + campeão vídeo |
+| C Segmentado | 120258980155160001 | Mulheres 35 a 65, pais de adolescentes E interesse em Psicologia | R$ 20/dia | campeão estático, L1 foto, L2 antes e depois, L4 sete dias |
+
+Total: R$ 90 por dia.
+
+Tentativa de segmento por quem curte a página: recusada pelo Meta (conexões não estão mais disponíveis). Públicos personalizados (Instagram, site, checkout, compradores, semelhante) dependem de token da API ou do Zapier conectado.
+
+Checagens agendadas: 13/10 às 10h (entrega e reprovação) e 19/10 às 10h (leitura de 7 dias).

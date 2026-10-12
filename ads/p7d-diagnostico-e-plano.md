@@ -167,3 +167,24 @@ Próximo passo: produzir os cinco estáticos e subir a campanha nova com o pixel
 ## Limites desta análise
 
 Os dados são do pixel, não da Hotmart. Treze compras em 90 dias é amostra pequena; as diferenças entre segmentos indicam direção, não certeza. Não vi as imagens dos anúncios (os links de pré-visualização exigem login no Meta). Não consegui abrir a página ao vivo nem o checkout; usei a cópia local do repositório. Não consultei o histórico editorial para repetição de tese porque anúncio não entra no feed, mas as teses dos posts para família estão no contexto de ads.
+
+## 5. Campanha montada (12/10, tudo pausado)
+
+Campanha **P7D | Vendas | Estaticos | Out26**, id 120258979808100001. Objetivo Vendas, sem orçamento de campanha (orçamento por conjunto).
+
+| Conjunto | id | Orçamento | Público | Anúncios |
+|---|---|---|---|---|
+| A Estáticos | 120258979808960001 | R$ 40/dia | Mulheres 35 a 65, BR, Advantage desligado, FB e IG em Feed, Stories e Reels | 6 |
+| B Vídeo Minha filha | 120258979811340001 | R$ 30/dia | igual ao A | 1 (criativo 1406418751693153, o mesmo da campanha atual) |
+| C Remarketing | não criado | R$ 15/dia | depende do público personalizado | anúncio L5 pronto no Canva |
+
+Pixel 2562728947535171, evento Compra. Página do Facebook 981858741676233.
+
+Anúncios do conjunto A: L1 foto corredor (120258979822240001), L1 minimalista papel (120258979822630001), L2 minimalista navy (120258979822750001), L2 antes e depois (120258979822910001), L3 esperar x Protocolo (120258979823620001), L4 sete dias, para o checkout (120258979824030001). Os seis primeiros apontam para curso.drfabioschmidt.net; o L4 vai para pay.hotmart.com/S104212285E.
+
+Imagens: Canva, design DAHX0knAaE4, páginas 2 a 8, 1080 x 1350.
+
+Antes de ligar, conferir no Gerenciador:
+1. A conta do Instagram aparece como identidade dos anúncios (o conector não definiu o Instagram; se aparecer "usar página do Facebook", trocar para @drfabioschmidt).
+2. A pré-visualização de cada anúncio no Feed, Stories e Reels.
+3. Na hora de ligar a nova, pausar a P7D | Vendas | Landing | Set26 para as duas não disputarem o mesmo público.

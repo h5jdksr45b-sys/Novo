@@ -49,3 +49,23 @@ O público morno é o ativo mais subaproveitado da conta. O perfil alcança muit
 - Não abrir um conjunto por interesse (Psicologia, Família, Pais de adolescentes). Fragmenta o aprendizado.
 - Não subir o orçamento antes de o custo por compra ficar abaixo de R$ 130 por uma semana.
 - Não reativar a campanha antiga pausada. O histórico dela não volta, e ela passaria a disputar o mesmo público com a nova.
+
+## 5. Criar os públicos pelo conector (Zapier, Facebook Custom Audiences)
+
+Habilitado em 12/10. Falta autenticar a conta do Facebook no Zapier. Depois disso, as chamadas previstas, todas na conta act_1454243259689590:
+
+| Público | Fonte | Retenção |
+|---|---|---|
+| IG engajou 365d | Instagram 17841401503370732, qualquer interação | 365 dias |
+| Site visitou 30d | pixel 2562728947535171, PageView em curso.drfabioschmidt.net | 30 dias |
+| Checkout iniciado 30d | pixel 2562728947535171, InitiateCheckout | 30 dias |
+| Compradores 180d | pixel 2562728947535171, Purchase | 180 dias |
+| Semelhante 1% BR | a partir de IG engajou 365d | |
+
+Depois de criados, o conector do Windsor monta os conjuntos morno e quente com esses públicos e exclui compradores de todos.
+
+## 6. Imagens trocadas no Meta (12/10)
+
+- L3 esperar x Protocolo, anúncio 120258979823620001: botão Ver o que fazer em casa (Canva página 9).
+- L4 sete dias, anúncio 120258979824030001: botão Começar pelo Dia 1 (Canva página 10).
+- L5 remarketing com linha de contexto: Canva página 11, entra no conjunto C.

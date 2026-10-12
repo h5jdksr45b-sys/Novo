@@ -282,3 +282,5 @@ Refeitas:
 - L5 remarketing: a tela do celular tinha inventado aulas de outro curso (mindset, nutrição) e durações falsas. Nova versão: job 1bad2969-e78d-4acd-a9ec-baab292008e8.
 - L2 minimalista navy: subtítulo usava fórmula de contraste vetada. Agora: Existe o que dizer no lugar. Job 3b5ddde4-2e7b-4788-a5b0-99d5ff80b9c3.
 - L1 foto corredor: ursinho na cama sugeria criança pequena. Job cc0553fa-d840-4947-921d-1402ea7bd070.
+
+Correções aprovadas em 12/10. Lote final com 7 peças em ads/criativos (prévias em baixa resolução; os originais em 2K estão no Higgsfield, pelos jobs listados acima).

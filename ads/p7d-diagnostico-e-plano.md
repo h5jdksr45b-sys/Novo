@@ -1,0 +1,145 @@
+# Protocolo 7 Dias no Meta Ads: diagnóstico e plano
+
+Data: 2026-10-12. Fonte: conta de anúncios Fabio H. L. Schmidt (id 1454243259689590) via Windsor.ai, últimos 90 dias (15/07 a 12/10). Compras e valores são os que o pixel registrou; a Hotmart pode ter contado diferente. Preços informados por você: curso R$ 219, livro R$ 69.
+
+## 1. O que os números dizem
+
+### Total dos 90 dias
+
+| | Gasto | Compras (pixel) | Custo por compra | Receita (pixel) |
+|---|---|---|---|---|
+| Tudo | R$ 2.970 | 13 | R$ 228 | R$ 2.197 |
+
+O pixel registra valores entre R$ 133 e R$ 196 por compra, abaixo dos R$ 219. Provavelmente é o valor líquido ou com desconto. Mesmo contando R$ 219 cheios, 13 vendas são R$ 2.847 brutos. Tirando a taxa da Hotmart (confira a sua; uso 10% como aproximação), sobra cerca de R$ 197 por venda, ou R$ 2.560 no período. Gasto de R$ 2.970 contra R$ 2.560 de receita líquida: é o "trocando dinheiro ou ficando no negativo" que você descreveu. Confere.
+
+**Conta de referência para daqui em diante:** com ticket de R$ 219, o custo por compra que empata é cerca de R$ 195. Para valer a pena, a meta é R$ 130 ou menos. Hoje está em R$ 228.
+
+### As duas campanhas
+
+| Campanha | Período | Gasto | Compras | CPA | CPM | Destino |
+|---|---|---|---|---|---|---|
+| Nova campanha de Vendas (pausada) | até 02/08 | R$ 1.890 | 9 | R$ 210 | R$ 24 | checkout direto |
+| P7D Vendas Landing Set26 (ativa, R$ 55/dia) | desde 27/09 | R$ 1.080 | 4 | R$ 270 | R$ 58 | página de venda |
+| Livro Quem sofre (ativa, R$ 55/dia) | começou hoje | R$ 0 | 0 | | |
+
+O anúncio que vendeu nas duas campanhas é o mesmo texto: "Você olha pra sua filha e sente que perdeu a pessoa que ela era". Na primeira campanha, o criativo "Copia 2 09.jun" fez 8 das 9 compras com CPA de R$ 178. Na segunda, o vídeo "Minha filha" fez as 4 compras com CPA de R$ 232. O CPM mais que dobrou entre uma campanha e outra (R$ 24 para R$ 58). Parte disso é época do ano, parte é o vídeo custar mais caro por mil, parte é o pixel diferente (ver abaixo). Não dá para separar com estes dados.
+
+### Quem compra
+
+| Segmento | Gasto | Compras | CPA |
+|---|---|---|---|
+| Mulheres 45+ | R$ 1.424 | 8 | R$ 178 |
+| Mulheres 35 a 44 | R$ 640 | 3 | R$ 213 |
+| Mulheres 25 a 34 | R$ 432 | 2 | R$ 216 |
+| Mulheres 18 a 24 | R$ 59 | 0 | |
+| Homens, todas as idades | R$ 407 | 0 | |
+
+Sua hipótese era que o anúncio não chega nas pessoas certas. Os dados dizem outra coisa: ele chega, e elas compram, mas caro, e 16% do dinheiro (R$ 466) vai para gente que não comprou nenhuma vez em 90 dias. O anúncio fala "sua filha" e é lido por homens também, que clicam e não compram.
+
+### Onde o anúncio aparece
+
+| Posicionamento | Gasto | Compras | CPA | Observação |
+|---|---|---|---|---|
+| Instagram Stories | R$ 1.021 | 6 | R$ 170 | melhor lugar |
+| Instagram Feed | R$ 1.236 | 4 | R$ 309 | caro |
+| Instagram Reels | R$ 226 | 1 | R$ 226 | |
+| Facebook Feed | R$ 273 | 1 | R$ 273 | |
+| Facebook Stories | R$ 80 | 1 | | 330 cliques viraram 17 visitas de página: clique acidental |
+| Audience Network | R$ 19 | 0 | | 123 cliques de "vídeo recompensado": lixo |
+| WhatsApp Status, Threads, outros | R$ 90 | 0 | | |
+
+### O funil da campanha atual (página de venda)
+
+555 cliques no link, 406 chegaram na página (73%, bom), 12 clicaram em comprar (3% das visitas), 4 compraram (33% dos checkouts).
+
+**O vazamento está entre a página e o botão.** De cada 100 mulheres que chegam na página, 97 saem sem clicar em comprar. O pixel registra compra, o checkout da Hotmart converte bem (1 em 3), o anúncio traz gente certa. A página é o elo fraco.
+
+### Três problemas de configuração
+
+1. **Dois pixels.** O conjunto ativo usa o pixel 2562728947535171. O conjunto pausado e a campanha do livro usam o 1594249651815237. Os dois registraram compras, então os dois estão instalados em algum lugar. Cada conjunto só aprende com o próprio pixel. Escolha um para tudo. Veja no Gerenciador de Eventos qual recebe a compra da Hotmart e use esse.
+2. **Os estáticos nunca foram testados.** O conjunto ativo tem 4 anúncios. O vídeo levou R$ 929; os três estáticos receberam R$ 1, R$ 17 e R$ 25. Com um vídeo no mesmo conjunto, o Meta nunca vai gastar nos estáticos. Para testar estático, ele precisa de conjunto próprio.
+3. **Segmentação confusa.** Interesses "Brasil, Psicologia, Família, faculdade de medicina, pais de adolescentes, relacionamento à distância, aniversário em dezembro" num só grupo, com público Advantage ligado por cima. O Meta trata isso como sugestão e vai amplo de qualquer jeito. Não atrapalha muito, mas não ajuda em nada. O que ajuda é restringir idade e gênero, que o Meta respeita quando você marca como restrição.
+
+## 2. O livro no ads
+
+A campanha do livro começou hoje, ampla, 18 a 65, R$ 55 por dia, otimizando para compra de R$ 69. Com o CPM que a conta está pagando (R$ 44 a R$ 58), para o livro empatar o custo por compra precisa ficar abaixo de R$ 60. Nada na conta sugere que isso aconteça com tráfego frio. O curso, que custa três vezes mais, está em R$ 228.
+
+Recomendação: pausar a campanha do livro hoje, antes de gastar, e usar o livro de dois jeitos que não custam mídia:
+- **Order bump no checkout do curso.** Quem está comprando o Protocolo vê o livro por R$ 69 (ou o Protocolo da Crise por R$ 27) com um clique. Isso sobe o ticket médio sem subir o CPA.
+- **Oferta de saída para quem viu a página e não comprou.** No remarketing, o livro a R$ 69 é a segunda chance para quem achou R$ 219 pesado.
+
+Eu não pauso nada sem você confirmar.
+
+## 3. O plano
+
+### Estrutura
+
+Uma campanha de Vendas, otimizada para Compra, um pixel só. Orçamento por conjunto (ABO), porque o objetivo das primeiras duas semanas é testar e CBO deixa o Meta escolher sozinho.
+
+| Conjunto | Público | Criativos | Orçamento | Destino |
+|---|---|---|---|---|
+| A. Estáticos frio | Mulheres 35 a 65, Brasil, Advantage ligado, sem interesses | Anúncios 1, 2, 3 e 4 dos briefs | R$ 40/dia | 1 a 3 para a página; 4 direto no checkout |
+| B. Vídeo frio | Igual ao A | Vídeo "Minha filha" (o que vende hoje) | R$ 30/dia | página |
+| C. Remarketing | Visitou a página em 30 dias ou interagiu com o Instagram em 60 dias, menos quem comprou | Anúncio 5 | R$ 15/dia | checkout |
+
+Total R$ 85 por dia. Hoje você gasta R$ 110 (55 + 55) com o livro ligado. Se preferir manter R$ 55, corte o B para R$ 15 e o A para R$ 30, e aceite que o teste leva o dobro do tempo.
+
+Posicionamentos: manual. Instagram Stories, Instagram Feed, Instagram Reels, Facebook Feed, Facebook Reels. Desligar Audience Network, Threads, WhatsApp, Messenger, coluna da direita, Marketplace, vídeo in-stream, sobreposição de Reels.
+
+### Regras de decisão (para não decidir no sentimento)
+
+Com R$ 85 por dia, a conta faz 3 a 4 vendas por semana. É pouco para julgar um anúncio só pela compra. Use os indicadores que chegam antes:
+
+| Indicador | Hoje | Meta | Regra |
+|---|---|---|---|
+| Custo por visita à página | R$ 2,66 | até R$ 3,00 | acima de R$ 4,50 depois de R$ 60 gastos, pausa o anúncio |
+| Visitas que clicam em comprar | 3% | 5% ou mais | depende da página, não do anúncio |
+| Custo por clique em comprar | R$ 90 | até R$ 45 | acima de R$ 120 depois de R$ 150 gastos, pausa |
+| Custo por compra | R$ 228 | até R$ 130 | avalie com 14 dias e 8 ou mais compras somadas, nunca com 2 |
+
+Anúncio novo tem 7 dias e R$ 150 antes de qualquer veredito. Não mexa em orçamento mais de uma vez por semana. Nunca edite um anúncio que está vendendo; duplique e teste ao lado.
+
+### Página de venda: o que fazer antes de ligar
+
+Li a cópia local de curso.drfabioschmidt.net (novo/curso7.html). Se a página no ar for diferente, me avise. A página tem título, subtítulo, preço, a lista dos sete dias, garantia e um botão. Para 3% virarem 5% ou mais:
+
+1. **Para quem é, para quem não é.** Uma seção curta logo abaixo do título. Mãe, pai, cônjuge, irmão. Não é para a pessoa com TPB (para ela existe o Kit). Não substitui tratamento.
+2. **Quem está falando.** Médico, CRM-SP 183549, pós-graduado em psiquiatria, dez anos em CAPS, consultório em Mogi. Hoje a página só tem nome e CRM no rodapé. A mãe de 50 anos compra de pessoa, não de método.
+3. **Uma frase sobre o que cada dia resolve.** A lista dos sete dias já existe. Falta dizer, em cada item, o que muda na casa. Exemplo: dia 3, pausa combinada de 20 minutos: a crise para de durar a noite inteira. Cuidado com promessa de resultado; descreva o procedimento, não o desfecho.
+4. **Perguntas que travam a compra.** Serve para marido ou filho adulto? Ela precisa saber que estou fazendo? Preciso de diagnóstico fechado? Quanto tempo por dia? Posso ver no celular? Respostas curtas.
+5. **Garantia ao lado de cada botão**, não só numa seção separada. "7 dias para pedir reembolso, sem perguntas" embaixo do botão.
+6. **Botão a cada seção.** Hoje tem dois. Mãe lê no celular, rolando. Cada seção termina com o botão.
+7. **Depoimentos, só se forem reais.** A Hotmart guarda avaliações de compradores. Se existirem, três delas, com primeiro nome e inicial, valem mais que qualquer texto meu. Se não existirem, não invente e não use comentário de Instagram sem autorização.
+8. **Um pixel só, e Compra chegando da Hotmart.** Conferir no Gerenciador de Eventos.
+
+A skill market-funnel que instalamos faz essa análise a partir da URL ao vivo. A rede desta sessão não alcança o seu domínio; rodei a lógica dela sobre a cópia local.
+
+### Oferta (skill offers aplicada ao que você já tem)
+
+Não mexa no preço agora. Mexa no que a pessoa leva por ele:
+- **Order bump:** Protocolo da Crise (R$ 27) no checkout do curso. É o complemento natural: o curso é a rotina, o guia é a hora H.
+- **Garantia** já existe e é boa. Só precisa aparecer mais.
+- **Parcelamento** já existe. 12x R$ 21,90 é o número que entra no anúncio de remarketing, não R$ 219.
+- **Sem escassez inventada.** Prazo falso para curso vitalício quebra a confiança que o perfil levou meses para construir, e é o tipo de apelo que a publicidade médica não comporta.
+
+### Calendário
+
+| Quando | O quê |
+|---|---|
+| Dia 0 (hoje) | Pausar livro. Decidir o pixel. Order bump na Hotmart. Produzir os 5 estáticos (briefs no arquivo p7d-briefs-estaticos.md). |
+| Dia 1 a 3 | Ajustar a página (itens 1, 2, 5, 6 e 8 são rápidos). Subir a campanha nova. Pausar a atual quando a nova aprovar. |
+| Dia 7 | Primeira leitura: custo por visita e por clique em comprar, por anúncio. Pausar o que estourou a regra. |
+| Dia 14 | Leitura de compra com o acumulado. Decidir: estático ou vídeo leva mais orçamento. Escalar 20% o que ganhou. |
+| Dia 21 | Segundo lote de estáticos: variar o conceito que ganhou. Testar a persona cônjuge com criativo próprio. |
+
+## 4. O que ainda preciso de você
+
+1. Vendas reais na Hotmart nos últimos 60 dias, curso e livro, para comparar com o pixel.
+2. Qual pixel recebe a compra da Hotmart (Gerenciador de Eventos).
+3. Se existem avaliações de compradores na Hotmart.
+4. Se R$ 297 já foi preço real do curso.
+5. Autorização para pausar a campanha do livro.
+
+## Limites desta análise
+
+Os dados são do pixel, não da Hotmart. Treze compras em 90 dias é amostra pequena; as diferenças entre segmentos indicam direção, não certeza. Não vi as imagens dos anúncios (os links de pré-visualização exigem login no Meta). Não consegui abrir a página ao vivo nem o checkout; usei a cópia local do repositório. Não consultei o histórico editorial para repetição de tese porque anúncio não entra no feed, mas as teses dos posts para família estão no contexto de ads.

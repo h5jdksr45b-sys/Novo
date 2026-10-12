@@ -66,7 +66,7 @@ Palavras que afastam: manipuladora, narcisista, cura, controle, "transforme sua 
 ## 5. Oferta e prova
 
 - **Oferta:** R$ 219 ou 12x R$ 21,90. Acesso imediato e vitalício. Garantia de 7 dias.
-- **Prova disponível:** médico, CRM-SP 183549, pós-graduado em psiquiatria, dez anos em CAPS, consultório em Mogi das Cruzes. Audiência grande no Instagram: posts para família com mais de 1.500 compartilhamentos cada (2026-09-05, 2026-08-07, 2026-09-26) [REAL, histórico de posts].
+- **Prova disponível:** médico, CRM-SP 183549, pós-graduado em psiquiatria, dez anos em CAPS, consultório em Mogi das Cruzes. Instagram com 105 mil seguidores (informado em 12/10). Autor de um livro: Quem Sofre Não Escolhe Como Gritar, edição expandida de Quando Escolher Não É Possível. Não existe livro chamado Borderline e Dignidade. Audiência grande no Instagram: posts para família com mais de 1.500 compartilhamentos cada (2026-09-05, 2026-08-07, 2026-09-26) [REAL, histórico de posts].
 - **Prova que falta:** depoimentos reais de compradores. Conferido em 12/10: não há avaliação na Hotmart. Prova Social e Lo-Fi com print ficam fora até existirem três reais. Nunca inventar depoimento.
 - **Demanda orgânica (Hotmart, 13/08 a 12/10):** curso 9 vendas, livro Quando Escolher Não É Possível 11 vendas, sem anúncio para o livro. O perfil vende sozinho.
 - **Atenção (CFM):** "Referência nacional", "+90k familiares orientados" e qualquer promessa de resultado estão fora dos anúncios. Dizer "mais de X pessoas acompanham" só com o número real.

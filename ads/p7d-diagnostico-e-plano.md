@@ -2,6 +2,28 @@
 
 Data: 2026-10-12. Fonte: conta de anúncios Fabio H. L. Schmidt (id 1454243259689590) via Windsor.ai, últimos 90 dias (15/07 a 12/10). Compras e valores são os que o pixel registrou; a Hotmart pode ter contado diferente. Preços informados por você: curso R$ 219, livro R$ 69.
 
+## 0. Urgente, antes de qualquer plano
+
+**A conta de anúncios está em período de carência de pagamento.** Status `IN_GRACE_PERIOD`, saldo em aberto de R$ 705,09 (gasto acumulado da conta: R$ 12.760,40). Isso quer dizer que uma cobrança falhou. O Meta mantém os anúncios no ar por alguns dias e depois desativa a conta inteira até o pagamento entrar. Enquanto a carência dura, campanhas novas quase não entregam.
+
+É por isso que a campanha do livro tem 2 impressões e gasto zero com R$ 55 por dia de orçamento. O anúncio "Busca no Google | 4:5" e o conjunto estão com status ACTIVE, então não é reprovação. O público é amplo (Brasil, 18 a 65), então não é público. É pagamento, somado ao fato de a campanha ter sido criada hoje de manhã.
+
+Quando a carência acabar, a campanha do Protocolo, que está vendendo, para junto. Regularizar o pagamento em Faturamento vem antes de tudo o que está abaixo.
+
+**Pixel decidido:** o conjunto ativo do Protocolo usa o pixel 2562728947535171 (está no campo de conversão do conjunto, que o Windsor devolve como `adset_promoted_object`). As 4 compras que ele registrou em outubro batem com as 4 vendas da Hotmart de 3, 7, 9 e 11/10, no centavo. Esse é o pixel que a Hotmart alimenta hoje. A campanha do livro está no outro, 1594249651815237. Se ela começar a entregar, vai otimizar às cegas. Trocar antes de ligar.
+
+**Hotmart x pixel, 60 dias (13/08 a 12/10), pelos e-mails de venda:**
+
+| Produto | Vendas Hotmart | Líquido | Atribuídas ao pixel | Leitura |
+|---|---|---|---|---|
+| Protocolo 7 Dias | 9 (uma de R$ 13,95, atípica) | R$ 1.525,42 | 4 (3, 7, 9 e 11/10) | 28 e 29/09 vieram dois dias depois da campanha subir, sem atribuição; 18 e 29/08 são orgânicas, sem anúncio no ar |
+| Quando Escolher Não É Possível (R$ 69) | 11 | R$ 579,52 | nenhuma campanha rodou | vende sozinho, 5 a 6 por mês |
+| Quem sofre não escolhe como gritar (R$ 69) | 0 pagas, 1 boleto em aberto hoje | | campanha com 2 impressões | o boleto não veio do anúncio |
+
+O líquido do curso fica entre R$ 178 e R$ 195 por venda. **O custo por compra que empata é R$ 188.** A campanha atual está entre R$ 270 (contando só as 4 atribuídas) e R$ 180 (se as duas de 28 e 29/09 forem dela). Ou seja: entre perder R$ 82 por venda e empatar. Nunca lucro.
+
+Sem avaliação de comprador na Hotmart: o anúncio de prova social fica fora até existirem três reais. R$ 297 nunca foi preço praticado: fora dos anúncios e da página.
+
 ## 1. O que os números dizem
 
 ### Total dos 90 dias
@@ -56,15 +78,17 @@ Sua hipótese era que o anúncio não chega nas pessoas certas. Os dados dizem o
 
 ### Três problemas de configuração
 
-1. **Dois pixels.** O conjunto ativo usa o pixel 2562728947535171. O conjunto pausado e a campanha do livro usam o 1594249651815237. Os dois registraram compras, então os dois estão instalados em algum lugar. Cada conjunto só aprende com o próprio pixel. Escolha um para tudo. Veja no Gerenciador de Eventos qual recebe a compra da Hotmart e use esse.
+1. **Dois pixels.** O conjunto ativo usa o pixel 2562728947535171. O conjunto pausado e a campanha do livro usam o 1594249651815237. Os dois registraram compras em momentos diferentes (o 1594 em julho, o 2562 em outubro). Cada conjunto só aprende com o próprio pixel. Decidido na seção 0: 2562728947535171 em tudo.
 2. **Os estáticos nunca foram testados.** O conjunto ativo tem 4 anúncios. O vídeo levou R$ 929; os três estáticos receberam R$ 1, R$ 17 e R$ 25. Com um vídeo no mesmo conjunto, o Meta nunca vai gastar nos estáticos. Para testar estático, ele precisa de conjunto próprio.
 3. **Segmentação confusa.** Interesses "Brasil, Psicologia, Família, faculdade de medicina, pais de adolescentes, relacionamento à distância, aniversário em dezembro" num só grupo, com público Advantage ligado por cima. O Meta trata isso como sugestão e vai amplo de qualquer jeito. Não atrapalha muito, mas não ajuda em nada. O que ajuda é restringir idade e gênero, que o Meta respeita quando você marca como restrição.
 
 ## 2. O livro no ads
 
-A campanha do livro começou hoje, ampla, 18 a 65, R$ 55 por dia, otimizando para compra de R$ 69. Com o CPM que a conta está pagando (R$ 44 a R$ 58), para o livro empatar o custo por compra precisa ficar abaixo de R$ 60. Nada na conta sugere que isso aconteça com tráfego frio. O curso, que custa três vezes mais, está em R$ 228.
+A campanha do livro começou hoje, ampla, 18 a 65, R$ 55 por dia, otimizando para compra de R$ 69. O livro deixa cerca de R$ 52 líquidos por venda. Para empatar, o custo por compra precisa ficar abaixo de R$ 52. Com o CPM que a conta paga (R$ 44 a R$ 58), isso exige uma venda a cada mil impressões. O curso, com página e vídeo rodados, faz uma a cada sete mil. Mesmo que o livro converta três vezes melhor, fica em R$ 125 por venda e perde R$ 73 em cada uma.
 
-Recomendação: pausar a campanha do livro hoje, antes de gastar, e usar o livro de dois jeitos que não custam mídia:
+O dado novo da Hotmart muda uma coisa: "Quando Escolher Não É Possível" vende 11 em 60 dias sem anúncio. Tem demanda orgânica. Isso é argumento para o livro ser porta de entrada barata, não para pagar R$ 50 de CPM por ele. Ponto a confirmar: a campanha anuncia "Quem sofre não escolhe como gritar" e o link que você me deu (U103950622S) é o de "Quando Escolher Não É Possível". São dois livros ou o mesmo com título novo?
+
+Recomendação mantida: pausar a campanha do livro antes de ela começar a entregar (hoje ela está no pixel errado e a conta está em carência), e usar o livro de dois jeitos que não custam mídia:
 - **Order bump no checkout do curso.** Quem está comprando o Protocolo vê o livro por R$ 69 (ou o Protocolo da Crise por R$ 27) com um clique. Isso sobe o ticket médio sem subir o CPA.
 - **Oferta de saída para quem viu a página e não comprou.** No remarketing, o livro a R$ 69 é a segunda chance para quem achou R$ 219 pesado.
 
@@ -126,7 +150,7 @@ Não mexa no preço agora. Mexa no que a pessoa leva por ele:
 
 | Quando | O quê |
 |---|---|
-| Dia 0 (hoje) | Pausar livro. Decidir o pixel. Order bump na Hotmart. Produzir os 5 estáticos (briefs no arquivo p7d-briefs-estaticos.md). |
+| Dia 0 (hoje) | Regularizar o pagamento da conta (R$ 705,09). Pausar livro. Pixel 2562728947535171 em tudo. Order bump na Hotmart. Produzir os 5 estáticos (briefs no arquivo p7d-briefs-estaticos.md). |
 | Dia 1 a 3 | Ajustar a página (itens 1, 2, 5, 6 e 8 são rápidos). Subir a campanha nova. Pausar a atual quando a nova aprovar. |
 | Dia 7 | Primeira leitura: custo por visita e por clique em comprar, por anúncio. Pausar o que estourou a regra. |
 | Dia 14 | Leitura de compra com o acumulado. Decidir: estático ou vídeo leva mais orçamento. Escalar 20% o que ganhou. |
@@ -134,11 +158,13 @@ Não mexa no preço agora. Mexa no que a pessoa leva por ele:
 
 ## 4. O que ainda preciso de você
 
-1. Vendas reais na Hotmart nos últimos 60 dias, curso e livro, para comparar com o pixel.
-2. Qual pixel recebe a compra da Hotmart (Gerenciador de Eventos).
-3. Se existem avaliações de compradores na Hotmart.
-4. Se R$ 297 já foi preço real do curso.
-5. Autorização para pausar a campanha do livro.
+Resolvido em 12/10: vendas da Hotmart (seção 0), pixel (2562728947535171), avaliações (não há), R$ 297 (nunca praticado).
+
+Fica:
+1. Pagamento da conta de anúncios regularizado. Só você faz isso, em Faturamento.
+2. "Quem sofre não escolhe como gritar" e "Quando Escolher Não É Possível" são o mesmo livro?
+3. Autorização para pausar a campanha do livro e para trocar o pixel dela.
+4. Order bump do Protocolo da Crise (R$ 27) ativado no checkout do curso, na Hotmart.
 
 ## Limites desta análise
 

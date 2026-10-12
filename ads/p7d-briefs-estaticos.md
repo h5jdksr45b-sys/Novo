@@ -232,7 +232,7 @@ Nome no alto. Imagem do produto no meio, menor que a oferta. Linha de oferta gra
 - Explicar o problema de novo. Ela já leu a página.
 - Mostrar para público frio. Este anúncio só roda no conjunto de remarketing.
 
-**Se R$ 297 já foi preço real:** linha "de R$ 297 por R$ 219" acima do 12x. Se nunca foi, não use.
+**Preço de referência:** não existe. R$ 297 nunca foi praticado, então não entra nem aqui nem na página.
 
 **Unidade do Meta**
 Texto principal (1 de 2):

@@ -6,7 +6,7 @@ _Idioma: português brasileiro · Objetivo principal: venda do Protocolo 7 Dias 
 - **Uma linha:** curso em vídeo de sete dias, um procedimento por dia, para quem convive com uma pessoa com transtorno de personalidade borderline.
 - **O que é:** 7 aulas, scripts prontos, acesso vitalício. Cada dia ensina uma técnica para aplicar em casa. Dia 1 frase fixa de presença que interrompe a escalada. Dia 2 limite que funciona sem virar briga. Dia 3 pausa combinada, o protocolo de 20 minutos. Dia 4 roteiro de pós-crise de 10 minutos. Dia 5 como parar de discutir detalhes inúteis no auge do conflito. Dia 6 regra de previsibilidade que reduz a incerteza do ambiente. Dia 7 autocuidado obrigatório para quem cuida não adoecer. [REAL, página de venda]
 - **Prateleira em que a pessoa procura:** "o que fazer quando ela entra em crise", "como lidar com filha borderline", "curso para família de borderline". Concorre com esperar a terapia dela resolver, terapia familiar, livros sobre TPB e conteúdo gratuito.
-- **Preço:** R$ 219 à vista ou 12x R$ 21,90. Hub mostra R$ 297 riscado; confirmar se R$ 297 já foi preço real antes de usar em anúncio. Garantia de 7 dias, reembolso sem perguntas. Checkout: pay.hotmart.com/S104212285E.
+- **Preço:** R$ 219 à vista ou 12x R$ 21,90. Líquido por venda entre R$ 178 e R$ 195 (Hotmart, out/2026). O R$ 297 riscado do hub nunca foi preço praticado: não usar. Garantia de 7 dias, reembolso sem perguntas. Checkout: pay.hotmart.com/S104212285E. Pixel que recebe a compra: 2562728947535171.
 - **Benefício central (a única coisa):** parar de improvisar na crise. Ter um procedimento para fazer em casa hoje à noite.
 - **Produtos ao redor (hub):** livro "Quando Escolher Não É Possível" R$ 69 (pay.hotmart.com/U103950622S); guia "Protocolo da Crise" R$ 27; "Kit de Regulação" R$ 27 (para a própria pessoa com TPB); consulta R$ 700.
 
@@ -67,7 +67,8 @@ Palavras que afastam: manipuladora, narcisista, cura, controle, "transforme sua 
 
 - **Oferta:** R$ 219 ou 12x R$ 21,90. Acesso imediato e vitalício. Garantia de 7 dias.
 - **Prova disponível:** médico, CRM-SP 183549, pós-graduado em psiquiatria, dez anos em CAPS, consultório em Mogi das Cruzes. Audiência grande no Instagram: posts para família com mais de 1.500 compartilhamentos cada (2026-09-05, 2026-08-07, 2026-09-26) [REAL, histórico de posts].
-- **Prova que falta:** depoimentos reais de compradores. A Hotmart guarda avaliações; sem elas, os conceitos Prova Social e Lo-Fi com print ficam fora. Nunca inventar depoimento.
+- **Prova que falta:** depoimentos reais de compradores. Conferido em 12/10: não há avaliação na Hotmart. Prova Social e Lo-Fi com print ficam fora até existirem três reais. Nunca inventar depoimento.
+- **Demanda orgânica (Hotmart, 13/08 a 12/10):** curso 9 vendas, livro Quando Escolher Não É Possível 11 vendas, sem anúncio para o livro. O perfil vende sozinho.
 - **Atenção (CFM):** "Referência nacional", "+90k familiares orientados" e qualquer promessa de resultado estão fora dos anúncios. Dizer "mais de X pessoas acompanham" só com o número real.
 
 ## 6. Mapa de consciência

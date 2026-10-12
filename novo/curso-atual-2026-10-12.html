@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark only">
+<meta name="supported-color-schemes" content="dark">
+<title>Protocolo 7 Dias · Dr. Fabio Schmidt</title>
+<meta name="description" content="Um caminho de 7 dias para famílias que convivem com alguém com borderline. Pare de alimentar o ciclo da crise sem perceber.">
+<meta property="og:title" content="Protocolo 7 Dias · Dr. Fabio Schmidt">
+<meta property="og:description" content="Conviver com alguém em crise sem virar o próximo alvo da crise.">
+<meta property="og:type" content="website">
+
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','2562728947535171');
+fbq('track','PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2562728947535171&ev=PageView&noscript=1"/></noscript>
+<!-- Fim Meta Pixel -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@800;900&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    color-scheme:dark;
+    --bg:#0d0d0d;
+    --bg-soft:#161616;
+    --text:#f4f1ea;
+    --muted:#a39e93;
+    --gold:#C8A96E;
+    --gold-bright:#dcc188;
+    --line:#2a2722;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;background:#0d0d0d !important}
+  body{
+    background:#0d0d0d !important;
+    color:#f4f1ea !important;
+    font-family:'Poppins',sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  .wrap{max-width:680px;margin:0 auto;padding:0 22px}
+
+  .glow{
+    position:fixed;top:-20%;left:50%;transform:translateX(-50%);
+    width:120%;height:60%;
+    background:radial-gradient(ellipse at center, rgba(200,169,110,0.10), transparent 65%);
+    pointer-events:none;z-index:0;
+  }
+
+  header,main{position:relative;z-index:1}
+
+  /* HERO */
+  .hero{padding:64px 0 30px;text-align:center}
+  .eyebrow{
+    font-size:13px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--gold);font-weight:600;margin-bottom:22px;
+    opacity:0;animation:rise .7s ease forwards}
+  h1{
+    font-family:'Archivo',sans-serif;font-weight:900;
+    font-size:clamp(30px,7vw,46px);line-height:1.08;
+    letter-spacing:-.01em;margin-bottom:20px;
+    opacity:0;animation:rise .7s ease .1s forwards}
+  h1 .hl{color:var(--gold-bright)}
+  .sub{
+    font-size:clamp(16px,2.4vw,18px);color:var(--muted);
+    max-width:520px;margin:0 auto 0;
+    opacity:0;animation:rise .7s ease .2s forwards}
+  .byline{
+    margin-top:18px;font-size:13px;color:var(--muted);letter-spacing:.02em;
+    opacity:0;animation:rise .7s ease .25s forwards}
+  .byline b{color:var(--text);font-weight:600}
+
+  /* VIDEO */
+  .video-sec{padding:30px 0 6px;opacity:0;animation:rise .7s ease .3s forwards}
+  .video-label{text-align:center;font-size:13px;color:var(--muted);
+    letter-spacing:.08em;margin-bottom:14px}
+  .video-frame{
+    position:relative;width:100%;padding-top:56.25%;
+    border-radius:16px;overflow:hidden;
+    border:1px solid var(--line);
+    box-shadow:0 20px 50px rgba(0,0,0,.5);
+    background:#161616;cursor:pointer}
+  .video-frame iframe{
+    position:absolute;inset:0;width:100%;height:100%;border:0}
+  .video-poster{
+    position:absolute;inset:0;width:100%;height:100%;
+    background:#161616 center/cover no-repeat;
+    display:flex;align-items:center;justify-content:center;
+    transition:opacity .25s ease}
+  .video-poster::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(13,13,13,.15),rgba(13,13,13,.55))}
+  .play-btn{
+    position:relative;z-index:2;
+    width:72px;height:72px;border-radius:50%;
+    background:var(--gold);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 8px 26px rgba(200,169,110,.4);
+    transition:transform .18s ease,background .18s ease}
+  .video-frame:hover .play-btn{transform:scale(1.07);background:var(--gold-bright)}
+  .play-btn::before{
+    content:"";display:block;
+    width:0;height:0;margin-left:5px;
+    border-top:14px solid transparent;
+    border-bottom:14px solid transparent;
+    border-left:22px solid #1a1407}
+
+  /* PRICE + CTA */
+  .price-block{padding-top:34px;
+    opacity:0;animation:rise .7s ease .4s forwards}
+  .price-old{
+    color:var(--muted);text-decoration:line-through;
+    font-size:18px;margin-bottom:2px;display:block}
+  .price-now{
+    font-family:'Archivo',sans-serif;font-weight:900;
+    font-size:clamp(40px,9vw,58px);color:var(--text);
+    line-height:1;margin-bottom:4px}
+  .price-now small{font-size:.4em;color:var(--muted);font-weight:400;vertical-align:super}
+  .price-note{font-size:13px;color:var(--muted);margin-bottom:26px}
+
+  .cta{
+    display:inline-block;width:100%;max-width:440px;
+    background:var(--gold);color:#1a1407;
+    font-family:'Archivo',sans-serif;font-weight:800;
+    font-size:clamp(16px,2.6vw,19px);letter-spacing:.01em;
+    text-decoration:none;padding:20px 26px;border-radius:14px;
+    box-shadow:0 10px 30px rgba(200,169,110,.22);
+    transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+  }
+  .cta:hover{transform:translateY(-2px);background:var(--gold-bright);
+    box-shadow:0 14px 38px rgba(200,169,110,.32)}
+  .cta:active{transform:translateY(0)}
+  .cta-mini{display:block;font-size:12px;color:var(--muted);
+    margin-top:12px;letter-spacing:.04em}
+
+  .hero-price{text-align:center}
+
+  /* CONTENT */
+  .section{padding:46px 0;border-top:1px solid var(--line)}
+  .section h2{
+    font-family:'Archivo',sans-serif;font-weight:800;
+    font-size:clamp(22px,4vw,28px);margin-bottom:24px;line-height:1.2}
+  .section h2 .hl{color:var(--gold-bright)}
+  .lead{color:var(--text);font-size:17px;margin-bottom:18px}
+  .lead.muted{color:var(--muted)}
+
+  .steps{list-style:none;display:grid;gap:14px;margin-top:8px}
+  .step{
+    display:flex;gap:16px;align-items:flex-start;
+    background:var(--bg-soft);border:1px solid var(--line);
+    border-radius:12px;padding:18px 18px}
+  .step .n{
+    flex:none;width:34px;height:34px;border-radius:9px;
+    background:rgba(200,169,110,.12);color:var(--gold-bright);
+    font-family:'Archivo',sans-serif;font-weight:800;font-size:16px;
+    display:flex;align-items:center;justify-content:center}
+  .step p{font-size:15px;color:var(--text)}
+  .step p b{color:var(--gold-bright);font-weight:600}
+
+  .for-who{display:grid;gap:10px;margin-top:6px}
+  .for-who div{
+    font-size:15px;color:var(--text);padding-left:24px;position:relative}
+  .for-who div::before{
+    content:"";position:absolute;left:0;top:9px;
+    width:9px;height:9px;border-radius:50%;background:var(--gold)}
+
+  /* AUTORIDADE */
+  .author{display:grid;gap:12px;margin-top:4px}
+  .author div{
+    background:var(--bg-soft);border:1px solid var(--line);
+    border-radius:12px;padding:14px 16px;font-size:15px;color:var(--text)}
+  .author div b{color:var(--gold-bright);font-weight:600}
+
+  /* GARANTIA */
+  .guarantee{
+    display:flex;gap:18px;align-items:center;
+    background:var(--bg-soft);border:1px solid var(--gold);
+    border-radius:14px;padding:22px 20px}
+  .seal{
+    flex:none;width:74px;height:74px;border-radius:50%;
+    border:2px solid var(--gold);color:var(--gold-bright);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    font-family:'Archivo',sans-serif;font-weight:900;line-height:1}
+  .seal span{font-size:26px}
+  .seal small{font-size:10px;letter-spacing:.12em;margin-top:3px}
+  .guarantee p{font-size:15px;color:var(--text)}
+  .guarantee p b{color:var(--gold-bright)}
+
+  /* FAQ */
+  .faq details{
+    border-bottom:1px solid var(--line);padding:16px 0}
+  .faq summary{
+    cursor:pointer;list-style:none;font-weight:600;font-size:16px;
+    display:flex;justify-content:space-between;gap:14px}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";color:var(--gold);font-size:20px;line-height:1}
+  .faq details[open] summary::after{content:"–"}
+  .faq details p{color:var(--muted);font-size:15px;margin-top:10px}
+
+  /* FINAL CTA */
+  .final{padding:54px 0 30px;text-align:center;border-top:1px solid var(--line)}
+  .final h2{margin-bottom:10px}
+  .final .price-block{margin-top:8px;animation:none;opacity:1;padding-top:8px}
+
+  footer{
+    text-align:center;padding:34px 0 50px;
+    border-top:1px solid var(--line);
+    color:var(--muted);font-size:13px;line-height:1.8}
+  footer .name{color:var(--text);font-weight:600}
+  footer .disc{display:block;margin-top:10px;font-size:12px;max-width:460px;margin-left:auto;margin-right:auto}
+
+  @keyframes rise{
+    from{opacity:0;transform:translateY(18px)}
+    to{opacity:1;transform:translateY(0)}
+  }
+  @media(max-width:480px){
+    .hero{padding:48px 0 24px}
+    .step{padding:15px}
+    .play-btn{width:60px;height:60px}
+    .guarantee{flex-direction:column;text-align:center}
+  }
+</style>
+</head>
+<body>
+<div class="glow"></div>
+
+<main class="wrap">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="eyebrow">Protocolo 7 Dias · Para famílias</div>
+    <h1>Conviver com alguém em crise <span class="hl">sem virar o próximo alvo</span> da crise.</h1>
+    <p class="sub">Um caminho de 7 dias para quem mora com alguém com borderline e já tentou de tudo. Não para consertar o outro. Para parar de alimentar o ciclo sem perceber.</p>
+    <p class="byline">Por <b>Dr. Fabio Schmidt</b> · Médico · 10 anos em saúde mental pública</p>
+  </section>
+
+  <!-- VIDEO -->
+  <section class="video-sec">
+    <div class="video-label">Veja como funciona, em 2 minutos</div>
+    <div class="video-frame" id="videoFrame" role="button" tabindex="0" aria-label="Assistir ao vídeo">
+      <div class="video-poster" id="videoPoster">
+        <div class="play-btn" aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICE + CTA -->
+  <section class="hero-price">
+    <div class="price-block">
+      <span class="price-old">de R$ 290</span>
+      <div class="price-now"><small>R$</small>219</div>
+      <div class="price-note">Acesso imediato · Pagamento seguro pela Hotmart · 7 dias de garantia</div>
+      <a class="cta js-checkout" href="https://pay.hotmart.com/S104212285E?sck=site_topo">Quero começar agora</a>
+      <span class="cta-mini">Acesso vitalício ao protocolo completo</span>
+    </div>
+  </section>
+
+  <!-- O QUE É -->
+  <section class="section">
+    <h2>Toda conversa vira briga. <span class="hl">E você já não sabe o que dizer.</span></h2>
+    <p class="lead">Você mede cada palavra antes de abrir a boca. Calcula o tom, escolhe a hora. E mesmo assim a crise vem, e quando vem parece que a culpa sobra pra você.</p>
+    <p class="lead muted">O que falta na maioria das casas não é paciência. É um plano. Saber o que fazer no minuto em que a crise abre, e o que não fazer pra não jogar lenha sem querer.</p>
+  </section>
+
+  <!-- COMO FUNCIONA -->
+  <section class="section">
+    <h2>O que você aprende nos 7 dias</h2>
+    <ul class="steps">
+      <li class="step"><span class="n">1</span><p>Reconhecer os <b>sinais que aparecem antes</b> da crise abrir, enquanto ainda dá pra agir.</p></li>
+      <li class="step"><span class="n">2</span><p>O que <b>parar de dizer</b> no auge do conflito, porque tentar argumentar ali alimenta o ciclo.</p></li>
+      <li class="step"><span class="n">3</span><p>Como <b>conter a crise no ambiente de casa</b> sem precisar ganhar a discussão.</p></li>
+      <li class="step"><span class="n">4</span><p>O passo a passo pra <b>se proteger</b> sem abandonar quem você ama.</p></li>
+    </ul>
+  </section>
+
+  <!-- PRA QUEM -->
+  <section class="section">
+    <h2>É pra você se</h2>
+    <div class="for-who">
+      <div>Mora com alguém com borderline e sente que anda no escuro.</div>
+      <div>Já tentou conversar, ceder, impor limite, e nada segurou a crise.</div>
+      <div>Quer entender o que acontece, sem julgar quem está sofrendo.</div>
+      <div>Precisa de passos concretos, não de teoria solta.</div>
+    </div>
+  </section>
+
+  <!-- QUEM CONDUZ -->
+  <section class="section">
+    <h2>Quem conduz o protocolo</h2>
+    <p class="lead">Sou o Dr. Fabio Schmidt. Atendo pessoas com borderline e as famílias delas no consultório, individualmente e em casal.</p>
+    <div class="author">
+      <div><b>10 anos</b> em saúde mental pública, nos CAPS</div>
+      <div>Autor de <b>Quando Escolher Não É Possível</b> e <b>Borderline e Dignidade</b></div>
+      <div>Mais de <b>100 mil pessoas</b> acompanham o Borderline Sem Estigma no Instagram</div>
+    </div>
+  </section>
+
+  <!-- GARANTIA -->
+  <section class="section">
+    <div class="guarantee">
+      <div class="seal"><span>7</span><small>DIAS</small></div>
+      <p><b>Garantia de 7 dias.</b> Entre, assista, aplique. Se não fizer sentido pra sua casa, você pede o reembolso pela própria Hotmart dentro de 7 dias e recebe 100% de volta. Sem pergunta.</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section faq">
+    <h2>Dúvidas</h2>
+    <details>
+      <summary>Como recebo o acesso?</summary>
+      <p>Assim que o pagamento é aprovado, a Hotmart envia o acesso para o seu e-mail. No Pix e no cartão é imediato.</p>
+    </details>
+    <details>
+      <summary>Serve se a pessoa não tem diagnóstico fechado?</summary>
+      <p>Sim. O protocolo é sobre o que acontece dentro de casa na hora da crise, e isso vale para você mesmo antes de um diagnóstico.</p>
+    </details>
+    <details>
+      <summary>Substitui tratamento ou terapia?</summary>
+      <p>Não. É um conteúdo educativo para a família. Não substitui avaliação nem acompanhamento profissional de quem está em sofrimento.</p>
+    </details>
+    <details>
+      <summary>E se não for pra mim?</summary>
+      <p>Você tem 7 dias de garantia. Pede o reembolso pela Hotmart e recebe o valor integral.</p>
+    </details>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final">
+    <h2>Comece hoje a mudar a dinâmica da sua casa.</h2>
+    <div class="price-block">
+      <span class="price-old">de R$ 290</span>
+      <div class="price-now"><small>R$</small>219</div>
+      <div class="price-note">Acesso imediato · Pagamento seguro pela Hotmart · 7 dias de garantia</div>
+      <a class="cta js-checkout" href="https://pay.hotmart.com/S104212285E?sck=site_final">Quero começar agora</a>
+      <span class="cta-mini">Acesso vitalício ao protocolo completo</span>
+    </div>
+  </section>
+
+  <footer>
+    <span class="name">Dr. Fabio Schmidt</span><br>
+    Médico · CRM-SP 183549<br>
+    Borderline sem estigma
+    <span class="disc">Conteúdo educativo. Não substitui consulta, diagnóstico ou tratamento. Em situação de risco, procure o CVV (188) ou o serviço de emergência mais próximo.</span>
+  </footer>
+
+</main>
+
+<script>
+(function(){
+  var frame = document.getElementById('videoFrame');
+  var poster = document.getElementById('videoPoster');
+  var VIMEO_ID = '1175944292';
+  var loaded = false;
+
+  // eventos extras usando o pixel que ja esta instalado no site
+  if(window.fbq) fbq('track','ViewContent',{content_name:'Protocolo 7 Dias',value:219,currency:'BRL'});
+
+  fetch('https://vimeo.com/api/oembed.json?url=https://vimeo.com/' + VIMEO_ID + '&width=1280')
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      if(d && d.thumbnail_url){
+        var big = d.thumbnail_url.replace(/_\d+x\d+/, '_1280');
+        poster.style.backgroundImage = "url('" + big + "')";
+      }
+    })
+    .catch(function(){});
+
+  function loadVideo(){
+    if(loaded) return;
+    loaded = true;
+    if(window.fbq) fbq('trackCustom','PlayVideo');
+    var iframe = document.createElement('iframe');
+    iframe.setAttribute('src','https://player.vimeo.com/video/' + VIMEO_ID + '?badge=0&autopause=0&autoplay=1&player_id=0&app_id=58479');
+    iframe.setAttribute('allow','autoplay; fullscreen; picture-in-picture');
+    iframe.setAttribute('allowfullscreen','');
+    iframe.setAttribute('title','Protocolo 7 Dias');
+    frame.appendChild(iframe);
+    poster.style.opacity = '0';
+    setTimeout(function(){ if(poster.parentNode) poster.parentNode.removeChild(poster); }, 260);
+  }
+
+  frame.addEventListener('click', loadVideo);
+  frame.addEventListener('keydown', function(e){
+    if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); loadVideo(); }
+  });
+
+  // evento de inicio de checkout para a Meta
+  var ctas = document.querySelectorAll('.js-checkout');
+  for(var i=0;i<ctas.length;i++){
+    ctas[i].addEventListener('click', function(){
+      if(window.fbq) fbq('track','InitiateCheckout',{value:219,currency:'BRL'});
+    });
+  }
+})();
+</script>
+
+</body>
+</html>

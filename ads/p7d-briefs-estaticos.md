@@ -255,3 +255,21 @@ Destino: checkout direto
 Monte o 1 e o 4 primeiro. O 1 é o mais barato de produzir (uma foto de celular e duas linhas) e testa se o perfil consegue comprar atenção de quem não está procurando. O 4 é o que mais se parece com o que já vendeu, mas em estático e com você assinando; é o teste mais direto de "estático vende ou só o vídeo vende". O 5 sobe junto, no conjunto de remarketing, porque não precisa de teste: quem viu a página e não comprou é a venda mais barata que a conta tem.
 
 O que fortaleceria o lote: três avaliações reais da Hotmart, com primeiro nome e inicial, para um sexto anúncio de Prova Social no nível 4.
+
+---
+
+## Imagens geradas (12/10, Higgsfield, GPT Image 2.5 Sunburst, alta, 2K, 4:5)
+
+Paleta da série: navy #0F1B2D, off-white #F5EFE6, âmbar #E0A458. Uma família tipográfica por peça.
+
+| Peça | Nível | Job no Higgsfield |
+|---|---|---|
+| 1. Foto corredor, Fica calma | L1 | 98c354e2-131d-44c9-ad6b-4b090773cce3 |
+| 1b. Minimalista papel, Fica calma (serifa) | L1 | 4fb14304-6e83-4c27-bdd0-36fbdcff6031 |
+| 1c. Minimalista navy, Tudo que você fala parece piorar | L2 | 5e0363f8-8a79-4871-89cc-44fb618399b0 |
+| 2. Antes e depois | L2 | f5feb34c-0938-41f0-9711-9dbaac394887 |
+| 3. Esperar x Protocolo | L3 | 985ddcac-372d-4a9f-84ed-2d927a728a0b |
+| 4. Sete dias, um procedimento por dia | L4 | ff4d14ae-bb30-4c33-95a6-7ea04278f760 |
+| 5. Remarketing 12x R$ 21,90 | L5 | b895479f-4e7a-4807-95d0-208e072612af |
+
+Antes de subir, conferir na imagem: acentos, CRM-SP 183549, 12x R$ 21,90, e se a tela do celular não inventou texto além do pedido.

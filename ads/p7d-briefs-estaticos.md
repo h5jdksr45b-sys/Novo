@@ -273,3 +273,12 @@ Paleta da série: navy #0F1B2D, off-white #F5EFE6, âmbar #E0A458. Uma família 
 | 5. Remarketing 12x R$ 21,90 | L5 | b895479f-4e7a-4807-95d0-208e072612af |
 
 Antes de subir, conferir na imagem: acentos, CRM-SP 183549, 12x R$ 21,90, e se a tela do celular não inventou texto além do pedido.
+
+### Revisão de 12/10
+
+Aprovadas e salvas em ads/criativos: L1 minimalista papel, L2 antes e depois, L3 esperar x Protocolo, L4 sete dias.
+
+Refeitas:
+- L5 remarketing: a tela do celular tinha inventado aulas de outro curso (mindset, nutrição) e durações falsas. Nova versão: job 1bad2969-e78d-4acd-a9ec-baab292008e8.
+- L2 minimalista navy: subtítulo usava fórmula de contraste vetada. Agora: Existe o que dizer no lugar. Job 3b5ddde4-2e7b-4788-a5b0-99d5ff80b9c3.
+- L1 foto corredor: ursinho na cama sugeria criança pequena. Job cc0553fa-d840-4947-921d-1402ea7bd070.

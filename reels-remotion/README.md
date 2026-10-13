@@ -81,3 +81,11 @@ Found an issue with Remotion? [File an issue here](https://github.com/remotion-d
 ## License
 
 Note that for some entities a company license is needed. [Read the terms here](https://github.com/remotion-dev/remotion/blob/main/LICENSE.md).
+
+## Componentes extras
+
+**Anime.js** (`animejs`) já vem instalado. Use sempre pelo hook `src/anime/useAnimeTimeline.ts`, que prende a animação ao quadro do vídeo. Chamar `animate()` direto faz o render final sair diferente do preview.
+
+**ComparacaoLadoALado**: composição de exemplo (câmera parada, dois lados com rótulo, diferença crescendo). Troque rótulos e cor no painel de props do Studio.
+
+**Imagens**: `public/icones-3d/` e `public/ilustracoes/` recebem os arquivos do 3dicons e do Kitbitz.

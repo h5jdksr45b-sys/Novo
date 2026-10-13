@@ -401,7 +401,7 @@ const emSeq = (de: number, ate: number, fps: number) => ({
   durationInFrames: Math.max(1, Math.round((ate - de) * fps)),
 });
 
-export const EspelhoPro: React.FC = () => {
+export const EspelhoPro: React.FC<{ semLegenda?: boolean }> = ({ semLegenda }) => {
   const { fps } = useVideoConfig();
   const [ok] = useState(() => {
     carregarFontes();
@@ -435,7 +435,7 @@ export const EspelhoPro: React.FC = () => {
       <Sequence {...emSeq(CTA.de, CTA.ate, fps)} layout="none">
         <CTAFinal durF={emSeq(CTA.de, CTA.ate, fps).durationInFrames} />
       </Sequence>
-      <Legendas />
+      {semLegenda ? null : <Legendas />}
     </AbsoluteFill>
   );
 };

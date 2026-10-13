@@ -1,7 +1,7 @@
 # Funil de Stories: Protocolo 7 Dias
 
 Público principal: familiares e parceiros de quem tem transtorno de personalidade borderline.
-Produto: Protocolo 7 Dias, R$217, Hotmart. Landing: curso.drfabioschmidt.net. ManyChat: COMEÇAR.
+Produto: Protocolo 7 Dias, R$219, Hotmart. Landing: curso.drfabioschmidt.net. ManyChat: COMEÇAR.
 
 ## Lógica da semana
 
@@ -128,7 +128,7 @@ Principal: Para quem convive com alguém que tem TPB e não sabe o que dizer na 
 Apoio: Conteúdo educativo. Não substitui tratamento de quem você ama.
 
 **3.4** Tipo: texto com link.
-Principal: R$217. Acesso vitalício pela Hotmart. Garantia de 7 dias.
+Principal: R$219 ou 12x de R$21,90. Acesso vitalício pela Hotmart. Garantia de 7 dias.
 Apoio: Ou responde COMEÇAR aqui que eu te mando o link no direct.
 Link: curso.drfabioschmidt.net
 Visual: preço em creme grande, linha do COMEÇAR em dourado mono. Figurinha de link logo abaixo do preço.
@@ -228,7 +228,7 @@ Apoio: Ligue para alguém que esteja perto ou para o SAMU 192.
 Visual: fundo creme, texto preto, sem link.
 
 **6.7** Tipo: texto com link.
-Principal: R$217. Garantia de 7 dias.
+Principal: R$219. Garantia de 7 dias.
 Apoio: Ou responde COMEÇAR.
 Link: curso.drfabioschmidt.net
 
@@ -248,7 +248,7 @@ Principal: Frase de presença. Limite. Pausa. Pós-crise. Sem discutir detalhe. 
 Visual: cada item em uma linha, número em vermelho.
 
 **7.3** Tipo: texto com link.
-Principal: R$217. Acesso imediato e vitalício. Garantia de 7 dias.
+Principal: R$219 ou 12x de R$21,90. Acesso imediato e vitalício. Garantia de 7 dias.
 Apoio: Responde COMEÇAR que eu te mando o link.
 Link: curso.drfabioschmidt.net
 
@@ -275,7 +275,6 @@ Se alguém está em risco agora, ligue para o SAMU 192 ou para a polícia 190. P
 ## Checklist de operação
 
 Antes da semana
-- [ ] Confirmar o preço. Você informou R$217. A landing no repositório (`novo/curso7.html`) mostra R$219 à vista ou 12x R$21,90. Conferir na Hotmart e acertar o que estiver errado.
 - [ ] Confirmar que os sete procedimentos da landing ainda são os do curso. A lista dos dias 3 e 7 vem dela.
 - [ ] Conferir se a página da Hotmart também diz acesso vitalício.
 - [ ] Testar o checkout da landing até a página de pagamento da Hotmart.
@@ -285,7 +284,6 @@ Antes da semana
 - [ ] Gravar os vídeos selfie dos dias 1, 2, 3, 5 e 7 de uma vez.
 - [ ] Gravar a tela da área de membros sem dados de alunos.
 - [ ] Preparar os dois prints autorizados com os cortes indicados em 5.4 e 6.5. Não subir os prints sem corte em nenhum lugar, nem neste repositório.
-- [ ] Confirmar com as duas mães que a autorização vale para Stories e para o destaque, que fica no perfil depois da semana.
 
 Durante a semana
 - [ ] Publicar a sequência do dia em um horário fixo.

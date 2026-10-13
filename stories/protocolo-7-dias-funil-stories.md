@@ -13,7 +13,7 @@ Nenhum bloco usa contagem regressiva, últimas vagas ou preço que sobe. Não ex
 
 | Dia | Bloco | O que faz |
 |---|---|---|
-| 1 | F. Quem fez o curso | Mostra quem está por trás, só com fatos |
+| 1 | F. Para quem é o curso | Apresenta o curso e quem está por trás |
 | 2 | A. Moro longe | Depoimento real: crise à distância, sem diagnóstico fechado |
 | 3 | C. Trecho de aula | A pessoa vê o método antes de pagar |
 | 4 | B. Ela não aceita tratar | Depoimento real para quem acha que nada adianta sem tratamento |
@@ -52,12 +52,13 @@ Visual: preço em creme grande, apoio em sans, COMEÇAR em dourado mono. Figurin
 
 ---
 
-## Dia 1. Bloco F: quem fez o curso
+## Dia 1. Bloco F: para quem é o curso
 
-**F.1** Tipo: vídeo selfie, 15 a 20 s.
-Fala: Sou médico, pós-graduado em psiquiatria. Trabalhei dez anos em CAPS. Hoje atendo no consultório, inclusive casais.
-Texto grande, entrando em "dez anos em CAPS": Dez anos em CAPS.
-Visual: enquadramento do peito para cima, luz lateral, fundo do consultório sem nada que identifique paciente. Legenda automática pequena abaixo do queixo.
+**F.1** Tipo: texto animado.
+Rótulo: PROTOCOLO 7 DIAS
+Principal: Para quem convive com alguém que tem borderline.
+Apoio: Dr. Fabio Schmidt, médico com foco em TPB.
+Visual: "borderline" em vermelho.
 
 **F.2** Tipo: texto.
 Principal: O Protocolo 7 Dias é o que eu ensino para quem está do lado de quem tem borderline.
@@ -199,7 +200,7 @@ Antes da semana
 - [ ] Configurar no ManyChat os gatilhos COMEÇAR, ANTES, DURANTE e DEPOIS para resposta a story, com as grafias sem acento e em minúscula.
 - [ ] Testar os quatro gatilhos com uma segunda conta.
 - [ ] Decidir se o link leva parâmetro de origem por dia (ex.: `?src=stories_d2`) e conferir se a landing repassa esse parâmetro para o checkout da Hotmart.
-- [ ] Gravar F.1 e recortar o trecho da aula do dia 1 para C.2.
+- [ ] Recortar o trecho da aula do dia 1 para C.2.
 - [ ] Gravar a tela da área de membros sem dados de alunos.
 - [ ] Preparar os dois prints com os cortes indicados em A.2, A.3 e B.2. Não subir os prints sem corte em nenhum lugar, nem neste repositório.
 

@@ -10,6 +10,7 @@ import {
 } from "./ComparacaoLadoALado";
 import { MitoApego } from "./MitoApego";
 import { MitoRindo } from "./MitoRindo";
+import { Espelho, espelhoDuracao } from "./Espelho";
 
 // Each <Composition> is an entry in the sidebar!
 
@@ -40,6 +41,14 @@ export const RemotionRoot: React.FC = () => {
           rotuloDireita: "Lado B",
           corDestaque: "#c83c1e",
         }}
+      />
+      <Composition
+        id="Espelho"
+        component={Espelho}
+        durationInFrames={espelhoDuracao(30)}
+        fps={30}
+        width={1080}
+        height={1920}
       />
       <Composition
         id="MitoRindo"

@@ -1,0 +1,41 @@
+{
+ "telas": [
+  {
+   "texto": "QUEM É ESSA?",
+   "de": 0,
+   "ate": 3500
+  },
+  {
+   "texto": "DESPERSONALIZAÇÃO",
+   "de": 7047,
+   "ate": 9588
+  },
+  {
+   "texto": "DE HORA EM HORA, POR 2 DIAS",
+   "de": 9588,
+   "ate": 13279
+  },
+  {
+   "texto": "A MENTE ABAIXA O VOLUME",
+   "de": 24112,
+   "ate": 27803
+  },
+  {
+   "texto": "QUEM PERDE A REALIDADE NÃO ESTRANHA",
+   "de": 29338,
+   "ate": 34898
+  },
+  {
+   "texto": "MANDA PRA QUEM JÁ SENTIU ISSO",
+   "de": 38589,
+   "ate": 41130
+  }
+ ],
+ "socos": [
+  5034,
+  7047,
+  24975,
+  29050,
+  38589
+ ]
+}

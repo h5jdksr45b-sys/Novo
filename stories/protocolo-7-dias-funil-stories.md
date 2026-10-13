@@ -128,7 +128,7 @@ Principal: Para quem convive com alguém que tem TPB e não sabe o que dizer na 
 Apoio: Conteúdo educativo. Não substitui tratamento de quem você ama.
 
 **3.4** Tipo: texto com link.
-Principal: R$217. Acesso pela Hotmart. Garantia de 7 dias.
+Principal: R$217. Acesso vitalício pela Hotmart. Garantia de 7 dias.
 Apoio: Ou responde COMEÇAR aqui que eu te mando o link no direct.
 Link: curso.drfabioschmidt.net
 Visual: preço em creme grande, linha do COMEÇAR em dourado mono. Figurinha de link logo abaixo do preço.
@@ -182,11 +182,17 @@ Principal: O que você diz. Quando você para. O que acontece na casa depois da 
 Principal: Você não decide pelo outro.
 Apoio: Você decide a sua resposta na próxima crise.
 
-**5.4** Tipo: caixinha de perguntas.
+**5.4** Tipo: print de depoimento autorizado (WhatsApp).
+Texto acima do print: Uma mãe me escreveu isto.
+Print: a mensagem inteira, de "De tudo que busco" até "E isso é essencial!".
+Visual: fundo preto, print centralizado ocupando uns 70% da largura, cantos arredondados. Cortar o horário, a reação em coração e qualquer número ou nome do topo da conversa. Não escrever nada sobre o print.
+Observação: ela fala do conteúdo do perfil, não do curso. Por isso o texto acima não cita o Protocolo.
+
+**5.5** Tipo: caixinha de perguntas.
 Pergunta: Que dúvida sobre o curso falta para você decidir?
 Apoio abaixo da caixinha: Não precisa contar detalhes de crise aqui. Respondo amanhã.
 
-**5.5** Tipo: texto com link.
+**5.6** Tipo: texto com link.
 Principal: Responde COMEÇAR que eu te mando o link.
 Link: curso.drfabioschmidt.net
 
@@ -204,15 +210,24 @@ Visual: rolagem lenta pela lista de aulas na área de membros da Hotmart. Sem no
 Escolha até três perguntas reais da caixinha do dia 5. Prefira dúvidas sobre o curso e sobre convivência.
 Se a pergunta for um caso individual, use esta resposta:
 Fala: Essa pergunta precisa de avaliação individual. Aqui eu não consigo responder sem te conhecer.
-Se nenhuma pergunta chegar, publique estas, que só usam fatos confirmados da landing:
+Se nenhuma pergunta chegar, publique estas, que só usam fatos confirmados:
 - Pergunta: Tem garantia? Fala: Tem. Sete dias. Se não fizer sentido para a sua casa, você pede o reembolso.
 - Pergunta: Quando eu começo? Fala: O acesso é imediato depois da compra.
+- Pergunta: Por quanto tempo eu tenho acesso? Fala: Para sempre. O acesso é vitalício. Você pode voltar a uma aula quando a crise aparecer de novo.
 Visual: figurinha da pergunta no topo, você abaixo, legenda automática pequena abaixo do queixo.
 
-**6.5** Tipo: depoimento, só se houver um autorizado por escrito.
-Visual: print sem nome, sem foto e sem detalhe que identifique a família. Sem depoimento autorizado, pule este story.
+**6.5** Tipo: print de depoimento autorizado (direct do Instagram).
+Texto acima do print: Ela comprou o curso e mora em outra cidade.
+Print: só os três balões do meio, de "Comprei seu curso" até "Foi por Deus!", e o último, "difícil achar orientação para os pais".
+Visual: fundo preto, prints empilhados com 24 px de espaço, cantos arredondados. Cortar o primeiro balão, a idade da filha, os avatares, a data, as suas respostas e as reações.
+Observação: o primeiro balão e a idade identificam a filha, que não autorizou nada. O corte mantém o que importa para o funil: comprou, assistiu, aplicou na crise à distância.
 
-**6.6** Tipo: texto com link.
+**6.6** Tipo: texto.
+Principal: Na crise à distância, a mensagem ajuda. Se houver risco, ela não basta.
+Apoio: Ligue para alguém que esteja perto ou para o SAMU 192.
+Visual: fundo creme, texto preto, sem link.
+
+**6.7** Tipo: texto com link.
 Principal: R$217. Garantia de 7 dias.
 Apoio: Ou responde COMEÇAR.
 Link: curso.drfabioschmidt.net
@@ -233,7 +248,7 @@ Principal: Frase de presença. Limite. Pausa. Pós-crise. Sem discutir detalhe. 
 Visual: cada item em uma linha, número em vermelho.
 
 **7.3** Tipo: texto com link.
-Principal: R$217. Acesso imediato. Garantia de 7 dias.
+Principal: R$217. Acesso imediato e vitalício. Garantia de 7 dias.
 Apoio: Responde COMEÇAR que eu te mando o link.
 Link: curso.drfabioschmidt.net
 
@@ -262,14 +277,15 @@ Se alguém está em risco agora, ligue para o SAMU 192 ou para a polícia 190. P
 Antes da semana
 - [ ] Confirmar o preço. Você informou R$217. A landing no repositório (`novo/curso7.html`) mostra R$219 à vista ou 12x R$21,90. Conferir na Hotmart e acertar o que estiver errado.
 - [ ] Confirmar que os sete procedimentos da landing ainda são os do curso. A lista dos dias 3 e 7 vem dela.
-- [ ] Confirmar o prazo de acesso ao curso antes de responder perguntas sobre isso.
+- [ ] Conferir se a página da Hotmart também diz acesso vitalício.
 - [ ] Testar o checkout da landing até a página de pagamento da Hotmart.
 - [ ] Configurar o gatilho do ManyChat para resposta a story, com as três grafias de COMEÇAR.
 - [ ] Testar o gatilho com uma segunda conta e conferir se o link chega.
 - [ ] Decidir se o link leva parâmetro de origem por dia (ex.: `?src=stories_d3`) e conferir se a landing repassa esse parâmetro para o checkout da Hotmart.
 - [ ] Gravar os vídeos selfie dos dias 1, 2, 3, 5 e 7 de uma vez.
 - [ ] Gravar a tela da área de membros sem dados de alunos.
-- [ ] Separar depoimento só com autorização por escrito. Sem autorização, o 6.5 sai.
+- [ ] Preparar os dois prints autorizados com os cortes indicados em 5.4 e 6.5. Não subir os prints sem corte em nenhum lugar, nem neste repositório.
+- [ ] Confirmar com as duas mães que a autorização vale para Stories e para o destaque, que fica no perfil depois da semana.
 
 Durante a semana
 - [ ] Publicar a sequência do dia em um horário fixo.

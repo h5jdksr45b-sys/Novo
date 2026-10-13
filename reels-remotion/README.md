@@ -89,3 +89,27 @@ Note that for some entities a company license is needed. [Read the terms here](h
 **ComparacaoLadoALado**: composição de exemplo (câmera parada, dois lados com rótulo, diferença crescendo). Troque rótulos e cor no painel de props do Studio.
 
 **Imagens**: `public/icones-3d/` e `public/ilustracoes/` recebem os arquivos do 3dicons e do Kitbitz.
+
+## ReelLegendas (legenda cinética)
+
+Composição `ReelLegendas` em `src/ReelLegendas/`. As palavras entram uma a uma
+no instante em que são faladas. A palavra falada ganha fundo vermelho. Fora
+das ênfases a legenda é pequena e fica abaixo do queixo. Dentro das janelas
+listadas em `enfases` (pares de ms: início, fim) a mesma legenda vira texto
+grande.
+
+As legendas ficam inline no nó `<LegendaCinetica>` em
+`src/ReelLegendas/index.tsx`, então o editor de legendas do Studio consegue
+corrigir palavras e tempos direto no código.
+
+Para trocar o vídeo: coloque o arquivo em `public/`, gere o JSON de legendas
+(`node sub.mjs public/arquivo.mp4`) e copie o conteúdo para o prop `captions`.
+
+Se o Hugging Face estiver bloqueado (sessões em nuvem), use
+`scripts/transcrever-parakeet.py`.
+
+Para renderizar num ambiente sem o Chrome do Remotion, aponte o navegador:
+
+```console
+npx remotion render src/index.ts ReelLegendas out/reel-legendas.mp4 --browser-executable=/caminho/para/chrome
+```

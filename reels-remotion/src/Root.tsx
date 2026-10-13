@@ -10,12 +10,28 @@ import {
 } from "./ComparacaoLadoALado";
 import { MitoApego } from "./MitoApego";
 import { MitoRindo } from "./MitoRindo";
+import {
+  calculateReelLegendasMetadata,
+  ReelLegendas,
+  reelLegendasSchema,
+} from "./ReelLegendas";
 
 // Each <Composition> is an entry in the sidebar!
 
 export const RemotionRoot: React.FC = () => {
   return (
     <>
+      <Composition
+        id="ReelLegendas"
+        component={ReelLegendas}
+        calculateMetadata={calculateReelLegendasMetadata}
+        schema={reelLegendasSchema}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          src: staticFile("reel-legendas.webm"),
+        }}
+      />
       <Composition
         id="CaptionedVideo"
         component={CaptionedVideo}

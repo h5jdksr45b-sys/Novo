@@ -61,7 +61,7 @@ export const RemotionRoot: React.FC = () => {
         height={1920}
       />
       <Composition
-        id="LogoRodapeBarra"
+        id="LogoRodapeTerco"
         component={LogoBarra}
         durationInFrames={DURACAO_LOGO}
         fps={30}
@@ -69,7 +69,7 @@ export const RemotionRoot: React.FC = () => {
         height={1920}
       />
       <Composition
-        id="LogoRodapeCirculos"
+        id="LogoRodapeSelo"
         component={LogoCirculos}
         durationInFrames={DURACAO_LOGO}
         fps={30}

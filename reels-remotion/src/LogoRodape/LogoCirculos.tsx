@@ -1,14 +1,19 @@
 import { useEffect } from "react";
-import { AbsoluteFill, Easing, interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
+import { AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
 import { Anton, loadAnton } from "../load-font";
-import { BRANCO, CINZA, HANDLE, VERMELHO, entrada, fadeFinal } from "./shared";
+import { Letras } from "./Letras";
+import { BRANCO, CINZA, HANDLE, SUBLINHA, VERMELHO, clamp, entrada, saida } from "./shared";
 
-// Opção B: dois círculos (cinza e vermelho) entram separados, se encontram e
-// formam o selo, que desliza para a esquerda enquanto o @ aparece letra a letra.
+// Opção B, "Selo": um anel se desenha em tela, deixa uma abertura, e um
+// ponto vermelho ocupa a abertura. O @ entra letra a letra ao lado e a linha
+// de crédito aparece embaixo. Sai encolhendo com leve desfoque.
 // Fundo transparente: renderizar em WebM com alpha ou ProRes 4444.
 
+const R = 44;
+const CIRC = 2 * Math.PI * R;
+
 export const LogoCirculos: React.FC<{ margemInferior?: number }> = ({
-  margemInferior = 330,
+  margemInferior = 300,
 }) => {
   const frame = useCurrentFrame();
   const { fps, durationInFrames } = useVideoConfig();
@@ -16,99 +21,68 @@ export const LogoCirculos: React.FC<{ margemInferior?: number }> = ({
     loadAnton();
   }, []);
 
-  const aproxima = spring({ frame, fps, config: { damping: 16, stiffness: 120 } });
-  const separacao = interpolate(aproxima, [0, 1], [120, 18]);
-  const pop = spring({ frame: frame - 14, fps, config: { damping: 10, stiffness: 160 } });
-  const pulso = interpolate(pop, [0, 1], [1.25, 1]);
-
-  const desliza = interpolate(frame, [26, 44], [0, 1], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-    easing: Easing.bezier(0.7, 0, 0.2, 1),
-  });
-  const letras = Math.floor(
-    interpolate(frame, [32, 62], [0, HANDLE.length], {
-      extrapolateLeft: "clamp",
-      extrapolateRight: "clamp",
-    }),
-  );
-  const linha = entrada(frame, 58, 76);
-  const opEntrada = entrada(frame, 0, 6);
-
-  const deslocamento = interpolate(desliza, [0, 1], [0, -275]);
+  const out = saida(frame, durationInFrames);
+  const traco = entrada(frame, 0, 26, 0, 0.86);
+  const ponto = spring({ frame: frame - 20, fps, config: { damping: 11, stiffness: 180 } });
+  const pulso = spring({ frame: frame - 32, fps, config: { damping: 8, stiffness: 120 } });
+  const credito = entrada(frame, 40, 56);
+  const brilhoAnel = interpolate(frame, [22, 40, 58], [0, 1, 0], clamp);
 
   return (
-    <AbsoluteFill style={{ opacity: opEntrada * fadeFinal(frame, durationInFrames) }}>
+    <AbsoluteFill>
       <div
         style={{
           position: "absolute",
           left: 0,
           right: 0,
           bottom: margemInferior,
-          height: 110,
           display: "flex",
-          alignItems: "center",
           justifyContent: "center",
+          alignItems: "center",
+          gap: 26,
+          opacity: 1 - out,
+          scale: `${1 - out * 0.08}`,
+          filter: `blur(${out * 6}px)`,
         }}
       >
-        <div
-          style={{
-            position: "absolute",
-            left: 475,
-            width: 130,
-            height: 90,
-            transform: `translateX(${deslocamento}px) scale(${pulso})`,
-          }}
-        >
+        <svg width={120} height={120} viewBox="0 0 120 120" style={{ overflow: "visible" }}>
+          <circle
+            cx={60}
+            cy={60}
+            r={R}
+            fill="none"
+            stroke={BRANCO}
+            strokeWidth={7}
+            strokeLinecap="round"
+            strokeDasharray={CIRC}
+            strokeDashoffset={CIRC * (1 - traco)}
+            transform="rotate(-60 60 60)"
+            style={{ filter: `drop-shadow(0 0 ${brilhoAnel * 10}px rgba(255,255,255,0.6))` }}
+          />
+          <circle
+            cx={60 + Math.cos(((-60 + 360 * 0.93) * Math.PI) / 180) * R}
+            cy={60 + Math.sin(((-60 + 360 * 0.93) * Math.PI) / 180) * R}
+            r={interpolate(ponto, [0, 1], [0, 11], clamp) * interpolate(pulso, [0, 1], [1.2, 1], clamp)}
+            fill={VERMELHO}
+            style={{ filter: `drop-shadow(0 0 ${interpolate(pulso, [0, 1], [14, 4])}px ${VERMELHO})` }}
+          />
+        </svg>
+        <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+          <Letras texto={HANDLE} inicio={14} tamanho={70} espaco={1.5} />
           <div
             style={{
-              position: "absolute",
-              top: 5,
-              left: 65 - 40 - separacao / 2,
-              width: 80,
-              height: 80,
-              borderRadius: "50%",
-              background: CINZA,
-              mixBlendMode: "normal",
+              fontFamily: Anton,
+              fontSize: 22,
+              letterSpacing: 5,
+              color: CINZA,
+              opacity: credito,
+              translate: `0 ${(1 - credito) * 10}px`,
+              textShadow: "0 2px 10px rgba(0,0,0,0.6)",
             }}
-          />
-          <div
-            style={{
-              position: "absolute",
-              top: 5,
-              left: 65 - 40 + separacao / 2,
-              width: 80,
-              height: 80,
-              borderRadius: "50%",
-              background: VERMELHO,
-              opacity: 0.92,
-            }}
-          />
+          >
+            {SUBLINHA}
+          </div>
         </div>
-        <div
-          style={{
-            position: "absolute",
-            left: 350,
-            fontFamily: Anton,
-            fontSize: 72,
-            letterSpacing: 2,
-            color: BRANCO,
-            whiteSpace: "pre",
-            textShadow: "0 3px 14px rgba(0,0,0,0.55)",
-          }}
-        >
-          {HANDLE.slice(0, letras)}
-        </div>
-        <div
-          style={{
-            position: "absolute",
-            left: 350,
-            top: 96,
-            height: 4,
-            width: 530 * linha,
-            background: VERMELHO,
-          }}
-        />
       </div>
     </AbsoluteFill>
   );

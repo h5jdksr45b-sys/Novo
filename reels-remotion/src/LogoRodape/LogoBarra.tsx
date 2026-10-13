@@ -1,14 +1,16 @@
 import { useEffect } from "react";
-import { AbsoluteFill, Easing, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
+import { AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
 import { Anton, loadAnton } from "../load-font";
-import { BRANCO, CINZA, DURACAO_LOGO, HANDLE, VERMELHO, entrada, fadeFinal } from "./shared";
+import { Letras } from "./Letras";
+import { CINZA, FIRME, HANDLE, SUBLINHA, VERMELHO, clamp, entrada, saida } from "./shared";
 
-// Opção A: barra vermelha corta o quadro, o @ é revelado da esquerda para a
-// direita e uma linha fina com o nome da marca aparece por baixo.
+// Opção A, "Terço inferior": uma faixa de vidro escuro desliza da esquerda,
+// a aresta vermelha cresce, o @ entra letra a letra e a linha de crédito
+// aparece embaixo. Sai deslizando de volta.
 // Fundo transparente: renderizar em WebM com alpha ou ProRes 4444.
 
 export const LogoBarra: React.FC<{ margemInferior?: number }> = ({
-  margemInferior = 330,
+  margemInferior = 300,
 }) => {
   const frame = useCurrentFrame();
   const { durationInFrames } = useVideoConfig();
@@ -16,64 +18,69 @@ export const LogoBarra: React.FC<{ margemInferior?: number }> = ({
     loadAnton();
   }, []);
 
-  const barraAltura = entrada(frame, 0, 14);
-  const revela = interpolate(frame, [8, 30], [0, 100], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-    easing: Easing.bezier(0.7, 0, 0.2, 1),
-  });
-  const marcaOp = entrada(frame, 26, 40);
-  const marcaY = entrada(frame, 26, 40, 14, 0);
+  const out = saida(frame, durationInFrames);
+  const faixa = entrada(frame, 0, 22);
+  const aresta = entrada(frame, 4, 20);
+  const credito = entrada(frame, 34, 50);
+  const brilho = interpolate(frame, [26, 54], [-40, 140], { ...clamp, easing: FIRME });
 
   return (
-    <AbsoluteFill style={{ opacity: fadeFinal(frame, durationInFrames || DURACAO_LOGO) }}>
+    <AbsoluteFill>
       <div
         style={{
           position: "absolute",
-          left: 0,
-          right: 0,
+          left: 72,
           bottom: margemInferior,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: 10,
+          height: 150,
+          width: 700,
+          overflow: "hidden",
+          borderRadius: 6,
+          opacity: 1 - out,
+          translate: `${interpolate(faixa, [0, 1], [-60, 0]) - out * 60}px 0`,
+          clipPath: `inset(0 ${(1 - faixa) * 100}% 0 0)`,
+          background: "rgba(8, 8, 8, 0.55)",
+          backdropFilter: "blur(14px)",
+          WebkitBackdropFilter: "blur(14px)",
+          boxShadow: "0 12px 40px rgba(0,0,0,0.35)",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 22 }}>
-          <div
-            style={{
-              width: 10,
-              height: 84,
-              background: VERMELHO,
-              transformOrigin: "bottom",
-              transform: `scaleY(${barraAltura})`,
-            }}
-          />
-          <div
-            style={{
-              fontFamily: Anton,
-              fontSize: 76,
-              letterSpacing: 2,
-              color: BRANCO,
-              clipPath: `inset(0 ${100 - revela}% 0 0)`,
-              textShadow: "0 3px 14px rgba(0,0,0,0.55)",
-            }}
-          >
-            {HANDLE}
-          </div>
+        <div
+          style={{
+            position: "absolute",
+            left: 0,
+            top: 0,
+            width: 8,
+            height: "100%",
+            background: VERMELHO,
+            transformOrigin: "top",
+            scale: `1 ${aresta}`,
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: `linear-gradient(105deg, transparent ${brilho - 14}%, rgba(255,255,255,0.14) ${brilho}%, transparent ${brilho + 14}%)`,
+            pointerEvents: "none",
+          }}
+        />
+        <div style={{ position: "absolute", left: 40, top: 26 }}>
+          <Letras texto={HANDLE} inicio={10} tamanho={66} espaco={1.5} />
         </div>
         <div
           style={{
+            position: "absolute",
+            left: 42,
+            top: 104,
             fontFamily: Anton,
-            fontSize: 28,
-            letterSpacing: 9,
+            fontSize: 22,
+            letterSpacing: 5,
             color: CINZA,
-            opacity: marcaOp,
-            transform: `translateY(${marcaY}px)`,
-            textShadow: "0 2px 10px rgba(0,0,0,0.6)",
+            opacity: credito,
+            translate: `0 ${(1 - credito) * 10}px`,
           }}
         >
-          BORDERLINE SEM ESTIGMA
+          {SUBLINHA}
         </div>
       </div>
     </AbsoluteFill>

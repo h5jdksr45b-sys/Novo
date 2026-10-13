@@ -8,7 +8,7 @@ description: Use ao criar, revisar ou planejar conteúdo de Instagram (Reel, car
 Material de consulta para criar e revisar peças. As métricas descrevem o passado. Elas não decidem o que publicar.
 
 Arquivos:
-- `references/posts-180d.psv`: 356 publicações, 13/04/2026 a 09/10/2026, mais recente primeiro.
+- `references/posts-180d.psv`: 364 publicações, 13/04/2026 a 12/10/2026, mais recente primeiro.
 - `references/leitura-dos-dados.md`: colunas, códigos, limites e como atualizar.
 - `scripts/resumo.py`: lista as últimas teses, mostra a defasagem e valida o arquivo.
 

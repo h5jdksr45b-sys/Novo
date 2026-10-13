@@ -212,3 +212,8 @@ Checagens agendadas: 13/10 às 10h (entrega e reprovação) e 19/10 às 10h (lei
 - Os três anúncios CAMPEAO levaram R$ 49 dos R$ 69,67.
 - Problema 1: CAMPEAO Vídeo (120258979878670001, conjunto B) leva para a página antiga h5jdksr45b-sys.github.io/landing/curso7.html. 6 cliques, 0 visita registrada. Correção proposta: trocar o link para curso.drfabioschmidt.net. Aguardando ok.
 - Problema 2: os anúncios que vão direto ao checkout tiveram 27 cliques e nenhum carregamento registrado. No histórico, cerca de 1 em cada 3 cliques para o checkout era registrado. Os CAMPEAO estáticos usam o cupom DESCONTO25. Conferir se o link abre, se o cupom está ativo e se o pixel continua configurado no produto na Hotmart.
+
+Correções feitas em 13/10, com ok do Dr. Fabio:
+- CAMPEAO Vídeo (120258979878670001): link trocado para curso.drfabioschmidt.net com utm_content=campeao_video. Novo criativo 1579020170027503.
+- CAMPEAO Estático, conjuntos A (120258979877610001) e C (120258980159320001): cupom DESCONTO25 retirado, por decisão dele (sem desconto). Link agora é pay.hotmart.com/S104212285E?sck=ad_campeao. Novo criativo 28578521031828843.
+- O texto desses anúncios não cita desconto. A imagem não foi conferida daqui.

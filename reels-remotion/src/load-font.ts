@@ -23,3 +23,29 @@ export const loadFont = async (): Promise<void> => {
 
   continueRender(waitForFont);
 };
+
+// Anton: fonte condensada com acentos do português (ã, ç, é).
+// TheBoldFont não tem esses caracteres.
+export const Anton = `Anton`;
+
+let antonLoaded = false;
+
+export const loadAnton = async (): Promise<void> => {
+  if (antonLoaded) {
+    return Promise.resolve();
+  }
+
+  const waitForFont = delayRender();
+
+  antonLoaded = true;
+
+  const font = new FontFace(
+    Anton,
+    `url('${staticFile("fonts/anton.woff2")}') format('woff2')`,
+  );
+
+  await font.load();
+  document.fonts.add(font);
+
+  continueRender(waitForFont);
+};

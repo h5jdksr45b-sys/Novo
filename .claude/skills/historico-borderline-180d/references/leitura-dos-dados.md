@@ -3,8 +3,8 @@
 ## Origem e período
 
 - Conta: @drfabioschmidt (Instagram, id 17841401503370732), conector `instagram` do Windsor.
-- Período: publicações de 2026-04-13 a 2026-10-09. Coleta em 2026-10-10.
-- 356 publicações: 234 Reels, 119 carrosséis, 3 imagens. Cada conteúdo aparece uma vez. Reenvios do mesmo conteúdo ficam no campo `flags` como `cop=`.
+- Período: publicações de 2026-04-13 a 2026-10-12. Coleta em 2026-10-13 (posts de 09 a 12/10 atualizados nessa data).
+- 364 publicações: 239 Reels, 122 carrosséis, 3 imagens. Cada conteúdo aparece uma vez. Reenvios do mesmo conteúdo ficam no campo `flags` como `cop=`.
 - Excluídos: dois posts de teste (legenda "FABIO", 3 views; Reel "Em 1960...", 1 view).
 
 ## Colunas

@@ -8,6 +8,7 @@ import {
   ComparacaoLadoALado,
   comparacaoSchema,
 } from "./ComparacaoLadoALado";
+import { MitoRindo } from "./MitoRindo";
 
 // Each <Composition> is an entry in the sidebar!
 
@@ -38,6 +39,14 @@ export const RemotionRoot: React.FC = () => {
           rotuloDireita: "Lado B",
           corDestaque: "#c83c1e",
         }}
+      />
+      <Composition
+        id="MitoRindo"
+        component={MitoRindo}
+        durationInFrames={450}
+        fps={30}
+        width={1080}
+        height={1920}
       />
     </>
   );

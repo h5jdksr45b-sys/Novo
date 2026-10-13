@@ -204,3 +204,11 @@ Total: R$ 90 por dia.
 Tentativa de segmento por quem curte a página: recusada pelo Meta (conexões não estão mais disponíveis). Públicos personalizados (Instagram, site, checkout, compradores, semelhante) dependem de token da API ou do Zapier conectado.
 
 Checagens agendadas: 13/10 às 10h (entrega e reprovação) e 19/10 às 10h (leitura de 7 dias).
+
+## 8. Checagem de 24h (13/10, 10h)
+
+- Campanha antiga 120258742429760001 pausada. Conjuntos A, B e C ativos. 13 anúncios ativos, nenhum reprovado.
+- De 12/10 16h30 a 13/10 manhã: R$ 69,67, 1.487 impressões, CPM médio R$ 47, 41 cliques no link, 5 visitas à página, 0 checkout iniciado registrado, 0 compra.
+- Os três anúncios CAMPEAO levaram R$ 49 dos R$ 69,67.
+- Problema 1: CAMPEAO Vídeo (120258979878670001, conjunto B) leva para a página antiga h5jdksr45b-sys.github.io/landing/curso7.html. 6 cliques, 0 visita registrada. Correção proposta: trocar o link para curso.drfabioschmidt.net. Aguardando ok.
+- Problema 2: os anúncios que vão direto ao checkout tiveram 27 cliques e nenhum carregamento registrado. No histórico, cerca de 1 em cada 3 cliques para o checkout era registrado. Os CAMPEAO estáticos usam o cupom DESCONTO25. Conferir se o link abre, se o cupom está ativo e se o pixel continua configurado no produto na Hotmart.

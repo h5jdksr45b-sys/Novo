@@ -89,3 +89,13 @@ Note that for some entities a company license is needed. [Read the terms here](h
 **ComparacaoLadoALado**: composição de exemplo (câmera parada, dois lados com rótulo, diferença crescendo). Troque rótulos e cor no painel de props do Studio.
 
 **Imagens**: `public/icones-3d/` e `public/ilustracoes/` recebem os arquivos do 3dicons e do Kitbitz.
+
+## Fluxo do Reel com legenda (português)
+
+1. Coloque o vídeo bruto em `public/brutos/NOME.mp4` (vertical 9:16, de preferência).
+2. Gere a legenda: `node sub.mjs public/brutos/NOME.mp4`. Sai `public/brutos/NOME.json`, palavra por palavra.
+   O Whisper está em português (`medium`, `pt`). Na primeira vez ele baixa o modelo de 1,5 GB do huggingface.co.
+3. Revise o `.json`: nomes, termos clínicos e pontuação.
+4. Renderize: `npx remotion render CaptionedVideo out/NOME.mp4 --props='{"src":"/public/brutos/NOME.mp4"}'`.
+
+Nas sessões na nuvem, `remotion.config.ts` usa o Chromium pré-instalado. A duração do vídeo é lida com Mediabunny, que não depende do decodificador do navegador.

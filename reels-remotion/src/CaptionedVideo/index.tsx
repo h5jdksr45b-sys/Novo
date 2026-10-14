@@ -1,5 +1,5 @@
 import { Caption, createTikTokStyleCaptions } from "@remotion/captions";
-import { getVideoMetadata } from "@remotion/media-utils";
+import { ALL_FORMATS, Input, UrlSource } from "mediabunny";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   AbsoluteFill,
@@ -30,11 +30,16 @@ export const calculateCaptionedVideoMetadata: CalculateMetadataFunction<
   z.infer<typeof captionedVideoSchema>
 > = async ({ props }) => {
   const fps = 30;
-  const metadata = await getVideoMetadata(props.src);
+  // Mediabunny lê a duração sem depender do decodificador do navegador.
+  const input = new Input({
+    formats: ALL_FORMATS,
+    source: new UrlSource(props.src, { getRetryDelay: () => null }),
+  });
+  const durationInSeconds = await input.computeDuration();
 
   return {
     fps,
-    durationInFrames: Math.floor(metadata.durationInSeconds * fps),
+    durationInFrames: Math.floor(durationInSeconds * fps),
   };
 };
 

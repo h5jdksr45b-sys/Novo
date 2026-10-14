@@ -10,12 +10,23 @@ import {
 } from "./ComparacaoLadoALado";
 import { MitoApego } from "./MitoApego";
 import { MitoRindo } from "./MitoRindo";
+import { TresDicas, tresDicasSchema } from "./TresDicas";
 
 // Each <Composition> is an entry in the sidebar!
 
 export const RemotionRoot: React.FC = () => {
   return (
     <>
+      <Composition
+        id="TresDicas"
+        component={TresDicas}
+        schema={tresDicasSchema}
+        durationInFrames={1650}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{ voz: "" }}
+      />
       <Composition
         id="CaptionedVideo"
         component={CaptionedVideo}

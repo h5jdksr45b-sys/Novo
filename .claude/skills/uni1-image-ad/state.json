@@ -1,4 +1,9 @@
 {
   "version": 1,
-  "accounts": {}
+  "accounts": {
+    "act_1454243259689590": {
+      "last_clone_ad_id": "120258979822750001",
+      "last_run_ts": "2026-10-14T18:40:19Z"
+    }
+  }
 }

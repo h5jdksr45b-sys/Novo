@@ -11,12 +11,12 @@ import {
   useVideoConfig,
 } from "remotion";
 
-const AMBAR = "#F2B33D";
-const CREME = "#F5F1E8";
-const CINZA = "#8E897F";
+const AMBAR = "#D4921A";
+const CREME = "#121110"; // texto escuro
+const CINZA = "#6F6A62";
 const VERM = "#E2563B";
-const VERDE = "#7FB77E";
-const FUNDO = "#121110";
+const VERDE = "#3E8E41";
+const FUNDO = "#F5F1E8"; // papel claro
 const SERIF = "DMSerif";
 const SERIF_IT = "DMSerifItalic";
 const SANS = "InterBlack";
@@ -128,7 +128,7 @@ const Mensagem: React.FC<{ atraso: number; larg: number; dx: number }> = ({ atra
         width: larg,
         height: 42,
         borderRadius: 21,
-        background: "rgba(245,241,232,0.16)",
+        background: "rgba(18,17,16,0.14)",
         marginBottom: 14,
         marginLeft: dx,
         opacity: e,
@@ -207,14 +207,14 @@ const Passo: React.FC<{ n: number; rotulo: string; icone: string; frase: string;
   return (
     <Cena dur={dur} narracao={narracao}>
       <div style={{ display: "flex", alignItems: "center", gap: 30 }}>
-        <div style={{ width: 110, height: 110, borderRadius: 55, background: AMBAR, color: FUNDO, fontFamily: SANS, fontSize: 60, display: "flex", alignItems: "center", justifyContent: "center", transform: `scale(${eNum})` }}>
+        <div style={{ width: 110, height: 110, borderRadius: 55, background: AMBAR, color: "#F5F1E8", fontFamily: SANS, fontSize: 60, display: "flex", alignItems: "center", justifyContent: "center", transform: `scale(${eNum})` }}>
           {n}
         </div>
         <div style={{ fontFamily: SANS, fontSize: 44, letterSpacing: 8, color: CREME, opacity: eNum }}>{rotulo}</div>
       </div>
       <div style={{ height: 70 }} />
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <div style={{ width: 220, height: 220, borderRadius: 60, background: "rgba(242,179,61,0.12)", display: "flex", alignItems: "center", justifyContent: "center", transform: `scale(${pulso})` }}>
+        <div style={{ width: 220, height: 220, borderRadius: 60, background: "rgba(212,146,26,0.16)", display: "flex", alignItems: "center", justifyContent: "center", transform: `scale(${pulso})` }}>
           <Icone d={icone} tam={130} prog={ic} />
         </div>
       </div>
@@ -276,7 +276,7 @@ const Linha: React.FC<{ n: number; texto: string; atraso: number }> = ({ n, text
   const ck = interpolate(frame, [atraso + 10, atraso + 26], [0, 1], clamp);
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 30, marginBottom: 36, opacity: e, transform: `translateX(${interpolate(e, [0, 1], [-60, 0])}px)` }}>
-      <div style={{ width: 90, height: 90, borderRadius: 24, background: "rgba(127,183,126,0.16)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <div style={{ width: 90, height: 90, borderRadius: 24, background: "rgba(62,142,65,0.16)", display: "flex", alignItems: "center", justifyContent: "center" }}>
         <Icone d={IC.check} cor={VERDE} tam={56} prog={ck} />
       </div>
       <div style={{ fontFamily: SANS_REG, fontSize: 30, color: CINZA, width: 40 }}>{n}</div>
@@ -297,7 +297,7 @@ const C7: React.FC<{ dur: number }> = ({ dur }) => {
       <Linha n={2} texto="Fica." atraso={28} />
       <Linha n={3} texto="Combina." atraso={50} />
       <div style={{ height: 40 }} />
-      <div style={{ display: "flex", alignItems: "center", gap: 28, padding: "30px 36px", borderRadius: 28, background: "rgba(242,179,61,0.12)", opacity: e, transform: `translateY(${interpolate(e, [0, 1], [40, 0])}px)` }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 28, padding: "30px 36px", borderRadius: 28, background: "rgba(212,146,26,0.16)", opacity: e, transform: `translateY(${interpolate(e, [0, 1], [40, 0])}px)` }}>
         <Icone d={IC.salvar} tam={80} prog={ic} />
         <div style={{ fontFamily: SANS, fontSize: 40, color: CREME, lineHeight: 1.25 }}>Salva pra usar na próxima. E manda pra quem convive.</div>
       </div>
@@ -322,7 +322,7 @@ export const Acalmar: React.FC = () => {
   const total = acalmarDuracao(fps);
   return (
     <AbsoluteFill style={{ backgroundColor: FUNDO }}>
-      <AbsoluteFill style={{ background: "radial-gradient(circle at 30% 20%, rgba(242,179,61,0.10), rgba(0,0,0,0) 55%), radial-gradient(circle at 80% 90%, rgba(226,86,59,0.08), rgba(0,0,0,0) 50%)" }} />
+      <AbsoluteFill style={{ background: "radial-gradient(circle at 30% 20%, rgba(212,146,26,0.14), rgba(0,0,0,0) 55%), radial-gradient(circle at 80% 90%, rgba(226,86,59,0.08), rgba(0,0,0,0) 50%)" }} />
       {CENAS.map(([Comp, d], i) => {
         const from = Math.round(ini * fps);
         const dur = Math.round(d * fps);

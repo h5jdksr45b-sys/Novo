@@ -1,0 +1,41 @@
+<template>
+  <div id="root" data-composition-id="04-chamada" data-width="1080" data-height="1920" data-duration="5.5">
+    <style>
+      #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; font-family: 'Inter', sans-serif; }
+      #root .clip { position: absolute; inset: 0; }
+      #root .s04-chamada-ground { background: #FFFFFF; }
+      #root .s04-chamada-rule { position: absolute; left: 90px; top: 420px; width: 60px; height: 4px; border-radius: 2px; background: #2B5C9E; }
+      #root .s04-chamada-cta { position: absolute; left: 90px; top: 470px; width: 900px; margin: 0; font-family: 'Inter', sans-serif; font-size: 92px; font-weight: 800; line-height: 1.08; letter-spacing: -0.02em; color: #1C2230; }
+      #root .s04-chamada-source { position: absolute; left: 90px; top: 1040px; width: 900px; margin: 0; font-family: 'Inter', sans-serif; font-size: 30px; font-weight: 500; line-height: 1.4; color: #4A5263; }
+      #root .s04-chamada-sig { position: absolute; left: 90px; top: 1230px; width: 900px; margin: 0; font-family: 'Inter', sans-serif; font-size: 34px; font-weight: 600; line-height: 1.35; color: #4A5263; }
+      #root .s04-chamada-sig span { display: block; }
+      #root .s04-chamada-disc { position: absolute; left: 90px; top: 1380px; width: 900px; margin: 0; font-family: 'Inter', sans-serif; font-size: 30px; font-weight: 400; line-height: 1.4; color: #8A91A0; }
+    </style>
+
+    <div id="s04-chamada-bg" class="clip s04-chamada-ground" data-start="0" data-duration="5.5" data-track-index="0"></div>
+
+    <div id="s04-chamada-content" class="clip" data-start="0" data-duration="5.5" data-track-index="1">
+      <div id="s04-chamada-rule" class="s04-chamada-rule"></div>
+      <h1 id="s04-chamada-cta" class="s04-chamada-cta">Manda para quem estuda TPB com você.</h1>
+      <p id="s04-chamada-source" class="s04-chamada-source">Fonte: Robitaille et al., 2017. Borderline Personality Disorder and Emotion Dysregulation, 4:25.</p>
+      <p id="s04-chamada-sig" class="s04-chamada-sig"><span>Dr. Fabio Schmidt</span><span>médico com foco em TPB, CRM-SP 183549</span></p>
+      <p id="s04-chamada-disc" class="s04-chamada-disc">Conteúdo educativo. Não substitui avaliação individual.</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      (function () {
+        window.__timelines = window.__timelines || {};
+        var tl = gsap.timeline({ paused: true });
+        // Scene 1 (0.0-0.8s): CTA rises in, accent rule draws under it
+        tl.fromTo("#s04-chamada-cta", { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: "power3.out" }, 0.05);
+        tl.fromTo("#s04-chamada-rule", { scaleX: 0, transformOrigin: "0% 50%" }, { scaleX: 1, duration: 0.6, ease: "power2.out" }, 0.1);
+        // Scene 2 (0.8-1.6s): source, signature and disclaimer fade in together
+        tl.fromTo(["#s04-chamada-source", "#s04-chamada-sig", "#s04-chamada-disc"], { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: "power2.out" }, 0.85);
+        // Scene 3 (1.6-5.5s): hold still to the end
+        tl.set({}, {}, 5.5);
+        window.__timelines["04-chamada"] = tl;
+      })();
+    </script>
+  </div>
+</template>

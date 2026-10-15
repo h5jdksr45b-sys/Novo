@@ -1,0 +1,45 @@
+{
+  "$schema": "https://hyperframes.heygen.com/schema/hyperframes.json",
+  "registry": "https://raw.githubusercontent.com/heygen-com/hyperframes/main/registry",
+  "paths": {
+    "blocks": "compositions",
+    "components": "compositions/components",
+    "assets": "assets"
+  },
+  "media": {
+    "autoProxy": true
+  },
+  "authoringSkill": "faceless-explainer",
+  "registryItems": [
+    {
+      "name": "chat-thread",
+      "type": "hyperframes:component",
+      "target": "compositions/components/chat-thread.html"
+    },
+    {
+      "name": "message-thread-reveal",
+      "type": "hyperframes:block",
+      "target": "compositions/message-thread-reveal.html"
+    },
+    {
+      "name": "notification-stack",
+      "type": "hyperframes:component",
+      "target": "compositions/components/notification-stack.html"
+    },
+    {
+      "name": "number-wheel",
+      "type": "hyperframes:component",
+      "target": "compositions/components/number-wheel.html"
+    },
+    {
+      "name": "icon-morph-beat",
+      "type": "hyperframes:component",
+      "target": "compositions/components/icon-morph-beat.html"
+    },
+    {
+      "name": "mesh-gradient-bg",
+      "type": "hyperframes:component",
+      "target": "compositions/components/mesh-gradient-bg.html"
+    }
+  ]
+}

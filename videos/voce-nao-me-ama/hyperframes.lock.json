@@ -1,0 +1,11 @@
+{
+  "assets/card-image.jpg": "b953bffd7866c96cd3ec86650f9193e6238b13a7341a3e3e7c0ac2c670e76f4a",
+  "assets/hyperframes-logo-black.svg": "dc156e7c21b474746c2ff3b651b96c90eb44745cc88252f0f36c140faf63cb59",
+  "compositions/components/chat-thread.html": "3973e891cba4c658d19d79c8543f208ce62c84d4dd2d59a932bcfdbf10b4f2f0",
+  "compositions/components/icon-morph-beat.html": "e0b8bcd72028d9d7309726133a3c6f72e6b3f99c001670afcf3edbe1483297b8",
+  "compositions/components/mesh-gradient-bg.html": "fa2734a794ff802b4fa8390a075f26fb93e584b5640abd2d526aaa10429fae1e",
+  "compositions/components/notification-stack.html": "dfe78474314169e66fb3cb6fa26d3e09755873248a1ff72dc4b472edacbb2771",
+  "compositions/components/number-wheel.html": "04e3b1d13a044f9e8ad88b701b27315fc69eded6e951ab99b046ab760dc91110",
+  "compositions/message-thread-reveal.html": "c40e3407237339d77e18d4b04f50114e49b74cb8f871af49722deae1d0c97ffb",
+  "TEMPLATE.md": "5ecb774355aa197745b859ec9a8816702730f4928b095be1a147866c401c2df8"
+}

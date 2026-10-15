@@ -1,0 +1,324 @@
+<template>
+  <div id="root" data-composition-id="02-provas" data-width="1080" data-height="1920" data-duration="7">
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Inter"; font-weight: 500; src: local("Inter Medium"), local("Inter-Medium"); }
+      @font-face { font-family: "Inter"; font-weight: 600; src: local("Inter SemiBold"), local("Inter-SemiBold"); }
+      @font-face { font-family: "Inter"; font-weight: 700; src: local("Inter Bold"), local("Inter-Bold"); }
+      @font-face { font-family: "Inter"; font-weight: 800; src: local("Inter ExtraBold"), local("Inter-ExtraBold"); }
+
+      #root {
+        position: absolute;
+        inset: 0;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        font-family: "Inter", sans-serif;
+        color: #1C2230;
+      }
+      #root * { box-sizing: border-box; }
+
+      /* background: white + soft light-blue mesh */
+      .p02-bg { position: absolute; inset: 0; background: #FFFFFF; overflow: hidden; }
+      .p02-mesh {
+        position: absolute;
+        inset: -8%;
+        --p02-x1: 18%; --p02-y1: 22%;
+        --p02-x2: 82%; --p02-y2: 48%;
+        --p02-x3: 30%; --p02-y3: 82%;
+        background:
+          radial-gradient(circle at var(--p02-x1) var(--p02-y1), #DCE4F0 0%, rgba(220, 228, 240, 0) 38%),
+          radial-gradient(circle at var(--p02-x2) var(--p02-y2), #EEF2F8 0%, rgba(238, 242, 248, 0) 42%),
+          radial-gradient(circle at var(--p02-x3) var(--p02-y3), #DCE4F0 0%, rgba(220, 228, 240, 0) 36%),
+          #FFFFFF;
+      }
+
+      .p02-layer { position: absolute; inset: 0; }
+
+      /* headline */
+      .p02-head {
+        position: absolute;
+        left: 90px;
+        top: 300px;
+        width: 900px;
+        font-size: 80px;
+        font-weight: 800;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+        color: #1C2230;
+        white-space: nowrap;
+      }
+      .p02-word { display: inline-block; }
+      .p02-under {
+        position: absolute;
+        left: 0;
+        bottom: -6px;
+        width: 100%;
+        height: 8px;
+        border-radius: 4px;
+        background: #2B5C9E;
+        transform-origin: 0 50%;
+      }
+      .p02-word-hl { position: relative; }
+
+      /* counter chip */
+      .p02-chip {
+        position: absolute;
+        left: 690px;
+        top: 408px;
+        width: 300px;
+        height: 96px;
+        transform-origin: 48px 48px;
+      }
+      .p02-chip-bg {
+        position: absolute;
+        inset: 0;
+        border-radius: 48px;
+        background: #2B5C9E;
+        clip-path: inset(0px 204px 0px 0px round 48px);
+      }
+      .p02-col {
+        position: absolute;
+        top: 16px;
+        width: 42px;
+        height: 64px;
+        overflow: hidden;
+        color: #FFFFFF;
+        font-size: 64px;
+        font-weight: 800;
+        font-variant-numeric: tabular-nums;
+      }
+      .p02-col-tens { left: 27px; }
+      .p02-col-units { left: 69px; }
+      .p02-strip { display: block; }
+      .p02-strip span {
+        display: block;
+        height: 64px;
+        line-height: 64px;
+        text-align: center;
+      }
+      .p02-label {
+        position: absolute;
+        left: 125px;
+        top: 0;
+        height: 96px;
+        line-height: 96px;
+        color: #FFFFFF;
+        font-size: 40px;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        clip-path: inset(0px 100% 0px 0px);
+      }
+
+      /* proof cards */
+      .p02-card {
+        position: absolute;
+        left: 90px;
+        top: 520px;
+        width: 900px;
+        height: 184px;
+        display: flex;
+        align-items: center;
+        gap: 28px;
+        padding: 0 28px 0 36px;
+        background: #FFFFFF;
+        border: 1.5px solid rgba(43, 92, 158, 0.2);
+        border-radius: 14px;
+        overflow: hidden;
+      }
+      .p02-card::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 8px;
+        background: #2B5C9E;
+      }
+      .p02-ichip {
+        flex: 0 0 auto;
+        width: 104px;
+        height: 104px;
+        border-radius: 24px;
+        background: #EEF2F8;
+        border: 1.5px solid rgba(43, 92, 158, 0.25);
+        color: #2B5C9E;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .p02-ichip svg { width: 56px; height: 56px; }
+      .p02-text {
+        flex: 1 1 auto;
+        min-width: 0;
+        font-size: 40px;
+        font-weight: 600;
+        line-height: 1.2;
+        letter-spacing: -0.01em;
+        color: #1C2230;
+      }
+      .p02-check {
+        flex: 0 0 auto;
+        width: 56px;
+        height: 56px;
+        color: #2B5C9E;
+      }
+      .p02-check svg { width: 56px; height: 56px; display: block; }
+
+      /* ghost cards (no text) */
+      .p02-ghost {
+        position: absolute;
+        left: 90px;
+        width: 900px;
+        height: 184px;
+        border-radius: 14px;
+        background: #E9ECF1;
+        border: 1.5px solid #DCE0E7;
+        transform-origin: 50% 100%;
+      }
+      .p02-ghost i {
+        position: absolute;
+        display: block;
+        background: #DCE0E7;
+      }
+      .p02-ghost .g-chip { left: 36px; top: 40px; width: 104px; height: 104px; border-radius: 24px; }
+      .p02-ghost .g-l1 { left: 168px; top: 58px; width: 520px; height: 26px; border-radius: 13px; }
+      .p02-ghost .g-l2 { left: 168px; top: 104px; width: 340px; height: 26px; border-radius: 13px; }
+    </style>
+
+    <div id="p02-bg" class="p02-bg clip" data-start="0" data-duration="7" data-track-index="0">
+      <div class="p02-mesh"></div>
+    </div>
+
+    <div id="p02-stack" class="p02-layer clip" data-start="0" data-duration="7" data-track-index="1">
+      <div class="p02-ghost" id="p02-g3" style="top:1076px;"><i class="g-chip"></i><i class="g-l1"></i><i class="g-l2"></i></div>
+      <div class="p02-ghost" id="p02-g2" style="top:1032px;"><i class="g-chip"></i><i class="g-l1"></i><i class="g-l2"></i></div>
+      <div class="p02-ghost" id="p02-g1" style="top:988px;"><i class="g-chip"></i><i class="g-l1"></i><i class="g-l2"></i></div>
+
+      <div class="p02-card" id="p02-c1">
+        <div class="p02-ichip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v4" /><path d="M14 14h-4" /><path d="M14 18h-4" /><path d="M14 8h-4" /><path d="M18 12h2a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2h2" /><path d="M18 22V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v18" /></svg>
+        </div>
+        <div class="p02-text">Eu fiquei com você no hospital.</div>
+        <div class="p02-check" id="p02-k1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><path class="p02-tick" d="m9 12 2 2 4-4" /></svg></div>
+      </div>
+
+      <div class="p02-card" id="p02-c2">
+        <div class="p02-ichip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z" /></svg>
+        </div>
+        <div class="p02-text">Eu cancelei a viagem.</div>
+        <div class="p02-check" id="p02-k2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><path class="p02-tick" d="m9 12 2 2 4-4" /></svg></div>
+      </div>
+
+      <div class="p02-card" id="p02-c3">
+        <div class="p02-ichip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2" /><circle cx="7" cy="17" r="2" /><path d="M9 17h6" /><circle cx="17" cy="17" r="2" /></svg>
+        </div>
+        <div class="p02-text">Eu atravesso a cidade toda sexta.</div>
+        <div class="p02-check" id="p02-k3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><path class="p02-tick" d="m9 12 2 2 4-4" /></svg></div>
+      </div>
+    </div>
+
+    <div id="p02-top" class="p02-layer clip" data-start="0" data-duration="7" data-track-index="2">
+      <div class="p02-head">
+        <span class="p02-word">Você</span>
+        <span class="p02-word">listou</span>
+        <span class="p02-word p02-word-hl">provas.<span class="p02-under"></span></span>
+      </div>
+
+      <div class="p02-chip" id="p02-chip">
+        <div class="p02-chip-bg" id="p02-chip-bg"></div>
+        <div class="p02-col p02-col-tens" id="p02-tens-col">
+          <div class="p02-strip" id="p02-tens"><span>&nbsp;</span><span>1</span></div>
+        </div>
+        <div class="p02-col p02-col-units" id="p02-units-col">
+          <div class="p02-strip" id="p02-units"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>0</span></div>
+        </div>
+        <div class="p02-label" id="p02-label">provas</div>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        var root = document.querySelector('[data-composition-id="02-provas"]') || document.getElementById("root");
+        var q = function (sel) { return root.querySelector(sel); };
+        var qa = function (sel) { return Array.prototype.slice.call(root.querySelectorAll(sel)); };
+
+        var tl = gsap.timeline({ paused: true });
+        var DIGIT = 64;
+        var SLOT = 212; // card height 184 + gap 28
+        var cards = [q("#p02-c1"), q("#p02-c2"), q("#p02-c3")];
+        var checks = [q("#p02-k1"), q("#p02-k2"), q("#p02-k3")];
+        var arrivals = [1.0, 2.2, 3.4];
+
+        // Background: slow mesh drift + gentle push (background only, content stays in safe area)
+        tl.fromTo(q(".p02-mesh"),
+          { "--p02-x1": "18%", "--p02-y1": "22%", "--p02-x2": "82%", "--p02-y2": "48%", "--p02-x3": "30%", "--p02-y3": "82%", scale: 1 },
+          { "--p02-x1": "34%", "--p02-y1": "34%", "--p02-x2": "66%", "--p02-y2": "62%", "--p02-x3": "46%", "--p02-y3": "70%", scale: 1.04, duration: 7, ease: "sine.inOut" }, 0);
+
+        // Scene 1: headline rises in word by word, accent underline draws under provas
+        tl.fromTo(qa(".p02-word"), { y: 70, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55, ease: "expo.out", stagger: 0.12 }, 0.05);
+        tl.fromTo(q(".p02-under"), { scaleX: 0 }, { scaleX: 1, duration: 0.4, ease: "power3.out" }, 0.55);
+
+        // Ghost cards hidden until Scene 3
+        // Scene 2: cards slide in from the right into the top slot; earlier cards shift down one slot
+        cards.forEach(function (card, i) {
+          var t = arrivals[i];
+          tl.fromTo(card, { x: 160, y: 0, opacity: 0 }, { x: 0, y: 0, opacity: 1, duration: 0.55, ease: "power3.out" }, t);
+          for (var j = 0; j < i; j++) {
+            var from = (i - 1 - j) * SLOT;
+            var to = (i - j) * SLOT;
+            tl.fromTo(cards[j], { y: from }, { y: to, duration: 0.45, ease: "power3.out", immediateRender: false }, t);
+            var opFrom = i - 1 - j === 0 ? 1 : 0.86;
+            var opTo = i - j === 1 ? 0.86 : 0.74;
+            tl.fromTo(cards[j], { opacity: opFrom }, { opacity: opTo, duration: 0.45, ease: "power2.out", immediateRender: false }, t);
+          }
+          // check icon: pop + draw
+          tl.fromTo(checks[i], { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: "back.out(1.4)" }, t + 0.35);
+          var tick = checks[i].querySelector(".p02-tick");
+          tl.fromTo(tick, { strokeDasharray: 9, strokeDashoffset: 9 }, { strokeDasharray: 9, strokeDashoffset: 0, duration: 0.3, ease: "power2.out" }, t + 0.45);
+        });
+
+        // Counter chip: badge pops with card 1, digit rolls 1, 2, 3 with each card
+        var chip = q("#p02-chip");
+        var units = q("#p02-units");
+        var unitsCol = q("#p02-units-col");
+        var tens = q("#p02-tens");
+        tl.fromTo(chip, { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(1.3)" }, 1.0);
+        tl.fromTo(unitsCol, { x: -42 }, { x: -42, duration: 0.01 }, 0);
+        tl.fromTo(units, { y: 0 }, { y: -1 * DIGIT, duration: 0.5, ease: "power3.out" }, 1.05);
+        tl.fromTo(units, { y: -1 * DIGIT }, { y: -2 * DIGIT, duration: 0.5, ease: "power3.out", immediateRender: false }, 2.25);
+        tl.fromTo(units, { y: -2 * DIGIT }, { y: -3 * DIGIT, duration: 0.5, ease: "power3.out", immediateRender: false }, 3.45);
+        // small chip bump with each new proof
+        [2.2, 3.4].forEach(function (t) {
+          tl.fromTo(chip, { scale: 1 }, { scale: 1.08, duration: 0.14, ease: "power2.out", immediateRender: false }, t + 0.05);
+          tl.fromTo(chip, { scale: 1.08 }, { scale: 1, duration: 0.3, ease: "power2.out", immediateRender: false }, t + 0.19);
+        });
+
+        // Scene 3: counter spins fast 3 to 10, ghost cards flick in behind the stack
+        tl.fromTo(units, { y: -3 * DIGIT }, { y: -10 * DIGIT, duration: 0.8, ease: "power2.inOut", immediateRender: false }, 4.6);
+        tl.fromTo(units, { filter: "blur(0px)" }, { filter: "blur(3px)", duration: 0.3, ease: "power1.in" }, 4.62);
+        tl.fromTo(units, { filter: "blur(3px)" }, { filter: "blur(0px)", duration: 0.3, ease: "power1.out", immediateRender: false }, 5.1);
+        tl.fromTo(tens, { y: 0 }, { y: -DIGIT, duration: 0.3, ease: "power3.out" }, 5.15);
+        tl.fromTo(unitsCol, { x: -42 }, { x: 0, duration: 0.3, ease: "power3.out", immediateRender: false }, 5.15);
+        tl.fromTo(q("#p02-chip-bg"), { clipPath: "inset(0px 204px 0px 0px round 48px)" }, { clipPath: "inset(0px 0px 0px 0px round 48px)", duration: 0.4, ease: "power3.out" }, 5.2);
+        tl.fromTo(q("#p02-label"), { clipPath: "inset(0px 100% 0px 0px)" }, { clipPath: "inset(0px 0% 0px 0px)", duration: 0.4, ease: "power3.out" }, 5.3);
+        tl.fromTo(chip, { scale: 1 }, { scale: 1.07, duration: 0.16, ease: "power2.out", immediateRender: false }, 5.4);
+        tl.fromTo(chip, { scale: 1.07 }, { scale: 1, duration: 0.4, ease: "power2.out", immediateRender: false }, 5.56);
+
+        var ghosts = [q("#p02-g1"), q("#p02-g2"), q("#p02-g3")];
+        var gScale = [0.96, 0.92, 0.88];
+        var gOp = [1, 0.8, 0.6];
+        ghosts.forEach(function (g, i) {
+          tl.fromTo(g, { x: 160, opacity: 0, scale: gScale[i] }, { x: 0, opacity: gOp[i], scale: gScale[i], duration: 0.35, ease: "power3.out" }, 4.65 + i * 0.15);
+        });
+
+        // Scene 4: hold (background keeps drifting)
+
+        window.__timelines = window.__timelines || {};
+        window.__timelines["02-provas"] = tl;
+      })();
+    </script>
+  </div>
+</template>

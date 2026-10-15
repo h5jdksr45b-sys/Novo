@@ -1,0 +1,547 @@
+<template id="06-limite-template">
+  <div
+    id="root"
+    data-composition-id="06-limite"
+    data-start="0"
+    data-duration="7"
+    data-width="1080"
+    data-height="1920"
+  >
+    <style>
+      #root {
+        position: absolute;
+        inset: 0;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        font-family: "Inter", sans-serif;
+        color: #1c2230;
+      }
+      [data-composition-id="06-limite"] * {
+        box-sizing: border-box;
+      }
+      /* ---------- background: white + soft light-blue mesh ---------- */
+      [data-composition-id="06-limite"] .l06-bg {
+        position: absolute;
+        inset: 0;
+        background: #ffffff;
+        overflow: hidden;
+      }
+      [data-composition-id="06-limite"] .l06-blob {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(90px);
+      }
+      [data-composition-id="06-limite"] .l06-blob-a {
+        left: -260px;
+        top: 80px;
+        width: 900px;
+        height: 900px;
+        background: radial-gradient(circle, #dce4f0 0%, rgba(220, 228, 240, 0) 70%);
+      }
+      [data-composition-id="06-limite"] .l06-blob-b {
+        left: 420px;
+        top: 760px;
+        width: 960px;
+        height: 960px;
+        background: radial-gradient(circle, #eef2f8 0%, rgba(238, 242, 248, 0) 70%);
+      }
+      [data-composition-id="06-limite"] .l06-blob-c {
+        left: 60px;
+        top: 1300px;
+        width: 820px;
+        height: 820px;
+        background: radial-gradient(circle, #dce4f0 0%, rgba(220, 228, 240, 0) 70%);
+      }
+      /* ---------- world (camera) ---------- */
+      [data-composition-id="06-limite"] .l06-world {
+        position: absolute;
+        inset: 0;
+        transform-origin: 540px 880px;
+      }
+      /* ---------- label chip ---------- */
+      [data-composition-id="06-limite"] .l06-label {
+        position: absolute;
+        left: 110px;
+        top: 300px;
+        height: 112px;
+      }
+      [data-composition-id="06-limite"] .l06-label-bg {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 100px;
+        background: #2b5c9e;
+        transform-origin: 56px 56px;
+      }
+      [data-composition-id="06-limite"] .l06-label-inner {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 22px;
+        height: 112px;
+        padding: 0 44px 0 14px;
+      }
+      [data-composition-id="06-limite"] .l06-chip {
+        flex: none;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background: #eef2f8;
+        color: #2b5c9e;
+        border: 2px solid #dce4f0;
+      }
+      [data-composition-id="06-limite"] .l06-label .l06-chip {
+        width: 84px;
+        height: 84px;
+      }
+      [data-composition-id="06-limite"] .l06-label .l06-chip svg {
+        width: 48px;
+        height: 48px;
+      }
+      [data-composition-id="06-limite"] .l06-label-text {
+        display: flex;
+        gap: 14px;
+        color: #ffffff;
+        font-size: 48px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        white-space: nowrap;
+      }
+      [data-composition-id="06-limite"] .l06-word {
+        display: inline-block;
+      }
+      /* ---------- phone ---------- */
+      [data-composition-id="06-limite"] .l06-phone {
+        position: absolute;
+        left: 160px;
+        top: 450px;
+        width: 760px;
+        height: 820px;
+        border-radius: 64px;
+        background: #ffffff;
+        border: 3px solid #dce4f0;
+        overflow: hidden;
+      }
+      [data-composition-id="06-limite"] .l06-topbar {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 120px;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 0 40px;
+        border-bottom: 2px solid #eef2f8;
+      }
+      [data-composition-id="06-limite"] .l06-avatar {
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        background: #eef2f8;
+        color: #2b5c9e;
+        display: grid;
+        place-items: center;
+      }
+      [data-composition-id="06-limite"] .l06-avatar svg {
+        width: 40px;
+        height: 40px;
+      }
+      [data-composition-id="06-limite"] .l06-name {
+        font-size: 38px;
+        font-weight: 600;
+        color: #1c2230;
+        letter-spacing: -0.01em;
+      }
+      [data-composition-id="06-limite"] .l06-view {
+        position: absolute;
+        left: 0;
+        top: 120px;
+        width: 100%;
+        height: 564px;
+        overflow: hidden;
+      }
+      [data-composition-id="06-limite"] .l06-stack {
+        position: absolute;
+        left: 28px;
+        right: 34px;
+        bottom: 12px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 24px;
+      }
+      [data-composition-id="06-limite"] .l06-row {
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+        gap: 18px;
+      }
+      [data-composition-id="06-limite"] .l06-bubble {
+        position: relative;
+        padding: 24px 30px;
+        border-radius: 40px;
+        background: #2b5c9e;
+        color: #ffffff;
+        font-size: 40px;
+        font-weight: 500;
+        line-height: 54px;
+        white-space: nowrap;
+        transform-origin: right bottom;
+      }
+      [data-composition-id="06-limite"] .l06-tail {
+        position: absolute;
+        right: -10px;
+        bottom: 0;
+        width: 30px;
+        height: 30px;
+      }
+      [data-composition-id="06-limite"] .l06-tail::before {
+        content: "";
+        position: absolute;
+        right: 10px;
+        bottom: 0;
+        width: 30px;
+        height: 30px;
+        background: #2b5c9e;
+        border-bottom-left-radius: 22px 20px;
+      }
+      [data-composition-id="06-limite"] .l06-tail::after {
+        content: "";
+        position: absolute;
+        right: -12px;
+        bottom: -2px;
+        width: 22px;
+        height: 33px;
+        background: #ffffff;
+        border-bottom-left-radius: 18px;
+      }
+      [data-composition-id="06-limite"] .l06-hl {
+        position: relative;
+        display: inline-block;
+      }
+      [data-composition-id="06-limite"] .l06-hl-bg {
+        position: absolute;
+        left: -8px;
+        right: -8px;
+        top: 4px;
+        bottom: 2px;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.24);
+        transform-origin: left center;
+      }
+      [data-composition-id="06-limite"] .l06-hl-txt {
+        position: relative;
+      }
+      [data-composition-id="06-limite"] .l06-clock {
+        width: 92px;
+        height: 92px;
+        margin-bottom: 6px;
+      }
+      [data-composition-id="06-limite"] .l06-clock svg {
+        width: 52px;
+        height: 52px;
+      }
+      /* typing dots (outgoing side) */
+      [data-composition-id="06-limite"] .l06-dots {
+        position: absolute;
+        right: 34px;
+        bottom: 12px;
+        width: 150px;
+        height: 84px;
+        border-radius: 42px;
+        background: #eef2f8;
+        border: 2px solid #dce4f0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        transform-origin: right bottom;
+      }
+      [data-composition-id="06-limite"] .l06-dot {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: #2b5c9e;
+      }
+      /* composer */
+      [data-composition-id="06-limite"] .l06-composer {
+        position: absolute;
+        left: 28px;
+        right: 28px;
+        top: 700px;
+        height: 84px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      [data-composition-id="06-limite"] .l06-field {
+        flex: 1;
+        height: 84px;
+        border-radius: 42px;
+        background: #f6f8fb;
+        border: 2px solid #dce4f0;
+        position: relative;
+      }
+      [data-composition-id="06-limite"] .l06-caret {
+        position: absolute;
+        left: 34px;
+        top: 22px;
+        width: 4px;
+        height: 40px;
+        border-radius: 2px;
+        background: #2b5c9e;
+      }
+      [data-composition-id="06-limite"] .l06-send {
+        flex: none;
+        width: 84px;
+        height: 84px;
+        border-radius: 50%;
+        background: #2b5c9e;
+        color: #ffffff;
+        display: grid;
+        place-items: center;
+      }
+      [data-composition-id="06-limite"] .l06-send svg {
+        width: 40px;
+        height: 40px;
+      }
+      /* ---------- safety card ---------- */
+      [data-composition-id="06-limite"] .l06-card {
+        position: absolute;
+        left: 110px;
+        top: 1300px;
+        width: 860px;
+        height: 156px;
+        display: flex;
+        align-items: center;
+        gap: 28px;
+        padding: 0 32px;
+        border-radius: 14px;
+        background: #ffffff;
+        border: 1.5px solid rgba(43, 92, 158, 0.2);
+      }
+      [data-composition-id="06-limite"] .l06-card .l06-chip {
+        width: 100px;
+        height: 100px;
+        border-radius: 24px;
+      }
+      [data-composition-id="06-limite"] .l06-card .l06-chip svg {
+        width: 54px;
+        height: 54px;
+      }
+      [data-composition-id="06-limite"] .l06-card-text {
+        font-size: 36px;
+        font-weight: 600;
+        line-height: 46px;
+        color: #1c2230;
+        letter-spacing: -0.01em;
+      }
+      [data-composition-id="06-limite"] .l06-line {
+        display: block;
+        white-space: nowrap;
+      }
+      [data-composition-id="06-limite"] .l06-ul {
+        position: relative;
+        display: inline-block;
+      }
+      [data-composition-id="06-limite"] .l06-ul-bar {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -4px;
+        height: 5px;
+        border-radius: 3px;
+        background: #2b5c9e;
+        transform-origin: left center;
+      }
+    </style>
+
+    <!-- full-bleed background -->
+    <div class="clip l06-bg" data-start="0" data-duration="7" data-track-index="0">
+      <div class="l06-blob l06-blob-a"></div>
+      <div class="l06-blob l06-blob-b"></div>
+      <div class="l06-blob l06-blob-c"></div>
+    </div>
+
+    <div class="clip l06-world" data-start="0" data-duration="7" data-track-index="1">
+      <!-- label chip -->
+      <div class="l06-label">
+        <div class="l06-label-bg"></div>
+        <div class="l06-label-inner">
+          <div class="l06-chip l06-shield-chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path class="l06-shield-path" pathLength="1" d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+            </svg>
+          </div>
+          <div class="l06-label-text">
+            <span class="l06-word">E</span><span class="l06-word">mantenha</span><span class="l06-word">o</span><span class="l06-word">limite</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- phone -->
+      <div class="l06-phone">
+        <div class="l06-topbar">
+          <div class="l06-avatar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="8" r="5" />
+              <path d="M20 21a8 8 0 0 0-16 0" />
+            </svg>
+          </div>
+          <div class="l06-name">Amor</div>
+        </div>
+
+        <div class="l06-view">
+          <div class="l06-stack">
+            <div class="l06-row">
+              <div class="l06-bubble l06-prev">
+                Eu estou aqui. Parece que<br />você está com medo de<br />me perder.
+                <span class="l06-tail l06-prev-tail"></span>
+              </div>
+            </div>
+            <div class="l06-row l06-new-row">
+              <div class="l06-chip l06-clock">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <line class="l06-hand-min" x1="12" y1="12" x2="12" y2="6" />
+                  <line class="l06-hand-hr" x1="12" y1="12" x2="16" y2="14" />
+                </svg>
+              </div>
+              <div class="l06-bubble l06-new">
+                Não vou continuar se<br />tiver xingamento. Volto<br />em <span class="l06-hl"><span class="l06-hl-bg"></span><span class="l06-hl-txt">20 minutos</span></span> para<br />conversar.
+                <span class="l06-tail"></span>
+              </div>
+            </div>
+          </div>
+          <div class="l06-dots">
+            <span class="l06-dot"></span><span class="l06-dot"></span><span class="l06-dot"></span>
+          </div>
+        </div>
+
+        <div class="l06-composer">
+          <div class="l06-field"><span class="l06-caret"></span></div>
+          <div class="l06-send">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z" />
+              <path d="m21.854 2.147-10.94 10.939" />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- safety card -->
+      <div class="l06-card">
+        <div class="l06-chip l06-siren-chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 18v-6a5 5 0 1 1 10 0v6" />
+            <path d="M5 21a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-1a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2z" />
+            <path class="l06-ray" d="M21 12h1" />
+            <path class="l06-ray" d="M18.5 4.5 18 5" />
+            <path class="l06-ray" d="M2 12h1" />
+            <path class="l06-ray" d="M12 2v1" />
+            <path class="l06-ray" d="m4.929 4.929.707.707" />
+            <path d="M12 12v6" />
+          </svg>
+        </div>
+        <div class="l06-card-text">
+          <span class="l06-line">Se houver ameaça ou violência,</span>
+          <span class="l06-line">a <span class="l06-ul">segurança vem primeiro<span class="l06-ul-bar"></span></span>.</span>
+        </div>
+      </div>
+    </div>
+
+    <script src="assets/gsap.min.js"></script>
+    <script>
+      (function () {
+        window.__timelines = window.__timelines || {};
+        var root = document.querySelector('[data-composition-id="06-limite"]');
+        var q = function (s) {
+          return root.querySelector(s);
+        };
+        var qa = function (s) {
+          return root.querySelectorAll(s);
+        };
+        var tl = gsap.timeline({ paused: true });
+
+        // Fixed geometry (line-height locked, explicit line breaks):
+        var NEW_H = 4 * 54 + 48; // new bubble height
+        var GAP = 24;
+        var DOTS_H = 84;
+
+        // ---- background mesh drift (whole shot) ----
+        tl.fromTo(q(".l06-blob-a"), { x: 0, y: 0 }, { x: 140, y: 90, duration: 7, ease: "sine.inOut" }, 0);
+        tl.fromTo(q(".l06-blob-b"), { x: 0, y: 0 }, { x: -160, y: -110, duration: 7, ease: "sine.inOut" }, 0);
+        tl.fromTo(q(".l06-blob-c"), { x: 0, y: 0 }, { x: 120, y: -70, duration: 7, ease: "sine.inOut" }, 0);
+
+        // ---- camera: one slow push toward the thread ----
+        tl.fromTo(q(".l06-world"), { scale: 1 }, { scale: 1.03, duration: 7, ease: "sine.inOut" }, 0);
+
+        // ---- Scene 1 (0.0-0.8): label chip swaps in ----
+        tl.fromTo(q(".l06-shield-chip"), { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, ease: "power3.out" }, 0.05);
+        tl.fromTo(q(".l06-shield-path"), { strokeDasharray: 1, strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.55, ease: "power2.out" }, 0.12);
+        tl.fromTo(q(".l06-label-bg"), { scaleX: 0.16, opacity: 0 }, { scaleX: 1, opacity: 1, duration: 0.5, ease: "expo.out" }, 0.18);
+        tl.fromTo(qa(".l06-label-text .l06-word"), { x: -36, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "power3.out", stagger: 0.07 }, 0.3);
+
+        // phone settles (already on screen, continuing thread)
+        tl.fromTo(q(".l06-phone"), { y: 24 }, { y: 0, duration: 0.6, ease: "power3.out" }, 0);
+
+        // stack starts with the new bubble hidden below the view
+        tl.fromTo(q(".l06-stack"), { y: NEW_H + GAP }, { y: NEW_H + GAP - (DOTS_H + GAP), duration: 0.45, ease: "power3.out" }, 0.8);
+        tl.fromTo(q(".l06-new"), { opacity: 0, scale: 0.7, y: 40 }, { opacity: 1, scale: 1, y: 0, duration: 0.45, ease: "power3.out" }, 1.55);
+        tl.fromTo(q(".l06-clock"), { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: "power3.out" }, 2.05);
+
+        // caret blinks in the empty composer until submit (finite, discrete)
+        var caret = q(".l06-caret");
+        [0.0, 0.5, 1.0].forEach(function (t) {
+          tl.set(caret, { opacity: 1 }, t);
+          tl.set(caret, { opacity: 0 }, t + 0.25);
+        });
+        tl.set(caret, { opacity: 1 }, 1.6);
+
+        // ---- Scene 2 (0.8-2.6): typing dots, submit, bubble lands, clock pops ----
+        var dots = q(".l06-dots");
+        tl.fromTo(dots, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.3, ease: "power3.out" }, 0.85);
+        var dotEls = qa(".l06-dot");
+        for (var c = 0; c < 2; c++) {
+          tl.fromTo(dotEls, { y: 0 }, { y: -10, duration: 0.14, ease: "sine.out", stagger: 0.08 }, 0.95 + c * 0.32);
+          tl.to(dotEls, { y: 0, duration: 0.14, ease: "sine.in", stagger: 0.08 }, 1.09 + c * 0.32);
+        }
+        // submit press dip on send button
+        tl.to(q(".l06-send"), { scale: 0.86, duration: 0.08, ease: "power2.in" }, 1.45);
+        tl.to(q(".l06-send"), { scale: 1, duration: 0.3, ease: "power3.out" }, 1.53);
+        // swap: dots out, bubble in, thread scrolls up
+        tl.set(dots, { opacity: 0 }, 1.55);
+        tl.set(q(".l06-prev-tail"), { opacity: 0 }, 1.55);
+        tl.to(q(".l06-stack"), { y: 0, duration: 0.5, ease: "expo.out" }, 1.55);
+
+        // clock: minute hand sweeps a third of a turn (20 minutes)
+        tl.fromTo(q(".l06-hand-min"), { rotation: 0, svgOrigin: "12 12" }, { rotation: 120, svgOrigin: "12 12", duration: 1.8, ease: "power2.inOut" }, 2.25);
+        tl.fromTo(q(".l06-hand-hr"), { rotation: 0, svgOrigin: "12 12" }, { rotation: 10, svgOrigin: "12 12", duration: 1.8, ease: "power2.inOut" }, 2.25);
+        // highlight on 20 minutos
+        tl.fromTo(q(".l06-hl-bg"), { scaleX: 0 }, { scaleX: 1, duration: 0.45, ease: "power3.out" }, 2.3);
+
+        // ---- Scene 3 (2.6-4.0): safety card slides up ----
+        tl.fromTo(q(".l06-card"), { y: 140, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55, ease: "power3.out" }, 2.6);
+        tl.fromTo(q(".l06-siren-chip"), { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: "power3.out" }, 2.8);
+        tl.fromTo(qa(".l06-line"), { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: "power3.out", stagger: 0.15 }, 2.85);
+        // siren rays flash (two finite pulses)
+        var rays = qa(".l06-ray");
+        tl.fromTo(rays, { opacity: 0 }, { opacity: 1, duration: 0.18, stagger: 0.04, ease: "power2.out" }, 3.2);
+        tl.to(rays, { opacity: 0.25, duration: 0.2, ease: "power1.inOut" }, 3.6);
+        tl.to(rays, { opacity: 1, duration: 0.2, ease: "power1.inOut" }, 3.85);
+
+        // ---- Scene 4 (4.0-7.0): hold with residual meaningful beats ----
+        tl.fromTo(q(".l06-ul-bar"), { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power3.out" }, 4.3);
+        tl.fromTo(q(".l06-shield-path"), { fill: "rgba(43, 92, 158, 0)" }, { fill: "rgba(43, 92, 158, 0.22)", duration: 0.6, ease: "power2.out" }, 5.3);
+        tl.fromTo(q(".l06-shield-chip"), { scale: 1 }, { scale: 1.04, duration: 0.25, ease: "power2.out", immediateRender: false }, 5.3);
+        tl.to(q(".l06-shield-chip"), { scale: 1, duration: 0.35, ease: "power2.inOut" }, 5.55);
+
+        window.__timelines["06-limite"] = tl;
+      })();
+    </script>
+  </div>
+</template>

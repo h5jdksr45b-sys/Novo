@@ -19,16 +19,7 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
 document,'script','https://connect.facebook.net/en_US/fbevents.js');
 fbq('init','2562728947535171');
 fbq('track','PageView');
-// Compra concluída. Se a integração de pixel da Hotmart já envia a compra para a Meta,
-// apague o bloco abaixo para a compra não ser contada duas vezes.
-(function(){
-  var ja = false;
-  try { ja = sessionStorage.getItem('p7d_purchase') === '1'; } catch(e) {}
-  if (!ja) {
-    fbq('track','Purchase',{value:219,currency:'BRL',content_name:'Protocolo 7 Dias'});
-    try { sessionStorage.setItem('p7d_purchase','1'); } catch(e) {}
-  }
-})();
+// A compra já chega à Meta pela integração de pixel da Hotmart. Não registrar Purchase aqui.
 </script>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2562728947535171&ev=PageView&noscript=1"/></noscript>
 <!-- Fim Meta Pixel -->

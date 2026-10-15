@@ -96,6 +96,7 @@
         height: 64px;
         line-height: 64px;
         text-align: center;
+        background: #2B5C9E;
       }
       .p02-label {
         position: absolute;
@@ -187,7 +188,7 @@
     </style>
 
     <div id="p02-bg" class="p02-bg clip" data-start="0" data-duration="7" data-track-index="0">
-      <div class="p02-mesh"></div>
+      <div class="p02-mesh" data-layout-allow-overflow></div>
     </div>
 
     <div id="p02-stack" class="p02-layer clip" data-start="0" data-duration="7" data-track-index="1">
@@ -229,10 +230,10 @@
 
       <div class="p02-chip" id="p02-chip">
         <div class="p02-chip-bg" id="p02-chip-bg"></div>
-        <div class="p02-col p02-col-tens" id="p02-tens-col">
+        <div class="p02-col p02-col-tens" id="p02-tens-col" data-layout-allow-overflow data-layout-allow-overlap data-layout-allow-occlusion>
           <div class="p02-strip" id="p02-tens"><span>&nbsp;</span><span>1</span></div>
         </div>
-        <div class="p02-col p02-col-units" id="p02-units-col">
+        <div class="p02-col p02-col-units" id="p02-units-col" data-layout-allow-overflow data-layout-allow-overlap data-layout-allow-occlusion>
           <div class="p02-strip" id="p02-units"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>0</span></div>
         </div>
         <div class="p02-label" id="p02-label">provas</div>
@@ -301,8 +302,8 @@
         tl.fromTo(units, { filter: "blur(0px)" }, { filter: "blur(3px)", duration: 0.3, ease: "power1.in" }, 4.62);
         tl.fromTo(units, { filter: "blur(3px)" }, { filter: "blur(0px)", duration: 0.3, ease: "power1.out", immediateRender: false }, 5.1);
         tl.fromTo(tens, { y: 0 }, { y: -DIGIT, duration: 0.3, ease: "power3.out" }, 5.15);
-        tl.fromTo(unitsCol, { x: -42 }, { x: 0, duration: 0.3, ease: "power3.out", immediateRender: false }, 5.15);
-        tl.fromTo(q("#p02-chip-bg"), { clipPath: "inset(0px 204px 0px 0px round 48px)" }, { clipPath: "inset(0px 0px 0px 0px round 48px)", duration: 0.4, ease: "power3.out" }, 5.2);
+        tl.fromTo(unitsCol, { x: -42 }, { x: 0, duration: 0.3, ease: "power3.out", immediateRender: false }, 5.22);
+        tl.fromTo(q("#p02-chip-bg"), { clipPath: "inset(0px 204px 0px 0px round 48px)" }, { clipPath: "inset(0px 0px 0px 0px round 48px)", duration: 0.35, ease: "power3.out" }, 5.15);
         tl.fromTo(q("#p02-label"), { clipPath: "inset(0px 100% 0px 0px)" }, { clipPath: "inset(0px 0% 0px 0px)", duration: 0.4, ease: "power3.out" }, 5.3);
         tl.fromTo(chip, { scale: 1 }, { scale: 1.07, duration: 0.16, ease: "power2.out", immediateRender: false }, 5.4);
         tl.fromTo(chip, { scale: 1.07 }, { scale: 1, duration: 0.4, ease: "power2.out", immediateRender: false }, 5.56);

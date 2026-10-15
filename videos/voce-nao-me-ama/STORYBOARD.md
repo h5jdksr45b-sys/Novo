@@ -29,7 +29,7 @@ hook: recognizable scene (a message in the middle of a fight)
 - voiceover: ""
 - duration: 5s
 - transition_in: cut
-- status: outline
+- status: animated
 - src: compositions/frames/01-mensagem.html
 - type: hook
 - persuasion: Recognizable scene
@@ -53,7 +53,7 @@ Scene 4 (2.4–5.0s): above the phone, kinetic headline rises in at y ≈ 300, w
 - voiceover: ""
 - duration: 7s
 - transition_in: push-slide UP
-- status: outline
+- status: animated
 - src: compositions/frames/02-provas.html
 - type: pain_point
 - persuasion: Escalation through repetition
@@ -83,7 +83,7 @@ Scene 4 (5.6–7.0s): hold.
 - voiceover: ""
 - duration: 4s
 - transition_in: cut
-- status: outline
+- status: animated
 - src: compositions/frames/03-dobrou.html
 - type: pain_point
 - persuasion: Consequence reveal
@@ -105,7 +105,7 @@ Scene 3 (1.8–4.0s): headline slams up below at y ≈ 1080, 96 px weight 800 in
 - voiceover: ""
 - duration: 7s
 - transition_in: crossfade
-- status: outline
+- status: animated
 - src: compositions/frames/04-virada.html
 - type: product_intro
 - persuasion: Reframe
@@ -135,7 +135,7 @@ Scene 4 (4.2–7.0s): the small line slides up at y ≈ 1250. Hold.
 - voiceover: ""
 - duration: 7s
 - transition_in: push-slide UP
-- status: outline
+- status: animated
 - src: compositions/frames/05-medo.html
 - type: feature_showcase
 - persuasion: Model the alternative
@@ -161,7 +161,7 @@ Scene 4 (4.2–7.0s): hold; slow push.
 - voiceover: ""
 - duration: 7s
 - transition_in: crossfade
-- status: outline
+- status: animated
 - src: compositions/frames/06-limite.html
 - type: feature_showcase
 - persuasion: Validation with boundaries
@@ -189,7 +189,7 @@ Scene 4 (4.0–7.0s): hold.
 - voiceover: ""
 - duration: 4.5s
 - transition_in: crossfade
-- status: outline
+- status: animated
 - src: compositions/frames/07-chamada.html
 - type: cta
 - persuasion: Specific share prompt

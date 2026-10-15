@@ -1,0 +1,313 @@
+{
+  "ok": true,
+  "strict": false,
+  "browserSkipped": false,
+  "lint": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "filesScanned": 9
+  },
+  "runtime": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": []
+  },
+  "layout": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 6,
+    "findings": [
+      {
+        "code": "container_overflow",
+        "severity": "info",
+        "time": 16.139,
+        "selector": "#dobrou-03-stage",
+        "message": "Element extends outside a clipping layout container.",
+        "rect": {
+          "left": -21.6,
+          "top": -36,
+          "right": 1101.6,
+          "bottom": 1960.8,
+          "width": 1123.2,
+          "height": 1996.8
+        },
+        "containerSelector": "#el-03-dobrou > div:nth-of-type(1)",
+        "fixHint": "Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "left": 21.6,
+          "right": 21.6,
+          "top": 36,
+          "bottom": 40.8
+        },
+        "dataAttributes": {
+          "data-start": "0",
+          "data-duration": "4.5",
+          "data-track-index": "1"
+        },
+        "sourceFile": "compositions/frames/03-dobrou.html",
+        "bbox": {
+          "x": -21.6,
+          "y": -36,
+          "width": 1123.2,
+          "height": 1996.8
+        },
+        "firstSeen": 16.139,
+        "lastSeen": 16.139,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          16.139
+        ]
+      },
+      {
+        "code": "content_overlap",
+        "severity": "info",
+        "time": 16.25,
+        "selector": "span.dobrou-03-strip > span:nth-of-type(1)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 63.68,
+          "top": 525.6,
+          "right": 304.7,
+          "bottom": 565.12,
+          "width": 241.02,
+          "height": 39.52
+        },
+        "containerSelector": "p.\\30 4-virada-line.\\30 4-virada-l1 > span:nth-of-type(1)",
+        "text": "1",
+        "fixHint": "Give each block its own zone, or put data-layout-allow-overlap on the text or on a container inside the scene. A marker on the scene root does not apply.",
+        "dataAttributes": {},
+        "sourceFile": "compositions/frames/03-dobrou.html",
+        "bbox": {
+          "x": 63.68,
+          "y": 525.6,
+          "width": 241.02,
+          "height": 39.52
+        },
+        "firstSeen": 16.25,
+        "lastSeen": 16.25,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          16.25
+        ]
+      },
+      {
+        "code": "content_overlap",
+        "severity": "info",
+        "time": 30.25,
+        "selector": "span.m05-name",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 291.44,
+          "top": 467.64,
+          "right": 401.26,
+          "bottom": 518.6,
+          "width": 109.82,
+          "height": 50.96
+        },
+        "containerSelector": "div.l06-name",
+        "text": "Amor",
+        "fixHint": "Give each block its own zone, or put data-layout-allow-overlap on the text or on a container inside the scene. A marker on the scene root does not apply.",
+        "dataAttributes": {},
+        "sourceFile": "compositions/frames/05-medo.html",
+        "bbox": {
+          "x": 291.44,
+          "y": 467.64,
+          "width": 109.82,
+          "height": 50.96
+        },
+        "firstSeen": 30.25,
+        "lastSeen": 30.25,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          30.25
+        ]
+      },
+      {
+        "code": "container_overflow",
+        "severity": "info",
+        "time": 34.583,
+        "selector": "#limite06-world",
+        "message": "Element extends outside a clipping layout container.",
+        "rect": {
+          "left": -11.83,
+          "top": -19.27,
+          "right": 1091.83,
+          "bottom": 1942.78,
+          "width": 1103.65,
+          "height": 1962.05
+        },
+        "containerSelector": "#el-06-limite > div:nth-of-type(1)",
+        "fixHint": "Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "left": 11.83,
+          "right": 11.83,
+          "top": 19.27,
+          "bottom": 22.78
+        },
+        "dataAttributes": {
+          "data-start": "0",
+          "data-duration": "7.5",
+          "data-track-index": "1"
+        },
+        "sourceFile": "compositions/frames/06-limite.html",
+        "bbox": {
+          "x": -11.83,
+          "y": -19.27,
+          "width": 1103.65,
+          "height": 1962.05
+        },
+        "firstSeen": 34.583,
+        "lastSeen": 34.583,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          34.583
+        ]
+      },
+      {
+        "code": "content_overlap",
+        "severity": "info",
+        "time": 37.25,
+        "selector": "div.l06-bubble.l06-prev",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 351.61,
+          "top": 646.19,
+          "right": 862.39,
+          "bottom": 807.9,
+          "width": 510.78,
+          "height": 161.71
+        },
+        "containerSelector": "#s07-chamada-l2",
+        "text": "Eu estou aqui. Parece que você está com medo de me perder.",
+        "fixHint": "Give each block its own zone, or put data-layout-allow-overlap on the text or on a container inside the scene. A marker on the scene root does not apply.",
+        "dataAttributes": {},
+        "sourceFile": "compositions/frames/06-limite.html",
+        "bbox": {
+          "x": 351.61,
+          "y": 646.19,
+          "width": 510.78,
+          "height": 161.71
+        },
+        "firstSeen": 37.25,
+        "lastSeen": 37.25,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          37.25
+        ]
+      },
+      {
+        "code": "content_overlap",
+        "severity": "info",
+        "time": 37.25,
+        "selector": "div.l06-bubble.l06-new",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 408.43,
+          "top": 887.21,
+          "right": 862.39,
+          "bottom": 1104.54,
+          "width": 453.96,
+          "height": 217.33
+        },
+        "containerSelector": "span.s07-chamada-hl",
+        "text": "Não vou continuar se tiver xingamento. Volto em 20 minutos para conversar.",
+        "fixHint": "Give each block its own zone, or put data-layout-allow-overlap on the text or on a container inside the scene. A marker on the scene root does not apply.",
+        "dataAttributes": {},
+        "sourceFile": "compositions/frames/06-limite.html",
+        "bbox": {
+          "x": 408.43,
+          "y": 887.21,
+          "width": 453.96,
+          "height": 217.33
+        },
+        "firstSeen": 37.25,
+        "lastSeen": 37.25,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          37.25
+        ]
+      }
+    ],
+    "duration": 41.5,
+    "samples": [
+      2.306,
+      6.917,
+      11.528,
+      16.139,
+      20.75,
+      25.361,
+      29.972,
+      34.583,
+      39.194
+    ],
+    "transitionSamples": [],
+    "transitionSamplesDropped": 0,
+    "tolerance": 2,
+    "totalIssueCount": 6,
+    "truncated": false
+  },
+  "motion": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "enabled": false,
+    "samples": 0
+  },
+  "contrast": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "enabled": true,
+    "samples": [
+      2.306,
+      11.528,
+      20.75,
+      29.972,
+      39.194
+    ],
+    "checked": 50,
+    "passed": 50
+  },
+  "hdr": {
+    "autoPromotion": null,
+    "inspection": "available"
+  },
+  "snapshots": {
+    "enabled": false,
+    "files": [],
+    "times": [],
+    "findingFiles": []
+  }
+}

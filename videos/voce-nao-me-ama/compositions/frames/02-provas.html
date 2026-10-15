@@ -231,10 +231,10 @@
       <div class="p02-chip" id="p02-chip">
         <div class="p02-chip-bg" id="p02-chip-bg" data-layout-allow-occlusion></div>
         <div class="p02-col p02-col-tens" id="p02-tens-col" data-layout-allow-overflow data-layout-allow-overlap data-layout-allow-occlusion>
-          <div class="p02-strip" id="p02-tens" data-layout-allow-occlusion data-layout-allow-overlap data-layout-allow-overflow><span>&nbsp;</span><span>1</span></div>
+          <div class="p02-strip" id="p02-tens" data-layout-allow-occlusion data-layout-allow-overlap data-layout-allow-overflow><span data-layout-allow-occlusion data-layout-allow-overlap data-layout-allow-overflow>&nbsp;</span><span data-layout-allow-occlusion data-layout-allow-overlap data-layout-allow-overflow>1</span></div>
         </div>
         <div class="p02-col p02-col-units" id="p02-units-col" data-layout-allow-overflow data-layout-allow-overlap data-layout-allow-occlusion>
-          <div class="p02-strip" id="p02-units" data-layout-allow-occlusion data-layout-allow-overlap data-layout-allow-overflow><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>0</span></div>
+          <div class="p02-strip" id="p02-units" data-layout-allow-occlusion data-layout-allow-overlap data-layout-allow-overflow><span data-layout-allow-occlusion data-layout-allow-overlap data-layout-allow-overflow>0</span><span data-layout-allow-occlusion data-layout-allow-overlap data-layout-allow-overflow>1</span><span data-layout-allow-occlusion data-layout-allow-overlap data-layout-allow-overflow>2</span><span data-layout-allow-occlusion data-layout-allow-overlap data-layout-allow-overflow>3</span><span data-layout-allow-occlusion data-layout-allow-overlap data-layout-allow-overflow>4</span><span data-layout-allow-occlusion data-layout-allow-overlap data-layout-allow-overflow>5</span><span data-layout-allow-occlusion data-layout-allow-overlap data-layout-allow-overflow>6</span><span data-layout-allow-occlusion data-layout-allow-overlap data-layout-allow-overflow>7</span><span data-layout-allow-occlusion data-layout-allow-overlap data-layout-allow-overflow>8</span><span data-layout-allow-occlusion data-layout-allow-overlap data-layout-allow-overflow>9</span><span data-layout-allow-occlusion data-layout-allow-overlap data-layout-allow-overflow>0</span></div>
         </div>
         <div class="p02-label" id="p02-label">provas</div>
       </div>
@@ -273,7 +273,7 @@
             tl.fromTo(cards[j], { y: from }, { y: to, duration: 0.45, ease: "power3.out", immediateRender: false }, t);
             var opFrom = i - 1 - j === 0 ? 1 : 0.86;
             var opTo = i - j === 1 ? 0.86 : 0.74;
-            tl.fromTo(cards[j], { opacity: opFrom }, { opacity: opTo, duration: 0.45, ease: "power2.out", immediateRender: false }, t);
+            tl.fromTo(cards[j].querySelectorAll(".p02-ichip, .p02-text"), { opacity: opFrom }, { opacity: opTo, duration: 0.45, ease: "power2.out", immediateRender: false }, t);
           }
           // check icon: pop + draw
           tl.fromTo(checks[i], { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: "back.out(1.4)" }, t + 0.35);

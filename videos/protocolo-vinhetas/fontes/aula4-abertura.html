@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=720, height=1280" />
+    <title>Aula 4 abertura</title>
+    <script src="assets/vendor/gsap.min.js"></script>
+    <script src="assets/kit.js"></script>
+    <link rel="stylesheet" href="assets/kit.css" />
+    <style>
+      @font-face { font-family: "Source Sans 3"; src: url("assets/fonts/source-sans-3-400.woff2") format("woff2"); font-weight: 400; }
+      @font-face { font-family: "Source Sans 3"; src: url("assets/fonts/source-sans-3-600.woff2") format("woff2"); font-weight: 600; }
+      @font-face { font-family: "Source Sans 3"; src: url("assets/fonts/source-sans-3-800.woff2") format("woff2"); font-weight: 700 800; }
+      #a4a-chama { position: absolute; left: 250px; top: 230px; width: 220px; height: 280px; overflow: visible; opacity: 0; }
+      #a4a-texto { position: absolute; left: 150px; top: 210px; width: 420px; padding: 30px 32px; background: #e9e6e1; border-radius: 26px; box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35);
+        display: flex; flex-direction: column; gap: 14px; opacity: 0; }
+      .a4a-barra { height: 16px; border-radius: 8px; background: #8b929a; transform-origin: 0% 50%; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="aula4-abertura" data-start="0" data-duration="7.5" data-width="720" data-height="1280">
+      <div class="fundo"></div>
+      <div class="mancha m1"></div><div class="mancha m2"></div><div class="mancha m3"></div>
+
+      <section id="a4a-cena1" class="cena clip" data-start="0" data-duration="5.35" data-track-index="0">
+        <div class="selo"><span>Protocolo <b>7</b> Dias</span></div>
+        <svg id="a4a-chama" viewBox="0 0 120 150">
+          <path fill="#e8622c" d="M60 2 C72 32 108 52 104 96 C101 130 82 148 60 148 C34 148 16 130 16 100 C16 70 40 60 44 34 C54 50 57 60 60 72 C66 52 66 26 60 2 Z" />
+          <path fill="#e9c24b" d="M60 70 C66 88 84 100 82 120 C80 136 70 144 60 144 C48 144 38 136 38 120 C38 104 52 98 54 84 C57 92 59 96 60 100 C62 90 62 80 60 70 Z" />
+        </svg>
+        <div id="a4a-texto">
+          <span class="a4a-barra" style="width: 100%"></span>
+          <span class="a4a-barra" style="width: 92%"></span>
+          <span class="a4a-barra" style="width: 98%"></span>
+          <span class="a4a-barra" style="width: 80%"></span>
+          <span class="a4a-barra" style="width: 95%"></span>
+          <span class="a4a-barra" style="width: 88%"></span>
+          <span class="a4a-barra" style="width: 100%"></span>
+          <span class="a4a-barra" style="width: 60%"></span>
+        </div>
+        <div class="frases">
+          <span class="linha" id="a4a-l1">Você explicou</span>
+          <span class="linha" id="a4a-l2">seus motivos.</span>
+          <span class="linha" id="a4a-l3">Virou combustível</span>
+          <span class="linha destaque" id="a4a-l4">para a briga.</span>
+        </div>
+      </section>
+
+      <section id="a4a-cena2" class="cena clip" data-start="5.35" data-duration="2.15" data-track-index="1">
+        <div class="cartela" id="a4a-cartela">
+          <svg class="icone-cartela" viewBox="0 0 120 130" width="110" height="120">
+            <path class="a4a-escudo" pathLength="1" fill="none" stroke="#f4f1ec" stroke-width="6" stroke-linejoin="round" d="M60 8 L108 26 V62 C108 94 86 114 60 124 C34 114 12 94 12 62 V26 Z" />
+            <path class="a4a-escudo" pathLength="1" fill="none" stroke="#46708c" stroke-width="6" stroke-linecap="round" d="M60 30 V102" />
+          </svg>
+          <span class="rotulo">Protocolo 7 Dias</span>
+          <span class="numero"><small>Aula</small>4</span>
+          <span class="traco"></span>
+          <span class="titulo">Limite sem briga</span>
+        </div>
+      </section>
+
+      <div class="painel p1"></div><div class="painel p2"></div>
+      <div class="grao"></div>
+      <div class="vinheta"></div>
+
+      <audio id="a4a-pad" src="assets/sfx/pad-8s.wav" data-start="0" data-duration="7.5" data-track-index="10" data-volume="0.55"></audio>
+      <audio id="a4a-s1" src="assets/sfx/click.wav" data-start="0.12" data-track-index="11" data-volume="0.7"></audio>
+      <audio id="a4a-s2" src="assets/sfx/pop-agudo.wav" data-start="0.35" data-track-index="12" data-volume="0.45"></audio>
+      <audio id="a4a-s3" src="assets/sfx/digitando.wav" data-start="0.55" data-track-index="13" data-volume="0.75"></audio>
+      <audio id="a4a-s4" src="assets/sfx/digitando.wav" data-start="0.95" data-track-index="14" data-volume="0.75"></audio>
+      <audio id="a4a-s5" src="assets/sfx/digitando.wav" data-start="1.35" data-track-index="15" data-volume="0.75"></audio>
+      <audio id="a4a-s6" src="assets/sfx/digitando.wav" data-start="1.75" data-track-index="16" data-volume="0.75"></audio>
+      <audio id="a4a-s7" src="assets/sfx/whoosh.wav" data-start="1.25" data-track-index="17" data-volume="0.45"></audio>
+      <audio id="a4a-s8" src="assets/sfx/riser.wav" data-start="1.9" data-track-index="18" data-volume="0.6"></audio>
+      <audio id="a4a-s9" src="assets/sfx/impacto.wav" data-start="2.85" data-track-index="19" data-volume="0.75"></audio>
+      <audio id="a4a-s10" src="assets/sfx/whoosh.wav" data-start="3.0" data-track-index="20" data-volume="0.5"></audio>
+      <audio id="a4a-s11" src="assets/sfx/whoosh-grave.wav" data-start="4.9" data-track-index="21" data-volume="0.75"></audio>
+      <audio id="a4a-s12" src="assets/sfx/pop-agudo.wav" data-start="5.5" data-track-index="22" data-volume="0.5"></audio>
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      Kit.fundo(tl, 7.5);
+      Kit.selo(tl, 0.1);
+
+      // A explicação cresce linha por linha
+      tl.fromTo("#a4a-texto", { opacity: 0, y: 30, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.4, ease: "back.out(1.8)" }, 0.35);
+      tl.fromTo(".a4a-barra", { scaleX: 0 }, { scaleX: 1, duration: 0.18, ease: "power1.out", stagger: 0.2 }, 0.55);
+      Kit.linha(tl, "#a4a-l1", 1.25);
+      Kit.linha(tl, "#a4a-l2", 1.45);
+
+      // As palavras pegam fogo
+      tl.to(".a4a-barra", { backgroundColor: "#e8622c", duration: 0.25, stagger: { each: 0.08, from: "end" } }, 2.2);
+      tl.to("#a4a-texto", { backgroundColor: "#3a2a26", duration: 0.5 }, 2.4);
+      tl.fromTo("#a4a-chama", { opacity: 0, scale: 0.4, y: 120, transformOrigin: "50% 100%" }, { opacity: 1, scale: 1.25, y: 0, duration: 0.5, ease: "back.out(2.2)" }, 2.85);
+      tl.to("#a4a-texto", { y: 260, scale: 0.6, opacity: 0, duration: 0.5, ease: "power2.in" }, 2.85);
+      tl.fromTo("#a4a-chama", { scaleY: 1.25 }, { scaleY: 1.33, duration: 0.17, yoyo: true, repeat: 9, ease: "sine.inOut", immediateRender: false }, 3.35);
+      Kit.linha(tl, "#a4a-l3", 3.0);
+      Kit.linha(tl, "#a4a-l4", 3.2);
+
+      // Título da aula
+      Kit.deslize(tl, 4.9);
+      Kit.desenhar(tl, ".a4a-escudo", 5.45, 0.6, 0.2);
+      Kit.cartela(tl, 5.45);
+      Kit.respiro(tl, "#a4a-cartela", 6.2, 1.3);
+
+      window.__timelines["aula4-abertura"] = tl;
+    </script>
+  </body>
+</html>

@@ -1,0 +1,77 @@
+/* Visual das aulas do Protocolo 7 Dias: azul acinzentado desfocado, laranja de alerta, caixas de legenda escuras. */
+:root {
+  --fundo-a: #5d6875;
+  --fundo-b: #3b4450;
+  --fundo-c: #2a3139;
+  --branco: #f4f1ec;
+  --cinza: #c3cad1;
+  --laranja: #e8622c;
+  --vermelho: #b8322a;
+  --amarelo: #e9c24b;
+  --aco: #46708c;
+  --caixa: rgba(38, 42, 48, 0.82);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 720px; height: 1280px; overflow: hidden; background: var(--fundo-c); }
+#root {
+  position: relative; width: 100%; height: 100%; overflow: hidden;
+  font-family: "Source Sans 3", "Segoe UI", sans-serif; color: var(--branco);
+}
+.cena { position: absolute; inset: 0; }
+
+/* Fundo: manchas desfocadas, granulação e vinheta */
+.fundo { position: absolute; inset: 0; background: linear-gradient(170deg, var(--fundo-a) 0%, var(--fundo-b) 55%, var(--fundo-c) 100%); }
+.mancha { position: absolute; border-radius: 50%; filter: blur(70px); opacity: 0.55; }
+.mancha.m1 { width: 520px; height: 520px; left: -160px; top: 80px; background: #7b8794; }
+.mancha.m2 { width: 460px; height: 460px; left: 360px; top: 620px; background: #34506a; }
+.mancha.m3 { width: 380px; height: 380px; left: 240px; top: -120px; background: #8a5a4a; opacity: 0.28; }
+.grao { position: absolute; inset: -40px; background-image: url("img/grao.png"); background-size: 256px 256px; opacity: 0.07; mix-blend-mode: overlay; }
+.vinheta { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 70% at 50% 45%, transparent 55%, rgba(10, 12, 15, 0.55) 100%); }
+
+/* Selo do curso */
+.selo {
+  position: absolute; left: 0; right: 0; top: 96px; display: flex; justify-content: center;
+}
+.selo span {
+  display: block; font-weight: 600; font-size: 21px; letter-spacing: 0.22em; text-transform: uppercase;
+  padding: 10px 22px; border: 1.5px solid rgba(244, 241, 236, 0.35); border-radius: 999px; background: rgba(20, 24, 28, 0.35);
+}
+.selo b { color: #f07a46; font-weight: 800; }
+
+/* Frases do slogan */
+.frases { position: absolute; left: 56px; right: 56px; top: 760px; display: flex; flex-direction: column; gap: 6px; }
+.linha { display: block; font-weight: 800; font-size: 58px; line-height: 1.08; letter-spacing: -0.01em; }
+.linha.fina { font-weight: 600; color: var(--cinza); }
+.destaque { color: var(--laranja); }
+.bolha-ok {
+  display: inline-block; background: #e9e6e1; color: #1f2329; font-weight: 600; font-size: 46px;
+  padding: 2px 22px 6px; border-radius: 26px 26px 26px 6px; line-height: 1.1; vertical-align: 4px;
+}
+
+/* Transição de deslize */
+.painel { position: absolute; top: -200px; bottom: -200px; left: 0; width: 1200px; }
+.painel.p1 { background: var(--laranja); }
+.painel.p2 { background: var(--fundo-c); }
+
+/* Cartela de título */
+.cartela { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 18px; padding: 0 60px; }
+.rotulo { font-weight: 600; font-size: 24px; letter-spacing: 0.32em; text-transform: uppercase; color: var(--cinza); }
+.numero { display: block; font-weight: 800; font-size: 300px; line-height: 0.82; color: var(--branco); }
+.numero small { display: block; font-size: 64px; letter-spacing: 0.12em; color: var(--laranja); line-height: 1; margin-bottom: 16px; }
+.traco { width: 240px; height: 6px; background: var(--laranja); border-radius: 3px; }
+.titulo { font-weight: 700; font-size: 44px; line-height: 1.15; text-wrap: balance; }
+.assinatura { position: absolute; left: 0; right: 0; bottom: 120px; text-align: center; display: flex; flex-direction: column; gap: 4px; }
+.assinatura .nome { font-weight: 700; font-size: 30px; }
+.assinatura .cargo { font-weight: 400; font-size: 21px; color: var(--cinza); letter-spacing: 0.04em; }
+
+/* Esquemas */
+.esquema { position: absolute; left: 0; top: 190px; width: 720px; height: 540px; }
+.etiqueta { font-family: "Source Sans 3", sans-serif; font-weight: 600; font-size: 22px; fill: var(--branco); }
+.etiqueta.cinza { fill: #dfe4e8; font-weight: 600; font-size: 19px; }
+
+/* Lista de passos (Aulas 3 e 4) */
+.passos { position: absolute; left: 70px; right: 70px; top: 230px; display: flex; flex-direction: column; gap: 22px; }
+.passo { display: flex; align-items: center; gap: 18px; background: rgba(28, 33, 39, 0.72); border: 2px solid rgba(195, 202, 209, 0.25); border-radius: 16px; padding: 16px 20px; }
+.passo .num { flex: none; width: 46px; height: 46px; border-radius: 50%; background: var(--aco); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 24px; }
+.passo .txt { font-weight: 700; font-size: 28px; line-height: 1.15; }
+.icone-cartela { overflow: visible; }

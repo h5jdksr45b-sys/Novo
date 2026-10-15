@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=720, height=1280" />
+    <title>Aula 3 fechamento</title>
+    <script src="assets/vendor/gsap.min.js"></script>
+    <script src="assets/kit.js"></script>
+    <link rel="stylesheet" href="assets/kit.css" />
+    <style>
+      @font-face { font-family: "Source Sans 3"; src: url("assets/fonts/source-sans-3-400.woff2") format("woff2"); font-weight: 400; }
+      @font-face { font-family: "Source Sans 3"; src: url("assets/fonts/source-sans-3-600.woff2") format("woff2"); font-weight: 600; }
+      @font-face { font-family: "Source Sans 3"; src: url("assets/fonts/source-sans-3-800.woff2") format("woff2"); font-weight: 700 800; }
+      .fim { position: absolute; inset: 0; background: #14181c; opacity: 0; }
+      #a3f-p1 .num, #a3f-p2 .num { background: var(--laranja); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="aula3-fechamento" data-start="0" data-duration="8.5" data-width="720" data-height="1280">
+      <div class="fundo"></div>
+      <div class="mancha m1"></div><div class="mancha m2"></div><div class="mancha m3"></div>
+
+      <section id="a3f-cena1" class="cena clip" data-start="0" data-duration="5.25" data-track-index="0">
+        <div class="selo"><span>Protocolo <b>7</b> Dias · Aula 3</span></div>
+        <div class="passos">
+          <div class="passo" id="a3f-p1"><span class="num">1</span><span class="txt">Nomear a emoção</span></div>
+          <div class="passo" id="a3f-p2"><span class="num">2</span><span class="txt">Confirmar presença</span></div>
+          <div class="passo" id="a3f-p3"><span class="num">3</span><span class="txt">Colocar limite</span></div>
+        </div>
+        <div class="frases">
+          <span class="linha" id="a3f-l1">Acolher a dor</span>
+          <span class="linha" id="a3f-l2">não é aceitar o grito.</span>
+          <span class="linha" id="a3f-l3">Eu estou aqui,</span>
+          <span class="linha destaque" id="a3f-l4">mas não aos gritos.</span>
+        </div>
+      </section>
+
+      <section id="a3f-cena2" class="cena clip" data-start="5.25" data-duration="3.25" data-track-index="1">
+        <div class="cartela" id="a3f-cartela">
+          <svg class="icone-cartela" viewBox="0 0 120 130" width="110" height="120">
+            <path class="a3f-escudo" pathLength="1" fill="none" stroke="#f4f1ec" stroke-width="6" stroke-linejoin="round" d="M60 8 L108 26 V62 C108 94 86 114 60 124 C34 114 12 94 12 62 V26 Z" />
+            <path class="a3f-escudo" pathLength="1" fill="none" stroke="#46708c" stroke-width="6" stroke-linecap="round" d="M60 30 V102" />
+          </svg>
+          <span class="rotulo">Próxima aula</span>
+          <span class="numero"><small>Aula</small>4</span>
+          <span class="traco"></span>
+          <span class="titulo">Limite sem briga</span>
+        </div>
+        <div class="assinatura"><span class="nome">Dr. Fabio Schmidt</span><span class="cargo">Médico · CRM-SP 183549</span></div>
+      </section>
+
+      <div class="painel p1"></div><div class="painel p2"></div>
+      <div class="grao"></div>
+      <div class="vinheta"></div>
+      <div class="fim"></div>
+
+      <audio id="a3f-pad" src="assets/sfx/pad-8s.wav" data-start="0" data-duration="8.5" data-track-index="10" data-volume="0.55"></audio>
+      <audio id="a3f-s1" src="assets/sfx/click.wav" data-start="0.12" data-track-index="11" data-volume="0.7"></audio>
+      <audio id="a3f-s2" src="assets/sfx/whoosh-curto.wav" data-start="0.35" data-track-index="12" data-volume="0.5"></audio>
+      <audio id="a3f-s3" src="assets/sfx/click.wav" data-start="0.55" data-track-index="13" data-volume="0.6"></audio>
+      <audio id="a3f-s4" src="assets/sfx/whoosh-curto.wav" data-start="0.7" data-track-index="14" data-volume="0.5"></audio>
+      <audio id="a3f-s5" src="assets/sfx/click.wav" data-start="0.9" data-track-index="15" data-volume="0.6"></audio>
+      <audio id="a3f-s6" src="assets/sfx/whoosh-curto.wav" data-start="1.05" data-track-index="16" data-volume="0.5"></audio>
+      <audio id="a3f-s7" src="assets/sfx/click.wav" data-start="1.25" data-track-index="17" data-volume="0.6"></audio>
+      <audio id="a3f-s8" src="assets/sfx/whoosh.wav" data-start="1.4" data-track-index="18" data-volume="0.5"></audio>
+      <audio id="a3f-s9" src="assets/sfx/pop.wav" data-start="3.0" data-track-index="19" data-volume="0.55"></audio>
+      <audio id="a3f-s10" src="assets/sfx/whoosh.wav" data-start="3.2" data-track-index="20" data-volume="0.5"></audio>
+      <audio id="a3f-s11" src="assets/sfx/whoosh-grave.wav" data-start="4.8" data-track-index="21" data-volume="0.75"></audio>
+      <audio id="a3f-s12" src="assets/sfx/pop-agudo.wav" data-start="5.45" data-track-index="22" data-volume="0.5"></audio>
+      <audio id="a3f-s13" src="assets/sfx/pop-agudo.wav" data-start="6.7" data-track-index="23" data-volume="0.45"></audio>
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      Kit.fundo(tl, 8.5);
+      Kit.selo(tl, 0.1);
+
+      // Os três pilares entram juntos
+      ["#a3f-p1", "#a3f-p2", "#a3f-p3"].forEach((sel, i) => {
+        tl.fromTo(sel, { x: -620, opacity: 0 }, { x: 0, opacity: 1, duration: 0.42, ease: "power3.out" }, 0.35 + i * 0.35);
+        tl.fromTo(sel + " .num", { scale: 0.4 }, { scale: 1, duration: 0.3, ease: "back.out(3)" }, 0.55 + i * 0.35);
+      });
+      Kit.linha(tl, "#a3f-l1", 1.4);
+      Kit.linha(tl, "#a3f-l2", 1.6);
+
+      // Acolhe e segura o limite ao mesmo tempo
+      tl.fromTo(["#a3f-p1", "#a3f-p2"], { borderColor: "rgba(195, 202, 209, 0.25)" }, { borderColor: "rgba(232, 98, 44, 0.9)", duration: 0.35, stagger: 0.1 }, 3.0);
+      tl.fromTo("#a3f-p3", { borderColor: "rgba(195, 202, 209, 0.25)" }, { borderColor: "rgba(122, 170, 204, 0.95)", duration: 0.35 }, 3.25);
+      tl.fromTo("#a3f-p3", { scale: 1 }, { scale: 1.05, duration: 0.18, yoyo: true, repeat: 1, ease: "power2.out", immediateRender: false }, 3.25);
+      Kit.linha(tl, "#a3f-l3", 3.2);
+      Kit.linha(tl, "#a3f-l4", 3.4);
+
+      // Próxima aula
+      Kit.deslize(tl, 4.8);
+      Kit.desenhar(tl, ".a3f-escudo", 5.35, 0.7, 0.2);
+      Kit.cartela(tl, 5.4);
+      Kit.assinatura(tl, 6.7);
+      Kit.respiro(tl, "#a3f-cartela", 6.0, 2.5);
+      tl.to(".fim", { opacity: 1, duration: 0.5, ease: "power1.in" }, 8.0);
+
+      window.__timelines["aula3-fechamento"] = tl;
+    </script>
+  </body>
+</html>

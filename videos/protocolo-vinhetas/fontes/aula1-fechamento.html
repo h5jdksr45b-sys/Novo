@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=720, height=1280" />
+    <title>Aula 1 fechamento</title>
+    <script src="assets/vendor/gsap.min.js"></script>
+    <script src="assets/kit.js"></script>
+    <link rel="stylesheet" href="assets/kit.css" />
+    <style>
+      @font-face { font-family: "Source Sans 3"; src: url("assets/fonts/source-sans-3-400.woff2") format("woff2"); font-weight: 400; }
+      @font-face { font-family: "Source Sans 3"; src: url("assets/fonts/source-sans-3-600.woff2") format("woff2"); font-weight: 600; }
+      @font-face { font-family: "Source Sans 3"; src: url("assets/fonts/source-sans-3-800.woff2") format("woff2"); font-weight: 700 800; }
+      .fim { position: absolute; inset: 0; background: #14181c; opacity: 0; }
+      #a1f-esquema { overflow: visible; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="aula1-fechamento" data-start="0" data-duration="8.5" data-width="720" data-height="1280">
+      <div class="fundo"></div>
+      <div class="mancha m1"></div><div class="mancha m2"></div><div class="mancha m3"></div>
+
+      <section id="a1f-cena1" class="cena clip" data-start="0" data-duration="5.15" data-track-index="0">
+        <div class="selo"><span>Protocolo <b>7</b> Dias · Aula 1</span></div>
+        <svg id="a1f-esquema" class="esquema" viewBox="0 0 720 540">
+          <defs>
+            <radialGradient id="a1f-gl" cx="0.5" cy="0.5" r="0.5">
+              <stop offset="0" stop-color="#e8622c" stop-opacity="0.6" /><stop offset="1" stop-color="#e8622c" stop-opacity="0" />
+            </radialGradient>
+          </defs>
+          <!-- Emoção do outro -->
+          <g id="a1f-topo">
+            <circle id="a1f-brilho" cx="360" cy="70" r="90" fill="url(#a1f-gl)" />
+            <g id="a1f-chama">
+              <path fill="#e8622c" d="M360 20 C368 40 392 54 389 84 C387 106 375 118 360 118 C342 118 330 106 330 86 C330 66 346 58 349 42 C355 52 357 58 360 66 C364 54 364 36 360 20 Z" />
+              <path fill="#e9c24b" d="M360 64 C364 76 376 84 375 98 C374 109 367 114 360 114 C352 114 345 109 345 98 C345 87 355 83 356 74 C358 79 359 82 360 85 C361 79 361 72 360 64 Z" />
+            </g>
+            <text class="etiqueta" x="360" y="160" text-anchor="middle">Emoção do outro</text>
+            <text class="etiqueta cinza" x="360" y="186" text-anchor="middle">não depende de você</text>
+          </g>
+          <!-- Limite -->
+          <g id="a1f-barra">
+            <rect x="130" y="232" width="460" height="56" rx="10" fill="#46708c" />
+            <text class="etiqueta" x="360" y="268" text-anchor="middle">Seu limite</text>
+          </g>
+          <!-- O que você faz -->
+          <g id="a1f-base">
+            <circle id="a1f-anel" cx="360" cy="380" r="54" fill="none" stroke="#e8622c" stroke-width="4" />
+            <circle cx="360" cy="362" r="16" fill="#f4f1ec" />
+            <path fill="#f4f1ec" d="M330 410 C330 388 344 382 360 382 C376 382 390 388 390 410 Z" />
+            <text class="etiqueta" x="360" y="470" text-anchor="middle">O que você faz</text>
+            <text class="etiqueta cinza" x="360" y="496" text-anchor="middle">depende de você</text>
+          </g>
+        </svg>
+        <div class="frases">
+          <span class="linha" id="a1f-l1">Você não controla</span>
+          <span class="linha" id="a1f-l2">a emoção do outro.</span>
+          <span class="linha" id="a1f-l3"><span class="destaque">Você decide</span> o que faz</span>
+          <span class="linha" id="a1f-l4">quando ela chega.</span>
+        </div>
+      </section>
+
+      <section id="a1f-cena2" class="cena clip" data-start="5.15" data-duration="3.35" data-track-index="1">
+        <div class="cartela" id="a1f-cartela">
+          <svg viewBox="0 0 140 140" width="130" height="130">
+            <path class="a1f-ciclo" pathLength="1" fill="none" stroke="#c3cad1" stroke-width="4" d="M70 18 A52 52 0 1 1 69.9 18" />
+            <circle class="a1f-no" cx="70" cy="18" r="11" fill="#f4f1ec" />
+            <circle class="a1f-no" cx="122" cy="70" r="11" fill="#f4f1ec" />
+            <circle class="a1f-no" cx="70" cy="122" r="11" fill="#e8622c" />
+            <circle class="a1f-no" cx="18" cy="70" r="11" fill="#e9c24b" />
+          </svg>
+          <span class="rotulo">Próxima aula</span>
+          <span class="numero"><small>Aula</small>2</span>
+          <span class="traco"></span>
+          <span class="titulo">O ciclo da crise em 4 etapas</span>
+        </div>
+        <div class="assinatura"><span class="nome">Dr. Fabio Schmidt</span><span class="cargo">Médico · CRM-SP 183549</span></div>
+      </section>
+
+      <div class="painel p1"></div><div class="painel p2"></div>
+      <div class="grao"></div>
+      <div class="vinheta"></div>
+      <div class="fim"></div>
+
+      <audio id="a1f-pad" src="assets/sfx/pad-8s.wav" data-start="0" data-duration="8.5" data-track-index="10" data-volume="0.55"></audio>
+      <audio id="a1f-s1" src="assets/sfx/click.wav" data-start="0.12" data-track-index="11" data-volume="0.7"></audio>
+      <audio id="a1f-s2" src="assets/sfx/pop.wav" data-start="0.3" data-track-index="12" data-volume="0.6"></audio>
+      <audio id="a1f-s3" src="assets/sfx/whoosh-curto.wav" data-start="0.5" data-track-index="13" data-volume="0.6"></audio>
+      <audio id="a1f-s4" src="assets/sfx/click.wav" data-start="0.82" data-track-index="14" data-volume="0.65"></audio>
+      <audio id="a1f-s5" src="assets/sfx/whoosh.wav" data-start="0.95" data-track-index="15" data-volume="0.5"></audio>
+      <audio id="a1f-s6" src="assets/sfx/pop-agudo.wav" data-start="1.3" data-track-index="16" data-volume="0.5"></audio>
+      <audio id="a1f-s7" src="assets/sfx/whoosh-grave.wav" data-start="2.7" data-track-index="17" data-volume="0.45"></audio>
+      <audio id="a1f-s8" src="assets/sfx/pop.wav" data-start="3.05" data-track-index="18" data-volume="0.6"></audio>
+      <audio id="a1f-s9" src="assets/sfx/whoosh.wav" data-start="3.0" data-track-index="19" data-volume="0.5"></audio>
+      <audio id="a1f-s10" src="assets/sfx/whoosh-grave.wav" data-start="4.7" data-track-index="20" data-volume="0.75"></audio>
+      <audio id="a1f-s11" src="assets/sfx/click.wav" data-start="5.35" data-track-index="21" data-volume="0.55"></audio>
+      <audio id="a1f-s12" src="assets/sfx/click.wav" data-start="5.5" data-track-index="22" data-volume="0.55"></audio>
+      <audio id="a1f-s13" src="assets/sfx/click.wav" data-start="5.65" data-track-index="23" data-volume="0.55"></audio>
+      <audio id="a1f-s14" src="assets/sfx/click.wav" data-start="5.8" data-track-index="24" data-volume="0.55"></audio>
+      <audio id="a1f-s15" src="assets/sfx/pop-agudo.wav" data-start="6.7" data-track-index="25" data-volume="0.45"></audio>
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      Kit.fundo(tl, 8.5);
+      Kit.selo(tl, 0.1);
+
+      // Esquema monta de cima para baixo
+      tl.fromTo("#a1f-topo", { y: -30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 0.3);
+      tl.fromTo("#a1f-chama", { scaleY: 1, svgOrigin: "360 118" }, { scaleY: 1.08, duration: 0.17, yoyo: true, repeat: 13, ease: "sine.inOut" }, 0.5);
+      tl.fromTo("#a1f-barra", { x: -720 }, { x: 0, duration: 0.4, ease: "power3.out" }, 0.45);
+      tl.fromTo("#a1f-barra", { scaleY: 1, svgOrigin: "360 260" }, { scaleY: 1.18, duration: 0.09, yoyo: true, repeat: 1, ease: "power1.out", immediateRender: false }, 0.84);
+      tl.fromTo("#a1f-base", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 1.2);
+      tl.fromTo("#a1f-anel", { opacity: 0 }, { opacity: 0.25, duration: 0.3 }, 1.3);
+
+      Kit.linha(tl, "#a1f-l1", 0.95);
+      Kit.linha(tl, "#a1f-l2", 1.15);
+
+      // Sem combustível, a chama perde força; o que você faz acende
+      tl.to("#a1f-chama", { scale: 0.45, opacity: 0.45, svgOrigin: "360 118", duration: 1.0, ease: "power2.inOut" }, 2.7);
+      tl.to("#a1f-brilho", { opacity: 0, duration: 0.9 }, 2.7);
+      tl.fromTo("#a1f-anel", { opacity: 0.25, scale: 0.8, svgOrigin: "360 380" }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(2.5)", immediateRender: false }, 3.05);
+      tl.fromTo("#a1f-anel", { scale: 1, svgOrigin: "360 380" }, { scale: 1.08, duration: 0.5, yoyo: true, repeat: 2, ease: "sine.inOut", immediateRender: false }, 3.5);
+      Kit.linha(tl, "#a1f-l3", 3.0);
+      Kit.linha(tl, "#a1f-l4", 3.2);
+
+      // Próxima aula
+      Kit.deslize(tl, 4.7);
+      Kit.desenhar(tl, ".a1f-ciclo", 5.25, 0.7);
+      tl.fromTo(".a1f-no", { scale: 0, transformOrigin: "50% 50%" }, { scale: 1, duration: 0.3, ease: "back.out(3)", stagger: 0.15 }, 5.35);
+      Kit.cartela(tl, 5.3);
+      Kit.assinatura(tl, 6.7);
+      Kit.respiro(tl, "#a1f-cartela", 6.0, 2.5);
+      tl.to(".fim", { opacity: 1, duration: 0.5, ease: "power1.in" }, 8.0);
+
+      window.__timelines["aula1-fechamento"] = tl;
+    </script>
+  </body>
+</html>

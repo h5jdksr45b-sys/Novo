@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=720, height=1280" />
+    <title>Aula 1 abertura</title>
+    <script src="assets/vendor/gsap.min.js"></script>
+    <script src="assets/kit.js"></script>
+    <link rel="stylesheet" href="assets/kit.css" />
+    <style>
+      @font-face { font-family: "Source Sans 3"; src: url("assets/fonts/source-sans-3-400.woff2") format("woff2"); font-weight: 400; }
+      @font-face { font-family: "Source Sans 3"; src: url("assets/fonts/source-sans-3-600.woff2") format("woff2"); font-weight: 600; }
+      @font-face { font-family: "Source Sans 3"; src: url("assets/fonts/source-sans-3-800.woff2") format("woff2"); font-weight: 700 800; }
+      #a1a-chama { overflow: visible; position: absolute; left: 260px; top: 300px; width: 200px; height: 250px; }
+      #a1a-brilho { position: absolute; left: 160px; top: 230px; width: 400px; height: 400px; border-radius: 50%;
+        background: radial-gradient(circle, rgba(232, 98, 44, 0.55) 0%, rgba(232, 98, 44, 0.12) 45%, transparent 70%); }
+      #a1a-onda { position: absolute; left: 240px; top: 310px; width: 240px; height: 240px; border-radius: 50%; border: 4px solid var(--amarelo); opacity: 0; }
+      .a1a-bolha { opacity: 0; position: absolute; left: 285px; top: 380px; width: 150px; height: 112px; filter: drop-shadow(0 6px 10px rgba(0,0,0,.35)); }
+      #a1a-casa { position: absolute; left: 300px; top: 250px; width: 120px; height: 120px; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="aula1-abertura" data-start="0" data-duration="7" data-width="720" data-height="1280">
+      <div class="fundo"></div>
+      <div class="mancha m1"></div><div class="mancha m2"></div><div class="mancha m3"></div>
+
+      <section id="a1a-cena1" class="cena clip" data-start="0" data-duration="4.55" data-track-index="0">
+        <div class="selo"><span>Protocolo <b>7</b> Dias</span></div>
+        <div id="a1a-brilho"></div>
+        <div id="a1a-onda"></div>
+        <svg id="a1a-chama" viewBox="0 0 120 150">
+          <defs>
+            <linearGradient id="a1a-g" x1="0" y1="1" x2="0" y2="0">
+              <stop offset="0" stop-color="#b8322a" /><stop offset="0.6" stop-color="#e8622c" /><stop offset="1" stop-color="#f29a4a" />
+            </linearGradient>
+          </defs>
+          <path id="a1a-fogo" fill="url(#a1a-g)" d="M60 2 C72 32 108 52 104 96 C101 130 82 148 60 148 C34 148 16 130 16 100 C16 70 40 60 44 34 C54 50 57 60 60 72 C66 52 66 26 60 2 Z" />
+          <path id="a1a-miolo" fill="#e9c24b" d="M60 70 C66 88 84 100 82 120 C80 136 70 144 60 144 C48 144 38 136 38 120 C38 104 52 98 54 84 C57 92 59 96 60 100 C62 90 62 80 60 70 Z" />
+        </svg>
+        <svg class="a1a-bolha" id="a1a-b1" viewBox="0 0 124 92"><path fill="#46708c" d="M14 4 H110 Q120 4 120 14 V58 Q120 68 110 68 H44 L24 86 L28 68 H14 Q4 68 4 58 V14 Q4 4 14 4 Z" /><circle cx="40" cy="36" r="7" fill="#f4f1ec" /><circle cx="62" cy="36" r="7" fill="#f4f1ec" /><circle cx="84" cy="36" r="7" fill="#f4f1ec" /></svg>
+        <svg class="a1a-bolha" id="a1a-b2" viewBox="0 0 124 92"><path fill="#46708c" d="M14 4 H110 Q120 4 120 14 V58 Q120 68 110 68 H96 L100 86 L80 68 H14 Q4 68 4 58 V14 Q4 4 14 4 Z" /><circle cx="40" cy="36" r="7" fill="#f4f1ec" /><circle cx="62" cy="36" r="7" fill="#f4f1ec" /><circle cx="84" cy="36" r="7" fill="#f4f1ec" /></svg>
+        <svg class="a1a-bolha" id="a1a-b3" viewBox="0 0 124 92"><path fill="#46708c" d="M14 4 H110 Q120 4 120 14 V58 Q120 68 110 68 H44 L24 86 L28 68 H14 Q4 68 4 58 V14 Q4 4 14 4 Z" /><circle cx="40" cy="36" r="7" fill="#f4f1ec" /><circle cx="62" cy="36" r="7" fill="#f4f1ec" /><circle cx="84" cy="36" r="7" fill="#f4f1ec" /></svg>
+        <div class="frases">
+          <span class="linha" id="a1a-l1">Você tentou acalmar</span>
+          <span class="linha" id="a1a-l2">com argumentos.</span>
+          <span class="linha" id="a1a-l3">A crise</span>
+          <span class="linha destaque" id="a1a-l4">só cresceu.</span>
+        </div>
+      </section>
+
+      <section id="a1a-cena2" class="cena clip" data-start="4.55" data-duration="2.45" data-track-index="1">
+        <div class="cartela" id="a1a-cartela">
+          <svg id="a1a-casa-svg" viewBox="0 0 120 120" width="120" height="120">
+            <path class="a1a-traco" pathLength="1" fill="none" stroke="#f4f1ec" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" d="M14 58 L60 18 L106 58 M26 48 V104 H94 V48" />
+            <path class="a1a-traco" pathLength="1" fill="none" stroke="#e8622c" stroke-width="6" stroke-linecap="round" d="M50 104 V76 H70 V104" />
+          </svg>
+          <span class="rotulo">Protocolo 7 Dias</span>
+          <span class="numero"><small>Aula</small>1</span>
+          <span class="traco"></span>
+          <span class="titulo">Estratégias para familiares</span>
+        </div>
+      </section>
+
+      <div class="painel p1"></div><div class="painel p2"></div>
+      <div class="grao"></div>
+      <div class="vinheta"></div>
+
+      <audio id="a1a-pad" src="assets/sfx/pad-8s.wav" data-start="0" data-duration="7" data-track-index="10" data-volume="0.55"></audio>
+      <audio id="a1a-s1" src="assets/sfx/click.wav" data-start="0.12" data-track-index="11" data-volume="0.7"></audio>
+      <audio id="a1a-s2" src="assets/sfx/pop.wav" data-start="0.35" data-track-index="12" data-volume="0.6"></audio>
+      <audio id="a1a-s3" src="assets/sfx/whoosh-curto.wav" data-start="0.7" data-track-index="13" data-volume="0.6"></audio>
+      <audio id="a1a-s4" src="assets/sfx/click.wav" data-start="1.05" data-track-index="14" data-volume="0.6"></audio>
+      <audio id="a1a-s5" src="assets/sfx/whoosh.wav" data-start="1.05" data-track-index="15" data-volume="0.55"></audio>
+      <audio id="a1a-s6" src="assets/sfx/whoosh-curto.wav" data-start="1.3" data-track-index="16" data-volume="0.55"></audio>
+      <audio id="a1a-s7" src="assets/sfx/click.wav" data-start="1.65" data-track-index="17" data-volume="0.6"></audio>
+      <audio id="a1a-s8" src="assets/sfx/whoosh-curto.wav" data-start="1.9" data-track-index="18" data-volume="0.55"></audio>
+      <audio id="a1a-s9" src="assets/sfx/click.wav" data-start="2.25" data-track-index="19" data-volume="0.6"></audio>
+      <audio id="a1a-s10" src="assets/sfx/impacto.wav" data-start="2.75" data-track-index="20" data-volume="0.75"></audio>
+      <audio id="a1a-s11" src="assets/sfx/whoosh.wav" data-start="2.75" data-track-index="21" data-volume="0.5"></audio>
+      <audio id="a1a-s12" src="assets/sfx/whoosh-grave.wav" data-start="4.1" data-track-index="22" data-volume="0.75"></audio>
+      <audio id="a1a-s13" src="assets/sfx/pop-agudo.wav" data-start="4.7" data-track-index="23" data-volume="0.55"></audio>
+      <audio id="a1a-s14" src="assets/sfx/click.wav" data-start="5.05" data-track-index="24" data-volume="0.6"></audio>
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      Kit.fundo(tl, 7);
+      Kit.selo(tl, 0.1);
+
+      // Chama acende e tremula
+      Kit.surgir(tl, "#a1a-chama", 0.35, 0.5);
+      tl.fromTo("#a1a-brilho", { opacity: 0, scale: 0.6 }, { opacity: 0.8, scale: 0.8, duration: 0.6, ease: "power2.out" }, 0.35);
+      tl.fromTo("#a1a-fogo", { scaleY: 1, transformOrigin: "50% 100%" }, { scaleY: 1.06, duration: 0.18, yoyo: true, repeat: 21, ease: "sine.inOut" }, 0.85);
+      tl.fromTo("#a1a-miolo", { scaleY: 1, transformOrigin: "50% 100%" }, { scaleY: 0.9, duration: 0.14, yoyo: true, repeat: 27, ease: "sine.inOut" }, 0.85);
+
+      // Três argumentos voam até a chama e cada um alimenta o fogo
+      const voos = [
+        ["#a1a-b1", { x: -300, y: -60 }, { x: -110, y: -20 }, 0.7],
+        ["#a1a-b2", { x: 320, y: -120 }, { x: 110, y: -40 }, 1.3],
+        ["#a1a-b3", { x: -280, y: 220 }, { x: -90, y: 60 }, 1.9],
+      ];
+      const escalas = [1.12, 1.26, 1.42];
+      voos.forEach(([sel, de, ate, t], i) => {
+        tl.fromTo(sel, { ...de, scale: 0.8, rotation: de.x < 0 ? -12 : 12 },
+          { ...ate, scale: 1, rotation: 0, duration: 0.35, ease: "power1.in" }, t);
+        tl.fromTo(sel, { opacity: 0 }, { opacity: 1, duration: 0.08 }, t);
+        tl.to(sel, { scale: 0, opacity: 0, duration: 0.16, ease: "power2.in" }, t + 0.35);
+        tl.fromTo("#a1a-chama", { scale: i === 0 ? 1 : escalas[i - 1] }, { scale: escalas[i], duration: 0.3, ease: "back.out(3)", immediateRender: false }, t + 0.36);
+        tl.fromTo("#a1a-onda", { scale: 0.5, opacity: 0.9 }, { scale: 1.5, opacity: 0, duration: 0.5, ease: "power2.out", immediateRender: false }, t + 0.36);
+      });
+
+      Kit.linha(tl, "#a1a-l1", 1.05);
+      Kit.linha(tl, "#a1a-l2", 1.25);
+
+      // A crise só cresceu
+      tl.fromTo("#a1a-chama", { scale: 1.42 }, { scale: 1.75, duration: 0.45, ease: "back.out(2.5)", immediateRender: false }, 2.75);
+      tl.fromTo("#a1a-brilho", { opacity: 0.8, scale: 0.8 }, { opacity: 1, scale: 1.25, duration: 0.5, ease: "power2.out", immediateRender: false }, 2.75);
+      tl.fromTo("#a1a-onda", { scale: 0.6, opacity: 1 }, { scale: 2.1, opacity: 0, duration: 0.7, ease: "power2.out", immediateRender: false }, 2.75);
+      Kit.linha(tl, "#a1a-l3", 2.75);
+      Kit.linha(tl, "#a1a-l4", 2.95);
+      tl.fromTo("#a1a-l4", { scale: 1, transformOrigin: "0% 50%" }, { scale: 1.06, duration: 0.2, yoyo: true, repeat: 1, ease: "power2.out", immediateRender: false }, 3.5);
+
+      // Deslize para a cartela
+      Kit.deslize(tl, 4.1);
+      Kit.desenhar(tl, ".a1a-traco", 4.65, 0.7, 0.2);
+      Kit.cartela(tl, 4.7);
+      Kit.respiro(tl, "#a1a-cartela", 5.4, 1.6);
+
+      window.__timelines["aula1-abertura"] = tl;
+    </script>
+  </body>
+</html>

@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=720, height=1280" />
+    <title>Aula 2 fechamento</title>
+    <script src="assets/vendor/gsap.min.js"></script>
+    <script src="assets/kit.js"></script>
+    <link rel="stylesheet" href="assets/kit.css" />
+    <style>
+      @font-face { font-family: "Source Sans 3"; src: url("assets/fonts/source-sans-3-400.woff2") format("woff2"); font-weight: 400; }
+      @font-face { font-family: "Source Sans 3"; src: url("assets/fonts/source-sans-3-600.woff2") format("woff2"); font-weight: 600; }
+      @font-face { font-family: "Source Sans 3"; src: url("assets/fonts/source-sans-3-800.woff2") format("woff2"); font-weight: 700 800; }
+      .fim { position: absolute; inset: 0; background: #14181c; opacity: 0; }
+      #a2f-esquema { overflow: visible; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="aula2-fechamento" data-start="0" data-duration="8.5" data-width="720" data-height="1280">
+      <div class="fundo"></div>
+      <div class="mancha m1"></div><div class="mancha m2"></div><div class="mancha m3"></div>
+
+      <section id="a2f-cena1" class="cena clip" data-start="0" data-duration="5.25" data-track-index="0">
+        <div class="selo"><span>Protocolo <b>7</b> Dias · Aula 2</span></div>
+
+        <svg id="a2f-esquema" class="esquema" viewBox="0 0 720 540">
+          <defs>
+            <radialGradient id="a2f-gl" cx="0.5" cy="0.5" r="0.5">
+              <stop offset="0" stop-color="#e9c24b" stop-opacity="0.3" /><stop offset="1" stop-color="#e9c24b" stop-opacity="0" />
+            </radialGradient>
+          </defs>
+          <circle fill="none" stroke="#c3cad1" stroke-opacity="0.5" stroke-width="5" cx="360" cy="270" r="160" />
+          <circle id="a2f-luz" cx="200" cy="270" r="110" fill="url(#a2f-gl)" opacity="0" />
+          <g id="a2f-raios" stroke="#e9c24b" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path class="a2f-raio" pathLength="1" d="M312 392 L296 410 L310 416 L292 438" />
+            <path class="a2f-raio" pathLength="1" d="M408 392 L424 410 L410 416 L428 438" />
+            <path class="a2f-raio" pathLength="1" d="M360 360 L350 374 L366 378 L356 392" />
+          </g>
+          <g id="a2f-n1"><circle cx="360" cy="110" r="32" fill="#3b4450" stroke="#c3cad1" stroke-width="3" /><text class="etiqueta" x="360" y="118" text-anchor="middle">1</text></g>
+          <g id="a2f-n2"><circle cx="520" cy="270" r="32" fill="#3b4450" stroke="#c3cad1" stroke-width="3" /><text class="etiqueta" x="520" y="278" text-anchor="middle">2</text></g>
+          <g id="a2f-n3"><circle id="a2f-c3" cx="360" cy="430" r="32" fill="#b8322a" stroke="#e8622c" stroke-width="3" /><text class="etiqueta" x="360" y="438" text-anchor="middle">3</text></g>
+          <g id="a2f-n4"><circle id="a2f-c4" cx="200" cy="270" r="32" fill="#3b4450" stroke="#c3cad1" stroke-width="3" /><text class="etiqueta" x="200" y="278" text-anchor="middle">4</text></g>
+          <text class="etiqueta" x="360" y="62" text-anchor="middle">Micro-rejeição</text>
+          <text class="etiqueta" x="566" y="278">Escalada</text>
+          <text class="etiqueta" x="360" y="498" text-anchor="middle" id="a2f-r3">Ato impulsivo</text>
+          <text class="etiqueta" x="154" y="278" text-anchor="end">Pós-crise</text>
+          <!-- Limite que bate e não entra -->
+          <g id="a2f-limite">
+            <rect x="214" y="320" width="120" height="40" rx="8" fill="#46708c" />
+            <text class="etiqueta" x="274" y="347" text-anchor="middle" style="font-size:19px">limite</text>
+          </g>
+          <!-- Caneca: depois da tempestade -->
+          <g id="a2f-caneca" fill="none" stroke="#f4f1ec" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+            <path class="a2f-traco" pathLength="1" d="M326 250 H386 V296 Q386 314 368 314 H344 Q326 314 326 296 Z" />
+            <path class="a2f-traco" pathLength="1" d="M386 260 Q408 260 408 276 Q408 292 386 292" />
+            <path class="a2f-vapor" pathLength="1" stroke="#c3cad1" d="M344 236 Q336 222 344 210 Q352 198 344 184" />
+            <path class="a2f-vapor" pathLength="1" stroke="#c3cad1" d="M368 236 Q360 222 368 210 Q376 198 368 184" />
+          </g>
+        </svg>
+
+        <div class="frases">
+          <span class="linha" id="a2f-l1">No meio da crise,</span>
+          <span class="linha" id="a2f-l2">ninguém escuta limite.</span>
+          <span class="linha" id="a2f-l3">O trabalho começa</span>
+          <span class="linha destaque" id="a2f-l4">depois da tempestade.</span>
+        </div>
+      </section>
+
+      <section id="a2f-cena2" class="cena clip" data-start="5.25" data-duration="3.25" data-track-index="1">
+        <div class="cartela" id="a2f-cartela">
+          <span class="rotulo">Próxima aula</span>
+          <span class="numero"><small>Aula</small>3</span>
+          <span class="traco"></span>
+          <span class="titulo">Validação cirúrgica</span>
+        </div>
+        <div class="assinatura"><span class="nome">Dr. Fabio Schmidt</span><span class="cargo">Médico · CRM-SP 183549</span></div>
+      </section>
+
+      <div class="painel p1"></div><div class="painel p2"></div>
+      <div class="grao"></div>
+      <div class="vinheta"></div>
+      <div class="fim"></div>
+
+      <audio id="a2f-pad" src="assets/sfx/pad-8s.wav" data-start="0" data-duration="8.5" data-track-index="10" data-volume="0.55"></audio>
+      <audio id="a2f-s1" src="assets/sfx/click.wav" data-start="0.12" data-track-index="11" data-volume="0.7"></audio>
+      <audio id="a2f-s2" src="assets/sfx/impacto.wav" data-start="0.35" data-track-index="12" data-volume="0.55"></audio>
+      <audio id="a2f-s3" src="assets/sfx/whoosh-curto.wav" data-start="1.15" data-track-index="13" data-volume="0.6"></audio>
+      <audio id="a2f-s4" src="assets/sfx/click.wav" data-start="1.5" data-track-index="14" data-volume="0.7"></audio>
+      <audio id="a2f-s5" src="assets/sfx/whoosh.wav" data-start="0.9" data-track-index="15" data-volume="0.5"></audio>
+      <audio id="a2f-s6" src="assets/sfx/whoosh-grave.wav" data-start="2.7" data-track-index="16" data-volume="0.4"></audio>
+      <audio id="a2f-s7" src="assets/sfx/pop.wav" data-start="3.1" data-track-index="17" data-volume="0.6"></audio>
+      <audio id="a2f-s8" src="assets/sfx/whoosh.wav" data-start="3.2" data-track-index="18" data-volume="0.5"></audio>
+      <audio id="a2f-s9" src="assets/sfx/pop-agudo.wav" data-start="3.55" data-track-index="19" data-volume="0.4"></audio>
+      <audio id="a2f-s10" src="assets/sfx/whoosh-grave.wav" data-start="4.8" data-track-index="20" data-volume="0.75"></audio>
+      <audio id="a2f-s11" src="assets/sfx/pop-agudo.wav" data-start="5.45" data-track-index="21" data-volume="0.5"></audio>
+      <audio id="a2f-s12" src="assets/sfx/click.wav" data-start="5.8" data-track-index="22" data-volume="0.55"></audio>
+      <audio id="a2f-s13" src="assets/sfx/pop-agudo.wav" data-start="6.7" data-track-index="23" data-volume="0.45"></audio>
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      Kit.fundo(tl, 8.5);
+      Kit.selo(tl, 0.1);
+
+      // O ciclo já está montado; a etapa 3 está em tempestade
+      tl.fromTo("#a2f-esquema", { opacity: 0, scale: 0.94, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.5, ease: "power2.out" }, 0.2);
+      tl.fromTo("#a2f-n3", { scale: 1, svgOrigin: "360 430" }, { scale: 1.2, duration: 0.16, yoyo: true, repeat: 13, ease: "sine.inOut" }, 0.35);
+      Kit.desenhar(tl, ".a2f-raio", 0.4, 0.25, 0.12);
+      tl.fromTo(".a2f-raio", { opacity: 1 }, { opacity: 0.25, duration: 0.08, yoyo: true, repeat: 15, ease: "none", immediateRender: false }, 0.8);
+
+      // O limite tenta entrar e é rebatido
+      tl.fromTo("#a2f-limite", { x: -340, y: -80, opacity: 0, rotation: 0, svgOrigin: "274 340" }, { x: 0, y: 0, opacity: 1, duration: 0.35, ease: "power2.in" }, 1.15);
+      tl.to("#a2f-limite", { x: -120, y: 140, rotation: -50, opacity: 0, duration: 0.55, ease: "power2.out", svgOrigin: "274 340" }, 1.5);
+      Kit.linha(tl, "#a2f-l1", 0.9);
+      Kit.linha(tl, "#a2f-l2", 1.1);
+
+      // Passa a tempestade: a etapa 4 acende e a caneca aparece
+      tl.to(".a2f-raio", { opacity: 0, duration: 0.4 }, 2.7);
+      tl.to("#a2f-c3", { attr: { fill: "#3b4450", stroke: "#c3cad1" }, duration: 0.6 }, 2.7);
+      tl.fromTo("#a2f-c4", { attr: { stroke: "#c3cad1", "stroke-width": 3 } }, { attr: { stroke: "#e9c24b", "stroke-width": 7 }, duration: 0.3, ease: "back.out(3)" }, 3.1);
+      tl.fromTo("#a2f-luz", { opacity: 0, scale: 0.6, svgOrigin: "200 270" }, { opacity: 1, scale: 1, duration: 0.6, ease: "power2.out" }, 3.1);
+      Kit.desenhar(tl, ".a2f-traco", 3.25, 0.6, 0.15);
+      Kit.desenhar(tl, ".a2f-vapor", 3.6, 0.7, 0.15);
+      tl.fromTo(".a2f-vapor", { y: 0 }, { y: -8, duration: 0.6, yoyo: true, repeat: 1, ease: "sine.inOut", immediateRender: false }, 4.2);
+      Kit.linha(tl, "#a2f-l3", 3.2);
+      Kit.linha(tl, "#a2f-l4", 3.4);
+
+      // Próxima aula
+      Kit.deslize(tl, 4.8);
+      Kit.cartela(tl, 5.4);
+      Kit.assinatura(tl, 6.7);
+      Kit.respiro(tl, "#a2f-cartela", 6.0, 2.5);
+      tl.to(".fim", { opacity: 1, duration: 0.5, ease: "power1.in" }, 8.0);
+
+      window.__timelines["aula2-fechamento"] = tl;
+    </script>
+  </body>
+</html>

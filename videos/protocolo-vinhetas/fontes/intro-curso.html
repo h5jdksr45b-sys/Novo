@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=720, height=1280" />
+    <title>Introdução do curso</title>
+    <script src="assets/vendor/gsap.min.js"></script>
+    <script src="assets/kit.js"></script>
+    <link rel="stylesheet" href="assets/kit.css" />
+    <style>
+      @font-face { font-family: "Source Sans 3"; src: url("assets/fonts/source-sans-3-400.woff2") format("woff2"); font-weight: 400; }
+      @font-face { font-family: "Source Sans 3"; src: url("assets/fonts/source-sans-3-600.woff2") format("woff2"); font-weight: 600; }
+      @font-face { font-family: "Source Sans 3"; src: url("assets/fonts/source-sans-3-800.woff2") format("woff2"); font-weight: 700 800; }
+      .fim { position: absolute; inset: 0; background: #14181c; opacity: 0; }
+
+      /* Marca do curso */
+      .marca { position: absolute; left: 0; right: 0; top: 0; bottom: 0; display: flex; align-items: center; justify-content: center; gap: 18px; }
+      .marca-texto { display: flex; flex-direction: column; align-items: flex-end; line-height: 0.92; }
+      .marca-texto .mt1 { font-weight: 800; font-size: 70px; letter-spacing: 0.01em; }
+      .marca-texto .mt2 { font-weight: 800; font-size: 70px; color: var(--laranja); }
+      .marca svg { overflow: visible; }
+
+      /* Antes de começar */
+      #in-antes { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 26px; text-align: center; }
+      #in-antes .grande { font-weight: 800; font-size: 92px; line-height: 0.98; }
+      #in-antes .grande span { display: block; }
+
+      /* Lista dos quatro combinados */
+      .combinados { position: absolute; left: 50px; right: 50px; top: 200px; display: flex; flex-direction: column; gap: 14px; }
+      .combinado { display: flex; align-items: center; gap: 16px; background: rgba(28, 33, 39, 0.72); border: 2px solid rgba(195, 202, 209, 0.22); border-radius: 16px; padding: 14px 18px; }
+      .combinado .num { flex: none; width: 44px; height: 44px; border-radius: 50%; background: var(--aco); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 23px; }
+      .combinado .txt { flex: 1; font-weight: 700; font-size: 27px; line-height: 1.15; }
+      .combinado svg { flex: none; overflow: visible; }
+      .falas { position: absolute; left: 56px; right: 56px; top: 720px; }
+      .fala { position: absolute; left: 0; right: 0; top: 0; display: flex; flex-direction: column; gap: 6px; }
+
+      /* Agora sim */
+      #in-agora { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 34px; text-align: center; }
+      #in-agora .grande { font-weight: 800; font-size: 96px; line-height: 0.98; }
+      #in-agora .grande span { display: block; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="intro-curso" data-start="0" data-duration="22.09" data-width="720" data-height="1280">
+      <div class="fundo"></div>
+      <div class="mancha m1"></div><div class="mancha m2"></div><div class="mancha m3"></div>
+
+      <!-- 0 a 3,3 s: marca -->
+      <section id="in-cena-marca" class="cena clip" data-start="0" data-duration="3.3" data-track-index="0">
+        <div class="marca" id="in-marca1">
+          <div class="marca-texto"><span class="mt1" id="in-m1">PROTOCOLO</span><span class="mt2" id="in-m2">7 DIAS</span></div>
+          <svg width="210" height="210" viewBox="0 0 210 210">
+            <path id="in-anel1" pathLength="1" fill="none" stroke="#e8622c" stroke-width="10" stroke-linecap="round" d="M150 34 A84 84 0 1 0 186 92" />
+            <path id="in-seta1" fill="#e8622c" d="M178 64 L200 96 L166 100 Z" />
+            <text id="in-sete1" x="104" y="150" text-anchor="middle" style="font-family:'Source Sans 3',sans-serif;font-weight:800;font-size:150px;fill:#f4f1ec">7</text>
+          </svg>
+        </div>
+      </section>
+
+      <!-- 3,3 a 4,75 s: antes de começar -->
+      <section id="in-cena-antes" class="cena clip" data-start="3.3" data-duration="1.45" data-track-index="1">
+        <div id="in-antes">
+          <svg width="120" height="140" viewBox="0 0 120 140">
+            <path class="in-prancheta" pathLength="1" fill="none" stroke="#f4f1ec" stroke-width="6" stroke-linejoin="round" d="M14 22 H106 V132 H14 Z" />
+            <path class="in-prancheta" pathLength="1" fill="none" stroke="#e8622c" stroke-width="6" stroke-linejoin="round" d="M40 10 H80 V32 H40 Z" />
+            <path class="in-prancheta" pathLength="1" fill="none" stroke="#c3cad1" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" d="M30 62 L38 70 L52 56 M62 64 H92 M30 98 L38 106 L52 92 M62 100 H92" />
+          </svg>
+          <div class="grande"><span id="in-a1">Antes de</span><span id="in-a2" class="destaque">começar</span></div>
+          <span class="rotulo" id="in-a3">4 combinados</span>
+        </div>
+      </section>
+
+      <!-- 4,75 a 18,85 s: os quatro combinados -->
+      <section id="in-cena-lista" class="cena clip" data-start="4.75" data-duration="14.1" data-track-index="2">
+        <div class="selo"><span>Protocolo <b>7</b> Dias · Antes de começar</span></div>
+        <div class="combinados">
+          <div class="combinado" id="in-c1"><span class="num">1</span><span class="txt">Assista na ordem</span>
+            <svg width="44" height="44" viewBox="0 0 48 48"><path class="in-ic1" pathLength="1" fill="none" stroke="#f4f1ec" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" d="M4 42 H14 V32 H24 V22 H34 V12 H44" /><path class="in-ic1" pathLength="1" fill="none" stroke="#e8622c" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" d="M30 6 H44 V20" /></svg></div>
+          <div class="combinado" id="in-c2"><span class="num">2</span><span class="txt">Não pule etapas</span>
+            <svg width="44" height="44" viewBox="0 0 48 48"><path class="in-ic2" pathLength="1" fill="none" stroke="#f4f1ec" stroke-width="4" stroke-linejoin="round" d="M8 12 L22 24 L8 36 Z M24 12 L38 24 L24 36 Z" /><path class="in-ic2" pathLength="1" fill="none" stroke="#e8622c" stroke-width="5" stroke-linecap="round" d="M4 44 L44 4" /></svg></div>
+          <div class="combinado" id="in-c3"><span class="num">3</span><span class="txt">Anote frases para a crise</span>
+            <svg width="44" height="44" viewBox="0 0 48 48"><path class="in-ic3" pathLength="1" fill="none" stroke="#f4f1ec" stroke-width="4" stroke-linejoin="round" d="M10 4 H34 V44 H10 Z" /><path class="in-ic3" pathLength="1" fill="none" stroke="#c3cad1" stroke-width="3.5" stroke-linecap="round" d="M16 14 H28 M16 22 H28 M16 30 H24" /><path class="in-ic3" pathLength="1" fill="none" stroke="#e8622c" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" d="M44 16 L32 40 L28 44 L28 38 L40 14 Z" /></svg></div>
+          <div class="combinado" id="in-c4"><span class="num">4</span><span class="txt">Não substitui tratamento</span>
+            <svg width="44" height="44" viewBox="0 0 48 48"><path class="in-ic4" pathLength="1" fill="none" stroke="#f4f1ec" stroke-width="4" stroke-linejoin="round" d="M24 3 L43 10 V24 C43 35 34 42 24 45 C14 42 5 35 5 24 V10 Z" /><path class="in-ic4" pathLength="1" fill="none" stroke="#e8622c" stroke-width="5" stroke-linecap="round" d="M24 15 V33 M15 24 H33" /></svg></div>
+        </div>
+        <div class="falas">
+          <div class="fala" id="in-f1"><span class="linha">Assista</span><span class="linha destaque">na ordem.</span></div>
+          <div class="fala" id="in-f2"><span class="linha">Não pule direto</span><span class="linha">pro módulo que</span><span class="linha destaque">parece mais urgente.</span></div>
+          <div class="fala" id="in-f3"><span class="linha">Anote frases que</span><span class="linha">você pode usar</span><span class="linha destaque">na próxima crise.</span></div>
+          <div class="fala" id="in-f4"><span class="linha" id="in-f4a">Esse curso</span><span class="linha destaque" id="in-f4b">não substitui</span><span class="linha" id="in-f4c">atendimento médico</span><span class="linha" id="in-f4d">ou psicológico.</span></div>
+        </div>
+      </section>
+
+      <!-- 18,85 a 20,5 s: agora sim -->
+      <section id="in-cena-agora" class="cena clip" data-start="18.85" data-duration="1.65" data-track-index="3">
+        <div id="in-agora">
+          <svg width="130" height="130" viewBox="0 0 130 130">
+            <circle id="in-play-anel" cx="65" cy="65" r="58" fill="none" stroke="#e8622c" stroke-width="7" />
+            <path id="in-play" fill="#f4f1ec" d="M52 40 L92 65 L52 90 Z" />
+          </svg>
+          <div class="grande"><span id="in-g1">Agora sim,</span><span id="in-g2" class="destaque">vamos começar.</span></div>
+        </div>
+      </section>
+
+      <!-- 20,5 s ao fim: marca e assinatura -->
+      <section id="in-cena-fim" class="cena clip" data-start="20.5" data-duration="1.59" data-track-index="4">
+        <div class="marca" id="in-marca2" style="bottom: 160px">
+          <div class="marca-texto"><span class="mt1">PROTOCOLO</span><span class="mt2">7 DIAS</span></div>
+          <svg width="210" height="210" viewBox="0 0 210 210">
+            <path id="in-anel2" pathLength="1" fill="none" stroke="#e8622c" stroke-width="10" stroke-linecap="round" d="M150 34 A84 84 0 1 0 186 92" />
+            <path fill="#e8622c" d="M178 64 L200 96 L166 100 Z" />
+            <text x="104" y="150" text-anchor="middle" style="font-family:'Source Sans 3',sans-serif;font-weight:800;font-size:150px;fill:#f4f1ec">7</text>
+          </svg>
+        </div>
+        <div class="assinatura"><span class="nome">Dr. Fabio Schmidt</span><span class="cargo">Médico · CRM-SP 183549</span></div>
+      </section>
+
+      <div class="painel p1"></div><div class="painel p2"></div>
+      <div class="grao"></div>
+      <div class="vinheta"></div>
+      <div class="fim"></div>
+
+      <!-- Narração original -->
+      <audio id="in-voz" src="assets/audio/intro-voz.wav" data-start="0" data-duration="22.09" data-track-index="9" data-volume="1"></audio>
+      <audio id="in-pad" src="assets/sfx/pad-22s.wav" data-start="0" data-duration="22.09" data-track-index="10" data-volume="0.3"></audio>
+      <audio id="in-s1" src="assets/sfx/whoosh.wav" data-start="0.2" data-track-index="11" data-volume="0.35"></audio>
+      <audio id="in-s2" src="assets/sfx/pop.wav" data-start="1.3" data-track-index="12" data-volume="0.35"></audio>
+      <audio id="in-s3" src="assets/sfx/whoosh-curto.wav" data-start="3.05" data-track-index="13" data-volume="0.35"></audio>
+      <audio id="in-s4" src="assets/sfx/whoosh-grave.wav" data-start="4.3" data-track-index="14" data-volume="0.45"></audio>
+      <audio id="in-s5" src="assets/sfx/whoosh-curto.wav" data-start="4.8" data-track-index="15" data-volume="0.3"></audio>
+      <audio id="in-s6" src="assets/sfx/click.wav" data-start="5.05" data-track-index="16" data-volume="0.35"></audio>
+      <audio id="in-s7" src="assets/sfx/whoosh-curto.wav" data-start="6.8" data-track-index="17" data-volume="0.3"></audio>
+      <audio id="in-s8" src="assets/sfx/click.wav" data-start="7.05" data-track-index="18" data-volume="0.35"></audio>
+      <audio id="in-s9" src="assets/sfx/whoosh-curto.wav" data-start="10.2" data-track-index="19" data-volume="0.3"></audio>
+      <audio id="in-s10" src="assets/sfx/click.wav" data-start="10.45" data-track-index="20" data-volume="0.35"></audio>
+      <audio id="in-s11" src="assets/sfx/whoosh-curto.wav" data-start="14.6" data-track-index="21" data-volume="0.3"></audio>
+      <audio id="in-s12" src="assets/sfx/click.wav" data-start="14.85" data-track-index="22" data-volume="0.35"></audio>
+      <audio id="in-s13" src="assets/sfx/whoosh-grave.wav" data-start="18.4" data-track-index="23" data-volume="0.45"></audio>
+      <audio id="in-s14" src="assets/sfx/pop.wav" data-start="19.05" data-track-index="24" data-volume="0.35"></audio>
+      <audio id="in-s15" src="assets/sfx/whoosh.wav" data-start="20.35" data-track-index="25" data-volume="0.3"></audio>
+      <audio id="in-s16" src="assets/sfx/pop-agudo.wav" data-start="21.0" data-track-index="26" data-volume="0.3"></audio>
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      Kit.fundo(tl, 22.09);
+
+      // Marca: o texto desliza e a seta circular se desenha em volta do 7
+      tl.fromTo("#in-m1", { x: -260, opacity: 0, clipPath: "inset(0% 0% 0% 100%)" }, { x: 0, opacity: 1, clipPath: "inset(0% 0% 0% 0%)", duration: 0.6, ease: "power3.out" }, 0.25);
+      tl.fromTo("#in-m2", { x: -260, opacity: 0, clipPath: "inset(0% 0% 0% 100%)" }, { x: 0, opacity: 1, clipPath: "inset(0% 0% 0% 0%)", duration: 0.6, ease: "power3.out" }, 0.4);
+      Kit.desenhar(tl, "#in-anel1", 0.4, 0.9);
+      tl.fromTo("#in-seta1", { scale: 0, transformOrigin: "50% 50%" }, { scale: 1, duration: 0.3, ease: "back.out(3)" }, 1.25);
+      tl.fromTo("#in-sete1", { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "back.out(2)" }, 0.6);
+      tl.fromTo("#in-marca1", { scale: 1 }, { scale: 1.05, duration: 1.6, ease: "sine.inOut" }, 1.4);
+      tl.to("#in-marca1", { y: -140, opacity: 0, duration: 0.35, ease: "power2.in" }, 2.95);
+
+      // Antes de começar
+      Kit.desenhar(tl, ".in-prancheta", 3.3, 0.5, 0.12);
+      tl.fromTo("#in-a1", { y: 80, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: "power3.out" }, 3.38);
+      tl.fromTo("#in-a2", { y: 80, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: "power3.out" }, 3.55);
+      tl.fromTo("#in-a3", { opacity: 0, scale: 1.25 }, { opacity: 1, scale: 1, duration: 0.5, ease: "power2.out" }, 3.8);
+      Kit.deslize(tl, 4.3);
+
+      // Os quatro combinados, no tempo da fala
+      Kit.selo(tl, 4.8);
+      const itens = [
+        { c: "#in-c1", ic: ".in-ic1", f: "#in-f1", t: 4.8 },
+        { c: "#in-c2", ic: ".in-ic2", f: "#in-f2", t: 6.8 },
+        { c: "#in-c3", ic: ".in-ic3", f: "#in-f3", t: 10.2 },
+        { c: "#in-c4", ic: ".in-ic4", f: "#in-f4", t: 14.6 },
+      ];
+      itens.forEach((it, i) => {
+        tl.fromTo(it.c, { x: 640, opacity: 0 }, { x: 0, opacity: 1, duration: 0.45, ease: "power3.out" }, it.t);
+        tl.fromTo(it.c + " .num", { scale: 0.3 }, { scale: 1, duration: 0.3, ease: "back.out(3)" }, it.t + 0.25);
+        tl.fromTo(it.c, { borderColor: "rgba(195, 202, 209, 0.22)" }, { borderColor: "rgba(232, 98, 44, 0.95)", duration: 0.25 }, it.t + 0.2);
+        tl.fromTo(it.c + " .num", { backgroundColor: "#46708c" }, { backgroundColor: "#e8622c", duration: 0.25 }, it.t + 0.2);
+        Kit.desenhar(tl, it.ic, it.t + 0.3, 0.55, 0.12);
+        if (i > 0) {
+          const ant = itens[i - 1];
+          tl.to(ant.c, { borderColor: "rgba(195, 202, 209, 0.22)", opacity: 0.55, duration: 0.3 }, it.t);
+          tl.to(ant.c + " .num", { backgroundColor: "#46708c", duration: 0.3 }, it.t);
+          Kit.sairFrases(tl, ant.f + " .linha", it.t - 0.25);
+        }
+        if (i < 3) {
+          const linhas = gsap.utils.toArray(it.f + " .linha");
+          linhas.forEach((l, k) => Kit.linha(tl, l, it.t + 0.1 + k * 0.22));
+        }
+      });
+      // Item 4 acompanha a fala palavra por palavra
+      Kit.linha(tl, "#in-f4a", 14.65);
+      Kit.linha(tl, "#in-f4b", 15.6);
+      tl.fromTo("#in-f4b", { scale: 1, transformOrigin: "0% 50%" }, { scale: 1.07, duration: 0.18, yoyo: true, repeat: 1, ease: "power2.out", immediateRender: false }, 15.9);
+      Kit.linha(tl, "#in-f4c", 16.6);
+      Kit.linha(tl, "#in-f4d", 17.85);
+      tl.to("#in-c4", { scale: 1.03, duration: 0.25, yoyo: true, repeat: 1, ease: "power2.out" }, 16.6);
+      Kit.deslize(tl, 18.4);
+
+      // Agora sim, vamos começar
+      tl.fromTo("#in-play-anel", { scale: 0, transformOrigin: "50% 50%" }, { scale: 1, duration: 0.4, ease: "back.out(2.5)" }, 18.95);
+      tl.fromTo("#in-play", { scale: 0, x: -10, transformOrigin: "50% 50%" }, { scale: 1, x: 0, duration: 0.35, ease: "back.out(3)" }, 19.05);
+      tl.fromTo("#in-play-anel", { scale: 1 }, { scale: 1.12, opacity: 0.6, duration: 0.35, yoyo: true, repeat: 1, ease: "sine.out", immediateRender: false }, 19.8);
+      tl.fromTo("#in-g1", { y: 70, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, ease: "power3.out" }, 19.1);
+      tl.fromTo("#in-g2", { y: 70, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, ease: "power3.out" }, 19.8);
+      tl.to("#in-agora", { scale: 0.9, opacity: 0, duration: 0.3, ease: "power2.in" }, 20.25);
+
+      // Marca e assinatura
+      tl.fromTo("#in-marca2", { scale: 0.85, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.45, ease: "power3.out" }, 20.5);
+      Kit.desenhar(tl, "#in-anel2", 20.55, 0.7);
+      Kit.assinatura(tl, 20.95);
+      tl.to(".fim", { opacity: 1, duration: 0.45, ease: "power1.in" }, 21.62);
+
+      window.__timelines["intro-curso"] = tl;
+    </script>
+  </body>
+</html>

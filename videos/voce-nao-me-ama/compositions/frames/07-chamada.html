@@ -1,0 +1,85 @@
+<template>
+  <div id="root" data-composition-id="07-chamada" data-width="1080" data-height="1920" data-duration="4.5">
+    <style>
+      #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; font-family: 'Inter', sans-serif; }
+      #root .clip { position: absolute; inset: 0; }
+      #root .s07-chamada-ground { background: #FFFFFF; overflow: hidden; }
+      #root .s07-chamada-blob { position: absolute; border-radius: 50%; filter: blur(90px); }
+      #root .s07-chamada-blob-a { left: -260px; top: 160px; width: 900px; height: 900px; background: #DCE4F0; opacity: 0.85; }
+      #root .s07-chamada-blob-b { left: 540px; top: 560px; width: 720px; height: 720px; background: #EEF2F8; }
+      #root .s07-chamada-blob-c { left: 560px; top: 1560px; width: 700px; height: 700px; background: #EEF2F8; opacity: 0.7; }
+      #root .s07-chamada-stage { position: absolute; inset: 0; transform-origin: 50% 40%; }
+      #root .s07-chamada-rule { position: absolute; left: 90px; top: 500px; width: 60px; height: 4px; border-radius: 2px; background: #2B5C9E; }
+      #root .s07-chamada-cta { position: absolute; left: 90px; top: 560px; width: 900px; margin: 0; font-size: 96px; font-weight: 800; line-height: 1.1; letter-spacing: -0.02em; color: #1C2230; }
+      #root .s07-chamada-line { display: block; overflow: hidden; padding-bottom: 6px; }
+      #root .s07-chamada-line-inner { display: inline-block; }
+      #root .s07-chamada-hl { color: #2B5C9E; }
+      #root .s07-chamada-chip { position: absolute; left: 660px; top: 812px; width: 124px; height: 124px; border-radius: 32px; background: #EEF2F8; border: 2px solid #DCE4F0; color: #2B5C9E; }
+      #root .s07-chamada-arrow, #root .s07-chamada-ghost { position: absolute; left: 30px; top: 30px; width: 64px; height: 64px; }
+      #root .s07-chamada-arrow svg, #root .s07-chamada-ghost svg { width: 64px; height: 64px; display: block; }
+      #root .s07-chamada-ghost { color: #2B5C9E; opacity: 0; }
+      #root .s07-chamada-sig { position: absolute; left: 90px; top: 1270px; width: 900px; margin: 0; font-size: 34px; font-weight: 600; line-height: 1.35; color: #4A5263; }
+      #root .s07-chamada-sig span { display: block; }
+      #root .s07-chamada-disc { position: absolute; left: 90px; top: 1380px; width: 900px; margin: 0; font-size: 30px; font-weight: 400; line-height: 1.4; color: #8A91A0; }
+    </style>
+
+    <div id="s07-chamada-bg" class="clip s07-chamada-ground" data-start="0" data-duration="4.5" data-track-index="0">
+      <div id="s07-chamada-blob-a" data-layout-allow-overflow class="s07-chamada-blob s07-chamada-blob-a"></div>
+      <div id="s07-chamada-blob-b" data-layout-allow-overflow class="s07-chamada-blob s07-chamada-blob-b"></div>
+      <div id="s07-chamada-blob-c" data-layout-allow-overflow class="s07-chamada-blob s07-chamada-blob-c"></div>
+    </div>
+
+    <div id="s07-chamada-content" class="clip" data-start="0" data-duration="4.5" data-track-index="1">
+      <div id="s07-chamada-stage" class="s07-chamada-stage">
+        <div id="s07-chamada-rule" class="s07-chamada-rule"></div>
+        <h1 class="s07-chamada-cta">
+          <span class="s07-chamada-line" data-layout-allow-overflow><span id="s07-chamada-l1" class="s07-chamada-line-inner">Manda para</span></span>
+          <span class="s07-chamada-line" data-layout-allow-overflow><span id="s07-chamada-l2" class="s07-chamada-line-inner">quem vive</span></span>
+          <span class="s07-chamada-line" data-layout-allow-overflow><span id="s07-chamada-l3" class="s07-chamada-line-inner">essa <span class="s07-chamada-hl">briga</span>.</span></span>
+        </h1>
+        <div id="s07-chamada-chip" class="s07-chamada-chip">
+          <div id="s07-chamada-ghost" class="s07-chamada-ghost"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z" /><path d="m21.854 2.147-10.94 10.939" /></svg></div>
+          <div id="s07-chamada-arrow" class="s07-chamada-arrow"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z" /><path d="m21.854 2.147-10.94 10.939" /></svg></div>
+        </div>
+        <p id="s07-chamada-sig" class="s07-chamada-sig"><span>Dr. Fabio Schmidt</span><span>médico com foco em TPB, CRM-SP 183549</span></p>
+        <p id="s07-chamada-disc" class="s07-chamada-disc">Conteúdo educativo. Não substitui avaliação individual.</p>
+      </div>
+    </div>
+
+    <script src="assets/gsap.min.js"></script>
+    <script>
+      (function () {
+        window.__timelines = window.__timelines || {};
+        var tl = gsap.timeline({ paused: true });
+
+        // Background: slow mesh drift that eases to rest before the end
+        tl.fromTo("#s07-chamada-blob-a", { x: 0, y: 0 }, { x: 120, y: 60, duration: 3.0, ease: "sine.inOut" }, 0);
+        tl.fromTo("#s07-chamada-blob-b", { x: 0, y: 0 }, { x: -110, y: -70, duration: 3.0, ease: "sine.inOut" }, 0);
+        tl.fromTo("#s07-chamada-blob-c", { x: 0, y: 0 }, { x: -60, y: -90, duration: 3.0, ease: "sine.inOut" }, 0);
+
+        // Subtle camera push that settles at 2.2s so the hold is still
+        tl.fromTo("#s07-chamada-stage", { scale: 1.0 }, { scale: 1.03, duration: 2.2, ease: "power2.out" }, 0);
+
+        // Scene 1 (0.0-1.0s): CTA rises in line by line
+        tl.fromTo("#s07-chamada-rule", { scaleX: 0, transformOrigin: "0% 50%" }, { scaleX: 1, duration: 0.5, ease: "power3.out" }, 0.0);
+        tl.fromTo("#s07-chamada-l1", { yPercent: 110 }, { yPercent: 0, duration: 0.5, ease: "power3.out" }, 0.05);
+        tl.fromTo("#s07-chamada-l2", { yPercent: 110 }, { yPercent: 0, duration: 0.5, ease: "power3.out" }, 0.3);
+        tl.fromTo("#s07-chamada-l3", { yPercent: 110 }, { yPercent: 0, duration: 0.5, ease: "power3.out" }, 0.55);
+
+        // Scene 2 (1.0-1.6s): send chip pops, arrow flicks up-right once and settles
+        tl.fromTo("#s07-chamada-chip", { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: "back.out(1.2)" }, 1.0);
+        tl.fromTo("#s07-chamada-ghost", { x: 0, y: 0, opacity: 0.9 }, { x: 70, y: -70, opacity: 0, duration: 0.35, ease: "power2.out" }, 1.22);
+        tl.fromTo("#s07-chamada-arrow", { x: 0, y: 0 }, { x: 14, y: -14, duration: 0.12, ease: "power2.out" }, 1.22);
+        tl.to("#s07-chamada-arrow", { x: 0, y: 0, duration: 0.26, ease: "power3.out" }, 1.34);
+
+        // Scene 3 (1.6-2.2s): signature and disclaimer fade in
+        tl.fromTo("#s07-chamada-sig", { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: "power2.out" }, 1.6);
+        tl.fromTo("#s07-chamada-disc", { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: "power2.out" }, 1.75);
+
+        // Scene 4 (2.2-4.5s): hold still
+        tl.set({}, {}, 4.5);
+        window.__timelines["07-chamada"] = tl;
+      })();
+    </script>
+  </div>
+</template>

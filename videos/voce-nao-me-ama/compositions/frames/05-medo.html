@@ -1,0 +1,391 @@
+<template>
+  <div id="root" data-composition-id="05-medo" data-width="1080" data-height="1920" data-duration="7">
+    <style>
+      #root {
+        position: absolute;
+        inset: 0;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        font-family: "Inter", sans-serif;
+        color: #1c2230;
+      }
+      #root *,
+      #root *::before,
+      #root *::after {
+        box-sizing: border-box;
+      }
+      .m05-bg {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: #ffffff;
+      }
+      .m05-blob {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(90px);
+      }
+      .m05-blob-a { width: 900px; height: 900px; left: -260px; top: 120px; background: #dce4f0; opacity: 0.85; }
+      .m05-blob-b { width: 820px; height: 820px; left: 480px; top: 900px; background: #eef2f8; opacity: 1; }
+      .m05-blob-c { width: 700px; height: 700px; left: 520px; top: -120px; background: #e4ebf5; opacity: 0.9; }
+      .m05-world {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 1080px;
+        height: 1920px;
+        transform-origin: 540px 880px;
+      }
+      /* label chip */
+      .m05-chip {
+        position: absolute;
+        left: 0;
+        top: 310px;
+        width: 1080px;
+        height: 96px;
+        display: flex;
+        justify-content: center;
+      }
+      .m05-chip-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 18px;
+        height: 96px;
+        padding: 0 40px 0 14px;
+        border-radius: 100px;
+        background: #2b5c9e;
+        color: #ffffff;
+        font-size: 40px;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        white-space: nowrap;
+        transform-origin: 50% 50%;
+      }
+      .m05-chip-icon {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background: #eef2f8;
+        color: #2b5c9e;
+        display: grid;
+        place-items: center;
+      }
+      .m05-chip-icon svg { width: 40px; height: 40px; }
+      /* phone */
+      .m05-phone {
+        position: absolute;
+        left: 160px;
+        top: 440px;
+        width: 760px;
+        height: 1010px;
+        border-radius: 64px;
+        border: 3px solid #dce4f0;
+        background: #ffffff;
+        overflow: hidden;
+      }
+      .m05-bar {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 132px;
+        display: flex;
+        align-items: center;
+        gap: 22px;
+        padding: 0 40px;
+        border-bottom: 2px solid #eef2f8;
+      }
+      .m05-avatar {
+        width: 76px;
+        height: 76px;
+        border-radius: 50%;
+        background: #eef2f8;
+        color: #2b5c9e;
+        display: grid;
+        place-items: center;
+      }
+      .m05-avatar svg { width: 42px; height: 42px; }
+      .m05-name { font-size: 40px; font-weight: 700; color: #1c2230; letter-spacing: -0.01em; }
+      .m05-thread {
+        position: absolute;
+        left: 36px;
+        right: 36px;
+        top: 172px;
+      }
+      .m05-row { position: relative; width: 100%; }
+      .m05-row.sent { text-align: right; margin-top: 30px; }
+      .m05-bubble {
+        display: inline-block;
+        position: relative;
+        max-width: 560px;
+        padding: 22px 32px;
+        border-radius: 40px;
+        font-size: 42px;
+        font-weight: 500;
+        line-height: 1.3;
+        text-align: left;
+      }
+      .m05-recv { background: #e9ecf1; color: #1c2230; }
+      .m05-sent { background: #2b5c9e; color: #ffffff; transform-origin: 100% 100%; }
+      .m05-recv::before {
+        content: ""; position: absolute; left: -10px; bottom: 0; width: 30px; height: 30px;
+        background: #e9ecf1; border-bottom-right-radius: 22px 20px;
+      }
+      .m05-recv::after {
+        content: ""; position: absolute; left: -28px; bottom: -2px; width: 22px; height: 34px;
+        background: #ffffff; border-bottom-right-radius: 18px;
+      }
+      .m05-sent::before {
+        content: ""; position: absolute; right: -10px; bottom: 0; width: 30px; height: 30px;
+        background: #2b5c9e; border-bottom-left-radius: 22px 20px;
+      }
+      .m05-sent::after {
+        content: ""; position: absolute; right: -28px; bottom: -2px; width: 22px; height: 34px;
+        background: #ffffff; border-bottom-left-radius: 18px;
+      }
+      .m05-ring {
+        position: absolute;
+        right: 0;
+        top: 0;
+        border-radius: 44px;
+        border: 4px solid #2b5c9e;
+        opacity: 0;
+        pointer-events: none;
+      }
+      /* composer */
+      .m05-composer {
+        position: absolute;
+        left: 28px;
+        right: 28px;
+        bottom: 28px;
+        display: flex;
+        align-items: flex-end;
+        gap: 16px;
+      }
+      .m05-field {
+        flex: 1;
+        min-height: 96px;
+        padding: 20px 30px;
+        border-radius: 48px;
+        border: 3px solid #dce4f0;
+        background: #ffffff;
+        font-size: 40px;
+        font-weight: 500;
+        line-height: 1.3;
+        color: #1c2230;
+        text-align: left;
+        overflow-wrap: break-word;
+      }
+      .m05-caret {
+        display: inline-block;
+        width: 4px;
+        height: 46px;
+        margin-left: 2px;
+        vertical-align: -9px;
+        background: #2b5c9e;
+        border-radius: 2px;
+      }
+      .m05-send {
+        position: relative;
+        flex: 0 0 96px;
+        width: 96px;
+        height: 96px;
+        border-radius: 50%;
+        background: #eef2f8;
+        color: #2b5c9e;
+        transform-origin: 50% 50%;
+      }
+      .m05-send-solid {
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        background: #2b5c9e;
+        opacity: 0;
+      }
+      .m05-send-ico {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-items: center;
+      }
+      .m05-send-ico svg { width: 46px; height: 46px; margin-left: -4px; margin-top: 4px; }
+      .m05-send-ico.white { color: #ffffff; opacity: 0; }
+      .m05-tap {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 96px;
+        height: 96px;
+        margin: -48px 0 0 -48px;
+        border-radius: 50%;
+        border: 4px solid #2b5c9e;
+        opacity: 0;
+      }
+    </style>
+
+    <div class="m05-bg clip" id="m05-bg" data-start="0" data-duration="7" data-track-index="0">
+      <div class="m05-blob m05-blob-a" id="m05-blob-a" data-layout-allow-overflow></div>
+      <div class="m05-blob m05-blob-b" id="m05-blob-b" data-layout-allow-overflow></div>
+      <div class="m05-blob m05-blob-c" id="m05-blob-c" data-layout-allow-overflow></div>
+    </div>
+
+    <div class="m05-world clip" id="m05-world" data-layout-allow-overflow data-start="0" data-duration="7" data-track-index="1">
+      <div class="m05-chip">
+        <div class="m05-chip-pill" id="m05-chip">
+          <span class="m05-chip-icon" id="m05-chip-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 14h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 16" /><path d="m7 20 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a2 2 0 0 0-2.75-2.91l-4.2 3.9" /><path d="m2 15 6 6" /><path d="M19.5 8.5c.7-.7 1.5-1.6 1.5-2.7A2.73 2.73 0 0 0 16 4a2.78 2.78 0 0 0-5 1.8c0 1.2.8 2 1.5 2.8L16 12Z" /></svg>
+          </span>
+          <span>Responda ao medo</span>
+        </div>
+      </div>
+
+      <div class="m05-phone" id="m05-phone">
+        <div class="m05-bar">
+          <span class="m05-avatar">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5" /><path d="M20 21a8 8 0 0 0-16 0" /></svg>
+          </span>
+          <span class="m05-name">Amor</span>
+        </div>
+
+        <div class="m05-thread">
+          <div class="m05-row recv">
+            <div class="m05-bubble m05-recv" id="m05-recv">Você não me ama.</div>
+          </div>
+          <div class="m05-row sent">
+            <div class="m05-bubble m05-sent" id="m05-out">Eu estou aqui. Parece que você está com medo de me perder.</div>
+            <div class="m05-ring" id="m05-ring"></div>
+          </div>
+        </div>
+
+        <div class="m05-composer">
+          <div class="m05-field" id="m05-field"><span id="m05-typed"></span><span class="m05-caret" id="m05-caret"></span></div>
+          <div class="m05-send" id="m05-send">
+            <span class="m05-send-solid" id="m05-send-solid"></span>
+            <span class="m05-send-ico" id="m05-ico-blue">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z" /><path d="m21.854 2.147-10.94 10.939" /></svg>
+            </span>
+            <span class="m05-send-ico white" id="m05-ico-white">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z" /><path d="m21.854 2.147-10.94 10.939" /></svg>
+            </span>
+            <span class="m05-tap" id="m05-tap"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="assets/gsap.min.js"></script>
+    <script>
+      (function () {
+        var REPLY = "Eu estou aqui. Parece que você está com medo de me perder.";
+        var TYPE_START = 0.8;
+        var TYPE_END = 3.45;
+        var SEND_AT = 3.6;
+
+        // Deterministic per-character timestamps: small pauses after spaces and punctuation.
+        var weights = [];
+        var total = 0;
+        for (var i = 0; i < REPLY.length; i++) {
+          var prev = i > 0 ? REPLY.charAt(i - 1) : "";
+          var w = 1 + ((i * 7) % 5) * 0.08;
+          if (prev === " ") w += 0.5;
+          if (prev === "." || prev === ",") w += 2.6;
+          weights.push(w);
+          total += w;
+        }
+        var charTimes = [];
+        var acc = 0;
+        for (var j = 0; j < REPLY.length; j++) {
+          acc += weights[j];
+          charTimes.push(TYPE_START + (acc / total) * (TYPE_END - TYPE_START));
+        }
+
+        var root = document.querySelector('[data-composition-id="05-medo"]');
+        var q = function (id) { return root.querySelector("#" + id); };
+        var typedEl = q("m05-typed");
+        var caretEl = q("m05-caret");
+        var outEl = q("m05-out");
+        var ringEl = q("m05-ring");
+
+        function renderAt(t) {
+          var n = 0;
+          if (t >= SEND_AT + 0.08) {
+            n = 0;
+          } else {
+            for (var k = 0; k < charTimes.length; k++) {
+              if (charTimes[k] <= t) n = k + 1; else break;
+            }
+          }
+          var s = REPLY.slice(0, n);
+          if (typedEl.textContent !== s) typedEl.textContent = s;
+          // Caret: blinks before typing and while idle; solid while typing.
+          var on = true;
+          if (t < TYPE_START) on = Math.floor(t / 0.4) % 2 === 0;
+          else if (t > TYPE_END + 0.05 && t < SEND_AT + 0.08) on = true;
+          else if (t >= SEND_AT + 0.08) on = Math.floor((t - SEND_AT) / 0.5) % 2 === 1;
+          caretEl.style.opacity = on ? "1" : "0";
+        }
+
+        var tl = gsap.timeline({ paused: true });
+        var clock = { t: 0 };
+        tl.fromTo(clock, { t: 0 }, {
+          t: 7, duration: 7, ease: "none",
+          onUpdate: function () { renderAt(clock.t); }
+        }, 0);
+        renderAt(0);
+
+        // Background mesh drift (slow, deterministic)
+        tl.fromTo("#m05-blob-a", { x: 0, y: 0 }, { x: 140, y: 120, duration: 7, ease: "sine.inOut" }, 0);
+        tl.fromTo("#m05-blob-b", { x: 0, y: 0 }, { x: -160, y: -100, duration: 7, ease: "sine.inOut" }, 0);
+        tl.fromTo("#m05-blob-c", { x: 0, y: 0 }, { x: -90, y: 140, duration: 7, ease: "sine.inOut" }, 0);
+
+        // Camera: one slow push across the frame
+        tl.fromTo("#m05-world", { scale: 1 }, { scale: 1.04, duration: 6.4, ease: "power1.inOut" }, 0.6);
+
+        // Scene 1: phone slides in, label chip pops
+        tl.fromTo("#m05-phone", { y: 140, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55, ease: "power3.out" }, 0);
+        tl.fromTo("#m05-chip", { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.45, ease: "back.out(1.2)" }, 0.25);
+        tl.fromTo("#m05-chip-icon", { scale: 0.6, rotation: -14 }, { scale: 1, rotation: 0, duration: 0.45, ease: "power3.out" }, 0.35);
+
+        // Scene 2: send control arms on first keystroke
+        tl.fromTo("#m05-send-solid", { opacity: 0 }, { opacity: 1, duration: 0.2, ease: "power2.out" }, charTimes[0]);
+        tl.fromTo("#m05-ico-white", { opacity: 0 }, { opacity: 1, duration: 0.2, ease: "power2.out" }, charTimes[0]);
+        tl.fromTo("#m05-send", { scale: 1 }, { scale: 1.04, duration: 0.12, ease: "power2.out" }, charTimes[0]);
+        tl.to("#m05-send", { scale: 1, duration: 0.2, ease: "power2.out" }, charTimes[0] + 0.12);
+
+        // Scene 3: send tap (press dip + recovery + ripple)
+        tl.to("#m05-send", { scale: 0.84, duration: 0.09, ease: "power2.in" }, SEND_AT);
+        tl.to("#m05-send", { scale: 1, duration: 0.3, ease: "power3.out" }, SEND_AT + 0.09);
+        tl.fromTo("#m05-tap", { scale: 1, opacity: 0.7 }, { scale: 1.9, opacity: 0, duration: 0.5, ease: "power2.out" }, SEND_AT + 0.05);
+
+        // Outgoing bubble rises from the composer into the thread and settles
+        tl.fromTo(outEl, { y: 420, scale: 0.9, opacity: 0 }, { y: 0, scale: 1, opacity: 1, duration: 0.55, ease: "expo.out" }, SEND_AT + 0.08);
+
+        // Scene 4: hold. The fear is answered: the accusation recedes, the reply is underlined by a single soft ring.
+        tl.fromTo("#m05-recv", { opacity: 1 }, { opacity: 0.55, duration: 0.6, ease: "power2.out" }, 4.4);
+        tl.fromTo(ringEl, { scale: 1, opacity: 0 }, { scale: 1, opacity: 0.55, duration: 0.25, ease: "power2.out" }, 4.5);
+        tl.to(ringEl, { scale: 1.08, opacity: 0, duration: 1.1, ease: "power2.out" }, 4.75);
+        tl.fromTo("#m05-chip-icon", { scale: 1 }, { scale: 1.04, duration: 0.25, ease: "power2.out", immediateRender: false }, 5.6);
+        tl.to("#m05-chip-icon", { scale: 1, duration: 0.5, ease: "power2.out" }, 5.85);
+
+        function sizeRing() {
+          ringEl.style.width = outEl.offsetWidth + 16 + "px";
+          ringEl.style.height = outEl.offsetHeight + 16 + "px";
+          ringEl.style.top = "-8px";
+          ringEl.style.right = "-8px";
+        }
+        sizeRing();
+        if (document.fonts && document.fonts.ready) {
+          document.fonts.ready.then(sizeRing);
+        }
+
+        tl.set({}, {}, 7);
+        window.__timelines = window.__timelines || {};
+        window.__timelines["05-medo"] = tl;
+      })();
+    </script>
+  </div>
+</template>

@@ -1,6 +1,6 @@
 ---
 format: 1080x1920
-duration: 38s
+duration: 39.5s
 message: "No PCL-R, o TPB sem TPA pontua perto do grupo sem TPB nem TPA; o que leva a pontuação para perto do corte de psicopatia é a comorbidade com TPA."
 arc: Pergunta → Escala e corte → Dados por grupo → Foco no TPB sem TPA → Comorbidade → Limites → Chamada
 audience: Estudantes e profissionais de saúde mental e pessoas informadas que convivem com TPB
@@ -52,7 +52,7 @@ Scene 3 (2.4–4.5s): the question holds still for reading. The word psicopatia 
 
 - scene: One bar chart instrument assembles and is then read in stages: scale and cut line, four bars counting up, focus on TPB sem TPA, focus on comorbidity, the over-30 split
 - voiceover: ""
-- duration: 22s
+- duration: 23.5s
 - transition_in: crossfade
 - status: outline
 - src: compositions/frames/02-dados.html

@@ -28,7 +28,7 @@ hook: rhetorical question
 - voiceover: ""
 - duration: 4.5s
 - transition_in: cut
-- status: outline
+- status: animated
 - src: compositions/frames/01-pergunta.html
 - type: hook
 - persuasion: Rhetorical question
@@ -54,7 +54,7 @@ Scene 3 (2.4–4.5s): the question holds still for reading. The word psicopatia 
 - voiceover: ""
 - duration: 23.5s
 - transition_in: crossfade
-- status: outline
+- status: animated
 - src: compositions/frames/02-dados.html
 - type: feature_showcase
 - persuasion: Progressive disclosure with concretization
@@ -98,7 +98,7 @@ Note: frame duration may need to extend so H5 gets at least 2.5 s of reading. If
 - voiceover: ""
 - duration: 6s
 - transition_in: crossfade
-- status: outline
+- status: animated
 - src: compositions/frames/03-limites.html
 - type: benefit_highlight
 - persuasion: Caveat for credibility
@@ -127,7 +127,7 @@ Scene 4 (4.0–6.0s): hold still.
 - voiceover: ""
 - duration: 5.5s
 - transition_in: crossfade
-- status: outline
+- status: animated
 - src: compositions/frames/04-chamada.html
 - type: cta
 - persuasion: Specific share prompt

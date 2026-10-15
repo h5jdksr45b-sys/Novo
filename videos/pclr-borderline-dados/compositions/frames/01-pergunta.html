@@ -1,0 +1,112 @@
+<template>
+  <div
+    id="root"
+    data-composition-id="01-pergunta"
+    data-start="0"
+    data-duration="4.5"
+    data-width="1080"
+    data-height="1920"
+  >
+    <style>
+      #root {
+        position: relative;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        font-family: Inter, sans-serif;
+      }
+      #root .clip {
+        position: absolute;
+        inset: 0;
+      }
+      #root #pergunta-01-field {
+        background: #ffffff;
+      }
+      #root #pergunta-01-stage {
+        pointer-events: none;
+      }
+      #root #pergunta-01-rule {
+        position: absolute;
+        left: 90px;
+        top: 360px;
+        width: 60px;
+        height: 4px;
+        border-radius: 2px;
+        background: #2b5c9e;
+        transform-origin: 0 50%;
+      }
+      #root #pergunta-01-question {
+        position: absolute;
+        left: 90px;
+        top: 420px;
+        width: 900px;
+        margin: 0;
+        color: #1c2230;
+        font-weight: 800;
+        font-size: 96px;
+        line-height: 1.12;
+        letter-spacing: -0.02em;
+        text-align: left;
+      }
+      #root .pergunta-01-mask {
+        display: block;
+        overflow: hidden;
+        padding-bottom: 0.08em;
+        margin-bottom: -0.08em;
+      }
+      #root .pergunta-01-line {
+        display: block;
+        white-space: nowrap;
+        will-change: transform, opacity;
+      }
+    </style>
+
+    <div id="pergunta-01-field" class="clip" data-start="0" data-duration="4.5" data-track-index="0"></div>
+
+    <div id="pergunta-01-stage" class="clip" data-start="0" data-duration="4.5" data-track-index="1">
+      <div id="pergunta-01-rule"></div>
+      <h1 id="pergunta-01-question">
+        <span class="pergunta-01-mask"><span class="pergunta-01-line">Quanto um homem</span></span>
+        <span class="pergunta-01-mask"><span class="pergunta-01-line">com borderline pontua</span></span>
+        <span class="pergunta-01-mask"><span class="pergunta-01-line">numa escala</span></span>
+        <span class="pergunta-01-mask"><span class="pergunta-01-line">de psicopatia?</span></span>
+      </h1>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      (function () {
+        var scope = document.querySelector('[data-composition-id="01-pergunta"]') || document;
+        var rule = scope.querySelector("#pergunta-01-rule");
+        var lines = scope.querySelectorAll(".pergunta-01-line");
+
+        var tl = gsap.timeline({ paused: true });
+
+        // Scene 1 (0.0-0.5s): white field only. Hold an empty beat.
+        tl.set({}, {}, 0);
+
+        // Scene 2 (0.5-2.4s): accent rule draws, four lines rise in ~0.45s apart, settling on power3.
+        tl.fromTo(
+          rule,
+          { scaleX: 0 },
+          { scaleX: 1, duration: 0.5, ease: "power3.out" },
+          0.5
+        );
+        for (var i = 0; i < lines.length; i++) {
+          tl.fromTo(
+            lines[i],
+            { yPercent: 105, opacity: 0 },
+            { yPercent: 0, opacity: 1, duration: 0.6, ease: "power3.out" },
+            0.5 + i * 0.45
+          );
+        }
+
+        // Scene 3 (2.4-4.5s): the question holds still for reading. Pad timeline to full duration.
+        tl.set({}, {}, 4.5);
+
+        window.__timelines = window.__timelines || {};
+        window.__timelines["01-pergunta"] = tl;
+      })();
+    </script>
+  </div>
+</template>

@@ -1,0 +1,275 @@
+<template>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+      font-family: Inter, "Helvetica Neue", Arial, sans-serif;
+      color: #1C2230;
+    }
+    #root * { box-sizing: border-box; }
+    .d02-bg { position: absolute; inset: 0; background: #FFFFFF; }
+
+    /* headline zone y 290-500 */
+    .d02-head {
+      position: absolute;
+      left: 90px;
+      top: 290px;
+      width: 900px;
+      font-size: 58px;
+      font-weight: 800;
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      color: #1C2230;
+      opacity: 0;
+    }
+
+    /* scale */
+    .d02-grid {
+      position: absolute;
+      left: 150px;
+      width: 840px;
+      height: 2px;
+      background: #E7E9EE;
+    }
+    .d02-base {
+      position: absolute;
+      left: 150px;
+      width: 840px;
+      height: 3px;
+      top: 1239px;
+      background: #C3C8D1;
+    }
+    .d02-tick {
+      position: absolute;
+      left: 30px;
+      width: 100px;
+      height: 40px;
+      line-height: 40px;
+      text-align: right;
+      font-size: 30px;
+      font-weight: 400;
+      color: #8A91A0;
+    }
+
+    /* cut line at value 30 -> y 730 */
+    .d02-cut {
+      position: absolute;
+      left: 150px;
+      top: 727px;
+      width: 840px;
+      height: 6px;
+      clip-path: inset(0 100% 0 0);
+    }
+    .d02-cut svg { display: block; }
+    .d02-cutlabel {
+      position: absolute;
+      right: 90px;
+      top: 672px;
+      font-size: 36px;
+      font-weight: 700;
+      line-height: 44px;
+      color: #C6372B;
+      white-space: nowrap;
+    }
+
+    /* bars */
+    .d02-col { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+    .d02-bar {
+      position: absolute;
+      bottom: 680px; /* 1920 - 1240 */
+      width: 150px;
+      background: #C3C8D1;
+      border-radius: 6px 6px 0 0;
+      transform-origin: 50% 100%;
+    }
+    .d02-bar.d02-hi { background: #2B5C9E; }
+    .d02-val {
+      position: absolute;
+      top: 1180px; /* bottom of label sits ~8px above baseline at rest */
+      width: 220px;
+      height: 52px;
+      line-height: 52px;
+      text-align: center;
+      font-size: 46px;
+      font-weight: 700;
+      color: #1C2230;
+      font-variant-numeric: tabular-nums;
+      transform-origin: 50% 100%;
+    }
+    .d02-val.d02-hi { font-size: 52px; color: #2B5C9E; height: 60px; line-height: 60px; top: 1172px; }
+    .d02-lab {
+      position: absolute;
+      top: 1258px;
+      width: 220px;
+      text-align: center;
+      font-size: 32px;
+      line-height: 40px;
+      font-weight: 500;
+      color: #4A5263;
+    }
+    .d02-lab.d02-hi { font-weight: 700; color: #1C2230; }
+
+    /* 22,2 annotation */
+    .d02-rule {
+      position: absolute;
+      left: 368px;
+      top: 730px;
+      width: 4px;
+      height: 377px; /* 730 -> 1107 (top of bar 2) */
+      background: #4A5263;
+      border-radius: 2px;
+      transform-origin: 50% 0%;
+    }
+    .d02-note {
+      position: absolute;
+      right: 728px; /* right edge at x 352 */
+      top: 768px;
+      text-align: right;
+      font-size: 34px;
+      line-height: 42px;
+      white-space: nowrap;
+    }
+    .d02-note b { display: block; font-weight: 700; color: #1C2230; }
+    .d02-note span { display: block; font-weight: 500; color: #4A5263; }
+  </style>
+
+  <div id="root" data-composition-id="02-dados" data-width="1080" data-height="1920" data-duration="23.5">
+    <div id="d02-bg" class="d02-bg clip" data-start="0" data-duration="23.5" data-track-index="0"></div>
+
+    <div id="d02-scale" class="clip" data-start="0" data-duration="23.5" data-track-index="1" style="position:absolute;inset:0;">
+      <div class="d02-grid" style="top:559px"></div>
+      <div class="d02-grid" style="top:729px"></div>
+      <div class="d02-grid" style="top:899px"></div>
+      <div class="d02-grid" style="top:1069px"></div>
+      <div class="d02-base"></div>
+      <div class="d02-tick" style="top:540px">40</div>
+      <div class="d02-tick" style="top:710px">30</div>
+      <div class="d02-tick" style="top:880px">20</div>
+      <div class="d02-tick" style="top:1050px">10</div>
+      <div class="d02-tick" style="top:1220px">0</div>
+    </div>
+
+    <div id="d02-chart" class="clip" data-start="0" data-duration="23.5" data-track-index="2" style="position:absolute;inset:0;">
+      <!-- bar 1: Sem TPB / nem TPA 3,1 -->
+      <div class="d02-col" id="d02-c1">
+        <div class="d02-bar" id="d02-b1" style="left:180px;height:52.7px"></div>
+        <div class="d02-val" id="d02-v1" style="left:145px">0,0</div>
+        <div class="d02-lab" id="d02-l1" style="left:145px">Sem TPB<br>nem TPA</div>
+      </div>
+      <!-- bar 2: TPB / sem TPA 7,8 (highlight) -->
+      <div class="d02-col" id="d02-c2">
+        <div class="d02-bar d02-hi" id="d02-b2" style="left:390px;height:132.6px"></div>
+        <div class="d02-val d02-hi" id="d02-v2" style="left:355px">0,0</div>
+        <div class="d02-lab d02-hi" id="d02-l2" style="left:355px">TPB<br>sem TPA</div>
+      </div>
+      <!-- bar 3: TPA 15,2 -->
+      <div class="d02-col" id="d02-c3">
+        <div class="d02-bar" id="d02-b3" style="left:600px;height:258.4px"></div>
+        <div class="d02-val" id="d02-v3" style="left:565px">0,0</div>
+        <div class="d02-lab" id="d02-l3" style="left:565px">TPA</div>
+      </div>
+      <!-- bar 4: TPB / com TPA 23,1 -->
+      <div class="d02-col" id="d02-c4">
+        <div class="d02-bar" id="d02-b4" style="left:810px;height:392.7px"></div>
+        <div class="d02-val" id="d02-v4" style="left:775px">0,0</div>
+        <div class="d02-lab" id="d02-l4" style="left:775px">TPB<br>com TPA</div>
+      </div>
+
+      <!-- cut line -->
+      <div class="d02-cut" id="d02-cut">
+        <svg width="840" height="6" viewBox="0 0 840 6">
+          <line x1="0" y1="3" x2="840" y2="3" stroke="#C6372B" stroke-width="6" stroke-dasharray="18 12"></line>
+        </svg>
+      </div>
+      <div class="d02-cutlabel" id="d02-cutlabel">Corte de psicopatia: 30</div>
+
+      <!-- 22,2 annotation -->
+      <div class="d02-rule" id="d02-rule"></div>
+      <div class="d02-note" id="d02-note"><b>22,2 pontos</b><span>abaixo do corte</span></div>
+    </div>
+
+    <div id="d02-heads" class="clip" data-start="0" data-duration="23.5" data-track-index="3" style="position:absolute;inset:0;">
+      <div class="d02-head" id="d02-h1">PCL-R: escala de psicopatia, de 0 a 40.</div>
+      <div class="d02-head" id="d02-h2">Média por grupo. Homens de 33 anos.</div>
+      <div class="d02-head" id="d02-h3">TPB sem TPA fica a 4,7 pontos do grupo sem TPB nem TPA.</div>
+      <div class="d02-head" id="d02-h4">O que leva a pontuação para perto do corte é o TPA junto.</div>
+      <div class="d02-head" id="d02-h5">Acima de 30: nenhum do TPB sem TPA. Mais de 1 em 3 do TPB com TPA.</div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      function q(s) { return document.querySelector(s); }
+      var tl = gsap.timeline({ paused: true });
+
+      function fmt(v) { return v.toFixed(1).replace(".", ","); }
+
+      function headIn(sel, t) {
+        tl.fromTo(q(sel), { opacity: 0, y: 34 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, t);
+      }
+      function headOut(sel, t) {
+        tl.to(q(sel), { opacity: 0, duration: 0.35, ease: "power1.in" }, t);
+      }
+
+      // Scene 1 (0.0-0.6): scale fades in
+      tl.fromTo(q("#d02-scale"), { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "power1.out" }, 0);
+
+      // Scene 2 (0.6-4.4): H1, cut line draw, cut label
+      headIn("#d02-h1", 0.6);
+      tl.fromTo(q("#d02-cut"), { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: 1.0, ease: "power2.inOut" }, 2.0);
+      tl.fromTo(q("#d02-cutlabel"), { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 2.8);
+
+      // Scene 3 (4.4-4.8): H1 out
+      headOut("#d02-h1", 4.4);
+
+      // Scene 4 (4.8-13.0): H2 in, bars grow with count-up
+      headIn("#d02-h2", 4.8);
+      var bars = [
+        { i: 1, v: 3.1, t: 5.0 },
+        { i: 2, v: 7.8, t: 6.8 },
+        { i: 3, v: 15.2, t: 8.6 },
+        { i: 4, v: 23.1, t: 10.4 }
+      ];
+      bars.forEach(function (b) {
+        var bar = q("#d02-b" + b.i), val = q("#d02-v" + b.i), lab = q("#d02-l" + b.i);
+        var h = b.v * 17;
+        var proxy = { n: 0 };
+        val.textContent = "0,0";
+        tl.fromTo(bar, { scaleY: 0 }, { scaleY: 1, duration: 1.2, ease: "power2.out" }, b.t);
+        tl.fromTo(val, { y: 0, opacity: 0, scale: 0.8 }, { y: -h, opacity: 1, scale: 1, duration: 1.2, ease: "power2.out" }, b.t);
+        tl.fromTo(proxy, { n: 0 }, {
+          n: b.v, duration: 1.2, ease: "power2.out",
+          onUpdate: function () { val.textContent = fmt(proxy.n); },
+          onComplete: function () { val.textContent = fmt(b.v); }
+        }, b.t);
+        tl.fromTo(lab, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, b.t);
+      });
+
+      // Scene 5 (13.0-13.4): H2 out
+      headOut("#d02-h2", 13.0);
+
+      // Scene 6 (13.4-18.4): H3, dim 1/3/4, annotation
+      headIn("#d02-h3", 13.4);
+      tl.fromTo([q("#d02-c1"), q("#d02-c3"), q("#d02-c4")], { opacity: 1 }, { opacity: 0.28, duration: 0.6, ease: "power2.inOut" }, 13.6);
+      tl.fromTo(q("#d02-rule"), { scaleY: 0 }, { scaleY: 1, duration: 0.7, ease: "power2.out" }, 14.2);
+      tl.fromTo(q("#d02-note"), { opacity: 0, x: -14 }, { opacity: 1, x: 0, duration: 0.5, ease: "power2.out" }, 14.6);
+
+      // Scene 7 (18.4-18.8): H3 + annotation out
+      headOut("#d02-h3", 18.4);
+      tl.to([q("#d02-rule"), q("#d02-note")], { opacity: 0, duration: 0.35, ease: "power1.in" }, 18.4);
+
+      // Scene 8 (18.8-23.5): H4, bar 4 returns, then H5 holds
+      headIn("#d02-h4", 18.8);
+      tl.fromTo(q("#d02-c4"), { opacity: 0.28 }, { opacity: 1, duration: 0.6, ease: "power2.inOut" }, 19.0);
+      headOut("#d02-h4", 20.2);
+      headIn("#d02-h5", 20.6);
+      tl.set({}, {}, 23.5);
+
+      window.__timelines["02-dados"] = tl;
+    })();
+  </script>
+</template>

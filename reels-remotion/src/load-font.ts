@@ -49,3 +49,38 @@ export const loadAnton = async (): Promise<void> => {
 
   continueRender(waitForFont);
 };
+
+// Inter: mesma fonte dos esquemas do artigo sobre comorbidades.
+export const Inter = `InterReel`;
+
+let interLoaded = false;
+
+export const loadInter = async (): Promise<void> => {
+  if (interLoaded) {
+    return Promise.resolve();
+  }
+
+  const waitForFont = delayRender();
+
+  interLoaded = true;
+
+  const pesos: [string, string][] = [
+    ["Regular", "400"],
+    ["SemiBold", "600"],
+    ["Bold", "700"],
+    ["ExtraBold", "800"],
+  ];
+  await Promise.all(
+    pesos.map(async ([nome, peso]) => {
+      const font = new FontFace(
+        Inter,
+        `url('${staticFile(`fonts/inter/Inter-${nome}.otf`)}') format('opentype')`,
+        { weight: peso },
+      );
+      await font.load();
+      document.fonts.add(font);
+    }),
+  );
+
+  continueRender(waitForFont);
+};

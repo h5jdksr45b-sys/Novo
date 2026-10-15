@@ -1,0 +1,57 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Esquema 3</title><link rel="stylesheet" href="base.css"></head><body><script src="common.js"></script><script>
+let s=arrowDefs();
+const box=(x,y,w,h,o={})=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${o.rx||12}" fill="${o.fill||'#fff'}" stroke="${o.stroke||C.gray}" stroke-width="${o.sw||1.5}" ${o.dash?`stroke-dasharray="${o.dash}"`:''}/>`;
+const arr=(x1,y1,x2,y2,c)=>`<path d="M${x1},${y1} L${x2},${y2}" stroke="${c||C.ink2}" stroke-width="2" fill="none" marker-end="url(#${c===C.blue?'ahb':'ah'})"/>`;
+const cx=560;
+// topo
+s+=box(cx-260,80,520,104,{fill:'#F5F6F8',stroke:C.gray});
+s+=t(cx,124,'Um mesmo comportamento',{size:26,w:700,anchor:'middle'});
+s+=t(cx,160,'explosão, ameaça ou mentira',{size:19,anchor:'middle',fill:C.ink2});
+s+=arr(cx,184,cx,230);
+// pergunta
+s+=box(cx-300,236,600,92,{rx:46,stroke:C.ink,sw:2.5});
+s+=t(cx,292,'Para que esse comportamento serviu?',{size:26,w:700,anchor:'middle'});
+// ramos
+const lx=300,rx=800;
+s+=`<path d="M${cx},328 V362 H${lx} V398" stroke="${C.blue}" stroke-width="2" fill="none" marker-end="url(#ahb)"/>`;
+s+=`<path d="M${cx},362 H${rx} V398" stroke="${C.ink2}" stroke-width="2" fill="none" marker-end="url(#ah)"/>`;
+s+=box(lx-240,404,480,120,{fill:'#EEF2F8',stroke:C.blue,sw:2});
+s+=t(lx,450,'Aliviar uma dor insuportável',{size:22,w:600,anchor:'middle'});
+s+=t(lx,482,'ou segurar o vínculo',{size:22,w:600,anchor:'middle'});
+s+=box(rx-190,404,380,120,{stroke:C.gray,sw:2});
+s+=t(rx,458,'Obter ganho',{size:22,w:600,anchor:'middle'});
+s+=t(rx,490,'com afeto estável',{size:22,w:600,anchor:'middle'});
+s+=arr(lx,524,lx,570,C.blue); s+=arr(rx,524,rx,570);
+// passos ramo 1
+[['1','Validar'],['2','Regular'],['3','Só depois confrontar']].forEach(([n,l],i)=>{const y=576+i*84;
+ s+=box(lx-240,y,480,58,{stroke:C.blue,sw:1.5});
+ s+=`<circle cx="${lx-204}" cy="${y+29}" r="17" fill="${C.blue}"/>`+t(lx-204,y+36,n,{size:18,w:700,fill:'#fff',anchor:'middle'});
+ s+=t(lx-172,y+37,l,{size:22,w:600});
+ if(i<2)s+=arr(lx,y+58,lx,y+82,C.blue);});
+s+=box(rx-190,576,380,58,{stroke:C.ink2,sw:1.5,dash:'7 5'});
+s+=t(rx,613,'Avaliar outro padrão',{size:22,w:600,anchor:'middle'});
+// checklist
+const px=1070,pw=470;
+s+=box(px,80,pw,722,{fill:'#F7F8FA',stroke:C.grid,rx:16});
+s+=t(px+36,136,'Checklist de manejo',{size:24,w:700});
+const ic=[
+ // função antes da forma: alvo
+ (x,y)=>`<circle cx="${x}" cy="${y}" r="13" fill="none" stroke="${C.blue}" stroke-width="2.2"/><circle cx="${x}" cy="${y}" r="6" fill="none" stroke="${C.blue}" stroke-width="2.2"/><circle cx="${x}" cy="${y}" r="1.8" fill="${C.blue}"/>`,
+ // validar antes de confrontar: balão com check
+ (x,y)=>`<path d="M${x-14},${y-12} h28 a3,3 0 0 1 3,3 v16 a3,3 0 0 1 -3,3 h-16 l-8,7 v-7 h-4 a3,3 0 0 1 -3,-3 v-16 a3,3 0 0 1 3,-3 z" fill="none" stroke="${C.blue}" stroke-width="2.2" stroke-linejoin="round"/><path d="M${x-7},${y-2} l5,5 l9,-9" fill="none" stroke="${C.blue}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>`,
+ // regular antes de insight: onda que se acalma
+ (x,y)=>`<path d="M${x-16},${y} q4,-14 8,0 q4,14 8,0 q3,-7 6,0 q2,4 4,0 h6" fill="none" stroke="${C.blue}" stroke-width="2.4" stroke-linecap="round"/>`,
+ // sem rótulo moral: etiqueta riscada
+ (x,y)=>`<path d="M${x-14},${y-9} h16 l10,9 l-10,9 h-16 z" fill="none" stroke="${C.blue}" stroke-width="2.2" stroke-linejoin="round"/><line x1="${x-17}" y1="${y+14}" x2="${x+15}" y2="${y-14}" stroke="${C.blue}" stroke-width="2.4" stroke-linecap="round"/>`,
+ // contratransferência como dado: duas pessoas e seta de retorno
+ (x,y)=>`<circle cx="${x-9}" cy="${y-6}" r="5" fill="none" stroke="${C.blue}" stroke-width="2.2"/><circle cx="${x+9}" cy="${y-6}" r="5" fill="none" stroke="${C.blue}" stroke-width="2.2"/><path d="M${x-17},${y+12} q0,-8 8,-8 q8,0 8,8 M${x+1},${y+12} q0,-8 8,-8 q8,0 8,8" fill="none" stroke="${C.blue}" stroke-width="2.2" stroke-linecap="round"/>`];
+['Função antes da forma','Validar antes de confrontar','Regular antes de insight','Sem rótulo moral','Contratransferência como dado'].forEach((l,i)=>{const y=214+i*124;
+ s+=`<circle cx="${px+66}" cy="${y}" r="30" fill="#fff" stroke="${C.grid}" stroke-width="1.5"/>`+ic[i](px+66,y);
+ s+=t(px+116,y+8,l,{size:21,w:600});
+ if(i<4)s+=`<line x1="${px+36}" x2="${px+pw-36}" y1="${y+62}" y2="${y+62}" stroke="${C.grid}"/>`;});
+// frase final
+s+=`<line x1="80" x2="1520" y1="868" y2="868" stroke="${C.grid}"/>`;
+s+=`<rect x="80" y="896" width="6" height="44" rx="3" fill="${C.red}"/>`;
+s+=t(108,928,'Confundir sofrimento com cálculo é um risco ético.',{size:28,w:700});
+svgEl(s);
+</script></body></html>

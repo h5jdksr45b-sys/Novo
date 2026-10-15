@@ -1,0 +1,28 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Esquema 1</title><link rel="stylesheet" href="base.css"></head><body><script src="common.js"></script><script>
+const L=170,R=1400,T=250,B=800,max=35,y=v=>B-v*(B-T)/max;
+const data=[['Sem transtorno',3.1],['TPB sem TPA',7.8,1],['TPA',15.2],['TPB com TPA',23.1]];
+const slot=(R-L)/4,bw=150;
+let s='';
+s+=t(80,104,'O TPB sozinho fica perto de quem não tem transtorno',{size:36,w:600});
+s+=t(80,150,'e longe do núcleo psicopático.',{size:36,w:600});
+s+=t(80,200,'Pontuação média no PCL-R por grupo',{size:20,fill:C.ink2});
+for(let v=0;v<=35;v+=5){s+=`<line x1="${L}" x2="${R}" y1="${y(v)}" y2="${y(v)}" stroke="${v?C.grid:C.gray}" stroke-width="${v?1:1.5}"/>`;
+ s+=t(L-18,y(v)+6,v,{size:16,fill:C.muted,anchor:'end'});}
+data.forEach(([n,v,hl],i)=>{const c=L+slot*(i+.5),x=c-bw/2,top=y(v),r=4;
+ s+=`<path d="M${x},${B} V${top+r} Q${x},${top} ${x+r},${top} H${x+bw-r} Q${x+bw},${top} ${x+bw},${top+r} V${B} Z" fill="${hl?C.blue:C.gray}"/>`;
+ s+=t(c,top-14,String(v).replace('.',','),{size:hl?26:22,w:hl?700:600,anchor:'middle',fill:hl?C.ink:C.ink2});
+ s+=t(c,B+38,n,{size:20,w:hl?700:500,anchor:'middle',fill:hl?C.ink:C.ink2});});
+// hipótese
+{const c=L+slot*.5,x=c-bw/2-8,w=bw+16;
+ s+=`<rect x="${x}" y="${y(7)}" width="${w}" height="${y(3.1)-y(7)}" fill="${C.ink2}" fill-opacity="0.08" stroke="${C.ink2}" stroke-width="1.5" stroke-dasharray="6 5" rx="3"/>`;
+ s+=t(x+w+10,y(7)+5,'7',{size:15,fill:C.muted});
+ s+=`<line x1="${c}" x2="${c}" y1="${y(7)-6}" y2="${y(7)-58}" stroke="${C.ink2}" stroke-width="1.2" stroke-dasharray="3 4"/>`;
+ s+=t(c,y(7)-136,'Hipótese:',{size:17,w:700,anchor:'middle',fill:C.ink2,italic:1});
+ s+=lines(c,y(7)-112,['subnotificação por ocultação','de traço, não medida'],24,{size:17,anchor:'middle',fill:C.ink2,italic:1});}
+// corte
+s+=`<line x1="${L}" x2="${R}" y1="${y(30)}" y2="${y(30)}" stroke="${C.red}" stroke-width="2.5" stroke-dasharray="10 7"/>`;
+s+=t(R,y(30)-14,'Corte de psicopatia',{size:20,w:600,fill:C.red,anchor:'end'});
+s+=`<line x1="80" x2="1520" y1="900" y2="900" stroke="${C.grid}"/>`;
+s+=t(80,936,'Média total no PCL-R em amostra de homens. Grupo TPB sem TPA com n = 12.',{size:17,fill:C.ink2});
+svgEl(s);
+</script></body></html>

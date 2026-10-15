@@ -1,0 +1,36 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Esquema 2</title><link rel="stylesheet" href="base.css"></head><body><script src="common.js"></script><script>
+const L=210,R=1440,T=240,B=820,mx=(L+R)/2,my=(T+B)/2;
+let s=arrowDefs();
+s+=t(80,104,'O que se parece é a conduta.',{size:36,w:600});
+s+=t(80,150,'O motor afetivo é oposto.',{size:36,w:600});
+// quadrantes
+s+=`<line x1="${mx}" x2="${mx}" y1="${T}" y2="${B}" stroke="${C.grid}" stroke-width="1.5" stroke-dasharray="4 6"/>`;
+s+=`<line x1="${L}" x2="${R}" y1="${my}" y2="${my}" stroke="${C.grid}" stroke-width="1.5" stroke-dasharray="4 6"/>`;
+// eixos
+s+=`<line x1="${L}" x2="${R+10}" y1="${B}" y2="${B}" stroke="${C.ink2}" stroke-width="2" marker-end="url(#ah)"/>`;
+s+=`<line x1="${L}" x2="${L}" y1="${B}" y2="${T-10}" stroke="${C.ink2}" stroke-width="2" marker-end="url(#ah)"/>`;
+s+=t(L,B+36,'Silenciada',{size:17,fill:C.ink2});
+s+=t(R,B+36,'Hipersensível',{size:17,fill:C.ink2,anchor:'end'});
+s+=t(mx,B+40,'Reatividade afetiva',{size:20,w:600,anchor:'middle'});
+s+=t(L-20,B,'Baixo',{size:17,fill:C.ink2,anchor:'end'});
+s+=t(L-20,T+6,'Alto',{size:17,fill:C.ink2,anchor:'end'});
+s+=t(0,0,'Antagonismo',{size:20,w:600,anchor:'middle',extra:`transform="translate(${L-48},${my}) rotate(-90)"`});
+// desinibição: faixa saindo do TPB em direção ao centro
+s+=`<g transform="translate(1240,700) rotate(20)"><rect x="-300" y="-36" width="300" height="72" rx="36" fill="${C.blue}" fill-opacity="0.10" stroke="${C.blue}" stroke-opacity="0.5" stroke-width="1.5" stroke-dasharray="6 5"/>
+${t(-232,7,'Desinibição',{size:18,w:600,fill:C.ink2,anchor:'middle',italic:1})}</g>`;
+// zona de sobreposição
+s+=`<ellipse cx="${mx-10}" cy="${my+10}" rx="150" ry="88" fill="${C.ink2}" fill-opacity="0.08" stroke="${C.ink2}" stroke-opacity="0.45" stroke-width="1.5" stroke-dasharray="6 5"/>`;
+s+=t(mx-10,my+2,'Zona de sobreposição:',{size:18,w:700,anchor:'middle'});
+s+=t(mx-10,my+28,'impulsividade (Fator 2)',{size:18,anchor:'middle',fill:C.ink2});
+// TPB
+s+=`<ellipse cx="1240" cy="700" rx="160" ry="82" fill="#DCE4F0" stroke="${C.blue}" stroke-width="2.5"/>`;
+s+=t(1240,694,'TPB',{size:30,w:700,anchor:'middle'});
+s+=t(1240,724,'afeto alto, antagonismo baixo',{size:16,anchor:'middle',fill:C.ink2});
+// psicopatia
+s+=`<ellipse cx="420" cy="350" rx="185" ry="82" fill="${C.red}" fill-opacity="0.12" stroke="${C.red}" stroke-width="2.5"/>`;
+s+=t(420,344,'Psicopatia primária',{size:28,w:700,anchor:'middle'});
+s+=t(420,374,'afeto baixo, antagonismo alto',{size:16,anchor:'middle',fill:C.ink2});
+s+=`<line x1="80" x2="1520" y1="900" y2="900" stroke="${C.grid}"/>`;
+s+=t(80,936,'HiTOP, AMPD e ICD-11 são modelos de leitura, não prova de entidade separada. Posições conceituais, sem escala numérica.',{size:17,fill:C.ink2});
+svgEl(s);
+</script></body></html>

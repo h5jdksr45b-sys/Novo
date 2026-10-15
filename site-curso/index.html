@@ -7,9 +7,72 @@
 <meta name="supported-color-schemes" content="dark">
 <title>Protocolo 7 Dias · Dr. Fabio Schmidt</title>
 <meta name="description" content="Um caminho de 7 dias para famílias que convivem com alguém com borderline. Pare de alimentar o ciclo da crise sem perceber.">
+<link rel="canonical" href="https://curso.drfabioschmidt.net/">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
 <meta property="og:title" content="Protocolo 7 Dias · Dr. Fabio Schmidt">
 <meta property="og:description" content="Conviver com alguém em crise sem virar o próximo alvo da crise.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://curso.drfabioschmidt.net/">
+<meta property="og:site_name" content="Borderline Sem Estigma">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:image" content="https://curso.drfabioschmidt.net/img/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Protocolo 7 Dias. Conviver com alguém em crise sem virar o próximo alvo da crise. Dr. Fabio Schmidt, médico.">
+<meta name="twitter:card" content="summary_large_image">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Course",
+      "name": "Protocolo 7 Dias",
+      "description": "Um caminho de 7 dias para famílias que convivem com alguém com borderline. O foco é o que a família faz dentro de casa na hora da crise.",
+      "inLanguage": "pt-BR",
+      "url": "https://curso.drfabioschmidt.net/",
+      "image": "https://curso.drfabioschmidt.net/img/og-image.jpg",
+      "provider": { "@id": "https://curso.drfabioschmidt.net/#autor" },
+      "offers": {
+        "@type": "Offer",
+        "price": "219.00",
+        "priceCurrency": "BRL",
+        "category": "Paid",
+        "availability": "https://schema.org/InStock",
+        "url": "https://pay.hotmart.com/S104212285E"
+      },
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "courseMode": "Online",
+        "courseWorkload": "P7D"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://curso.drfabioschmidt.net/#autor",
+      "name": "Fabio Schmidt",
+      "honorificPrefix": "Dr.",
+      "jobTitle": "Médico",
+      "description": "Médico com foco em transtorno de personalidade borderline. CRM-SP 183549.",
+      "image": "https://curso.drfabioschmidt.net/img/foto-dr-fabio.jpg",
+      "sameAs": ["https://www.instagram.com/drfabioschmidt"]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "Como recebo o acesso?", "acceptedAnswer": { "@type": "Answer", "text": "Assim que o pagamento é aprovado, a Hotmart envia o acesso para o seu e-mail. No Pix e no cartão é imediato." } },
+        { "@type": "Question", "name": "Serve se a pessoa não tem diagnóstico fechado?", "acceptedAnswer": { "@type": "Answer", "text": "Sim. O protocolo é sobre o que acontece dentro de casa na hora da crise, e isso vale para você mesmo antes de um diagnóstico." } },
+        { "@type": "Question", "name": "Substitui tratamento ou terapia?", "acceptedAnswer": { "@type": "Answer", "text": "Não. É um conteúdo educativo para a família. Não substitui avaliação nem acompanhamento profissional de quem está em sofrimento." } },
+        { "@type": "Question", "name": "Serve para marido, esposa ou namorado?", "acceptedAnswer": { "@type": "Answer", "text": "Serve. O protocolo foi feito para quem convive de perto: mães, pais, cônjuges e irmãos." } },
+        { "@type": "Question", "name": "A pessoa precisa saber ou participar?", "acceptedAnswer": { "@type": "Answer", "text": "O protocolo é sobre o que você faz. Ela não precisa assistir às aulas nem concordar antes de você começar." } },
+        { "@type": "Question", "name": "E se não for pra mim?", "acceptedAnswer": { "@type": "Answer", "text": "Você tem 7 dias de garantia. Pede o reembolso pela Hotmart e recebe o valor integral." } }
+      ]
+    }
+  ]
+}
+</script>
 
 <!-- Meta Pixel -->
 <script>
@@ -79,6 +142,8 @@ fbq('track','PageView');
     margin-top:18px;font-size:13px;color:var(--muted);letter-spacing:.02em;
     opacity:0;animation:rise .7s ease .25s forwards}
   .byline b{color:var(--text);font-weight:600}
+  .byline{display:flex;align-items:center;justify-content:center;gap:10px}
+  .byline img{width:34px;height:34px;border-radius:50%;object-fit:cover;border:1px solid var(--line);flex:none}
 
   /* VIDEO */
   .video-sec{padding:30px 0 6px;opacity:0;animation:rise .7s ease .3s forwards}
@@ -181,6 +246,10 @@ fbq('track','PageView');
   .testimonial .who{display:block;font-size:13px;color:var(--muted);margin-top:6px}
 
   /* AUTORIDADE */
+  .author-head{display:flex;gap:20px;align-items:center;margin-bottom:18px}
+  .author-head img{width:116px;height:116px;border-radius:50%;object-fit:cover;flex:none;
+    border:2px solid var(--gold)}
+  .author-head .lead{margin-bottom:0}
   .author{display:grid;gap:12px;margin-top:4px}
   .author div{
     background:var(--bg-soft);border:1px solid var(--line);
@@ -224,14 +293,17 @@ fbq('track','PageView');
     color:var(--muted);font-size:13px;line-height:1.8}
   footer .name{color:var(--text);font-weight:600}
   footer .disc{display:block;margin-top:10px;font-size:12px;max-width:460px;margin-left:auto;margin-right:auto}
+  footer .links{margin-top:14px}
+  footer .links a{color:var(--gold) !important;text-decoration:underline}
 
-  .sticky{position:fixed;left:0;right:0;bottom:0;z-index:5;display:none;
-    align-items:center;justify-content:space-between;gap:12px;
+  .sticky{position:fixed;left:0;right:0;bottom:0;z-index:5;
     background:rgba(13,13,13,.96);border-top:1px solid var(--line);padding:12px 16px}
+  .sticky-inner{max-width:680px;margin:0 auto;display:flex;
+    align-items:center;justify-content:space-between;gap:12px}
   .sticky .s-price{font-size:13px;color:var(--muted);line-height:1.3}
   .sticky .s-price b{display:block;color:var(--text);font-size:16px;font-weight:600}
   .sticky .cta{width:auto;max-width:none;padding:14px 20px;font-size:16px;border-radius:12px}
-  @media(max-width:720px){.sticky{display:flex} body{padding-bottom:78px}}
+  body{padding-bottom:78px}
 
   @keyframes rise{
     from{opacity:0;transform:translateY(18px)}
@@ -242,6 +314,7 @@ fbq('track','PageView');
     .step{padding:15px}
     .play-btn{width:60px;height:60px}
     .guarantee{flex-direction:column;text-align:center}
+    .author-head{flex-direction:column;text-align:center}
   }
 </style>
 </head>
@@ -255,7 +328,7 @@ fbq('track','PageView');
     <div class="eyebrow">Protocolo 7 Dias · Para famílias</div>
     <h1>Conviver com alguém em crise <span class="hl">sem virar o próximo alvo</span> da crise.</h1>
     <p class="sub">Um caminho de 7 dias para quem mora com alguém com borderline e já tentou de tudo. O foco é o que você faz dentro de casa, para parar de alimentar o ciclo sem perceber.</p>
-    <p class="byline">Por <b>Dr. Fabio Schmidt</b> · Médico · 10 anos em saúde mental pública</p>
+    <p class="byline"><img src="img/foto-dr-fabio.jpg" alt="" width="34" height="34"><span>Por <b>Dr. Fabio Schmidt</b> · Médico · 10 anos em saúde mental pública</span></p>
   </section>
 
   <!-- VIDEO -->
@@ -334,7 +407,10 @@ fbq('track','PageView');
   <!-- QUEM CONDUZ -->
   <section class="section">
     <h2>Quem conduz o protocolo</h2>
-    <p class="lead">Sou o Dr. Fabio Schmidt. Atendo pessoas com borderline e as famílias delas no consultório, individualmente e em casal.</p>
+    <div class="author-head">
+      <img src="img/foto-dr-fabio.jpg" alt="Foto do Dr. Fabio Schmidt" width="116" height="116" loading="lazy">
+      <p class="lead">Sou o Dr. Fabio Schmidt. Atendo pessoas com borderline e as famílias delas no consultório, individualmente e em casal.</p>
+    </div>
     <div class="author">
       <div><b>10 anos</b> em saúde mental pública, nos CAPS</div>
       <div>Autor de <b>Quem Sofre Não Escolhe Como Gritar</b>, edição expandida de <b>Quando Escolher Não É Possível</b></div>
@@ -396,13 +472,16 @@ fbq('track','PageView');
     Médico · CRM-SP 183549<br>
     Borderline sem estigma
     <span class="disc">Conteúdo educativo. Não substitui consulta, diagnóstico ou tratamento. Em situação de risco, ligue 192 (SAMU), procure o CVV (188) ou o serviço de emergência mais próximo.</span>
+    <div class="links">Dúvidas: <a href="mailto:drfabioschmidt@gmail.com">drfabioschmidt@gmail.com</a> · <a href="privacidade.html">Política de privacidade</a></div>
   </footer>
 
 </main>
 
 <div class="sticky">
-  <div class="s-price"><b>R$ 219 ou 12x de R$ 21,90</b>7 dias de garantia</div>
-  <a class="cta js-checkout" href="https://pay.hotmart.com/S104212285E?sck=site_fixo">Começar</a>
+  <div class="sticky-inner">
+    <div class="s-price"><b>R$ 219 ou 12x de R$ 21,90</b>7 dias de garantia</div>
+    <a class="cta js-checkout" href="https://pay.hotmart.com/S104212285E?sck=site_fixo">Começar</a>
+  </div>
 </div>
 
 <script>

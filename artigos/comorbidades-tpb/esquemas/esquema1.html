@@ -1,9 +1,9 @@
 <!doctype html><html><head><meta charset="utf-8"><title>Esquema 1</title><link rel="stylesheet" href="base.css"></head><body><script src="common.js"></script><script>
 const L=170,R=1400,T=250,B=800,max=35,y=v=>B-v*(B-T)/max;
-const data=[['Sem transtorno',3.1],['TPB sem TPA',7.8,1],['TPA',15.2],['TPB com TPA',23.1]];
+const data=[['Sem TPB nem TPA',3.1],['TPB sem TPA',7.8,1],['TPA',15.2],['TPB com TPA',23.1]];
 const slot=(R-L)/4,bw=150;
 let s='';
-s+=t(80,104,'O TPB sozinho fica perto de quem não tem transtorno',{size:36,w:600});
+s+=t(80,104,'O TPB sozinho fica perto do grupo sem TPB nem TPA',{size:36,w:600});
 s+=t(80,150,'e longe do núcleo psicopático.',{size:36,w:600});
 s+=t(80,200,'Pontuação média no PCL-R por grupo',{size:20,fill:C.ink2});
 for(let v=0;v<=35;v+=5){s+=`<line x1="${L}" x2="${R}" y1="${y(v)}" y2="${y(v)}" stroke="${v?C.grid:C.gray}" stroke-width="${v?1:1.5}"/>`;
@@ -22,7 +22,8 @@ data.forEach(([n,v,hl],i)=>{const c=L+slot*(i+.5),x=c-bw/2,top=y(v),r=4;
 // corte
 s+=`<line x1="${L}" x2="${R}" y1="${y(30)}" y2="${y(30)}" stroke="${C.red}" stroke-width="2.5" stroke-dasharray="10 7"/>`;
 s+=t(R,y(30)-14,'Corte de psicopatia',{size:20,w:600,fill:C.red,anchor:'end'});
-s+=`<line x1="80" x2="1520" y1="900" y2="900" stroke="${C.grid}"/>`;
-s+=t(80,936,'Média total no PCL-R em amostra de homens. Grupo TPB sem TPA com n = 12.',{size:17,fill:C.ink2});
+s+=`<line x1="80" x2="1520" y1="890" y2="890" stroke="${C.grid}"/>`;
+s+=t(80,930,'Média total no PCL-R em amostra comunitária de homens no Canadá. Grupo TPB sem TPA com n = 12.',{size:17,fill:C.ink2});
+s+=t(80,958,'Fonte: Robitaille et al., 2017. Borderline Personality Disorder and Emotion Dysregulation, 4:25.',{size:17,fill:C.muted});
 svgEl(s);
 </script></body></html>

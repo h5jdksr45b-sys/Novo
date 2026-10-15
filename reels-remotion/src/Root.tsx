@@ -8,6 +8,7 @@ import { ComparacaoLadoALado, comparacaoSchema } from "./ComparacaoLadoALado";
 import { MitoApego } from "./MitoApego";
 import { MitoRindo } from "./MitoRindo";
 import { FuncaoDoComportamento } from "./FuncaoDoComportamento";
+import { PCLRDados, pclrSchema } from "./PCLRDados";
 
 // Each <Composition> is an entry in the sidebar!
 
@@ -62,6 +63,19 @@ export const RemotionRoot: React.FC = () => {
         fps={30}
         width={1080}
         height={1920}
+      />
+      <Composition
+        id="PCLRDados"
+        component={PCLRDados}
+        schema={pclrSchema}
+        durationInFrames={1284}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          fonte:
+            "Fonte: Robitaille et al., 2017. Borderline Personality Disorder and Emotion Dysregulation, 4:25.",
+        }}
       />
     </>
   );

@@ -1,97 +1,92 @@
 import re, html, json
 
 DUR = 42.2
-TEXTO_NO_VIDEO = False  # legendas e texto grande saem do vídeo e vão para o .srt
-# Trechos de fala alinhados pelas pausas detectadas no áudio (ffmpeg silencedetect)
-SEG = [
- (4.11, 5.95, ["Pra muita gente", "com *borderline*,", "naquela hora,"]),
- (6.41, 8.49, ["ser *mal entendido*", "parece o primeiro passo", "para *perder a pessoa*."]),
- (8.82, 10.57, ["Então cada frase", "tenta *impedir* isso."]),
- (10.93, 11.64, ["Daí ele *explica*,"]),
- (11.88, 15.11, ["depois explica a *explicação*,", "e os áudios", "vão *crescendo*", "junto com o *medo*."]),
- (15.36, 19.98, ["Do *outro lado*,", "quem recebe tanto áudio", "depois de uma briga", "muitas vezes", "*para no começo*."]),
- (20.25, 22.83, ["E tudo bem", "falar assim:", "olha, eu só vi", "o *começo*,"]),
- (25.58, 27.83, ["Se é você", "que grava", "um áudio longo,", "*tudo bem*."]),
- (28.24, 31.29, ["Depois de uma *briga*,", "escreve antes *numa linha*"]),
- (31.52, 32.88, ["o que você quer", "que a pessoa *entenda*."]),
- (34.41, 35.66, ["Se ela *quiser*,", "você explica o *resto*."]),
- (36.10, 38.45, ["Se *ninguém nunca*", "tinha te falado isso,"]),
+TEXTO_NO_VIDEO = True
+# Tempos de início de cada bloco: linhas do CapCut (transcrição real, em segundos inteiros)
+# presas ao início de fala medido nas pausas do áudio (ffmpeg silencedetect, precisão de 10 ms).
+# Texto: a transcrição corrigida pelo Dr. Fabio. Até 4 palavras por bloco.
+LEGENDAS = [
+ (2.90, "Pra muita gente"),
+ (3.40, "com *borderline*,"),
+ (4.11, "naquela hora,"),
+ (4.83, "ser *mal entendido*"),
+ (6.41, "parece o primeiro passo"),
+ (7.23, "para *perder a pessoa*."),
+ (8.82, "Então cada frase"),
+ (9.63, "tenta *impedir* isso."),
+ (10.93, "Daí ele *explica*,"),
+ (11.88, "depois explica"),
+ (12.55, "a *explicação*,"),
+ (13.12, "e os áudios"),
+ (13.58, "vão *crescendo*"),
+ (14.04, "junto com o *medo*."),
+ (14.92, "Do *outro lado*,"),
+ (15.36, "quem recebe tanto áudio"),
+ (17.05, "depois de uma briga"),
+ (18.66, "muitas vezes"),
+ (19.25, "*para no começo*."),
+ (20.25, "E tudo bem"),
+ (20.95, "falar assim:"),
+ (21.63, "olha, eu só vi"),
+ (22.53, "o *começo*,"),
+ (24.28, "Se é você"),
+ (24.85, "que grava"),
+ (25.58, "um áudio longo"),
+ (26.51, "pra contar como foi"),
+ (27.12, "seu dia,"),
+ (27.59, "*tudo bem*."),
+ (28.24, "Depois de uma *briga*,"),
+ (29.72, "escreve antes *numa linha*"),
+ (31.52, "o que você quer"),
+ (32.10, "que a pessoa *entenda*."),
+ (34.41, "Se ela *quiser*,"),
+ (35.02, "você explica o *resto*."),
+ (36.10, "Se *ninguém nunca*"),
+ (36.55, "tinha te falado isso,"),
 ]
 # Texto grande: substitui a legenda pequena nesses intervalos
 GRANDE = [
- (0.00, 1.15, "Por que o *borderline*"),
- (1.15, 2.17, "manda tanto áudio"),
- (2.17, 3.95, "depois de uma *briga*?"),
- (23.11, 25.45, "me fala o *principal*"),
- (33.20, 34.35, "manda essa *linha primeiro*"),
- (38.45, 39.20, "manda esse vídeo"),
- (39.20, 40.00, "para aquela pessoa"),
- (40.00, 40.56, "que sempre ouve"),
- (40.56, 42.20, "*mil áudios*"),
+ (0.00, 0.96, "Por que o *borderline*"),
+ (0.96, 1.69, "manda tanto áudio"),
+ (1.69, 2.85, "depois de uma *briga?*"),
+ (23.11, 24.25, "me fala o *principal*"),
+ (33.27, 34.38, "manda essa *linha primeiro*"),
+ (37.18, 38.70, "então manda esse vídeo"),
+ (38.70, 39.60, "para aquela pessoa"),
+ (39.60, 40.70, "que sempre ouve"),
+ (40.70, 42.20, "*mil áudios*"),
 ]
-# Efeitos sonoros: sempre nas pausas da fala e em volume baixo; o riser fica baixo e entra em fade
+# Efeitos sonoros: nas pausas da fala, volume calculado para o pico ficar 13 a 19 dB abaixo do pico da voz
 SFX = [
+ ("sfx-pop-gancho", "assets/sfx/pop.mp3", 0.05, 0.60, 0.0, 0.15, None),
  ("sfx-clique-1", "assets/sfx/clique_a.mp3", 6.26, 0.50, 0.0, 0.07, None),
  ("sfx-whoosh-grava", "assets/sfx/whoosh_fino_a.mp3", 10.45, 0.75, 0.0, 0.25, [(0,1),(0.55,1),(0.75,0)]),
- ("sfx-swipe-recebe", "assets/sfx/swipe_d.mp3", 15.00, 0.44, 0.0, 0.09, None),
+ ("sfx-swipe-recebe", "assets/sfx/swipe_d.mp3", 14.70, 0.44, 0.0, 0.09, None),
+ ("sfx-pop-principal", "assets/sfx/pop.mp3", 22.92, 0.50, 0.0, 0.12, None),
  ("sfx-riser-virada", "assets/sfx/riser_longo_fino.mp3", 25.10, 3.00, 6.34, 0.15, [(0,0),(1.5,1),(3.0,1)]),
  ("sfx-clique-2", "assets/sfx/clique_a.mp3", 33.10, 0.50, 0.0, 0.07, None),
 ]
 # Zoom punch no rosto: entra junto com o clique e volta no próximo trecho
-PUNCH = [(6.41, 8.82), (33.20, 34.41)]
+PUNCH = [(6.41, 8.82), (33.27, 34.41)]
 BROLL = [
- ("broll-grava", "assets/broll_756.mp4", 10.93, 15.11, 0.30),
- ("broll-recebe", "assets/broll_677.mp4", 15.11, 19.98, 0.10),
+ ("broll-grava", "assets/broll_756.mp4", 10.93, 14.92, 0.30),
+ ("broll-recebe", "assets/broll_677.mp4", 14.92, 19.98, 0.00),
  ("broll-caderno", "assets/broll_a8.mp4", 28.10, 32.95, 0.15),
 ]
 
-def silabas(w):
-    w = w.lower()
-    n = len(re.findall(r"[aeiouáéíóúâêôãõà]+", w))
-    return max(1, n)
-
-def blocos(texto, maxw=4):
-    palavras = texto.split()
-    out, cur = [], []
-    for p in palavras:
-        cur.append(p)
-        if len(cur) >= maxw or re.search(r"[,:.?]$", p):
-            out.append(cur); cur = []
-    if cur: out.append(cur)
-    # junta blocos de 1 palavra ao anterior quando possível
-    res = []
-    for b in out:
-        if res and len(b) == 1 and len(res[-1]) < 5:
-            res[-1] += b
-        else:
-            res.append(b)
-    return res
-
-cues = []
-for ini, fim, chunks in SEG:
-    bl = [c.split() for c in chunks]
-    pesos = [sum(silabas(p) for p in b) for b in bl]
-    tot = sum(pesos); t = ini
-    for b, p in zip(bl, pesos):
-        d = (fim - ini) * p / tot
-        cues.append((round(t, 2), round(d, 2), " ".join(b)))
-        t += d
-# a última legenda de cada trecho fica na tela até o próximo começar (sem piscar)
-starts = sorted([c[0] for c in cues] + [g[0] for g in GRANDE] + [DUR])
+# fim de cada legenda: começo do próximo bloco (legenda ou texto grande), sem passar de 1,6 s depois da fala
+marcos = sorted([a for a, _ in LEGENDAS] + [a for a, _, _ in GRANDE] + [DUR])
 cues2 = []
-for s, d, t in cues:
-    prox = min(x for x in starts if x > s + 0.01)
-    gap = prox - (s + d)
-    if 0 < gap < 0.6:
-        d = prox - s
-    cues2.append((s, round(d, 2), t))
+for a, t in LEGENDAS:
+    prox = min(x for x in marcos if x > a + 0.01)
+    cues2.append((a, round(min(prox, a + 1.6) - a, 2), t))
 
 def marca(t):
     t = html.escape(t)
     return re.sub(r"\*(.+?)\*", r"<em>\1</em>", t)
 
 def limpa(t):
-    return marca(t.rstrip(",:"))
+    return marca(re.sub(r"[.,:]$", "", re.sub(r"\*([.,:])$", "*", t)))
 
 partes = []
 z = 2

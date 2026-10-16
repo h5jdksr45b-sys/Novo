@@ -1,6 +1,7 @@
 import re, html, json
 
 DUR = 42.2
+TEXTO_NO_VIDEO = False  # legendas e texto grande saem do vídeo e vão para o .srt
 # Trechos de fala alinhados pelas pausas detectadas no áudio (ffmpeg silencedetect)
 SEG = [
  (4.11, 5.95, ["Pra muita gente", "com *borderline*,", "naquela hora,"]),
@@ -30,11 +31,9 @@ GRANDE = [
 ]
 # Efeitos sonoros: sempre nas pausas da fala e em volume baixo; o riser fica baixo e entra em fade
 SFX = [
- ("sfx-pop-gancho", "assets/sfx/pop.mp3", 0.08, 0.60, 0.0, 0.45, None),
  ("sfx-clique-1", "assets/sfx/clique_a.mp3", 6.26, 0.50, 0.0, 0.35, None),
  ("sfx-whoosh-grava", "assets/sfx/whoosh_fino_a.mp3", 10.45, 0.75, 0.0, 0.45, [(0,1),(0.55,1),(0.75,0)]),
  ("sfx-swipe-recebe", "assets/sfx/swipe_d.mp3", 15.00, 0.44, 0.0, 0.35, None),
- ("sfx-pop-principal", "assets/sfx/pop.mp3", 22.90, 0.50, 0.0, 0.35, None),
  ("sfx-riser-virada", "assets/sfx/riser_longo_fino.mp3", 25.10, 3.00, 6.34, 0.35, [(0,0),(1.5,1),(3.0,1)]),
  ("sfx-clique-2", "assets/sfx/clique_a.mp3", 33.10, 0.50, 0.0, 0.35, None),
 ]
@@ -100,9 +99,9 @@ for id_, src, a, b, ms in BROLL:
     partes.append(f'''      <video id="{id_}" class="clip broll" src="{src}" muted playsinline
         data-start="{a}" data-duration="{round(b-a,2)}" data-media-start="{ms}" data-track-index="1"
         style="z-index:{z}"></video>''')
-for i, (s, d, t) in enumerate(cues2):
+for i, (s, d, t) in (enumerate(cues2) if TEXTO_NO_VIDEO else []):
     partes.append(f'      <div id="leg-{i:02d}" class="clip legenda" data-start="{s}" data-duration="{d}" data-track-index="2"><span>{limpa(t)}</span></div>')
-for i, (a, b, t) in enumerate(GRANDE):
+for i, (a, b, t) in (enumerate(GRANDE) if TEXTO_NO_VIDEO else []):
     partes.append(f'      <div id="grande-{i}" class="clip grande" data-start="{a}" data-duration="{round(b-a,2)}" data-track-index="3"><span>{marca(t)}</span></div>')
 for id_, src, a, d, ms, vol, env in SFX:
     auto = ""
@@ -112,12 +111,12 @@ for id_, src, a, d, ms, vol, env in SFX:
     partes.append(f'      <audio id="{id_}" class="clip" src="{src}" data-start="{a}" data-duration="{d}" data-media-start="{ms}" data-volume="{vol}" data-track-index="4"{auto}></audio>')
 
 linhas = []
-for i, (a, b, t) in enumerate(GRANDE):
+for i, (a, b, t) in (enumerate(GRANDE) if TEXTO_NO_VIDEO else []):
     linhas.append(f'      tl.from("#grande-{i} span", {{ opacity: 0, y: 34, scale: 0.94, duration: 0.24, ease: "power3.out" }}, {a});')
     if "*" in t:
         linhas.append(f'      tl.from("#grande-{i} em", {{ opacity: 0, y: 18, rotation: -4, duration: 0.3, ease: "back.out(2)" }}, {round(a+0.14,2)});')
     linhas.append(f'      tl.to("#grande-{i} span", {{ opacity: 0, y: -22, duration: 0.16, ease: "power2.in" }}, {round(b-0.17,2)});')
-for i, (s0, d, t) in enumerate(cues2):
+for i, (s0, d, t) in (enumerate(cues2) if TEXTO_NO_VIDEO else []):
     linhas.append(f'      tl.from("#leg-{i:02d} span", {{ opacity: 0, y: 16, duration: 0.15, ease: "power3.out" }}, {s0});')
     if "*" in t:
         linhas.append(f'      tl.from("#leg-{i:02d} em", {{ opacity: 0, y: 10, scale: 1.25, duration: 0.24, ease: "back.out(2.2)" }}, {round(s0+0.07,2)});')
@@ -183,3 +182,12 @@ open("index.html", "w").write(doc)
 json.dump([{"start": s, "dur": d, "text": t} for s, d, t in cues2], open("scripts/legendas.json", "w"), ensure_ascii=False, indent=1)
 print(len(cues2), "legendas;", len(GRANDE), "textos grandes;", len(BROLL), "b-rolls")
 for s, d, t in cues2: print(f"{s:6.2f} {s+d:6.2f}  {t}")
+
+# legenda em arquivo .srt (texto corrigido, até 4 palavras por bloco)
+def ts(x):
+    ms = int(round(x * 1000)); h, ms = divmod(ms, 3600000); m, ms = divmod(ms, 60000); sec, ms = divmod(ms, 1000)
+    return f"{h:02d}:{m:02d}:{sec:02d},{ms:03d}"
+todos = sorted([(s0, s0 + d, t) for s0, d, t in cues2] + [(a, b, t) for a, b, t in GRANDE])
+with open("renders/reel-audio-depois-da-briga.srt", "w") as f:
+    for n_, (a, b, t) in enumerate(todos, 1):
+        f.write(f"{n_}\n{ts(a)} --> {ts(b)}\n{t.replace('*','')}\n\n")

@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="pt-BR" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/vendor/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Anton"; src: url("assets/fonts/anton.woff2") format("woff2"); }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #000; }
+      #a-roll, .broll { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; object-fit: cover; }
+      .legenda, .grande { position: absolute; left: 0; width: 1080px; display: flex; justify-content: center; text-align: center; z-index: 20; }
+      .legenda { top: 1010px; }
+      .legenda span {
+        max-width: 860px; font-family: "Inter", sans-serif; font-weight: 800; font-size: 46px; line-height: 1.2;
+        color: #fff; text-shadow: 0 0 6px rgba(0,0,0,.9), 0 2px 3px rgba(0,0,0,.9);
+      }
+      .grande { top: 1100px; }
+      .grande span {
+        max-width: 900px; font-family: "Anton", sans-serif; font-size: 92px; line-height: 1.05; text-transform: uppercase;
+        color: #fff; text-shadow: 0 0 14px rgba(0,0,0,.85), 0 4px 6px rgba(0,0,0,.9);
+      }
+      #grande-0 { top: 1060px; }
+      #grande-0 span { font-size: 84px; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="42.2" data-width="1080" data-height="1920">
+      <video id="a-roll" class="clip" src="assets/fala.mp4" playsinline data-has-audio="true"
+        data-start="0" data-duration="42.2" data-track-index="0" style="z-index:1"></video>
+      <video id="broll-grava" class="clip broll" src="assets/broll_756.mp4" muted playsinline
+        data-start="10.93" data-duration="4.18" data-media-start="0.3" data-track-index="1"
+        style="z-index:2"></video>
+      <video id="broll-recebe" class="clip broll" src="assets/broll_677.mp4" muted playsinline
+        data-start="15.11" data-duration="4.87" data-media-start="0.1" data-track-index="1"
+        style="z-index:2"></video>
+      <video id="broll-caderno" class="clip broll" src="assets/broll_a8.mp4" muted playsinline
+        data-start="28.1" data-duration="4.85" data-media-start="0.15" data-track-index="1"
+        style="z-index:2"></video>
+      <div id="leg-00" class="clip legenda" data-start="4.11" data-duration="1.23" data-track-index="2"><span>Pra muita gente com borderline</span></div>
+      <div id="leg-01" class="clip legenda" data-start="5.34" data-duration="1.07" data-track-index="2"><span>naquela hora</span></div>
+      <div id="leg-02" class="clip legenda" data-start="6.41" data-duration="0.57" data-track-index="2"><span>ser mal-entendido</span></div>
+      <div id="leg-03" class="clip legenda" data-start="6.98" data-duration="0.85" data-track-index="2"><span>parece o primeiro passo</span></div>
+      <div id="leg-04" class="clip legenda" data-start="7.83" data-duration="0.99" data-track-index="2"><span>para perder a pessoa.</span></div>
+      <div id="leg-05" class="clip legenda" data-start="8.82" data-duration="0.81" data-track-index="2"><span>Então cada frase</span></div>
+      <div id="leg-06" class="clip legenda" data-start="9.63" data-duration="1.3" data-track-index="2"><span>tenta impedir isso.</span></div>
+      <div id="leg-07" class="clip legenda" data-start="10.93" data-duration="0.95" data-track-index="2"><span>Daí ele explica</span></div>
+      <div id="leg-08" class="clip legenda" data-start="11.88" data-duration="1.35" data-track-index="2"><span>depois explica a explicação</span></div>
+      <div id="leg-09" class="clip legenda" data-start="13.23" data-duration="1.08" data-track-index="2"><span>e os áudios vão crescendo</span></div>
+      <div id="leg-10" class="clip legenda" data-start="14.3" data-duration="1.06" data-track-index="2"><span>junto com o medo.</span></div>
+      <div id="leg-11" class="clip legenda" data-start="15.36" data-duration="0.77" data-track-index="2"><span>Do outro lado</span></div>
+      <div id="leg-12" class="clip legenda" data-start="16.13" data-duration="1.23" data-track-index="2"><span>quem recebe tanto áudio</span></div>
+      <div id="leg-13" class="clip legenda" data-start="17.36" data-duration="1.08" data-track-index="2"><span>depois de uma briga</span></div>
+      <div id="leg-14" class="clip legenda" data-start="18.44" data-duration="1.81" data-track-index="2"><span>muitas vezes para no começo.</span></div>
+      <div id="leg-15" class="clip legenda" data-start="20.25" data-duration="1.21" data-track-index="2"><span>E tudo bem falar assim</span></div>
+      <div id="leg-16" class="clip legenda" data-start="21.46" data-duration="1.65" data-track-index="2"><span>olha, eu só vi o começo</span></div>
+      <div id="leg-17" class="clip legenda" data-start="25.58" data-duration="1.05" data-track-index="2"><span>Se é você que grava</span></div>
+      <div id="leg-18" class="clip legenda" data-start="26.63" data-duration="1.61" data-track-index="2"><span>um áudio longo, tudo bem.</span></div>
+      <div id="leg-19" class="clip legenda" data-start="28.24" data-duration="1.33" data-track-index="2"><span>Depois de uma briga</span></div>
+      <div id="leg-20" class="clip legenda" data-start="29.57" data-duration="1.95" data-track-index="2"><span>escreve antes numa linha</span></div>
+      <div id="leg-21" class="clip legenda" data-start="31.52" data-duration="0.57" data-track-index="2"><span>o que você quer</span></div>
+      <div id="leg-22" class="clip legenda" data-start="32.09" data-duration="1.11" data-track-index="2"><span>que a pessoa entenda.</span></div>
+      <div id="leg-23" class="clip legenda" data-start="34.41" data-duration="0.48" data-track-index="2"><span>Se ela quiser</span></div>
+      <div id="leg-24" class="clip legenda" data-start="34.89" data-duration="1.21" data-track-index="2"><span>você explica o resto.</span></div>
+      <div id="leg-25" class="clip legenda" data-start="36.1" data-duration="0.9" data-track-index="2"><span>Se ninguém nunca</span></div>
+      <div id="leg-26" class="clip legenda" data-start="37.0" data-duration="1.45" data-track-index="2"><span>tinha te falado isso</span></div>
+      <div id="grande-0" class="clip grande" data-start="0.0" data-duration="3.95" data-track-index="3"><span>Por que o borderline manda tanto áudio depois de uma briga?</span></div>
+      <div id="grande-1" class="clip grande" data-start="23.11" data-duration="2.34" data-track-index="3"><span>me fala o principal</span></div>
+      <div id="grande-2" class="clip grande" data-start="33.2" data-duration="1.15" data-track-index="3"><span>manda essa linha primeiro</span></div>
+      <div id="grande-3" class="clip grande" data-start="38.45" data-duration="3.75" data-track-index="3"><span>manda esse vídeo pra quem sempre ouve mil áudios</span></div>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      tl.from("#grande-0 span", { opacity: 0, y: 24, duration: 0.18, ease: "power2.out" }, 0.0);
+      tl.from("#grande-1 span", { opacity: 0, y: 24, duration: 0.18, ease: "power2.out" }, 23.11);
+      tl.from("#grande-2 span", { opacity: 0, y: 24, duration: 0.18, ease: "power2.out" }, 33.2);
+      tl.from("#grande-3 span", { opacity: 0, y: 24, duration: 0.18, ease: "power2.out" }, 38.45);
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

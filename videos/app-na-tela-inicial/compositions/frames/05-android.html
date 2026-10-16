@@ -1,0 +1,487 @@
+<template>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <style>
+    @font-face {
+      font-family: "Space Grotesk";
+      src: url("assets/fonts/space-grotesk-latin-700-normal.woff2") format("woff2");
+      font-weight: 700;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Space Grotesk";
+      src: url("assets/fonts/space-grotesk-latin-600-normal.woff2") format("woff2");
+      font-weight: 600;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Space Grotesk";
+      src: url("assets/fonts/space-grotesk-latin-500-normal.woff2") format("woff2");
+      font-weight: 500;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Inter";
+      src: url("assets/fonts/inter-latin-400-normal.woff2") format("woff2");
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Inter";
+      src: url("assets/fonts/inter-latin-500-normal.woff2") format("woff2");
+      font-weight: 500;
+      font-style: normal;
+    }
+
+    #root {
+      position: absolute;
+      inset: 0;
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+      container-type: size;
+      font-family: "Inter", sans-serif;
+      color: #111111;
+    }
+
+    /* full-bleed ground: cream + faint cobalt hairline grid */
+    .\30 5-android-bg {
+      position: absolute;
+      inset: 0;
+      background-color: #fdfae7;
+      background-image:
+        linear-gradient(to right, rgba(30, 43, 250, 0.055) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(30, 43, 250, 0.055) 1px, transparent 1px);
+      background-size: 60px 60px;
+      background-position: 30px 0;
+    }
+
+    .\30 5-android-stage {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1080px;
+      height: 1590px;
+    }
+
+    /* header */
+    .\30 5-android-pill {
+      position: absolute;
+      left: 60px;
+      top: 168px;
+      height: 58px;
+      padding: 0 30px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-radius: 100px;
+      background: rgba(30, 43, 250, 0.08);
+      color: #1e2bfa;
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 600;
+      font-size: 30px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .\30 5-android-pill-dot {
+      display: block;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #1e2bfa;
+    }
+    .\30 5-android-headline {
+      position: absolute;
+      left: 60px;
+      top: 254px;
+      width: 960px;
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 700;
+      font-size: 92px;
+      line-height: 1.06;
+      letter-spacing: -0.02em;
+      color: #111111;
+    }
+    .\30 5-android-word {
+      display: inline-block;
+      margin-right: 0.24em;
+    }
+
+    /* the strip of step cards */
+    .\30 5-android-card {
+      position: absolute;
+      left: 60px;
+      width: 960px;
+      height: 290px;
+      border-radius: 14px;
+      background: rgba(30, 43, 250, 0.04);
+      border: 1.5px solid rgba(30, 43, 250, 0.2);
+    }
+    .\30 5-android-card-1 { top: 486px; }
+    .\30 5-android-card-2 { top: 802px; }
+    .\30 5-android-card-3 { top: 1118px; }
+
+    .\30 5-android-num {
+      position: absolute;
+      left: 34px;
+      top: 32px;
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      background: #1e2bfa;
+      color: #fdfae7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 700;
+      font-size: 48px;
+      line-height: 1;
+    }
+    .\30 5-android-label {
+      position: absolute;
+      left: 34px;
+      top: 144px;
+      width: 360px;
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 600;
+      font-size: 42px;
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      color: #111111;
+    }
+
+    /* recreated UI fragment frame (neutral, no brand) */
+    .\30 5-android-frag {
+      position: absolute;
+      right: 32px;
+      top: 31px;
+      width: 500px;
+      height: 226px;
+      border-radius: 12px;
+      background: #fdfae7;
+      border: 1.5px solid rgba(30, 43, 250, 0.2);
+      overflow: hidden;
+    }
+    .\30 5-android-bar {
+      position: absolute;
+      display: block;
+      height: 14px;
+      border-radius: 6px;
+      background: rgba(17, 17, 17, 0.1);
+    }
+
+    /* fragment 1: address bar + three vertical dots */
+    .\30 5-android-url {
+      position: absolute;
+      left: 24px;
+      top: 28px;
+      width: 384px;
+      height: 64px;
+      border-radius: 100px;
+      background: rgba(30, 43, 250, 0.04);
+      border: 1.5px solid rgba(30, 43, 250, 0.2);
+    }
+    .\30 5-android-url-icon {
+      position: absolute;
+      left: 22px;
+      top: 21px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(17, 17, 17, 0.16);
+    }
+    .\30 5-android-dots {
+      position: absolute;
+      left: 434px;
+      top: 26px;
+      width: 36px;
+      height: 68px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+    }
+    .\30 5-android-dot {
+      display: block;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: #1e2bfa;
+    }
+
+    /* tap marker + ripple ring (shared) */
+    .\30 5-android-tap {
+      position: absolute;
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      background: #1e2bfa;
+      opacity: 0;
+    }
+    .\30 5-android-ripple {
+      position: absolute;
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      border: 3px solid #1e2bfa;
+      opacity: 0;
+    }
+    .\30 5-android-tap-1,
+    .\30 5-android-ripple-1 { left: 414px; top: 22px; }
+    .\30 5-android-tap-3,
+    .\30 5-android-ripple-3 { left: 343px; top: 132px; }
+
+    /* fragment 2: mini menu list */
+    .\30 5-android-row {
+      position: absolute;
+      left: 14px;
+      width: 470px;
+      height: 49px;
+    }
+    .\30 5-android-row-icon {
+      position: absolute;
+      left: 14px;
+      top: 13px;
+      width: 23px;
+      height: 23px;
+      border-radius: 6px;
+      background: rgba(17, 17, 17, 0.14);
+    }
+    .\30 5-android-row-text {
+      position: absolute;
+      left: 54px;
+      top: 0;
+      height: 49px;
+      display: flex;
+      align-items: center;
+      font-family: "Inter", sans-serif;
+      font-weight: 500;
+      font-size: 25px;
+      color: #111111;
+      white-space: nowrap;
+    }
+    .\30 5-android-row-hl .\30 5-android-row-icon {
+      background: #1e2bfa;
+    }
+    .\30 5-android-ring {
+      position: absolute;
+      left: 10px;
+      top: 108px;
+      width: 478px;
+      height: 57px;
+      border-radius: 10px;
+      border: 3px solid #1e2bfa;
+      background: rgba(30, 43, 250, 0.08);
+      opacity: 0;
+    }
+
+    /* fragment 3: confirm dialog */
+    .\30 5-android-app {
+      position: absolute;
+      left: 28px;
+      top: 28px;
+      width: 64px;
+      height: 64px;
+      border-radius: 14px;
+      background: rgba(30, 43, 250, 0.15);
+      border: 1.5px solid rgba(30, 43, 250, 0.2);
+    }
+    .\30 5-android-btn {
+      position: absolute;
+      bottom: 24px;
+      height: 64px;
+      border-radius: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 600;
+      font-size: 27px;
+    }
+    .\30 5-android-btn-cancel {
+      right: 226px;
+      width: 160px;
+      color: #6b6b6b;
+    }
+    .\30 5-android-btn-add {
+      right: 24px;
+      width: 190px;
+      background: #1e2bfa;
+      color: #fdfae7;
+    }
+
+    /* helper line */
+    .\30 5-android-helper {
+      position: absolute;
+      left: 60px;
+      top: 1448px;
+      width: 960px;
+      font-family: "Inter", sans-serif;
+      font-weight: 400;
+      font-size: 36px;
+      line-height: 1.5;
+      color: #6b6b6b;
+    }
+    .\30 5-android-helper strong {
+      font-weight: 500;
+      color: #111111;
+    }
+  </style>
+
+  <div
+    id="root"
+    data-composition-id="05-android"
+    data-start="0"
+    data-duration="7"
+    data-width="1080"
+    data-height="1920"
+  >
+    <div id="f05-android-bg" class="05-android-bg clip" data-start="0" data-duration="7" data-track-index="0"></div>
+
+    <div id="f05-android-stage" class="05-android-stage clip" data-start="0" data-duration="7" data-track-index="1">
+      <div class="05-android-pill"><span class="05-android-pill-dot"></span>Android</div>
+      <div class="05-android-headline">
+        <span class="05-android-word">No</span><span class="05-android-word">Android,</span><span class="05-android-word">pelo</span><span class="05-android-word">Chrome</span>
+      </div>
+
+      <!-- Card 1: three dots -->
+      <div class="05-android-card 05-android-card-1">
+        <div class="05-android-num">1</div>
+        <div class="05-android-label">Toque nos três pontinhos</div>
+        <div class="05-android-frag 05-android-frag-1">
+          <div class="05-android-url">
+            <span class="05-android-url-icon"></span>
+            <span class="05-android-bar" style="left: 58px; top: 24px; width: 230px"></span>
+          </div>
+          <div class="05-android-tap 05-android-tap-1"></div>
+          <div class="05-android-ripple 05-android-ripple-1"></div>
+          <div class="05-android-dots">
+            <span class="05-android-dot"></span>
+            <span class="05-android-dot"></span>
+            <span class="05-android-dot"></span>
+          </div>
+          <span class="05-android-bar 05-android-pline" style="left: 24px; top: 124px; width: 446px"></span>
+          <span class="05-android-bar 05-android-pline" style="left: 24px; top: 154px; width: 380px"></span>
+          <span class="05-android-bar 05-android-pline" style="left: 24px; top: 184px; width: 290px"></span>
+        </div>
+      </div>
+
+      <!-- Card 2: menu row -->
+      <div class="05-android-card 05-android-card-2">
+        <div class="05-android-num">2</div>
+        <div class="05-android-label">Adicionar à tela inicial</div>
+        <div class="05-android-frag 05-android-frag-2">
+          <div class="05-android-ring"></div>
+          <div class="05-android-row" style="top: 12px">
+            <span class="05-android-row-icon"></span>
+            <span class="05-android-bar" style="left: 54px; top: 18px; width: 210px"></span>
+          </div>
+          <div class="05-android-row" style="top: 61px">
+            <span class="05-android-row-icon"></span>
+            <span class="05-android-bar" style="left: 54px; top: 18px; width: 260px"></span>
+          </div>
+          <div class="05-android-row 05-android-row-hl" style="top: 112px">
+            <span class="05-android-row-icon"></span>
+            <span class="05-android-row-text">Adicionar à tela inicial</span>
+          </div>
+          <div class="05-android-row" style="top: 163px">
+            <span class="05-android-row-icon"></span>
+            <span class="05-android-bar" style="left: 54px; top: 18px; width: 180px"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: confirm dialog -->
+      <div class="05-android-card 05-android-card-3">
+        <div class="05-android-num">3</div>
+        <div class="05-android-label">Confirme em Adicionar</div>
+        <div class="05-android-frag 05-android-frag-3">
+          <div class="05-android-app"></div>
+          <span class="05-android-bar" style="left: 112px; top: 40px; width: 230px; height: 16px"></span>
+          <span class="05-android-bar" style="left: 112px; top: 70px; width: 150px; height: 12px"></span>
+          <div class="05-android-btn 05-android-btn-cancel">Cancelar</div>
+          <div class="05-android-btn 05-android-btn-add">Adicionar</div>
+          <div class="05-android-tap 05-android-tap-3"></div>
+          <div class="05-android-ripple 05-android-ripple-3"></div>
+        </div>
+      </div>
+
+      <div class="05-android-helper">Se aparecer <strong>Instalar app</strong>, pode tocar também.</div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var root =
+        document.querySelector('#root[data-composition-id="05-android"]') ||
+        document.querySelector('[data-composition-id="05-android"]');
+      function all(name) {
+        return Array.prototype.slice.call(root.getElementsByClassName("05-android-" + name));
+      }
+      function one(name) {
+        return all(name)[0];
+      }
+
+      var cards = all("card");
+      var labels = all("label");
+      var frags = all("frag");
+      var nums = all("num");
+
+      var tl = gsap.timeline({ paused: true });
+
+      // Macro camera: a slow settle of the whole stage, ending as the helper lands, then still.
+      tl.fromTo(
+        one("stage"),
+        { scale: 1.025, transformOrigin: "50% 38%" },
+        { scale: 1, duration: 5.9, ease: "sine.inOut" },
+        0
+      );
+
+      // Scene 1 (0.0-1.0): pill + headline
+      tl.fromTo(one("pill"), { y: -24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 0.1);
+      tl.fromTo(
+        all("word"),
+        { y: 56, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.6, ease: "power3.out", stagger: 0.08 },
+        0.22
+      );
+
+      // Card entrance helper
+      function cardIn(i, t) {
+        tl.fromTo(cards[i], { x: 150, opacity: 0 }, { x: 0, opacity: 1, duration: 0.6, ease: "power3.out" }, t);
+        tl.fromTo(nums[i], { scale: 0.4, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.45, ease: "back.out(1.8)" }, t + 0.15);
+        tl.fromTo(frags[i], { scale: 0.94, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: "power2.out" }, t + 0.2);
+        tl.fromTo(labels[i], { y: 22, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, t + 0.32);
+      }
+
+      // Scene 2 (1.0-2.6): card 1, tap the three dots
+      cardIn(0, 1.0);
+      tl.fromTo(all("pline"), { scaleX: 0, transformOrigin: "0% 50%" }, { scaleX: 1, duration: 0.45, ease: "power2.out", stagger: 0.06 }, 1.3);
+      tl.fromTo(all("dot"), { scale: 0 }, { scale: 1, duration: 0.35, ease: "back.out(2)", stagger: 0.07 }, 1.35);
+      tl.fromTo(one("tap-1"), { scale: 0.4, opacity: 0 }, { scale: 1, opacity: 0.22, duration: 0.25, ease: "power2.out" }, 1.85);
+      tl.to(one("dots"), { scale: 0.82, duration: 0.12, ease: "power2.in" }, 1.9);
+      tl.to(one("dots"), { scale: 1, duration: 0.3, ease: "back.out(2)" }, 2.02);
+      tl.fromTo(one("ripple-1"), { scale: 0.5, opacity: 0.8 }, { scale: 1.9, opacity: 0, duration: 0.6, ease: "power2.out" }, 1.95);
+
+      // Scene 3 (2.6-4.2): card 2, menu row highlighted by cobalt ring
+      cardIn(1, 2.6);
+      tl.fromTo(all("row"), { x: 24, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "power2.out", stagger: 0.07 }, 2.85);
+      tl.fromTo(one("ring"), { scale: 1.08, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.45, ease: "back.out(1.6)" }, 3.4);
+
+      // Scene 4 (4.2-5.6): card 3, dialog, tap on Adicionar
+      cardIn(2, 4.2);
+      tl.fromTo(one("btn-add"), { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 4.5);
+      tl.fromTo(one("btn-cancel"), { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 4.45);
+      tl.fromTo(one("tap-3"), { scale: 0.4, opacity: 0 }, { scale: 1, opacity: 0.22, duration: 0.25, ease: "power2.out" }, 4.95);
+      tl.to(one("btn-add"), { scale: 0.93, duration: 0.12, ease: "power2.in" }, 5.0);
+      tl.to(one("btn-add"), { scale: 1, duration: 0.3, ease: "back.out(2)" }, 5.12);
+      tl.fromTo(one("ripple-3"), { scale: 0.5, opacity: 0.8 }, { scale: 1.9, opacity: 0, duration: 0.6, ease: "power2.out" }, 5.05);
+
+      // Scene 5 (5.6-7.0): helper line, then hold still
+      tl.fromTo(one("helper"), { y: 22, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }, 5.6);
+
+      window.__timelines["05-android"] = tl;
+    })();
+  </script>
+</template>

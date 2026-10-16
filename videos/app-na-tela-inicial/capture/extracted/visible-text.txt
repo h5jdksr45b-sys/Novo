@@ -1,0 +1,5 @@
+Como transformar um link em app na tela do celular.
+iPhone: abra o link. Toque no botão compartilhar. Toque em Adicionar à Tela de Início. Toque em Adicionar. O ícone aparece na tela inicial.
+Android (Chrome): abra o link. Toque nos três pontos no canto superior. Toque em Adicionar à tela inicial. Confirme em Adicionar.
+Pronto: abre com um toque, como um app.
+Exemplo: Botão de Apoio (socorro.base44.app). Dr. Fabio Schmidt, médico, CRM-SP 183549.

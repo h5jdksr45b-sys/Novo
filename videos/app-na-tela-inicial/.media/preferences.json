@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "preferences": {
+    "destination": {
+      "value": "whatsapp",
+      "confirmed_in": [
+        "app-na-tela-inicial"
+      ],
+      "updated_at": "2026-10-16T17:30:44.520Z"
+    },
+    "aspect": {
+      "value": "1080x1920",
+      "confirmed_in": [
+        "app-na-tela-inicial"
+      ],
+      "updated_at": "2026-10-16T17:30:44.612Z"
+    },
+    "language": {
+      "value": "pt-BR",
+      "confirmed_in": [
+        "app-na-tela-inicial"
+      ],
+      "updated_at": "2026-10-16T17:30:44.681Z"
+    },
+    "flow": {
+      "value": "automation",
+      "confirmed_in": [
+        "app-na-tela-inicial"
+      ],
+      "updated_at": "2026-10-16T17:30:44.735Z"
+    },
+    "storyboard": {
+      "value": "no",
+      "confirmed_in": [
+        "app-na-tela-inicial"
+      ],
+      "updated_at": "2026-10-16T17:30:44.788Z"
+    },
+    "style_preset.faceless-explainer": {
+      "value": "blue-professional",
+      "confirmed_in": [
+        "app-na-tela-inicial"
+      ],
+      "updated_at": "2026-10-16T17:30:44.858Z"
+    }
+  },
+  "sightings": {}
+}

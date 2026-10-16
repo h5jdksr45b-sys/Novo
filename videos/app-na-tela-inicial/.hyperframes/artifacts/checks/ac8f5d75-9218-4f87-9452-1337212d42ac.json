@@ -1,0 +1,608 @@
+{
+  "ok": true,
+  "strict": false,
+  "browserSkipped": false,
+  "lint": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "filesScanned": 7
+  },
+  "runtime": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": []
+  },
+  "layout": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 12,
+    "findings": [
+      {
+        "code": "panel_out_of_canvas",
+        "severity": "info",
+        "time": 5.167,
+        "selector": "#f02-phone",
+        "message": "Painted panel extends outside the composition canvas.",
+        "rect": {
+          "left": 272,
+          "top": 863.9,
+          "right": 808,
+          "bottom": 1993.9,
+          "width": 536,
+          "height": 1130
+        },
+        "containerSelector": "#root",
+        "text": "",
+        "fixHint": "Move the panel inward, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "bottom": 73.9
+        },
+        "dataAttributes": {},
+        "sourceFile": "compositions/frames/02-iphone-compartilhar.html",
+        "bbox": {
+          "x": 272,
+          "y": 863.9,
+          "width": 536,
+          "height": 1130
+        },
+        "firstSeen": 5.167,
+        "lastSeen": 5.167,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          5.167
+        ]
+      },
+      {
+        "code": "container_overflow",
+        "severity": "info",
+        "time": 8.611,
+        "selector": "#f02-cam",
+        "message": "Element extends outside a clipping layout container.",
+        "rect": {
+          "left": -437.8,
+          "top": 595,
+          "right": 848.6,
+          "bottom": 3307,
+          "width": 1286.4,
+          "height": 2712
+        },
+        "containerSelector": "#f02-stage",
+        "fixHint": "Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 460,
+          "right": 1080,
+          "bottom": 1600,
+          "width": 1080,
+          "height": 1140
+        },
+        "overflow": {
+          "left": 437.8,
+          "bottom": 1707
+        },
+        "dataAttributes": {},
+        "sourceFile": "compositions/frames/02-iphone-compartilhar.html",
+        "bbox": {
+          "x": -437.8,
+          "y": 595,
+          "width": 1286.4,
+          "height": 2712
+        },
+        "firstSeen": 8.611,
+        "lastSeen": 8.611,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          8.611
+        ]
+      },
+      {
+        "code": "escaped_container",
+        "severity": "info",
+        "time": 8.611,
+        "selector": "#f02-cam",
+        "message": "Positioned element renders far outside its offset parent — its coordinates were likely computed in a different frame (canvas/viewport pixels).",
+        "rect": {
+          "left": -437.8,
+          "top": 595,
+          "right": 848.6,
+          "bottom": 3307,
+          "width": 1286.4,
+          "height": 2712
+        },
+        "containerSelector": "#f02-stage",
+        "text": "",
+        "fixHint": "Compute left/top in the offset parent's frame (subtract its rect), or mark intentional placement with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 460,
+          "right": 1080,
+          "bottom": 1600,
+          "width": 1080,
+          "height": 1140
+        },
+        "dataAttributes": {},
+        "sourceFile": "compositions/frames/02-iphone-compartilhar.html",
+        "bbox": {
+          "x": -437.8,
+          "y": 595,
+          "width": 1286.4,
+          "height": 2712
+        },
+        "firstSeen": 8.611,
+        "lastSeen": 8.611,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          8.611
+        ]
+      },
+      {
+        "code": "content_overlap",
+        "severity": "info",
+        "time": 9.25,
+        "selector": "#f02-num",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 72,
+          "top": 73,
+          "right": 129.03,
+          "bottom": 242,
+          "width": 57.03,
+          "height": 169
+        },
+        "containerSelector": "#f03-num",
+        "text": "1",
+        "fixHint": "Give each block its own zone, or put data-layout-allow-overlap on the text or on a container inside the scene. A marker on the scene root does not apply.",
+        "dataAttributes": {},
+        "sourceFile": "compositions/frames/02-iphone-compartilhar.html",
+        "bbox": {
+          "x": 72,
+          "y": 73,
+          "width": 57.03,
+          "height": 169
+        },
+        "firstSeen": 9.25,
+        "lastSeen": 9.25,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          9.25
+        ]
+      },
+      {
+        "code": "content_overlap",
+        "severity": "info",
+        "time": 9.25,
+        "selector": "#f02-pill",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 192.03,
+          "top": 136.5,
+          "right": 312.09,
+          "bottom": 179.5,
+          "width": 120.06,
+          "height": 43
+        },
+        "containerSelector": "#f03-pill",
+        "text": "iPhone",
+        "fixHint": "Give each block its own zone, or put data-layout-allow-overlap on the text or on a container inside the scene. A marker on the scene root does not apply.",
+        "dataAttributes": {},
+        "sourceFile": "compositions/frames/02-iphone-compartilhar.html",
+        "bbox": {
+          "x": 192.03,
+          "y": 136.5,
+          "width": 120.06,
+          "height": 43
+        },
+        "firstSeen": 9.25,
+        "lastSeen": 9.25,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          9.25
+        ]
+      },
+      {
+        "code": "content_overlap",
+        "severity": "info",
+        "time": 14.25,
+        "selector": "#f03-num",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 72,
+          "top": 73,
+          "right": 147.78,
+          "bottom": 242,
+          "width": 75.78,
+          "height": 169
+        },
+        "containerSelector": "#f04-num",
+        "text": "2",
+        "fixHint": "Give each block its own zone, or put data-layout-allow-overlap on the text or on a container inside the scene. A marker on the scene root does not apply.",
+        "dataAttributes": {},
+        "sourceFile": "compositions/frames/03-iphone-adicionar-tela.html",
+        "bbox": {
+          "x": 72,
+          "y": 73,
+          "width": 75.78,
+          "height": 169
+        },
+        "firstSeen": 14.25,
+        "lastSeen": 14.25,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          14.25
+        ]
+      },
+      {
+        "code": "content_overlap",
+        "severity": "info",
+        "time": 14.25,
+        "selector": "#f03-pill",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 210.78,
+          "top": 136.5,
+          "right": 330.84,
+          "bottom": 179.5,
+          "width": 120.06,
+          "height": 43
+        },
+        "containerSelector": "#f04-pill",
+        "text": "iPhone",
+        "fixHint": "Give each block its own zone, or put data-layout-allow-overlap on the text or on a container inside the scene. A marker on the scene root does not apply.",
+        "dataAttributes": {},
+        "sourceFile": "compositions/frames/03-iphone-adicionar-tela.html",
+        "bbox": {
+          "x": 210.78,
+          "y": 136.5,
+          "width": 120.06,
+          "height": 43
+        },
+        "firstSeen": 14.25,
+        "lastSeen": 14.25,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          14.25
+        ]
+      },
+      {
+        "code": "container_overflow",
+        "severity": "info",
+        "time": 15.5,
+        "selector": "#f04-sheet",
+        "message": "Element extends outside a clipping layout container.",
+        "rect": {
+          "left": 285.81,
+          "top": 553.52,
+          "right": 794.06,
+          "bottom": 1590.04,
+          "width": 508.25,
+          "height": 1036.52
+        },
+        "containerSelector": "#f04-screen",
+        "fixHint": "Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 285.81,
+          "top": 483.44,
+          "right": 794.06,
+          "bottom": 1585.99,
+          "width": 508.25,
+          "height": 1102.55
+        },
+        "overflow": {
+          "bottom": 4.05
+        },
+        "dataAttributes": {},
+        "sourceFile": "compositions/frames/04-iphone-confirmar.html",
+        "bbox": {
+          "x": 285.81,
+          "y": 553.52,
+          "width": 508.25,
+          "height": 1036.52
+        },
+        "firstSeen": 15.5,
+        "lastSeen": 15.5,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          15.5
+        ]
+      },
+      {
+        "code": "content_overlap",
+        "severity": "info",
+        "time": 18.75,
+        "selector": "#f04-num",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 72,
+          "top": 73,
+          "right": 149.63,
+          "bottom": 242,
+          "width": 77.63,
+          "height": 169
+        },
+        "containerSelector": "div.\\30 5-android-pill",
+        "text": "3",
+        "fixHint": "Give each block its own zone, or put data-layout-allow-overlap on the text or on a container inside the scene. A marker on the scene root does not apply.",
+        "dataAttributes": {},
+        "sourceFile": "compositions/frames/04-iphone-confirmar.html",
+        "bbox": {
+          "x": 72,
+          "y": 73,
+          "width": 77.63,
+          "height": 169
+        },
+        "firstSeen": 18.75,
+        "lastSeen": 18.75,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          18.75
+        ]
+      },
+      {
+        "code": "container_overflow",
+        "severity": "info",
+        "time": 18.944,
+        "selector": "#f05-android-stage",
+        "message": "Element extends outside a clipping layout container.",
+        "rect": {
+          "left": -13.34,
+          "top": -14.92,
+          "right": 1093.34,
+          "bottom": 1614.35,
+          "width": 1106.68,
+          "height": 1629.27
+        },
+        "containerSelector": "#el-05-android > div:nth-of-type(1)",
+        "fixHint": "Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "left": 13.34,
+          "right": 13.34,
+          "top": 14.92
+        },
+        "dataAttributes": {
+          "data-start": "0",
+          "data-duration": "7.5",
+          "data-track-index": "1"
+        },
+        "sourceFile": "compositions/frames/05-android.html",
+        "bbox": {
+          "x": -13.34,
+          "y": -14.92,
+          "width": 1106.68,
+          "height": 1629.27
+        },
+        "firstSeen": 18.944,
+        "lastSeen": 22.389,
+        "occurrences": 2,
+        "heldMs": 0,
+        "times": [
+          18.944,
+          22.389
+        ]
+      },
+      {
+        "code": "container_overflow",
+        "severity": "info",
+        "time": 25.833,
+        "selector": "#pronto-06-rings > g:nth-of-type(1)",
+        "message": "Element extends outside a clipping layout container.",
+        "rect": {
+          "left": -132.54,
+          "top": 387.46,
+          "right": 1212.54,
+          "bottom": 1732.54,
+          "width": 1345.09,
+          "height": 1345.09
+        },
+        "containerSelector": "#pronto-06-rings",
+        "fixHint": "Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 13.66,
+          "top": 26.82,
+          "right": 1066.34,
+          "bottom": 1898.24,
+          "width": 1052.68,
+          "height": 1871.42
+        },
+        "overflow": {
+          "left": 146.2,
+          "right": 146.2
+        },
+        "dataAttributes": {},
+        "sourceFile": "compositions/frames/06-pronto.html",
+        "bbox": {
+          "x": -132.54,
+          "y": 387.46,
+          "width": 1345.09,
+          "height": 1345.09
+        },
+        "firstSeen": 25.833,
+        "lastSeen": 29.278,
+        "occurrences": 2,
+        "heldMs": 0,
+        "times": [
+          25.833,
+          29.278
+        ]
+      },
+      {
+        "code": "container_overflow",
+        "severity": "info",
+        "time": 29.278,
+        "selector": "#pronto-06-label",
+        "message": "Nowrap text is wider than its container.",
+        "rect": {
+          "left": 411.5,
+          "top": 1049,
+          "right": 570,
+          "bottom": 1069,
+          "width": 158.5,
+          "height": 20
+        },
+        "containerSelector": "#pronto-06-target",
+        "fixHint": "Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 441.5,
+          "top": 957,
+          "right": 540,
+          "bottom": 1073,
+          "width": 98.5,
+          "height": 116
+        },
+        "overflow": {
+          "left": 30,
+          "right": 30
+        },
+        "dataAttributes": {},
+        "sourceFile": "compositions/frames/06-pronto.html",
+        "bbox": {
+          "x": 411.5,
+          "y": 1049,
+          "width": 158.5,
+          "height": 20
+        },
+        "firstSeen": 29.278,
+        "lastSeen": 29.278,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          29.278
+        ]
+      }
+    ],
+    "duration": 31,
+    "samples": [
+      1.722,
+      5.167,
+      8.611,
+      12.056,
+      15.5,
+      18.944,
+      22.389,
+      25.833,
+      29.278
+    ],
+    "transitionSamples": [],
+    "transitionSamplesDropped": 0,
+    "tolerance": 2,
+    "totalIssueCount": 12,
+    "truncated": false
+  },
+  "motion": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "enabled": false,
+    "samples": 0
+  },
+  "contrast": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 2,
+    "infoCount": 0,
+    "findings": [
+      {
+        "code": "contrast_aa_failure",
+        "severity": "warning",
+        "message": "Contrast is 3.27:1; WCAG AA requires 4.5:1.",
+        "text": "Cancelar",
+        "fg": "rgb(10,132,255)",
+        "bg": "rgb(242,242,247)",
+        "ratio": 3.27,
+        "requiredRatio": 4.5,
+        "suggestedColor": "rgb(8,109,211)",
+        "large": false,
+        "selector": "div > div:nth-of-type(4) > div > div:nth-of-type(3) > div > div:nth-of-type(5) > div:nth-of-type(1) > span:nth-of-type(1)",
+        "dataAttributes": {},
+        "sourceFile": "compositions/frames/04-iphone-confirmar.html",
+        "bbox": {
+          "x": 305.8160095214844,
+          "y": 584.0389404296875,
+          "width": 84.40155029296875,
+          "height": 24.01202392578125
+        },
+        "time": 15.5,
+        "times": [
+          15.5
+        ]
+      },
+      {
+        "code": "contrast_aa_failure",
+        "severity": "warning",
+        "message": "Contrast is 3.27:1; WCAG AA requires 4.5:1.",
+        "text": "Adicionar",
+        "fg": "rgb(10,132,255)",
+        "bg": "rgb(242,242,247)",
+        "ratio": 3.27,
+        "requiredRatio": 4.5,
+        "suggestedColor": "rgb(8,109,211)",
+        "large": false,
+        "selector": "#f04-add",
+        "dataAttributes": {},
+        "sourceFile": "compositions/frames/04-iphone-confirmar.html",
+        "bbox": {
+          "x": 681.316162109375,
+          "y": 584.0389404296875,
+          "width": 92.73382568359375,
+          "height": 24.01202392578125
+        },
+        "time": 15.5,
+        "times": [
+          15.5
+        ]
+      }
+    ],
+    "enabled": true,
+    "samples": [
+      1.722,
+      8.611,
+      15.5,
+      22.389,
+      29.278
+    ],
+    "checked": 37,
+    "passed": 35
+  },
+  "hdr": {
+    "autoPromotion": null,
+    "inspection": "available"
+  },
+  "snapshots": {
+    "enabled": false,
+    "files": [],
+    "times": [],
+    "findingFiles": []
+  }
+}

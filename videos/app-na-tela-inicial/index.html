@@ -2,8 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=1920, height=1080" />
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/vendor/gsap.min.js"></script>
     <style>
       * {
         margin: 0;
@@ -12,25 +12,23 @@
       }
       html,
       body {
-        margin: 0;
-        width: 1920px;
-        height: 1080px;
+        width: 1080px;
+        height: 1920px;
         overflow: hidden;
-        background: #0a0a0a;
+        background: #000;
       }
       #root {
+        position: relative;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: #fdfae7;
+      }
+      .scene {
+        position: absolute;
+        inset: 0;
         width: 100%;
         height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: Inter, ui-sans-serif, system-ui, sans-serif;
-      }
-      #title {
-        color: #f4f4f5;
-        font-size: 72px;
-        font-weight: 600;
-        letter-spacing: -0.03em;
       }
     </style>
   </head>
@@ -39,17 +37,94 @@
       id="root"
       data-composition-id="main"
       data-start="0"
-      data-duration="10"
-      data-width="1920"
-      data-height="1080"
+      data-duration="31"
+      data-width="1080"
+      data-height="1920"
     >
-      <h1 id="title" class="clip" data-start="0" data-duration="10" data-track-index="0">Title</h1>
+      <div
+        id="el-01-link-vira-app"
+        class="scene"
+        data-composition-id="01-link-vira-app"
+        data-composition-src="compositions/frames/01-link-vira-app.html"
+        data-start="0"
+        data-duration="4.5"
+        data-track-index="0"
+      ></div>
+
+      <div
+        id="el-02-iphone-compartilhar"
+        class="scene"
+        data-composition-id="02-iphone-compartilhar"
+        data-composition-src="compositions/frames/02-iphone-compartilhar.html"
+        data-start="4"
+        data-duration="5.5"
+        data-track-index="1"
+      ></div>
+
+      <div
+        id="el-03-iphone-adicionar-tela"
+        class="scene"
+        data-composition-id="03-iphone-adicionar-tela"
+        data-composition-src="compositions/frames/03-iphone-adicionar-tela.html"
+        data-start="9"
+        data-duration="5.5"
+        data-track-index="0"
+      ></div>
+
+      <div
+        id="el-04-iphone-confirmar"
+        class="scene"
+        data-composition-id="04-iphone-confirmar"
+        data-composition-src="compositions/frames/04-iphone-confirmar.html"
+        data-start="14"
+        data-duration="5"
+        data-track-index="1"
+      ></div>
+
+      <div
+        id="el-05-android"
+        class="scene"
+        data-composition-id="05-android"
+        data-composition-src="compositions/frames/05-android.html"
+        data-start="18.5"
+        data-duration="7.5"
+        data-track-index="0"
+      ></div>
+
+      <div
+        id="el-06-pronto"
+        class="scene"
+        data-composition-id="06-pronto"
+        data-composition-src="compositions/frames/06-pronto.html"
+        data-start="25.5"
+        data-duration="5.5"
+        data-track-index="1"
+      ></div>
+
     </div>
+
     <script>
-      const tl = gsap.timeline({ paused: true });
-      // Example: tl.fromTo("#title", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6 }, 0);
-      window.__timelines["main"] = tl;
-      tl.seek(0);
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+      // ── frame transitions (injected by transitions.mjs) ──
+      (function () { var tl = window.__timelines["main"];
+        tl.to("#el-01-link-vira-app", { opacity: 0, duration: 0.5, ease: "power2.inOut" }, 4);
+        tl.fromTo("#el-02-iphone-compartilhar", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.inOut" }, 4);
+        tl.addLabel("hf:transition:01-link-vira-app:02-iphone-compartilhar:crossfade", 4);
+        tl.to("#el-02-iphone-compartilhar", { opacity: 0, duration: 0.5, ease: "power2.inOut" }, 9);
+        tl.fromTo("#el-03-iphone-adicionar-tela", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.inOut" }, 9);
+        tl.addLabel("hf:transition:02-iphone-compartilhar:03-iphone-adicionar-tela:crossfade", 9);
+        tl.to("#el-03-iphone-adicionar-tela", { opacity: 0, duration: 0.5, ease: "power2.inOut" }, 14);
+        tl.fromTo("#el-04-iphone-confirmar", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.inOut" }, 14);
+        tl.addLabel("hf:transition:03-iphone-adicionar-tela:04-iphone-confirmar:crossfade", 14);
+        tl.to("#el-04-iphone-confirmar", { opacity: 0, duration: 0.5, ease: "power2.inOut" }, 18.5);
+        tl.fromTo("#el-05-android", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.inOut" }, 18.5);
+        tl.addLabel("hf:transition:04-iphone-confirmar:05-android:crossfade", 18.5);
+        tl.to("#el-05-android", { opacity: 0, duration: 0.5, ease: "power2.inOut" }, 25.5);
+        tl.fromTo("#el-06-pronto", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.inOut" }, 25.5);
+        tl.addLabel("hf:transition:05-android:06-pronto:crossfade", 25.5);
+        tl.to({}, { duration: 31 }, 0); // full-span anchor — main.duration() == composition total (Studio master duration)
+      })();
     </script>
   </body>
 </html>

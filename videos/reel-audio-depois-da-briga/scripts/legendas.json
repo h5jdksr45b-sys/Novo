@@ -1,8 +1,13 @@
 [
  {
   "start": 4.11,
-  "dur": 1.23,
-  "text": "Pra muita gente com borderline,"
+  "dur": 0.61,
+  "text": "Pra muita gente"
+ },
+ {
+  "start": 4.72,
+  "dur": 0.62,
+  "text": "com *borderline*,"
  },
  {
   "start": 5.34,
@@ -12,7 +17,7 @@
  {
   "start": 6.41,
   "dur": 0.57,
-  "text": "ser mal-entendido"
+  "text": "ser *mal-entendido*"
  },
  {
   "start": 6.98,
@@ -22,7 +27,7 @@
  {
   "start": 7.83,
   "dur": 0.99,
-  "text": "para perder a pessoa."
+  "text": "para *perder a pessoa*."
  },
  {
   "start": 8.82,
@@ -32,32 +37,37 @@
  {
   "start": 9.63,
   "dur": 1.3,
-  "text": "tenta impedir isso."
+  "text": "tenta *impedir* isso."
  },
  {
   "start": 10.93,
   "dur": 0.95,
-  "text": "Daí ele explica,"
+  "text": "Daí ele *explica*,"
  },
  {
   "start": 11.88,
   "dur": 1.35,
-  "text": "depois explica a explicação,"
+  "text": "depois explica a *explicação*,"
  },
  {
   "start": 13.23,
-  "dur": 1.08,
-  "text": "e os áudios vão crescendo"
+  "dur": 0.54,
+  "text": "e os áudios"
+ },
+ {
+  "start": 13.76,
+  "dur": 0.54,
+  "text": "vão *crescendo*"
  },
  {
   "start": 14.3,
   "dur": 1.06,
-  "text": "junto com o medo."
+  "text": "junto com o *medo*."
  },
  {
   "start": 15.36,
   "dur": 0.77,
-  "text": "Do outro lado,"
+  "text": "Do *outro lado*,"
  },
  {
   "start": 16.13,
@@ -71,38 +81,63 @@
  },
  {
   "start": 18.44,
-  "dur": 1.81,
-  "text": "muitas vezes para no começo."
+  "dur": 0.62,
+  "text": "muitas vezes"
+ },
+ {
+  "start": 19.06,
+  "dur": 1.19,
+  "text": "*para no começo*."
  },
  {
   "start": 20.25,
-  "dur": 1.21,
-  "text": "E tudo bem falar assim:"
+  "dur": 0.61,
+  "text": "E tudo bem"
+ },
+ {
+  "start": 20.86,
+  "dur": 0.61,
+  "text": "falar assim:"
  },
  {
   "start": 21.46,
-  "dur": 1.65,
-  "text": "olha, eu só vi o começo,"
+  "dur": 0.76,
+  "text": "olha, eu só vi"
+ },
+ {
+  "start": 22.22,
+  "dur": 0.89,
+  "text": "o *começo*,"
  },
  {
   "start": 25.58,
-  "dur": 1.05,
-  "text": "Se é você que grava"
+  "dur": 0.6,
+  "text": "Se é você"
+ },
+ {
+  "start": 26.18,
+  "dur": 0.45,
+  "text": "que grava"
  },
  {
   "start": 26.63,
-  "dur": 1.61,
-  "text": "um áudio longo, tudo bem."
+  "dur": 0.75,
+  "text": "um áudio longo,"
+ },
+ {
+  "start": 27.38,
+  "dur": 0.86,
+  "text": "*tudo bem*."
  },
  {
   "start": 28.24,
   "dur": 1.33,
-  "text": "Depois de uma briga,"
+  "text": "Depois de uma *briga*,"
  },
  {
   "start": 29.57,
   "dur": 1.95,
-  "text": "escreve antes numa linha"
+  "text": "escreve antes *numa linha*"
  },
  {
   "start": 31.52,
@@ -112,22 +147,22 @@
  {
   "start": 32.09,
   "dur": 1.11,
-  "text": "que a pessoa entenda."
+  "text": "que a pessoa *entenda*."
  },
  {
   "start": 34.41,
   "dur": 0.48,
-  "text": "Se ela quiser,"
+  "text": "Se ela *quiser*,"
  },
  {
   "start": 34.89,
   "dur": 1.21,
-  "text": "você explica o resto."
+  "text": "você explica o *resto*."
  },
  {
   "start": 36.1,
   "dur": 0.9,
-  "text": "Se ninguém nunca"
+  "text": "Se *ninguém nunca*"
  },
  {
   "start": 37.0,

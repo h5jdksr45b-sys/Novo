@@ -24,7 +24,7 @@ naquela hora,
 
 7
 00:00:06,410 --> 00:00:06,980
-ser mal-entendido
+ser mal entendido
 
 8
 00:00:06,980 --> 00:00:07,830

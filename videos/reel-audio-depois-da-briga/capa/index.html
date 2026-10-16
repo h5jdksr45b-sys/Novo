@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="pt-BR" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Anton"; src: url("assets/fonts/anton.woff2") format("woff2"); }
+      @font-face { font-family: "Instrument Serif"; font-style: italic; src: url("assets/fonts/instrument-serif-italic.woff2") format("woff2"); }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #000; }
+      #foto { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; object-fit: cover; }
+      #sombra { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px;
+        background: linear-gradient(180deg, rgba(0,0,0,0) 45%, rgba(0,0,0,.55) 68%, rgba(0,0,0,.75) 100%); }
+      #titulo { position: absolute; left: 70px; width: 940px; top: 1060px; text-align: center; color: #fff;
+        font-family: "Anton", sans-serif; font-size: 118px; line-height: 1.02; text-transform: uppercase;
+        text-shadow: 0 0 18px rgba(0,0,0,.8), 0 4px 6px rgba(0,0,0,.9); }
+      #titulo em { font-family: "Instrument Serif", serif; font-style: italic; text-transform: none; color: #FFD23F;
+        font-size: 1.22em; line-height: .9; }
+      #apoio { position: absolute; left: 0; width: 1080px; top: 1500px; text-align: center; color: #fff;
+        font-family: "Instrument Serif", serif; font-style: italic; font-size: 64px;
+        text-shadow: 0 0 14px rgba(0,0,0,.9); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="capa" data-start="0" data-duration="1" data-width="1080" data-height="1920">
+      <img id="foto" class="clip" src="assets/rosto.jpg" data-start="0" data-duration="1" data-track-index="0" />
+      <div id="sombra" class="clip" data-start="0" data-duration="1" data-track-index="1"></div>
+      <div id="titulo" class="clip" data-start="0" data-duration="1" data-track-index="2">Por que o <em>borderline</em> manda tanto áudio?</div>
+      <div id="apoio" class="clip" data-start="0" data-duration="1" data-track-index="3">depois de uma briga</div>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      window.__timelines["capa"] = gsap.timeline({ paused: true });
+    </script>
+  </body>
+</html>

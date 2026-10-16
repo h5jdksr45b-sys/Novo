@@ -5,7 +5,7 @@ TEXTO_NO_VIDEO = False  # legendas e texto grande saem do vídeo e vão para o .
 # Trechos de fala alinhados pelas pausas detectadas no áudio (ffmpeg silencedetect)
 SEG = [
  (4.11, 5.95, ["Pra muita gente", "com *borderline*,", "naquela hora,"]),
- (6.41, 8.49, ["ser *mal-entendido*", "parece o primeiro passo", "para *perder a pessoa*."]),
+ (6.41, 8.49, ["ser *mal entendido*", "parece o primeiro passo", "para *perder a pessoa*."]),
  (8.82, 10.57, ["Então cada frase", "tenta *impedir* isso."]),
  (10.93, 11.64, ["Daí ele *explica*,"]),
  (11.88, 15.11, ["depois explica a *explicação*,", "e os áudios", "vão *crescendo*", "junto com o *medo*."]),
@@ -31,11 +31,11 @@ GRANDE = [
 ]
 # Efeitos sonoros: sempre nas pausas da fala e em volume baixo; o riser fica baixo e entra em fade
 SFX = [
- ("sfx-clique-1", "assets/sfx/clique_a.mp3", 6.26, 0.50, 0.0, 0.35, None),
- ("sfx-whoosh-grava", "assets/sfx/whoosh_fino_a.mp3", 10.45, 0.75, 0.0, 0.45, [(0,1),(0.55,1),(0.75,0)]),
- ("sfx-swipe-recebe", "assets/sfx/swipe_d.mp3", 15.00, 0.44, 0.0, 0.35, None),
- ("sfx-riser-virada", "assets/sfx/riser_longo_fino.mp3", 25.10, 3.00, 6.34, 0.35, [(0,0),(1.5,1),(3.0,1)]),
- ("sfx-clique-2", "assets/sfx/clique_a.mp3", 33.10, 0.50, 0.0, 0.35, None),
+ ("sfx-clique-1", "assets/sfx/clique_a.mp3", 6.26, 0.50, 0.0, 0.07, None),
+ ("sfx-whoosh-grava", "assets/sfx/whoosh_fino_a.mp3", 10.45, 0.75, 0.0, 0.25, [(0,1),(0.55,1),(0.75,0)]),
+ ("sfx-swipe-recebe", "assets/sfx/swipe_d.mp3", 15.00, 0.44, 0.0, 0.09, None),
+ ("sfx-riser-virada", "assets/sfx/riser_longo_fino.mp3", 25.10, 3.00, 6.34, 0.15, [(0,0),(1.5,1),(3.0,1)]),
+ ("sfx-clique-2", "assets/sfx/clique_a.mp3", 33.10, 0.50, 0.0, 0.07, None),
 ]
 # Zoom punch no rosto: entra junto com o clique e volta no próximo trecho
 PUNCH = [(6.41, 8.82), (33.20, 34.41)]

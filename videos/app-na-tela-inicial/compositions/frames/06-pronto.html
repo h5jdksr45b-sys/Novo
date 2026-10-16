@@ -1,0 +1,348 @@
+<template>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap");
+
+    #root {
+      position: absolute;
+      inset: 0;
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+      font-family: "Inter", sans-serif;
+      color: #111111;
+    }
+    #root * { box-sizing: border-box; }
+
+    .pronto-06-bg {
+      position: absolute;
+      inset: 0;
+      background: #fdfae7;
+    }
+    .pronto-06-rings {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1080px;
+      height: 1920px;
+    }
+
+    /* headline */
+    .pronto-06-head {
+      position: absolute;
+      left: 54px;
+      right: 54px;
+      top: 190px;
+      text-align: center;
+    }
+    .pronto-06-accent {
+      width: 60px;
+      height: 4px;
+      border-radius: 2px;
+      background: #1e2bfa;
+      margin: 0 auto 34px;
+    }
+    .pronto-06-h1 {
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 700;
+      font-size: 132px;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      color: #111111;
+    }
+    .pronto-06-sub {
+      margin-top: 26px;
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 500;
+      font-size: 50px;
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+      color: #111111;
+    }
+
+    /* phone */
+    .pronto-06-phone {
+      position: absolute;
+      left: 300px;
+      top: 540px;
+      width: 480px;
+      height: 1040px;
+      border-radius: 72px;
+      border: 7px solid rgba(30, 43, 250, 0.32);
+      background: rgba(30, 43, 250, 0.06);
+      padding: 10px;
+    }
+    .pronto-06-screen {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 60px;
+      overflow: hidden;
+      background: linear-gradient(180deg, #f3f1ea 0%, #ecebf2 100%);
+    }
+    .pronto-06-island {
+      position: absolute;
+      left: 50%;
+      top: 18px;
+      width: 120px;
+      height: 32px;
+      margin-left: -60px;
+      border-radius: 100px;
+      background: #1b1b1f;
+    }
+    .pronto-06-status-l {
+      position: absolute;
+      left: 40px;
+      top: 28px;
+      width: 46px;
+      height: 12px;
+      border-radius: 6px;
+      background: #c9c8cc;
+    }
+    .pronto-06-status-r {
+      position: absolute;
+      right: 40px;
+      top: 28px;
+      width: 56px;
+      height: 12px;
+      border-radius: 6px;
+      background: #c9c8cc;
+    }
+    .pronto-06-grid {
+      position: absolute;
+      left: 26px;
+      right: 26px;
+      top: 100px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      row-gap: 34px;
+    }
+    .pronto-06-cell {
+      position: relative;
+      height: 116px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .pronto-06-ph {
+      width: 80px;
+      height: 80px;
+      border-radius: 20px;
+      background: #d6d5da;
+    }
+    .pronto-06-ph.pronto-06-alt { background: #cfced4; }
+    .pronto-06-ph.pronto-06-alt2 { background: #dddce1; }
+    .pronto-06-phl {
+      margin-top: 12px;
+      width: 50px;
+      height: 9px;
+      border-radius: 5px;
+      background: #d9d8dd;
+    }
+    .pronto-06-slot {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      width: 80px;
+      height: 80px;
+      margin-left: -40px;
+      border-radius: 20px;
+      border: 2px dashed rgba(30, 43, 250, 0.22);
+    }
+    .pronto-06-ring {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      width: 80px;
+      height: 80px;
+      margin-left: -40px;
+      border-radius: 24px;
+      border: 4px solid #1e2bfa;
+      opacity: 0;
+    }
+    .pronto-06-icon {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      width: 80px;
+      height: 80px;
+      margin-left: -40px;
+      border-radius: 20px;
+      background: #1e2bfa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .pronto-06-icon svg { width: 50px; height: 50px; display: block; }
+    .pronto-06-label {
+      position: absolute;
+      left: -30px;
+      right: -30px;
+      top: 92px;
+      text-align: center;
+      white-space: nowrap;
+      font-family: "Inter", sans-serif;
+      font-weight: 500;
+      font-size: 17px;
+      color: #111111;
+    }
+    .pronto-06-dock {
+      position: absolute;
+      left: 16px;
+      right: 16px;
+      bottom: 22px;
+      height: 120px;
+      border-radius: 40px;
+      background: rgba(30, 43, 250, 0.05);
+      border: 1.5px solid rgba(30, 43, 250, 0.12);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      align-items: center;
+      justify-items: center;
+      padding: 0 10px;
+    }
+    .pronto-06-pager {
+      position: absolute;
+      left: 50%;
+      bottom: 164px;
+      width: 60px;
+      height: 10px;
+      margin-left: -30px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .pronto-06-pager span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #c9c8cc;
+    }
+    .pronto-06-pager span:first-child { background: #8f8e95; }
+
+    /* signature */
+    .pronto-06-sig {
+      position: absolute;
+      left: 54px;
+      right: 54px;
+      top: 1532px;
+      text-align: center;
+      font-family: "Inter", sans-serif;
+      font-weight: 400;
+      font-size: 30px;
+      line-height: 1.3;
+      color: #6b6b6b;
+    }
+  </style>
+
+  <div id="root" data-composition-id="06-pronto" data-width="1080" data-height="1920" data-duration="5.5">
+    <div class="clip pronto-06-bg" id="pronto-06-bg" data-start="0" data-duration="5.5" data-track-index="0"></div>
+
+    <svg class="clip pronto-06-rings" id="pronto-06-rings" data-start="0" data-duration="5.5" data-track-index="1" viewBox="0 0 1080 1920">
+      <g fill="none" stroke="#1e2bfa">
+        <circle cx="540" cy="1060" r="330" stroke-opacity="0.07" stroke-width="1.5" />
+        <circle cx="540" cy="1060" r="450" stroke-opacity="0.055" stroke-width="1.5" />
+        <circle cx="540" cy="1060" r="570" stroke-opacity="0.04" stroke-width="1.5" />
+        <circle cx="540" cy="1060" r="690" stroke-opacity="0.03" stroke-width="1.5" />
+      </g>
+    </svg>
+
+    <div class="clip pronto-06-phone" id="pronto-06-phone" data-start="0" data-duration="5.5" data-track-index="2">
+      <div class="pronto-06-screen">
+        <div class="pronto-06-island"></div>
+        <div class="pronto-06-status-l"></div>
+        <div class="pronto-06-status-r"></div>
+
+        <div class="pronto-06-grid">
+          <div class="pronto-06-cell"><div class="pronto-06-ph"></div><div class="pronto-06-phl"></div></div>
+          <div class="pronto-06-cell"><div class="pronto-06-ph pronto-06-alt"></div><div class="pronto-06-phl"></div></div>
+          <div class="pronto-06-cell"><div class="pronto-06-ph pronto-06-alt2"></div><div class="pronto-06-phl"></div></div>
+          <div class="pronto-06-cell"><div class="pronto-06-ph"></div><div class="pronto-06-phl"></div></div>
+
+          <div class="pronto-06-cell"><div class="pronto-06-ph pronto-06-alt2"></div><div class="pronto-06-phl"></div></div>
+          <div class="pronto-06-cell"><div class="pronto-06-ph"></div><div class="pronto-06-phl"></div></div>
+          <div class="pronto-06-cell"><div class="pronto-06-ph pronto-06-alt"></div><div class="pronto-06-phl"></div></div>
+          <div class="pronto-06-cell"><div class="pronto-06-ph pronto-06-alt2"></div><div class="pronto-06-phl"></div></div>
+
+          <div class="pronto-06-cell"><div class="pronto-06-ph pronto-06-alt"></div><div class="pronto-06-phl"></div></div>
+          <div class="pronto-06-cell" id="pronto-06-target">
+            <div class="pronto-06-slot" id="pronto-06-slot"></div>
+            <div class="pronto-06-ring" id="pronto-06-ring"></div>
+            <div class="pronto-06-icon" id="pronto-06-icon">
+              <svg viewBox="0 0 48 48" aria-hidden="true">
+                <path d="M24 5 L39 10.5 V22.5 C39 32 32.6 39.6 24 43 C15.4 39.6 9 32 9 22.5 V10.5 Z" fill="none" stroke="#ffffff" stroke-width="3.2" stroke-linejoin="round" />
+                <line x1="24" y1="15" x2="24" y2="27" stroke="#ffffff" stroke-width="3.6" stroke-linecap="round" />
+                <circle cx="24" cy="33.2" r="2.2" fill="#ffffff" />
+              </svg>
+            </div>
+            <div class="pronto-06-label" id="pronto-06-label">Botão de Apoio</div>
+          </div>
+          <div class="pronto-06-cell"><div class="pronto-06-ph"></div><div class="pronto-06-phl"></div></div>
+          <div class="pronto-06-cell"><div class="pronto-06-ph pronto-06-alt2"></div><div class="pronto-06-phl"></div></div>
+
+          <div class="pronto-06-cell"><div class="pronto-06-ph pronto-06-alt2"></div><div class="pronto-06-phl"></div></div>
+          <div class="pronto-06-cell"><div class="pronto-06-ph pronto-06-alt"></div><div class="pronto-06-phl"></div></div>
+          <div class="pronto-06-cell"><div class="pronto-06-ph"></div><div class="pronto-06-phl"></div></div>
+          <div class="pronto-06-cell"><div class="pronto-06-ph pronto-06-alt"></div><div class="pronto-06-phl"></div></div>
+
+          <div class="pronto-06-cell"><div class="pronto-06-ph"></div><div class="pronto-06-phl"></div></div>
+          <div class="pronto-06-cell"><div class="pronto-06-ph pronto-06-alt2"></div><div class="pronto-06-phl"></div></div>
+          <div class="pronto-06-cell"><div class="pronto-06-ph pronto-06-alt"></div><div class="pronto-06-phl"></div></div>
+          <div class="pronto-06-cell"><div class="pronto-06-ph"></div><div class="pronto-06-phl"></div></div>
+        </div>
+
+        <div class="pronto-06-pager"><span></span><span></span><span></span></div>
+
+        <div class="pronto-06-dock">
+          <div class="pronto-06-ph pronto-06-alt"></div>
+          <div class="pronto-06-ph"></div>
+          <div class="pronto-06-ph pronto-06-alt2"></div>
+          <div class="pronto-06-ph pronto-06-alt"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="clip pronto-06-head" id="pronto-06-head" data-start="0" data-duration="5.5" data-track-index="3">
+      <div class="pronto-06-accent" id="pronto-06-accent"></div>
+      <div class="pronto-06-h1" id="pronto-06-h1">Pronto.</div>
+      <div class="pronto-06-sub" id="pronto-06-sub">Abre com um toque, como um app.</div>
+    </div>
+
+    <div class="clip pronto-06-sig" id="pronto-06-sig" data-start="0" data-duration="5.5" data-track-index="4">Dr. Fabio Schmidt · Médico · CRM-SP 183549</div>
+  </div>
+
+  <script>
+    (function () {
+      window.__timelines = window.__timelines || {};
+      var root = document.querySelector('[data-composition-id="06-pronto"]');
+      var q = function (s) { return root.querySelectorAll(s); };
+      var tl = gsap.timeline({ paused: true });
+
+      // Scene 1 (0.0-1.0): phone settles in, placeholder grid fills, one slot left empty
+      tl.fromTo("#pronto-06-rings", { opacity: 0, scale: 0.94, transformOrigin: "540px 1060px" }, { opacity: 1, scale: 1, duration: 1.2, ease: "power2.out" }, 0);
+      tl.fromTo("#pronto-06-phone", { y: 70, opacity: 0, scale: 0.97 }, { y: 0, opacity: 1, scale: 1, duration: 0.7, ease: "power3.out" }, 0);
+      tl.fromTo(q(".pronto-06-grid .pronto-06-ph, .pronto-06-grid .pronto-06-phl, .pronto-06-dock .pronto-06-ph"),
+        { opacity: 0, scale: 0.8 },
+        { opacity: 1, scale: 1, duration: 0.35, ease: "power2.out", stagger: 0.018 }, 0.2);
+      tl.fromTo("#pronto-06-slot", { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power1.out" }, 0.55);
+
+      // Scene 2 (1.0-2.0): cobalt shield icon spring-pops into the slot, one ring pulse
+      tl.fromTo("#pronto-06-icon", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(2.4)" }, 1.0);
+      tl.to("#pronto-06-slot", { opacity: 0, duration: 0.2, ease: "power1.out" }, 1.05);
+      tl.fromTo("#pronto-06-ring", { scale: 1, opacity: 0.7 }, { scale: 1.9, opacity: 0, duration: 0.75, ease: "power2.out" }, 1.3);
+      tl.fromTo("#pronto-06-label", { y: 10, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: "power2.out" }, 1.3);
+
+      // Scene 3 (2.0-3.2): headline above the phone
+      tl.fromTo("#pronto-06-accent", { scaleX: 0, transformOrigin: "50% 50%" }, { scaleX: 1, duration: 0.4, ease: "power3.out" }, 2.0);
+      tl.fromTo("#pronto-06-h1", { y: 46, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55, ease: "power3.out" }, 2.05);
+      tl.fromTo("#pronto-06-sub", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55, ease: "power3.out" }, 2.6);
+
+      // Scene 4 (3.2-4.2): signature fades in, small and muted
+      tl.fromTo("#pronto-06-sig", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, 3.3);
+
+      // Scene 5 (4.2-5.5): held final read, still
+      tl.set({}, {}, 5.5);
+
+      window.__timelines["06-pronto"] = tl;
+    })();
+  </script>
+</template>

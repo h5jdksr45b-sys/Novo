@@ -1,0 +1,31 @@
+Roteiro de narração. Vídeo sem áudio de voz e sem legenda. Só animação e cliques.
+
+Cena 1. Abertura. Início 0:00 (4s)
+Tela: Você não escolheu sentir. Mas fez algo com isso.
+Narração: Muita gente controla o que faz, mas não o que sente na hora.
+
+Cena 2. Fluxo. Início 0:04 (7s)
+Tela: Emoção surge, Razão percebe, Vontade consente ou não, Ato. Etapa 1 sem controle. Etapas 3 e 4 com controle.
+Narração: Para Tomás de Aquino, a emoção chega antes da razão. A escolha mora no intervalo.
+
+Cena 3. Tabela. Início 0:11 (7s)
+Tela: Antecedente, veio antes da escolha, diminui a culpa. Consequente, foi alimentada, não diminui.
+Rodapé: Tomás de Aquino. Suma Teológica I-II, q.77, a.6
+Narração: Emoção que arrasta o juízo diminui a culpa. Emoção alimentada, não.
+
+Cena 4. Dois cards. Início 0:18 (6s)
+Tela: Impetuosidade, agiu antes de pensar. Fraqueza, pensou, mas não sustentou.
+Rodapé: Tomás de Aquino. Suma Teológica II-II, q.156, a.1
+Narração: Impulso é pular a ponderação. Não é maldade fria.
+
+Cena 5. Síntese. Início 0:24 (6s)
+Tela: Você não responde pelo impulso que surgiu. Responde pelo que faz com ele.
+Assinatura: Dr. Fabio Schmidt, médico, pós-graduado em psiquiatria. Conteúdo educativo.
+Narração: O sofrimento diminui a culpa. Não apaga a responsabilidade.
+
+Marcas de clique (para sincronizar a voz)
+0:00.1 frase 1 | 0:01.3 frase 2
+0:04.2 emoção | 0:04.7 sem controle | 0:05.1 razão | 0:06.1 vontade | 0:07.0 ato | 0:08.1 caixa com controle
+0:11.6 antecedente | 0:12.3 diminui a culpa | 0:13.9 consequente | 0:14.5 não diminui | 0:16.0 fonte
+0:18.3 impetuosidade | 0:19.5 fraqueza | 0:21.2 fonte
+0:24.1 relógio | 0:24.4 frase 1 | 0:25.6 frase 2

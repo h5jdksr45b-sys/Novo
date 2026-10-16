@@ -159,7 +159,7 @@ doc = f'''<!doctype html>
   <body>
     <div id="root" data-composition-id="main" data-start="0" data-duration="{DUR}" data-width="1080" data-height="1920">
       <div id="a-visual" class="inner">
-        <video id="a-roll" class="clip" src="assets/fala.mp4" playsinline data-has-audio="true"
+        <video id="a-roll" class="clip" src="assets/fala_hq.mp4" playsinline data-has-audio="true"
           data-start="0" data-duration="{DUR}" data-track-index="0"></video>
       </div>
 {chr(10).join(partes)}

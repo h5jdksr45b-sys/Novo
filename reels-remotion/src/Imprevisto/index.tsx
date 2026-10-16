@@ -118,6 +118,7 @@ const Palavras: React.FC<{
         textTransform: "uppercase",
         fontSize: tamanho,
         lineHeight: 1.08,
+        textWrap: "balance",
         color: cor,
       }}
     >
@@ -340,9 +341,9 @@ const CenaMedo: React.FC = () => {
   const tremor = frame > 112 ? Math.sin(frame * 2.3) * 3 : 0;
   return (
     <Cena duracao={CENAS.medo}>
-      <Palavras texto="Quantas vezes essa mensagem saiu porque o" atraso={2} tamanho={84} top={260} />
+      <Palavras texto="Quantas vezes essa mensagem saiu porque" atraso={2} tamanho={84} top={260} />
       <Palavras
-        texto="medo do encontro ficou maior que a vontade de ir?"
+        texto="o medo do encontro ficou maior que a vontade de ir?"
         atraso={24}
         tamanho={84}
         top={470}

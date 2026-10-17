@@ -50,6 +50,15 @@ Distribua as variações. Não entregue dez frases que mudam só uma palavra. Pe
 
 Depois de cada opção, em parênteses, diga em poucas palavras o que mudou. Exemplo: (gramática: pergunta em vez de afirmação).
 
+## Modo polêmico
+
+Quando o Dr. Fabio pedir temas polêmicos ou inusitados, as estruturas continuam vindo das três visões do banco, mas o tema pode sair do banco. Cada opção então:
+- contraria uma crença comum sobre borderline, de pacientes, famílias ou profissionais;
+- é verdadeira. Polêmica falsa, estigmatizante ou que diagnostica terceiros fica de fora;
+- indica o que a sustenta: fonte científica a conferir, observação clínica do Dr. Fabio ou hipótese editorial.
+
+Entregue em tabela: capa, estrutura base (código), crença que contraria, o que sustenta.
+
 ## Regras da frase de capa
 
 - Português brasileiro, palavras do dia a dia, frase curta. Uma ideia por capa.

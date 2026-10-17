@@ -1,0 +1,800 @@
+<title>Painel do Consultório</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,600;1,700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: app de uma coluna, conteúdo rolando acima de uma barra de abas líquida fixa no rodapé.
+   Visual da marca Dr. Fabio Schmidt: preto, dourado e creme. Tema escuro único, escolhido de propósito. */
+:root{
+  color-scheme:dark;
+  --ink:#0a0908;
+  --surface:#151311;
+  --surface-2:#1e1b18;
+  --line:rgba(245,240,235,.09);
+  --line-2:rgba(245,240,235,.16);
+  --cream:#f5f0eb;
+  --muted:#b3aa9d;
+  --dim:#80786d;
+  --gold:#d4a853;
+  --gold-soft:rgba(212,168,83,.14);
+  --ember:#d0573a;
+  --ok:#7fb07a;
+  --warn:#e0a43c;
+  --bad:#e06a52;
+  --f-display:'Playfair Display',Georgia,'Times New Roman',serif;
+  --f-body:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --f-mono:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,monospace;
+  --dock-h:64px;
+}
+html,body{height:100%}
+body{background:var(--ink);color:var(--cream);font-family:var(--f-body);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--ink)}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:6px}
+a{color:var(--gold)}
+
+.app{max-width:760px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px calc(var(--dock-h) + 56px + env(safe-area-inset-bottom,0px))}
+
+/* Cabeçalho */
+.top{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-bottom:18px;border-bottom:1px solid var(--line);margin-bottom:22px}
+.top h1{font-family:var(--f-display);font-style:italic;font-weight:700;font-size:clamp(1.6rem,5vw,2.1rem);line-height:1.1;letter-spacing:-.01em;text-wrap:balance}
+.top .date{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:6px}
+.toggle{display:inline-flex;align-items:center;gap:8px;background:none;border:1px solid var(--line-2);border-radius:999px;padding:6px 12px;font-size:.8rem;color:var(--muted)}
+.toggle[aria-pressed="true"]{border-color:var(--gold);color:var(--gold)}
+
+/* Elementos comuns */
+.eyebrow{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+h2{font-family:var(--f-display);font-style:italic;font-weight:600;font-size:1.35rem;line-height:1.2;text-wrap:balance}
+.section{display:flex;flex-direction:column;gap:12px;margin-bottom:28px}
+.row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.spacer{flex:1}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--line-2);background:var(--surface-2);border-radius:10px;padding:8px 14px;font-size:.85rem;font-weight:500;text-decoration:none;color:var(--cream);white-space:nowrap}
+.btn:hover{border-color:var(--gold)}
+.btn.primary{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+.btn.ghost{background:none}
+.btn.small{padding:5px 10px;font-size:.78rem;border-radius:8px}
+.btn.danger{border-color:var(--bad);color:var(--bad);background:none}
+.btn:disabled{opacity:.5;cursor:default}
+.pill{display:inline-flex;align-items:center;gap:5px;font-family:var(--f-mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;border-radius:999px;padding:3px 8px;border:1px solid var(--line-2);color:var(--muted);white-space:nowrap}
+.pill.first{border-color:var(--gold);color:var(--gold)}
+.pill.warn{border-color:var(--warn);color:var(--warn)}
+.pill.ok{border-color:var(--ok);color:var(--ok)}
+.pill.bad{border-color:var(--bad);color:var(--bad)}
+.field{width:100%;background:var(--surface);border:1px solid var(--line-2);border-radius:10px;padding:10px 12px;font-size:.92rem}
+.field:focus{border-color:var(--gold);outline:none}
+textarea.field{min-height:140px;resize:vertical;line-height:1.5}
+.chips{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+.chip{border:1px solid var(--line-2);background:none;border-radius:999px;padding:6px 12px;font-size:.8rem;color:var(--muted);white-space:nowrap}
+.chip[aria-pressed="true"]{background:var(--cream);border-color:var(--cream);color:var(--ink);font-weight:600}
+.list{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.item{display:flex;gap:12px;align-items:flex-start;padding:14px 4px;border-bottom:1px solid var(--line);background:none;border-left:0;border-right:0;border-top:0;text-align:left;width:100%}
+button.item:hover{background:var(--surface)}
+.item .main{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.item .t{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.item .s{color:var(--muted);font-size:.85rem;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.item .meta{font-family:var(--f-mono);font-size:.72rem;color:var(--dim);white-space:nowrap;font-variant-numeric:tabular-nums}
+.avatar{flex:none;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--surface-2);border:1px solid var(--line-2);font-family:var(--f-display);font-style:italic;font-weight:600;color:var(--gold)}
+.notice{border:1px dashed var(--line-2);border-radius:12px;padding:16px;color:var(--muted);font-size:.9rem;display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+.notice.err{border-style:solid;border-color:rgba(224,106,82,.45)}
+.skeleton{height:14px;border-radius:6px;background:linear-gradient(90deg,var(--surface) 0%,var(--surface-2) 50%,var(--surface) 100%);background-size:200% 100%;animation:sk 1.4s linear infinite}
+@keyframes sk{to{background-position:-200% 0}}
+.loading{display:flex;flex-direction:column;gap:10px;padding:8px 0}
+.stamp{font-family:var(--f-mono);font-size:.68rem;color:var(--dim)}
+
+/* Hoje */
+.today-card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:14px}
+.today-stats{display:flex;gap:28px;flex-wrap:wrap}
+.stat .n{font-family:var(--f-display);font-style:italic;font-weight:700;font-size:2rem;line-height:1;color:var(--cream);font-variant-numeric:tabular-nums}
+.stat .l{font-size:.78rem;color:var(--muted);margin-top:4px}
+.next{border-top:1px solid var(--line);padding-top:12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.next b{color:var(--gold);font-weight:600}
+.slot{display:grid;grid-template-columns:62px 1fr;gap:12px;padding:14px 4px;border-bottom:1px solid var(--line);align-items:start}
+.slot .time{font-family:var(--f-mono);font-size:.9rem;color:var(--cream);font-variant-numeric:tabular-nums;padding-top:1px}
+.slot .time small{display:block;color:var(--dim);font-size:.7rem}
+.slot.past{opacity:.48}
+.slot.now .time{color:var(--gold)}
+.slot .body{min-width:0;display:flex;flex-direction:column;gap:6px}
+.slot .name{font-weight:600;font-size:1rem}
+.live{width:8px;height:8px;border-radius:50%;background:var(--gold);display:inline-block;box-shadow:0 0 0 0 rgba(212,168,83,.6);animation:pulse 1.8s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 8px rgba(212,168,83,0)}100%{box-shadow:0 0 0 0 rgba(212,168,83,0)}}
+.day-h{display:flex;align-items:baseline;justify-content:space-between;padding:16px 4px 6px;border-bottom:1px solid var(--line)}
+.day-h span:first-child{font-weight:600}
+
+/* Gastos */
+.money{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.money .box{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;min-width:0}
+.money .v{font-family:var(--f-mono);font-size:1.05rem;font-variant-numeric:tabular-nums;margin-top:4px;overflow-wrap:anywhere}
+.money .v.neg{color:var(--bad)}.money .v.pos{color:var(--ok)}
+.cat{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;align-items:center;font-size:.86rem}
+.cat .bar{grid-column:1/-1;height:6px;border-radius:3px;background:var(--surface-2);overflow:hidden}
+.cat .bar i{display:block;height:100%;background:var(--gold);border-radius:3px}
+.cat .amt{font-family:var(--f-mono);font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.form-grid .full{grid-column:1/-1}
+label.lab{display:flex;flex-direction:column;gap:5px;font-size:.78rem;color:var(--muted);min-width:0}
+.sug{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.sug .src{font-size:.8rem;color:var(--dim);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.month-nav{display:flex;align-items:center;gap:8px}
+.month-nav strong{font-family:var(--f-display);font-style:italic;font-size:1.25rem;min-width:9ch;text-align:center;text-transform:capitalize}
+
+/* Painel lateral (detalhes) */
+.sheet-wrap{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.55);display:flex;align-items:flex-end;justify-content:center}
+.sheet{background:var(--ink);border:1px solid var(--line-2);border-bottom:0;border-radius:22px 22px 0 0;width:100%;max-width:760px;max-height:calc(100% - 40px - env(safe-area-inset-top,0px));overflow-y:auto;padding:20px max(18px,env(safe-area-inset-right,0px)) calc(28px + env(safe-area-inset-bottom,0px)) max(18px,env(safe-area-inset-left,0px));animation:up .32s cubic-bezier(.2,.9,.3,1)}
+@keyframes up{from{transform:translateY(40px);opacity:.4}}
+.sheet-head{display:flex;align-items:flex-start;gap:12px;margin-bottom:18px}
+.sheet-head h2{flex:1;min-width:0;overflow-wrap:anywhere}
+.close{flex:none;width:36px;height:36px;border-radius:50%;border:1px solid var(--line-2);background:var(--surface);display:grid;place-items:center}
+.kv{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:8px 12px;align-items:center;font-size:.9rem}
+.kv dt{color:var(--dim);font-size:.78rem}
+.kv dd{overflow-wrap:anywhere}
+.msg{border-top:1px solid var(--line);padding:14px 0;display:flex;flex-direction:column;gap:8px}
+.msg pre{white-space:pre-wrap;overflow-wrap:anywhere;font-family:var(--f-body);font-size:.9rem;color:var(--cream);line-height:1.55;max-height:420px;overflow-y:auto}
+.tpl{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:8px}
+.tpl pre{white-space:pre-wrap;font-family:var(--f-body);font-size:.85rem;color:var(--muted)}
+.preview{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;white-space:pre-wrap;overflow-wrap:anywhere;font-size:.86rem;max-height:55vh;overflow-y:auto;color:var(--muted)}
+
+/* Modo discreto: nomes e contatos embaçados até passar o mouse ou tocar */
+body.discreto .pii{filter:blur(6px);transition:filter .2s}
+body.discreto .pii:hover,body.discreto .pii:focus-within{filter:none}
+
+/* Barra de abas líquida */
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:40;padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(12px,env(safe-area-inset-right,0px));padding-bottom:calc(12px + env(safe-area-inset-bottom,0px));pointer-events:none}
+.dock-inner{position:relative;max-width:560px;height:var(--dock-h);margin:0 auto;pointer-events:auto}
+.goo{position:absolute;inset:-30px 0 0;filter:url(#goo)}
+.goo-bar{position:absolute;left:0;right:0;bottom:0;height:var(--dock-h);border-radius:calc(var(--dock-h)/2);background:var(--cream)}
+.blob-x{position:absolute;top:0;left:0;width:0;height:100%;transition:transform .62s cubic-bezier(.45,1.45,.45,1)}
+.blob{position:absolute;top:4px;left:-29px;width:58px;height:58px;border-radius:50%;background:var(--cream)}
+.blob.dip{animation:dip .62s ease}
+@keyframes dip{0%{transform:translateY(0)}35%{transform:translateY(22px) scale(1.35,.8)}70%{transform:translateY(-3px) scale(.95,1.06)}100%{transform:translateY(0)}}
+.tabs{position:absolute;inset:0;display:grid;grid-template-columns:repeat(6,1fr)}
+.tab{position:relative;border:0;background:none;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:2px;padding-bottom:9px;color:#5a5249;min-width:0}
+.tab .ico{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;transition:transform .5s cubic-bezier(.45,1.45,.45,1),background .3s,color .3s}
+.tab .ico svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.tab .lbl{font-size:.64rem;font-weight:600;letter-spacing:.02em;line-height:1;white-space:nowrap}
+.tab[aria-selected="true"]{color:var(--ink)}
+.tab[aria-selected="true"] .ico{transform:translateY(-24px);background:var(--ink);color:var(--gold)}
+.tab[aria-selected="true"] .lbl{transform:translateY(-12px);transition:transform .5s cubic-bezier(.45,1.45,.45,1)}
+.tab .ico{margin-bottom:-6px}
+.badge{position:absolute;top:10px;right:calc(50% - 22px);min-width:16px;height:16px;padding:0 4px;border-radius:8px;background:var(--ember);color:#fff;font-size:.6rem;font-weight:700;display:grid;place-items:center;transition:transform .5s}
+.tab[aria-selected="true"] .badge{transform:translateY(-24px)}
+.toast{position:fixed;left:50%;bottom:calc(var(--dock-h) + 34px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:60;background:var(--cream);color:var(--ink);border-radius:999px;padding:9px 16px;font-size:.85rem;font-weight:600;max-width:calc(100% - 32px);text-align:center;box-shadow:0 8px 30px rgba(0,0,0,.4)}
+
+@media (max-width:440px){
+  .tab .lbl{font-size:.58rem}
+  .money{grid-template-columns:1fr 1fr}
+  .money .box:last-child{grid-column:1/-1}
+  .form-grid{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <filter id="goo"><feGaussianBlur in="SourceGraphic" stdDeviation="9" result="b"/><feColorMatrix in="b" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 24 -11"/></filter>
+</svg>
+
+<div class="app">
+  <header class="top">
+    <div>
+      <div class="date" id="today-label"></div>
+      <h1>Consultório</h1>
+    </div>
+    <button class="toggle" id="discreto" type="button" aria-pressed="false" title="Embaça nomes e contatos quando a tela está à vista">Modo discreto</button>
+  </header>
+  <main id="view" aria-live="polite"></main>
+</div>
+
+<nav class="dock" aria-label="Seções do painel">
+  <div class="dock-inner">
+    <div class="goo" aria-hidden="true"><div class="goo-bar"></div><div class="blob-x" id="blob-x"><div class="blob" id="blob"></div></div></div>
+    <div class="tabs" role="tablist" id="tabs"></div>
+  </div>
+</nav>
+
+<div id="sheet-root"></div>
+<div id="toast-root"></div>
+
+<script>
+(function(){
+'use strict';
+
+/* ---------- Configuração ---------- */
+const CAL='Google Calendar', GMAIL='Gmail', DRIVE='Google Drive';
+const ICONS={
+  hoje:'<path d="M4 7h16M4 7v12a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V7M4 7V6a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v1M8 3v4M16 3v4"/><path d="M8 12h3v3H8z"/>',
+  pacientes:'<circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5"/><circle cx="17" cy="9" r="2.4"/><path d="M15.8 14.2c2.4 0 4.1 1.6 4.7 4.3"/>',
+  email:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/>',
+  drive:'<path d="M3 7.5A1.5 1.5 0 0 1 4.5 6H9l2 2h8.5A1.5 1.5 0 0 1 21 9.5v8a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/>',
+  gastos:'<path d="M4 7h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a1 1 0 0 1-1-1z"/><path d="M4 7l11-3v3"/><circle cx="16" cy="13" r="1.3"/>',
+  links:'<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>'
+};
+const TABS=[['hoje','Hoje'],['pacientes','Pacientes'],['email','E-mail'],['drive','Drive'],['gastos','Gastos'],['links','Links']];
+const LINKS=[
+  {g:'Agendamento',items:[
+    ['Agendamento principal','https://fabio-flow-book.base44.app/'],
+    ['Cal.com (alternativa)','https://cal.com/drfabioschmidt']]},
+  {g:'Produtos',items:[
+    ['Protocolo 7 Dias, página','https://curso.drfabioschmidt.net/'],
+    ['Protocolo 7 Dias, checkout','https://pay.hotmart.com/S104212285E?bid=1778816264134'],
+    ['Livro Quando escolher não é possível','https://pay.hotmart.com/U103950622S?off=3xv992tf&bid=1778816298424'],
+    ['Manual de Crise','https://pay.hotmart.com/H105440271K?bid=1778816337663'],
+    ['Kit Regulação','https://pay.hotmart.com/M105447307K?bid=1778816366683']]},
+  {g:'Materiais gratuitos',items:[
+    ['PDF Começar','https://drive.google.com/file/d/1aXqQc6aTmEieHbJSu3xxPOsmbLYrOEkM/view?usp=drivesdk'],
+    ['Livro TPB no CAPS','https://drive.google.com/file/d/13dvlbl-KGja6l9R3R7D72mPUS5f8UNcK/view?usp=drivesdk']]}
+];
+const CAT_GASTO=['Consultório','Anúncios e marketing','Ferramentas e assinaturas','Impostos e taxas','Educação','Transporte','Alimentação','Casa','Saúde','Pessoal','Outros'];
+const CAT_RECEITA=['Consultas','Produtos digitais','Outras receitas'];
+const SIG={clinica:'Jessica, secretária do Dr. Fabio Schmidt',pessoal:'Fabio Henrique de Lima Schmidt'};
+const RECEIPT_Q='newer_than:45d -category:promotions -category:social (comprovante OR recibo OR fatura OR "nota fiscal" OR boleto OR pix OR "pagamento aprovado" OR "compra aprovada" OR "pagamento confirmado" OR "venda realizada" OR assinatura OR invoice OR receipt)';
+
+/* ---------- Estado ---------- */
+const S={
+  tab:'hoje',
+  mcp:null, db:null, sample:null, capsReady:false,
+  agenda:{status:'loading',events:[],err:null,at:null},
+  pac:{status:'idle',events:[],err:null,q:''},
+  mail:{status:'loading',threads:[],err:null,filter:'inbox',q:'',at:null},
+  drive:{status:'idle',files:[],err:null,q:''},
+  gastos:{status:'loading',rows:[],err:null,month:monthKey(new Date()),sug:null,sugStatus:'idle',sugErr:null,confirmDel:null},
+  unread:0
+};
+let unwatchAgenda=null, unwatchMail=null;
+
+/* ---------- Utilidades ---------- */
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function pad(n){return String(n).padStart(2,'0')}
+function localISO(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())+'T'+pad(d.getHours())+':'+pad(d.getMinutes())+':00'}
+function dayKey(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())}
+function monthKey(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)}
+function startOfDay(d){const x=new Date(d);x.setHours(0,0,0,0);return x}
+function addDays(d,n){const x=new Date(d);x.setDate(x.getDate()+n);return x}
+const fTime=new Intl.DateTimeFormat('pt-BR',{hour:'2-digit',minute:'2-digit'});
+const fDay=new Intl.DateTimeFormat('pt-BR',{weekday:'long',day:'numeric',month:'long'});
+const fShort=new Intl.DateTimeFormat('pt-BR',{day:'2-digit',month:'short'});
+const fShortY=new Intl.DateTimeFormat('pt-BR',{day:'2-digit',month:'short',year:'numeric'});
+const fMonth=new Intl.DateTimeFormat('pt-BR',{month:'long',year:'numeric'});
+const fBRL=new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'});
+function cap(s){return s?s.charAt(0).toUpperCase()+s.slice(1):s}
+function relDay(d){const t=startOfDay(new Date()),x=startOfDay(d),n=Math.round((x-t)/864e5);if(n===0)return 'Hoje';if(n===1)return 'Amanhã';if(n===-1)return 'Ontem';return cap(fDay.format(d))}
+function ago(ts){if(!ts)return '';const m=Math.round((Date.now()-ts)/6e4);if(m<1)return 'agora';if(m<60)return 'há '+m+' min';return 'às '+fTime.format(new Date(ts))}
+function initials(n){const p=String(n||'?').trim().split(/\s+/);return ((p[0]||'?')[0]+(p.length>1?p[p.length-1][0]:'')).toUpperCase()}
+function mailDate(s){const d=new Date(s);if(isNaN(d))return '';const t=startOfDay(new Date());return d>=t?fTime.format(d):(d.getFullYear()===t.getFullYear()?fShort.format(d):fShortY.format(d))}
+function parseSender(s){s=String(s||'');const m=s.match(/^\s*"?([^"<]*)"?\s*<([^>]+)>/);if(m)return {name:m[1].trim()||m[2],email:m[2].trim()};return {name:s.trim(),email:s.trim()}}
+function money(v){return fBRL.format(Number(v)||0)}
+function toast(msg){const r=document.getElementById('toast-root');r.innerHTML='<div class="toast" role="status">'+esc(msg)+'</div>';clearTimeout(toast.t);toast.t=setTimeout(()=>{r.innerHTML=''},2600)}
+async function copy(text,label){try{await navigator.clipboard.writeText(text);toast((label||'Texto')+' copiado')}catch(e){toast('Não deu para copiar. Selecione o texto e copie manualmente.')}}
+function store(k,v){try{if(v===undefined)return JSON.parse(localStorage.getItem(k));localStorage.setItem(k,JSON.stringify(v))}catch(e){return null}}
+function payload(r){if(!r)return null;if(r.payload!==undefined)return r.payload;return r}
+function skel(n){let h='<div class="loading" aria-label="Carregando">';for(let i=0;i<(n||4);i++)h+='<div class="skeleton" style="width:'+(55+((i*17)%40))+'%"></div>';return h+'</div>'}
+
+/* Mensagem de erro por código, com a ação que resolve */
+function errBox(e,server,retryAction){
+  const c=e&&e.code;let msg;let btn='';
+  switch(c){
+    case 'needs_reauth':msg='A conexão com o '+server+' expirou. Reconecte em claude.ai, Configurações, Conectores.';break;
+    case 'server_not_connected':msg='O '+server+' não está conectado. Adicione em claude.ai, Configurações, Conectores.';break;
+    case 'selection_required':msg='Você tem mais de uma conta do '+server+'. Escolha qual o painel deve usar no aviso do claude.ai.';break;
+    case 'approval_required':msg='O painel precisa da sua autorização para ler o '+server+'.';btn='Autorizar e carregar';break;
+    case 'not_in_manifest':msg='O acesso ao '+server+' foi recusado para este painel. Libere em Permissões, no menu do artifact.';break;
+    case 'blocked_by_policy':msg='A política da conta bloqueia o '+server+' aqui.';break;
+    case 'server_unavailable':msg='O '+server+' não respondeu agora.';btn='Tentar de novo';break;
+    case 'no_mcp':msg='Abra este painel no claude.ai para ler Agenda, Gmail e Drive. Fora dele, os conectores não ficam disponíveis.';break;
+    case 'tool_error':msg='O '+server+' recusou o pedido: '+String(e.message||'').slice(0,200);btn='Tentar de novo';break;
+    default:msg='Não foi possível carregar do '+server+'. '+String((e&&e.message)||'').slice(0,160);btn='Tentar de novo';
+  }
+  return '<div class="notice err"><span>'+esc(msg)+'</span>'+(btn&&retryAction?'<button class="btn small" data-act="'+retryAction+'">'+btn+'</button>':'')+'</div>';
+}
+
+/* ---------- Conectores ---------- */
+async function call(server,tool,input,opts){
+  if(!S.mcp)throw {code:'no_mcp'};
+  const r=await S.mcp.callTool(server,tool,input,opts);
+  return payload(r);
+}
+
+/* ---------- Agenda ---------- */
+function parseEvent(e){
+  const d=String(e.description||'');
+  const get=k=>{const m=d.match(new RegExp('^\\s*'+k+'\\s*:\\s*(.+)$','im'));return m?m[1].trim():''};
+  let name=get('Paciente'),tipo=get('Tipo');
+  if(!name){const m=String(e.summary||'').match(/^\s*(primeira consulta|retorno|consulta|sess[aã]o)\s*[-–—:]\s*(.+)$/i);if(m){tipo=tipo||m[1];name=m[2].trim()}}
+  const st=e.start||{},en=e.end||{};
+  const start=new Date(st.dateTime||(st.date?st.date+'T00:00:00':''));
+  const end=new Date(en.dateTime||(en.date?en.date+'T00:00:00':''));
+  return {id:e.id,title:e.summary||'(sem título)',start,end,allDay:!st.dateTime,name,tipo,email:get('E-?mail'),phone:get('Telefone'),link:e.htmlLink,patient:!!name,status:e.status};
+}
+function agendaInput(){const t=startOfDay(new Date());return {startTime:localISO(t),endTime:localISO(addDays(t,8)),orderBy:'startTime',pageSize:120}}
+function watchAgenda(){
+  if(unwatchAgenda){unwatchAgenda();unwatchAgenda=null}
+  if(!S.mcp){S.agenda={status:'error',events:[],err:{code:'no_mcp'}};render();return}
+  S.agenda.status=S.agenda.events.length?'ready':'loading';
+  unwatchAgenda=S.mcp.watchTool(CAL,'list_events',agendaInput(),ev=>{
+    if(ev.type==='data'){
+      const p=payload(ev.result)||{};
+      S.agenda={status:'ready',events:(p.events||[]).filter(e=>e.status!=='cancelled').map(parseEvent).filter(e=>!isNaN(e.start)),err:null,at:(ev.result.cache&&ev.result.cache.storedAt)||Date.now()};
+    }else{
+      const c=ev.error&&ev.error.code;
+      const keep=(c==='server_unavailable'||c==='upstream_error')&&S.agenda.events.length;
+      S.agenda={status:keep?'ready':'error',events:keep?S.agenda.events:[],err:ev.error,at:S.agenda.at};
+    }
+    if(S.tab==='hoje')render();
+  },{refetchInterval:5*60*1000,cache:{staleTime:60000}});
+}
+async function loadAgendaOnce(){
+  S.agenda.status='loading';render();
+  try{const p=await call(CAL,'list_events',agendaInput(),{cache:{refresh:true}})||{};
+    S.agenda={status:'ready',events:(p.events||[]).filter(e=>e.status!=='cancelled').map(parseEvent).filter(e=>!isNaN(e.start)),err:null,at:Date.now()};
+    watchAgenda();
+  }catch(e){S.agenda={status:'error',events:[],err:e}}
+  render();
+}
+
+function renderHoje(){
+  const a=S.agenda;
+  if(a.status==='loading')return '<section class="section"><div class="today-card">'+skel(3)+'</div></section>';
+  if(a.status==='error')return '<section class="section">'+errBox(a.err,CAL,'agenda-retry')+'</section>';
+  const now=new Date(),t0=startOfDay(now),t1=addDays(t0,1);
+  const today=a.events.filter(e=>e.start>=t0&&e.start<t1&&!e.allDay);
+  const pats=today.filter(e=>e.patient);
+  const left=pats.filter(e=>e.end>now);
+  const next=a.events.find(e=>e.patient&&e.start>now);
+  const missing=pats.filter(e=>!e.phone||!e.email);
+  let h='<section class="section"><div class="today-card">';
+  h+='<div class="today-stats"><div class="stat"><div class="n">'+pats.length+'</div><div class="l">consultas hoje</div></div><div class="stat"><div class="n">'+left.length+'</div><div class="l">ainda por atender</div></div><div class="stat"><div class="n">'+a.events.filter(e=>e.patient&&e.start>=t1).length+'</div><div class="l">nos próximos 7 dias</div></div></div>';
+  if(pats.length){const done=pats.length-left.length;h+='<div class="row" style="gap:10px"><div class="cat" style="flex:1;grid-template-columns:1fr"><span class="bar" aria-hidden="true"><i style="width:'+Math.round(done/pats.length*100)+'%"></i></span></div><span class="stamp">'+done+' de '+pats.length+' atendidas</span></div>'}
+  if(next){const mins=Math.round((next.start-now)/6e4);const when=mins<60?'em '+mins+' min':(next.start<t1?'às '+fTime.format(next.start):relDay(next.start).toLowerCase()+', '+fTime.format(next.start));
+    h+='<div class="next"><span class="eyebrow">Próxima</span><span class="pii"><b>'+esc(next.name)+'</b></span><span class="pill'+(/primeira/i.test(next.tipo)?' first':'')+'">'+esc(next.tipo||'Consulta')+'</span><span class="spacer"></span><span class="meta stamp">'+esc(when)+'</span></div>'}
+  if(missing.length)h+='<div class="next"><span class="pill warn">Faltam dados</span><span class="pii" style="color:var(--muted);font-size:.86rem">'+missing.map(e=>esc(e.name)).join(', ')+' sem telefone ou e-mail na agenda</span></div>';
+  h+='</div></section>';
+
+  h+='<section class="section"><div class="row"><h2>'+esc(cap(fDay.format(now)))+'</h2><span class="spacer"></span><button class="btn small ghost" data-act="agenda-retry">Atualizar</button></div>';
+  if(!today.length)h+='<div class="notice">Nenhum compromisso na agenda hoje. Os horários de atendimento ficam livres para encaixe.</div>';
+  else{h+='<div class="list">';today.forEach(e=>{h+=slotHTML(e,now)});h+='</div>'}
+  h+='<span class="stamp">Agenda Google, atualizada '+esc(ago(a.at))+'</span></section>';
+
+  const later=a.events.filter(e=>e.start>=t1);
+  if(later.length){
+    h+='<section class="section"><h2>Próximos dias</h2><div>';
+    let cur='';later.forEach(e=>{const k=dayKey(e.start);if(k!==cur){cur=k;const n=later.filter(x=>dayKey(x.start)===k&&x.patient).length;h+='<div class="day-h"><span>'+esc(relDay(e.start))+'</span><span class="stamp">'+n+' consulta'+(n===1?'':'s')+'</span></div>'}h+=slotHTML(e,now)});
+    h+='</div></section>';
+  }
+  return h;
+}
+function slotHTML(e,now){
+  const cls=e.end<now?'past':(e.start<=now&&e.end>now?'now':'');
+  let h='<div class="slot '+cls+'"><div class="time">'+(e.allDay?'dia':esc(fTime.format(e.start)))+(e.allDay?'':'<small>'+esc(fTime.format(e.end))+'</small>')+'</div><div class="body">';
+  if(e.patient){
+    h+='<div class="row"><span class="name pii">'+esc(e.name)+'</span>'+(cls==='now'?'<span class="live" title="Em andamento"></span>':'')+'<span class="pill'+(/primeira/i.test(e.tipo)?' first':'')+'">'+esc(e.tipo||'Consulta')+'</span></div>';
+    h+='<div class="row"><button class="btn small" data-act="open-patient" data-key="'+esc(patKey(e))+'">Ficha</button>'+(e.phone?'<button class="btn small ghost" data-act="copy" data-text="'+esc(e.phone)+'" data-label="Telefone">Copiar telefone</button>':'')+(e.link?'<a class="btn small ghost" href="'+esc(e.link)+'" target="_blank" rel="noopener">Agenda</a>':'')+'</div>';
+  }else{
+    h+='<div class="row"><span class="name">'+esc(e.title)+'</span></div>'+(e.link?'<div class="row"><a class="btn small ghost" href="'+esc(e.link)+'" target="_blank" rel="noopener">Abrir na agenda</a></div>':'');
+  }
+  return h+'</div></div>';
+}
+
+/* ---------- Pacientes ---------- */
+function patKey(e){return (e.email?e.email.toLowerCase():'n:'+String(e.name||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\s+/g,' ').trim())}
+function patients(){
+  const map=new Map();
+  const all=S.pac.events.length?S.pac.events:S.agenda.events;
+  all.forEach(e=>{if(!e.patient)return;const k=patKey(e);let p=map.get(k);
+    if(!p){p={key:k,name:e.name,email:e.email,phone:e.phone,visits:[]};map.set(k,p)}
+    if(e.name.length>p.name.length)p.name=e.name;if(!p.email&&e.email)p.email=e.email;if(!p.phone&&e.phone)p.phone=e.phone;
+    if(!p.visits.some(v=>v.id===e.id))p.visits.push({id:e.id,start:e.start,tipo:e.tipo,link:e.link});
+  });
+  const now=new Date();
+  const arr=[...map.values()].map(p=>{p.visits.sort((a,b)=>a.start-b.start);p.next=p.visits.find(v=>v.start>now)||null;const past=p.visits.filter(v=>v.start<=now);p.last=past[past.length-1]||null;p.done=past.length;return p});
+  arr.sort((a,b)=>{if(a.next&&b.next)return a.next.start-b.next.start;if(a.next)return -1;if(b.next)return 1;return (b.last?b.last.start:0)-(a.last?a.last.start:0)});
+  return arr;
+}
+async function loadPatients(){
+  if(S.pac.status==='loading')return;
+  S.pac.status='loading';render();
+  const t=startOfDay(new Date());
+  let out=[],token=null,pages=0;
+  try{
+    do{const inp={startTime:localISO(addDays(t,-365)),endTime:localISO(addDays(t,120)),orderBy:'startTime',pageSize:250,fullText:'Paciente'};if(token)inp.pageToken=token;
+      const p=await call(CAL,'list_events',inp,{cache:{staleTime:120000}})||{};
+      out=out.concat((p.events||[]).filter(e=>e.status!=='cancelled').map(parseEvent).filter(e=>!isNaN(e.start)));
+      token=p.nextPageToken;pages++;
+    }while(token&&pages<6);
+    // eventos antigos que só têm o nome no título
+    try{const p2=await call(CAL,'list_events',{startTime:localISO(addDays(t,-365)),endTime:localISO(addDays(t,120)),orderBy:'startTime',pageSize:250,fullText:'Retorno'},{cache:{staleTime:120000}})||{};
+      (p2.events||[]).map(parseEvent).forEach(e=>{if(!isNaN(e.start)&&!out.some(x=>x.id===e.id))out.push(e)})}catch(_){}
+    S.pac.events=out;S.pac.status='ready';S.pac.err=null;
+  }catch(e){S.pac.status='error';S.pac.err=e}
+  render();
+}
+function renderPacientes(){
+  if(S.pac.status==='idle'){loadPatients();}
+  if(S.pac.status==='error')return '<section class="section">'+errBox(S.pac.err,CAL,'pac-retry')+'</section>';
+  const list=patients();
+  const q=S.pac.q.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+  const f=q?list.filter(p=>(p.name+' '+(p.email||'')+' '+(p.phone||'')).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').includes(q)):list;
+  let h='<section class="section"><div class="row"><h2>Pacientes</h2><span class="spacer"></span><span class="stamp">'+(S.pac.status==='loading'?'carregando 12 meses de agenda':list.length+' na agenda, últimos 12 meses')+'</span></div>';
+  h+='<input class="field" id="pac-q" type="search" placeholder="Buscar por nome, e-mail ou telefone" value="'+esc(S.pac.q)+'" autocomplete="off">';
+  if(S.pac.status==='loading'&&!list.length)return h+skel(6)+'</section>';
+  if(!f.length)h+='<div class="notice">'+(q?'Ninguém com esse nome ou contato na agenda.':'Nenhuma consulta encontrada. O painel lê os eventos da agenda que têm a linha Paciente: na descrição.')+'</div>';
+  else{h+='<div class="list">';f.slice(0,150).forEach(p=>{
+    const sub=p.next?'Próxima: '+relDay(p.next.start)+', '+fTime.format(p.next.start):(p.last?'Última: '+fShortY.format(p.last.start):'');
+    h+='<button class="item" data-act="open-patient" data-key="'+esc(p.key)+'"><span class="avatar pii">'+esc(initials(p.name))+'</span><span class="main"><span class="t pii">'+esc(p.name)+'</span><span class="s">'+esc(sub)+'</span></span><span class="meta">'+p.done+' consulta'+(p.done===1?'':'s')+'</span></button>'});
+    h+='</div>'}
+  return h+'</section>';
+}
+
+function tplMsgs(p){
+  const first=(p.name||'').split(/\s+/)[0]||'';
+  const v=p.next;const dia=v?cap(new Intl.DateTimeFormat('pt-BR',{weekday:'long'}).format(v.start)):'[DIA]';const data=v?new Intl.DateTimeFormat('pt-BR',{day:'2-digit',month:'2-digit'}).format(v.start):'[DATA]';const hora=v?fTime.format(v.start):'[HORÁRIO]';
+  const isRet=v&&/retorno/i.test(v.tipo||'');
+  return [
+    ['Confirmação na véspera','Olá '+first+'! Passando para confirmar sua consulta amanhã, '+data+', às '+hora+'. Posso confirmar?'],
+    [isRet?'Cobrança, retorno':'Cobrança, primeira consulta','Olá! Tudo bem?\n'+(isRet?'Seu retorno':'Sua consulta')+' com o Dr. Fabio Schmidt está agendad'+(isRet?'o':'a')+' para '+dia+' às '+hora+'.\nO valor '+(isRet?'do retorno':'da consulta')+' é de *R$ '+(isRet?'650,00':'700,00')+'*.\n⚠️ A vaga só é garantida após a confirmação do pagamento.\nO PIX para pagamento será enviado abaixo 👇'],
+    ['Boas-vindas e dados','Olá '+first+'! Seja bem-vindo(a)! 😊\nSua consulta está confirmada para '+dia+', '+data+', às '+hora+'.\nPara agilizar o atendimento, preciso de algumas informações para documentos como receitas e exames:\n📋 *Nome completo:*\n📋 *CPF:*\n📋 *Endereço completo (rua, número, bairro, cidade, CEP):*']
+  ];
+}
+function openPatient(key){
+  let p=patients().find(x=>x.key===key);
+  if(!p){toast('Paciente não encontrado na agenda carregada');return}
+  const id='p'+Math.random().toString(36).slice(2,8);
+  let h='<div class="sheet-head"><span class="avatar pii">'+esc(initials(p.name))+'</span><h2 class="pii">'+esc(p.name)+'</h2><button class="close" data-act="close" aria-label="Fechar">✕</button></div>';
+  h+='<div class="section"><dl class="kv">';
+  if(p.phone)h+='<dt>Telefone</dt><dd class="pii">'+esc(p.phone)+'</dd><dd><button class="btn small ghost" data-act="copy" data-text="'+esc(p.phone)+'" data-label="Telefone">Copiar</button></dd>';
+  if(p.email)h+='<dt>E-mail</dt><dd class="pii">'+esc(p.email)+'</dd><dd><button class="btn small ghost" data-act="copy" data-text="'+esc(p.email)+'" data-label="E-mail">Copiar</button></dd>';
+  if(!p.phone&&!p.email)h+='<dt>Contato</dt><dd>Sem telefone nem e-mail na agenda</dd><dd></dd>';
+  h+='</dl>'+(p.email?'<div class="row"><button class="btn small" data-act="compose" data-to="'+esc(p.email)+'" data-sig="clinica">Escrever e-mail</button></div>':'')+'</div>';
+  h+='<div class="section"><span class="eyebrow">Consultas na agenda</span><div class="list">';
+  p.visits.slice().reverse().forEach(v=>{const fut=v.start>new Date();h+='<div class="item"><span class="main"><span class="t">'+esc(cap(fShortY.format(v.start)))+', '+esc(fTime.format(v.start))+'</span></span><span class="pill'+(/primeira/i.test(v.tipo)?' first':'')+'">'+esc(v.tipo||'Consulta')+'</span>'+(fut?'<span class="pill ok">Agendada</span>':'')+(v.link?'<a class="btn small ghost" href="'+esc(v.link)+'" target="_blank" rel="noopener">Abrir</a>':'')+'</div>'});
+  h+='</div></div>';
+  h+='<div class="section"><span class="eyebrow">Mensagens prontas para o WhatsApp</span>';
+  tplMsgs(p).forEach(([t,m])=>{h+='<div class="tpl"><div class="row"><strong>'+esc(t)+'</strong><span class="spacer"></span><button class="btn small" data-act="copy" data-text="'+esc(m)+'" data-label="Mensagem">Copiar</button></div><pre class="pii">'+esc(m)+'</pre></div>'});
+  h+='</div>';
+  h+='<div class="section"><span class="eyebrow">E-mails com o paciente</span><div id="'+id+'-mail">'+(p.email?skel(3):'<div class="notice">Sem e-mail na agenda para buscar.</div>')+'</div></div>';
+  h+='<div class="section"><span class="eyebrow">Arquivos no Drive com o nome</span><div id="'+id+'-drive">'+skel(2)+'</div></div>';
+  openSheet(h);
+  if(p.email){call(GMAIL,'search_threads',{query:'from:'+p.email+' OR to:'+p.email,pageSize:10},{cache:{staleTime:60000}}).then(r=>{
+    const el=document.getElementById(id+'-mail');if(!el)return;const th=(r&&r.threads)||[];
+    el.innerHTML=th.length?'<div class="list">'+th.map(threadItem).join('')+'</div>':'<div class="notice">Nenhuma conversa com esse endereço.</div>';
+  }).catch(e=>{const el=document.getElementById(id+'-mail');if(el)el.innerHTML=errBox(e,GMAIL)})}
+  const nm=(p.name||'').replace(/'/g,"\\'").trim();
+  if(nm.length<3){document.getElementById(id+'-drive').innerHTML='<div class="notice">Nome curto demais para buscar no Drive.</div>'}
+  else call(DRIVE,'search_files',{query:"fullText contains '"+nm+"'",pageSize:8,excludeContentSnippets:true},{cache:{staleTime:60000}}).then(r=>{
+    const el=document.getElementById(id+'-drive');if(!el)return;const fs=(r&&r.files)||[];
+    el.innerHTML=fs.length?'<div class="list">'+fs.map(fileItem).join('')+'</div>':'<div class="notice">Nenhum arquivo com esse nome no Drive.</div>';
+  }).catch(e=>{const el=document.getElementById(id+'-drive');if(el)el.innerHTML=errBox(e,DRIVE)});
+}
+
+/* ---------- E-mail ---------- */
+const MAIL_FILTERS=[['inbox','Entrada','in:inbox'],['unread','Não lidos','in:inbox is:unread'],['important','Importantes','in:inbox is:important'],['attach','Com anexo','in:inbox has:attachment'],['sent','Enviados','in:sent']];
+function mailQuery(){const f=MAIL_FILTERS.find(x=>x[0]===S.mail.filter)||MAIL_FILTERS[0];return S.mail.q.trim()?S.mail.q.trim():f[2]}
+function watchMail(){
+  if(unwatchMail){unwatchMail();unwatchMail=null}
+  if(!S.mcp){S.mail.status='error';S.mail.err={code:'no_mcp'};render();return}
+  S.mail.status='loading';
+  unwatchMail=S.mcp.watchTool(GMAIL,'search_threads',{query:mailQuery(),pageSize:30},ev=>{
+    if(ev.type==='data'){const p=payload(ev.result)||{};S.mail.threads=p.threads||[];S.mail.status='ready';S.mail.err=null;S.mail.at=(ev.result.cache&&ev.result.cache.storedAt)||Date.now();
+      if(S.mail.filter==='inbox'&&!S.mail.q)S.unread=S.mail.threads.filter(t=>(t.messages||[]).some(m=>(m.labelIds||[]).includes('UNREAD'))).length,paintTabs();}
+    else{const c=ev.error&&ev.error.code;if(!((c==='server_unavailable'||c==='upstream_error')&&S.mail.threads.length)){S.mail.status='error';S.mail.threads=[]}S.mail.err=ev.error}
+    if(S.tab==='email')render();
+  },{refetchInterval:2*60*1000,cache:{staleTime:30000}});
+}
+function threadItem(t){
+  const ms=t.messages||[];const m=ms[ms.length-1]||{};const first=ms[0]||m;
+  const unread=ms.some(x=>(x.labelIds||[]).includes('UNREAD'));
+  const s=parseSender(m.sender);
+  return '<button class="item" data-act="open-thread" data-id="'+esc(t.id)+'"><span class="main"><span class="row" style="gap:8px">'+(unread?'<span class="live" style="animation:none" title="Não lido"></span>':'')+'<span class="t pii" style="'+(unread?'':'font-weight:500')+'">'+esc(s.name)+'</span>'+(ms.length>1?'<span class="stamp">'+ms.length+'</span>':'')+'</span><span class="s"><span style="color:var(--cream)">'+esc(first.subject||'(sem assunto)')+'</span> '+esc(m.snippet||'')+'</span></span><span class="meta">'+esc(mailDate(m.date))+'</span></button>';
+}
+function renderEmail(){
+  let h='<section class="section"><div class="row"><h2>E-mail</h2><span class="spacer"></span><button class="btn small primary" data-act="compose">Novo e-mail</button></div>';
+  h+='<div class="chips" role="group" aria-label="Filtro">'+MAIL_FILTERS.map(f=>'<button class="chip" data-act="mail-filter" data-f="'+f[0]+'" aria-pressed="'+(S.mail.filter===f[0]&&!S.mail.q)+'">'+f[1]+'</button>').join('')+'</div>';
+  h+='<form id="mail-search" class="row" style="flex-wrap:nowrap"><input class="field" id="mail-q" type="search" placeholder="Buscar: nome, assunto, from:alguem@email.com" value="'+esc(S.mail.q)+'" autocomplete="off"><button class="btn" type="submit">Buscar</button></form>';
+  if(S.mail.status==='loading')h+=skel(7);
+  else if(S.mail.status==='error')h+=errBox(S.mail.err,GMAIL,'mail-retry');
+  else if(!S.mail.threads.length)h+='<div class="notice">Nenhuma conversa nesse filtro.</div>';
+  else h+='<div class="list">'+S.mail.threads.map(threadItem).join('')+'</div><span class="stamp">Gmail, atualizado '+esc(ago(S.mail.at))+'. O painel cria rascunhos; o envio é feito por você no Gmail.</span>';
+  return h+'</section>';
+}
+async function openThread(id){
+  openSheet('<div class="sheet-head"><h2>Carregando conversa</h2><button class="close" data-act="close" aria-label="Fechar">✕</button></div>'+skel(6));
+  try{
+    const t=await call(GMAIL,'get_thread',{threadId:id,messageFormat:'PLAIN_TEXT'},{cache:{staleTime:30000}})||{};
+    const ms=t.messages||[];const last=ms[ms.length-1]||{};const subj=(ms[0]&&ms[0].subject)||'(sem assunto)';
+    const from=parseSender(last.sender);
+    const me=/drfabioschmidt@gmail\.com/i;
+    const replyTo=me.test(from.email)?((last.toRecipients||[])[0]||''):from.email;
+    let h='<div class="sheet-head"><h2>'+esc(subj)+'</h2><button class="close" data-act="close" aria-label="Fechar">✕</button></div>';
+    ms.forEach(m=>{const s=parseSender(m.sender);const body=m.plaintextBody||m.plaintext_body||m.snippet||'';
+      h+='<div class="msg"><div class="row"><strong class="pii">'+esc(s.name)+'</strong><span class="stamp pii">'+esc(s.email!==s.name?s.email:'')+'</span><span class="spacer"></span><span class="stamp">'+esc(mailDate(m.date))+'</span></div><pre class="pii">'+esc(String(body).replace(/\n{3,}/g,'\n\n').trim())+'</pre>'+((m.attachments&&m.attachments.length)?'<span class="stamp">'+m.attachments.length+' anexo(s), abra no Gmail para ver</span>':'')+'</div>'});
+    h+='<div class="section" style="margin-top:8px"><span class="eyebrow">Responder</span>'+composerHTML({to:replyTo,subject:/^re:/i.test(subj)?subj:'Re: '+subj,replyId:last.id,sig:'clinica'})+'</div>';
+    h+='<div class="row">'+(t.viewUrl?'<a class="btn ghost" href="'+esc(t.viewUrl)+'" target="_blank" rel="noopener">Abrir no Gmail</a>':'')+'</div>';
+    openSheet(h);
+  }catch(e){openSheet('<div class="sheet-head"><h2>Conversa</h2><button class="close" data-act="close" aria-label="Fechar">✕</button></div>'+errBox(e,GMAIL))}
+}
+function composerHTML(o){
+  return '<form class="section" id="composer" data-reply="'+esc(o.replyId||'')+'" style="gap:10px;margin:0">'+
+    '<label class="lab">Para<input class="field" id="c-to" type="email" required value="'+esc(o.to||'')+'" autocomplete="off"></label>'+
+    (o.replyId?'<input type="hidden" id="c-subj" value="'+esc(o.subject||'')+'">':'<label class="lab">Assunto<input class="field" id="c-subj" type="text" value="'+esc(o.subject||'')+'"></label>')+
+    '<label class="lab">Mensagem<textarea class="field" id="c-body" placeholder="Escreva aqui">'+esc(o.body||'')+'</textarea></label>'+
+    '<div class="row"><label class="lab" style="flex-direction:row;align-items:center;gap:8px">Assinar como <select class="field" id="c-sig" style="width:auto;padding:6px 10px"><option value="clinica"'+(o.sig!=='pessoal'?' selected':'')+'>Jessica, secretária</option><option value="pessoal"'+(o.sig==='pessoal'?' selected':'')+'>Fabio, pessoal</option></select></label><span class="spacer"></span><button class="btn primary" type="submit" id="c-send">Criar rascunho</button></div>'+
+    '<div id="c-result"></div></form>';
+}
+function openCompose(to,sig){
+  openSheet('<div class="sheet-head"><h2>Novo e-mail</h2><button class="close" data-act="close" aria-label="Fechar">✕</button></div>'+composerHTML({to:to||'',sig:sig||'clinica'})+
+    '<div class="section" style="margin-top:14px"><span class="eyebrow">Modelo</span><button class="btn small ghost" data-act="tpl-noreply">Paciente que não responde</button></div>');
+}
+async function submitComposer(form){
+  const btn=form.querySelector('#c-send');const res=form.querySelector('#c-result');
+  const to=form.querySelector('#c-to').value.trim();const subject=form.querySelector('#c-subj').value.trim();
+  let body=form.querySelector('#c-body').value.replace(/\s+$/,'');const sig=SIG[form.querySelector('#c-sig').value]||SIG.clinica;
+  if(!to||!body){res.innerHTML='<div class="notice err">Preencha o destinatário e a mensagem.</div>';return}
+  if(!body.includes(sig))body+='\n\n'+sig;
+  btn.disabled=true;btn.textContent='Criando…';
+  const inp={to:[to],subject,body};const rid=form.dataset.reply;if(rid)inp.replyToMessageId=rid;
+  try{const d=await call(GMAIL,'create_draft',inp)||{};
+    res.innerHTML='<div class="notice"><span>Rascunho salvo no Gmail. Revise e envie por lá.</span>'+(d.viewUrl?'<a class="btn small" href="'+esc(d.viewUrl)+'" target="_blank" rel="noopener">Abrir rascunho</a>':'')+'</div>';
+    btn.textContent='Rascunho criado';
+  }catch(e){
+    const amb=e&&(e.code==='server_unavailable'||e.code==='upstream_error');
+    res.innerHTML=amb?'<div class="notice err">Sem resposta do Gmail. O rascunho pode ter sido criado: confira a pasta Rascunhos antes de tentar de novo.</div>':errBox(e,GMAIL);
+    btn.disabled=false;btn.textContent='Criar rascunho';
+  }
+}
+
+/* ---------- Drive ---------- */
+function mimeLabel(m){m=String(m||'');if(m.includes('folder'))return 'Pasta';if(m.includes('document'))return 'Doc';if(m.includes('spreadsheet'))return 'Planilha';if(m.includes('presentation'))return 'Slides';if(m.includes('pdf'))return 'PDF';if(m.startsWith('image/'))return 'Imagem';if(m.startsWith('video/'))return 'Vídeo';if(m.startsWith('audio/'))return 'Áudio';if(m.includes('word'))return 'Word';return 'Arquivo'}
+const READABLE=/(google-apps\.(document|presentation|spreadsheet)|pdf|msword|wordprocessingml|spreadsheetml|presentationml|opendocument|image\/(png|jpe?g))/;
+function fileItem(f){
+  const d=new Date(f.modifiedTime||f.viewedByMeTime||'');
+  return '<button class="item" data-act="open-file" data-id="'+esc(f.id)+'" data-title="'+esc(f.title||'')+'" data-mime="'+esc(f.mimeType||'')+'" data-url="'+esc(f.viewUrl||'')+'"><span class="pill" style="width:72px;justify-content:center">'+esc(mimeLabel(f.mimeType))+'</span><span class="main"><span class="t">'+esc(f.title||'(sem nome)')+'</span></span><span class="meta">'+(isNaN(d)?'':esc(mailDate(d)))+'</span></button>';
+}
+async function loadDrive(){
+  S.drive.status='loading';render();
+  try{const q=S.drive.q.trim().replace(/'/g,"\\'");
+    const r=q?await call(DRIVE,'search_files',{query:"title contains '"+q+"' or fullText contains '"+q+"'",pageSize:25,excludeContentSnippets:true},{cache:{staleTime:60000}})
+             :await call(DRIVE,'list_recent_files',{pageSize:25,excludeContentSnippets:true,orderBy:'recency'},{cache:{staleTime:60000}});
+    S.drive.files=(r&&r.files)||[];S.drive.status='ready';S.drive.err=null;
+  }catch(e){S.drive.status='error';S.drive.err=e}
+  render();
+}
+function renderDrive(){
+  if(S.drive.status==='idle'){loadDrive()}
+  let h='<section class="section"><div class="row"><h2>Drive</h2><span class="spacer"></span><a class="btn small ghost" href="https://drive.google.com/drive/my-drive" target="_blank" rel="noopener">Abrir Drive</a></div>';
+  h+='<form id="drive-search" class="row" style="flex-wrap:nowrap"><input class="field" id="drive-q" type="search" placeholder="Buscar no título ou no conteúdo" value="'+esc(S.drive.q)+'" autocomplete="off"><button class="btn" type="submit">Buscar</button></form>';
+  h+='<span class="eyebrow">'+(S.drive.q?'Resultados':'Recentes')+'</span>';
+  if(S.drive.status==='loading'||S.drive.status==='idle')h+=skel(6);
+  else if(S.drive.status==='error')h+=errBox(S.drive.err,DRIVE,'drive-retry');
+  else if(!S.drive.files.length)h+='<div class="notice">Nenhum arquivo encontrado.</div>';
+  else h+='<div class="list">'+S.drive.files.map(fileItem).join('')+'</div>';
+  return h+'</section>';
+}
+async function openFile(b){
+  const id=b.dataset.id,title=b.dataset.title,mime=b.dataset.mime,url=b.dataset.url;
+  const head='<div class="sheet-head"><h2>'+esc(title||'Arquivo')+'</h2><button class="close" data-act="close" aria-label="Fechar">✕</button></div><div class="row" style="margin-bottom:14px"><span class="pill">'+esc(mimeLabel(mime))+'</span><span class="spacer"></span>'+(url?'<a class="btn small primary" href="'+esc(url)+'" target="_blank" rel="noopener">Abrir no Drive</a>':'')+'</div>';
+  if(mime.includes('folder')){
+    openSheet(head+skel(4));
+    try{const r=await call(DRIVE,'search_files',{query:"parentId = '"+id+"'",pageSize:40,excludeContentSnippets:true},{cache:{staleTime:60000}});const fs=(r&&r.files)||[];
+      openSheet(head+(fs.length?'<div class="list">'+fs.map(fileItem).join('')+'</div>':'<div class="notice">Pasta vazia.</div>'))}catch(e){openSheet(head+errBox(e,DRIVE))}
+    return;
+  }
+  if(!READABLE.test(mime)){openSheet(head+'<div class="notice">Este tipo de arquivo abre direto no Drive.</div>');return}
+  openSheet(head+skel(8));
+  try{const r=await call(DRIVE,'read_file_content',{fileId:id},{cache:{staleTime:120000}});
+    let txt=typeof r==='string'?r:(r&&(r.content||r.text||r.markdown))||JSON.stringify(r,null,2);
+    openSheet(head+'<div class="preview pii">'+esc(String(txt).slice(0,20000))+'</div>');
+  }catch(e){openSheet(head+errBox(e,DRIVE))}
+}
+
+/* ---------- Gastos ---------- */
+function monthRows(mk){return S.gastos.rows.filter(r=>String(r.data||'').startsWith(mk))}
+function watchGastos(){
+  if(!S.db){S.gastos.status='nodb';return}
+  try{S.db.collection('gastos').orderBy('data','desc').limit(1500).onSnapshot(snap=>{
+      S.gastos.rows=snap.docs.map(d=>Object.assign({id:d.id},d.data()));S.gastos.status='ready';if(S.tab==='gastos')render();
+    },err=>{S.gastos.status='error';S.gastos.err=err;if(S.tab==='gastos')render()});
+  }catch(e){S.gastos.status='error';S.gastos.err=e}
+}
+function renderGastos(){
+  const G=S.gastos;
+  if(G.status==='nodb')return '<section class="section"><h2>Gastos</h2><div class="notice">Abra o painel no claude.ai, com sua conta, para registrar e ver os gastos.</div></section>';
+  if(G.status==='error')return '<section class="section"><h2>Gastos</h2><div class="notice err">Não foi possível ler os lançamentos. '+esc((G.err&&G.err.message)||'')+'</div></section>';
+  const [y,m]=G.month.split('-').map(Number);const label=fMonth.format(new Date(y,m-1,1));
+  const rows=monthRows(G.month);
+  const out=rows.filter(r=>r.tipo!=='receita').reduce((s,r)=>s+(Number(r.valor)||0),0);
+  const inn=rows.filter(r=>r.tipo==='receita').reduce((s,r)=>s+(Number(r.valor)||0),0);
+  const prev=monthKey(new Date(y,m-2,1));const outPrev=monthRows(prev).filter(r=>r.tipo!=='receita').reduce((s,r)=>s+(Number(r.valor)||0),0);
+  let h='<section class="section"><div class="row"><h2>Gastos</h2><span class="spacer"></span><div class="month-nav"><button class="btn small ghost" data-act="month" data-d="-1" aria-label="Mês anterior">‹</button><strong>'+esc(label)+'</strong><button class="btn small ghost" data-act="month" data-d="1" aria-label="Próximo mês">›</button></div></div>';
+  if(G.status==='loading')return h+skel(4)+'</section>';
+  h+='<div class="money"><div class="box"><div class="eyebrow">Saídas</div><div class="v neg">'+esc(money(out))+'</div>'+(outPrev?'<div class="stamp">'+(out>=outPrev?'+':'')+Math.round((out-outPrev)/outPrev*100)+'% vs mês anterior</div>':'')+'</div><div class="box"><div class="eyebrow">Entradas</div><div class="v pos">'+esc(money(inn))+'</div></div><div class="box"><div class="eyebrow">Saldo</div><div class="v '+(inn-out<0?'neg':'pos')+'">'+esc(money(inn-out))+'</div></div></div>';
+  const cats={};rows.filter(r=>r.tipo!=='receita').forEach(r=>{cats[r.categoria||'Outros']=(cats[r.categoria||'Outros']||0)+(Number(r.valor)||0)});
+  const ce=Object.entries(cats).sort((a,b)=>b[1]-a[1]);
+  if(ce.length){h+='<div class="section" style="margin:6px 0 0;gap:10px"><span class="eyebrow">Por categoria</span>';ce.forEach(([c,v])=>{h+='<div class="cat"><span>'+esc(c)+'</span><span class="amt">'+esc(money(v))+'</span><span class="bar"><i style="width:'+Math.max(2,Math.round(v/ce[0][1]*100))+'%"></i></span></div>'});h+='</div>'}
+  h+='</section>';
+
+  // Busca automática no Gmail
+  h+='<section class="section"><div class="row"><h2>Comprovantes no Gmail</h2><span class="spacer"></span><button class="btn small primary" data-act="scan" '+(G.sugStatus==='loading'?'disabled':'')+'>'+(G.sugStatus==='loading'?'Lendo e-mails…':'Buscar últimos 45 dias')+'</button></div>';
+  if(!S.sample)h+='<div class="notice">A leitura automática precisa do Claude disponível neste painel. O lançamento manual continua funcionando.</div>';
+  if(G.sugErr)h+=G.sugErr;
+  if(G.sug){const pend=G.sug.filter(s=>!s.done);
+    if(!pend.length)h+='<div class="notice">Nenhum comprovante novo. Os que já foram lançados ou ignorados não aparecem de novo.</div>';
+    pend.forEach((s,i)=>{const idx=G.sug.indexOf(s);const cats=s.tipo==='receita'?CAT_RECEITA:CAT_GASTO;
+      h+='<div class="sug"><div class="row"><span class="pill '+(s.tipo==='receita'?'ok':'bad')+'">'+(s.tipo==='receita'?'Entrada':'Saída')+'</span><strong style="flex:1;min-width:0">'+esc(s.descricao)+'</strong>'+(s.confianca==='baixa'?'<span class="pill warn">Conferir valor</span>':'')+'</div><div class="src">'+esc(s.origem)+'</div>'+
+      '<div class="form-grid"><label class="lab">Valor (R$)<input class="field" id="sv'+idx+'" inputmode="decimal" value="'+(s.valor?String(s.valor).replace('.',','):'')+'"></label><label class="lab">Data<input class="field" id="sd'+idx+'" type="date" value="'+esc(s.data)+'"></label><label class="lab full">Categoria<select class="field" id="sc'+idx+'">'+cats.map(c=>'<option'+(c===s.categoria?' selected':'')+'>'+esc(c)+'</option>').join('')+'</select></label></div>'+
+      '<div class="row"><button class="btn small primary" data-act="sug-add" data-i="'+idx+'">Lançar</button><button class="btn small ghost" data-act="sug-skip" data-i="'+idx+'">Ignorar</button>'+(s.url?'<span class="spacer"></span><a class="btn small ghost" href="'+esc(s.url)+'" target="_blank" rel="noopener">Ver e-mail</a>':'')+'</div></div>'});
+  }else if(G.sugStatus!=='loading')h+='<div class="notice">O painel procura comprovantes, faturas, PIX e vendas no seu Gmail e sugere os lançamentos. Nada entra na planilha sem você clicar em Lançar.</div>';
+  h+='</section>';
+
+  // Lançamento manual
+  const today=dayKey(new Date());
+  h+='<section class="section"><h2>Novo lançamento</h2><form id="g-form" class="form-grid">'+
+    '<label class="lab">Tipo<select class="field" id="g-tipo"><option value="gasto">Saída</option><option value="receita">Entrada</option></select></label>'+
+    '<label class="lab">Valor (R$)<input class="field" id="g-valor" inputmode="decimal" placeholder="0,00" required></label>'+
+    '<label class="lab full">Descrição<input class="field" id="g-desc" placeholder="Ex.: aluguel da sala, Meta Ads" required></label>'+
+    '<label class="lab">Categoria<select class="field" id="g-cat">'+CAT_GASTO.map(c=>'<option>'+esc(c)+'</option>').join('')+'</select></label>'+
+    '<label class="lab">Data<input class="field" id="g-data" type="date" value="'+today+'"></label>'+
+    '<div class="full row"><span class="spacer"></span><button class="btn primary" type="submit">Lançar</button></div></form></section>';
+
+  // Lista do mês
+  h+='<section class="section"><h2>Lançamentos de '+esc(label.split(' ')[0])+'</h2>';
+  if(!rows.length)h+='<div class="notice">Nenhum lançamento neste mês.</div>';
+  else{h+='<div class="list">';rows.slice().sort((a,b)=>String(b.data).localeCompare(String(a.data))).forEach(r=>{
+    const conf=G.confirmDel===r.id;const d=new Date(String(r.data)+'T12:00:00');
+    h+='<div class="item"><span class="main"><span class="t">'+esc(r.descricao||'(sem descrição)')+'</span><span class="s">'+esc(isNaN(d)?'':fShort.format(d))+' · '+esc(r.categoria||'Outros')+(r.origem==='gmail'?' · do Gmail':'')+'</span></span><span class="meta" style="color:'+(r.tipo==='receita'?'var(--ok)':'var(--cream)')+'">'+(r.tipo==='receita'?'+':'−')+esc(money(r.valor))+'</span><button class="btn small '+(conf?'danger':'ghost')+'" data-act="del" data-id="'+esc(r.id)+'" aria-label="Excluir lançamento">'+(conf?'Confirmar':'✕')+'</button></div>'});
+    h+='</div>'}
+  return h+'</section>';
+}
+function parseValor(s){s=String(s||'').replace(/[^\d,.-]/g,'');if(s.includes(','))s=s.replace(/\./g,'').replace(',','.');const n=parseFloat(s);return isFinite(n)?Math.round(n*100)/100:NaN}
+async function scanReceipts(){
+  const G=S.gastos;G.sugStatus='loading';G.sugErr=null;render();
+  try{
+    const r=await call(GMAIL,'search_threads',{query:RECEIPT_Q,pageSize:30},{cache:{staleTime:60000}})||{};
+    const known=new Set(G.rows.map(x=>x.gmailId).filter(Boolean));const skipped=new Set(store('gastos-ignorados')||[]);
+    const items=[];(r.threads||[]).forEach(t=>{const m=(t.messages||[])[0];if(!m||known.has(m.id)||skipped.has(m.id))return;
+      items.push({id:m.id,de:parseSender(m.sender).name,assunto:m.subject||'',trecho:String(m.snippet||'').slice(0,300),data:String(m.date||'').slice(0,10),url:m.viewUrl||t.viewUrl||''})});
+    if(!items.length){G.sug=[];G.sugStatus='ready';render();return}
+    if(!S.sample){G.sug=items.map(it=>({gmailId:it.id,tipo:'gasto',valor:null,data:it.data,descricao:it.assunto||it.de,categoria:'Outros',confianca:'baixa',origem:it.de+' · '+it.assunto,url:it.url}));G.sugStatus='ready';render();return}
+    const prompt='Você recebe e-mails do Gmail de um médico brasileiro com consultório próprio. Para cada e-mail, decida se é um comprovante de dinheiro que saiu (gasto) ou entrou (receita, por exemplo PIX recebido ou venda na Hotmart). Ignore newsletters, avisos sem valor e promoções.\n'+
+      'Responda só com um array JSON. Um objeto por e-mail que seja comprovante: {"id": id do e-mail, "tipo": "gasto" ou "receita", "valor": número em reais com ponto decimal ou null se não aparecer, "data": "AAAA-MM-DD", "descricao": até 40 caracteres, "categoria": uma de '+JSON.stringify(CAT_GASTO.concat(CAT_RECEITA))+', "confianca": "alta" ou "baixa"}.\n'+
+      'Use categoria de receita só para tipo receita. Não invente valores: se o valor não estiver no assunto ou no trecho, use null e confianca baixa.\n\nE-mails:\n'+JSON.stringify(items.map(({url,...x})=>x));
+    const out=await S.sample.json(prompt,{modelTier:'quick'});
+    const byId=new Map(items.map(i=>[i.id,i]));
+    G.sug=(Array.isArray(out)?out:[]).filter(o=>o&&byId.has(o.id)).map(o=>{const it=byId.get(o.id);const tipo=o.tipo==='receita'?'receita':'gasto';const cats=tipo==='receita'?CAT_RECEITA:CAT_GASTO;
+      return {gmailId:o.id,tipo,valor:(typeof o.valor==='number'&&isFinite(o.valor))?o.valor:null,data:/^\d{4}-\d{2}-\d{2}$/.test(o.data||'')?o.data:it.data,descricao:String(o.descricao||it.assunto).slice(0,60),categoria:cats.includes(o.categoria)?o.categoria:cats[cats.length-1],confianca:o.valor==null?'baixa':(o.confianca==='baixa'?'baixa':'alta'),origem:it.de+' · '+it.assunto,url:it.url}});
+    G.sugStatus='ready';
+  }catch(e){
+    G.sugStatus='ready';
+    if(e&&e.code&&['not_granted','rate_limited','invalid_json'].includes(e.code)&&!e.server)G.sugErr='<div class="notice err">'+(e.code==='rate_limited'?'Muitas leituras seguidas. Espere um minuto e tente de novo.':e.code==='not_granted'?'A leitura automática não foi autorizada neste painel. O lançamento manual continua funcionando.':'A leitura dos comprovantes veio incompleta. Tente de novo.')+'</div>';
+    else G.sugErr=errBox(e,GMAIL,'scan');
+  }
+  render();
+}
+async function addRow(row,docId){
+  if(!S.db){toast('Abra no claude.ai para salvar');return false}
+  try{const ref=docId?S.db.collection('gastos').doc(docId):S.db.collection('gastos').doc();await ref.set(Object.assign(row,{criadoEm:new Date().toISOString()}));return true}
+  catch(e){toast('Não foi possível salvar: '+((e&&e.message)||'erro'));return false}
+}
+
+/* ---------- Links ---------- */
+function renderLinks(){
+  let h='';LINKS.forEach(g=>{h+='<section class="section"><h2>'+esc(g.g)+'</h2><div class="list">';
+    g.items.forEach(([n,u])=>{h+='<div class="item"><span class="main"><span class="t">'+esc(n)+'</span><span class="s" style="font-family:var(--f-mono);font-size:.72rem;-webkit-line-clamp:1">'+esc(u.replace(/^https:\/\//,''))+'</span></span><button class="btn small ghost" data-act="copy" data-text="'+esc(u)+'" data-label="Link">Copiar</button><a class="btn small" href="'+esc(u)+'" target="_blank" rel="noopener">Abrir</a></div>'});
+    h+='</div></section>'});
+  return h;
+}
+
+/* ---------- Sheet ---------- */
+let lastFocus=null;
+function openSheet(html){
+  const root=document.getElementById('sheet-root');
+  if(!root.firstChild)lastFocus=document.activeElement;
+  root.innerHTML='<div class="sheet-wrap" data-act="backdrop"><div class="sheet" role="dialog" aria-modal="true">'+html+'</div></div>';
+  const c=root.querySelector('.close');if(c)c.focus();
+}
+function closeSheet(){document.getElementById('sheet-root').innerHTML='';if(lastFocus&&lastFocus.focus)lastFocus.focus()}
+
+/* ---------- Abas e barra líquida ---------- */
+function paintTabs(){
+  const el=document.getElementById('tabs');
+  el.innerHTML=TABS.map(([k,l])=>'<button class="tab" role="tab" id="tab-'+k+'" data-tab="'+k+'" aria-selected="'+(S.tab===k)+'" aria-controls="view"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true">'+ICONS[k]+'</svg></span><span class="lbl">'+l+'</span>'+(k==='email'&&S.unread?'<span class="badge">'+(S.unread>9?'9+':S.unread)+'</span>':'')+'</button>').join('');
+  moveBlob(false);
+}
+function moveBlob(dip){
+  const inner=document.querySelector('.dock-inner');const i=TABS.findIndex(t=>t[0]===S.tab);
+  const w=inner.clientWidth/TABS.length;const x=w*i+w/2;
+  document.getElementById('blob-x').style.transform='translateX('+x+'px)';
+  if(dip){const b=document.getElementById('blob');b.classList.remove('dip');void b.offsetWidth;b.classList.add('dip')}
+}
+function setTab(k){
+  if(k===S.tab){window.scrollTo({top:0,behavior:'smooth'});return}
+  S.tab=k;store('painel-aba',k);
+  document.querySelectorAll('.tab').forEach(t=>t.setAttribute('aria-selected',String(t.dataset.tab===k)));
+  moveBlob(true);window.scrollTo(0,0);render();
+}
+
+/* ---------- Render ---------- */
+function render(){
+  const v=document.getElementById('view');
+  const keep=document.activeElement&&document.activeElement.id&&v.contains(document.activeElement)?{id:document.activeElement.id,s:document.activeElement.selectionStart}:null;
+  let h='';
+  switch(S.tab){case 'hoje':h=renderHoje();break;case 'pacientes':h=renderPacientes();break;case 'email':h=renderEmail();break;case 'drive':h=renderDrive();break;case 'gastos':h=renderGastos();break;default:h=renderLinks()}
+  v.innerHTML=h;
+  if(keep){const el=document.getElementById(keep.id);if(el){el.focus();try{if(keep.s!=null)el.setSelectionRange(keep.s,keep.s)}catch(_){}}}
+}
+
+/* ---------- Eventos ---------- */
+document.addEventListener('click',async ev=>{
+  const tab=ev.target.closest('.tab');if(tab){setTab(tab.dataset.tab);return}
+  const a=ev.target.closest('[data-act]');if(!a)return;
+  const act=a.dataset.act;
+  if(act==='backdrop'){if(ev.target===a)closeSheet();return}
+  switch(act){
+    case 'close':closeSheet();break;
+    case 'copy':copy(a.dataset.text,a.dataset.label);break;
+    case 'agenda-retry':loadAgendaOnce();break;
+    case 'pac-retry':S.pac.status='idle';render();break;
+    case 'open-patient':openPatient(a.dataset.key);break;
+    case 'mail-filter':S.mail.filter=a.dataset.f;S.mail.q='';watchMail();render();break;
+    case 'mail-retry':
+      try{S.mail.status='loading';render();const p=await call(GMAIL,'search_threads',{query:mailQuery(),pageSize:30},{cache:{refresh:true}})||{};S.mail.threads=p.threads||[];S.mail.status='ready';S.mail.at=Date.now();watchMail()}catch(e){S.mail.status='error';S.mail.err=e}render();break;
+    case 'open-thread':openThread(a.dataset.id);break;
+    case 'compose':openCompose(a.dataset.to,a.dataset.sig);break;
+    case 'tpl-noreply':{const b=document.getElementById('c-body'),s=document.getElementById('c-subj');if(s&&!s.value)s.value='Sua consulta com o Dr. Fabio Schmidt';if(b)b.value='Olá [NOME], tudo bem?\nTentamos contato pelo WhatsApp sobre sua consulta e não conseguimos falar com você. Para facilitar, você mesma pode escolher o melhor dia e horário por aqui: https://fabio-flow-book.base44.app/\nA vaga fica garantida após a confirmação do pagamento. Qualquer dúvida, é só responder este e-mail.\nUm abraço,';break}
+    case 'drive-retry':loadDrive();break;
+    case 'open-file':openFile(a);break;
+    case 'month':{const [y,m]=S.gastos.month.split('-').map(Number);S.gastos.month=monthKey(new Date(y,m-1+Number(a.dataset.d),1));S.gastos.confirmDel=null;render();break}
+    case 'scan':scanReceipts();break;
+    case 'sug-add':{const i=Number(a.dataset.i),s=S.gastos.sug[i];const valor=parseValor(document.getElementById('sv'+i).value);
+      if(!(valor>0)){toast('Informe o valor antes de lançar');document.getElementById('sv'+i).focus();break}
+      a.disabled=true;
+      const ok=await addRow({tipo:s.tipo,valor,data:document.getElementById('sd'+i).value||s.data,descricao:s.descricao,categoria:document.getElementById('sc'+i).value,origem:'gmail',gmailId:s.gmailId},'gm_'+s.gmailId);
+      if(ok){s.done=true;toast('Lançado');render()}else a.disabled=false;break}
+    case 'sug-skip':{const s=S.gastos.sug[Number(a.dataset.i)];s.done=true;const ig=store('gastos-ignorados')||[];ig.push(s.gmailId);store('gastos-ignorados',ig.slice(-500));render();break}
+    case 'del':{const id=a.dataset.id;if(S.gastos.confirmDel!==id){S.gastos.confirmDel=id;render();break}
+      try{await S.db.collection('gastos').doc(id).delete();S.gastos.confirmDel=null;toast('Lançamento excluído')}catch(e){toast('Não foi possível excluir')}break}
+  }
+});
+document.addEventListener('submit',async ev=>{
+  ev.preventDefault();const f=ev.target;
+  if(f.id==='composer')submitComposer(f);
+  else if(f.id==='mail-search'){S.mail.q=document.getElementById('mail-q').value;watchMail();render()}
+  else if(f.id==='drive-search'){S.drive.q=document.getElementById('drive-q').value;loadDrive()}
+  else if(f.id==='g-form'){
+    const valor=parseValor(document.getElementById('g-valor').value);
+    if(!(valor>0)){toast('Valor inválido');return}
+    const ok=await addRow({tipo:document.getElementById('g-tipo').value,valor,descricao:document.getElementById('g-desc').value.trim(),categoria:document.getElementById('g-cat').value,data:document.getElementById('g-data').value||dayKey(new Date()),origem:'manual'});
+    if(ok){toast('Lançado');const d=document.getElementById('g-data').value;if(d)S.gastos.month=d.slice(0,7);f.reset();}
+  }
+});
+document.addEventListener('input',ev=>{
+  if(ev.target.id==='pac-q'){S.pac.q=ev.target.value;render()}
+});
+document.addEventListener('change',ev=>{
+  if(ev.target.id==='g-tipo'){const c=document.getElementById('g-cat');const list=ev.target.value==='receita'?CAT_RECEITA:CAT_GASTO;c.innerHTML=list.map(x=>'<option>'+esc(x)+'</option>').join('')}
+});
+document.addEventListener('keydown',ev=>{if(ev.key==='Escape'&&document.getElementById('sheet-root').firstChild)closeSheet()});
+window.addEventListener('resize',()=>moveBlob(false));
+
+const disc=document.getElementById('discreto');
+function setDisc(on){document.body.classList.toggle('discreto',on);disc.setAttribute('aria-pressed',String(on));store('painel-discreto',on)}
+disc.addEventListener('click',()=>setDisc(!document.body.classList.contains('discreto')));
+
+/* ---------- Início ---------- */
+document.getElementById('today-label').textContent=fDay.format(new Date());
+setDisc(!!store('painel-discreto'));
+const saved=store('painel-aba');const hash=(location.hash||'').slice(1);
+if(TABS.some(t=>t[0]===hash))S.tab=hash;else if(TABS.some(t=>t[0]===saved))S.tab=saved;
+paintTabs();render();
+requestAnimationFrame(()=>moveBlob(false));
+
+(async function boot(){
+  const use=n=>(window.claude&&window.claude.use)?window.claude.use(n).catch(()=>null):Promise.resolve(null);
+  const [mcp,db,sample]=await Promise.all([use('mcp'),use('db'),use('sample')]);
+  S.mcp=mcp;S.db=db;S.sample=sample;
+  watchAgenda();watchMail();watchGastos();
+  if(!db){S.gastos.status='nodb'}
+  render();
+})();
+})();
+</script>

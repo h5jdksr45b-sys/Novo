@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=720, height=1280" />
+    <title>Aula 6 abertura</title>
+    <script src="assets/vendor/gsap.min.js"></script>
+    <script src="assets/kit.js"></script>
+    <link rel="stylesheet" href="assets/kit.css" />
+    <style>
+      @font-face { font-family: "Source Sans 3"; src: url("assets/fonts/source-sans-3-400.woff2") format("woff2"); font-weight: 400; }
+      @font-face { font-family: "Source Sans 3"; src: url("assets/fonts/source-sans-3-600.woff2") format("woff2"); font-weight: 600; }
+      @font-face { font-family: "Source Sans 3"; src: url("assets/fonts/source-sans-3-800.woff2") format("woff2"); font-weight: 700 800; }
+      #a6a-cena { position: absolute; left: 0; top: 170px; width: 720px; height: 560px; overflow: visible; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="aula6-abertura" data-start="0" data-duration="7.5" data-width="720" data-height="1280">
+      <div class="fundo"></div>
+      <div class="mancha m1"></div><div class="mancha m2"></div><div class="mancha m3"></div>
+
+      <section id="a6a-cena1" class="cena clip" data-start="0" data-duration="5.35" data-track-index="0">
+        <div class="selo"><span>Protocolo <b>7</b> Dias</span></div>
+        <svg id="a6a-cena" viewBox="0 0 720 560">
+          <!-- Casa -->
+          <g id="a6a-casa" fill="none" stroke="#f4f1ec" stroke-width="8" stroke-linejoin="round" stroke-linecap="round">
+            <path class="a6a-traco" pathLength="1" d="M190 250 L360 110 L530 250" />
+            <path class="a6a-traco" pathLength="1" d="M226 222 V440 H494 V222" />
+          </g>
+          <!-- Gritos dentro de casa -->
+          <path id="a6a-g1" fill="#46708c" d="M300 250 L318 222 L330 248 L356 214 L362 246 L392 228 L384 258 L414 262 L388 280 L408 306 L376 300 L370 330 L350 304 L326 326 L322 298 L292 304 L308 282 L280 268 Z" />
+          <path id="a6a-g2" fill="#3fae8a" d="M360 300 L378 274 L390 300 L416 268 L422 298 L452 282 L444 312 L470 318 L446 334 L462 360 L432 352 L426 380 L408 356 L384 376 L380 348 L352 352 L366 332 L340 318 Z" />
+          <!-- Alarme -->
+          <circle id="a6a-alarme" cx="360" cy="92" r="16" fill="#e8622c" />
+          <circle id="a6a-onda" opacity="0" cx="360" cy="92" r="16" fill="none" stroke="#e8622c" stroke-width="4" />
+          <!-- Etiqueta do modo -->
+          <g id="a6a-modo">
+            <rect x="240" y="470" width="240" height="44" rx="22" fill="#b8322a" />
+            <text class="etiqueta" x="360" y="499" text-anchor="middle" style="font-size:20px;font-weight:800;letter-spacing:2px">MODO SOBREVIVÊNCIA</text>
+          </g>
+          <!-- Combustível -->
+          <g id="a6a-gota"><path fill="#e9c24b" d="M560 140 C568 156 578 166 578 180 C578 192 570 200 560 200 C550 200 542 192 542 180 C542 166 552 156 560 140 Z" /></g>
+          <g id="a6a-fogo">
+            <path fill="#e8622c" d="M560 300 C568 320 592 334 589 364 C587 386 575 398 560 398 C542 398 530 386 530 366 C530 346 546 338 549 322 C555 332 557 338 560 346 C564 334 564 316 560 300 Z" />
+            <path fill="#e9c24b" d="M560 344 C564 356 576 364 575 378 C574 389 567 394 560 394 C552 394 545 389 545 378 C545 367 555 363 556 354 C558 359 559 362 560 365 C561 359 561 352 560 344 Z" />
+          </g>
+        </svg>
+        <div class="frases">
+          <span class="linha" id="a6a-l1">Um dia comum</span>
+          <span class="linha" id="a6a-l2">vira grito e ameaça.</span>
+          <span class="linha" id="a6a-l3">E o instinto da família</span>
+          <span class="linha destaque" id="a6a-l4">vira combustível.</span>
+        </div>
+      </section>
+
+      <section id="a6a-cena2" class="cena clip" data-start="5.35" data-duration="2.15" data-track-index="1">
+        <div class="cartela" id="a6a-cartela">
+          <svg class="icone-cartela" viewBox="0 0 120 120" width="110" height="110">
+            <circle class="a6a-ic" pathLength="1" cx="60" cy="60" r="52" fill="none" stroke="#3fae8a" stroke-width="6" />
+            <path class="a6a-ic" pathLength="1" fill="none" stroke="#f4f1ec" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" d="M60 88 V34 M38 56 L60 34 L82 56" />
+          </svg>
+          <span class="rotulo">Protocolo 7 Dias</span>
+          <span class="numero"><small>Aula</small>6</span>
+          <span class="traco"></span>
+          <span class="titulo">Saindo do modo sobrevivência</span>
+        </div>
+      </section>
+
+      <div class="painel p1"></div><div class="painel p2"></div>
+      <div class="grao"></div>
+      <div class="vinheta"></div>
+
+      <audio id="a6a-pad" src="assets/sfx/pad-8s.wav" data-start="0" data-duration="7.5" data-track-index="10" data-volume="0.55"></audio>
+      <audio id="a6a-s1" src="assets/sfx/click.wav" data-start="0.12" data-track-index="11" data-volume="0.7"></audio>
+      <audio id="a6a-s2" src="assets/sfx/whoosh.wav" data-start="0.3" data-track-index="12" data-volume="0.45"></audio>
+      <audio id="a6a-s3" src="assets/sfx/pop.wav" data-start="1.0" data-track-index="13" data-volume="0.6"></audio>
+      <audio id="a6a-s4" src="assets/sfx/pop.wav" data-start="1.3" data-track-index="14" data-volume="0.6"></audio>
+      <audio id="a6a-s5" src="assets/sfx/impacto.wav" data-start="1.6" data-track-index="15" data-volume="0.65"></audio>
+      <audio id="a6a-s6" src="assets/sfx/click.wav" data-start="2.0" data-track-index="16" data-volume="0.6"></audio>
+      <audio id="a6a-s7" src="assets/sfx/pop-agudo.wav" data-start="2.95" data-track-index="17" data-volume="0.45"></audio>
+      <audio id="a6a-s8" src="assets/sfx/impacto.wav" data-start="3.35" data-track-index="18" data-volume="0.7"></audio>
+      <audio id="a6a-s9" src="assets/sfx/whoosh.wav" data-start="3.25" data-track-index="19" data-volume="0.45"></audio>
+      <audio id="a6a-s10" src="assets/sfx/whoosh-grave.wav" data-start="4.9" data-track-index="20" data-volume="0.75"></audio>
+      <audio id="a6a-s11" src="assets/sfx/pop-agudo.wav" data-start="5.5" data-track-index="21" data-volume="0.5"></audio>
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      Kit.fundo(tl, 7.5);
+      Kit.selo(tl, 0.1);
+
+      // A casa se desenha
+      Kit.desenhar(tl, ".a6a-traco", 0.3, 0.6, 0.15);
+
+      // Gritos estouram dentro de casa
+      tl.fromTo("#a6a-g1", { scale: 0, svgOrigin: "347 272" }, { scale: 1, duration: 0.3, ease: "back.out(3)" }, 1.0);
+      tl.fromTo("#a6a-g2", { scale: 0, svgOrigin: "405 325" }, { scale: 1, duration: 0.3, ease: "back.out(3)" }, 1.3);
+      tl.fromTo(["#a6a-g1", "#a6a-g2"], { rotation: 0 }, { rotation: 6, svgOrigin: "376 300", duration: 0.07, yoyo: true, repeat: 15, ease: "none", immediateRender: false }, 1.6);
+      tl.fromTo("#a6a-casa", { x: 0 }, { x: 7, duration: 0.05, yoyo: true, repeat: 7, ease: "none" }, 1.6);
+
+      // Alarme dispara e o modo aparece
+      tl.fromTo("#a6a-alarme", { scale: 0, svgOrigin: "360 92" }, { scale: 1, duration: 0.25, ease: "back.out(3)" }, 1.6);
+      tl.fromTo("#a6a-onda", { scale: 1, opacity: 0.9, svgOrigin: "360 92" }, { scale: 3, opacity: 0, duration: 0.6, repeat: 4, ease: "power1.out" }, 1.7);
+      tl.fromTo("#a6a-modo", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, ease: "back.out(2)" }, 2.0);
+      Kit.linha(tl, "#a6a-l1", 1.2);
+      Kit.linha(tl, "#a6a-l2", 1.45);
+
+      // O instinto vira combustível: a gota cai e o fogo sobe
+      tl.fromTo("#a6a-gota", { y: -60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3, ease: "power2.out" }, 2.85);
+      tl.to("#a6a-gota", { y: 150, opacity: 0, duration: 0.25, ease: "power2.in" }, 3.15);
+      tl.fromTo("#a6a-fogo", { scale: 0, svgOrigin: "560 398" }, { scale: 1.3, duration: 0.45, ease: "back.out(2.5)" }, 3.35);
+      tl.fromTo("#a6a-fogo", { scaleY: 1.3 }, { scaleY: 1.4, svgOrigin: "560 398", duration: 0.16, yoyo: true, repeat: 7, ease: "sine.inOut", immediateRender: false }, 3.8);
+      Kit.linha(tl, "#a6a-l3", 3.25);
+      Kit.linha(tl, "#a6a-l4", 3.45);
+
+      // Título da aula
+      Kit.deslize(tl, 4.9);
+      Kit.desenhar(tl, ".a6a-ic", 5.45, 0.6, 0.18);
+      Kit.cartela(tl, 5.45);
+      Kit.respiro(tl, "#a6a-cartela", 6.2, 1.3);
+
+      window.__timelines["aula6-abertura"] = tl;
+    </script>
+  </body>
+</html>

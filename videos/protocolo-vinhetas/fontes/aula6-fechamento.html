@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=720, height=1280" />
+    <title>Aula 6 fechamento</title>
+    <script src="assets/vendor/gsap.min.js"></script>
+    <script src="assets/kit.js"></script>
+    <link rel="stylesheet" href="assets/kit.css" />
+    <style>
+      @font-face { font-family: "Source Sans 3"; src: url("assets/fonts/source-sans-3-400.woff2") format("woff2"); font-weight: 400; }
+      @font-face { font-family: "Source Sans 3"; src: url("assets/fonts/source-sans-3-600.woff2") format("woff2"); font-weight: 600; }
+      @font-face { font-family: "Source Sans 3"; src: url("assets/fonts/source-sans-3-800.woff2") format("woff2"); font-weight: 700 800; }
+      .fim { position: absolute; inset: 0; background: #14181c; opacity: 0; }
+      #a6f-pilha { position: absolute; left: 130px; right: 130px; top: 170px; height: 520px; }
+      #a6f-moldura { position: absolute; left: -16px; right: -16px; top: 6px; height: 352px; border: 3px solid #3fae8a; border-radius: 18px; opacity: 0; }
+      #a6f-autocuidado { position: absolute; left: 0; right: 0; top: -12px; text-align: center; }
+      #a6f-autocuidado span { background: #1f2a2a; color: #7fe0b8; font-weight: 800; font-size: 17px; letter-spacing: 0.14em; text-transform: uppercase; padding: 4px 12px; border-radius: 8px; }
+      .a6f-bloco { position: absolute; left: 0; right: 0; height: 62px; border-radius: 12px; background: var(--aco); display: flex; align-items: center; gap: 14px; padding: 0 18px; font-weight: 700; font-size: 25px; box-shadow: 0 8px 18px rgba(0,0,0,.3); }
+      .a6f-bloco b { flex: none; width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,.18); display: flex; align-items: center; justify-content: center; font-size: 19px; }
+      #a6f-b4 { top: 34px; background: #e9e6e1; color: #1f2329; } #a6f-b4 b { background: rgba(0,0,0,.1); }
+      #a6f-b3 { top: 110px; } #a6f-b2 { top: 186px; } #a6f-b1 { top: 262px; }
+      #a6f-seta { position: absolute; left: 50%; top: 378px; margin-left: -34px; width: 68px; height: 74px; overflow: visible; }
+      #a6f-modo { position: absolute; left: 0; right: 0; top: 462px; text-align: center; }
+      #a6f-modo span { display: inline-block; padding: 8px 22px; border-radius: 22px; font-weight: 800; font-size: 20px; letter-spacing: 0.12em; }
+      #a6f-ruim { background: #b8322a; }
+      #a6f-bom { background: #2f8f6f; position: absolute; left: 50%; top: 0; transform: translateX(-50%); white-space: nowrap; opacity: 0; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="aula6-fechamento" data-start="0" data-duration="8.5" data-width="720" data-height="1280">
+      <div class="fundo"></div>
+      <div class="mancha m1"></div><div class="mancha m2"></div><div class="mancha m3"></div>
+
+      <section id="a6f-cena1" class="cena clip" data-start="0" data-duration="5.25" data-track-index="0">
+        <div class="selo"><span>Protocolo <b>7</b> Dias · Aula 6</span></div>
+        <div id="a6f-pilha">
+          <div id="a6f-moldura"><div id="a6f-autocuidado"><span>Autocuidado</span></div></div>
+          <div class="a6f-bloco" id="a6f-b4"><b>4</b>Pós-crise de 10 min</div>
+          <div class="a6f-bloco" id="a6f-b3"><b>3</b>Pausa programada</div>
+          <div class="a6f-bloco" id="a6f-b2"><b>2</b>Limite sonoro</div>
+          <div class="a6f-bloco" id="a6f-b1"><b>1</b>Frase de presença</div>
+          <svg id="a6f-seta" viewBox="0 0 68 74"><path fill="#f4f1ec" d="M34 0 L68 36 H48 V74 H20 V36 H0 Z" /></svg>
+          <div id="a6f-modo"><span id="a6f-ruim">MODO SOBREVIVÊNCIA</span><span id="a6f-bom">MODO SEGURO</span></div>
+        </div>
+        <div class="frases">
+          <span class="linha" id="a6f-l1">Peça por peça,</span>
+          <span class="linha" id="a6f-l2">o escudo fica de pé.</span>
+          <span class="linha" id="a6f-l3">E a casa sai</span>
+          <span class="linha destaque" id="a6f-l4">do modo sobrevivência.</span>
+        </div>
+      </section>
+
+      <section id="a6f-cena2" class="cena clip" data-start="5.25" data-duration="3.25" data-track-index="1">
+        <div class="cartela" id="a6f-cartela">
+          <svg class="icone-cartela" viewBox="0 0 120 120" width="110" height="110">
+            <rect class="a6f-ic" pathLength="1" x="14" y="34" width="80" height="52" rx="8" fill="none" stroke="#f4f1ec" stroke-width="6" />
+            <path class="a6f-ic" pathLength="1" fill="none" stroke="#f4f1ec" stroke-width="6" stroke-linecap="round" d="M102 50 V70" />
+            <path class="a6f-ic" pathLength="1" fill="none" stroke="#3fae8a" stroke-width="10" stroke-linecap="round" d="M28 60 H78" />
+          </svg>
+          <span class="rotulo">Próxima aula</span>
+          <span class="numero"><small>Aula</small>7</span>
+          <span class="traco"></span>
+          <span class="titulo">Manutenção e proteção pessoal</span>
+        </div>
+        <div class="assinatura"><span class="nome">Dr. Fabio Schmidt</span><span class="cargo">Médico · CRM-SP 183549</span></div>
+      </section>
+
+      <div class="painel p1"></div><div class="painel p2"></div>
+      <div class="grao"></div>
+      <div class="vinheta"></div>
+      <div class="fim"></div>
+
+      <audio id="a6f-pad" src="assets/sfx/pad-8s.wav" data-start="0" data-duration="8.5" data-track-index="10" data-volume="0.55"></audio>
+      <audio id="a6f-s1" src="assets/sfx/click.wav" data-start="0.12" data-track-index="11" data-volume="0.7"></audio>
+      <audio id="a6f-s2" src="assets/sfx/pop.wav" data-start="0.55" data-track-index="12" data-volume="0.5"></audio>
+      <audio id="a6f-s3" src="assets/sfx/pop.wav" data-start="0.9" data-track-index="13" data-volume="0.5"></audio>
+      <audio id="a6f-s4" src="assets/sfx/pop.wav" data-start="1.25" data-track-index="14" data-volume="0.5"></audio>
+      <audio id="a6f-s5" src="assets/sfx/pop.wav" data-start="1.6" data-track-index="15" data-volume="0.5"></audio>
+      <audio id="a6f-s6" src="assets/sfx/whoosh.wav" data-start="1.4" data-track-index="16" data-volume="0.45"></audio>
+      <audio id="a6f-s7" src="assets/sfx/riser.wav" data-start="2.2" data-track-index="17" data-volume="0.4"></audio>
+      <audio id="a6f-s8" src="assets/sfx/pop-agudo.wav" data-start="3.2" data-track-index="18" data-volume="0.55"></audio>
+      <audio id="a6f-s9" src="assets/sfx/whoosh.wav" data-start="3.3" data-track-index="19" data-volume="0.45"></audio>
+      <audio id="a6f-s10" src="assets/sfx/whoosh-grave.wav" data-start="4.8" data-track-index="20" data-volume="0.75"></audio>
+      <audio id="a6f-s11" src="assets/sfx/pop-agudo.wav" data-start="5.45" data-track-index="21" data-volume="0.5"></audio>
+      <audio id="a6f-s12" src="assets/sfx/pop-agudo.wav" data-start="6.7" data-track-index="22" data-volume="0.45"></audio>
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      Kit.fundo(tl, 8.5);
+      Kit.selo(tl, 0.1);
+
+      // A seta e o modo atual aparecem; os blocos caem e empilham de baixo para cima
+      tl.fromTo("#a6f-seta", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, ease: "power3.out" }, 0.25);
+      tl.fromTo("#a6f-ruim", { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: "back.out(2.5)" }, 0.35);
+      ["#a6f-b1", "#a6f-b2", "#a6f-b3", "#a6f-b4"].forEach((sel, i) => {
+        tl.fromTo(sel, { y: -260, opacity: 0 }, { y: 0, opacity: 1, duration: 0.32, ease: "bounce.out" }, 0.45 + i * 0.35);
+      });
+      Kit.linha(tl, "#a6f-l1", 1.4);
+      Kit.linha(tl, "#a6f-l2", 1.6);
+
+      // O autocuidado fecha o escudo e o modo muda
+      tl.fromTo("#a6f-moldura", { opacity: 0, scale: 1.08 }, { opacity: 1, scale: 1, duration: 0.45, ease: "power3.out" }, 2.6);
+      tl.to("#a6f-ruim", { opacity: 0, y: 10, duration: 0.25 }, 3.15);
+      tl.fromTo("#a6f-bom", { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.3, ease: "back.out(2.5)" }, 3.2);
+      tl.to("#a6f-seta path", { fill: "#7fe0b8", duration: 0.3 }, 3.2);
+      tl.fromTo("#a6f-pilha", { y: 0 }, { y: -14, duration: 0.3, yoyo: true, repeat: 1, ease: "power2.out" }, 3.2);
+      Kit.linha(tl, "#a6f-l3", 3.3);
+      Kit.linha(tl, "#a6f-l4", 3.5);
+
+      // Próxima aula
+      Kit.deslize(tl, 4.8);
+      Kit.desenhar(tl, ".a6f-ic", 5.35, 0.5, 0.15);
+      Kit.cartela(tl, 5.4);
+      Kit.assinatura(tl, 6.7);
+      Kit.respiro(tl, "#a6f-cartela", 6.0, 2.5);
+      tl.to(".fim", { opacity: 1, duration: 0.5, ease: "power1.in" }, 8.0);
+
+      window.__timelines["aula6-fechamento"] = tl;
+    </script>
+  </body>
+</html>

@@ -69,6 +69,7 @@ Entregue em tabela: capa, estrutura base (código), crença que contraria, o que
 - Não explique pela infância e não use a fórmula quem aprendeu cedo. Sem neurobiologia.
 - Validar o sofrimento não apaga responsabilidade, limite ou segurança de quem foi machucado.
 - Não force paradoxo, choque ou contraste em todas as opções. Varie.
+- Não use a fórmula não é X, é Y, nem suas variantes: não X. Y.; não é X. É Y.; você não X, você Y. Antes de entregar, procure não é e não + verbo seguido de correção, e reescreva.
 - Não invente número, estudo, caso ou fala de paciente.
 
 ## Formato de entrega

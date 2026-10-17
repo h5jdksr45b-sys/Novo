@@ -85,6 +85,8 @@ Antes de entregar uma capa de carrossel, confira e diga o que não passou:
 
 Os limites de 8 palavras e de 22% a 78% são restrições de leitura, não previsão de alcance.
 
+Segurança da imagem: o público tem risco aumentado de autolesão e suicídio. Não use imagem que mostre ou sugira método: queda, pessoa caindo, precipício, beira de prédio ou ponte, afogamento, corda, lâmina, remédios em quantidade, sangue. Em dúvida, troque por uma metáfora sem risco.
+
 ## Formato de entrega
 
 Entrada do banco (modo alimentar):

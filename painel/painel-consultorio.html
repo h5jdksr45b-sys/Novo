@@ -148,7 +148,7 @@ body.discreto .pii:hover,body.discreto .pii:focus-within{filter:none}
 .blob{position:absolute;top:4px;left:-29px;width:58px;height:58px;border-radius:50%;background:var(--cream)}
 .blob.dip{animation:dip .62s ease}
 @keyframes dip{0%{transform:translateY(0)}35%{transform:translateY(22px) scale(1.35,.8)}70%{transform:translateY(-3px) scale(.95,1.06)}100%{transform:translateY(0)}}
-.tabs{position:absolute;inset:0;display:grid;grid-template-columns:repeat(6,1fr)}
+.tabs{position:absolute;inset:0;display:grid;grid-template-columns:repeat(7,1fr)}
 .tab{position:relative;border:0;background:none;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:2px;padding-bottom:9px;color:#5a5249;min-width:0}
 .tab .ico{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;transition:transform .5s cubic-bezier(.45,1.45,.45,1),background .3s,color .3s}
 .tab .ico svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
@@ -162,7 +162,7 @@ body.discreto .pii:hover,body.discreto .pii:focus-within{filter:none}
 .toast{position:fixed;left:50%;bottom:calc(var(--dock-h) + 34px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:60;background:var(--cream);color:var(--ink);border-radius:999px;padding:9px 16px;font-size:.85rem;font-weight:600;max-width:calc(100% - 32px);text-align:center;box-shadow:0 8px 30px rgba(0,0,0,.4)}
 
 @media (max-width:440px){
-  .tab .lbl{font-size:.58rem}
+  .tab .lbl{font-size:.54rem;letter-spacing:0}
   .money{grid-template-columns:1fr 1fr}
   .money .box:last-child{grid-column:1/-1}
   .form-grid{grid-template-columns:1fr}
@@ -209,22 +209,49 @@ const ICONS={
   email:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/>',
   drive:'<path d="M3 7.5A1.5 1.5 0 0 1 4.5 6H9l2 2h8.5A1.5 1.5 0 0 1 21 9.5v8a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/>',
   gastos:'<path d="M4 7h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a1 1 0 0 1-1-1z"/><path d="M4 7l11-3v3"/><circle cx="16" cy="13" r="1.3"/>',
+  mensagens:'<path d="M4 5h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H9l-4 3v-3H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z"/><path d="M7.5 9.5h9M7.5 12.5h6"/>',
   links:'<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>'
 };
-const TABS=[['hoje','Hoje'],['pacientes','Pacientes'],['email','E-mail'],['drive','Drive'],['gastos','Gastos'],['links','Links']];
+const TABS=[['hoje','Hoje'],['pacientes','Pacientes'],['email','E-mail'],['mensagens','Mensagens'],['drive','Drive'],['gastos','Gastos'],['links','Links']];
+const CONSULTA_URL='https://consultadrfabio.base44.app/';
 const LINKS=[
-  {g:'Agendamento',items:[
-    ['Agendamento principal','https://fabio-flow-book.base44.app/'],
-    ['Cal.com (alternativa)','https://cal.com/drfabioschmidt']]},
+  {g:'Principais',items:[
+    ['Consulta, agendamento',CONSULTA_URL],
+    ['Site principal','https://www.drfabioschmidt.net/'],
+    ['Protocolo 7 Dias, landing page','https://curso.drfabioschmidt.net/'],
+    ['Radar de crise','https://radar-crise-flow.base44.app/']]},
   {g:'Produtos',items:[
-    ['Protocolo 7 Dias, página','https://curso.drfabioschmidt.net/'],
     ['Protocolo 7 Dias, checkout','https://pay.hotmart.com/S104212285E?bid=1778816264134'],
-    ['Livro Quando escolher não é possível','https://pay.hotmart.com/U103950622S?off=3xv992tf&bid=1778816298424'],
+    ['Livro Quem sofre não escolhe como gritar','https://pay.hotmart.com/U103950622S?off=3xv992tf&bid=1778816298424'],
     ['Manual de Crise','https://pay.hotmart.com/H105440271K?bid=1778816337663'],
     ['Kit Regulação','https://pay.hotmart.com/M105447307K?bid=1778816366683']]},
+  {g:'Materiais do Protocolo 7 Dias',local:true,items:[
+    ['0. Comece aqui','materiais/comece-aqui.pdf'],
+    ['1. Scripts para a crise','materiais/scripts-para-a-crise.pdf'],
+    ['2. Checklist dos primeiros 60 segundos','materiais/checklist-60-segundos.pdf']]},
   {g:'Materiais gratuitos',items:[
     ['PDF Começar','https://drive.google.com/file/d/1aXqQc6aTmEieHbJSu3xxPOsmbLYrOEkM/view?usp=drivesdk'],
     ['Livro TPB no CAPS','https://drive.google.com/file/d/13dvlbl-KGja6l9R3R7D72mPUS5f8UNcK/view?usp=drivesdk']]}
+];
+/* Mensagens do consultório, conforme o padrão da secretaria. [NOME], [DIA], [DATA] e [HORÁRIO] são preenchidos pelos campos da aba. */
+const MSGS=[
+  {g:'Agenda',items:[
+    ['Boas-vindas e dados','Olá [NOME]! Seja bem-vindo(a)! 😊\nSua consulta está confirmada para [DIA], [DATA], às [HORÁRIO].\nPara agilizar o atendimento, preciso de algumas informações para documentos como receitas e exames:\n📋 *Nome completo:*\n📋 *CPF:*\n📋 *Endereço completo (rua, número, bairro, cidade, CEP):*'],
+    ['Confirmação na véspera','Olá [NOME]! Passando para confirmar sua consulta amanhã, [DATA], às [HORÁRIO]. Posso confirmar?'],
+    ['Sem horário','No momento não tenho horários disponíveis para esse dia. Posso verificar outra data?'],
+    ['Link para agendar','Olá [NOME], tudo bem? Você pode escolher o melhor dia e horário por aqui: '+CONSULTA_URL+'\nA vaga fica garantida após a confirmação do pagamento.']]},
+  {g:'Cobrança',items:[
+    ['Primeira consulta, R$ 700','Olá! Tudo bem?\nSua consulta com o Dr. Fabio Schmidt está agendada para [DIA] às [HORÁRIO].\nO valor da consulta é de *R$ 700,00*.\n⚠️ A vaga só é garantida após a confirmação do pagamento.\nO PIX para pagamento será enviado abaixo 👇'],
+    ['Retorno, R$ 650','Olá! Tudo bem?\nSeu retorno com o Dr. Fabio Schmidt está agendado para [DIA] às [HORÁRIO].\nO valor do retorno é de *R$ 650,00*.\n⚠️ A vaga só é garantida após a confirmação do pagamento.\nO PIX para pagamento será enviado abaixo 👇']]},
+  {g:'Planos de 4 sessões',items:[
+    ['Oferta do plano','Olá [NOME], tudo bem?\nPara quem precisa de acompanhamento mais próximo, o Dr. Fabio tem planos de 4 sessões:\n• *R$ 2.200*: 4 sessões de acompanhamento\n• *R$ 2.900*: 4 sessões + suporte mais próximo entre as consultas, materiais de apoio e preferência na agenda\nPode ser à vista ou mês a mês. Se quiser, te explico a diferença e já reservo os horários.'],
+    ['Renovação, na sessão 4 de 4','Olá [NOME], tudo bem?\nSua sessão de [DATA] fecha o ciclo de 4 do seu plano. Se quiser seguir, já deixo os próximos horários reservados antes que a agenda feche. Me avisa por aqui 😊']]},
+  {g:'Limites e segurança',items:[
+    ['Risco: suicídio ou autolesão','Te ouvi. Você não está sozinho(a). Liga agora no CVV 188 (24h, gratuito) ou CVV.org.br no chat. Se for emergência, SAMU 192.'],
+    ['Caso individual por mensagem','Não consigo orientar caso individual por aqui, isso é para a consulta. Se quiser, te mando o link para agendar.'],
+    ['Paciente insistente','Olá! Quero ser transparente pra te ajudar da melhor forma 🙏\nPelo WhatsApp consigo responder apenas dúvidas pontuais e simples. Algumas coisas que *não são possíveis* por aqui:\n❌ Atender urgências ou crises\n❌ Alterar ou prescrever medicações\n❌ Analisar exames ou tomar condutas clínicas\n❌ Estar disponível para respostas rápidas\n⚠️ *Se for uma urgência, não espere retorno aqui.* Procure o pronto-socorro mais próximo ou ligue para o SAMU (192).\nPara dúvidas que exigem avaliação, o caminho é agendar uma consulta. 😊']]},
+  {g:'E-mail',items:[
+    ['Paciente que não responde','Assunto: Sua consulta com o Dr. Fabio Schmidt\n\nOlá [NOME], tudo bem?\nTentamos contato pelo WhatsApp sobre sua consulta e não conseguimos falar com você. Para facilitar, você mesma pode escolher o melhor dia e horário por aqui: '+CONSULTA_URL+'\nA vaga fica garantida após a confirmação do pagamento. Qualquer dúvida, é só responder este e-mail.\nUm abraço,\nJessica, secretária do Dr. Fabio Schmidt']]}
 ];
 const CAT_GASTO=['Consultório','Anúncios e marketing','Ferramentas e assinaturas','Impostos e taxas','Educação','Transporte','Alimentação','Casa','Saúde','Pessoal','Outros'];
 const CAT_RECEITA=['Consultas','Produtos digitais','Outras receitas'];
@@ -676,10 +703,28 @@ async function addRow(row,docId){
   catch(e){toast('Não foi possível salvar: '+((e&&e.message)||'erro'));return false}
 }
 
+/* ---------- Mensagens ---------- */
+const M={nome:'',quando:'',g:'Agenda'};
+function fillMsg(t){
+  const d=M.quando?new Date(M.quando):null;const ok=d&&!isNaN(d);
+  return t.replace(/\[NOME\]/g,M.nome.trim()||'[NOME]')
+    .replace(/\[DIA\]/g,ok?cap(new Intl.DateTimeFormat('pt-BR',{weekday:'long'}).format(d)):'[DIA]')
+    .replace(/\[DATA\]/g,ok?new Intl.DateTimeFormat('pt-BR',{day:'2-digit',month:'2-digit'}).format(d):'[DATA]')
+    .replace(/\[HORÁRIO\]/g,ok?fTime.format(d):'[HORÁRIO]');
+}
+function renderMensagens(){
+  let h='<section class="section"><h2>Mensagens prontas</h2>';
+  h+='<div class="form-grid"><label class="lab">Nome do paciente<input class="field pii" id="m-nome" value="'+esc(M.nome)+'" placeholder="Preenche [NOME]" autocomplete="off"></label><label class="lab">Dia e horário da consulta<input class="field" id="m-quando" type="datetime-local" value="'+esc(M.quando)+'"></label></div>';
+  h+='<div class="chips" role="group" aria-label="Grupo">'+MSGS.map(g=>'<button class="chip" data-act="msg-group" data-g="'+esc(g.g)+'" aria-pressed="'+(M.g===g.g)+'">'+esc(g.g)+'</button>').join('')+'</div>';
+  const grp=MSGS.find(g=>g.g===M.g)||MSGS[0];
+  grp.items.forEach(([t,m])=>{const txt=fillMsg(m);h+='<div class="tpl"><div class="row"><strong>'+esc(t)+'</strong><span class="spacer"></span><button class="btn small primary" data-act="copy" data-text="'+esc(txt)+'" data-label="Mensagem">Copiar</button></div><pre class="pii">'+esc(txt)+'</pre></div>'});
+  return h+'<span class="stamp">Para copiar e colar no WhatsApp. Os campos em branco ficam entre colchetes.</span></section>';
+}
+
 /* ---------- Links ---------- */
 function renderLinks(){
   let h='';LINKS.forEach(g=>{h+='<section class="section"><h2>'+esc(g.g)+'</h2><div class="list">';
-    g.items.forEach(([n,u])=>{h+='<div class="item"><span class="main"><span class="t">'+esc(n)+'</span><span class="s" style="font-family:var(--f-mono);font-size:.72rem;-webkit-line-clamp:1">'+esc(u.replace(/^https:\/\//,''))+'</span></span><button class="btn small ghost" data-act="copy" data-text="'+esc(u)+'" data-label="Link">Copiar</button><a class="btn small" href="'+esc(u)+'" target="_blank" rel="noopener">Abrir</a></div>'});
+    g.items.forEach(([n,u])=>{h+='<div class="item"><span class="main"><span class="t">'+esc(n)+'</span><span class="s" style="font-family:var(--f-mono);font-size:.72rem;-webkit-line-clamp:1">'+esc(g.local?'PDF':u.replace(/^https:\/\//,''))+'</span></span>'+(g.local?'':'<button class="btn small ghost" data-act="copy" data-text="'+esc(u)+'" data-label="Link">Copiar</button>')+'<a class="btn small" href="'+esc(u)+'" target="_blank" rel="noopener">Abrir</a></div>'});
     h+='</div></section>'});
   return h;
 }
@@ -718,7 +763,7 @@ function render(){
   const v=document.getElementById('view');
   const keep=document.activeElement&&document.activeElement.id&&v.contains(document.activeElement)?{id:document.activeElement.id,s:document.activeElement.selectionStart}:null;
   let h='';
-  switch(S.tab){case 'hoje':h=renderHoje();break;case 'pacientes':h=renderPacientes();break;case 'email':h=renderEmail();break;case 'drive':h=renderDrive();break;case 'gastos':h=renderGastos();break;default:h=renderLinks()}
+  switch(S.tab){case 'hoje':h=renderHoje();break;case 'pacientes':h=renderPacientes();break;case 'email':h=renderEmail();break;case 'drive':h=renderDrive();break;case 'gastos':h=renderGastos();break;case 'mensagens':h=renderMensagens();break;default:h=renderLinks()}
   v.innerHTML=h;
   if(keep){const el=document.getElementById(keep.id);if(el){el.focus();try{if(keep.s!=null)el.setSelectionRange(keep.s,keep.s)}catch(_){}}}
 }
@@ -740,7 +785,8 @@ document.addEventListener('click',async ev=>{
       try{S.mail.status='loading';render();const p=await call(GMAIL,'search_threads',{query:mailQuery(),pageSize:30},{cache:{refresh:true}})||{};S.mail.threads=p.threads||[];S.mail.status='ready';S.mail.at=Date.now();watchMail()}catch(e){S.mail.status='error';S.mail.err=e}render();break;
     case 'open-thread':openThread(a.dataset.id);break;
     case 'compose':openCompose(a.dataset.to,a.dataset.sig);break;
-    case 'tpl-noreply':{const b=document.getElementById('c-body'),s=document.getElementById('c-subj');if(s&&!s.value)s.value='Sua consulta com o Dr. Fabio Schmidt';if(b)b.value='Olá [NOME], tudo bem?\nTentamos contato pelo WhatsApp sobre sua consulta e não conseguimos falar com você. Para facilitar, você mesma pode escolher o melhor dia e horário por aqui: https://fabio-flow-book.base44.app/\nA vaga fica garantida após a confirmação do pagamento. Qualquer dúvida, é só responder este e-mail.\nUm abraço,';break}
+    case 'tpl-noreply':{const b=document.getElementById('c-body'),s=document.getElementById('c-subj');if(s&&!s.value)s.value='Sua consulta com o Dr. Fabio Schmidt';if(b)b.value='Olá [NOME], tudo bem?\nTentamos contato pelo WhatsApp sobre sua consulta e não conseguimos falar com você. Para facilitar, você mesma pode escolher o melhor dia e horário por aqui: '+CONSULTA_URL+'\nA vaga fica garantida após a confirmação do pagamento. Qualquer dúvida, é só responder este e-mail.\nUm abraço,';break}
+    case 'msg-group':M.g=a.dataset.g;render();break;
     case 'drive-retry':loadDrive();break;
     case 'open-file':openFile(a);break;
     case 'month':{const [y,m]=S.gastos.month.split('-').map(Number);S.gastos.month=monthKey(new Date(y,m-1+Number(a.dataset.d),1));S.gastos.confirmDel=null;render();break}
@@ -769,6 +815,7 @@ document.addEventListener('submit',async ev=>{
 });
 document.addEventListener('input',ev=>{
   if(ev.target.id==='pac-q'){S.pac.q=ev.target.value;render()}
+  if(ev.target.id==='m-nome'||ev.target.id==='m-quando'){M[ev.target.id==='m-nome'?'nome':'quando']=ev.target.value;render()}
 });
 document.addEventListener('change',ev=>{
   if(ev.target.id==='g-tipo'){const c=document.getElementById('g-cat');const list=ev.target.value==='receita'?CAT_RECEITA:CAT_GASTO;c.innerHTML=list.map(x=>'<option>'+esc(x)+'</option>').join('')}

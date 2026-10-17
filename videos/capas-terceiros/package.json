@@ -1,0 +1,21 @@
+{
+  "name": "capas-terceiros",
+  "private": true,
+  "scripts": {
+    "render": "remotion render Reel out/video.mp4"
+  },
+  "dependencies": {
+    "@fontsource/anton": "5.1.0",
+    "@fontsource/inter": "5.1.0",
+    "@fontsource/playfair-display": "^5.1.0",
+    "@remotion/cli": "4.0.535",
+    "lucide-react": "0.468.0",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "remotion": "4.0.535"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.7",
+    "typescript": "5.9.3"
+  }
+}

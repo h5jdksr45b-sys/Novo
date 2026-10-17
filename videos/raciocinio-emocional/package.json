@@ -1,0 +1,23 @@
+{
+  "name": "raciocinio-emocional",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "remotion studio",
+    "render": "remotion render RaciocinioEmocional out/video.mp4",
+    "lint": "tsc"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.535",
+    "@remotion/paths": "4.0.535",
+    "lucide-react": "0.460.0",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "remotion": "4.0.535"
+  },
+  "devDependencies": {
+    "@fontsource/inter": "5.1.0",
+    "@types/react": "19.2.7",
+    "typescript": "5.9.3"
+  }
+}

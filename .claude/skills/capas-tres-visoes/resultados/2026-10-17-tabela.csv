@@ -1,0 +1,181 @@
+Capa base,Nº,Opção,O que mudou
+C01,1,Eu estava na mesa. Ninguém me via ali.,lógica: premissa dita em voz alta
+C01,2,Você já foi a cadeira vazia de uma mesa cheia?,gramática: pergunta em segunda pessoa
+C01,3,Sentada com todo mundo e sozinha mesmo assim.,gramática: frase nominal
+C01,4,Ninguém percebeu que eu não estava ali.,lógica: foco em quem não notou
+C01,5,Eu ria junto e por dentro já tinha saído da mesa.,lógica: contraste entre gesto e sensação
+C01,6,Tem gente que some sem levantar da cadeira.,gramática: terceira pessoa; retórica: observação
+C01,7,A mesa estava cheia. Eu era quem faltava.,"gramática: duas frases curtas, ordem invertida"
+C01,8,Estar na mesa e se sentir fora dela também é sofrimento.,retórica: validar; lógica: definição
+C01,9,"No almoço de família, eu contava os minutos para ir embora.",lógica: exemplo no lugar da metáfora; retórica: intensidade média
+C01,10,Sobrar entre os seus dói de um jeito que ninguém vê.,"retórica: intensidade média, voz geral"
+C02,1,Todo mundo fala da sexualidade no borderline. Quase ninguém fala do vazio.,lógica: diz qual parte machuca
+C02,2,O que mais se fala sobre borderline não é o que mais dói.,"gramática: uma frase, sem risco visual"
+C02,3,Você sabe o que mais dói no borderline? Não é o que todo mundo comenta.,gramática: pergunta
+C02,4,Hipersexual é o rótulo. A dor fica do lado de dentro.,retórica: mais seca
+C02,5,Borderline é manipulador (riscado). Essa parte todo mundo repete.,"lógica: mesmo mecanismo, outro estereótipo"
+C02,6,A fama vem do comportamento. O sofrimento vem antes dele.,lógica: sequência no lugar de contraste
+C02,7,"Antes de julgar o comportamento, pergunte o que ele está tentando aliviar.",gramática: imperativa; retórica: orientar
+C02,8,A impulsividade sexual existe em alguns casos. Ela não resume ninguém.,retórica: admite antes de corrigir; lógica: concessão
+C02,9,Quem só conhece a parte do sexo não conhece o borderline.,gramática: sujeito oracional
+C02,10,Eu era conhecida pelo que fazia. Ninguém perguntava pelo que eu sentia.,gramática: primeira pessoa
+C03,1,Na sua família chamavam de nervosa. Hoje dá para perguntar o que era.,lógica: pergunta no lugar do diagnóstico
+C03,2,"Nervosa, difícil, de lua. Que nome você ouviu em casa?",gramática: lista e pergunta; retórica: identificar
+C03,3,Muita dor de mulher ficou com o apelido de nervosa.,gramática: declarativa geral; retórica: intensidade média
+C03,4,Sua avó nunca foi avaliada. Você pode ser.,lógica: contraste de acesso ao cuidado
+C03,5,Apelido de família não é diagnóstico. Pode ser uma pista.,lógica: condição explícita
+C03,6,Três gerações ouvindo que era só nervoso.,gramática: frase nominal
+C03,7,"Quando o mesmo sofrimento se repete na família, vale olhar com cuidado.",lógica: generalização prudente; retórica: alerta brando
+C03,8,Você ouviu nervosa a vida inteira. Isso nunca foi explicação.,retórica: contestar o rótulo
+C03,9,"Antes de culpar o gênio da família, olhe o sofrimento por trás dele.",gramática: imperativa
+C03,10,Chamaram de nervosa e ninguém perguntou o que doía.,lógica: do rótulo para a falta de cuidado
+C04,1,"Você pede ajuda e, do jeito que sai, a pessoa vai embora.",gramática: segunda pessoa
+C04,2,Eu precisava de alguém e afastava justo essa pessoa.,"gramática: primeira pessoa, passado"
+C04,3,Por que o pedido de ajuda no borderline às vezes soa como ataque?,gramática: pergunta; lógica: causa
+C04,4,A briga era um pedido. Só não parecia.,retórica: mais seca
+C04,5,O pedido é real. O jeito machuca quem está perto.,lógica: valida os dois lados
+C04,6,Entender o pedido não obriga ninguém a aguentar o jeito.,retórica: limite de quem convive
+C04,7,"Quando a dor sai como raiva, quase ninguém fica para ouvir.",lógica: condição temporal
+C04,8,"Grito, cobrança, silêncio. Às vezes é assim que sai um pedido de ajuda.",gramática: lista nominal
+C04,9,Dá para pedir ajuda sem afastar quem você ama.,retórica: prometer um caminho
+C04,10,Quem está perto ouve acusação. Quem está em crise está pedindo socorro.,lógica: duas perspectivas lado a lado
+C05,1,"Você trabalha, cuida de tudo e desaba quando a porta fecha.",gramática: segunda pessoa; lógica: exemplo
+C05,2,Dar conta não quer dizer que está tudo bem.,gramática: sujeito infinitivo
+C05,3,Funcionar por fora custa caro por dentro.,retórica: mais seca
+C05,4,Ninguém no trabalho imagina como foi a sua noite.,lógica: exemplo concreto
+C05,5,Por que borderline funcional é tão difícil de perceber?,gramática: pergunta; lógica: causa
+C05,6,Eu entregava tudo no prazo. Chegava em casa sem sobrar nada.,gramática: primeira pessoa
+C05,7,"Se você funciona, ninguém pergunta como você está.",lógica: condição
+C05,8,Funcional fala do que os outros veem. Leve falaria do que você sente.,lógica: definição dita em voz alta
+C05,9,Você não precisa estar caindo aos pedaços para pedir ajuda.,retórica: autorizar
+C05,10,O sofrimento de quem dá conta de tudo também conta.,"retórica: validar, intensidade média"
+C06,1,"Você achou que estava enlouquecendo. No borderline, a crise pode mexer com a percepção.",retórica: aliviar
+C06,2,Desconfiar de todo mundo no auge da crise tem explicação.,"lógica: um sintoma, sem número"
+C06,3,Se sentir fora do próprio corpo numa briga tem nome.,lógica: exemplo concreto
+C06,4,O que acontece com a percepção no borderline quando o estresse passa do limite.,gramática: frase nominal
+C06,5,Por que a crise no borderline pode parecer psicose e passar?,gramática: pergunta; lógica: correção do termo
+C06,6,Sintomas que parecem psicose no borderline e o que os diferencia.,lógica: distinção no lugar de lista
+C06,7,Você sabia que não era real e mesmo assim parecia.,"gramática: segunda pessoa, cena"
+C06,8,Ouvir coisas na crise assusta. Saber o que é ajuda a buscar o cuidado certo.,retórica: orientar
+C06,9,"Desconfiança, sensação de irrealidade, vozes na crise: quando é borderline e quando é outra coisa.",lógica: diferencial; retórica: orientar
+C06,10,Crise não é sinônimo de perder a razão.,"retórica: contestar, intensidade média"
+C07,1,Você vai embora antes que te deixem.,gramática: segunda pessoa
+C07,2,Eu terminava antes de ser deixada.,"gramática: primeira pessoa, passado"
+C07,3,"Sair primeiro parece proteção. Na prática, confirma o medo.",lógica: premissa dita em voz alta
+C07,4,Por que quem tem medo de ser deixado às vezes é quem vai embora?,gramática: pergunta; retórica: explicar
+C07,5,O medo de ser abandonado também faz a pessoa abandonar.,lógica: generalização atenuada
+C07,6,Ir embora primeiro não dói menos. Só dói antes.,retórica: mais seca
+C07,7,O medo de perder faz cortar a relação antes que ela acabe.,lógica: causa explícita
+C07,8,"Se você termina tudo antes de dar errado, leia isso.",retórica: chamada direta
+C07,9,Para quem foi deixado assim: a saída antes da hora também machucou você.,retórica: lado de quem foi ferido
+C07,10,"Bloquear, sumir, terminar por mensagem. O medo também tem esse jeito.",gramática: lista; lógica: exemplos
+C08,1,O que acontece no borderline quando ninguém está olhando.,gramática: sem número
+C08,2,Você sente isso todo dia e ninguém percebe.,gramática: segunda pessoa
+C08,3,Os sintomas do borderline que não aparecem na crise.,lógica: contraste com o visível
+C08,4,Nem todo sofrimento do borderline faz barulho.,retórica: mais íntima
+C08,5,7 sintomas borderline que passam por jeito de ser.,lógica: confundidos com personalidade
+C08,6,"Antes da explosão, tem muita coisa que ninguém vê.",lógica: sequência temporal
+C08,7,Quais sintomas do borderline a família não vê?,gramática: pergunta; público família
+C08,8,"Eu parecia bem. Por dentro, isso aqui acontecia.",gramática: primeira pessoa
+C08,9,O lado silencioso do borderline.,"retórica: seca, intensidade baixa"
+C08,10,"Se você só reconhece o borderline pela crise, está vendo pouco.",retórica: contestar; lógica: condição
+C09,1,Quem tem borderline às vezes espeta para não ser tocado onde dói.,lógica: analogia explicada
+C09,2,A defesa que afasta é a mesma que protege.,lógica: premissa sem metáfora
+C09,3,Você chega perto e leva uma resposta atravessada. Tem motivo.,gramática: segunda pessoa; público quem convive
+C09,4,Por que quem tem borderline se defende antes de ser atacado?,gramática: pergunta
+C09,5,Eu me fechava antes que alguém chegasse perto demais.,gramática: primeira pessoa
+C09,6,"Por trás da resposta dura, muitas vezes tem medo.",lógica: generalização atenuada
+C09,7,O jeito duro costuma ser defesa. Não é licença para machucar.,retórica: preservar limite
+C09,8,Entender a defesa muda o jeito de olhar para o transtorno.,retórica: promessa sem enigma
+C09,9,"Ríspido por fora, em alerta por dentro.",gramática: frase nominal
+C09,10,Nem toda grosseria é desprezo. Às vezes é proteção.,lógica: distinção
+C10,1,Você sabe o humor de todo mundo pelo barulho da porta.,"gramática: segunda pessoa, cena"
+C10,2,Eu sabia quem estava bravo pelo jeito de andar. O meu humor eu não sabia.,lógica: exemplo
+C10,3,Por que é tão fácil ler os outros e tão difícil ler a si mesmo?,gramática: pergunta
+C10,4,Ler o ambiente virou hábito. Ler a si mesmo ainda é difícil.,gramática: impessoal
+C10,5,Vigiar o humor dos outros cansa e não deixa espaço para o seu.,lógica: consequência
+C10,6,"Você entra num lugar e já sabe quem está mal. E você, como está?",retórica: pergunta ao leitor
+C10,7,"Antes de perguntar o que eu sentia, eu checava o que os outros sentiam.",gramática: ordem invertida
+C10,8,Prestar atenção em todo mundo não é o mesmo que estar bem.,retórica: contestar
+C10,9,Tem gente que entende o humor de todos e estranha o próprio.,gramática: terceira pessoa
+C10,10,Saber o que os outros sentem antes de saber o que você sente também é sofrimento.,retórica: validar
+C11,1,Você ama alguém com borderline e não entende o que acontece.,gramática: segunda pessoa
+C11,2,Ninguém te explicou como amar alguém com borderline sem se perder.,retórica: inclui o limite de quem ama
+C11,3,O que eu queria ter sabido antes de amar alguém com borderline.,gramática: primeira pessoa
+C11,4,Amar alguém com borderline pede mais do que amor.,lógica: premissa dita
+C11,5,Como amar alguém com borderline sem abrir mão de você.,gramática: como fazer
+C11,6,Você pode amar e ainda assim colocar limite.,retórica: autorizar
+C11,7,Quando amar alguém com borderline vira adivinhar o tempo todo.,lógica: exemplo
+C11,8,Um guia curto para quem ama e cansou de adivinhar.,gramática: frase nominal
+C11,9,Entender o borderline não resolve tudo. Muda a briga.,lógica: concessão
+C11,10,Amar sem informação machuca os dois lados.,lógica: consequência; retórica: alerta
+C12,1,O que quem tem borderline queria dizer para quem mora junto.,lógica: sem atribuir autoria
+C12,2,Carta para quem divide a casa com a minha crise.,gramática: destinatário mais específico
+C12,3,Você mora com alguém com borderline? Isso é o que talvez ela não consiga dizer.,gramática: pergunta
+C12,4,Coisas difíceis de dizer para quem mora com você.,gramática: frase nominal; retórica: intensidade menor
+C12,5,Para quem acorda do meu lado depois de uma crise.,gramática: dedicatória
+C12,6,O pedido de desculpa no dia seguinte é só o começo.,lógica: responsabilidade
+C12,7,Morar com borderline cansa os dois lados. Uma carta para os dois.,retórica: duas pontas
+C12,8,O que eu queria que você soubesse sobre morar comigo.,gramática: primeira pessoa
+C12,9,Quem mora com alguém com borderline também precisa ouvir isto.,retórica: público quem convive
+C12,10,Uma carta sobre a casa depois da crise.,retórica: intensidade baixa
+C13,1,"Você repete porque, por alguns minutos, alivia.",gramática: segunda pessoa; lógica: causa explícita
+C13,2,A compulsão alivia na hora e cobra depois.,lógica: custo
+C13,3,Por que você volta para o que te faz mal?,gramática: pergunta
+C13,4,"Comer, comprar, beber: o alívio vem rápido e a culpa também.",gramática: lista
+C13,5,Eu sabia que ia me arrepender e fazia mesmo assim.,gramática: primeira pessoa
+C13,6,"Parar é difícil porque, na hora, funciona.",gramática: ordem invertida
+C13,7,Entender para que a compulsão serve é o começo para trocar por outra coisa.,retórica: orientar
+C13,8,Não é falta de força de vontade. É alívio rápido.,retórica: contestar a culpa
+C13,9,A compulsão resolve a angústia por minutos. O problema é o resto do dia.,lógica: tempo
+C13,10,"Se você repete mesmo sabendo, existe um motivo.",lógica: condição; retórica: acolher
+C14,1,"Na família com borderline, todo mundo sai machucado.",gramática: declarativa
+C14,2,"Quem adoece quem? Muitas vezes, um ao outro.",lógica: influência mútua dita
+C14,3,Sua família piora a sua crise ou a sua crise piora a família?,gramática: segunda pessoa
+C14,4,Procurar culpado quase nunca ajuda a família a melhorar.,retórica: tirar a culpa de cena
+C14,5,"Quando um sofre, a casa inteira muda de jeito.",lógica: efeito em todos
+C14,6,Família e borderline: o problema raramente está em uma pessoa só.,gramática: frase nominal
+C14,7,Eu achava que o problema da casa era eu.,gramática: primeira pessoa
+C14,8,Cuidar de quem tem borderline também adoece. Isso também precisa de cuidado.,retórica: lado do familiar
+C14,9,Entender o que cada um faz com a dor do outro muda a casa.,retórica: promessa; lógica: orientação
+C14,10,Ninguém é só vítima nem só culpado numa casa em crise.,lógica: distinção; retórica: equilíbrio
+C15,1,Às vezes o pedido para ficar sozinho é um pedido para alguém ficar.,lógica: exemplo da inversão
+C15,2,Você ouve uma coisa e a pessoa quis dizer outra.,gramática: segunda pessoa
+C15,3,5 frases do borderline que parecem rejeição e podem ser medo.,lógica: nomeia o contrário
+C15,4,Como entender o que o borderline fala na crise.,gramática: como fazer
+C15,5,O que eu dizia na briga nem sempre era o que eu sentia.,gramática: primeira pessoa
+C15,6,Entender a fala não obriga você a aceitar o tom.,retórica: limite
+C15,7,Por que no borderline a frase às vezes sai ao contrário do que se sente?,gramática: pergunta; lógica: causa
+C15,8,5 falas do borderline e o que costuma estar por trás delas.,retórica: menos chocante
+C15,9,"Na crise, as palavras saem mais duras que o sentimento.",lógica: causa geral
+C15,10,"Antes de responder à frase, escute o medo.",gramática: imperativa
+C16,1,Às vezes você some e não é por falta de interesse.,"gramática: segunda pessoa, quem some"
+C16,2,Eu sumia quando gostava demais.,gramática: primeira pessoa
+C16,3,Por que algumas pessoas se afastam justo de quem importa?,gramática: pergunta; lógica: sem rótulo
+C16,4,Sumiço pode ter muitas causas. Medo é uma delas.,lógica: hipótese entre várias
+C16,5,Quem some também sofre. Quem fica esperando também.,retórica: dois lados
+C16,6,Você sumiu e não sabe explicar por quê.,lógica: exemplo; retórica: identificar
+C16,7,"Antes de concluir que foi desinteresse, existem outras explicações.",retórica: prudência
+C16,8,Sumir por medo ainda deixa alguém esperando resposta.,retórica: responsabilidade
+C16,9,"Se você some quando a relação fica séria, isso tem explicação.",lógica: condição
+C16,10,Desaparecer é um jeito de se proteger que machuca dos dois lados.,lógica: definição funcional
+C17,1,Desabar na frente de alguém também pode ser confiança.,lógica: possibilidade no lugar de regra
+C17,2,Às vezes a crise acontece perto de quem a pessoa mais confia.,lógica: generalização atenuada
+C17,3,Por que a crise costuma estourar com quem está mais perto?,gramática: pergunta
+C17,4,Ser o lugar seguro de alguém não quer dizer aguentar tudo.,retórica: limite de quem recebe
+C17,5,Eu só desabava na frente de quem eu confiava.,gramática: primeira pessoa
+C17,6,Você recebe a crise porque está perto. Você também precisa de cuidado.,retórica: dois lados
+C17,7,Ser a pessoa de confiança de alguém em crise cansa. Isso pode ser dito.,retórica: validar quem convive
+C17,8,"Quando ela desaba só com você, a confiança vem junto com o peso.",lógica: concessão
+C17,9,Ser escolhido para ver a crise não é ser culpado por ela.,lógica: distinção
+C17,10,A crise na sua frente pode ser confiança. Agressão contra você não é.,retórica: segurança
+Variadas,1,Eu ria junto e por dentro já tinha saído da mesa.,"C01; primeira pessoa, cena"
+Variadas,2,Funcionar por fora custa caro por dentro.,C05; declarativa seca
+Variadas,3,Você vai embora antes que te deixem.,"C07; segunda pessoa, causa implícita"
+Variadas,4,Por que você volta para o que te faz mal?,C13; pergunta
+Variadas,5,Você sabe o humor de todo mundo pelo barulho da porta.,C10; cena concreta
+Variadas,6,Às vezes o pedido para ficar sozinho é um pedido para alguém ficar.,C15; inversão de sentido
+Variadas,7,Como amar alguém com borderline sem abrir mão de você.,"C11; como fazer, público quem ama"
+Variadas,8,Ser escolhido para ver a crise não é ser culpado por ela.,"C17; distinção, segurança de quem recebe"
+Variadas,9,Se sentir fora do próprio corpo numa briga tem nome.,C06; exemplo antes do termo
+Variadas,10,Eu achava que o problema da casa era eu.,"C14; primeira pessoa, família"

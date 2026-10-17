@@ -200,6 +200,7 @@ body.discreto .pii:hover,body.discreto .pii:focus-within{filter:none}
 <div id="sheet-root"></div>
 <div id="toast-root"></div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
 (function(){
 'use strict';
@@ -576,7 +577,7 @@ function openPatient(key){
   if(p.phone)h+='<dt>Telefone</dt><dd class="pii">'+esc(p.phone)+'</dd><dd><button class="btn small ghost" data-act="copy" data-text="'+esc(p.phone)+'" data-label="Telefone">Copiar</button></dd>';
   if(p.email)h+='<dt>E-mail</dt><dd class="pii">'+esc(p.email)+'</dd><dd><button class="btn small ghost" data-act="copy" data-text="'+esc(p.email)+'" data-label="E-mail">Copiar</button></dd>';
   if(!p.phone&&!p.email)h+='<dt>Contato</dt><dd>Sem telefone nem e-mail na agenda</dd><dd></dd>';
-  h+='</dl><div class="row"><button class="btn small primary" data-act="book" data-key="'+esc(p.key)+'">Marcar retorno</button><button class="btn small" data-act="pend-for" data-key="'+esc(p.key)+'">Nova pendência</button>'+(p.email?'<button class="btn small" data-act="compose" data-to="'+esc(p.email)+'" data-sig="clinica">Escrever e-mail</button>':'')+'</div></div>';
+  h+='</dl><div class="row"><button class="btn small primary" data-act="book" data-key="'+esc(p.key)+'">Marcar retorno</button><button class="btn small" data-act="pend-for" data-key="'+esc(p.key)+'">Nova pendência</button><button class="btn small" data-act="doc-for" data-key="'+esc(p.key)+'">Documento</button>'+(p.email?'<button class="btn small" data-act="compose" data-to="'+esc(p.email)+'" data-sig="clinica">Escrever e-mail</button>':'')+'</div></div>';
   h+='<div class="section"><span class="eyebrow">Consultas na agenda</span><div class="list">';
   p.visits.slice().reverse().forEach(v=>{const fut=v.start>new Date();h+='<div class="item"><span class="main"><span class="t">'+esc(cap(fShortY.format(v.start)))+', '+esc(fTime.format(v.start))+'</span></span><span class="pill'+(/primeira/i.test(v.tipo)?' first':'')+'">'+esc(v.tipo||'Consulta')+'</span>'+(fut?'<span class="pill ok">Agendada</span>':'')+(v.link?'<a class="btn small ghost" href="'+esc(v.link)+'" target="_blank" rel="noopener">Abrir</a>':'')+'</div>'});
   h+='</div></div>';
@@ -855,7 +856,7 @@ function prazoInfo(r){
 }
 function pendItem(r){
   const conf=S.pend.confirmDel===r.id;
-  return '<div class="item"><button class="check" data-act="pend-done" data-id="'+esc(r.id)+'" aria-label="Marcar como feita"></button><span class="main"><span class="t" style="white-space:normal">'+esc(r.titulo)+'</span><span class="row" style="gap:6px"><span class="pill">'+esc(r.tipo||'Outro')+'</span>'+(r.paciente?'<button class="linkish pii" data-act="pend-pac" data-key="'+esc(r.pacienteKey||'')+'" data-name="'+esc(r.paciente)+'">'+esc(r.paciente)+'</button>':'')+prazoInfo(r)+(r.origem==='claude'?'<span class="stamp">sugerida pelo Claude</span>':'')+'</span>'+(r.nota?'<span class="s">'+esc(r.nota)+'</span>':'')+'</span><button class="btn small '+(conf?'danger':'ghost')+'" data-act="pend-del" data-id="'+esc(r.id)+'" aria-label="Excluir pendência">'+(conf?'Excluir':'✕')+'</button></div>';
+  return '<div class="item"><button class="btn small primary" data-act="pend-fix" data-id="'+esc(r.id)+'" style="order:3">Resolver</button><button class="check" data-act="pend-done" data-id="'+esc(r.id)+'" aria-label="Marcar como feita"></button><span class="main"><span class="t" style="white-space:normal">'+esc(r.titulo)+'</span><span class="row" style="gap:6px"><span class="pill">'+esc(r.tipo||'Outro')+'</span>'+(r.paciente?'<button class="linkish pii" data-act="pend-pac" data-key="'+esc(r.pacienteKey||'')+'" data-name="'+esc(r.paciente)+'">'+esc(r.paciente)+'</button>':'')+prazoInfo(r)+(r.origem==='claude'?'<span class="stamp">sugerida pelo Claude</span>':'')+'</span>'+(r.nota?'<span class="s">'+esc(r.nota)+'</span>':'')+'</span><button class="btn small '+(conf?'danger':'ghost')+'" data-act="pend-del" data-id="'+esc(r.id)+'" aria-label="Excluir pendência">'+(conf?'Excluir':'✕')+'</button></div>';
 }
 function renderPendencias(){
   const P=S.pend;
@@ -892,6 +893,181 @@ function renderPendencias(){
     if(P.showDone)h+='<div class="list">'+done.slice(0,30).map(r=>'<div class="item" style="opacity:.6"><span class="main"><span class="t" style="white-space:normal;text-decoration:line-through">'+esc(r.titulo)+'</span><span class="s">'+esc(r.paciente||'')+(r.feitoEm?' · feita em '+fShort.format(new Date(r.feitoEm)):'')+'</span></span><button class="btn small ghost" data-act="pend-undo" data-id="'+esc(r.id)+'">Reabrir</button></div>').join('')+'</div>';
   }
   return h+'</section>';
+}
+
+
+/* ---------- Documentos (padrão da casa: A4, fonte tipo Arial 12, rótulos dourados, espaço para BirdID) ---------- */
+const DOC_TIPOS=[['receita','Receita'],['relatorio','Relatório'],['atestado','Atestado'],['declaracao','Declaração de horas'],['exames','Pedido de exames']];
+const TUSS=[['40304361','Hemograma completo'],['40302040','Glicose'],['40302733','Hemoglobina glicada (HbA1c)'],['40301605','Colesterol total'],['40301583','HDL'],['40301591','LDL'],['40302547','Triglicerídeos'],['40316521','TSH'],['40316491','T4 livre'],['40316467','T3 livre'],['40316157','Anti-TPO'],['40302580','Ureia'],['40301630','Creatinina'],['40302423','Sódio'],['40302318','Potássio'],['40301400','Cálcio'],['40302237','Magnésio'],['40302504','TGO (AST)'],['40302512','TGP (ALT)'],['40301990','Gama GT'],['40301397','Bilirrubinas'],['40308391','Proteína C reativa'],['40316416','Prolactina'],['40302830','Vitamina D (25-OH)'],['40316572','Vitamina B12'],['40316270','Ferritina'],['40316459','SDHEA'],['40302229','Litemia'],['40301168','Valproatemia (coletar 12h após a última dose)']];
+const EXTENSO=['zero','um','dois','três','quatro','cinco','seis','sete','oito','nove','dez','onze','doze','treze','quatorze','quinze','dezesseis','dezessete','dezoito','dezenove','vinte','vinte e um','vinte e dois','vinte e três','vinte e quatro','vinte e cinco','vinte e seis','vinte e sete','vinte e oito','vinte e nove','trinta'];
+const fLong=new Intl.DateTimeFormat('pt-BR',{day:'numeric',month:'long',year:'numeric'});
+let DOC=null;
+function docRodape(){return store('doc-rodape')||'Consultório em Botujuru, Mogi das Cruzes, SP · CEP 08840-000 · drfabioschmidt@gmail.com'}
+function openDoc(o){
+  const p=o.key?patients().find(x=>x.key===o.key):(o.paciente?patients().find(x=>x.name.toLowerCase()===String(o.paciente).toLowerCase()):null);
+  const now=new Date();
+  const visits=p?p.visits.slice().reverse():[];
+  const lastPast=visits.find(v=>v.start<=now)||visits[0]||null;
+  DOC=Object.assign({tipo:'receita',paciente:p?p.name:(o.paciente||''),pkey:p?p.key:'',visits,visitId:lastPast?lastPast.id:'',desde:p&&p.visits.length?dayKey(p.visits[0].start):'',
+    dias:1,inicio:dayKey(now),itens:[{nome:'',qtd:'',pos:''}],texto:'',cid:'',cidOk:false,exames:[],outros:'',indicacao:'',segunda:false,data:dayKey(now),pendId:null,cpf:''},o);
+  paintDoc();
+}
+function readDoc(){
+  const v=id=>{const el=document.getElementById(id);return el?el.value:undefined};
+  const c=id=>{const el=document.getElementById(id);return el?el.checked:undefined};
+  if(v('d-pac')!==undefined)DOC.paciente=v('d-pac').trim();
+  if(v('d-data')!==undefined)DOC.data=v('d-data');
+  if(c('d-2via')!==undefined)DOC.segunda=c('d-2via');
+  if(DOC.tipo==='receita'){DOC.itens=DOC.itens.map((it,i)=>({nome:(v('d-n'+i)||'').trim(),qtd:(v('d-q'+i)||'').trim(),pos:(v('d-p'+i)||'').trim()}))}
+  if(DOC.tipo==='relatorio'){DOC.texto=v('d-texto')||'';DOC.cid=(v('d-cid')||'').trim();DOC.cidOk=!!c('d-cidok')}
+  if(DOC.tipo==='atestado'){DOC.dias=Math.max(1,parseInt(v('d-dias'))||1);DOC.inicio=v('d-inicio')||DOC.data;DOC.cid=(v('d-cid')||'').trim();DOC.cidOk=!!c('d-cidok')}
+  if(DOC.tipo==='declaracao'){DOC.visitId=v('d-visit')||'';DOC.h1=v('d-h1');DOC.h2=v('d-h2');DOC.dataDecl=v('d-dd')}
+  if(DOC.tipo==='exames'){DOC.exames=[...document.querySelectorAll('.d-ex:checked')].map(x=>x.value);DOC.outros=v('d-outros')||'';DOC.indicacao=(v('d-ind')||'').trim()}
+}
+function relatorioPadrao(){
+  const desde=DOC.desde?' desde '+fLong.format(new Date(DOC.desde+'T12:00:00')):'';
+  return 'Declaro, para os devidos fins, que '+(DOC.paciente||'[NOME]')+' encontra-se em acompanhamento médico comigo'+desde+'.\n\n';
+}
+function paintDoc(){
+  if(!DOC)return;
+  const t=DOC.tipo;
+  let h='<div class="sheet-head"><h2>Documento</h2><button class="close" data-act="close" aria-label="Fechar">✕</button></div>';
+  h+='<div class="chips" style="flex-wrap:wrap;margin-bottom:16px">'+DOC_TIPOS.map(([k,l])=>'<button class="chip" data-act="doc-tipo" data-t="'+k+'" aria-pressed="'+(t===k)+'">'+l+'</button>').join('')+'</div>';
+  h+='<div class="form-grid"><label class="lab full">Paciente<input class="field pii" id="d-pac" value="'+esc(DOC.paciente)+'" autocomplete="off"></label>';
+  if(t!=='declaracao')h+='<label class="lab">Data do documento<input class="field" id="d-data" type="date" value="'+esc(DOC.data)+'"></label>';
+  h+='<label class="lab" style="flex-direction:row;align-items:center;gap:10px;align-self:end"><input type="checkbox" id="d-2via"'+(DOC.segunda?' checked':'')+'> Marcar como 2ª via</label></div>';
+  h+='<div class="section" style="margin-top:16px;gap:12px">';
+  if(t==='receita'){
+    DOC.itens.forEach((it,i)=>{h+='<div class="tpl"><div class="form-grid"><label class="lab">Medicamento e dose<input class="field" id="d-n'+i+'" value="'+esc(it.nome)+'" placeholder="Ex.: Sertralina 50 mg"></label><label class="lab">Quantidade<input class="field" id="d-q'+i+'" value="'+esc(it.qtd)+'" placeholder="Ex.: 30 comprimidos"></label><label class="lab full">Como usar<input class="field" id="d-p'+i+'" value="'+esc(it.pos)+'" placeholder="Ex.: tomar 1 comprimido pela manhã"></label></div></div>'});
+    h+='<div class="row"><button class="btn small ghost" data-act="doc-add">Adicionar medicamento</button><span class="stamp">Receita comum. Controle especial segue pelo sistema próprio.</span></div>';
+  }
+  if(t==='relatorio'){
+    if(!DOC.texto)DOC.texto=relatorioPadrao();
+    h+='<label class="lab">Texto do relatório<textarea class="field" id="d-texto" style="min-height:220px">'+esc(DOC.texto)+'</textarea></label>';
+    h+=cidHTML();
+  }
+  if(t==='atestado'){
+    h+='<span class="eyebrow">Dias de afastamento</span><div class="chips" style="flex-wrap:wrap">'+[1,2,3,5,7,10,15,30].map(n=>'<button class="chip" data-act="doc-dias" data-n="'+n+'" aria-pressed="'+(DOC.dias===n)+'">'+n+(n===1?' dia':' dias')+'</button>').join('')+'</div>';
+    h+='<div class="form-grid"><label class="lab">Outro número de dias<input class="field" id="d-dias" type="number" min="1" max="365" value="'+DOC.dias+'"></label><label class="lab">A partir de<input class="field" id="d-inicio" type="date" value="'+esc(DOC.inicio)+'"></label></div>';
+    h+=cidHTML();
+  }
+  if(t==='declaracao'){
+    const vs=DOC.visits;
+    if(vs.length){
+      const sel=vs.find(x=>x.id===DOC.visitId)||vs[0];
+      h+='<label class="lab">Consulta<select class="field" id="d-visit">'+vs.map(x=>'<option value="'+esc(x.id)+'"'+(x.id===sel.id?' selected':'')+'>'+esc(cap(fShortY.format(x.start))+', '+fTime.format(x.start))+'</option>').join('')+'</select></label>';
+      const ev=S.agenda.events.concat(S.pac.events,S.pend.recent).find(e=>e.id===sel.id);
+      DOC.dataDecl=dayKey(sel.start);DOC.h1=fTime.format(sel.start);DOC.h2=fTime.format(ev?ev.end:new Date(sel.start.getTime()+45*6e4));
+    }else h+='<div class="notice">Nenhuma consulta desse paciente na agenda carregada. Preencha data e horário.</div>';
+    h+='<div class="form-grid"><label class="lab">Data<input class="field" id="d-dd" type="date" value="'+esc(DOC.dataDecl||DOC.data)+'"></label><span></span><label class="lab">Das<input class="field" id="d-h1" type="time" value="'+esc(DOC.h1||'')+'"></label><label class="lab">Às<input class="field" id="d-h2" type="time" value="'+esc(DOC.h2||'')+'"></label></div>';
+  }
+  if(t==='exames'){
+    h+='<label class="lab">Indicação clínica (opcional)<input class="field" id="d-ind" value="'+esc(DOC.indicacao)+'"></label>';
+    h+='<div class="chips" style="flex-wrap:wrap"><button class="chip" data-act="doc-kit" data-k="basico">Rotina básica</button><button class="chip" data-act="doc-kit" data-k="tireoide">Tireoide</button><button class="chip" data-act="doc-kit" data-k="litio">Lítio</button><button class="chip" data-act="doc-kit" data-k="limpar">Limpar</button></div>';
+    h+='<div class="list" style="max-height:340px;overflow-y:auto">'+TUSS.map(([c,n])=>'<label class="item" style="cursor:pointer;padding:10px 4px"><input type="checkbox" class="d-ex" value="'+c+'"'+(DOC.exames.includes(c)?' checked':'')+'><span class="main"><span class="t" style="font-weight:500">'+esc(n)+'</span></span><span class="meta">'+c+'</span></label>').join('')+'</div>';
+    h+='<label class="lab">Outros exames (um por linha; código TUSS opcional no começo)<textarea class="field" id="d-outros" style="min-height:80px" placeholder="40316300 Exemplo">'+esc(DOC.outros)+'</textarea></label>';
+  }
+  h+='</div>';
+  h+='<div class="row" style="margin-top:18px"><span class="stamp" style="flex:1">'+esc(docRodape())+' <button class="linkish" data-act="doc-rodape">alterar rodapé</button></span></div>';
+  h+='<div class="row" style="margin-top:12px">'+(DOC.pendId?'<label class="lab" style="flex-direction:row;align-items:center;gap:8px"><input type="checkbox" id="d-feita" checked> Marcar pendência como feita</label>':'')+'<span class="spacer"></span><button class="btn primary" data-act="doc-pdf">Gerar PDF</button></div><div id="d-msg"></div>';
+  openSheet(h);
+}
+function cidHTML(){
+  return '<div class="form-grid"><label class="lab">CID (opcional)<input class="field" id="d-cid" value="'+esc(DOC.cid)+'" autocomplete="off"></label><label class="lab" style="flex-direction:row;align-items:center;gap:8px;align-self:end"><input type="checkbox" id="d-cidok"'+(DOC.cidOk?' checked':'')+'> Paciente autorizou o CID</label></div>';
+}
+function docTexto(){
+  const nome=DOC.paciente||'[NOME]';
+  if(DOC.tipo==='atestado'){
+    const n=DOC.dias,ext=EXTENSO[n]||String(n);
+    const ini=fLong.format(new Date((DOC.inicio||DOC.data)+'T12:00:00'));
+    let t='Atesto, para os devidos fins, que '+nome+' esteve sob meus cuidados médicos e necessita de afastamento de suas atividades por '+n+' ('+ext+') dia'+(n===1?'':'s')+', a partir de '+ini+'.';
+    if(DOC.cidOk&&DOC.cid)t+='\n\nCID: '+DOC.cid+' (incluído com autorização do paciente).';
+    return t;
+  }
+  if(DOC.tipo==='declaracao'){
+    const d=DOC.dataDecl?fLong.format(new Date(DOC.dataDecl+'T12:00:00')):'[DATA]';
+    return 'Declaro, para os devidos fins, que '+nome+' esteve em consulta médica neste consultório no dia '+d+', das '+(DOC.h1||'[HORA]')+' às '+(DOC.h2||'[HORA]')+'.';
+  }
+  if(DOC.tipo==='relatorio'){let t=DOC.texto.trim();if(DOC.cidOk&&DOC.cid)t+='\n\nCID: '+DOC.cid+' (incluído com autorização do paciente).';return t}
+  return '';
+}
+function buildPDF(){
+  const J=window.jspdf&&window.jspdf.jsPDF;if(!J)throw new Error('O gerador de PDF não carregou. Recarregue o painel.');
+  const doc=new J({unit:'mm',format:'a4'});
+  const W=210,M=22,GOLD=[176,134,58],INK=[30,27,24],GREY=[105,99,92];
+  const titulos={receita:'Receita',relatorio:'Relatório médico',atestado:'Atestado médico',declaracao:'Declaração de comparecimento',exames:'Solicitação de exames'};
+  let y=0;
+  const header=()=>{
+    doc.setFont('helvetica','bold');doc.setFontSize(17);doc.setTextColor(...INK);doc.text('Dr. Fabio Schmidt',M,24);
+    doc.setFont('helvetica','normal');doc.setFontSize(10);doc.setTextColor(...GREY);doc.text('Médico · Pós-graduado em Psiquiatria · CRM-SP 183549',M,30);
+    if(DOC.segunda){doc.setFont('helvetica','bold');doc.setFontSize(11);doc.setTextColor(...GOLD);doc.text('2ª VIA',W-M,24,{align:'right'})}
+    doc.setDrawColor(...GOLD);doc.setLineWidth(0.6);doc.line(M,35,W-M,35);
+    y=48;
+  };
+  const footer=()=>{doc.setDrawColor(...GOLD);doc.setLineWidth(0.3);doc.line(M,282,W-M,282);doc.setFont('helvetica','normal');doc.setFontSize(8.5);doc.setTextColor(...GREY);doc.text(docRodape(),W/2,287,{align:'center',maxWidth:W-2*M})};
+  const label=(t,x,yy)=>{doc.setFont('helvetica','bold');doc.setFontSize(8.5);doc.setTextColor(...GOLD);doc.text(t.toUpperCase(),x,yy)};
+  const ensure=need=>{if(y+need>228){footer();doc.addPage();header()}};
+  const para=(text,size=12)=>{doc.setFont('helvetica','normal');doc.setFontSize(size);doc.setTextColor(...INK);
+    String(text).split('\n').forEach(line=>{const parts=line.trim()?doc.splitTextToSize(line,W-2*M):[''];parts.forEach(l=>{ensure(6.2);doc.text(l,M,y);y+=6.2})})};
+  header();
+  doc.setFont('helvetica','bold');doc.setFontSize(14);doc.setTextColor(...INK);doc.text(titulos[DOC.tipo],M,y);y+=11;
+  label('Paciente',M,y);y+=6;doc.setFont('helvetica','normal');doc.setFontSize(12);doc.setTextColor(...INK);doc.text(DOC.paciente||'',M,y);y+=12;
+  if(DOC.tipo==='receita'){
+    label('Uso',M,y);y+=7;
+    DOC.itens.filter(i=>i.nome).forEach((it,i)=>{
+      ensure(16);doc.setFont('helvetica','bold');doc.setFontSize(12);doc.setTextColor(...INK);doc.text((i+1)+'. '+it.nome,M,y);
+      if(it.qtd){doc.setFont('helvetica','normal');doc.text(it.qtd,W-M,y,{align:'right'})}
+      y+=6.2;if(it.pos){doc.setFont('helvetica','normal');doc.setTextColor(...GREY);doc.splitTextToSize(it.pos,W-2*M-6).forEach(l=>{ensure(6);doc.text(l,M+6,y);y+=6})}
+      y+=4;
+    });
+  }else if(DOC.tipo==='exames'){
+    if(DOC.indicacao){label('Indicação clínica',M,y);y+=6;para(DOC.indicacao);y+=4}
+    const rows=TUSS.filter(([c])=>DOC.exames.includes(c)).map(([c,n])=>[c,n]);
+    DOC.outros.split('\n').map(l=>l.trim()).filter(Boolean).forEach(l=>{const m=l.match(/^(\d{8})\s+(.+)$/);rows.push(m?[m[1],m[2]]:['',l])});
+    label('Código TUSS',M,y);label('Exame',M+38,y);y+=2.5;doc.setDrawColor(...GOLD);doc.setLineWidth(0.3);doc.line(M,y,W-M,y);y+=6;
+    rows.forEach(([c,n])=>{ensure(8);doc.setFont('helvetica','normal');doc.setFontSize(11.5);doc.setTextColor(...INK);doc.text(c||'',M,y);doc.text(doc.splitTextToSize(n,W-2*M-38)[0],M+38,y);y+=3;doc.setDrawColor(225,220,212);doc.setLineWidth(0.2);doc.line(M,y,W-M,y);y+=5.5});
+  }else{
+    para(docTexto());
+  }
+  // local, data e assinatura
+  const dataDoc=DOC.tipo==='declaracao'&&DOC.dataDecl?DOC.dataDecl:DOC.data;
+  let ys=Math.max(y+14,232);if(ys>246){footer();doc.addPage();header();ys=232}
+  doc.setFont('helvetica','normal');doc.setFontSize(11);doc.setTextColor(...INK);doc.text('Mogi das Cruzes, '+fLong.format(new Date(dataDoc+'T12:00:00'))+'.',M,ys+18);
+  const sx=W-M-72;doc.setDrawColor(...INK);doc.setLineWidth(0.3);doc.line(sx,ys+24,W-M,ys+24);
+  doc.setFontSize(10.5);doc.setFont('helvetica','bold');doc.text('Dr. Fabio Schmidt',sx+36,ys+29,{align:'center'});
+  doc.setFont('helvetica','normal');doc.setFontSize(9);doc.setTextColor(...GREY);doc.text('Médico · Pós-graduado em Psiquiatria',sx+36,ys+33.5,{align:'center'});doc.text('CRM-SP 183549',sx+36,ys+38,{align:'center'});
+  footer();
+  return doc.output('blob');
+}
+async function gerarPDF(btn){
+  readDoc();
+  const msg=document.getElementById('d-msg');
+  if(!DOC.paciente){msg.innerHTML='<div class="notice err">Informe o paciente.</div>';return}
+  if(DOC.tipo==='receita'&&!DOC.itens.some(i=>i.nome)){msg.innerHTML='<div class="notice err">Inclua ao menos um medicamento.</div>';return}
+  if(DOC.tipo==='exames'&&!DOC.exames.length&&!DOC.outros.trim()){msg.innerHTML='<div class="notice err">Escolha ao menos um exame.</div>';return}
+  if(!S.dl){msg.innerHTML='<div class="notice err">Abra o painel no claude.ai para salvar o PDF.</div>';return}
+  let blob;try{blob=buildPDF()}catch(e){msg.innerHTML='<div class="notice err">'+esc(e.message)+'</div>';return}
+  const nomeTipo=(DOC_TIPOS.find(x=>x[0]===DOC.tipo)||['','Documento'])[1];
+  const fn=nomeTipo+' - '+DOC.paciente.replace(/[\\/:*?"<>|]/g,'')+' - '+(DOC.tipo==='declaracao'&&DOC.dataDecl?DOC.dataDecl:DOC.data)+'.pdf';
+  btn.disabled=true;
+  try{await S.dl.save({filename:fn,data:blob});
+    const feita=document.getElementById('d-feita');
+    if(DOC.pendId&&feita&&feita.checked)await patchPend(DOC.pendId,{status:'feita',feitoEm:new Date().toISOString()});
+    msg.innerHTML='<div class="notice"><span>PDF salvo. Assine no BirdID antes de enviar.</span></div>';
+  }catch(e){
+    const c=e&&e.code;msg.innerHTML=c==='declined'?'<div class="notice">Download cancelado.</div>':'<div class="notice err">Não foi possível salvar o PDF ('+esc(c||e.message||'erro')+').</div>';
+  }
+  btn.disabled=false;
+}
+function resolvePend(r){
+  const map={Receita:'receita','Relatório':'relatorio',Exames:'exames'};
+  const low=(r.titulo||'').toLowerCase();
+  const tipoDoc=map[r.tipo]||(/atestado/.test(low)?'atestado':/declara/.test(low)?'declaracao':/relat/.test(low)?'relatorio':/exame/.test(low)?'exames':/receit/.test(low)?'receita':null);
+  if(tipoDoc){openDoc({key:r.pacienteKey||'',paciente:r.paciente||'',tipo:tipoDoc,pendId:r.id});return}
+  if(r.tipo==='Retorno'){const p=patients().find(x=>x.key===r.pacienteKey);openBooking(p?{nome:p.name,email:p.email||'',phone:p.phone||'',tipo:'Retorno'}:{nome:r.paciente||'',tipo:'Retorno'});return}
+  if(r.tipo==='Cobrança'||r.tipo==='Mensagem'){M.nome=(r.paciente||'').split(/\s+/)[0]||'';const p=patients().find(x=>x.key===r.pacienteKey);if(p&&p.next){const d=p.next.start;M.quando=localISO(d).slice(0,16)}M.g=r.tipo==='Cobrança'?'Cobrança':'Agenda';setTab('mensagens');return}
+  if(r.pacienteKey&&patients().some(x=>x.key===r.pacienteKey)){openPatient(r.pacienteKey);return}
+  toast('Abra a pendência e resolva manualmente');
 }
 
 /* ---------- Mensagens ---------- */
@@ -979,6 +1155,15 @@ document.addEventListener('click',async ev=>{
     case 'tpl-noreply':{const b=document.getElementById('c-body'),s=document.getElementById('c-subj');if(s&&!s.value)s.value='Sua consulta com o Dr. Fabio Schmidt';if(b)b.value='Olá [NOME], tudo bem?\nTentamos contato pelo WhatsApp sobre sua consulta e não conseguimos falar com você. Para facilitar, você mesma pode escolher o melhor dia e horário por aqui: '+CONSULTA_URL+'\nA vaga fica garantida após a confirmação do pagamento. Qualquer dúvida, é só responder este e-mail.\nUm abraço,';break}
     case 'msg-group':M.g=a.dataset.g;render();break;
     case 'go-pend':setTab('pendencias');break;
+    case 'pend-fix':{const r=S.pend.rows.find(x=>x.id===a.dataset.id);if(r)resolvePend(r);break}
+    case 'doc-for':openDoc({key:a.dataset.key});break;
+    case 'doc-tipo':readDoc();DOC.tipo=a.dataset.t;paintDoc();break;
+    case 'doc-add':readDoc();DOC.itens.push({nome:'',qtd:'',pos:''});paintDoc();break;
+    case 'doc-dias':readDoc();DOC.dias=Number(a.dataset.n);paintDoc();break;
+    case 'doc-kit':{readDoc();const k=a.dataset.k;const kits={basico:['40304361','40302040','40302733','40301605','40301583','40301591','40302547','40302580','40301630','40302504','40302512'],tireoide:['40316521','40316491','40316157'],litio:['40302229','40302580','40301630','40316521','40302423','40301400']};DOC.exames=k==='limpar'?[]:[...new Set(DOC.exames.concat(kits[k]||[]))];paintDoc();break}
+    case 'doc-rodape':{readDoc();const el=document.getElementById('d-msg');el.innerHTML='<div class="form-grid" style="margin-top:10px"><label class="lab full">Rodapé dos documentos<input class="field" id="d-rod" value="'+esc(docRodape())+'"></label><div class="full row"><span class="spacer"></span><button class="btn small" data-act="doc-rod-save">Salvar rodapé</button></div></div>';break}
+    case 'doc-rod-save':{const v=document.getElementById('d-rod').value.trim();if(v)store('doc-rodape',v);readDoc();paintDoc();toast('Rodapé salvo');break}
+    case 'doc-pdf':gerarPDF(a);break;
     case 'pend-for':{const p=patients().find(x=>x.key===a.dataset.key);S.pend.prefill={paciente:p?p.name:'',tipo:'Receita',titulo:p?'Enviar receita de '+p.name:''};closeSheet();setTab('pendencias');break}
     case 'pend-pac':{const k=a.dataset.key;if(k&&patients().some(x=>x.key===k))openPatient(k);else toast('Paciente não encontrado na agenda carregada');break}
     case 'pend-ok':{const r=pendSuggestions().find(x=>x.id===a.dataset.id);if(!r)break;a.disabled=true;
@@ -1059,8 +1244,8 @@ requestAnimationFrame(()=>moveBlob(false));
 
 (async function boot(){
   const use=n=>(window.claude&&window.claude.use)?window.claude.use(n).catch(()=>null):Promise.resolve(null);
-  const [mcp,db,sample]=await Promise.all([use('mcp'),use('db'),use('sample')]);
-  S.mcp=mcp;S.db=db;S.sample=sample;
+  const [mcp,db,sample,dl]=await Promise.all([use('mcp'),use('db'),use('sample'),use('downloads')]);
+  S.mcp=mcp;S.db=db;S.sample=sample;S.dl=dl;
   watchAgenda();watchMail();watchGastos();watchPend();loadRecent();
   if(!db){S.gastos.status='nodb'}
   render();

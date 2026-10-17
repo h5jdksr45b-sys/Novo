@@ -110,3 +110,85 @@ export const Capa6 = () => (
     <Assinatura cor="#6d6461" />
   </AbsoluteFill>
 );
+
+// Rodada 2
+
+// 1B. Preto com interrogação gigante
+export const Capa7 = () => (
+  <AbsoluteFill style={{background: '#111'}}>
+    <div style={{position: 'absolute', right: -40, top: -120, fontFamily: SERIF, fontWeight: 700, fontSize: 1100, lineHeight: 1, color: '#1f1f1f'}}>?</div>
+    <div style={{position: 'absolute', left: 80, right: 80, top: 520, fontFamily: INTER, fontWeight: 800, fontSize: 96, lineHeight: 1.05, color: '#F2ECE1', letterSpacing: -2}}>
+      Não saber dói tanto que <span style={{color: VERMELHO}}>o pior vira certeza.</span>
+    </div>
+    <Assinatura cor="#77706a" />
+  </AbsoluteFill>
+);
+
+// 2B. Tela dividida na diagonal
+export const Capa8 = () => (
+  <AbsoluteFill style={{background: '#111'}}>
+    <div style={{position: 'absolute', inset: 0, background: '#F3E9DC', clipPath: 'polygon(0 0, 100% 0, 100% 38%, 0 62%)'}} />
+    <div style={{position: 'absolute', left: 80, top: 150, fontFamily: ANTON, fontSize: 190, lineHeight: 1, color: '#111'}}>DO AMOR</div>
+    <div style={{position: 'absolute', right: 80, top: 880, fontFamily: ANTON, fontSize: 190, lineHeight: 1, color: VERMELHO, textAlign: 'right'}}>AO TÉRMINO</div>
+    <div style={{position: 'absolute', left: 80, top: 1090, fontFamily: INTER, fontWeight: 800, fontSize: 48, color: '#F3E9DC'}}>em 3 segundos. Na minha cabeça.</div>
+    <Assinatura cor="#77706a" style={{left: 'auto', right: 80}} />
+  </AbsoluteFill>
+);
+
+// 3B. Papel quadriculado com sticker
+export const Capa9 = () => (
+  <AbsoluteFill style={{background: '#F4F1EA'}}>
+    <AbsoluteFill style={{backgroundImage: 'linear-gradient(#d9d3c7 2px, transparent 2px), linear-gradient(90deg, #d9d3c7 2px, transparent 2px)', backgroundSize: '54px 54px', opacity: 0.8}} />
+    <div style={{position: 'absolute', left: 80, right: 80, top: 130, fontFamily: ANTON, fontSize: 150, lineHeight: 1.0, color: '#111'}}>
+      NÃO É SAUDADE DA PESSOA.
+    </div>
+    <div style={{position: 'absolute', left: 60, top: 470, width: 980}}>
+      <Sticker nome="fita_vermelha" style={{left: -20, top: 0, width: 990, height: 300, transform: 'rotate(-2deg)'}} />
+      <div style={{position: 'relative', left: 40, top: 78, fontFamily: ANTON, fontSize: 92, lineHeight: 1.2, color: '#F4F1EA', transform: 'rotate(-2deg)'}}>É PÂNICO SEM ELA.</div>
+    </div>
+    <Sticker nome="silencio" style={{right: 90, bottom: 60, width: 400, transform: 'rotate(4deg)'}} />
+    <Assinatura cor="#555" />
+  </AbsoluteFill>
+);
+
+// 4B. Ditado reescrito, tipografia de livro em papel kraft
+export const Capa10 = () => (
+  <AbsoluteFill style={{background: '#CBB48E'}}>
+    <AbsoluteFill style={{opacity: 0.2, backgroundImage: 'radial-gradient(#4a3a26 1px, transparent 1.2px)', backgroundSize: '5px 5px'}} />
+    <div style={{position: 'absolute', left: 90, right: 90, top: 300, fontFamily: SERIF, fontWeight: 700, fontSize: 112, lineHeight: 1.08, color: '#1d1610'}}>
+      Longe dos olhos,
+    </div>
+    <div style={{position: 'absolute', left: 90, right: 90, top: 470, fontFamily: SERIF, fontStyle: 'italic', fontSize: 104, lineHeight: 1.08, color: '#1d1610'}}>
+      longe da <span style={{color: '#A3281E'}}>certeza de ser amado.</span>
+    </div>
+    <Assinatura cor="#1d1610" />
+  </AbsoluteFill>
+);
+
+// 5B. Branco, brutal, sublinhado vermelho
+export const Capa11 = () => (
+  <AbsoluteFill style={{background: '#FAFAF7'}}>
+    <div style={{position: 'absolute', left: 80, right: 80, top: 180, fontFamily: ANTON, fontSize: 228, lineHeight: 1.1, color: '#111'}}>
+      SENTIR NÃO É <span style={{textDecoration: 'underline', textDecorationColor: VERMELHO, textDecorationThickness: 20, textUnderlineOffset: 18}}>PROVAR.</span>
+    </div>
+    <div style={{position: 'absolute', left: 80, right: 80, top: 1110, fontFamily: INTER, fontWeight: 500, fontSize: 46, lineHeight: 1.25, color: '#333'}}>
+      O que você sente é válido. A conclusão pode não ser.
+    </div>
+    <Assinatura cor="#777" />
+  </AbsoluteFill>
+);
+
+// 6B. Lilás, dois estados lado a lado
+export const Capa12 = () => (
+  <AbsoluteFill style={{background: '#D9D2F0'}}>
+    <div style={{position: 'absolute', left: 80, right: 80, top: 180, fontFamily: INTER, fontWeight: 800, fontSize: 104, lineHeight: 1.05, color: '#1b1730', letterSpacing: -2}}>
+      Tudo bem na relação.
+    </div>
+    <div style={{position: 'absolute', left: 80, right: 80, top: 440, fontFamily: INTER, fontWeight: 800, fontSize: 104, lineHeight: 1.05, color: VERMELHO, letterSpacing: -2}}>
+      Menos na sua cabeça.
+    </div>
+    <Sticker nome="coracao" style={{left: 380, top: 760, width: 340, transform: 'rotate(-6deg)'}} />
+    <Sticker nome="rabisco" style={{left: 400, top: 800, width: 320, transform: 'rotate(10deg)'}} />
+    <Assinatura cor="#1b1730" />
+  </AbsoluteFill>
+);

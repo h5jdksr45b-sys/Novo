@@ -72,6 +72,19 @@ Entregue em tabela: capa, estrutura base (código), crença que contraria, o que
 - Não use a fórmula não é X, é Y, nem suas variantes: não X. Y.; não é X. É Y.; você não X, você Y. Antes de entregar, procure não é e não + verbo seguido de correção, e reescreva.
 - Não invente número, estudo, caso ou fala de paciente.
 
+## Checklist de carrossel (critérios do Dr. Fabio)
+
+Antes de entregar uma capa de carrossel, confira e diga o que não passou:
+1. Envio: a frase funciona sozinha numa mensagem de WhatsApp, sem contexto, e tem um destinatário claro.
+2. Leitura em 1 segundo: no máximo 8 palavras; a tensão aparece nas primeiras palavras, não no último bloco.
+3. Posição: o texto fica entre 22% e 78% da altura. Confirmar se o grid do perfil corta em quadrado ou em 3:4.
+4. Card 2: existe e funciona como capa sozinho.
+5. Rosto: se houver, olhos na lente e texto fora do rosto; sem rosto, contraste alto.
+6. Uma ideia, sem pedir salvar, curtir ou comentar.
+7. Miniatura: reduzida a cerca de 10% do tamanho, a frase ainda se lê; sem elementos que disputem atenção.
+
+Os limites de 8 palavras e de 22% a 78% são restrições de leitura, não previsão de alcance.
+
 ## Formato de entrega
 
 Entrada do banco (modo alimentar):

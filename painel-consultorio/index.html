@@ -1501,7 +1501,7 @@ function readRx(){
 function rxItensResumo(){return RX.itens.filter(i=>i.nome).map(i=>i.nome+(i.qtd?', '+i.qtd:'')).join('; ')}
 function rxPrompt(){
   const its=RX.itens.filter(i=>i.nome);
-  let t='Prepare uma receita na Memed, no Chrome, para eu conferir e assinar.\n\n';
+  let t='Use o Claude in Chrome, no meu Chrome, onde já estou logado na Memed, para preparar uma receita para eu conferir e assinar.\n\n';
   const pr=patients().find(x=>x.key===RX.pkey);const nasc=pr&&pr.nasc?', nascimento '+fmtNasc(pr.nasc).replace(/ \(.*/,''):'';
   t+='Paciente: '+(RX.paciente||'[NOME]')+(RX.cpf?', CPF '+RX.cpf:'')+nasc+'\n\nItens:\n';
   t+=(its.length?its:[{nome:'[MEDICAMENTO]',qtd:'',pos:''}]).map((i,n)=>(n+1)+'. '+i.nome+'. Quantidade: '+(i.qtd||'não informada, me pergunte')+'. Posologia: '+(i.pos||'não informada, me pergunte')+'.').join('\n');

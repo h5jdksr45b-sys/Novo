@@ -1,0 +1,55 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 0
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Cap,Inter SemiBold,50,&H00FFFFFF,&H00FFFFFF,&H00000000,&H64000000,0,0,0,0,100,100,0,0,1,3,0,2,80,80,340,1
+Style: Q,Inter ExtraBold,70,&H00141414,&H00141414,&H00FFFFFF,&H00FFFFFF,0,0,0,0,100,100,0,0,3,22,0,8,110,110,300,1
+Style: N,Inter SemiBold,40,&H00FFFFFF,&H00FFFFFF,&H00000000,&H00000000,0,0,0,0,100,100,2,0,1,3,0,8,80,80,220,1
+Style: Big,Inter Black,150,&H00FFFFFF,&H00FFFFFF,&H00000000,&H00000000,0,0,0,0,100,100,4,0,1,6,0,5,40,40,0,1
+Style: Title,Inter ExtraBold,78,&H00FFFFFF,&H00FFFFFF,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,5,0,8,90,90,380,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 2,0:00:00.00,0:00:01.50,Title,,0,0,0,,{\fad(120,100)}Verdade ou mito\Nsobre borderline
+Dialogue: 2,0:00:01.50,0:00:09.40,N,,0,0,0,,{\fad(150,100)}1/4
+Dialogue: 2,0:00:01.50,0:00:09.40,Q,,0,0,0,,{\fad(150,100)\t(0,180,\fscx100\fscy100)}Todo mundo com borderline se machuca.
+Dialogue: 2,0:00:09.40,0:00:22.45,N,,0,0,0,,{\fad(150,100)}2/4
+Dialogue: 2,0:00:09.40,0:00:22.45,Q,,0,0,0,,{\fad(150,100)\t(0,180,\fscx100\fscy100)}Adolescente não pode receber diagnóstico de borderline.
+Dialogue: 2,0:00:22.45,0:00:29.80,N,,0,0,0,,{\fad(150,100)}3/4
+Dialogue: 2,0:00:22.45,0:00:29.80,Q,,0,0,0,,{\fad(150,100)\t(0,180,\fscx100\fscy100)}A família também pode fazer acompanhamento.
+Dialogue: 2,0:00:29.80,0:00:39.85,N,,0,0,0,,{\fad(150,100)}4/4
+Dialogue: 2,0:00:29.80,0:00:39.85,Q,,0,0,0,,{\fad(150,100)\t(0,180,\fscx100\fscy100)}Quem tem borderline não consegue ficar muito tempo num relacionamento.
+Dialogue: 3,0:00:03.55,0:00:04.85,Big,,0,0,0,,{\pos(540,700)\1c&H004A4AE0&\fscx130\fscy130\t(0,160,\fscx100\fscy100)\fad(0,150)}MITO
+Dialogue: 3,0:00:11.45,0:00:12.75,Big,,0,0,0,,{\pos(540,700)\1c&H004A4AE0&\fscx130\fscy130\t(0,160,\fscx100\fscy100)\fad(0,150)}MITO
+Dialogue: 3,0:00:24.60,0:00:25.90,Big,,0,0,0,,{\pos(540,700)\1c&H0060B030&\fscx130\fscy130\t(0,160,\fscx100\fscy100)\fad(0,150)}VERDADE
+Dialogue: 3,0:00:31.85,0:00:33.15,Big,,0,0,0,,{\pos(540,700)\1c&H004A4AE0&\fscx130\fscy130\t(0,160,\fscx100\fscy100)\fad(0,150)}MITO
+Dialogue: 1,0:00:00.08,0:00:01.50,Cap,,0,0,0,,Tenta acertar antes de mim.
+Dialogue: 1,0:00:03.58,0:00:04.15,Cap,,0,0,0,,Mito.
+Dialogue: 1,0:00:04.23,0:00:05.05,Cap,,0,0,0,,É comum.
+Dialogue: 1,0:00:05.13,0:00:05.98,Cap,,0,0,0,,Mas não é obrigatório
+Dialogue: 1,0:00:05.98,0:00:06.75,Cap,,0,0,0,,para o diagnóstico.
+Dialogue: 1,0:00:06.83,0:00:07.77,Cap,,0,0,0,,Quem não se machuca
+Dialogue: 1,0:00:07.77,0:00:09.40,Cap,,0,0,0,,também pode estar sofrendo muito.
+Dialogue: 1,0:00:11.48,0:00:14.25,Cap,,0,0,0,,Mito. Pode, mas com cuidado.
+Dialogue: 1,0:00:14.33,0:00:15.78,Cap,,0,0,0,,Esse padrão precisa durar
+Dialogue: 1,0:00:15.78,0:00:16.30,Cap,,0,0,0,,um tempo.
+Dialogue: 1,0:00:16.38,0:00:17.97,Cap,,0,0,0,,Aparecer em várias áreas
+Dialogue: 1,0:00:17.97,0:00:20.15,Cap,,0,0,0,,da vida, prejudicar suas funções.
+Dialogue: 1,0:00:20.23,0:00:21.56,Cap,,0,0,0,,Então não pode ser
+Dialogue: 1,0:00:21.56,0:00:22.45,Cap,,0,0,0,,só uma fase.
+Dialogue: 1,0:00:24.63,0:00:26.80,Cap,,0,0,0,,Verdade. E muitas vezes deve.
+Dialogue: 1,0:00:26.88,0:00:28.20,Cap,,0,0,0,,Quem convive também tem
+Dialogue: 1,0:00:28.20,0:00:29.23,Cap,,0,0,0,,que saber reagir e
+Dialogue: 1,0:00:29.23,0:00:29.80,Cap,,0,0,0,,se cuidar.
+Dialogue: 1,0:00:31.88,0:00:33.00,Cap,,0,0,0,,Mito.
+Dialogue: 1,0:00:33.08,0:00:34.60,Cap,,0,0,0,,Muita gente consegue.
+Dialogue: 1,0:00:34.68,0:00:36.27,Cap,,0,0,0,,Claro, costuma pedir mais
+Dialogue: 1,0:00:36.27,0:00:38.50,Cap,,0,0,0,,conversa, mais combinado, previsão.
+Dialogue: 1,0:00:38.58,0:00:39.85,Cap,,0,0,0,,E muitas vezes o tratamento.
+Dialogue: 1,0:00:39.93,0:00:40.83,Cap,,0,0,0,,E você, em qual
+Dialogue: 1,0:00:40.83,0:00:42.70,Cap,,0,0,0,,dessas você ouvia como verdade?
+Dialogue: 1,0:00:42.78,0:00:43.80,Cap,,0,0,0,,Comenta aqui o número.

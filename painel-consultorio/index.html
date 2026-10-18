@@ -299,7 +299,8 @@ const MSGS=[
     ['Confirmação na véspera','Olá [NOME]! Passando para confirmar sua consulta amanhã, [DATA], às [HORÁRIO]. Posso confirmar?'],
     ['Boas-vindas e dados','Olá [NOME]! Seja bem-vindo(a)! 😊\nSua consulta está confirmada para [DIA], [DATA], às [HORÁRIO].\nPara agilizar o atendimento, preciso de algumas informações para documentos como receitas e exames:\n📋 *Nome completo:*\n📋 *CPF:*\n📋 *Endereço completo (rua, número, bairro, cidade, CEP):*'],
     ['Sem horário','No momento não tenho horários disponíveis para esse dia. Posso verificar outra data?'],
-    ['Link para agendar','Olá [NOME], tudo bem? Você pode escolher o melhor dia e horário por aqui: '+CONSULTA_URL+'\nA vaga fica garantida após a confirmação do pagamento.']]},
+    ['Link para agendar','Olá [NOME], tudo bem? Você pode escolher o melhor dia e horário por aqui: '+CONSULTA_URL+'\nA vaga fica garantida após a confirmação do pagamento.'],
+    ['Retomar contato','Olá [NOME], tudo bem? Passando para saber como você está. Se quiser marcar um retorno, você pode escolher o melhor dia e horário por aqui: '+CONSULTA_URL]]},
   {g:'Cobrança',items:[
     ['Primeira consulta, R$ 700','Olá! Tudo bem?\nSua consulta com o Dr. Fabio Schmidt está agendada para [DIA] às [HORÁRIO].\nO valor da consulta é de *R$ 700,00*.\n⚠️ A vaga só é garantida após a confirmação do pagamento.\nO PIX para pagamento será enviado abaixo 👇'],
     ['Retorno, R$ 650','Olá! Tudo bem?\nSeu retorno com o Dr. Fabio Schmidt está agendado para [DIA] às [HORÁRIO].\nO valor do retorno é de *R$ 650,00*.\n⚠️ A vaga só é garantida após a confirmação do pagamento.\nO PIX para pagamento será enviado abaixo 👇']]},
@@ -332,7 +333,11 @@ const S={
   pend:{status:'loading',rows:[],err:null,recent:[],view:'all',q:'',showDone:false,
     form:{titulo:'',tipo:'Outro',prazo:'',paciente:'',nota:'',more:false}},
   moldes:[],
-  receitas:[]
+  receitas:[],
+  cad:[],cadStatus:'loading',
+  conf:{},pag:{},contato:{},
+  waiting:{status:'idle',threads:[]},
+  semRetorno:Number(store('sem-retorno'))||60
 };
 let unwatchAgenda=null, unwatchMail=null;
 
@@ -448,6 +453,7 @@ function renderAgenda(){
     h+='<div class="next"><span class="pill accent">Próxima</span><b class="pii">'+esc(next.name)+'</b><span class="pill">'+esc(next.tipo||'Consulta')+'</span><span class="spacer"></span><span class="stamp">'+esc(when)+'</span></div>'}
   if(missing.length)h+='<div class="next"><span class="pill warn">Faltam dados</span><span class="pii" style="color:var(--muted);font-size:.85rem">'+missing.map(e=>esc(e.name)).join(', ')+' sem telefone ou e-mail na agenda</span></div>';
   h+='</div>';
+  h+=renderConfirmacoes();
 
   const livres=freeSlots(dayKey(now),a.events).filter(f=>!f.busy&&!f.past);
   h+='<div class="card"><div class="card-h"><h2>Hoje</h2><span class="count">'+plural(today.length,'compromisso')+'</span></div>';
@@ -468,7 +474,7 @@ function slotHTML(e,now){
   const cls=e.end<now?'past':(e.start<=now&&e.end>now?'now':'');
   let h='<div class="slot '+cls+'"><div class="time">'+(e.allDay?'dia':esc(fTime.format(e.start)))+(e.allDay?'':'<small>'+esc(fTime.format(e.end))+'</small>')+'</div><div class="body">';
   if(e.patient){
-    h+='<div class="row"><span class="name pii">'+esc(e.name)+'</span>'+(cls==='now'?'<span class="live" title="Em andamento"></span>':'')+'<span class="pill'+(/primeira/i.test(e.tipo)?' accent':'')+'">'+esc(e.tipo||'Consulta')+'</span></div>';
+    h+='<div class="row"><span class="name pii">'+esc(e.name)+'</span>'+(cls==='now'?'<span class="live" title="Em andamento"></span>':'')+'<span class="pill'+(/primeira/i.test(e.tipo)?' accent':'')+'">'+esc(e.tipo||'Consulta')+'</span>'+planPill(e)+pixBtn(e)+confPill(e)+'</div>';
     h+='<div class="row" style="gap:6px"><button class="btn small" data-act="open-patient" data-key="'+esc(patKey(e))+'">Ficha</button>'+(e.phone?'<button class="btn small ghost" data-act="copy" data-text="'+esc(e.phone)+'" data-label="Telefone">Copiar telefone</button>':'')+
       (e.start>now?'<button class="btn small ghost" data-act="move" data-id="'+esc(e.id)+'">Remarcar</button><button class="btn small ghost" data-act="cancel" data-id="'+esc(e.id)+'">Cancelar</button>':'')+'</div>';
   }else{
@@ -526,7 +532,7 @@ function paintBooking(){
   }
   h+='</div>';
   if(!isMove){
-    h+='<div class="card grid2"><label class="lab full" for="b-nome">Nome do paciente<input class="field pii" id="b-nome" value="'+esc(B.nome)+'" autocomplete="off"></label>'+
+    h+='<div class="card grid2"><label class="lab full" for="b-nome">Nome do paciente<input class="field pii" id="b-nome" list="b-pacs" value="'+esc(B.nome)+'" autocomplete="off"><datalist id="b-pacs">'+patientNames().map(n=>'<option value="'+esc(n)+'"></option>').join('')+'</datalist></label>'+
       '<label class="lab" for="b-tipo">Tipo<select class="field" id="b-tipo">'+TIPOS.map(t=>'<option'+(t===B.tipo?' selected':'')+'>'+t+'</option>').join('')+'</select></label>'+
       '<label class="lab" for="b-phone">Telefone<input class="field pii" id="b-phone" value="'+esc(B.phone)+'" inputmode="tel" autocomplete="off"></label>'+
       '<label class="lab full" for="b-email">E-mail<input class="field pii" id="b-email" type="email" value="'+esc(B.email)+'" autocomplete="off"></label></div>';
@@ -573,13 +579,22 @@ async function cancelEvent(id,btn){
 
 /* ---------- Pacientes ---------- */
 function patKey(e){return e.email?e.email.toLowerCase():'n:'+norm(e.name)}
-function patients(){
+let PMEMO={};
+function patients(){if(PMEMO.v&&PMEMO.a===S.pac.events&&PMEMO.b===S.agenda.events&&PMEMO.c===S.cad)return PMEMO.v;PMEMO={a:S.pac.events,b:S.agenda.events,c:S.cad,v:patientsRaw()};return PMEMO.v}
+function patientsRaw(){
   const map=new Map();
   const all=S.pac.events.length?S.pac.events:S.agenda.events;
   all.forEach(e=>{if(!e.patient)return;const k=patKey(e);let p=map.get(k);
     if(!p){p={key:k,name:e.name,email:e.email,phone:e.phone,cpf:e.cpf,visits:[]};map.set(k,p)}
     if(e.name.length>p.name.length)p.name=e.name;if(!p.email&&e.email)p.email=e.email;if(!p.phone&&e.phone)p.phone=e.phone;if(!p.cpf&&e.cpf)p.cpf=e.cpf;
     if(!p.visits.some(v=>v.id===e.id))p.visits.push({id:e.id,start:e.start,end:e.end,tipo:e.tipo,link:e.link});
+  });
+  // junta o cadastro do painel com a agenda: mesmo e-mail, mesmo CPF ou mesmo nome
+  S.cad.forEach(c=>{
+    const em=String(c.email||'').toLowerCase(),nn=norm(c.nome),cd=digits(c.cpf);
+    let p=[...map.values()].find(x=>(em&&x.email&&x.email.toLowerCase()===em)||(cd&&digits(x.cpf)===cd)||(nn&&norm(x.name)===nn));
+    if(!p){p={key:'c:'+c.id,name:c.nome,visits:[]};map.set(p.key,p)}
+    p.cad=c;if(c.nome)p.name=c.nome;if(c.email)p.email=c.email;if(c.telefone)p.phone=c.telefone;if(c.cpf)p.cpf=c.cpf;p.nasc=c.nascimento||'';
   });
   const now=new Date();
   const arr=[...map.values()].map(p=>{p.visits.sort((a,b)=>a.start-b.start);p.next=p.visits.find(v=>v.start>now)||null;const past=p.visits.filter(v=>v.start<=now);p.last=past[past.length-1]||null;p.done=past.length;return p});
@@ -608,8 +623,9 @@ const PAC_ACOES=[['ficha','Abrir ficha'],['receita','Receita Memed'],['atestado'
 function pacAcao(){const v=store('pac-acao');return PAC_ACOES.some(a=>a[0]===v)?v:'ficha'}
 function renderPacientes(){
   if(S.pac.status==='idle')loadPatients();
-  let h='<div class="page-h"><div><h2>Pacientes</h2><p>'+(S.pac.status==='loading'?'Lendo 12 meses da agenda':plural(patients().length,'paciente')+' na agenda, últimos 12 meses')+'</p></div><span class="spacer"></span><button class="btn small" data-act="doc-avulso">'+ic('doc')+'Documento avulso</button></div>';
+  let h='<div class="page-h"><div><h2>Pacientes</h2><p>'+(S.pac.status==='loading'?'Lendo 12 meses da agenda':plural(patients().length,'paciente')+', da agenda e do cadastro')+'</p></div><span class="spacer"></span><button class="btn small primary" data-act="cad-new">'+ic('plus')+'Novo paciente</button><button class="btn small" data-act="doc-avulso">'+ic('doc')+'Documento avulso</button></div>';
   if(S.pac.status==='error')return h+errBox(S.pac.err,CAL,'pac-retry');
+  h+=renderSemRetorno();
   const acao=pacAcao();
   h+='<div class="card"><div class="card-h"><h2>Ao tocar no nome</h2><span class="count">o documento abre preenchido</span></div>';
   h+='<div class="chips" role="group" aria-label="Ação ao tocar no nome">'+PAC_ACOES.map(([k,l])=>'<button class="chip" data-act="pac-acao" data-k="'+k+'" aria-pressed="'+(acao===k)+'">'+l+'</button>').join('')+'</div>';
@@ -643,8 +659,18 @@ function openPatient(key,grp){
   h+='<div class="card"><dl class="kv">';
   if(p.phone)h+='<dt>Telefone</dt><dd class="pii">'+esc(p.phone)+'</dd><dd><button class="btn small ghost" data-act="copy" data-text="'+esc(p.phone)+'" data-label="Telefone">Copiar</button></dd>';
   if(p.email)h+='<dt>E-mail</dt><dd class="pii">'+esc(p.email)+'</dd><dd><button class="btn small ghost" data-act="copy" data-text="'+esc(p.email)+'" data-label="E-mail">Copiar</button></dd>';
-  if(!p.phone&&!p.email)h+='<dt>Contato</dt><dd>Sem telefone nem e-mail na agenda</dd><dd></dd>';
-  h+='</dl><div class="row" style="gap:6px"><button class="btn small primary" data-act="book" data-key="'+esc(p.key)+'">Marcar retorno</button><button class="btn small accent" data-act="rx-for" data-key="'+esc(p.key)+'">Receita na Memed</button><button class="btn small" data-act="pend-for" data-key="'+esc(p.key)+'">Nova pendência</button>'+(p.email?'<button class="btn small" data-act="compose" data-to="'+esc(p.email)+'" data-name="'+esc(p.name)+'">Escrever e-mail</button>':'')+'</div></div>';
+  if(!p.phone&&!p.email)h+='<dt>Contato</dt><dd>Sem telefone nem e-mail</dd><dd></dd>';
+  if(p.cpf)h+='<dt>CPF</dt><dd class="pii">'+esc(p.cpf)+'</dd><dd><button class="btn small ghost" data-act="copy" data-text="'+esc(p.cpf)+'" data-label="CPF">Copiar</button></dd>';
+  const c=p.cad;
+  if(c){
+    if(c.nascimento)h+='<dt>Nascimento</dt><dd class="pii">'+esc(fmtNasc(c.nascimento))+'</dd><dd></dd>';
+    const end=enderecoLinha(c);if(end)h+='<dt>Endereço</dt><dd class="pii">'+esc(end)+'</dd><dd><button class="btn small ghost" data-act="copy" data-text="'+esc(end)+'" data-label="Endereço">Copiar</button></dd>';
+    if(c.responsavel)h+='<dt>Responsável</dt><dd class="pii">'+esc(c.responsavel)+'</dd><dd></dd>';
+    if(c.plano&&c.plano!=='Avulso')h+='<dt>Plano</dt><dd>'+esc(c.plano)+'</dd><dd></dd>';
+    if(c.origem)h+='<dt>Chegou por</dt><dd>'+esc(c.origem)+'</dd><dd></dd>';
+    if(c.nota)h+='<dt>Nota</dt><dd>'+esc(c.nota)+'</dd><dd></dd>';
+  }
+  h+='</dl><div class="row" style="gap:6px"><button class="btn small primary" data-act="book" data-key="'+esc(p.key)+'">Marcar retorno</button><button class="btn small accent" data-act="rx-for" data-key="'+esc(p.key)+'">Receita na Memed</button><button class="btn small" data-act="pend-for" data-key="'+esc(p.key)+'">Nova pendência</button><button class="btn small" data-act="cad-edit" data-key="'+esc(p.key)+'">'+(p.cad?'Editar cadastro':'Completar cadastro')+'</button>'+(p.cad?'<button class="btn small ghost" data-act="copy" data-text="'+esc(dadosTexto(p))+'" data-label="Dados">Copiar dados</button>':'')+(p.email?'<button class="btn small" data-act="compose" data-to="'+esc(p.email)+'" data-name="'+esc(p.name)+'">Escrever e-mail</button>':'')+'</div></div>';
   h+='<div class="card"><div class="card-h"><h2>Documentos</h2><span class="count">abre preenchido, você ajusta e gera o PDF</span></div><div class="row" style="gap:6px">'+DOC_TIPOS.map(([k,l])=>'<button class="btn small" data-act="doc-for" data-key="'+esc(p.key)+'" data-t="'+k+'">'+ic('doc')+esc(l.split(' ')[0])+'</button>').join('')+'</div></div>';
   h+='<div class="card"><div class="card-h"><h2>Consultas na agenda</h2><span class="count">'+p.visits.length+'</span></div><div class="list">';
   p.visits.slice().reverse().slice(0,30).forEach(v=>{const fut=v.start>new Date();h+='<div class="row" style="padding:8px 0;border-top:1px solid var(--line)"><span style="flex:1;min-width:0">'+esc(cap(fShortY.format(v.start)))+', '+esc(fTime.format(v.start))+'</span><span class="pill'+(/primeira/i.test(v.tipo)?' accent':'')+'">'+esc(v.tipo||'Consulta')+'</span>'+(fut?'<span class="pill ok">Agendada</span>':'')+(v.link?'<a class="icon-btn flat" href="'+esc(v.link)+'" target="_blank" rel="noopener" aria-label="Abrir na agenda">'+ic('open')+'</a>':'')+'</div>'});
@@ -665,6 +691,7 @@ function openPatient(key,grp){
 const MAIL_FILTERS=[
   ['principal','Principal','in:inbox category:primary'],
   ['naolidos','Não lidos','in:inbox category:primary is:unread'],
+  ['aguardando','Esperando resposta','in:inbox category:primary newer_than:30d older_than:1d'],
   ['pacientes','Pacientes','label:pacientes'],
   ['estrela','Com estrela','is:starred'],
   ['importantes','Importantes','in:inbox is:important'],
@@ -729,7 +756,7 @@ function renderEmail(){
   if(S.mail.filter==='rascunhos'&&!S.mail.q)return h+renderDrafts()+'</div>';
   if(S.mail.status==='loading')h+=skel(7);
   else if(S.mail.status==='error')h+=errBox(S.mail.err,GMAIL,'mail-retry');
-  else{const all=S.mail.threads.concat(S.mail.extra);
+  else{let all=S.mail.threads.concat(S.mail.extra);if(S.mail.filter==='aguardando'&&!S.mail.q){all=all.filter(waitingThread);h+='<span class="stamp">Conversas da Principal em que a última mensagem é de outra pessoa, há mais de um dia.</span>'}
     if(!all.length)h+='<div class="notice">Nenhuma conversa aqui.</div>';
     else{h+='<div class="list">'+all.map(threadRow).join('')+'</div>';
       if(S.mail.next)h+='<button class="btn" data-act="mail-more" style="align-self:center" '+(S.mail.moreBusy?'disabled':'')+'>'+(S.mail.moreBusy?'Carregando…':'Carregar mais')+'</button>'}
@@ -905,6 +932,12 @@ function pendSuggestions(){
     const id='rx_'+e.id;if(known.has(id))return;
     out.push({id,auto:true,titulo:'Enviar receita de '+e.name,tipo:'Receita',paciente:e.name,pacienteKey:patKey(e),prazo:dayKey(addDays(e.start,1)),motivo:(e.tipo||'Consulta')+' em '+fShort.format(e.start)+', '+fTime.format(e.start)});
   });
+  // véspera: depois das 17h, quem ainda não confirmou vira sugestão
+  if(now.getHours()>=17){confTargets().list.forEach(e=>{const st=confStatus(e);if(st==='confirmou'||st==='desmarcou')return;const id='conf_'+e.id;if(known.has(id))return;
+    out.push({id,auto:true,titulo:'Confirmar consulta de '+e.name,tipo:'Mensagem',paciente:e.name,pacienteKey:patKey(e),prazo:dayKey(now),motivo:(st==='enviada'?'Mensagem enviada, sem resposta':'Confirmação ainda não enviada')+' · '+relDay(e.start)+', '+fTime.format(e.start)})})}
+  // plano: sessão 4 de 4 nos próximos 7 dias
+  S.agenda.events.forEach(e=>{if(!e.patient||e.start<now)return;const pi=planInfo(e);if(!pi||pi.n!==4)return;const id='renov_'+e.id;if(known.has(id))return;
+    out.push({id,auto:true,titulo:'Oferecer renovação do plano a '+e.name,tipo:'Mensagem',paciente:e.name,pacienteKey:patKey(e),prazo:dayKey(addDays(e.start,-1)),motivo:'Sessão 4 de 4 '+relDay(e.start).toLowerCase()+', '+fTime.format(e.start)})});
   return out;
 }
 function bucket(r){
@@ -964,6 +997,7 @@ function renderPendencias(){
   if(P.status==='nodb')return h+'<div class="notice">Abra o painel no claude.ai, com sua conta, para ver e registrar pendências.</div>';
   if(P.status==='error')return h+'<div class="notice err">Não foi possível ler as pendências. '+esc((P.err&&P.err.message)||'')+'</div>';
   if(P.status==='loading')return h+'<div class="card">'+skel(5)+'</div>';
+  h+=renderResumo();
   const cnt={late:0,today:0,week:0,later:0,none:0};open.forEach(r=>cnt[bucket(r)]++);
   // Resumo
   h+='<div class="stats">'+
@@ -1034,7 +1068,7 @@ function resolvePend(r){
   if(tipoDoc){openDoc({key:r.pacienteKey||'',paciente:r.paciente||'',tipo:tipoDoc,pendId:r.id});return}
   if(r.tipo==='Receita'){openRx({key:r.pacienteKey||'',paciente:r.paciente||'',pendId:r.id,obs:r.nota||''});return}
   if(r.tipo==='Retorno'){const p=patients().find(x=>x.key===r.pacienteKey);openBooking(p?{nome:p.name,email:p.email||'',phone:p.phone||'',tipo:'Retorno'}:{nome:r.paciente||'',tipo:'Retorno'});return}
-  if(r.pacienteKey&&patients().some(x=>x.key===r.pacienteKey)){openPatient(r.pacienteKey,r.tipo==='Cobrança'?'Cobrança':'Agenda');return}
+  if(r.pacienteKey&&patients().some(x=>x.key===r.pacienteKey)){openPatient(r.pacienteKey,r.tipo==='Cobrança'?'Cobrança':/renova/i.test(r.titulo||'')?'Planos':'Agenda');return}
   toast('Abra a pendência e resolva manualmente');
 }
 
@@ -1250,6 +1284,203 @@ async function gerarPDF(btn){
   btn.disabled=false;
 }
 
+/* ---------- Cadastro de pacientes (dados administrativos, não é prontuário) ---------- */
+const PLANOS=['Avulso','Plano de 4 sessões, R$ 2.200','Plano de 4 sessões, R$ 2.900'];
+const ORIGENS=['','Instagram','Indicação','Google','Site','CAPS ou outro serviço','Outro'];
+const CAD_CAMPOS=['nome','cpf','nascimento','telefone','email','cep','endereco','bairro','cidade','uf','responsavel','plano','planoInicio','origem','nota'];
+let CAD=null;
+function digits(s){return String(s||'').replace(/\D/g,'')}
+function fmtCPF(s){const d=digits(s);return d.length===11?d.slice(0,3)+'.'+d.slice(3,6)+'.'+d.slice(6,9)+'-'+d.slice(9):String(s||'').trim()}
+function cpfValido(s){const d=digits(s);if(d.length!==11||/^(\d)\1+$/.test(d))return false;
+  for(let t=9;t<11;t++){let sum=0;for(let i=0;i<t;i++)sum+=Number(d[i])*(t+1-i);const r=(sum*10)%11%10;if(r!==Number(d[t]))return false}return true}
+function fmtNasc(k){if(!/^\d{4}-\d{2}-\d{2}$/.test(k||''))return k||'';const [y,m,d]=k.split('-').map(Number);const n=new Date();let age=n.getFullYear()-y;if(n.getMonth()+1<m||(n.getMonth()+1===m&&n.getDate()<d))age--;return pad(d)+'/'+pad(m)+'/'+y+' ('+age+' anos)'}
+function enderecoLinha(c){return [c.endereco,c.bairro,[c.cidade,c.uf].filter(Boolean).join(' - '),c.cep?'CEP '+c.cep:''].filter(Boolean).join(', ')}
+function dadosTexto(p){const c=p.cad||{};return ['Nome completo: '+(p.name||''),'CPF: '+(p.cpf||''),c.nascimento?'Nascimento: '+fmtNasc(c.nascimento).replace(/ \(.*/,''):'','Telefone: '+(p.phone||''),'E-mail: '+(p.email||''),enderecoLinha(c)?'Endereço: '+enderecoLinha(c):'',c.responsavel?'Responsável: '+c.responsavel:''].filter(x=>x&&!/: $/.test(x)).join('\n')}
+function watchCad(){
+  if(!S.db){S.cadStatus='nodb';return}
+  try{S.db.collection('pacientes').limit(2000).onSnapshot(snap=>{S.cad=snap.docs.map(d=>Object.assign({id:d.id},d.data()));S.cadStatus='ready';if(S.tab==='pacientes')render();if(CAD)paintCadWarn()},()=>{S.cadStatus='error'})}catch(_){}
+}
+/* Lê a resposta do paciente à mensagem de boas-vindas (Nome completo, CPF, Endereço...) */
+function parseDados(t){
+  let txt=String(t||'').replace(/[*_]/g,'').replace(/📋/g,'');const o={};
+  const lab=re=>{const m=txt.match(re);return m?m[1].trim().replace(/[.;]$/,''):''};
+  o.nome=lab(/nome(?:\s+completo)?\s*[:\-]\s*(.+)/i);
+  const cpf=txt.match(/(?:cpf\s*[:\-]?\s*)?(\d{3}\.?\d{3}\.?\d{3}\s?-?\s?\d{2})(?!\d)/i);if(cpf){o.cpf=fmtCPF(cpf[1]);txt=txt.replace(cpf[0],' ')}
+  const em=txt.match(/[\w.+-]+@[\w-]+(?:\.[\w-]+)+/);if(em){o.email=em[0].toLowerCase();txt=txt.replace(em[0],' ')}
+  const nasc=txt.match(/(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{4})/);if(nasc){o.nascimento=nasc[3]+'-'+pad(nasc[2])+'-'+pad(nasc[1]);txt=txt.replace(nasc[0],' ')}
+  const cep=txt.match(/(?:cep\s*[:\-]?\s*)?(\d{5})-?(\d{3})(?!\d)/i);if(cep){o.cep=cep[1]+'-'+cep[2];txt=txt.replace(cep[0],' ')}
+  const tel=txt.match(/(?:\+?55\s?)?\(?\d{2}\)?\s?9?\d{4}[-\s]?\d{4}/);if(tel)o.telefone=tel[0].trim();
+  let end=lab(/endere[cç]o[^:\n]*[:\-]\s*(.+)/i);
+  if(end){end=end.replace(/,?\s*CEP\s*$/i,'').replace(/[,\s]+$/,'');
+    const ufm=end.match(/[,\-]\s*([A-Z]{2})\s*$/);if(ufm){o.uf=ufm[1];end=end.slice(0,ufm.index).trim()}
+    o.endereco=end}
+  o.bairro=lab(/bairro\s*[:\-]\s*(.+)/i)||'';o.cidade=lab(/cidade\s*[:\-]\s*(.+)/i)||'';
+  return o;
+}
+function openCad(o){
+  const c=o.cad||(o.p&&o.p.cad)||null;const p=o.p||null;
+  const f={};CAD_CAMPOS.forEach(k=>f[k]=c&&c[k]!=null?String(c[k]):'');
+  if(!c&&p){f.nome=p.name||'';f.telefone=p.phone||'';f.email=p.email||'';f.cpf=p.cpf||''}
+  if(!f.plano)f.plano='Avulso';
+  CAD={id:c?c.id:null,f,colar:'',err:''};
+  paintCad();
+}
+function readCad(){
+  if(!CAD)return;
+  CAD_CAMPOS.forEach(k=>{const el=document.getElementById('cad-'+k);if(el)CAD.f[k]=el.value});
+  const t=document.getElementById('cad-colar');if(t)CAD.colar=t.value;
+}
+function cadDup(){
+  const f=CAD.f,cd=digits(f.cpf),nn=norm(f.nome);
+  return S.cad.find(x=>x.id!==CAD.id&&((cd.length===11&&digits(x.cpf)===cd)||(nn&&norm(x.nome)===nn)))||null;
+}
+function cadWarnHTML(){
+  let h='';const f=CAD.f;
+  if(f.cpf&&!cpfValido(f.cpf))h+='<div class="notice err">O CPF não confere. Confira os números.</div>';
+  const d=cadDup();if(d)h+='<div class="notice"><span>Já existe cadastro de <b class="pii">'+esc(d.nome)+'</b>'+(d.cpf?' (CPF '+esc(d.cpf)+')':'')+'.</span><button class="btn small" data-act="cad-open-dup" data-id="'+esc(d.id)+'">Abrir esse cadastro</button></div>';
+  return h;
+}
+function paintCadWarn(){const z=document.getElementById('cad-warn');if(z&&CAD)z.innerHTML=cadWarnHTML()}
+function paintCad(){
+  if(!CAD)return;const f=CAD.f;
+  const inp=(k,label,extra,cls)=>'<label class="lab'+(cls?' '+cls:'')+'" for="cad-'+k+'">'+label+'<input class="field pii" id="cad-'+k+'" value="'+esc(f[k])+'" autocomplete="off"'+(extra||'')+'></label>';
+  let h=sheetHead(CAD.id?'Editar cadastro':'Novo paciente');
+  h+='<div class="card"><div class="card-h"><h2>Preencher automático</h2><span class="count">print, foto de documento ou texto do WhatsApp</span></div>'+
+    (CAD.lendo?'<div class="notice"><span>Lendo o print…</span>'+skel(2)+'</div>':
+    '<div class="row" style="gap:6px"><label class="btn small primary" for="cad-print">'+ic('clip')+'Enviar print ou foto</label><input type="file" id="cad-print" accept="image/*" hidden><span class="stamp">ou cole a imagem aqui (Ctrl+V)</span></div>'+
+    '<textarea class="field" id="cad-colar" style="min-height:80px" placeholder="Ou cole o texto em que o paciente mandou os dados">'+esc(CAD.colar)+'</textarea><button class="btn small" data-act="cad-parse" style="align-self:flex-start">Preencher com o texto</button>')+
+    '<span class="stamp">Confira os campos antes de salvar. A leitura pode errar números.</span></div>';
+  h+='<div class="card grid2">'+
+    inp('nome','Nome completo *',' required','full')+
+    inp('cpf','CPF *',' required inputmode="numeric" placeholder="000.000.000-00"')+
+    '<label class="lab" for="cad-nascimento">Nascimento<input class="field pii" id="cad-nascimento" type="date" value="'+esc(f.nascimento)+'"></label>'+
+    inp('telefone','Telefone (WhatsApp)',' inputmode="tel"')+
+    inp('email','E-mail',' type="email" inputmode="email"')+
+    inp('cep','CEP',' inputmode="numeric" placeholder="00000-000"')+
+    inp('endereco','Rua, número e complemento','','full')+
+    inp('bairro','Bairro')+
+    inp('cidade','Cidade')+
+    inp('uf','UF',' maxlength="2" placeholder="SP"')+
+    inp('responsavel','Responsável (se for menor de idade)')+
+    '<label class="lab" for="cad-plano">Plano<select class="field" id="cad-plano">'+PLANOS.map(x=>'<option'+(x===f.plano?' selected':'')+'>'+esc(x)+'</option>').join('')+'</select></label>'+
+    '<label class="lab" for="cad-planoInicio">Início do plano<input class="field" id="cad-planoInicio" type="date" value="'+esc(f.planoInicio)+'"></label>'+
+    '<label class="lab" for="cad-origem">Como chegou<select class="field" id="cad-origem">'+ORIGENS.map(x=>'<option value="'+esc(x)+'"'+(x===f.origem?' selected':'')+'>'+esc(x||'Não informado')+'</option>').join('')+'</select></label>'+
+    inp('nota','Nota administrativa (ex.: prefere contato por e-mail)','','full')+
+    '</div>';
+  h+='<div class="stamp">* Obrigatórios: nome e CPF. Só dados de cadastro; anotação clínica fica no prontuário. O início do plano conta as sessões (1 de 4, 2 de 4...).</div>';
+  h+='<div id="cad-warn">'+cadWarnHTML()+'</div><div id="cad-msg"></div>';
+  h+='<div class="row">'+(CAD.id?'<button class="btn ghost" data-act="cad-del">'+ic('trash')+'Excluir cadastro</button>':'')+'<span class="spacer"></span><button class="btn accent" data-act="cad-save">'+(CAD.id?'Salvar alterações':'Cadastrar')+'</button></div>';
+  openSheet(h,true);
+}
+async function saveCad(btn){
+  readCad();const f=CAD.f;const msg=document.getElementById('cad-msg');
+  if(!f.nome.trim()){msg.innerHTML='<div class="notice err">Informe o nome completo.</div>';document.getElementById('cad-nome').focus();return}
+  if(!f.cpf.trim()){msg.innerHTML='<div class="notice err">Informe o CPF.</div>';document.getElementById('cad-cpf').focus();return}
+  if(!cpfValido(f.cpf)){msg.innerHTML='<div class="notice err">O CPF não confere. Confira os números.</div>';return}
+  if(f.email&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.trim())){msg.innerHTML='<div class="notice err">O e-mail parece incompleto.</div>';return}
+  if(!CAD.id&&cadDup()){msg.innerHTML='<div class="notice err">Esse paciente já tem cadastro. Abra o cadastro existente para atualizar.</div>';return}
+  if(!S.db){msg.innerHTML='<div class="notice err">Abra o painel no claude.ai, com sua conta, para salvar cadastros.</div>';return}
+  const data={};CAD_CAMPOS.forEach(k=>data[k]=String(f[k]||'').trim());
+  data.cpf=data.cpf?fmtCPF(data.cpf):'';data.email=data.email.toLowerCase();data.uf=data.uf.toUpperCase();data.atualizadoEm=new Date().toISOString();
+  btn.disabled=true;btn.textContent='Salvando…';
+  try{
+    if(CAD.id)await S.db.collection('pacientes').doc(CAD.id).update(data);
+    else{data.criadoEm=data.atualizadoEm;await S.db.collection('pacientes').doc().set(data)}
+    toast(CAD.id?'Cadastro atualizado':'Paciente cadastrado');
+    const nome=data.nome;closeSheet();
+    setTimeout(()=>{const p=patients().find(x=>norm(x.name)===norm(nome));if(p)openPatient(p.key)},400);
+  }catch(e){btn.disabled=false;btn.textContent=CAD.id?'Salvar alterações':'Cadastrar';msg.innerHTML='<div class="notice err">Não foi possível salvar: '+esc((e&&e.message)||'erro')+'</div>'}
+}
+
+/* ---------- Confirmações, PIX, planos, retornos e resumo do dia ---------- */
+const WAIT_Q='in:inbox category:primary newer_than:30d older_than:1d';
+const ME=/drfabioschmidt@gmail\.com/i;
+const ROBO=/no-?reply|nao-?responda|naoresponda|notifica|mailer|newsletter|bounce|postmaster|alerts?@|news@/i;
+function docId(s){return String(s||'').replace(/[^A-Za-z0-9_\-.~:@+]/g,'_').slice(0,190)||'x'}
+function watchMap(coll,target){
+  if(!S.db)return;
+  try{S.db.collection(coll).limit(2000).onSnapshot(snap=>{const m={};snap.docs.forEach(d=>{m[d.id]=d.data()});S[target]=m;paintTabs();render()},()=>{})}catch(_){}
+}
+function waitingThread(t){const ms=t.messages||[];const m=ms[ms.length-1]||{};const em=parseSender(m.sender).email;return !!em&&!ME.test(em)&&!ROBO.test(em)}
+async function loadWaiting(){
+  if(!S.mcp)return;S.waiting.status='loading';
+  try{const r=await call(GMAIL,'search_threads',{query:WAIT_Q,pageSize:40},{cache:{staleTime:120000}});S.waiting={status:'ready',threads:((r&&r.threads)||[]).filter(waitingThread)}}
+  catch(e){S.waiting={status:'error',threads:[]}}
+  if(S.tab==='pendencias')render();
+}
+/* Plano de 4 sessões: conta as consultas desde o início do plano, de 4 em 4 */
+function planInfo(e){
+  const p=patients().find(x=>x.visits.some(v=>v.id===e.id));
+  if(!p||!p.cad||!p.cad.plano||p.cad.plano==='Avulso'||!p.cad.planoInicio)return null;
+  const vs=p.visits.filter(v=>dayKey(v.start)>=p.cad.planoInicio);const i=vs.findIndex(v=>v.id===e.id);
+  return i<0?null:{n:i%4+1,ciclo:Math.floor(i/4)+1,p};
+}
+function planPill(e){const pi=planInfo(e);if(!pi)return '';return '<span class="pill'+(pi.n===4?' accent':'')+'">Sessão '+pi.n+' de 4'+(pi.n===4?' · renovar':'')+'</span>'}
+function pixPago(e){const g=S.pag[docId(e.id)];return !!(g&&g.pago)}
+function pixBtn(e){const ok=pixPago(e);return '<button class="pill '+(ok?'ok':'warn')+'" style="border:0;cursor:pointer;font:inherit;font-size:.7rem;font-weight:500" data-act="pix" data-id="'+esc(e.id)+'" data-name="'+esc(e.name)+'" title="Toque para mudar">'+(ok?'PIX pago':'PIX pendente')+'</button>'}
+function confStatus(e){return (S.conf[docId(e.id)]||{}).status||''}
+function confPill(e){const st=confStatus(e);if(st==='confirmou')return '<span class="pill ok">Confirmou</span>';if(st==='desmarcou')return '<span class="pill bad">Desmarcou</span>';return ''}
+function confTargets(){const d=nextWorkday(addDays(new Date(),1));const k=dayKey(d);return {d,list:S.agenda.events.filter(e=>e.patient&&!e.allDay&&dayKey(e.start)===k)}}
+function confMsg(e,d){const amanha=dayKey(d)===dayKey(addDays(new Date(),1));return 'Olá '+firstName(e.name)+'! Passando para confirmar sua consulta '+(amanha?'amanhã':'na '+fWd.format(d))+', '+fDM.format(e.start)+', às '+fTime.format(e.start)+'. Posso confirmar?'}
+function renderConfirmacoes(){
+  const {d,list}=confTargets();if(!list.length)return '';
+  const ok=list.filter(e=>confStatus(e)==='confirmou').length;
+  let h='<div class="card"><div class="card-h"><h2>Confirmações de '+esc(dayKey(d)===dayKey(addDays(new Date(),1))?'amanhã':fWd.format(d))+'</h2><span class="count">'+ok+' de '+list.length+' confirmadas</span></div>';
+  h+='<div class="tasks">';
+  list.forEach(e=>{const st=confStatus(e);const msg=confMsg(e,d);
+    h+='<div class="task"><div class="task-main"><span class="row" style="gap:8px"><span class="stamp" style="font-size:.8rem">'+esc(fTime.format(e.start))+'</span><span class="task-t pii">'+esc(e.name)+'</span>'+(st==='enviada'?'<span class="pill">Enviada, sem resposta</span>':'')+pixBtn(e)+'</span>'+
+      '<span class="row" style="gap:6px"><button class="btn small accent" data-act="conf-copy" data-id="'+esc(e.id)+'" data-name="'+esc(e.name)+'" data-text="'+esc(msg)+'">Copiar mensagem</button>'+(e.phone?'<button class="btn small ghost" data-act="copy" data-text="'+esc(e.phone)+'" data-label="Telefone">Telefone</button>':'')+
+      '<button class="chip" data-act="conf-set" data-st="confirmou" data-id="'+esc(e.id)+'" data-name="'+esc(e.name)+'" aria-pressed="'+(st==='confirmou')+'">Confirmou</button>'+
+      '<button class="chip" data-act="conf-set" data-st="desmarcou" data-id="'+esc(e.id)+'" data-name="'+esc(e.name)+'" aria-pressed="'+(st==='desmarcou')+'">Desmarcou</button>'+
+      (st==='desmarcou'?'<button class="btn small ghost" data-act="cancel" data-id="'+esc(e.id)+'">Cancelar</button><button class="btn small ghost" data-act="move" data-id="'+esc(e.id)+'">Remarcar</button>':'')+'</span></div></div>'});
+  h+='</div><span class="stamp">Copiar marca como enviada. Depois das 17h, quem não confirmou aparece nas pendências para aprovar.</span></div>';
+  return h;
+}
+function renderSemRetorno(){
+  if(S.pac.status!=='ready')return '';
+  const now=new Date(),lim=addDays(startOfDay(now),-S.semRetorno),limMax=addDays(startOfDay(now),-365);
+  const list=patients().filter(p=>!p.next&&p.last&&p.last.start<lim&&p.last.start>limMax).filter(p=>{const c=S.contato[docId(p.key)];return !(c&&c.em&&new Date(c.em)>addDays(now,-30))}).sort((a,b)=>b.last.start-a.last.start);
+  let h='<div class="card"><div class="card-h"><h2>Sem retorno marcado</h2><span class="count">'+list.length+'</span><span class="spacer"></span><div class="chips">'+[30,60,90].map(n=>'<button class="chip" data-act="sr-dias" data-n="'+n+'" aria-pressed="'+(S.semRetorno===n)+'">+'+n+' dias</button>').join('')+'</div></div>';
+  if(!list.length)return h+'<div class="notice">Ninguém com a última consulta há mais de '+S.semRetorno+' dias sem retorno marcado.</div></div>';
+  const tpl=MSGS[0].items.find(x=>x[0]==='Retomar contato')[1];
+  h+='<div class="tasks">'+list.slice(0,15).map(p=>{const dias=Math.round((startOfDay(now)-startOfDay(p.last.start))/864e5);const msg=tpl.replace(/\[NOME\]/g,firstName(p.name));
+    return '<div class="task"><span class="avatar pii">'+esc(initials(p.name))+'</span><div class="task-main"><button class="linkish pii" style="font-size:.95rem;color:var(--fg);text-align:left" data-act="open-patient" data-key="'+esc(p.key)+'">'+esc(p.name)+'</button><span class="task-note">Última consulta '+esc(fShortY.format(p.last.start))+', há '+dias+' dias</span><span class="row" style="gap:6px"><button class="btn small" data-act="sr-copy" data-text="'+esc(msg)+'">Copiar mensagem</button><button class="btn small ghost" data-act="book" data-key="'+esc(p.key)+'">Marcar</button><button class="btn small ghost" data-act="sr-ok" data-key="'+esc(p.key)+'" data-name="'+esc(p.name)+'">Já falei</button></span></div></div>'}).join('')+'</div>';
+  if(list.length>15)h+='<span class="stamp">Mostrando os 15 mais recentes de '+list.length+'.</span>';
+  return h+'</div>';
+}
+function renderResumo(){
+  const now=new Date(),t0=startOfDay(now),t2=addDays(t0,2);
+  const rows=[];
+  if(S.agenda.status==='ready'){
+    const hoje=S.agenda.events.filter(e=>e.patient&&!e.allDay&&dayKey(e.start)===dayKey(now));
+    const prox=hoje.find(e=>e.end>now);
+    rows.push(['agenda','',hoje.length?plural(hoje.length,'consulta')+' hoje'+(prox?', próxima às '+fTime.format(prox.start):', todas atendidas'):'Nenhuma consulta hoje','']);
+    const {d,list}=confTargets();if(list.length){const ok=list.filter(e=>confStatus(e)==='confirmou').length;rows.push(['agenda','',ok+' de '+list.length+' confirmadas para '+(dayKey(d)===dayKey(addDays(now,1))?'amanhã':fWd.format(d)),ok<list.length?'warn':'ok'])}
+    const pix=S.agenda.events.filter(e=>e.patient&&!e.allDay&&e.start>=t0&&e.start<t2&&!pixPago(e));if(pix.length)rows.push(['agenda','',plural(pix.length,'PIX pendente','PIX pendentes')+' hoje e amanhã','warn']);
+    const ren=S.agenda.events.filter(e=>e.patient&&e.start>=now&&(planInfo(e)||{}).n===4);if(ren.length)rows.push(['pendencias','',plural(ren.length,'renovação de plano','renovações de plano')+' nesta semana','accent']);
+  }else if(S.agenda.status==='loading')rows.push(['agenda','','Lendo a agenda…','']);
+  if(S.waiting.status==='ready'&&S.waiting.threads.length)rows.push(['email','aguardando',plural(S.waiting.threads.length,'e-mail esperando','e-mails esperando')+' resposta há mais de um dia','warn']);
+  if(!rows.length)return '';
+  return '<div class="card"><div class="card-h"><h2>Resumo do dia</h2></div><div class="list">'+rows.map(([tab,f,txt,tone])=>'<div class="mrow"><button class="mrow-main" style="align-items:center;padding:10px 2px" data-act="go" data-tab="'+tab+'"'+(f?' data-f="'+f+'"':'')+'><span class="live" style="animation:none;background:var(--'+(tone==='warn'?'warn':tone==='ok'?'ok':tone==='accent'?'accent':'dim')+')"></span><span class="txt"><span class="subj" style="white-space:normal">'+esc(txt)+'</span></span><svg viewBox="0 0 24 24" class="ico prow-chev" aria-hidden="true">'+I.chev+'</svg></button></div>').join('')+'</div></div>';
+}
+/* Leitura de print: o Claude lê a imagem e devolve os campos do cadastro */
+function shrink(file){return new Promise((res,rej)=>{const url=URL.createObjectURL(file);const img=new Image();img.onload=()=>{const k=Math.min(1,1800/Math.max(img.width,img.height));const c=document.createElement('canvas');c.width=Math.round(img.width*k);c.height=Math.round(img.height*k);c.getContext('2d').drawImage(img,0,0,c.width,c.height);URL.revokeObjectURL(url);c.toBlob(b=>b?res(b):rej(new Error('imagem')),'image/jpeg',.88)};img.onerror=()=>{URL.revokeObjectURL(url);rej(new Error('imagem'))};img.src=url})}
+async function lerPrint(file){
+  if(!S.sample){toast('A leitura de print funciona com o painel aberto no claude.ai.');return}
+  const lim=await S.sample.limits().catch(()=>null);
+  if(!lim||!lim.images){toast('Leitura de imagem indisponível aqui. Cole o texto.');return}
+  readCad();CAD.lendo=true;paintCad();
+  try{
+    const blob=await shrink(file);
+    const out=await S.sample.json('Esta imagem é um print ou foto com dados de um paciente de consultório médico no Brasil (conversa de WhatsApp, documento, ficha ou formulário). Extraia somente os dados cadastrais que estiverem visíveis. Responda só com um objeto JSON com as chaves: nome (nome completo), cpf, nascimento (formato AAAA-MM-DD), telefone, email, cep, endereco (rua, número e complemento), bairro, cidade, uf (sigla). Use "" para o que não aparecer. Não invente nem complete dados que não estão na imagem. Copie os números exatamente como aparecem.',{images:[blob],modelTier:'quick'});
+    if(!CAD)return;
+    const o=out&&typeof out==='object'?out:{};let n=0;
+    ['nome','cpf','nascimento','telefone','email','cep','endereco','bairro','cidade','uf'].forEach(k=>{let v=String(o[k]||'').trim();if(!v)return;if(k==='cpf')v=fmtCPF(v);if(k==='nascimento'&&!/^\d{4}-\d{2}-\d{2}$/.test(v))return;if(k==='uf')v=v.toUpperCase().slice(0,2);if(k==='email')v=v.toLowerCase();CAD.f[k]=v;n++});
+    toast(n?plural(n,'campo preenchido','campos preenchidos')+'. Confira antes de salvar.':'Não encontrei dados de cadastro nesse print.');
+  }catch(e){toast(e&&e.code==='not_granted'?'A leitura de imagem não foi autorizada neste painel.':e&&e.code==='rate_limited'?'Muitas leituras seguidas. Espere um minuto.':'Não consegui ler o print. Tente outro ou cole o texto.')}
+  if(CAD){CAD.lendo=false;paintCad()}
+}
+
 /* ---------- Receita pela Memed: o Claude prepara no Chrome do computador, você confere, digita o OTP e assina ---------- */
 let RX=null;
 function lastRx(key,name){const n=norm(name);return S.receitas.filter(r=>(key&&r.pacienteKey===key)||(n&&norm(r.paciente)===n)).sort((a,b)=>String(b.criadoEm).localeCompare(String(a.criadoEm)))[0]||null}
@@ -1271,7 +1502,8 @@ function rxItensResumo(){return RX.itens.filter(i=>i.nome).map(i=>i.nome+(i.qtd?
 function rxPrompt(){
   const its=RX.itens.filter(i=>i.nome);
   let t='Prepare uma receita na Memed, no Chrome, para eu conferir e assinar.\n\n';
-  t+='Paciente: '+(RX.paciente||'[NOME]')+(RX.cpf?', CPF '+RX.cpf:'')+'\n\nItens:\n';
+  const pr=patients().find(x=>x.key===RX.pkey);const nasc=pr&&pr.nasc?', nascimento '+fmtNasc(pr.nasc).replace(/ \(.*/,''):'';
+  t+='Paciente: '+(RX.paciente||'[NOME]')+(RX.cpf?', CPF '+RX.cpf:'')+nasc+'\n\nItens:\n';
   t+=(its.length?its:[{nome:'[MEDICAMENTO]',qtd:'',pos:''}]).map((i,n)=>(n+1)+'. '+i.nome+'. Quantidade: '+(i.qtd||'não informada, me pergunte')+'. Posologia: '+(i.pos||'não informada, me pergunte')+'.').join('\n');
   if(RX.obs)t+='\n\nObservação: '+RX.obs;
   t+='\n\nComo fazer:\n'+
@@ -1323,7 +1555,7 @@ function openSheet(html,keepScroll){
   const sh=root.querySelector('.sheet');if(top)sh.scrollTop=top;
   if(!keepScroll||!prev){const c=root.querySelector('[data-act="close"]');if(c)c.focus({preventScroll:true})}
 }
-function closeSheet(){document.getElementById('sheet-root').innerHTML='';DOC=null;THREAD=null;COMP=null;B=null;FICHA=null;RX=null;if(lastFocus&&lastFocus.focus)lastFocus.focus()}
+function closeSheet(){document.getElementById('sheet-root').innerHTML='';DOC=null;THREAD=null;COMP=null;B=null;FICHA=null;RX=null;CAD=null;if(lastFocus&&lastFocus.focus)lastFocus.focus()}
 
 /* ---------- Abas ---------- */
 function paintTabs(){
@@ -1374,6 +1606,22 @@ document.addEventListener('click',async ev=>{
     case 'ficha-grp':if(FICHA)openPatient(FICHA.key,a.dataset.g);break;
     case 'doc-avulso':{const k=pacAcao();if(k==='receita')openRx({});else openDoc({tipo:k==='ficha'?'atestado':k});break}
     case 'rx-for':openRx({key:a.dataset.key});break;
+    case 'cad-new':openCad({});break;
+    case 'go':{const t=a.dataset.tab;if(a.dataset.f){S.mail.filter=a.dataset.f;S.mail.q='';watchMail()}setTab(t);break}
+    case 'pix':{const id=a.dataset.id;const ok=!(S.pag[docId(id)]&&S.pag[docId(id)].pago);if(!S.db){toast('Abra no claude.ai para salvar');break}a.disabled=true;
+      try{await S.db.collection('pagamentos').doc(docId(id)).set({pago:ok,em:new Date().toISOString(),paciente:a.dataset.name||''});toast(ok?'PIX marcado como pago':'PIX voltou para pendente')}catch(e){toast('Não foi possível salvar');a.disabled=false}break}
+    case 'conf-set':{if(!S.db){toast('Abra no claude.ai para salvar');break}const id=a.dataset.id,st=a.dataset.st;const cur=(S.conf[docId(id)]||{}).status;
+      try{await S.db.collection('confirmacoes').doc(docId(id)).set({status:cur===st?'enviada':st,em:new Date().toISOString(),paciente:a.dataset.name||''})}catch(e){toast('Não foi possível salvar')}break}
+    case 'conf-copy':{copy(a.dataset.text,'Mensagem');const id=a.dataset.id;if(S.db&&!(S.conf[docId(id)]||{}).status){try{await S.db.collection('confirmacoes').doc(docId(id)).set({status:'enviada',em:new Date().toISOString(),paciente:a.dataset.name||''})}catch(_){}}break}
+    case 'sr-dias':S.semRetorno=Number(a.dataset.n);store('sem-retorno',S.semRetorno);render();break;
+    case 'sr-copy':{copy(a.dataset.text,'Mensagem');break}
+    case 'sr-ok':{if(!S.db){toast('Abra no claude.ai para salvar');break}a.disabled=true;try{await S.db.collection('contatos').doc(docId(a.dataset.key)).set({em:new Date().toISOString(),paciente:a.dataset.name||''});toast('Some da lista por 30 dias')}catch(e){a.disabled=false;toast('Não foi possível salvar')}break}
+    case 'cad-edit':{const p=patients().find(x=>x.key===a.dataset.key);if(p)openCad({p});break}
+    case 'cad-parse':readCad();{const t=(document.getElementById('cad-colar')||{}).value||'';const o=parseDados(t);const n=Object.keys(o).filter(k=>o[k]).length;if(!n){toast('Não encontrei dados nesse texto');break}Object.keys(o).forEach(k=>{if(o[k])CAD.f[k]=o[k]});CAD.colar='';paintCad();toast(plural(n,'campo preenchido','campos preenchidos')+'. Confira antes de salvar.')}break;
+    case 'cad-save':saveCad(a);break;
+    case 'cad-open-dup':{const c=S.cad.find(x=>x.id===a.dataset.id);if(c)openCad({cad:c});break}
+    case 'cad-del':{if(!CAD||!CAD.id)break;if(!a.dataset.armed){a.dataset.armed='1';a.classList.add('danger');a.lastChild.textContent='Confirmar exclusão do cadastro';break}
+      try{await S.db.collection('pacientes').doc(CAD.id).delete();toast('Cadastro excluído. As consultas na agenda continuam.');closeSheet()}catch(e){toast('Não foi possível excluir')}break}
     case 'rx-add':readRx();RX.itens.push({nome:'',qtd:'',pos:''});paintRx();{const el=document.getElementById('rx-n'+(RX.itens.length-1));if(el)el.focus()}break;
     case 'rx-del':readRx();RX.itens.splice(Number(a.dataset.i),1);if(!RX.itens.length)RX.itens.push({nome:'',qtd:'',pos:''});paintRx();break;
     case 'rx-repeat':{readRx();const l=lastRx(RX.pkey,RX.paciente);if(l){RX.itens=(l.itens||[]).map(i=>({nome:i.nome||'',qtd:i.qtd||'',pos:i.pos||''}));paintRx();toast('Itens da última receita copiados. Confira antes de pedir.')}break}
@@ -1468,18 +1716,25 @@ document.addEventListener('input',ev=>{
   else if(id==='pf-titulo')S.pend.form.titulo=ev.target.value;
   else if(id==='pf-paciente')S.pend.form.paciente=ev.target.value;
   else if(id==='pf-nota')S.pend.form.nota=ev.target.value;
+  else if(CAD&&/^cad-/.test(id)){readCad();if(id==='cad-cpf'||id==='cad-nome')paintCadWarn()}
   else if(RX&&/^rx-/.test(id)){readRx();const pv=document.getElementById('rx-preview');if(pv)pv.textContent=rxPrompt()}
   else if(id==='d-texto'&&DOC){DOC.texto=ev.target.value;if(!DOC.dirty){DOC.dirty=true}}
   else if(DOC&&/^d-/.test(id)&&!['d-molde-nome','d-rod'].includes(id)){readDoc();refreshDocText()}
 });
 document.addEventListener('change',ev=>{
   const id=ev.target.id;
+  if(id==='b-nome'&&B){const p=patients().find(x=>norm(x.name)===norm(ev.target.value));if(p){['phone','email'].forEach(k=>{const el=document.getElementById('b-'+k);if(el&&!el.value&&p[k])el.value=p[k]})}return}
   if(id==='b-date'&&B&&ev.target.value){readBookingFields();B.date=ev.target.value;B.busyMsg='';loadBookingDay();return}
   if(id==='pf-prazo'){S.pend.form.prazo=ev.target.value;render();return}
   if(id==='c-tpl'&&ev.target.value!==''){applyTemplate(Number(ev.target.value));ev.target.value='';return}
+  if(id==='cad-print'&&CAD&&ev.target.files&&ev.target.files[0]){lerPrint(ev.target.files[0]);ev.target.value='';return}
   if(id==='c-files'&&COMP){addFiles(ev.target.files);ev.target.value='';return}
   if(id==='d-visit'&&DOC){readDoc();const v=DOC.visits.find(x=>x.id===ev.target.value);if(v)setDeclFromVisit(v);refreshDocText();paintDoc();return}
   if(DOC&&(id==='d-cidok'||id==='d-2via'||id==='d-pac')){readDoc();if(id==='d-pac'){const p=patients().find(x=>norm(x.name)===norm(DOC.paciente));if(p){DOC.pkey=p.key;if(p.cpf&&!DOC.cpf)DOC.cpf=p.cpf;DOC.visits=p.visits.slice().reverse();DOC.desde=p.visits.length?dayKey(p.visits[0].start):DOC.desde;const lp=DOC.visits.find(v=>v.start<=new Date())||DOC.visits[0];if(lp)setDeclFromVisit(lp);paintDoc()}}refreshDocText()}
+});
+document.addEventListener('paste',ev=>{
+  if(!CAD||CAD.lendo)return;const fs=[...((ev.clipboardData&&ev.clipboardData.files)||[])].filter(f=>/^image\//.test(f.type));
+  if(fs.length){ev.preventDefault();lerPrint(fs[0])}
 });
 document.addEventListener('keydown',ev=>{if(ev.key==='Escape'&&document.getElementById('sheet-root').firstChild)closeSheet()});
 
@@ -1502,9 +1757,9 @@ paintTabs();render();
 
 (async function boot(){
   const use=n=>(window.claude&&window.claude.use)?window.claude.use(n).catch(()=>null):Promise.resolve(null);
-  const [mcp,db,dl]=await Promise.all([use('mcp'),use('db'),use('downloads')]);
-  S.mcp=mcp;S.db=db;S.dl=dl;
-  watchAgenda();watchMail();watchPend();watchMoldes();watchReceitas();loadRecent();loadLabels();
+  const [mcp,db,dl,sample]=await Promise.all([use('mcp'),use('db'),use('downloads'),use('sample')]);
+  S.mcp=mcp;S.db=db;S.dl=dl;S.sample=sample;
+  watchAgenda();watchMail();watchPend();watchMoldes();watchReceitas();watchCad();watchMap('confirmacoes','conf');watchMap('pagamentos','pag');watchMap('contatos','contato');loadRecent();loadLabels();loadWaiting();
   if(!db)S.pend.status='nodb';
   render();
 })();

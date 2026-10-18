@@ -331,7 +331,8 @@ const S={
   unread:0,
   pend:{status:'loading',rows:[],err:null,recent:[],view:'all',q:'',showDone:false,
     form:{titulo:'',tipo:'Outro',prazo:'',paciente:'',nota:'',more:false}},
-  moldes:[]
+  moldes:[],
+  receitas:[]
 };
 let unwatchAgenda=null, unwatchMail=null;
 
@@ -603,7 +604,7 @@ async function loadPatients(){
   }catch(e){S.pac.status='error';S.pac.err=e}
   render();
 }
-const PAC_ACOES=[['ficha','Abrir ficha'],['atestado','Atestado'],['relatorio','Relatório'],['declaracao','Declaração'],['exames','Exames']];
+const PAC_ACOES=[['ficha','Abrir ficha'],['receita','Receita Memed'],['atestado','Atestado'],['relatorio','Relatório'],['declaracao','Declaração'],['exames','Exames']];
 function pacAcao(){const v=store('pac-acao');return PAC_ACOES.some(a=>a[0]===v)?v:'ficha'}
 function renderPacientes(){
   if(S.pac.status==='idle')loadPatients();
@@ -643,7 +644,7 @@ function openPatient(key,grp){
   if(p.phone)h+='<dt>Telefone</dt><dd class="pii">'+esc(p.phone)+'</dd><dd><button class="btn small ghost" data-act="copy" data-text="'+esc(p.phone)+'" data-label="Telefone">Copiar</button></dd>';
   if(p.email)h+='<dt>E-mail</dt><dd class="pii">'+esc(p.email)+'</dd><dd><button class="btn small ghost" data-act="copy" data-text="'+esc(p.email)+'" data-label="E-mail">Copiar</button></dd>';
   if(!p.phone&&!p.email)h+='<dt>Contato</dt><dd>Sem telefone nem e-mail na agenda</dd><dd></dd>';
-  h+='</dl><div class="row" style="gap:6px"><button class="btn small primary" data-act="book" data-key="'+esc(p.key)+'">Marcar retorno</button><button class="btn small" data-act="pend-for" data-key="'+esc(p.key)+'">Nova pendência</button>'+(p.email?'<button class="btn small" data-act="compose" data-to="'+esc(p.email)+'" data-name="'+esc(p.name)+'">Escrever e-mail</button>':'')+'</div></div>';
+  h+='</dl><div class="row" style="gap:6px"><button class="btn small primary" data-act="book" data-key="'+esc(p.key)+'">Marcar retorno</button><button class="btn small accent" data-act="rx-for" data-key="'+esc(p.key)+'">Receita na Memed</button><button class="btn small" data-act="pend-for" data-key="'+esc(p.key)+'">Nova pendência</button>'+(p.email?'<button class="btn small" data-act="compose" data-to="'+esc(p.email)+'" data-name="'+esc(p.name)+'">Escrever e-mail</button>':'')+'</div></div>';
   h+='<div class="card"><div class="card-h"><h2>Documentos</h2><span class="count">abre preenchido, você ajusta e gera o PDF</span></div><div class="row" style="gap:6px">'+DOC_TIPOS.map(([k,l])=>'<button class="btn small" data-act="doc-for" data-key="'+esc(p.key)+'" data-t="'+k+'">'+ic('doc')+esc(l.split(' ')[0])+'</button>').join('')+'</div></div>';
   h+='<div class="card"><div class="card-h"><h2>Consultas na agenda</h2><span class="count">'+p.visits.length+'</span></div><div class="list">';
   p.visits.slice().reverse().slice(0,30).forEach(v=>{const fut=v.start>new Date();h+='<div class="row" style="padding:8px 0;border-top:1px solid var(--line)"><span style="flex:1;min-width:0">'+esc(cap(fShortY.format(v.start)))+', '+esc(fTime.format(v.start))+'</span><span class="pill'+(/primeira/i.test(v.tipo)?' accent':'')+'">'+esc(v.tipo||'Consulta')+'</span>'+(fut?'<span class="pill ok">Agendada</span>':'')+(v.link?'<a class="icon-btn flat" href="'+esc(v.link)+'" target="_blank" rel="noopener" aria-label="Abrir na agenda">'+ic('open')+'</a>':'')+'</div>'});
@@ -920,6 +921,10 @@ function watchPend(){
     },err=>{S.pend.status='error';S.pend.err=err;if(S.tab==='pendencias')render()});
   }catch(e){S.pend.status='error';S.pend.err=e}
 }
+function watchReceitas(){
+  if(!S.db)return;
+  try{S.db.collection('receitas').limit(500).onSnapshot(snap=>{S.receitas=snap.docs.map(d=>Object.assign({id:d.id},d.data()));if(RX&&!RX.copied){readRx();paintRx()}},()=>{})}catch(_){}
+}
 function watchMoldes(){
   if(!S.db)return;
   try{S.db.collection('moldes').limit(200).onSnapshot(snap=>{S.moldes=snap.docs.map(d=>Object.assign({id:d.id},d.data()));if(DOC&&DOC.tipo!=='exames'){readDoc();paintDoc()}},()=>{})}catch(_){}
@@ -946,10 +951,10 @@ function prazoPill(r){
   return '<span class="pill '+(n<0?'bad':n===0?'warn':'')+'">'+esc(lbl)+'</span>';
 }
 const DOC_DE_TIPO={'Atestado':'atestado','Relatório':'relatorio','Declaração':'declaracao','Exames':'exames'};
-function resolvable(r){return !!(DOC_DE_TIPO[r.tipo]||r.tipo==='Retorno'||((r.tipo==='Cobrança'||r.tipo==='Mensagem')&&r.pacienteKey))}
+function resolvable(r){return !!(DOC_DE_TIPO[r.tipo]||r.tipo==='Receita'||r.tipo==='Retorno'||((r.tipo==='Cobrança'||r.tipo==='Mensagem')&&r.pacienteKey))}
 function taskHTML(r){
   const res=resolvable(r);
-  return '<div class="task"><button class="tick" data-act="pend-done" data-id="'+esc(r.id)+'" aria-label="Marcar como feita" title="Marcar como feita">'+ic('check')+'</button><div class="task-main"><span class="task-t">'+esc(r.titulo)+'</span><span class="task-meta"><span class="pill">'+esc(r.tipo||'Outro')+'</span>'+prazoPill(r)+(r.paciente?'<button class="linkish pii" data-act="pend-pac" data-key="'+esc(r.pacienteKey||'')+'">'+esc(r.paciente)+'</button>':'')+'</span>'+(r.nota?'<span class="task-note">'+esc(r.nota)+'</span>':'')+'</div><div class="task-act">'+(res?'<button class="btn small" data-act="pend-fix" data-id="'+esc(r.id)+'">'+(DOC_DE_TIPO[r.tipo]?'Gerar':r.tipo==='Retorno'?'Marcar':'Abrir')+'</button>':'')+'<button class="icon-btn flat" data-act="pend-menu" data-id="'+esc(r.id)+'" aria-label="Mais opções">'+ic('dots')+'</button></div></div>';
+  return '<div class="task"><button class="tick" data-act="pend-done" data-id="'+esc(r.id)+'" aria-label="Marcar como feita" title="Marcar como feita">'+ic('check')+'</button><div class="task-main"><span class="task-t">'+esc(r.titulo)+'</span><span class="task-meta"><span class="pill">'+esc(r.tipo||'Outro')+'</span>'+prazoPill(r)+(r.paciente?'<button class="linkish pii" data-act="pend-pac" data-key="'+esc(r.pacienteKey||'')+'">'+esc(r.paciente)+'</button>':'')+'</span>'+(r.nota?'<span class="task-note">'+esc(r.nota)+'</span>':'')+'</div><div class="task-act">'+(res?'<button class="btn small" data-act="pend-fix" data-id="'+esc(r.id)+'">'+(DOC_DE_TIPO[r.tipo]?'Gerar':r.tipo==='Receita'?'Pedir':r.tipo==='Retorno'?'Marcar':'Abrir')+'</button>':'')+'<button class="icon-btn flat" data-act="pend-menu" data-id="'+esc(r.id)+'" aria-label="Mais opções">'+ic('dots')+'</button></div></div>';
 }
 function patientNames(){return [...new Set(patients().map(p=>p.name))].slice(0,300)}
 function renderPendencias(){
@@ -1020,13 +1025,14 @@ function openPendMenu(id){
     '<label class="lab full" for="pe-nota">Observação<input class="field" id="pe-nota" value="'+esc(r.nota||'')+'" autocomplete="off"></label>'+
     '<div class="full row"><button class="btn small ghost" data-act="pe-adiar" data-n="1">Adiar 1 dia</button><button class="btn small ghost" data-act="pe-adiar" data-n="7">Adiar 1 semana</button><span class="spacer"></span><button class="btn primary" data-act="pe-save">Salvar</button></div></div>';
   h+='<div class="row">'+(resolvable(r)?'<button class="btn" data-act="pend-fix" data-id="'+esc(r.id)+'">Resolver agora</button>':'')+'<button class="btn" data-act="pend-done" data-id="'+esc(r.id)+'">'+ic('check')+'Marcar como feita</button><span class="spacer"></span><button class="btn ghost" data-act="pend-del" data-id="'+esc(r.id)+'">'+ic('trash')+'Excluir</button></div>';
-  if(r.tipo==='Receita')h+='<div class="notice">Receitas são emitidas no seu sistema próprio. Marque como feita depois de enviar.</div>';
+  if(r.tipo==='Receita')h+='<div class="notice">Pedir abre o pedido da receita para o Claude preparar na Memed. Você confere, digita o OTP e assina.</div>';
   openSheet(h);
 }
 function patKeyByName(n){n=norm(n);if(!n)return '';const p=patients().find(x=>norm(x.name)===n);return p?p.key:''}
 function resolvePend(r){
   const tipoDoc=DOC_DE_TIPO[r.tipo];
   if(tipoDoc){openDoc({key:r.pacienteKey||'',paciente:r.paciente||'',tipo:tipoDoc,pendId:r.id});return}
+  if(r.tipo==='Receita'){openRx({key:r.pacienteKey||'',paciente:r.paciente||'',pendId:r.id,obs:r.nota||''});return}
   if(r.tipo==='Retorno'){const p=patients().find(x=>x.key===r.pacienteKey);openBooking(p?{nome:p.name,email:p.email||'',phone:p.phone||'',tipo:'Retorno'}:{nome:r.paciente||'',tipo:'Retorno'});return}
   if(r.pacienteKey&&patients().some(x=>x.key===r.pacienteKey)){openPatient(r.pacienteKey,r.tipo==='Cobrança'?'Cobrança':'Agenda');return}
   toast('Abra a pendência e resolva manualmente');
@@ -1244,6 +1250,69 @@ async function gerarPDF(btn){
   btn.disabled=false;
 }
 
+/* ---------- Receita pela Memed: o Claude prepara no Chrome do computador, você confere, digita o OTP e assina ---------- */
+let RX=null;
+function lastRx(key,name){const n=norm(name);return S.receitas.filter(r=>(key&&r.pacienteKey===key)||(n&&norm(r.paciente)===n)).sort((a,b)=>String(b.criadoEm).localeCompare(String(a.criadoEm)))[0]||null}
+function openRx(o){
+  const p=o.key?patients().find(x=>x.key===o.key):(o.paciente?patients().find(x=>norm(x.name)===norm(o.paciente)):null);
+  RX={paciente:p?p.name:(o.paciente||''),pkey:p?p.key:(o.key||''),cpf:p&&p.cpf?p.cpf:'',itens:[{nome:'',qtd:'',pos:''}],obs:o.obs||'',pendId:o.pendId||null,copied:false};
+  paintRx();
+  const el=document.getElementById(RX.paciente?'rx-n0':'rx-pac');if(el)el.focus({preventScroll:true});
+}
+function readRx(){
+  if(!RX)return;
+  const v=id=>{const el=document.getElementById(id);return el?el.value:undefined};
+  if(v('rx-pac')!==undefined){RX.paciente=v('rx-pac').trim();const p=patients().find(x=>norm(x.name)===norm(RX.paciente));RX.pkey=p?p.key:''}
+  if(v('rx-cpf')!==undefined){RX.cpf=v('rx-cpf').trim();if(!RX.cpf){const p=patients().find(x=>x.key===RX.pkey);if(p&&p.cpf)RX.cpf=p.cpf}}
+  if(v('rx-obs')!==undefined)RX.obs=v('rx-obs').trim();
+  RX.itens=RX.itens.map((it,i)=>({nome:(v('rx-n'+i)||'').trim(),qtd:(v('rx-q'+i)||'').trim(),pos:(v('rx-p'+i)||'').trim()}));
+}
+function rxItensResumo(){return RX.itens.filter(i=>i.nome).map(i=>i.nome+(i.qtd?', '+i.qtd:'')).join('; ')}
+function rxPrompt(){
+  const its=RX.itens.filter(i=>i.nome);
+  let t='Prepare uma receita na Memed, no Chrome, para eu conferir e assinar.\n\n';
+  t+='Paciente: '+(RX.paciente||'[NOME]')+(RX.cpf?', CPF '+RX.cpf:'')+'\n\nItens:\n';
+  t+=(its.length?its:[{nome:'[MEDICAMENTO]',qtd:'',pos:''}]).map((i,n)=>(n+1)+'. '+i.nome+'. Quantidade: '+(i.qtd||'não informada, me pergunte')+'. Posologia: '+(i.pos||'não informada, me pergunte')+'.').join('\n');
+  if(RX.obs)t+='\n\nObservação: '+RX.obs;
+  t+='\n\nComo fazer:\n'+
+    '1. Abra a Memed (memed.com.br) no Chrome. Eu já estou logado. Se aparecer tela de login ou de senha, pare e me avise.\n'+
+    '2. Comece uma nova prescrição e busque o paciente pelo nome'+(RX.cpf?' ou pelo CPF':'')+'. Se houver mais de um parecido, ou se não encontrar, pare e me pergunte. Não cadastre paciente novo sem eu confirmar.\n'+
+    '3. Adicione cada item exatamente como está acima. Se a Memed não tiver o medicamento, a apresentação ou a dose exata, não escolha um parecido: pare e me pergunte.\n'+
+    '4. Não mude dose, quantidade nem posologia, e não acrescente nada que eu não pedi.\n'+
+    '5. Pare antes da assinatura. Não clique em assinar, emitir nem enviar, e não digite nenhuma senha nem código OTP.\n'+
+    '6. Me mostre um resumo do que ficou na tela, item por item, e avise que está pronto para eu conferir e assinar.';
+  return t;
+}
+function paintRx(){
+  if(!RX)return;
+  let h=sheetHead('Receita na Memed');
+  h+='<div class="notice">O Claude prepara a receita na Memed pelo Chrome do seu computador e para antes da assinatura. A conferência, o OTP e o clique em assinar ficam com você.</div>';
+  h+='<div class="card grid2"><label class="lab full" for="rx-pac">Paciente<input class="field pii" id="rx-pac" list="rx-pacs" value="'+esc(RX.paciente)+'" autocomplete="off"><datalist id="rx-pacs">'+patientNames().map(n=>'<option value="'+esc(n)+'"></option>').join('')+'</datalist></label>'+
+    '<label class="lab full" for="rx-cpf">CPF (opcional, ajuda a achar o paciente certo)<input class="field pii" id="rx-cpf" value="'+esc(RX.cpf)+'" inputmode="numeric" autocomplete="off" placeholder="000.000.000-00"></label></div>';
+  const l=lastRx(RX.pkey,RX.paciente);
+  h+='<div class="card"><div class="card-h"><h2>Itens</h2><span class="count">'+RX.itens.filter(i=>i.nome).length+'</span><span class="spacer"></span>'+(l?'<button class="linkish" data-act="rx-repeat">Repetir a de '+esc(fShort.format(new Date(l.criadoEm)))+'</button>':'')+'</div>';
+  RX.itens.forEach((it,i)=>{h+='<div class="tpl"><div class="row"><strong style="font-size:.82rem;color:var(--muted)">Item '+(i+1)+'</strong><span class="spacer"></span>'+(RX.itens.length>1?'<button class="icon-btn flat" data-act="rx-del" data-i="'+i+'" aria-label="Remover item '+(i+1)+'">'+ic('x')+'</button>':'')+'</div><div class="grid2">'+
+    '<label class="lab full" for="rx-n'+i+'">Medicamento e dose<input class="field" id="rx-n'+i+'" value="'+esc(it.nome)+'" placeholder="Ex.: Sertralina 50 mg" autocomplete="off"></label>'+
+    '<label class="lab" for="rx-q'+i+'">Quantidade<input class="field" id="rx-q'+i+'" value="'+esc(it.qtd)+'" placeholder="Ex.: 30 comprimidos" autocomplete="off"></label>'+
+    '<label class="lab" for="rx-p'+i+'">Posologia<input class="field" id="rx-p'+i+'" value="'+esc(it.pos)+'" placeholder="Ex.: 1 pela manhã" autocomplete="off"></label></div></div>'});
+  h+='<button class="btn small" data-act="rx-add" style="align-self:flex-start">'+ic('plus')+'Adicionar item</button>';
+  h+='<label class="lab" for="rx-obs">Observação para o Claude (opcional)<input class="field" id="rx-obs" value="'+esc(RX.obs)+'" placeholder="Ex.: receita de uso contínuo, 2 vias" autocomplete="off"></label></div>';
+  h+='<div class="card"><div class="card-h"><h2>Pedido para colar no Claude</h2></div><pre class="tpl pii" id="rx-preview" style="margin:0;white-space:pre-wrap;font-family:var(--f-ui);font-size:.82rem;color:var(--muted);overflow-wrap:anywhere">'+esc(rxPrompt())+'</pre>';
+  h+='<div class="row"><span class="stamp" style="flex:1;min-width:0">Cole no Claude, no Cowork do computador, com o Claude in Chrome ligado.</span><button class="btn accent" data-act="rx-copy">'+(RX.copied?'Copiar de novo':'Copiar pedido')+'</button></div>';
+  if(RX.copied)h+='<div class="notice"><span>Pedido copiado e salvo no histórico do paciente. Depois que o Claude preparar, confira na Memed, digite o OTP e assine.</span>'+(RX.pendId?'<button class="btn small primary" data-act="rx-done">Receita assinada: marcar pendência como feita</button>':'<button class="btn small" data-act="rx-pend">Criar pendência para lembrar de assinar</button>')+'</div>';
+  h+='</div>';
+  openSheet(h,true);
+}
+async function copyRx(){
+  readRx();
+  if(!RX.paciente){toast('Informe o paciente');document.getElementById('rx-pac').focus();return}
+  if(!RX.itens.some(i=>i.nome)){toast('Inclua ao menos um medicamento');const el=document.getElementById('rx-n0');if(el)el.focus();return}
+  const text=rxPrompt();
+  copy(text,'Pedido');
+  if(!RX.copied&&S.db){try{await S.db.collection('receitas').doc().set({paciente:RX.paciente,pacienteKey:RX.pkey||'',itens:RX.itens.filter(i=>i.nome),obs:RX.obs,criadoEm:new Date().toISOString()})}catch(_){}}
+  RX.copied=true;paintRx();
+}
+
 /* ---------- Folha inferior ---------- */
 let lastFocus=null;
 function openSheet(html,keepScroll){
@@ -1254,7 +1323,7 @@ function openSheet(html,keepScroll){
   const sh=root.querySelector('.sheet');if(top)sh.scrollTop=top;
   if(!keepScroll||!prev){const c=root.querySelector('[data-act="close"]');if(c)c.focus({preventScroll:true})}
 }
-function closeSheet(){document.getElementById('sheet-root').innerHTML='';DOC=null;THREAD=null;COMP=null;B=null;FICHA=null;if(lastFocus&&lastFocus.focus)lastFocus.focus()}
+function closeSheet(){document.getElementById('sheet-root').innerHTML='';DOC=null;THREAD=null;COMP=null;B=null;FICHA=null;RX=null;if(lastFocus&&lastFocus.focus)lastFocus.focus()}
 
 /* ---------- Abas ---------- */
 function paintTabs(){
@@ -1300,10 +1369,18 @@ document.addEventListener('click',async ev=>{
     /* pacientes */
     case 'pac-retry':S.pac.status='idle';render();break;
     case 'pac-acao':store('pac-acao',a.dataset.k);render();break;
-    case 'pac-tap':{const k=pacAcao();if(k==='ficha')openPatient(a.dataset.key);else openDoc({key:a.dataset.key,tipo:k});break}
+    case 'pac-tap':{const k=pacAcao();if(k==='ficha')openPatient(a.dataset.key);else if(k==='receita')openRx({key:a.dataset.key});else openDoc({key:a.dataset.key,tipo:k});break}
     case 'open-patient':openPatient(a.dataset.key);break;
     case 'ficha-grp':if(FICHA)openPatient(FICHA.key,a.dataset.g);break;
-    case 'doc-avulso':{const k=pacAcao();openDoc({tipo:k==='ficha'?'atestado':k});break}
+    case 'doc-avulso':{const k=pacAcao();if(k==='receita')openRx({});else openDoc({tipo:k==='ficha'?'atestado':k});break}
+    case 'rx-for':openRx({key:a.dataset.key});break;
+    case 'rx-add':readRx();RX.itens.push({nome:'',qtd:'',pos:''});paintRx();{const el=document.getElementById('rx-n'+(RX.itens.length-1));if(el)el.focus()}break;
+    case 'rx-del':readRx();RX.itens.splice(Number(a.dataset.i),1);if(!RX.itens.length)RX.itens.push({nome:'',qtd:'',pos:''});paintRx();break;
+    case 'rx-repeat':{readRx();const l=lastRx(RX.pkey,RX.paciente);if(l){RX.itens=(l.itens||[]).map(i=>({nome:i.nome||'',qtd:i.qtd||'',pos:i.pos||''}));paintRx();toast('Itens da última receita copiados. Confira antes de pedir.')}break}
+    case 'rx-copy':copyRx();break;
+    case 'rx-done':a.disabled=true;if(RX&&RX.pendId&&await patchPend(RX.pendId,{status:'feita',feitoEm:new Date().toISOString()})){toast('Pendência marcada como feita');closeSheet()}else a.disabled=false;break;
+    case 'rx-pend':{readRx();if(!RX.paciente){toast('Informe o paciente');break}a.disabled=true;const id=S.db?S.db.collection('pendencias').doc().id:null;
+      if(id&&await savePend(id,{titulo:'Assinar receita de '+RX.paciente,tipo:'Receita',paciente:RX.paciente,pacienteKey:RX.pkey||patKeyByName(RX.paciente),prazo:dayKey(new Date()),nota:rxItensResumo(),status:'aberta',origem:'painel',criadoEm:new Date().toISOString()})){RX.pendId=id;toast('Pendência criada para hoje');paintRx()}else a.disabled=false;break}
     case 'doc-for':openDoc({key:a.dataset.key,tipo:a.dataset.t});break;
     /* documentos */
     case 'doc-tipo':readDoc();{const t=a.dataset.t;DOC.tipo=t;DOC.molde=lastMolde(t);DOC.dirty=false;DOC.saveOpen=false;DOC.titulo=(moldeAtual()&&moldeAtual().titulo)||TITULO_PADRAO[t];if(t==='declaracao'&&!DOC.dataDecl){const v=DOC.visits.find(x=>x.id===DOC.visitId);if(v)setDeclFromVisit(v)}DOC.texto=fillMolde();paintDoc()}break;
@@ -1391,6 +1468,7 @@ document.addEventListener('input',ev=>{
   else if(id==='pf-titulo')S.pend.form.titulo=ev.target.value;
   else if(id==='pf-paciente')S.pend.form.paciente=ev.target.value;
   else if(id==='pf-nota')S.pend.form.nota=ev.target.value;
+  else if(RX&&/^rx-/.test(id)){readRx();const pv=document.getElementById('rx-preview');if(pv)pv.textContent=rxPrompt()}
   else if(id==='d-texto'&&DOC){DOC.texto=ev.target.value;if(!DOC.dirty){DOC.dirty=true}}
   else if(DOC&&/^d-/.test(id)&&!['d-molde-nome','d-rod'].includes(id)){readDoc();refreshDocText()}
 });
@@ -1426,7 +1504,7 @@ paintTabs();render();
   const use=n=>(window.claude&&window.claude.use)?window.claude.use(n).catch(()=>null):Promise.resolve(null);
   const [mcp,db,dl]=await Promise.all([use('mcp'),use('db'),use('downloads')]);
   S.mcp=mcp;S.db=db;S.dl=dl;
-  watchAgenda();watchMail();watchPend();watchMoldes();loadRecent();loadLabels();
+  watchAgenda();watchMail();watchPend();watchMoldes();watchReceitas();loadRecent();loadLabels();
   if(!db)S.pend.status='nodb';
   render();
 })();

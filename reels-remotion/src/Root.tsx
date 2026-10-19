@@ -4,12 +4,10 @@ import {
   calculateCaptionedVideoMetadata,
   captionedVideoSchema,
 } from "./CaptionedVideo";
-import {
-  ComparacaoLadoALado,
-  comparacaoSchema,
-} from "./ComparacaoLadoALado";
+import { ComparacaoLadoALado, comparacaoSchema } from "./ComparacaoLadoALado";
 import { MitoApego } from "./MitoApego";
 import { MitoRindo } from "./MitoRindo";
+import { VerdadeOuMito } from "./VerdadeOuMito";
 
 // Each <Composition> is an entry in the sidebar!
 
@@ -53,6 +51,14 @@ export const RemotionRoot: React.FC = () => {
         id="MitoApego"
         component={MitoApego}
         durationInFrames={450}
+        fps={30}
+        width={1080}
+        height={1920}
+      />
+      <Composition
+        id="VerdadeOuMito"
+        component={VerdadeOuMito}
+        durationInFrames={1315}
         fps={30}
         width={1080}
         height={1920}

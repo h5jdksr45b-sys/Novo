@@ -12,6 +12,8 @@ import {
   CactoCurto,
   CactoDeserto,
   CACTO_CURTO_DURACAO_S,
+  CACTO_NARRADO_DURACAO_S,
+  CactoNarrado,
   CACTO_DURACAO_S,
 } from "./CactoDeserto";
 import { Reacao, calculateReacaoMetadata, reacaoSchema } from "./Reacao";
@@ -82,6 +84,14 @@ export const RemotionRoot: React.FC = () => {
         id="CactoCurto"
         component={CactoCurto}
         durationInFrames={Math.round(CACTO_CURTO_DURACAO_S * 30)}
+        fps={30}
+        width={1080}
+        height={1920}
+      />
+      <Composition
+        id="CactoNarrado"
+        component={CactoNarrado}
+        durationInFrames={Math.round(CACTO_NARRADO_DURACAO_S * 30)}
         fps={30}
         width={1080}
         height={1920}

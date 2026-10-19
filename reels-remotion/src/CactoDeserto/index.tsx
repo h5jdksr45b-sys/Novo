@@ -565,10 +565,103 @@ const SONS_CURTOS: Som[] = [
   { arquivo: "clique_a.wav", em: inicioDe(CENAS_CURTAS, 7) + 0.2, volume: 0.6 },
 ];
 
-const Montagem: React.FC<{ cenas: Cena[]; sons: Som[] }> = ({
-  cenas,
-  sons,
-}) => {
+// Versão narrada: mesmas cenas da curta, com tempos medidos na narração.
+const CENAS_NARRADAS: Cena[] = [
+  {
+    ...CENAS_CURTAS[0],
+    dur: 6.6,
+    linhas: [
+      { ...CENAS_CURTAS[0].linhas[0], em: 0.2 },
+      { ...CENAS_CURTAS[0].linhas[1], em: 2.9 },
+    ],
+  },
+  {
+    ...CENAS_CURTAS[1],
+    dur: 1.35,
+    linhas: [{ ...CENAS_CURTAS[1].linhas[0], em: 0.2 }],
+  },
+  {
+    ...CENAS_CURTAS[2],
+    dur: 3.95,
+    linhas: [
+      { ...CENAS_CURTAS[2].linhas[0], em: 0.1 },
+      { ...CENAS_CURTAS[2].linhas[1], em: 1.2 },
+      { ...CENAS_CURTAS[2].linhas[2], em: 2.4 },
+      { ...CENAS_CURTAS[2].linhas[3], em: 3.4 },
+    ],
+  },
+  {
+    ...CENAS_CURTAS[3],
+    dur: 5.65,
+    linhas: [
+      { ...CENAS_CURTAS[3].linhas[0], em: 0.1 },
+      { ...CENAS_CURTAS[3].linhas[1], em: 2.9 },
+    ],
+  },
+  {
+    ...CENAS_CURTAS[4],
+    dur: 3.6,
+    linhas: [{ ...CENAS_CURTAS[4].linhas[0], em: 0.1 }],
+  },
+  {
+    ...CENAS_CURTAS[5],
+    dur: 4.05,
+    linhas: [
+      { ...CENAS_CURTAS[5].linhas[0], em: 0.2 },
+      { ...CENAS_CURTAS[5].linhas[1], em: 2.5 },
+    ],
+  },
+  {
+    ...CENAS_CURTAS[6],
+    dur: 4.6,
+    linhas: [
+      { ...CENAS_CURTAS[6].linhas[0], em: 0.85 },
+      { ...CENAS_CURTAS[6].linhas[1], em: 3.45 },
+    ],
+  },
+  {
+    ...CENAS_CURTAS[7],
+    dur: 5.6,
+    linhas: [{ ...CENAS_CURTAS[7].linhas[0], em: 0.1 }],
+  },
+];
+
+export const CACTO_NARRADO_DURACAO_S = CENAS_NARRADAS.reduce(
+  (s, c) => s + c.dur,
+  0,
+);
+
+// Efeitos mais baixos, porque agora ficam sob a voz.
+const SONS_NARRADOS: Som[] = [
+  {
+    arquivo: "whoosh_fino_a.wav",
+    em: inicioDe(CENAS_NARRADAS, 2) - 0.3,
+    volume: 0.45,
+  },
+  {
+    arquivo: "swipe_d.wav",
+    em: inicioDe(CENAS_NARRADAS, 4) + 0.05,
+    volume: 0.35,
+  },
+  {
+    arquivo: "riser_longo_fino.wav",
+    em: inicioDe(CENAS_NARRADAS, 6) + 3.45 - 4.0,
+    volume: 0.35,
+    corteFim: 4.0,
+  },
+  { arquivo: "pop.wav", em: inicioDe(CENAS_NARRADAS, 6) + 3.7, volume: 0.35 },
+  {
+    arquivo: "clique_a.wav",
+    em: inicioDe(CENAS_NARRADAS, 7) + 0.15,
+    volume: 0.35,
+  },
+];
+
+const Montagem: React.FC<{
+  cenas: Cena[];
+  sons: Som[];
+  narracao?: string;
+}> = ({ cenas, sons, narracao }) => {
   useEffect(() => {
     carregarFontes();
   }, []);
@@ -576,6 +669,7 @@ const Montagem: React.FC<{ cenas: Cena[]; sons: Som[] }> = ({
 
   return (
     <AbsoluteFill style={{ backgroundColor: PAPEL }}>
+      {narracao ? <Audio src={staticFile(narracao)} /> : null}
       {cenas.map((c, i) => (
         <Sequence
           key={`cena-${i}`}
@@ -622,4 +716,12 @@ export const CactoDeserto: React.FC = () => (
 
 export const CactoCurto: React.FC = () => (
   <Montagem cenas={CENAS_CURTAS} sons={SONS_CURTOS} />
+);
+
+export const CactoNarrado: React.FC = () => (
+  <Montagem
+    cenas={CENAS_NARRADAS}
+    sons={SONS_NARRADOS}
+    narracao="narracao-cacto.m4a"
+  />
 );

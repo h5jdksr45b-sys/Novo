@@ -7,7 +7,7 @@ Fontes deste documento: o PDF da nova edição (lido), o histórico de posts da 
 - **Uma linha:** um livro que explica o funcionamento borderline sem tratar a pessoa como mau-caráter e sem tirar dela a responsabilidade.
 - **O que é:** nova edição, revista e ampliada, de 2026. Junta *Quando Escolher Não É Possível* e *Borderline e Dignidade*. São 21 capítulos em 5 partes: o que se costuma pensar, o que acontece por dentro, onde isso aparece (relações, sexo, substâncias, dia difícil), o que pode ser feito (regulação, remédio, família, limites, responsabilidade) e dignidade e cuidado. Traz capítulos novos sobre remédio e sobre autolesão e risco de suicídio, ferramentas para a família e um plano de crise para preencher.
 - **Categoria (a prateleira):** livro sobre transtorno de personalidade borderline em linguagem acessível. Fica entre a psicoeducação e o relato clínico. Não é autoajuda nem tratado acadêmico, como o próprio livro avisa.
-- **Preço:** PENDENTE. Formato: PENDENTE (físico, digital ou os dois).
+- **Preço:** PENDENTE. **Formato:** e-book de 160 páginas, conforme as peças já prontas em `anuncios/` (busca-4x5 e calma-4x5). A confirmar se existe edição física, porque um carrossel de abril citou livro físico dentro do Protocolo 7 Dias.
 - **Benefício central:** finalmente entender o que acontece por dentro, com palavras que dá para usar com quem está em volta.
 
 ## 2. Buyer Persona(s)

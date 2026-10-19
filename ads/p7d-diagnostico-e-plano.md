@@ -217,3 +217,27 @@ Correções feitas em 13/10, com ok do Dr. Fabio:
 - CAMPEAO Vídeo (120258979878670001): link trocado para curso.drfabioschmidt.net com utm_content=campeao_video. Novo criativo 1579020170027503.
 - CAMPEAO Estático, conjuntos A (120258979877610001) e C (120258980159320001): cupom DESCONTO25 retirado, por decisão dele (sem desconto). Link agora é pay.hotmart.com/S104212285E?sck=ad_campeao. Novo criativo 28578521031828843.
 - O texto desses anúncios não cita desconto. A imagem não foi conferida daqui.
+
+## 9. Leitura de 7 dias (12/10 a 19/10)
+
+Total: R$ 636,89, 18.585 impressões, CPM R$ 34, 391 cliques no link, 217 visitas à página, 12 cliques em comprar, 3 compras pelo pixel (R$ 546 em valor). Custo por compra R$ 212. Visitas que clicam em comprar: 5,5%, acima da meta de 5%.
+
+| Conjunto | Gasto | Visitas | Custo por visita | Clique em comprar | Compras |
+|---|---|---|---|---|---|
+| A amplo | R$ 286,59 | 132 | R$ 2,17 | 5 | 2 |
+| B vídeo | R$ 211,05 | 49 | R$ 4,31 | 5 | 1 |
+| C pais + Psicologia | R$ 139,25 | 36 | R$ 3,87 (R$ 2,74 sem o anúncio que ia ao checkout) | 2 | 0 |
+
+Por anúncio, com gasto relevante:
+- L2 minimalista navy (A): R$ 117,88, 98 visitas, R$ 1,20 por visita, 2 cliques em comprar, 1 compra. Melhor anúncio da semana.
+- Vídeo Minha filha (B): R$ 118,82, 30 visitas, R$ 3,96, 1 clique em comprar, 0 compra. Dentro da regra de visita; a regra de clique em comprar vale a partir de R$ 150.
+- CAMPEÃO vídeo (B): R$ 92,23, 19 visitas, R$ 4,85, 4 cliques em comprar, 1 compra. Estoura a regra de visita, mas parte do gasto foi para a página antiga até 13/10, e é o anúncio com mais cliques em comprar. Manter.
+- Prova social (A): R$ 62,10, 18 visitas, R$ 3,45, 0 clique em comprar. Prova social (C): R$ 69,67, 20 visitas, R$ 3,48, 1 clique em comprar.
+- L1 minimalista papel (A): R$ 24,31, 11 visitas, R$ 2,21, 1 compra. L1 foto corredor (C): R$ 20,95, 14 visitas, R$ 1,50.
+- Anúncios que iam direto ao checkout (CAMPEÃO estático A e C, L4 A e C): R$ 117,56, 82 cliques, 1 clique em comprar, 0 compra. Estavam pausados na leitura de 19/10 e a prova social já apontava para a página; essas mudanças não foram feitas por esta sessão.
+
+Novos estáticos x campeão: o L2 navy faz visita quatro vezes mais barata que o campeão em vídeo, e os dois têm 1 compra. Três compras ainda não permitem julgar por venda (regra: 14 dias e 8 compras).
+
+C x A: o C não trouxe visita mais barata que o amplo quando o mesmo criativo roda nos dois (prova social R$ 3,48 x R$ 3,45) e não vendeu. O A fez 2 das 3 compras.
+
+Proposta enviada ao Dr. Fabio em 19/10, aguardando ok: pausar o conjunto C e passar o A de R$ 40 para R$ 60 por dia, total segue R$ 90. B sem mudança; se o Vídeo Minha filha passar de R$ 150 com até 1 clique em comprar, pausar.

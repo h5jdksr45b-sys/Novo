@@ -1,0 +1,1982 @@
+[
+ {
+  "id": "mao_marionete_garra_preta",
+  "categoria": "maos",
+  "arquivo": "maos/mao_marionete_garra_preta.png",
+  "largura": 936,
+  "altura": 587,
+  "prancha": 1,
+  "uso_restrito": false
+ },
+ {
+  "id": "mao_marionete_pinca",
+  "categoria": "maos",
+  "arquivo": "maos/mao_marionete_pinca.png",
+  "largura": 521,
+  "altura": 479,
+  "prancha": 1,
+  "uso_restrito": false
+ },
+ {
+  "id": "mao_marionete_dedos_baixo",
+  "categoria": "maos",
+  "arquivo": "maos/mao_marionete_dedos_baixo.png",
+  "largura": 544,
+  "altura": 475,
+  "prancha": 1,
+  "uso_restrito": false
+ },
+ {
+  "id": "olho_espiral_hipnotico_desenho",
+  "categoria": "olhos",
+  "arquivo": "olhos/olho_espiral_hipnotico_desenho.png",
+  "largura": 319,
+  "altura": 189,
+  "prancha": 1,
+  "uso_restrito": false
+ },
+ {
+  "id": "boca_sorriso_desenho_5",
+  "categoria": "bocas",
+  "arquivo": "bocas/boca_sorriso_desenho_5.png",
+  "largura": 252,
+  "altura": 155,
+  "prancha": 1,
+  "uso_restrito": false
+ },
+ {
+  "id": "boca_aberta_lingua_desenho",
+  "categoria": "bocas",
+  "arquivo": "bocas/boca_aberta_lingua_desenho.png",
+  "largura": 220,
+  "altura": 213,
+  "prancha": 1,
+  "uso_restrito": false
+ },
+ {
+  "id": "boca_labios_desenho_1",
+  "categoria": "bocas",
+  "arquivo": "bocas/boca_labios_desenho_1.png",
+  "largura": 252,
+  "altura": 126,
+  "prancha": 1,
+  "uso_restrito": false
+ },
+ {
+  "id": "boca_labios_desenho_2",
+  "categoria": "bocas",
+  "arquivo": "bocas/boca_labios_desenho_2.png",
+  "largura": 261,
+  "altura": 155,
+  "prancha": 1,
+  "uso_restrito": false
+ },
+ {
+  "id": "boca_sorriso_desenho_1",
+  "categoria": "bocas",
+  "arquivo": "bocas/boca_sorriso_desenho_1.png",
+  "largura": 304,
+  "altura": 135,
+  "prancha": 1,
+  "uso_restrito": false
+ },
+ {
+  "id": "boca_sorriso_desenho_2",
+  "categoria": "bocas",
+  "arquivo": "bocas/boca_sorriso_desenho_2.png",
+  "largura": 284,
+  "altura": 149,
+  "prancha": 1,
+  "uso_restrito": false
+ },
+ {
+  "id": "boca_sorriso_desenho_3",
+  "categoria": "bocas",
+  "arquivo": "bocas/boca_sorriso_desenho_3.png",
+  "largura": 315,
+  "altura": 145,
+  "prancha": 1,
+  "uso_restrito": false
+ },
+ {
+  "id": "boca_sorriso_desenho_4",
+  "categoria": "bocas",
+  "arquivo": "bocas/boca_sorriso_desenho_4.png",
+  "largura": 283,
+  "altura": 142,
+  "prancha": 1,
+  "uso_restrito": false
+ },
+ {
+  "id": "cabeca_sem_rosto_deitada_cabelo_escuro",
+  "categoria": "rostos",
+  "arquivo": "rostos/cabeca_sem_rosto_deitada_cabelo_escuro.png",
+  "largura": 312,
+  "altura": 289,
+  "prancha": 1,
+  "uso_restrito": false
+ },
+ {
+  "id": "cabeca_sem_rosto_deitada_loira",
+  "categoria": "rostos",
+  "arquivo": "rostos/cabeca_sem_rosto_deitada_loira.png",
+  "largura": 312,
+  "altura": 209,
+  "prancha": 1,
+  "uso_restrito": false
+ },
+ {
+  "id": "cabeca_sem_rosto_deitada_cacheada",
+  "categoria": "rostos",
+  "arquivo": "rostos/cabeca_sem_rosto_deitada_cacheada.png",
+  "largura": 322,
+  "altura": 279,
+  "prancha": 1,
+  "uso_restrito": false
+ },
+ {
+  "id": "rosto_vazio_jovem_cacheado",
+  "categoria": "rostos",
+  "arquivo": "rostos/rosto_vazio_jovem_cacheado.png",
+  "largura": 249,
+  "altura": 321,
+  "prancha": 1,
+  "uso_restrito": false
+ },
+ {
+  "id": "rosto_vazio_mulher_cabelo_liso",
+  "categoria": "rostos",
+  "arquivo": "rostos/rosto_vazio_mulher_cabelo_liso.png",
+  "largura": 285,
+  "altura": 315,
+  "prancha": 1,
+  "uso_restrito": false
+ },
+ {
+  "id": "rosto_vazio_homem",
+  "categoria": "rostos",
+  "arquivo": "rostos/rosto_vazio_homem.png",
+  "largura": 287,
+  "altura": 322,
+  "prancha": 1,
+  "uso_restrito": false
+ },
+ {
+  "id": "bocas_batom_preto_fileira",
+  "categoria": "bocas",
+  "arquivo": "bocas/bocas_batom_preto_fileira.png",
+  "largura": 611,
+  "altura": 183,
+  "prancha": 2,
+  "uso_restrito": false
+ },
+ {
+  "id": "maos_binoculo_olhos",
+  "categoria": "maos",
+  "arquivo": "maos/maos_binoculo_olhos.png",
+  "largura": 444,
+  "altura": 437,
+  "prancha": 2,
+  "uso_restrito": false
+ },
+ {
+  "id": "boca_grito_megafone_halftone_rosa",
+  "categoria": "bocas",
+  "arquivo": "bocas/boca_grito_megafone_halftone_rosa.png",
+  "largura": 548,
+  "altura": 386,
+  "prancha": 2,
+  "uso_restrito": false
+ },
+ {
+  "id": "menino_assustado_maos_no_rosto_filme",
+  "categoria": "_uso_restrito",
+  "arquivo": "_uso_restrito/menino_assustado_maos_no_rosto_filme.png",
+  "largura": 189,
+  "altura": 261,
+  "prancha": 2,
+  "uso_restrito": true
+ },
+ {
+  "id": "dedo_apontando_para_voce",
+  "categoria": "maos",
+  "arquivo": "maos/dedo_apontando_para_voce.png",
+  "largura": 397,
+  "altura": 420,
+  "prancha": 2,
+  "uso_restrito": false
+ },
+ {
+  "id": "dedo_silencio_labios",
+  "categoria": "maos",
+  "arquivo": "maos/dedo_silencio_labios.png",
+  "largura": 323,
+  "altura": 567,
+  "prancha": 2,
+  "uso_restrito": false
+ },
+ {
+  "id": "olho_espiral_colagem",
+  "categoria": "olhos",
+  "arquivo": "olhos/olho_espiral_colagem.png",
+  "largura": 333,
+  "altura": 207,
+  "prancha": 2,
+  "uso_restrito": false
+ },
+ {
+  "id": "megafone_mao_halftone_amarelo_1",
+  "categoria": "megafones",
+  "arquivo": "megafones/megafone_mao_halftone_amarelo_1.png",
+  "largura": 470,
+  "altura": 617,
+  "prancha": 2,
+  "uso_restrito": false
+ },
+ {
+  "id": "exclamacao_vermelha_papel",
+  "categoria": "simbolos",
+  "arquivo": "simbolos/exclamacao_vermelha_papel.png",
+  "largura": 101,
+  "altura": 211,
+  "prancha": 2,
+  "uso_restrito": false
+ },
+ {
+  "id": "boca_halftone_falando_roxa",
+  "categoria": "bocas",
+  "arquivo": "bocas/boca_halftone_falando_roxa.png",
+  "largura": 250,
+  "altura": 363,
+  "prancha": 2,
+  "uso_restrito": false
+ },
+ {
+  "id": "interrogacao_vinho_1",
+  "categoria": "simbolos",
+  "arquivo": "simbolos/interrogacao_vinho_1.png",
+  "largura": 75,
+  "altura": 138,
+  "prancha": 2,
+  "uso_restrito": false
+ },
+ {
+  "id": "interrogacao_vinho_2",
+  "categoria": "simbolos",
+  "arquivo": "simbolos/interrogacao_vinho_2.png",
+  "largura": 65,
+  "altura": 118,
+  "prancha": 2,
+  "uso_restrito": false
+ },
+ {
+  "id": "interrogacao_vinho_3",
+  "categoria": "simbolos",
+  "arquivo": "simbolos/interrogacao_vinho_3.png",
+  "largura": 55,
+  "altura": 93,
+  "prancha": 2,
+  "uso_restrito": false
+ },
+ {
+  "id": "interrogacao_vinho_4",
+  "categoria": "simbolos",
+  "arquivo": "simbolos/interrogacao_vinho_4.png",
+  "largura": 78,
+  "altura": 144,
+  "prancha": 2,
+  "uso_restrito": false
+ },
+ {
+  "id": "interrogacao_vinho_5",
+  "categoria": "simbolos",
+  "arquivo": "simbolos/interrogacao_vinho_5.png",
+  "largura": 52,
+  "altura": 90,
+  "prancha": 2,
+  "uso_restrito": false
+ },
+ {
+  "id": "interrogacao_vinho_6",
+  "categoria": "simbolos",
+  "arquivo": "simbolos/interrogacao_vinho_6.png",
+  "largura": 78,
+  "altura": 146,
+  "prancha": 2,
+  "uso_restrito": false
+ },
+ {
+  "id": "interrogacao_vinho_7",
+  "categoria": "simbolos",
+  "arquivo": "simbolos/interrogacao_vinho_7.png",
+  "largura": 74,
+  "altura": 134,
+  "prancha": 2,
+  "uso_restrito": false
+ },
+ {
+  "id": "globo_terrestre_jornal_1",
+  "categoria": "objetos",
+  "arquivo": "objetos/globo_terrestre_jornal_1.png",
+  "largura": 265,
+  "altura": 269,
+  "prancha": 3,
+  "uso_restrito": false
+ },
+ {
+  "id": "faixa_xadrez_preto_branco",
+  "categoria": "simbolos",
+  "arquivo": "simbolos/faixa_xadrez_preto_branco.png",
+  "largura": 264,
+  "altura": 69,
+  "prancha": 3,
+  "uso_restrito": false
+ },
+ {
+  "id": "balao_fala_jornal",
+  "categoria": "balao_texto",
+  "arquivo": "balao_texto/balao_fala_jornal.png",
+  "largura": 274,
+  "altura": 275,
+  "prancha": 3,
+  "uso_restrito": false
+ },
+ {
+  "id": "lupa_simples",
+  "categoria": "objetos",
+  "arquivo": "objetos/lupa_simples.png",
+  "largura": 115,
+  "altura": 212,
+  "prancha": 3,
+  "uso_restrito": false
+ },
+ {
+  "id": "labios_vermelhos_batom",
+  "categoria": "bocas",
+  "arquivo": "bocas/labios_vermelhos_batom.png",
+  "largura": 196,
+  "altura": 160,
+  "prancha": 3,
+  "uso_restrito": false
+ },
+ {
+  "id": "chave_antiga_e_aviao_papel",
+  "categoria": "objetos",
+  "arquivo": "objetos/chave_antiga_e_aviao_papel.png",
+  "largura": 167,
+  "altura": 284,
+  "prancha": 3,
+  "uso_restrito": false
+ },
+ {
+  "id": "homem_terno_cabeca_post_its",
+  "categoria": "figuras",
+  "arquivo": "figuras/homem_terno_cabeca_post_its.png",
+  "largura": 301,
+  "altura": 309,
+  "prancha": 3,
+  "uso_restrito": false
+ },
+ {
+  "id": "mao_bandeja_pecas_xadrez_1",
+  "categoria": "maos",
+  "arquivo": "maos/mao_bandeja_pecas_xadrez_1.png",
+  "largura": 242,
+  "altura": 159,
+  "prancha": 3,
+  "uso_restrito": false
+ },
+ {
+  "id": "mao_bandeja_pecas_xadrez_2",
+  "categoria": "maos",
+  "arquivo": "maos/mao_bandeja_pecas_xadrez_2.png",
+  "largura": 244,
+  "altura": 165,
+  "prancha": 3,
+  "uso_restrito": false
+ },
+ {
+  "id": "lampada_amarela",
+  "categoria": "objetos",
+  "arquivo": "objetos/lampada_amarela.png",
+  "largura": 109,
+  "altura": 175,
+  "prancha": 3,
+  "uso_restrito": false
+ },
+ {
+  "id": "lampada_acesa_jornal",
+  "categoria": "objetos",
+  "arquivo": "objetos/lampada_acesa_jornal.png",
+  "largura": 107,
+  "altura": 171,
+  "prancha": 3,
+  "uso_restrito": false
+ },
+ {
+  "id": "mao_bandeja_grafico_queda",
+  "categoria": "maos",
+  "arquivo": "maos/mao_bandeja_grafico_queda.png",
+  "largura": 237,
+  "altura": 157,
+  "prancha": 3,
+  "uso_restrito": false
+ },
+ {
+  "id": "rei_xadrez_preto",
+  "categoria": "objetos",
+  "arquivo": "objetos/rei_xadrez_preto.png",
+  "largura": 76,
+  "altura": 179,
+  "prancha": 3,
+  "uso_restrito": false
+ },
+ {
+  "id": "homem_terno_jornal",
+  "categoria": "figuras",
+  "arquivo": "figuras/homem_terno_jornal.png",
+  "largura": 269,
+  "altura": 332,
+  "prancha": 3,
+  "uso_restrito": false
+ },
+ {
+  "id": "mao_garra_gravura_1",
+  "categoria": "maos",
+  "arquivo": "maos/mao_garra_gravura_1.png",
+  "largura": 296,
+  "altura": 332,
+  "prancha": 4,
+  "uso_restrito": false
+ },
+ {
+  "id": "mao_garra_gravura_2",
+  "categoria": "maos",
+  "arquivo": "maos/mao_garra_gravura_2.png",
+  "largura": 183,
+  "altura": 332,
+  "prancha": 4,
+  "uso_restrito": false
+ },
+ {
+  "id": "silhueta_corpo_rabisco_vermelho",
+  "categoria": "figuras",
+  "arquivo": "figuras/silhueta_corpo_rabisco_vermelho.png",
+  "largura": 353,
+  "altura": 503,
+  "prancha": 4,
+  "uso_restrito": false
+ },
+ {
+  "id": "x_fita_isolante_preta",
+  "categoria": "simbolos",
+  "arquivo": "simbolos/x_fita_isolante_preta.png",
+  "largura": 270,
+  "altura": 278,
+  "prancha": 4,
+  "uso_restrito": false
+ },
+ {
+  "id": "homem_corda_maleta_automato",
+  "categoria": "figuras",
+  "arquivo": "figuras/homem_corda_maleta_automato.png",
+  "largura": 469,
+  "altura": 530,
+  "prancha": 4,
+  "uso_restrito": false
+ },
+ {
+  "id": "rosto_fragmentado_celulares",
+  "categoria": "rostos",
+  "arquivo": "rostos/rosto_fragmentado_celulares.png",
+  "largura": 458,
+  "altura": 561,
+  "prancha": 4,
+  "uso_restrito": false
+ },
+ {
+  "id": "sorriso_forcado_pregadores",
+  "categoria": "rostos",
+  "arquivo": "rostos/sorriso_forcado_pregadores.png",
+  "largura": 290,
+  "altura": 402,
+  "prancha": 4,
+  "uso_restrito": false
+ },
+ {
+  "id": "menina_tapando_ouvidos_grito",
+  "categoria": "figuras",
+  "arquivo": "figuras/menina_tapando_ouvidos_grito.png",
+  "largura": 332,
+  "altura": 440,
+  "prancha": 4,
+  "uso_restrito": false
+ },
+ {
+  "id": "pernas_salto_meia_calca",
+  "categoria": "_uso_restrito",
+  "arquivo": "_uso_restrito/pernas_salto_meia_calca.png",
+  "largura": 364,
+  "altura": 498,
+  "prancha": 4,
+  "uso_restrito": true
+ },
+ {
+  "id": "mulher_abracando_teclado_relogio",
+  "categoria": "figuras",
+  "arquivo": "figuras/mulher_abracando_teclado_relogio.png",
+  "largura": 528,
+  "altura": 485,
+  "prancha": 4,
+  "uso_restrito": false
+ },
+ {
+  "id": "mulher_lingerie_vintage",
+  "categoria": "_uso_restrito",
+  "arquivo": "_uso_restrito/mulher_lingerie_vintage.png",
+  "largura": 254,
+  "altura": 763,
+  "prancha": 4,
+  "uso_restrito": true
+ },
+ {
+  "id": "maos_acorrentadas",
+  "categoria": "maos",
+  "arquivo": "maos/maos_acorrentadas.png",
+  "largura": 221,
+  "altura": 292,
+  "prancha": 4,
+  "uso_restrito": false
+ },
+ {
+  "id": "pernas_salto_vermelho",
+  "categoria": "figuras",
+  "arquivo": "figuras/pernas_salto_vermelho.png",
+  "largura": 410,
+  "altura": 566,
+  "prancha": 5,
+  "uso_restrito": false
+ },
+ {
+  "id": "relogio_derretido",
+  "categoria": "objetos",
+  "arquivo": "objetos/relogio_derretido.png",
+  "largura": 282,
+  "altura": 539,
+  "prancha": 5,
+  "uso_restrito": false
+ },
+ {
+  "id": "olhos_vermelhos_espiral_vintage",
+  "categoria": "olhos",
+  "arquivo": "olhos/olhos_vermelhos_espiral_vintage.png",
+  "largura": 392,
+  "altura": 376,
+  "prancha": 5,
+  "uso_restrito": false
+ },
+ {
+  "id": "balao_karma",
+  "categoria": "balao_texto",
+  "arquivo": "balao_texto/balao_karma.png",
+  "largura": 415,
+  "altura": 414,
+  "prancha": 5,
+  "uso_restrito": false
+ },
+ {
+  "id": "nariz_recortado",
+  "categoria": "rostos",
+  "arquivo": "rostos/nariz_recortado.png",
+  "largura": 308,
+  "altura": 232,
+  "prancha": 5,
+  "uso_restrito": false
+ },
+ {
+  "id": "mulher_who_are_you_rosto",
+  "categoria": "rostos",
+  "arquivo": "rostos/mulher_who_are_you_rosto.png",
+  "largura": 341,
+  "altura": 595,
+  "prancha": 5,
+  "uso_restrito": false
+ },
+ {
+  "id": "mulheres_vintage_assustadas",
+  "categoria": "rostos",
+  "arquivo": "rostos/mulheres_vintage_assustadas.png",
+  "largura": 333,
+  "altura": 743,
+  "prancha": 5,
+  "uso_restrito": false
+ },
+ {
+  "id": "mulher_sentada_cabeca_nas_maos",
+  "categoria": "figuras",
+  "arquivo": "figuras/mulher_sentada_cabeca_nas_maos.png",
+  "largura": 346,
+  "altura": 432,
+  "prancha": 5,
+  "uso_restrito": false
+ },
+ {
+  "id": "pessoa_maos_vermelhas_na_cabeca",
+  "categoria": "figuras",
+  "arquivo": "figuras/pessoa_maos_vermelhas_na_cabeca.png",
+  "largura": 401,
+  "altura": 432,
+  "prancha": 5,
+  "uso_restrito": false
+ },
+ {
+  "id": "nariz_boca_halftone",
+  "categoria": "rostos",
+  "arquivo": "rostos/nariz_boca_halftone.png",
+  "largura": 428,
+  "altura": 293,
+  "prancha": 5,
+  "uso_restrito": false
+ },
+ {
+  "id": "camera_filmadora_antiga_mao",
+  "categoria": "objetos",
+  "arquivo": "objetos/camera_filmadora_antiga_mao.png",
+  "largura": 525,
+  "altura": 534,
+  "prancha": 5,
+  "uso_restrito": false
+ },
+ {
+  "id": "estrelas_vinho_feltro",
+  "categoria": "simbolos",
+  "arquivo": "simbolos/estrelas_vinho_feltro.png",
+  "largura": 203,
+  "altura": 194,
+  "prancha": 6,
+  "uso_restrito": false
+ },
+ {
+  "id": "mascara_de_gas",
+  "categoria": "objetos",
+  "arquivo": "objetos/mascara_de_gas.png",
+  "largura": 203,
+  "altura": 222,
+  "prancha": 6,
+  "uso_restrito": false
+ },
+ {
+  "id": "camera_polaroid",
+  "categoria": "objetos",
+  "arquivo": "objetos/camera_polaroid.png",
+  "largura": 159,
+  "altura": 182,
+  "prancha": 6,
+  "uso_restrito": false
+ },
+ {
+  "id": "tv_antiga_portatil",
+  "categoria": "objetos",
+  "arquivo": "objetos/tv_antiga_portatil.png",
+  "largura": 190,
+  "altura": 165,
+  "prancha": 6,
+  "uso_restrito": false
+ },
+ {
+  "id": "maca_cortada_desenho",
+  "categoria": "objetos",
+  "arquivo": "objetos/maca_cortada_desenho.png",
+  "largura": 164,
+  "altura": 150,
+  "prancha": 6,
+  "uso_restrito": false
+ },
+ {
+  "id": "coelho_pelucia_costurado",
+  "categoria": "objetos",
+  "arquivo": "objetos/coelho_pelucia_costurado.png",
+  "largura": 217,
+  "altura": 196,
+  "prancha": 6,
+  "uso_restrito": false
+ },
+ {
+  "id": "abelha",
+  "categoria": "objetos",
+  "arquivo": "objetos/abelha.png",
+  "largura": 94,
+  "altura": 141,
+  "prancha": 6,
+  "uso_restrito": false
+ },
+ {
+  "id": "caveira_realista",
+  "categoria": "objetos",
+  "arquivo": "objetos/caveira_realista.png",
+  "largura": 176,
+  "altura": 184,
+  "prancha": 6,
+  "uso_restrito": false
+ },
+ {
+  "id": "cigarro_aceso",
+  "categoria": "objetos",
+  "arquivo": "objetos/cigarro_aceso.png",
+  "largura": 217,
+  "altura": 61,
+  "prancha": 6,
+  "uso_restrito": false
+ },
+ {
+  "id": "vela_derretida",
+  "categoria": "objetos",
+  "arquivo": "objetos/vela_derretida.png",
+  "largura": 51,
+  "altura": 136,
+  "prancha": 6,
+  "uso_restrito": false
+ },
+ {
+  "id": "isqueiro",
+  "categoria": "objetos",
+  "arquivo": "objetos/isqueiro.png",
+  "largura": 119,
+  "altura": 44,
+  "prancha": 6,
+  "uso_restrito": false
+ },
+ {
+  "id": "vela_lata_tampa",
+  "categoria": "objetos",
+  "arquivo": "objetos/vela_lata_tampa.png",
+  "largura": 193,
+  "altura": 132,
+  "prancha": 6,
+  "uso_restrito": false
+ },
+ {
+  "id": "frasco_swamp_fog",
+  "categoria": "objetos",
+  "arquivo": "objetos/frasco_swamp_fog.png",
+  "largura": 70,
+  "altura": 109,
+  "prancha": 6,
+  "uso_restrito": false
+ },
+ {
+  "id": "esqueleto_animal_gravura",
+  "categoria": "objetos",
+  "arquivo": "objetos/esqueleto_animal_gravura.png",
+  "largura": 269,
+  "altura": 253,
+  "prancha": 6,
+  "uso_restrito": false
+ },
+ {
+  "id": "coelho_porcelana",
+  "categoria": "objetos",
+  "arquivo": "objetos/coelho_porcelana.png",
+  "largura": 220,
+  "altura": 247,
+  "prancha": 6,
+  "uso_restrito": false
+ },
+ {
+  "id": "mascara_coelho",
+  "categoria": "rostos",
+  "arquivo": "rostos/mascara_coelho.png",
+  "largura": 166,
+  "altura": 260,
+  "prancha": 6,
+  "uso_restrito": false
+ },
+ {
+  "id": "mancha_vermelha_marmorizada",
+  "categoria": "texturas",
+  "arquivo": "texturas/mancha_vermelha_marmorizada.png",
+  "largura": 328,
+  "altura": 598,
+  "prancha": 6,
+  "uso_restrito": false
+ },
+ {
+  "id": "silhueta_preta_olhos_brancos",
+  "categoria": "figuras",
+  "arquivo": "figuras/silhueta_preta_olhos_brancos.png",
+  "largura": 188,
+  "altura": 292,
+  "prancha": 6,
+  "uso_restrito": false
+ },
+ {
+  "id": "placa_boo",
+  "categoria": "balao_texto",
+  "arquivo": "balao_texto/placa_boo.png",
+  "largura": 122,
+  "altura": 43,
+  "prancha": 6,
+  "uso_restrito": false
+ },
+ {
+  "id": "figura_laranja_magra",
+  "categoria": "figuras",
+  "arquivo": "figuras/figura_laranja_magra.png",
+  "largura": 92,
+  "altura": 305,
+  "prancha": 6,
+  "uso_restrito": false
+ },
+ {
+  "id": "olhos_de_vidro_pilha",
+  "categoria": "olhos",
+  "arquivo": "olhos/olhos_de_vidro_pilha.png",
+  "largura": 123,
+  "altura": 209,
+  "prancha": 6,
+  "uso_restrito": false
+ },
+ {
+  "id": "cranio_animal",
+  "categoria": "objetos",
+  "arquivo": "objetos/cranio_animal.png",
+  "largura": 130,
+  "altura": 83,
+  "prancha": 6,
+  "uso_restrito": false
+ },
+ {
+  "id": "globo_ocular_realista",
+  "categoria": "olhos",
+  "arquivo": "olhos/globo_ocular_realista.png",
+  "largura": 135,
+  "altura": 124,
+  "prancha": 6,
+  "uso_restrito": false
+ },
+ {
+  "id": "listras_pretas_onduladas",
+  "categoria": "texturas",
+  "arquivo": "texturas/listras_pretas_onduladas.png",
+  "largura": 334,
+  "altura": 350,
+  "prancha": 6,
+  "uso_restrito": false
+ },
+ {
+  "id": "caveira_gravura",
+  "categoria": "objetos",
+  "arquivo": "objetos/caveira_gravura.png",
+  "largura": 429,
+  "altura": 381,
+  "prancha": 7,
+  "uso_restrito": false
+ },
+ {
+  "id": "ingresso_admit_one_1",
+  "categoria": "balao_texto",
+  "arquivo": "balao_texto/ingresso_admit_one_1.png",
+  "largura": 501,
+  "altura": 318,
+  "prancha": 7,
+  "uso_restrito": false
+ },
+ {
+  "id": "espiral_hipnotica_pb",
+  "categoria": "texturas",
+  "arquivo": "texturas/espiral_hipnotica_pb.png",
+  "largura": 662,
+  "altura": 666,
+  "prancha": 7,
+  "uso_restrito": false
+ },
+ {
+  "id": "lua_viagem_a_lua_melies",
+  "categoria": "objetos",
+  "arquivo": "objetos/lua_viagem_a_lua_melies.png",
+  "largura": 278,
+  "altura": 264,
+  "prancha": 7,
+  "uso_restrito": false
+ },
+ {
+  "id": "lua_crateras",
+  "categoria": "objetos",
+  "arquivo": "objetos/lua_crateras.png",
+  "largura": 382,
+  "altura": 379,
+  "prancha": 7,
+  "uso_restrito": false
+ },
+ {
+  "id": "ingresso_admit_one_2",
+  "categoria": "balao_texto",
+  "arquivo": "balao_texto/ingresso_admit_one_2.png",
+  "largura": 503,
+  "altura": 327,
+  "prancha": 7,
+  "uso_restrito": false
+ },
+ {
+  "id": "besouro_gravura",
+  "categoria": "objetos",
+  "arquivo": "objetos/besouro_gravura.png",
+  "largura": 223,
+  "altura": 320,
+  "prancha": 7,
+  "uso_restrito": false
+ },
+ {
+  "id": "nuvem_gravura",
+  "categoria": "objetos",
+  "arquivo": "objetos/nuvem_gravura.png",
+  "largura": 605,
+  "altura": 371,
+  "prancha": 7,
+  "uso_restrito": false
+ },
+ {
+  "id": "pintor_escada_moldura_vazia",
+  "categoria": "figuras",
+  "arquivo": "figuras/pintor_escada_moldura_vazia.png",
+  "largura": 478,
+  "altura": 756,
+  "prancha": 7,
+  "uso_restrito": false
+ },
+ {
+  "id": "mulher_vintage_apontando_espelho_olho",
+  "categoria": "figuras",
+  "arquivo": "figuras/mulher_vintage_apontando_espelho_olho.png",
+  "largura": 595,
+  "altura": 696,
+  "prancha": 7,
+  "uso_restrito": false
+ },
+ {
+  "id": "texto_what_was_i_made_for",
+  "categoria": "balao_texto",
+  "arquivo": "balao_texto/texto_what_was_i_made_for.png",
+  "largura": 483,
+  "altura": 473,
+  "prancha": 8,
+  "uso_restrito": false
+ },
+ {
+  "id": "olho_lagrima_desenho_1",
+  "categoria": "olhos",
+  "arquivo": "olhos/olho_lagrima_desenho_1.png",
+  "largura": 448,
+  "altura": 379,
+  "prancha": 8,
+  "uso_restrito": false
+ },
+ {
+  "id": "olho_desenho_2",
+  "categoria": "olhos",
+  "arquivo": "olhos/olho_desenho_2.png",
+  "largura": 277,
+  "altura": 432,
+  "prancha": 8,
+  "uso_restrito": false
+ },
+ {
+  "id": "rosto_dissolvido_passaros",
+  "categoria": "rostos",
+  "arquivo": "rostos/rosto_dissolvido_passaros.png",
+  "largura": 450,
+  "altura": 472,
+  "prancha": 8,
+  "uso_restrito": false
+ },
+ {
+  "id": "papel_help",
+  "categoria": "balao_texto",
+  "arquivo": "balao_texto/papel_help.png",
+  "largura": 351,
+  "altura": 374,
+  "prancha": 8,
+  "uso_restrito": false
+ },
+ {
+  "id": "rosto_apagado_carvao",
+  "categoria": "rostos",
+  "arquivo": "rostos/rosto_apagado_carvao.png",
+  "largura": 437,
+  "altura": 440,
+  "prancha": 8,
+  "uso_restrito": false
+ },
+ {
+  "id": "olho_papel_rasgado",
+  "categoria": "olhos",
+  "arquivo": "olhos/olho_papel_rasgado.png",
+  "largura": 401,
+  "altura": 386,
+  "prancha": 8,
+  "uso_restrito": false
+ },
+ {
+  "id": "maos_tapando_rosto_1",
+  "categoria": "rostos",
+  "arquivo": "rostos/maos_tapando_rosto_1.png",
+  "largura": 411,
+  "altura": 416,
+  "prancha": 8,
+  "uso_restrito": false
+ },
+ {
+  "id": "pilha_livros_antigos_alta",
+  "categoria": "objetos",
+  "arquivo": "objetos/pilha_livros_antigos_alta.png",
+  "largura": 344,
+  "altura": 762,
+  "prancha": 8,
+  "uso_restrito": false
+ },
+ {
+  "id": "texto_perhaps_its_the_world",
+  "categoria": "balao_texto",
+  "arquivo": "balao_texto/texto_perhaps_its_the_world.png",
+  "largura": 631,
+  "altura": 671,
+  "prancha": 8,
+  "uso_restrito": false
+ },
+ {
+  "id": "tiras_jornal_leque",
+  "categoria": "texturas",
+  "arquivo": "texturas/tiras_jornal_leque.png",
+  "largura": 322,
+  "altura": 350,
+  "prancha": 9,
+  "uso_restrito": false
+ },
+ {
+  "id": "maos_tapando_rosto_2",
+  "categoria": "rostos",
+  "arquivo": "rostos/maos_tapando_rosto_2.png",
+  "largura": 498,
+  "altura": 504,
+  "prancha": 9,
+  "uso_restrito": false
+ },
+ {
+  "id": "boca_halftone_aberta_lateral",
+  "categoria": "bocas",
+  "arquivo": "bocas/boca_halftone_aberta_lateral.png",
+  "largura": 310,
+  "altura": 265,
+  "prancha": 9,
+  "uso_restrito": false
+ },
+ {
+  "id": "livros_antigos_pilha_baixa",
+  "categoria": "objetos",
+  "arquivo": "objetos/livros_antigos_pilha_baixa.png",
+  "largura": 405,
+  "altura": 324,
+  "prancha": 9,
+  "uso_restrito": false
+ },
+ {
+  "id": "mulher_perfil_rabisco_cabeca",
+  "categoria": "rostos",
+  "arquivo": "rostos/mulher_perfil_rabisco_cabeca.png",
+  "largura": 378,
+  "altura": 519,
+  "prancha": 9,
+  "uso_restrito": false
+ },
+ {
+  "id": "boca_grito_halftone_1",
+  "categoria": "bocas",
+  "arquivo": "bocas/boca_grito_halftone_1.png",
+  "largura": 321,
+  "altura": 462,
+  "prancha": 9,
+  "uso_restrito": false
+ },
+ {
+  "id": "terno_sem_cabeca",
+  "categoria": "figuras",
+  "arquivo": "figuras/terno_sem_cabeca.png",
+  "largura": 640,
+  "altura": 341,
+  "prancha": 9,
+  "uso_restrito": false
+ },
+ {
+  "id": "homem_lendo_curvado_gravura",
+  "categoria": "figuras",
+  "arquivo": "figuras/homem_lendo_curvado_gravura.png",
+  "largura": 327,
+  "altura": 449,
+  "prancha": 9,
+  "uso_restrito": false
+ },
+ {
+  "id": "mulher_sentada_maos_na_cabeca",
+  "categoria": "figuras",
+  "arquivo": "figuras/mulher_sentada_maos_na_cabeca.png",
+  "largura": 472,
+  "altura": 462,
+  "prancha": 9,
+  "uso_restrito": false
+ },
+ {
+  "id": "megafone_cinza_halftone",
+  "categoria": "megafones",
+  "arquivo": "megafones/megafone_cinza_halftone.png",
+  "largura": 353,
+  "altura": 441,
+  "prancha": 10,
+  "uso_restrito": false
+ },
+ {
+  "id": "letras_news_recortadas",
+  "categoria": "balao_texto",
+  "arquivo": "balao_texto/letras_news_recortadas.png",
+  "largura": 470,
+  "altura": 188,
+  "prancha": 10,
+  "uso_restrito": false
+ },
+ {
+  "id": "aperto_de_mao_halftone_1",
+  "categoria": "maos",
+  "arquivo": "maos/aperto_de_mao_halftone_1.png",
+  "largura": 494,
+  "altura": 306,
+  "prancha": 10,
+  "uso_restrito": false
+ },
+ {
+  "id": "homem_cadeira_papel_no_rosto",
+  "categoria": "figuras",
+  "arquivo": "figuras/homem_cadeira_papel_no_rosto.png",
+  "largura": 590,
+  "altura": 656,
+  "prancha": 10,
+  "uso_restrito": false
+ },
+ {
+  "id": "pilha_papeis_pastas",
+  "categoria": "objetos",
+  "arquivo": "objetos/pilha_papeis_pastas.png",
+  "largura": 442,
+  "altura": 447,
+  "prancha": 10,
+  "uso_restrito": false
+ },
+ {
+  "id": "mao_caneta_halftone_1",
+  "categoria": "maos",
+  "arquivo": "maos/mao_caneta_halftone_1.png",
+  "largura": 363,
+  "altura": 627,
+  "prancha": 10,
+  "uso_restrito": false
+ },
+ {
+  "id": "caneta_tinteiro_1",
+  "categoria": "objetos",
+  "arquivo": "objetos/caneta_tinteiro_1.png",
+  "largura": 86,
+  "altura": 624,
+  "prancha": 10,
+  "uso_restrito": false
+ },
+ {
+  "id": "homem_coberto_post_its",
+  "categoria": "figuras",
+  "arquivo": "figuras/homem_coberto_post_its.png",
+  "largura": 646,
+  "altura": 550,
+  "prancha": 10,
+  "uso_restrito": false
+ },
+ {
+  "id": "gato_oculos_megafone",
+  "categoria": "megafones",
+  "arquivo": "megafones/gato_oculos_megafone.png",
+  "largura": 359,
+  "altura": 388,
+  "prancha": 11,
+  "uso_restrito": false
+ },
+ {
+  "id": "caneta_tinteiro_2",
+  "categoria": "objetos",
+  "arquivo": "objetos/caneta_tinteiro_2.png",
+  "largura": 339,
+  "altura": 495,
+  "prancha": 11,
+  "uso_restrito": false
+ },
+ {
+  "id": "megafone_halftone_2",
+  "categoria": "megafones",
+  "arquivo": "megafones/megafone_halftone_2.png",
+  "largura": 383,
+  "altura": 370,
+  "prancha": 11,
+  "uso_restrito": false
+ },
+ {
+  "id": "codigo_barras_vermelho",
+  "categoria": "simbolos",
+  "arquivo": "simbolos/codigo_barras_vermelho.png",
+  "largura": 422,
+  "altura": 263,
+  "prancha": 11,
+  "uso_restrito": false
+ },
+ {
+  "id": "lupa_mao_1",
+  "categoria": "maos",
+  "arquivo": "maos/lupa_mao_1.png",
+  "largura": 259,
+  "altura": 347,
+  "prancha": 11,
+  "uso_restrito": false
+ },
+ {
+  "id": "camera_fotografica_1",
+  "categoria": "objetos",
+  "arquivo": "objetos/camera_fotografica_1.png",
+  "largura": 343,
+  "altura": 288,
+  "prancha": 11,
+  "uso_restrito": false
+ },
+ {
+  "id": "mao_escrevendo_1",
+  "categoria": "maos",
+  "arquivo": "maos/mao_escrevendo_1.png",
+  "largura": 338,
+  "altura": 352,
+  "prancha": 11,
+  "uso_restrito": false
+ },
+ {
+  "id": "maos_frasco_perfume",
+  "categoria": "_uso_restrito",
+  "arquivo": "_uso_restrito/maos_frasco_perfume.png",
+  "largura": 207,
+  "altura": 566,
+  "prancha": 11,
+  "uso_restrito": true
+ },
+ {
+  "id": "aperto_de_mao_gravura_1",
+  "categoria": "maos",
+  "arquivo": "maos/aperto_de_mao_gravura_1.png",
+  "largura": 417,
+  "altura": 306,
+  "prancha": 11,
+  "uso_restrito": false
+ },
+ {
+  "id": "etiqueta_preco_promocao",
+  "categoria": "simbolos",
+  "arquivo": "simbolos/etiqueta_preco_promocao.png",
+  "largura": 246,
+  "altura": 245,
+  "prancha": 11,
+  "uso_restrito": false
+ },
+ {
+  "id": "marca_vans",
+  "categoria": "_uso_restrito",
+  "arquivo": "_uso_restrito/marca_vans.png",
+  "largura": 262,
+  "altura": 252,
+  "prancha": 11,
+  "uso_restrito": true
+ },
+ {
+  "id": "marca_coca_cola",
+  "categoria": "_uso_restrito",
+  "arquivo": "_uso_restrito/marca_coca_cola.png",
+  "largura": 325,
+  "altura": 394,
+  "prancha": 11,
+  "uso_restrito": true
+ },
+ {
+  "id": "marca_ysl",
+  "categoria": "_uso_restrito",
+  "arquivo": "_uso_restrito/marca_ysl.png",
+  "largura": 174,
+  "altura": 353,
+  "prancha": 11,
+  "uso_restrito": true
+ },
+ {
+  "id": "joinha_positivo_1",
+  "categoria": "maos",
+  "arquivo": "maos/joinha_positivo_1.png",
+  "largura": 200,
+  "altura": 257,
+  "prancha": 11,
+  "uso_restrito": false
+ },
+ {
+  "id": "alvo_seta_crescimento",
+  "categoria": "simbolos",
+  "arquivo": "simbolos/alvo_seta_crescimento.png",
+  "largura": 335,
+  "altura": 316,
+  "prancha": 11,
+  "uso_restrito": false
+ },
+ {
+  "id": "marca_zara",
+  "categoria": "_uso_restrito",
+  "arquivo": "_uso_restrito/marca_zara.png",
+  "largura": 351,
+  "altura": 159,
+  "prancha": 11,
+  "uso_restrito": true
+ },
+ {
+  "id": "megafone_raios_amarelos",
+  "categoria": "megafones",
+  "arquivo": "megafones/megafone_raios_amarelos.png",
+  "largura": 567,
+  "altura": 478,
+  "prancha": 12,
+  "uso_restrito": false
+ },
+ {
+  "id": "lampada_filamento_amarelo_1",
+  "categoria": "objetos",
+  "arquivo": "objetos/lampada_filamento_amarelo_1.png",
+  "largura": 305,
+  "altura": 454,
+  "prancha": 12,
+  "uso_restrito": false
+ },
+ {
+  "id": "tachinha_vermelha",
+  "categoria": "objetos",
+  "arquivo": "objetos/tachinha_vermelha.png",
+  "largura": 222,
+  "altura": 267,
+  "prancha": 12,
+  "uso_restrito": false
+ },
+ {
+  "id": "lampada_filamento_amarelo_2",
+  "categoria": "objetos",
+  "arquivo": "objetos/lampada_filamento_amarelo_2.png",
+  "largura": 305,
+  "altura": 453,
+  "prancha": 12,
+  "uso_restrito": false
+ },
+ {
+  "id": "telefone_fone_azul",
+  "categoria": "objetos",
+  "arquivo": "objetos/telefone_fone_azul.png",
+  "largura": 470,
+  "altura": 294,
+  "prancha": 12,
+  "uso_restrito": false
+ },
+ {
+  "id": "notebook_halftone",
+  "categoria": "objetos",
+  "arquivo": "objetos/notebook_halftone.png",
+  "largura": 488,
+  "altura": 461,
+  "prancha": 12,
+  "uso_restrito": false
+ },
+ {
+  "id": "jornal_aberto",
+  "categoria": "objetos",
+  "arquivo": "objetos/jornal_aberto.png",
+  "largura": 525,
+  "altura": 385,
+  "prancha": 12,
+  "uso_restrito": false
+ },
+ {
+  "id": "placa_protesto_em_branco_mao",
+  "categoria": "maos",
+  "arquivo": "maos/placa_protesto_em_branco_mao.png",
+  "largura": 781,
+  "altura": 736,
+  "prancha": 12,
+  "uso_restrito": false
+ },
+ {
+  "id": "exclamacao_azul_papel",
+  "categoria": "simbolos",
+  "arquivo": "simbolos/exclamacao_azul_papel.png",
+  "largura": 115,
+  "altura": 291,
+  "prancha": 12,
+  "uso_restrito": false
+ },
+ {
+  "id": "megafone_speak_up",
+  "categoria": "megafones",
+  "arquivo": "megafones/megafone_speak_up.png",
+  "largura": 314,
+  "altura": 640,
+  "prancha": 13,
+  "uso_restrito": false
+ },
+ {
+  "id": "lampada_preta",
+  "categoria": "objetos",
+  "arquivo": "objetos/lampada_preta.png",
+  "largura": 256,
+  "altura": 435,
+  "prancha": 13,
+  "uso_restrito": false
+ },
+ {
+  "id": "martelo_juiz_na_mao",
+  "categoria": "maos",
+  "arquivo": "maos/martelo_juiz_na_mao.png",
+  "largura": 401,
+  "altura": 557,
+  "prancha": 13,
+  "uso_restrito": false
+ },
+ {
+  "id": "joinha_negativo_1",
+  "categoria": "maos",
+  "arquivo": "maos/joinha_negativo_1.png",
+  "largura": 390,
+  "altura": 425,
+  "prancha": 13,
+  "uso_restrito": false
+ },
+ {
+  "id": "globo_terrestre_halftone_1",
+  "categoria": "objetos",
+  "arquivo": "objetos/globo_terrestre_halftone_1.png",
+  "largura": 345,
+  "altura": 424,
+  "prancha": 13,
+  "uso_restrito": false
+ },
+ {
+  "id": "martelo_juiz",
+  "categoria": "objetos",
+  "arquivo": "objetos/martelo_juiz.png",
+  "largura": 483,
+  "altura": 490,
+  "prancha": 13,
+  "uso_restrito": false
+ },
+ {
+  "id": "onda_hokusai_1",
+  "categoria": "texturas",
+  "arquivo": "texturas/onda_hokusai_1.png",
+  "largura": 212,
+  "altura": 190,
+  "prancha": 13,
+  "uso_restrito": false
+ },
+ {
+  "id": "base_martelo_juiz",
+  "categoria": "objetos",
+  "arquivo": "objetos/base_martelo_juiz.png",
+  "largura": 387,
+  "altura": 144,
+  "prancha": 13,
+  "uso_restrito": false
+ },
+ {
+  "id": "boca_grito_halftone_2",
+  "categoria": "bocas",
+  "arquivo": "bocas/boca_grito_halftone_2.png",
+  "largura": 321,
+  "altura": 457,
+  "prancha": 13,
+  "uso_restrito": false
+ },
+ {
+  "id": "caneta_tinteiro_3",
+  "categoria": "objetos",
+  "arquivo": "objetos/caneta_tinteiro_3.png",
+  "largura": 395,
+  "altura": 378,
+  "prancha": 13,
+  "uso_restrito": false
+ },
+ {
+  "id": "onda_hokusai_2",
+  "categoria": "texturas",
+  "arquivo": "texturas/onda_hokusai_2.png",
+  "largura": 178,
+  "altura": 196,
+  "prancha": 13,
+  "uso_restrito": false
+ },
+ {
+  "id": "capelo_formatura",
+  "categoria": "objetos",
+  "arquivo": "objetos/capelo_formatura.png",
+  "largura": 396,
+  "altura": 283,
+  "prancha": 13,
+  "uso_restrito": false
+ },
+ {
+  "id": "megafone_mao_halftone_amarelo_2",
+  "categoria": "megafones",
+  "arquivo": "megafones/megafone_mao_halftone_amarelo_2.png",
+  "largura": 613,
+  "altura": 727,
+  "prancha": 13,
+  "uso_restrito": false
+ },
+ {
+  "id": "livros_halftone_1",
+  "categoria": "objetos",
+  "arquivo": "objetos/livros_halftone_1.png",
+  "largura": 492,
+  "altura": 480,
+  "prancha": 13,
+  "uso_restrito": false
+ },
+ {
+  "id": "clipe_papel",
+  "categoria": "objetos",
+  "arquivo": "objetos/clipe_papel.png",
+  "largura": 265,
+  "altura": 177,
+  "prancha": 13,
+  "uso_restrito": false
+ },
+ {
+  "id": "balao_amarelo_boca_halftone",
+  "categoria": "balao_texto",
+  "arquivo": "balao_texto/balao_amarelo_boca_halftone.png",
+  "largura": 553,
+  "altura": 443,
+  "prancha": 14,
+  "uso_restrito": false
+ },
+ {
+  "id": "explosao_azul_amarela",
+  "categoria": "simbolos",
+  "arquivo": "simbolos/explosao_azul_amarela.png",
+  "largura": 281,
+  "altura": 352,
+  "prancha": 14,
+  "uso_restrito": false
+ },
+ {
+  "id": "microscopio",
+  "categoria": "objetos",
+  "arquivo": "objetos/microscopio.png",
+  "largura": 255,
+  "altura": 406,
+  "prancha": 14,
+  "uso_restrito": false
+ },
+ {
+  "id": "lupa_mao_2",
+  "categoria": "maos",
+  "arquivo": "maos/lupa_mao_2.png",
+  "largura": 227,
+  "altura": 480,
+  "prancha": 14,
+  "uso_restrito": false
+ },
+ {
+  "id": "punho_erguido",
+  "categoria": "maos",
+  "arquivo": "maos/punho_erguido.png",
+  "largura": 152,
+  "altura": 223,
+  "prancha": 14,
+  "uso_restrito": false
+ },
+ {
+  "id": "dna_gravura",
+  "categoria": "objetos",
+  "arquivo": "objetos/dna_gravura.png",
+  "largura": 174,
+  "altura": 312,
+  "prancha": 14,
+  "uso_restrito": false
+ },
+ {
+  "id": "homem_cabeca_lampada",
+  "categoria": "figuras",
+  "arquivo": "figuras/homem_cabeca_lampada.png",
+  "largura": 160,
+  "altura": 289,
+  "prancha": 14,
+  "uso_restrito": false
+ },
+ {
+  "id": "mao_segurando_livro",
+  "categoria": "maos",
+  "arquivo": "maos/mao_segurando_livro.png",
+  "largura": 546,
+  "altura": 243,
+  "prancha": 14,
+  "uso_restrito": false
+ },
+ {
+  "id": "raio_vermelho_1",
+  "categoria": "simbolos",
+  "arquivo": "simbolos/raio_vermelho_1.png",
+  "largura": 90,
+  "altura": 188,
+  "prancha": 14,
+  "uso_restrito": false
+ },
+ {
+  "id": "livros_halftone_2",
+  "categoria": "objetos",
+  "arquivo": "objetos/livros_halftone_2.png",
+  "largura": 472,
+  "altura": 459,
+  "prancha": 14,
+  "uso_restrito": false
+ },
+ {
+  "id": "raio_vermelho_2",
+  "categoria": "simbolos",
+  "arquivo": "simbolos/raio_vermelho_2.png",
+  "largura": 90,
+  "altura": 187,
+  "prancha": 14,
+  "uso_restrito": false
+ },
+ {
+  "id": "balanca_justica",
+  "categoria": "objetos",
+  "arquivo": "objetos/balanca_justica.png",
+  "largura": 257,
+  "altura": 357,
+  "prancha": 14,
+  "uso_restrito": false
+ },
+ {
+  "id": "megafone_mao_halftone_amarelo_3",
+  "categoria": "megafones",
+  "arquivo": "megafones/megafone_mao_halftone_amarelo_3.png",
+  "largura": 482,
+  "altura": 732,
+  "prancha": 14,
+  "uso_restrito": false
+ },
+ {
+  "id": "mao_caneta_tinteiro_gravura",
+  "categoria": "maos",
+  "arquivo": "maos/mao_caneta_tinteiro_gravura.png",
+  "largura": 343,
+  "altura": 294,
+  "prancha": 14,
+  "uso_restrito": false
+ },
+ {
+  "id": "lampada_com_explosoes_amarelas",
+  "categoria": "objetos",
+  "arquivo": "objetos/lampada_com_explosoes_amarelas.png",
+  "largura": 686,
+  "altura": 449,
+  "prancha": 14,
+  "uso_restrito": false
+ },
+ {
+  "id": "cerebro_gravura",
+  "categoria": "objetos",
+  "arquivo": "objetos/cerebro_gravura.png",
+  "largura": 243,
+  "altura": 204,
+  "prancha": 14,
+  "uso_restrito": false
+ },
+ {
+  "id": "globo_terrestre_jornal_2",
+  "categoria": "objetos",
+  "arquivo": "objetos/globo_terrestre_jornal_2.png",
+  "largura": 331,
+  "altura": 343,
+  "prancha": 14,
+  "uso_restrito": false
+ },
+ {
+  "id": "lupa_mao_3",
+  "categoria": "maos",
+  "arquivo": "maos/lupa_mao_3.png",
+  "largura": 274,
+  "altura": 298,
+  "prancha": 15,
+  "uso_restrito": false
+ },
+ {
+  "id": "lupa_mao_4",
+  "categoria": "maos",
+  "arquivo": "maos/lupa_mao_4.png",
+  "largura": 260,
+  "altura": 347,
+  "prancha": 15,
+  "uso_restrito": false
+ },
+ {
+  "id": "foguete",
+  "categoria": "objetos",
+  "arquivo": "objetos/foguete.png",
+  "largura": 191,
+  "altura": 432,
+  "prancha": 15,
+  "uso_restrito": false
+ },
+ {
+  "id": "caneta_tinteiro_4",
+  "categoria": "objetos",
+  "arquivo": "objetos/caneta_tinteiro_4.png",
+  "largura": 393,
+  "altura": 566,
+  "prancha": 15,
+  "uso_restrito": false
+ },
+ {
+  "id": "mao_ok",
+  "categoria": "maos",
+  "arquivo": "maos/mao_ok.png",
+  "largura": 260,
+  "altura": 384,
+  "prancha": 15,
+  "uso_restrito": false
+ },
+ {
+  "id": "cacto",
+  "categoria": "objetos",
+  "arquivo": "objetos/cacto.png",
+  "largura": 239,
+  "altura": 236,
+  "prancha": 15,
+  "uso_restrito": false
+ },
+ {
+  "id": "joinha_positivo_2",
+  "categoria": "maos",
+  "arquivo": "maos/joinha_positivo_2.png",
+  "largura": 273,
+  "altura": 355,
+  "prancha": 15,
+  "uso_restrito": false
+ },
+ {
+  "id": "megafone_halftone_3",
+  "categoria": "megafones",
+  "arquivo": "megafones/megafone_halftone_3.png",
+  "largura": 409,
+  "altura": 398,
+  "prancha": 15,
+  "uso_restrito": false
+ },
+ {
+  "id": "lupa_halftone",
+  "categoria": "objetos",
+  "arquivo": "objetos/lupa_halftone.png",
+  "largura": 244,
+  "altura": 395,
+  "prancha": 15,
+  "uso_restrito": false
+ },
+ {
+  "id": "camera_fotografica_2",
+  "categoria": "objetos",
+  "arquivo": "objetos/camera_fotografica_2.png",
+  "largura": 356,
+  "altura": 297,
+  "prancha": 15,
+  "uso_restrito": false
+ },
+ {
+  "id": "maquina_de_escrever",
+  "categoria": "objetos",
+  "arquivo": "objetos/maquina_de_escrever.png",
+  "largura": 327,
+  "altura": 308,
+  "prancha": 15,
+  "uso_restrito": false
+ },
+ {
+  "id": "relogio_parede",
+  "categoria": "objetos",
+  "arquivo": "objetos/relogio_parede.png",
+  "largura": 255,
+  "altura": 272,
+  "prancha": 15,
+  "uso_restrito": false
+ },
+ {
+  "id": "globo_terrestre_halftone_2",
+  "categoria": "objetos",
+  "arquivo": "objetos/globo_terrestre_halftone_2.png",
+  "largura": 281,
+  "altura": 342,
+  "prancha": 15,
+  "uso_restrito": false
+ },
+ {
+  "id": "mao_escrevendo_2",
+  "categoria": "maos",
+  "arquivo": "maos/mao_escrevendo_2.png",
+  "largura": 338,
+  "altura": 333,
+  "prancha": 15,
+  "uso_restrito": false
+ },
+ {
+  "id": "aperto_de_mao_gravura_2",
+  "categoria": "maos",
+  "arquivo": "maos/aperto_de_mao_gravura_2.png",
+  "largura": 326,
+  "altura": 211,
+  "prancha": 15,
+  "uso_restrito": false
+ },
+ {
+  "id": "trofeu",
+  "categoria": "objetos",
+  "arquivo": "objetos/trofeu.png",
+  "largura": 288,
+  "altura": 342,
+  "prancha": 15,
+  "uso_restrito": false
+ },
+ {
+  "id": "maos_camera_fotografica",
+  "categoria": "maos",
+  "arquivo": "maos/maos_camera_fotografica.png",
+  "largura": 394,
+  "altura": 388,
+  "prancha": 15,
+  "uso_restrito": false
+ },
+ {
+  "id": "mao_dedo_arma",
+  "categoria": "maos",
+  "arquivo": "maos/mao_dedo_arma.png",
+  "largura": 386,
+  "altura": 358,
+  "prancha": 15,
+  "uso_restrito": false
+ },
+ {
+  "id": "livros_halftone_3",
+  "categoria": "objetos",
+  "arquivo": "objetos/livros_halftone_3.png",
+  "largura": 326,
+  "altura": 317,
+  "prancha": 16,
+  "uso_restrito": false
+ },
+ {
+  "id": "megafone_mao_halftone_4",
+  "categoria": "megafones",
+  "arquivo": "megafones/megafone_mao_halftone_4.png",
+  "largura": 394,
+  "altura": 381,
+  "prancha": 16,
+  "uso_restrito": false
+ },
+ {
+  "id": "boca_lingua_para_fora",
+  "categoria": "bocas",
+  "arquivo": "bocas/boca_lingua_para_fora.png",
+  "largura": 299,
+  "altura": 287,
+  "prancha": 16,
+  "uso_restrito": false
+ },
+ {
+  "id": "olho_halftone_rasgado",
+  "categoria": "olhos",
+  "arquivo": "olhos/olho_halftone_rasgado.png",
+  "largura": 329,
+  "altura": 291,
+  "prancha": 16,
+  "uso_restrito": false
+ },
+ {
+  "id": "casal_beijo_pb",
+  "categoria": "figuras",
+  "arquivo": "figuras/casal_beijo_pb.png",
+  "largura": 319,
+  "altura": 312,
+  "prancha": 16,
+  "uso_restrito": false
+ },
+ {
+  "id": "hamburguer",
+  "categoria": "objetos",
+  "arquivo": "objetos/hamburguer.png",
+  "largura": 431,
+  "altura": 345,
+  "prancha": 16,
+  "uso_restrito": false
+ },
+ {
+  "id": "lupa_mao_5",
+  "categoria": "maos",
+  "arquivo": "maos/lupa_mao_5.png",
+  "largura": 505,
+  "altura": 418,
+  "prancha": 16,
+  "uso_restrito": false
+ },
+ {
+  "id": "joinha_negativo_2",
+  "categoria": "maos",
+  "arquivo": "maos/joinha_negativo_2.png",
+  "largura": 390,
+  "altura": 426,
+  "prancha": 16,
+  "uso_restrito": false
+ },
+ {
+  "id": "gato_preto_tres_olhos",
+  "categoria": "objetos",
+  "arquivo": "objetos/gato_preto_tres_olhos.png",
+  "largura": 478,
+  "altura": 453,
+  "prancha": 16,
+  "uso_restrito": false
+ },
+ {
+  "id": "olhos_empilhados_tres",
+  "categoria": "olhos",
+  "arquivo": "olhos/olhos_empilhados_tres.png",
+  "largura": 394,
+  "altura": 549,
+  "prancha": 16,
+  "uso_restrito": false
+ },
+ {
+  "id": "mao_rock",
+  "categoria": "maos",
+  "arquivo": "maos/mao_rock.png",
+  "largura": 244,
+  "altura": 419,
+  "prancha": 16,
+  "uso_restrito": false
+ },
+ {
+  "id": "boca_grito_megafone_halftone_2",
+  "categoria": "bocas",
+  "arquivo": "bocas/boca_grito_megafone_halftone_2.png",
+  "largura": 533,
+  "altura": 363,
+  "prancha": 16,
+  "uso_restrito": false
+ }
+]

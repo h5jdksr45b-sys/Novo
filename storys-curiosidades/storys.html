@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Storys Curiosidades TPB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@800;900&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0d0d0d; --bg-soft:#161616; --text:#f4f1ea; --muted:#a39e93;
+    --gold:#C8A96E; --gold-bright:#dcc188; --line:#2a2722;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#000;font-family:'Poppins',sans-serif;color:var(--text)}
+  .story{
+    width:1080px;height:1920px;position:relative;overflow:hidden;
+    background:
+      radial-gradient(900px 700px at 85% 8%, rgba(200,169,110,.13), transparent 70%),
+      radial-gradient(700px 600px at 0% 100%, rgba(200,169,110,.07), transparent 70%),
+      var(--bg);
+    padding:300px 96px 360px; display:flex; flex-direction:column;
+  }
+  /* barra de progresso própria da série */
+  .prog{position:absolute;top:230px;left:96px;right:96px;display:flex;gap:14px}
+  .prog i{flex:1;height:6px;border-radius:3px;background:var(--line)}
+  .prog i.on{background:var(--gold)}
+  .kicker{font-family:'Archivo',sans-serif;font-weight:800;font-size:30px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--gold);margin-top:40px}
+  h1{font-family:'Archivo',sans-serif;font-weight:900;font-size:112px;line-height:1.0;
+    letter-spacing:-.02em;margin-top:44px}
+  h1 em{font-style:normal;color:var(--gold)}
+  p{font-size:var(--p,44px);line-height:1.42;color:var(--text);margin-top:44px}
+  p.muted{color:var(--muted);font-size:38px}
+  .rule{width:120px;height:6px;background:var(--gold);margin-top:56px;border-radius:3px}
+  .stat{display:flex;align-items:center;gap:36px;margin-top:0;padding:34px 0;border-top:2px solid var(--line)}
+  .stat:last-of-type{border-bottom:2px solid var(--line)}
+  .stat b{font-family:'Archivo',sans-serif;font-weight:900;font-size:92px;color:var(--gold);white-space:nowrap;
+    line-height:1;min-width:420px;letter-spacing:-.02em}
+  .stat span{font-size:40px;line-height:1.3}
+  .duo{display:flex;gap:28px;margin-top:56px}
+  .duo div{flex:1;background:var(--bg-soft);border:2px solid var(--line);border-radius:28px;padding:40px 36px}
+  .duo b{display:block;font-family:'Archivo',sans-serif;font-weight:900;font-size:110px;color:var(--gold);line-height:1}
+  .duo span{display:block;font-size:34px;color:var(--muted);margin-top:16px;line-height:1.3}
+  .quiz{margin-top:auto;margin-bottom:40px;height:520px;border:3px dashed rgba(200,169,110,.45);
+    border-radius:36px;display:flex;align-items:center;justify-content:center;text-align:center;
+    color:rgba(200,169,110,.6);font-size:30px;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+  .quiz.export{border-color:transparent;color:transparent}
+  .src{position:absolute;left:96px;right:96px;bottom:300px;font-size:26px;line-height:1.4;color:var(--muted)}
+  .sig{position:absolute;left:96px;right:96px;bottom:220px;font-size:26px;color:var(--muted);
+    display:flex;justify-content:space-between;border-top:2px solid var(--line);padding-top:24px}
+  .sig strong{color:var(--text);font-weight:600}
+  .cta{margin-top:auto;margin-bottom:90px;background:var(--gold);color:#1a1407;border-radius:28px;
+    padding:44px 48px;font-family:'Archivo',sans-serif;font-weight:800;font-size:46px;line-height:1.2}
+  .cta small{display:block;font-family:'Poppins',sans-serif;font-weight:500;font-size:30px;margin-top:12px;opacity:.8}
+  .wrap{display:flex;flex-wrap:wrap;gap:40px;padding:40px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- 1 -->
+<section class="story" id="s1">
+  <div class="prog"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+  <div class="kicker">Curiosidades sobre borderline</div>
+  <h1>Qual país tem mais pessoas com <em>borderline?</em></h1>
+  <p>Arrisque um palpite antes de passar.</p>
+  <div class="quiz">Área do teste do Instagram</div>
+  <div class="sig"><span><strong>Dr. Fabio Schmidt</strong> · médico com foco em TPB</span><span>CRM-SP 183549</span></div>
+</section>
+
+<!-- 2 -->
+<section class="story" id="s2">
+  <div class="prog"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div>
+  <div class="kicker">Resposta</div>
+  <h1>Ninguém sabe <em>ao certo.</em></h1>
+  <p>Não existe ranking mundial confiável de borderline. Cada país pesquisa de um jeito. Muda a entrevista, o critério e quem responde.</p>
+  <div class="duo">
+    <div><b>9,6%</b><span>países de renda alta</span></div>
+    <div><b>4,3%</b><span>países de renda média e baixa</span></div>
+  </div>
+  <p class="muted">Numa revisão com 21 países, os transtornos de personalidade em geral apareceram mais nos países ricos. Os próprios autores pedem cautela: parte da diferença vem do método.</p>
+  <div class="src">Fonte: Winsper e colaboradores, British Journal of Psychiatry, 2020.</div>
+  <div class="sig"><span><strong>Dr. Fabio Schmidt</strong> · médico com foco em TPB</span><span>CRM-SP 183549</span></div>
+</section>
+
+<!-- 3 -->
+<section class="story" id="s3">
+  <div class="prog"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div>
+  <div class="kicker">Quantas pessoas</div>
+  <h1 style="margin-bottom:56px">Mais comum do que <em>parece.</em></h1>
+  <div class="stat"><b>2 em 100</b><span>adultos na população geral, em média</span></div>
+  <div class="stat"><b>1 em 10</b><span>pessoas em ambulatório de saúde mental</span></div>
+  <div class="stat"><b>1 em 5</b><span>pessoas internadas em psiquiatria</span></div>
+  <p class="muted">A média geral esconde muita variação. Os estudos vão de 0,7% a 7,35%.</p>
+  <div class="src">Fontes: Ramos-Suárez e colaboradores, European Psychiatry, 2025. Ellison e colaboradores, Psychiatric Clinics of North America, 2018.</div>
+  <div class="sig"><span><strong>Dr. Fabio Schmidt</strong> · médico com foco em TPB</span><span>CRM-SP 183549</span></div>
+</section>
+
+<!-- 4 -->
+<section class="story" id="s4">
+  <div class="prog"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div>
+  <div class="kicker">Homens e mulheres</div>
+  <h1>Você já ouviu que é <em>coisa de mulher.</em></h1>
+  <p>No consultório, aparecem mais mulheres. Na população geral, a conta fica bem mais equilibrada.</p>
+  <div class="rule"></div>
+  <p>Uma hipótese levantada nos estudos é o viés de gênero no diagnóstico. O homem que sofre do mesmo jeito pode receber outro nome. Ou nenhum.</p>
+  <div class="src">Fonte: Ramos-Suárez e colaboradores, European Psychiatry, 2025.</div>
+  <div class="sig"><span><strong>Dr. Fabio Schmidt</strong> · médico com foco em TPB</span><span>CRM-SP 183549</span></div>
+</section>
+
+<!-- 5 -->
+<section class="story" id="s5" style="--p:40px">
+  <div class="prog"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
+  <div class="kicker">De onde vem o nome</div>
+  <h1>Por que <em>borderline?</em></h1>
+  <p>Em 1938, o psicanalista americano Adolph Stern usou a palavra para pacientes que não cabiam nas categorias da época. Ficavam na fronteira entre neurose e psicose.</p>
+  <p>Em 1980, o diagnóstico entrou no manual oficial americano, o DSM-III.</p>
+  <p>O nome ficou. A ideia de quase loucura, não.</p>
+  <div style="flex:1;min-height:44px"></div>
+  <div class="cta">Mande para alguém que ainda acha que borderline quer dizer quase louco.</div>
+  <div class="sig"><span><strong>Dr. Fabio Schmidt</strong> · médico com foco em TPB</span><span>CRM-SP 183549</span></div>
+</section>
+
+</div>
+</body>
+</html>

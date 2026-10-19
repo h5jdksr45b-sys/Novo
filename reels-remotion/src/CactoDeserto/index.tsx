@@ -257,8 +257,9 @@ const CENAS: Cena[] = [
 
 export const CACTO_DURACAO_S = CENAS.reduce((s, c) => s + c.dur, 0);
 
-const inicioCena = (i: number) =>
-  CENAS.slice(0, i).reduce((s, c) => s + c.dur, 0);
+const inicioDe = (cenas: Cena[], i: number) =>
+  cenas.slice(0, i).reduce((s, c) => s + c.dur, 0);
+const inicioCena = (i: number) => inicioDe(CENAS, i);
 
 // Cada palavra entra com leve subida e desfoque; *palavra* vira itálico vermelho.
 const Palavras: React.FC<{
@@ -455,7 +456,119 @@ const SONS: Som[] = [
   { arquivo: "clique_a.wav", em: inicioCena(14) + 0.3, volume: 0.6 },
 ];
 
-export const CactoDeserto: React.FC = () => {
+// Versão curta, cerca de 25 s: só o que carrega a ideia.
+const CENAS_CURTAS: Cena[] = [
+  {
+    dur: 4.0,
+    img: "01.jpg",
+    topo: 170,
+    desceY: 160,
+    zoom: [1.0, 1.14],
+    origem: "62% 29%",
+    linhas: [
+      { texto: "Chamar de mau caráter por ser borderline", em: 0.1 },
+      {
+        texto: "é julgar o *espinho* sem ver o *deserto.*",
+        em: 1.4,
+        fina: true,
+      },
+    ],
+  },
+  {
+    dur: 2.5,
+    img: "02.jpg",
+    zoom: [1.12, 1.02],
+    origem: "65% 50%",
+    linhas: [{ texto: "Você só vê o *espinho.*", em: 0.1 }],
+  },
+  {
+    dur: 3.0,
+    escuro: true,
+    linhas: [
+      { texto: "E chama de", em: 0.05, tamanho: 70 },
+      { texto: "*drama.*", em: 0.55, tamanho: 130 },
+      { texto: "*frescura.*", em: 1.1, tamanho: 130 },
+      { texto: "gente tóxica.", em: 1.7, tamanho: 96 },
+    ],
+  },
+  {
+    dur: 4.0,
+    img: "05.jpg",
+    zoom: [1.14, 1.0],
+    linhas: [
+      { texto: "Muitas vezes, ela cresceu num *deserto.*", em: 0.1 },
+      { texto: "Sem segurança. Sem carinho confiável.", em: 1.4, fina: true },
+    ],
+  },
+  {
+    dur: 3.5,
+    img: "06.jpg",
+    zoom: [1.0, 1.1],
+    origem: "60% 60%",
+    deslize: [-30, 10],
+    linhas: [
+      { texto: "Os espinhos foram o jeito de continuar *existindo.*", em: 0.1 },
+    ],
+  },
+  {
+    dur: 3.0,
+    img: "10.jpg",
+    zoom: [1.0, 1.08],
+    origem: "35% 60%",
+    linhas: [
+      { texto: "Com tratamento e previsibilidade,", em: 0.1 },
+      { texto: "os espinhos continuam.", em: 1.1, fina: true },
+    ],
+  },
+  {
+    dur: 3.2,
+    img: "11.jpg",
+    topo: 170,
+    zoom: [1.0, 1.1],
+    origem: "50% 0%",
+    linhas: [
+      { texto: "Mas, pela primeira vez,", em: 0.1 },
+      { texto: "tem espaço pra *flor.*", em: 0.9, tamanho: 104 },
+    ],
+  },
+  {
+    dur: 2.8,
+    linhas: [
+      {
+        texto: "Manda pra quem ainda só enxerga *espinhos.*",
+        em: 0.1,
+        tamanho: 92,
+      },
+    ],
+  },
+];
+
+export const CACTO_CURTO_DURACAO_S = CENAS_CURTAS.reduce(
+  (s, c) => s + c.dur,
+  0,
+);
+
+const SONS_CURTOS: Som[] = [
+  {
+    arquivo: "whoosh_fino_a.wav",
+    em: inicioDe(CENAS_CURTAS, 2) - 0.35,
+    volume: 0.8,
+  },
+  { arquivo: "swipe_d.wav", em: inicioDe(CENAS_CURTAS, 4) + 0.05, volume: 0.6 },
+  {
+    arquivo: "riser_longo_fino.wav",
+    em: inicioDe(CENAS_CURTAS, 6) + 0.9 - 4.0,
+    volume: 0.7,
+    corteFim: 4.0,
+  },
+  { arquivo: "pop.wav", em: inicioDe(CENAS_CURTAS, 6) + 1.05, volume: 0.6 },
+  { arquivo: "clique_a.wav", em: inicioDe(CENAS_CURTAS, 7) + 0.2, volume: 0.6 },
+];
+
+const Montagem: React.FC<{ cenas: Cena[]; sons: Som[] }> = ({
+  cenas,
+  sons,
+}) => {
   useEffect(() => {
     carregarFontes();
   }, []);
@@ -463,16 +576,16 @@ export const CactoDeserto: React.FC = () => {
 
   return (
     <AbsoluteFill style={{ backgroundColor: PAPEL }}>
-      {CENAS.map((c, i) => (
+      {cenas.map((c, i) => (
         <Sequence
           key={`cena-${i}`}
-          from={Math.round(inicioCena(i) * fps)}
+          from={Math.round(inicioDe(cenas, i) * fps)}
           durationInFrames={Math.round(c.dur * fps)}
         >
-          <CenaView cena={c} final={i === CENAS.length - 1} />
+          <CenaView cena={c} final={i === cenas.length - 1} />
         </Sequence>
       ))}
-      {SONS.map((s) => (
+      {sons.map((s) => (
         <Sequence
           key={`${s.arquivo}-${s.em}`}
           from={Math.round(Math.max(0, s.em) * fps)}
@@ -490,7 +603,9 @@ export const CactoDeserto: React.FC = () => {
                     f,
                     [0, 10, s.corteFim * fps - 12, s.corteFim * fps],
                     [0, 1, 1, 0],
-                    { extrapolateRight: "clamp" },
+                    {
+                      extrapolateRight: "clamp",
+                    },
                   )
                 : s.volume
             }
@@ -500,3 +615,11 @@ export const CactoDeserto: React.FC = () => {
     </AbsoluteFill>
   );
 };
+
+export const CactoDeserto: React.FC = () => (
+  <Montagem cenas={CENAS} sons={SONS} />
+);
+
+export const CactoCurto: React.FC = () => (
+  <Montagem cenas={CENAS_CURTAS} sons={SONS_CURTOS} />
+);

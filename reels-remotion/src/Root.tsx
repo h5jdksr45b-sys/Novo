@@ -8,7 +8,12 @@ import { ComparacaoLadoALado, comparacaoSchema } from "./ComparacaoLadoALado";
 import { MitoApego } from "./MitoApego";
 import { MitoRindo } from "./MitoRindo";
 import { VerdadeOuMito } from "./VerdadeOuMito";
-import { CactoDeserto, CACTO_DURACAO_S } from "./CactoDeserto";
+import {
+  CactoCurto,
+  CactoDeserto,
+  CACTO_CURTO_DURACAO_S,
+  CACTO_DURACAO_S,
+} from "./CactoDeserto";
 import { Reacao, calculateReacaoMetadata, reacaoSchema } from "./Reacao";
 
 // Each <Composition> is an entry in the sidebar!
@@ -69,6 +74,14 @@ export const RemotionRoot: React.FC = () => {
         id="CactoDeserto"
         component={CactoDeserto}
         durationInFrames={Math.round(CACTO_DURACAO_S * 30)}
+        fps={30}
+        width={1080}
+        height={1920}
+      />
+      <Composition
+        id="CactoCurto"
+        component={CactoCurto}
+        durationInFrames={Math.round(CACTO_CURTO_DURACAO_S * 30)}
         fps={30}
         width={1080}
         height={1920}

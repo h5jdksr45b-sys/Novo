@@ -29,6 +29,7 @@ export const reacaoSchema = z.object({
     )
     .min(1)
     .max(2),
+  assinatura: z.boolean().optional(),
 });
 
 type Props = z.infer<typeof reacaoSchema>;
@@ -53,7 +54,7 @@ const texto: React.CSSProperties = {
   lineHeight: 1.05,
 };
 
-export const Reacao: React.FC<Props> = ({ src, linhas }) => {
+export const Reacao: React.FC<Props> = ({ src, linhas, assinatura = true }) => {
   useEffect(() => {
     loadAnton();
   }, []);
@@ -62,8 +63,13 @@ export const Reacao: React.FC<Props> = ({ src, linhas }) => {
 
   const ref = useAnimeTimeline((tl, $) => {
     const entra = { opacity: [0, 1], y: [40, 0], duration: 450 };
+    // Início negativo: a linha já está na tela no primeiro quadro.
     linhas.forEach((l, i) => {
-      tl.add($(`.l${i}`), entra, Math.max(0, l.inicio));
+      tl.add(
+        $(`.l${i}`),
+        l.inicio < 0 ? { opacity: [1, 1], duration: 1 } : entra,
+        Math.max(0, l.inicio),
+      );
     });
     tl.add($(".assinatura"), { opacity: [0, 1], duration: 400 }, 300);
   });
@@ -90,15 +96,17 @@ export const Reacao: React.FC<Props> = ({ src, linhas }) => {
         }}
       />
 
-      {linhas.map((l) => (
-        <Sequence
-          key={l.texto}
-          from={Math.round((Math.max(0, l.inicio - 120) / 1000) * fps)}
-          layout="none"
-        >
-          <Audio src={staticFile("sfx/whoosh.wav")} volume={0.25} />
-        </Sequence>
-      ))}
+      {linhas
+        .filter((l) => l.inicio >= 0)
+        .map((l) => (
+          <Sequence
+            key={l.texto}
+            from={Math.round((Math.max(0, l.inicio - 120) / 1000) * fps)}
+            layout="none"
+          >
+            <Audio src={staticFile("sfx/whoosh.wav")} volume={0.25} />
+          </Sequence>
+        ))}
 
       {linhas.map((l, i) => (
         <div
@@ -131,24 +139,26 @@ export const Reacao: React.FC<Props> = ({ src, linhas }) => {
         </div>
       ))}
 
-      <div
-        className="assinatura"
-        style={{
-          position: "absolute",
-          left: 0,
-          right: 0,
-          bottom: 150,
-          textAlign: "center",
-          fontSize: 30,
-          color: "rgba(255,255,255,0.6)",
-          fontFamily: "sans-serif",
-          textTransform: "none",
-          textShadow: "0 1px 6px rgba(0,0,0,0.8)",
-          opacity: 0,
-        }}
-      >
-        Dr. Fabio Schmidt, médico, CRM-SP 183549
-      </div>
+      {assinatura ? (
+        <div
+          className="assinatura"
+          style={{
+            position: "absolute",
+            left: 0,
+            right: 0,
+            bottom: 150,
+            textAlign: "center",
+            fontSize: 30,
+            color: "rgba(255,255,255,0.6)",
+            fontFamily: "sans-serif",
+            textTransform: "none",
+            textShadow: "0 1px 6px rgba(0,0,0,0.8)",
+            opacity: 0,
+          }}
+        >
+          Dr. Fabio Schmidt, médico, CRM-SP 183549
+        </div>
+      ) : null}
     </AbsoluteFill>
   );
 };

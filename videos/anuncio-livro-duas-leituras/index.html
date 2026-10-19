@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/vendor/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "EB Garamond"; font-weight: 400; src: url("assets/fonts/EBGaramond-400.woff2") format("woff2"); }
+      @font-face { font-family: "EB Garamond"; font-weight: 400; font-style: italic; src: url("assets/fonts/EBGaramond-400i.woff2") format("woff2"); }
+      @font-face { font-family: "EB Garamond"; font-weight: 500; src: url("assets/fonts/EBGaramond-500.woff2") format("woff2"); }
+      @font-face { font-family: "EB Garamond"; font-weight: 600; src: url("assets/fonts/EBGaramond-600.woff2") format("woff2"); }
+      @font-face { font-family: "Caveat"; font-weight: 500; src: url("assets/fonts/Caveat-500.woff2") format("woff2"); }
+      @font-face { font-family: "Caveat"; font-weight: 700; src: url("assets/fonts/Caveat-700.woff2") format("woff2"); }
+      @font-face { font-family: "Inter"; font-weight: 400; src: url("assets/fonts/Inter-400.woff2") format("woff2"); }
+      @font-face { font-family: "Inter"; font-weight: 500; src: url("assets/fonts/Inter-500.woff2") format("woff2"); }
+      @font-face { font-family: "Inter"; font-weight: 600; src: url("assets/fonts/Inter-600.woff2") format("woff2"); }
+
+      :root {
+        --tinta: #1f1a17;
+        --terracota: #b5542f;
+        --cinza: #6f665f;
+        --creme: #f4efe4;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--creme); }
+      #root { position: relative; width: 1080px; height: 1920px; font-family: "EB Garamond", serif; color: var(--tinta); }
+      .camada { position: absolute; inset: 0; width: 1080px; height: 1920px; }
+      img.fundo { position: absolute; inset: 0; width: 1080px; height: 1920px; object-fit: cover; }
+
+      /* Cena A: as duas leituras */
+      #titulo { position: absolute; left: 80px; top: 330px; width: 920px; text-align: center; }
+      #titulo .linha { display: block; font-weight: 500; font-size: 92px; line-height: 1.08; letter-spacing: -0.01em; visibility: hidden; }
+      #titulo .linha.b { color: var(--terracota); }
+
+      .coluna { position: absolute; top: 640px; width: 480px; }
+      #col-acusa { left: 50px; }
+      #col-explica { left: 550px; }
+
+      .fita { position: absolute; left: 10px; top: 0; width: 460px; height: 150px; visibility: hidden; }
+      .fita img { position: absolute; left: 0; top: -165px; width: 460px; }
+      .fita span { position: absolute; left: 0; top: 36px; width: 460px; text-align: center; font-family: "Caveat", cursive; font-weight: 700; font-size: 52px; color: var(--tinta); transform: rotate(-7deg); }
+
+      .tira { position: absolute; left: 0; width: 480px; height: 152px; background: url("assets/img/tira-rasgada.png") center / 100% auto no-repeat; display: flex; align-items: center; justify-content: center; visibility: hidden; }
+      .tira span { position: relative; font-weight: 600; font-size: 50px; line-height: 1; letter-spacing: -0.005em; white-space: nowrap; }
+      #col-explica .tira span { font-size: 42px; }
+      .tira svg { position: absolute; left: 0; top: 0; width: 480px; height: 152px; overflow: visible; }
+      .tira svg path { fill: none; stroke: var(--terracota); stroke-width: 9; stroke-linecap: round; stroke-linejoin: round; }
+      .t1 { top: 180px; } .t2 { top: 350px; } .t3 { top: 520px; }
+      #col-acusa .t2 { transform: rotate(-1.5deg); }
+      #col-explica .t1 { transform: rotate(1.2deg); }
+      #col-explica .t3 { transform: rotate(-1deg); }
+
+      #veredito { position: absolute; left: 100px; top: 1420px; width: 880px; text-align: center; font-style: italic; font-size: 54px; line-height: 1.2; }
+      #veredito .linha { display: block; visibility: hidden; }
+      #veredito .forte { font-style: normal; font-weight: 600; color: var(--terracota); }
+
+      /* Cena B: o e-book */
+      #capa { position: absolute; left: 341px; top: 737px; width: 396px; height: 846px; border-radius: 54px; background: #f6f1e6; display: flex; flex-direction: column; align-items: center; justify-content: center; padding-bottom: 110px; visibility: hidden; }
+      #capa .t { font-weight: 500; font-size: 58px; line-height: 1.12; letter-spacing: -0.01em; }
+      #capa .regua { width: 180px; height: 3px; background: var(--terracota); position: relative; margin: 18px 0; }
+      #capa .regua::after { content: ""; position: absolute; left: 50%; top: 50%; width: 14px; height: 14px; border-radius: 50%; background: var(--terracota); transform: translate(-50%, -50%); }
+      #capa .autor { position: absolute; bottom: 70px; font-family: "Inter", sans-serif; font-weight: 500; font-size: 15px; letter-spacing: 0.32em; color: #3a332e; }
+
+      #fecho { position: absolute; left: 90px; top: 360px; width: 900px; height: 190px; background: url("assets/img/tira-rasgada.png") center / 100% auto no-repeat; display: flex; align-items: center; justify-content: center; visibility: hidden; }
+      #fecho span { font-weight: 600; font-size: 62px; }
+      #assina { position: absolute; left: 0; top: 585px; width: 1080px; text-align: center; font-family: "Inter", sans-serif; font-weight: 400; font-size: 26px; color: var(--cinza); letter-spacing: 0.01em; visibility: hidden; }
+
+      #nota { position: absolute; left: 640px; top: 1330px; width: 340px; height: 340px; visibility: hidden; transform-origin: 50% 50%; }
+      #nota img { position: absolute; inset: 0; width: 340px; height: 340px; }
+      #nota div { position: absolute; left: 30px; top: 70px; width: 280px; text-align: center; font-family: "Caveat", cursive; font-weight: 700; font-size: 58px; line-height: 1.05; color: var(--tinta); transform: rotate(5deg); }
+      #nota small { display: block; font-size: 44px; font-weight: 500; }
+
+      #cta { position: absolute; left: 240px; top: 1584px; width: 600px; height: 92px; border-radius: 46px; background: var(--tinta); color: var(--creme); display: flex; align-items: center; justify-content: center; gap: 18px; font-family: "Inter", sans-serif; font-weight: 600; font-size: 36px; visibility: hidden; transform-origin: 50% 50%; }
+      #cta svg { width: 34px; height: 34px; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="12" data-width="1080" data-height="1920">
+      <!-- Fundo de papel, o vídeo inteiro -->
+      <div id="fundo" class="clip camada" data-start="0" data-duration="12" data-track-index="0">
+        <img class="fundo" src="assets/img/fundo-creme.jpg" alt="" />
+      </div>
+
+      <!-- Cena A: as duas leituras -->
+      <div id="cenaA" class="clip camada" data-start="0" data-duration="8.3" data-track-index="1">
+       <div id="cenaA-conteudo" class="camada">
+        <div id="titulo">
+          <span class="linha a" id="tit1">Os adjetivos mudam.</span>
+          <span class="linha b" id="tit2">A lógica é a mesma.</span>
+        </div>
+
+        <div class="coluna" id="col-acusa">
+          <div class="fita" id="fita1"><img src="assets/img/fita-terracota.png" alt="" /><span>a leitura que acusa</span></div>
+          <div class="tira t1" id="a1"><span>manipuladora</span>
+            <svg viewBox="0 0 480 152" data-layout-allow-overflow="true"><path class="risco" d="M 92 44 C 170 70, 300 100, 392 112" /><path class="risco" d="M 380 40 C 300 72, 180 96, 96 114" /></svg>
+          </div>
+          <div class="tira t2" id="a2"><span>exagerada</span>
+            <svg viewBox="0 0 480 152" data-layout-allow-overflow="true"><path class="risco" d="M 120 46 C 190 72, 290 98, 364 112" /><path class="risco" d="M 352 42 C 290 70, 190 96, 124 114" /></svg>
+          </div>
+          <div class="tira t3" id="a3"><span>faz de propósito</span>
+            <svg viewBox="0 0 480 152" data-layout-allow-overflow="true"><path class="risco" d="M 60 44 C 180 72, 320 100, 424 112" /><path class="risco" d="M 412 40 C 310 72, 160 96, 64 114" /></svg>
+          </div>
+        </div>
+
+        <div class="coluna" id="col-explica">
+          <div class="fita" id="fita2"><img src="assets/img/fita-terracota.png" alt="" /><span>a leitura que explica</span></div>
+          <div class="tira t1" id="e1"><span>o que aconteceu antes?</span>
+            <svg viewBox="0 0 480 152" data-layout-allow-overflow="true"><path class="sub" d="M 70 108 C 180 102, 300 114, 412 106" /></svg>
+          </div>
+          <div class="tira t2" id="e2"><span>o que ela sentiu?</span>
+            <svg viewBox="0 0 480 152" data-layout-allow-overflow="true"><path class="sub" d="M 110 108 C 200 102, 290 114, 372 106" /></svg>
+          </div>
+          <div class="tira t3" id="e3"><span>o que dá pra fazer depois?</span>
+            <svg viewBox="0 0 480 152" data-layout-allow-overflow="true"><path class="sub" d="M 50 108 C 180 102, 310 114, 432 106" /></svg>
+          </div>
+        </div>
+
+        <div id="veredito">
+          <span class="linha" id="v1">Entender não tira a responsabilidade.</span>
+          <span class="linha" id="v2"><span class="forte">Tira do lugar errado.</span></span>
+        </div>
+       </div>
+      </div>
+
+      <!-- Cena B: o e-book na tela -->
+      <div id="cenaB" class="clip camada" data-start="7.9" data-duration="4.1" data-track-index="1">
+       <div id="cenaB-conteudo" class="camada">
+        <div id="cenaB-grupo" class="camada">
+          <img class="fundo" src="assets/img/celular-vazio-9x16.jpg" alt="" />
+          <div id="capa">
+            <span class="t">Quem sofre</span>
+            <span class="t">não escolhe</span>
+            <span class="regua"></span>
+            <span class="t">como gritar</span>
+            <span class="autor">DR. FABIO SCHMIDT</span>
+          </div>
+        </div>
+        <div id="fecho"><span>Explicar não é passar pano.</span></div>
+        <div id="assina">Dr. Fabio Schmidt, médico, CRM-SP 183549. Conteúdo educativo.</div>
+        <div id="nota"><img src="assets/img/nota-adesiva.png" alt="" /><div>e-book<small>160 páginas</small></div></div>
+        <div id="cta"><span>Ver o que tem dentro</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+       </div>
+      </div>
+
+      <!-- Efeitos sonoros -->
+      <audio id="sfx-whoosh-1" src="assets/sfx/whoosh-short.mp3" data-start="0.1" data-duration="0.57" data-track-index="2" data-volume="0.5"></audio>
+      <audio id="sfx-impacto-1" src="assets/sfx/impact-bass-1.mp3" data-start="0.72" data-duration="2.1" data-track-index="3" data-volume="0.3"></audio>
+      <audio id="sfx-pop-1" src="assets/sfx/pop.mp3" data-start="1.6" data-duration="0.72" data-track-index="4" data-volume="0.45"></audio>
+      <audio id="sfx-pop-2" src="assets/sfx/pop.mp3" data-start="2.0" data-duration="0.72" data-track-index="5" data-volume="0.5"></audio>
+      <audio id="sfx-pop-3" src="assets/sfx/pop.mp3" data-start="2.55" data-duration="0.72" data-track-index="6" data-volume="0.5"></audio>
+      <audio id="sfx-pop-4" src="assets/sfx/pop.mp3" data-start="3.1" data-duration="0.72" data-track-index="7" data-volume="0.5"></audio>
+      <audio id="sfx-risco-1" src="assets/sfx/key-press.mp3" data-start="2.35" data-duration="0.43" data-track-index="8" data-volume="0.3"></audio>
+      <audio id="sfx-risco-2" src="assets/sfx/key-press.mp3" data-start="2.9" data-duration="0.43" data-track-index="9" data-volume="0.3"></audio>
+      <audio id="sfx-risco-3" src="assets/sfx/key-press.mp3" data-start="3.45" data-duration="0.43" data-track-index="10" data-volume="0.3"></audio>
+      <audio id="sfx-pop-5" src="assets/sfx/pop.mp3" data-start="4.2" data-duration="0.72" data-track-index="11" data-volume="0.45"></audio>
+      <audio id="sfx-whoosh-2" src="assets/sfx/whoosh-short.mp3" data-start="4.6" data-duration="0.57" data-track-index="12" data-volume="0.4"></audio>
+      <audio id="sfx-whoosh-3" src="assets/sfx/whoosh-short.mp3" data-start="5.15" data-duration="0.57" data-track-index="13" data-volume="0.4"></audio>
+      <audio id="sfx-whoosh-4" src="assets/sfx/whoosh-short.mp3" data-start="5.7" data-duration="0.57" data-track-index="14" data-volume="0.4"></audio>
+      <audio id="sfx-click-1" src="assets/sfx/click-soft.mp3" data-start="6.6" data-duration="0.37" data-track-index="15" data-volume="0.6"></audio>
+      <audio id="sfx-impacto-2" src="assets/sfx/impact-bass-1.mp3" data-start="7.15" data-duration="2.1" data-track-index="16" data-volume="0.28"></audio>
+      <audio id="sfx-whoosh-5" src="assets/sfx/whoosh.mp3" data-start="7.75" data-duration="1.2" data-track-index="17" data-volume="0.45"></audio>
+      <audio id="sfx-click-2" src="assets/sfx/click-soft.mp3" data-start="8.45" data-duration="0.37" data-track-index="18" data-volume="0.6"></audio>
+      <audio id="sfx-pop-6" src="assets/sfx/pop.mp3" data-start="9.1" data-duration="0.72" data-track-index="19" data-volume="0.5"></audio>
+      <audio id="sfx-pop-7" src="assets/sfx/pop.mp3" data-start="9.7" data-duration="0.72" data-track-index="20" data-volume="0.5"></audio>
+      <audio id="sfx-click-3" src="assets/sfx/click-soft.mp3" data-start="10.3" data-duration="0.37" data-track-index="21" data-volume="0.7"></audio>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      // Riscos e sublinhados: medir o traço e esconder (svg-path-draw)
+      document.querySelectorAll(".tira svg path").forEach((p) => {
+        const len = p.getTotalLength();
+        p.style.strokeDasharray = `${len}`;
+        p.style.strokeDashoffset = `${len}`;
+      });
+
+      // Cena A: título em duas batidas (kinetic-beat-slam, entradas distintas)
+      tl.fromTo("#tit1", { autoAlpha: 0, scale: 1.35, filter: "blur(14px)" }, { autoAlpha: 1, scale: 1, filter: "blur(0px)", duration: 0.55, ease: "power4.out" }, 0.12);
+      tl.fromTo("#tit2", { autoAlpha: 0, x: -220 }, { autoAlpha: 1, x: 0, duration: 0.5, ease: "expo.out" }, 0.72);
+
+      // Coluna que acusa: fita, três tiras que batem na mesa, riscos à mão
+      tl.fromTo("#fita1", { autoAlpha: 0, scale: 0.6, rotation: -14 }, { autoAlpha: 1, scale: 1, rotation: 0, duration: 0.45, ease: "power3.out" }, 1.6);
+      const acusa = [["#a1", 2.0, 3], ["#a2", 2.55, -4], ["#a3", 3.1, 2]];
+      acusa.forEach(([id, t, rot]) => {
+        tl.fromTo(id, { autoAlpha: 0, scale: 1.25, rotation: rot }, { autoAlpha: 1, scale: 1, rotation: 0, duration: 0.42, ease: "power4.out" }, t);
+        tl.to(id + " .risco", { strokeDashoffset: 0, duration: 0.32, stagger: 0.14, ease: "power2.out" }, t + 0.35);
+      });
+
+      // Coluna que explica: fita, tiras deslizam da direita, sublinhado desenhado
+      tl.fromTo("#fita2", { autoAlpha: 0, scale: 0.6, rotation: 12 }, { autoAlpha: 1, scale: 1, rotation: 0, duration: 0.45, ease: "power3.out" }, 4.2);
+      const explica = [["#e1", 4.6], ["#e2", 5.15], ["#e3", 5.7]];
+      explica.forEach(([id, t]) => {
+        tl.fromTo(id, { autoAlpha: 0, x: 260 }, { autoAlpha: 1, x: 0, duration: 0.5, ease: "expo.out" }, t);
+        tl.to(id + " .sub", { strokeDashoffset: 0, duration: 0.4, ease: "power2.out" }, t + 0.3);
+      });
+
+      // Veredito
+      tl.fromTo("#v1", { autoAlpha: 0, y: 26 }, { autoAlpha: 1, y: 0, duration: 0.4, ease: "power3.out" }, 6.6);
+      tl.fromTo("#v2", { autoAlpha: 0, scale: 1.3, filter: "blur(10px)" }, { autoAlpha: 1, scale: 1, filter: "blur(0px)", duration: 0.5, ease: "power4.out" }, 7.15);
+
+      // Saída da cena A: tudo sobe e some
+      tl.to("#cenaA-conteudo", { autoAlpha: 0, y: -60, duration: 0.4, ease: "power2.in" }, 7.85);
+
+      // Cena B: celular entra com um leve avanço, a tela acende com a capa
+      tl.fromTo("#cenaB-conteudo", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.45, ease: "power2.out" }, 7.9);
+      tl.fromTo("#cenaB-grupo", { scale: 1.06 }, { scale: 1, duration: 4.1, ease: "power1.out" }, 7.9);
+      tl.fromTo("#capa", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.45, ease: "power2.out" }, 8.45);
+      tl.fromTo("#capa .t, #capa .regua, #capa .autor", { y: 14, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.4, stagger: 0.07, ease: "power3.out" }, 8.55);
+
+      // Fecho, assinatura, nota e botão (spring-pop-entrance, sem quique)
+      tl.fromTo("#fecho", { autoAlpha: 0, scale: 1.2, rotation: -3 }, { autoAlpha: 1, scale: 1, rotation: -1.5, duration: 0.45, ease: "power4.out" }, 9.1);
+      tl.fromTo("#assina", { autoAlpha: 0, y: 12 }, { autoAlpha: 1, y: 0, duration: 0.35, ease: "power2.out" }, 9.45);
+      tl.fromTo("#nota", { autoAlpha: 0, scale: 0.5, rotation: 14 }, { autoAlpha: 1, scale: 1, rotation: 0, duration: 0.5, ease: "power3.out" }, 9.7);
+      tl.fromTo("#cta", { autoAlpha: 0, scale: 0.7, y: 20 }, { autoAlpha: 1, scale: 1, y: 0, duration: 0.45, ease: "power3.out" }, 10.3);
+      tl.fromTo("#cta", { scale: 1 }, { scale: 1.04, duration: 0.5, yoyo: true, repeat: 1, ease: "sine.inOut", immediateRender: false }, 11.0);
+
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

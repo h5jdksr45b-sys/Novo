@@ -66,6 +66,7 @@ type Cena = {
   origem?: string;
   deslize?: [number, number];
   desceY?: number;
+  soco?: boolean;
   linhas: Linha[];
 };
 
@@ -343,15 +344,23 @@ const CenaView: React.FC<{ cena: Cena; final: boolean }> = ({
   const t = frame / fps;
   const p = Math.min(1, t / cena.dur);
   const [z0, z1] = cena.zoom ?? [1, 1.06];
-  const escala = interpolate(p, [0, 1], [z0, z1], {
-    easing: Easing.inOut(Easing.sin),
-  });
+  const soco = cena.soco
+    ? interpolate(t, [0, 0.9], [0.22, 0], {
+        extrapolateRight: "clamp",
+        easing: Easing.out(Easing.cubic),
+      })
+    : 0;
+  const escala =
+    soco +
+    interpolate(p, [0, 1], [z0, z1], {
+      easing: Easing.inOut(Easing.sin),
+    });
   const [d0, d1] = cena.deslize ?? [0, 0];
   const dx = interpolate(p, [0, 1], [d0, d1]);
   // Entrada curta a partir do papel e saída leve, para o corte não pesar.
-  const entrada = interpolate(t, [0, 0.25], [0, 1], {
-    extrapolateRight: "clamp",
-  });
+  const entrada = cena.soco
+    ? 1
+    : interpolate(t, [0, 0.25], [0, 1], { extrapolateRight: "clamp" });
   const saida = final
     ? 1
     : interpolate(t, [cena.dur - 0.2, cena.dur], [1, 0.85], {
@@ -496,7 +505,7 @@ const CENAS_CURTAS: Cena[] = [
     img: "05.jpg",
     zoom: [1.14, 1.0],
     linhas: [
-      { texto: "Muitas vezes, ela cresceu num *deserto.*", em: 0.1 },
+      { texto: "Muitas vezes, ela cresceu no *deserto.*", em: 0.1 },
       { texto: "Sem segurança. Sem carinho confiável.", em: 1.4, fina: true },
     ],
   },
@@ -570,9 +579,14 @@ const CENAS_NARRADAS: Cena[] = [
   {
     ...CENAS_CURTAS[0],
     dur: 6.6,
+    soco: true,
     linhas: [
-      { ...CENAS_CURTAS[0].linhas[0], em: 0.2 },
-      { ...CENAS_CURTAS[0].linhas[1], em: 2.9 },
+      { texto: "Mau caráter por ser *borderline?*", em: -1, tamanho: 104 },
+      {
+        texto: "É julgar o *espinho* sem ver o *deserto.*",
+        em: 3.75,
+        fina: true,
+      },
     ],
   },
   {

@@ -1,13 +1,13 @@
 # META ADS CONTEXT: Quem sofre não escolhe como gritar (Dr. Fabio Schmidt)
 _Idioma dos anúncios: português brasileiro · Objetivo principal: vendas do livro na Hotmart (KPI: custo por compra) · Versão 1, rascunho de 19/10/2026_
 
-Fontes deste documento: o PDF da nova edição (lido), o histórico de posts da marca e as instruções do autor. O link da Hotmart não abriu deste ambiente, então preço, formato e página de venda estão marcados como PENDENTE.
+Fontes deste documento: o PDF da nova edição (lido), o histórico de posts da marca e as instruções do autor. O link da Hotmart não abriu deste ambiente, então o preço (R$ 69) foi informado pelo autor.
 
 ## 1. Product Snapshot
 - **Uma linha:** um livro que explica o funcionamento borderline sem tratar a pessoa como mau-caráter e sem tirar dela a responsabilidade.
 - **O que é:** nova edição, revista e ampliada, de 2026. Junta *Quando Escolher Não É Possível* e *Borderline e Dignidade*. São 21 capítulos em 5 partes: o que se costuma pensar, o que acontece por dentro, onde isso aparece (relações, sexo, substâncias, dia difícil), o que pode ser feito (regulação, remédio, família, limites, responsabilidade) e dignidade e cuidado. Traz capítulos novos sobre remédio e sobre autolesão e risco de suicídio, ferramentas para a família e um plano de crise para preencher.
 - **Categoria (a prateleira):** livro sobre transtorno de personalidade borderline em linguagem acessível. Fica entre a psicoeducação e o relato clínico. Não é autoajuda nem tratado acadêmico, como o próprio livro avisa.
-- **Preço:** PENDENTE. **Formato:** e-book de 160 páginas, conforme as peças já prontas em `anuncios/` (busca-4x5 e calma-4x5). A confirmar se existe edição física, porque um carrossel de abril citou livro físico dentro do Protocolo 7 Dias.
+- **Preço:** R$ 69 na Hotmart. **Formato:** e-book de 160 páginas, conforme as peças já prontas em `anuncios/` (busca-4x5 e calma-4x5). A confirmar se existe edição física, porque um carrossel de abril citou livro físico dentro do Protocolo 7 Dias.
 - **Benefício central:** finalmente entender o que acontece por dentro, com palavras que dá para usar com quem está em volta.
 
 ## 2. Buyer Persona(s)
@@ -72,7 +72,7 @@ Ainda não temos avaliações de leitores nem comentários reais coletados, ent�
 - **Autoridade permitida:** médico, pós-graduado em psiquiatria, CRM-SP 183549, dez anos de CAPS. Nunca "psiquiatra" ou "especialista".
 
 ## 5. Offer & Proof
-- **Oferta:** PENDENTE (preço, parcelamento, bônus, se houver).
+- **Oferta:** e-book a R$ 69 na Hotmart, sem bônus informado.
 - **Provas que podemos usar:**
   - O sumário de 21 capítulos.
   - O plano de crise para preencher, que vem no apêndice.

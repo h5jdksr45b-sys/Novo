@@ -20,7 +20,7 @@ O que fica de fora:
 - Antes e depois de ler.
 - Depoimento.
 - Urgência sem data real.
-- Preço, até você me passar.
+- Preço nos anúncios 1 e 2. Ele só aparece no anúncio 3, de retargeting.
 - Buscas do Google inventadas.
 
 ## Anúncio 1: a cena das mensagens
@@ -127,9 +127,9 @@ Dr. Fabio Schmidt, médico, CRM-SP 183549.
 
 **Texto principal (opção A)**
 
-Se você já leu sobre borderline e saiu se sentindo um monstro, este livro foi escrito para você.
+Boa parte do que circula sobre borderline trata o comportamento como prova de caráter. Muita gente lê e sai se sentindo um monstro.
 
-Boa parte do que circula trata o comportamento como prova de caráter. A pessoa que manda vinte mensagens é louca. A que termina às três e implora às nove é manipuladora.
+A pessoa que manda vinte mensagens é louca. A que termina às três e implora às nove é manipuladora.
 
 Este e-book faz outra leitura. Ele explica o que acontece por dentro, sem tirar de ninguém a responsabilidade pelo que faz depois.
 
@@ -161,7 +161,7 @@ Dr. Fabio Schmidt, médico, pós-graduado em psiquiatria, CRM-SP 183549.
 
 **Afirmação principal (escolha 1):**
 1. Explica sem acusar. Sem passar pano.
-2. Um livro sobre borderline que não te trata como suspeita.
+2. Um livro sobre borderline que não trata ninguém como suspeito.
 3. Para quem cansou de ser explicado pelos outros.
 
 **Subtítulo:** Quem sofre não escolhe como gritar
@@ -183,12 +183,12 @@ Quem sofre não escolhe como gritar é o meu livro sobre o funcionamento borderl
 
 Foi escrito para três leitores: quem vive com isso, quem convive e o profissional que atende. São 21 capítulos, com um capítulo sobre remédio, ferramentas para a família e um plano de crise para preencher no fim.
 
-E-book de 160 páginas. Acesso imediato pela Hotmart.
+E-book de 160 páginas, R$ 69. Acesso imediato pela Hotmart.
 
 Dr. Fabio Schmidt, médico, pós-graduado em psiquiatria, CRM-SP 183549.
 
 **Título do Meta:** Quem sofre não escolhe como gritar
-**Descrição:** E-book de 160 páginas. Acesso imediato.
+**Descrição:** E-book de 160 páginas por R$ 69. Acesso imediato.
 **Botão do Meta:** Comprar
 
 ## Imagens e montagem
@@ -212,7 +212,17 @@ Ritmo da animação no 9:16, com 8 a 12 segundos:
 
 O texto não entra nos 250 px de cima nem de baixo, que ficam por trás da interface do Instagram.
 
+## Conta do anúncio
+
+- Preço do e-book: R$ 69.
+- Taxa da Hotmart: confira na sua conta. Pela tabela padrão que conheço (9,9% mais R$ 1 por venda), sobram cerca de R$ 61.
+- **Teto por venda: cerca de R$ 61.** Custo por compra abaixo disso, o anúncio se paga. Acima disso, só vale como porta de entrada para o Protocolo 7 Dias ou para consulta, com um limite que você define.
+
+## Política da Meta (atributos pessoais)
+
+Nenhum texto afirma ou sugere que a pessoa que vê o anúncio tem borderline. Frases em segunda pessoa descrevem a cena (você manda a mensagem), nunca o diagnóstico. A abertura da opção A do anúncio 2 e a afirmação 2 do anúncio 3 foram reescritas por isso.
+
 ## Pendências
-1. Preço e parcelamento. Só entram no anúncio 3, se fizer sentido.
-2. Corrigir a página 6 do livro, onde está escrito "escrevo como psiquiatra", antes de levar tráfego.
+1. Aplicar no livro as correções de `anuncios/ajustes-antes-de-subir.md` e subir o PDF novo na Hotmart.
+2. Conferir o pixel da Meta no produto do livro na Hotmart.
 3. A peça busca-4x5 sai de circulação, porque as buscas foram inventadas.

@@ -319,9 +319,6 @@ const Gancho1: React.FC = () => {
   const sombra = { textShadow: "0 6px 30px rgba(0,0,0,0.55)" };
   return (
     <AbsoluteFill style={sombra}>
-      <Entra at={f(0.12)} style={{ ...linha, top: 1080, ...serif, fontSize: 64, opacity: 0.9 }}>
-        pega
-      </Entra>
       <Entra at={f(0.42)} style={{ ...linha, top: 1150 }}>
         <span style={serif}>o </span>
         <span style={sans}>gosto.</span>
@@ -400,10 +397,10 @@ const Cerne: React.FC = () => {
   return (
     <AbsoluteFill style={{ backgroundColor: PRETO, color: "white", transform: `translate(${tremor}px, ${tremor * 0.6}px)` }}>
       <div style={{ position: "absolute", top: 640, left: 0, right: 0, textAlign: "center" }}>
-        <Entra at={L(6.0)} style={{ fontFamily: SERIF, fontStyle: "italic", fontSize: 110 }}>
+        <Entra at={L(6.0)} style={{ fontFamily: SERIF, fontStyle: "italic", fontSize: 140 }}>
           o cerne do
         </Entra>
-        <Entra at={L(6.55)} style={{ fontFamily: SANS, fontWeight: 800, fontSize: 70, letterSpacing: -1.5, marginTop: 6 }}>
+        <Entra at={L(6.55)} style={{ fontFamily: SANS, fontWeight: 800, fontSize: 80, letterSpacing: -1.5, marginTop: 6 }}>
           transtorno borderline
         </Entra>
         <Entra at={L(7.9)} style={{ fontFamily: SERIF, fontStyle: "italic", fontSize: 72, marginTop: 70, opacity: 0.8 }}>
@@ -470,15 +467,15 @@ const Propria: React.FC = () => {
         transform: `translateX(${x}px) scale(0.8)`,
         transformOrigin: "50% 100%",
         opacity: op,
-        filter: `${pb} brightness(0.2)`,
+        filter: `${pb} brightness(0.55)`,
       }}
     />
   );
   return (
     <Chega de="lado">
       <AbsoluteFill style={{ backgroundColor: VERMELHO }}>
-        {eco(-330, 8, 0.35)}
-        {eco(330, 16, 0.35)}
+        {eco(-330, 8, 0.22)}
+        {eco(330, 16, 0.22)}
         <Recorte
           arquivo="cut_propria.webm"
           inicio={-(o - 404)}
@@ -743,7 +740,7 @@ const Aprimora: React.FC = () => {
       </Entra>
       <Entra at={L(35.5)} de={1.5} style={{ position: "absolute", top: 1110, left: 0, right: 0, textAlign: "center" }}>
         <div style={{ fontFamily: SANS, fontWeight: 700, fontSize: 54, marginBottom: 26 }}>reforça pra você mesmo que</div>
-        <div style={{ fontFamily: Anton, fontSize: 200, lineHeight: 1.05 }}>
+        <div style={{ fontFamily: Anton, fontSize: 168, lineHeight: 1.05 }}>
           VOCÊ É <span style={{ backgroundColor: VERMELHO, padding: "0 18px" }}>BOM</span>
         </div>
       </Entra>
@@ -798,7 +795,7 @@ const Melhorando: React.FC = () => {
       </div>
       <Recorte arquivo="cut_melhor.webm" inicio={-(o - 1126)} />
       <Entra at={L(37.85)} style={{ position: "absolute", top: 1330, left: 0, right: 0, textAlign: "center", fontFamily: SANS, fontWeight: 800, fontSize: 60, color: "white", letterSpacing: -1, textShadow: "0 6px 30px rgba(0,0,0,0.7)" }}>
-        melhorando a identidade,
+        melhorando a
       </Entra>
       <div style={{ position: "absolute", top: 1470, left: 90, right: 90, textAlign: "center", color: "white", fontFamily: SERIF, fontStyle: "italic", fontSize: 92, lineHeight: 1.05, textShadow: "0 6px 30px rgba(0,0,0,0.7)" }}>
         {fala.map((w, i) => (
@@ -836,45 +833,36 @@ const Final: React.FC = () => {
 
 type Sfx = [string, number, number];
 const SONS: Sfx[] = [
-  ["pop", 0.42, 0.35],
-  ["pop", 1.0, 0.35],
-  ["pop", 1.48, 0.4],
-  ["whoosh", 2.3, 0.55],
-  ["swoosh", 3.0, 0.3],
-  ["impact", 4.98, 0.5],
-  ["whoosh", 5.82, 0.5],
-  ["impact", 8.2, 0.85],
-  ["swoosh", 8.95, 0.35],
-  ["swoosh", 10.42, 0.4],
-  ["pop", 11.72, 0.4],
-  ["pop", 12.9, 0.45],
-  ["whoosh", 13.58, 0.55],
-  ["thud", 15.5, 0.6],
-  ["swoosh", 16.55, 0.35],
-  ["swoosh", 19.3, 0.4],
-  ["whoosh", 20.52, 0.55],
-  ["pop", 22.8, 0.45],
-  ["whoosh", 24.5, 0.4],
-  ["thud", 24.75, 0.55],
-  ["whoosh", 25.4, 0.45],
-  ["whoosh", 29.66, 0.5],
-  ["stop", 31.47, 0.55],
-  ["thud", 31.47, 0.6],
-  ["swoosh", 32.55, 0.35],
-  ["swoosh", 32.95, 0.35],
-  ["thud", 35.5, 0.55],
-  ["swoosh", 37.4, 0.35],
-  ["riser", 36.88, 0.45],
-  ["impact", 38.66, 0.75],
-  ["swoosh", 41.0, 0.3],
-  ["whoosh", 43.25, 0.4],
-  ["shimmer", 43.4, 0.4],
+  ["pop", 0.42, 0.22],
+  ["pop", 1.0, 0.22],
+  ["pop", 1.48, 0.25],
+  ["whoosh", 2.3, 0.32],
+  ["thud", 4.98, 0.35],
+  ["whoosh", 5.82, 0.3],
+  ["impact", 8.2, 0.5],
+  ["swoosh", 10.42, 0.2],
+  ["pop", 11.72, 0.22],
+  ["pop", 12.9, 0.25],
+  ["whoosh", 13.58, 0.32],
+  ["thud", 15.5, 0.32],
+  ["swoosh", 19.3, 0.2],
+  ["whoosh", 20.52, 0.3],
+  ["pop", 22.8, 0.25],
+  ["thud", 24.75, 0.32],
+  ["whoosh", 25.4, 0.26],
+  ["whoosh", 29.66, 0.3],
+  ["stop", 31.47, 0.3],
+  ["swoosh", 32.95, 0.2],
+  ["thud", 35.5, 0.32],
+  ["riser", 36.88, 0.26],
+  ["impact", 38.66, 0.42],
+  ["shimmer", 43.4, 0.25],
 ];
 
 // Teclas do diálogo digitado e tique do relógio.
 const TECLAS: number[] = [];
-for (let t = 25.6; t < 27.4; t += 0.085) TECLAS.push(t);
-for (let t = 28.15; t < 29.45; t += 0.06) TECLAS.push(t);
+for (let t = 25.6; t < 27.4; t += 0.13) TECLAS.push(t);
+for (let t = 28.15; t < 29.45; t += 0.1) TECLAS.push(t);
 const TIQUES: number[] = [];
 for (let t = 29.9; t < 31.45; t += 0.25) TIQUES.push(t);
 
@@ -891,12 +879,12 @@ const Som: React.FC = () => (
     ))}
     {TECLAS.map((t, i) => (
       <Sequence key={`k${i}`} from={f(t)} durationInFrames={6} layout="none">
-        <Audio src={dir("sfx/key.wav")} volume={0.18 + (i % 3) * 0.04} playbackRate={0.9 + (i % 4) * 0.07} />
+        <Audio src={dir("sfx/key.wav")} volume={0.1 + (i % 3) * 0.03} playbackRate={0.9 + (i % 4) * 0.07} />
       </Sequence>
     ))}
     {TIQUES.map((t, i) => (
       <Sequence key={`t${i}`} from={f(t)} durationInFrames={6} layout="none">
-        <Audio src={dir(i % 2 ? "sfx/tock.wav" : "sfx/tick.wav")} volume={0.3} />
+        <Audio src={dir(i % 2 ? "sfx/tock.wav" : "sfx/tick.wav")} volume={0.18} />
       </Sequence>
     ))}
   </>

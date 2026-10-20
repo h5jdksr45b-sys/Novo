@@ -802,8 +802,11 @@ for (let t = 28.15; t < 29.45; t += 0.1) TECLAS.push(t);
 const Som: React.FC = () => (
   <>
     <Audio
-      src={dir("sfx/music.wav")}
-      volume={(fr) => interpolate(fr, [0, 20, FALA - 10, FALA + 10, DURACAO - 10, DURACAO], [0, 0.07, 0.07, 0.22, 0.22, 0], { extrapolateRight: "clamp" })}
+      // Trilha do Suno (piano, baixo acústico, vassourinha), 83 BPM, a partir
+      // do segundo 3,7: os cortes caem perto das batidas e os dois IDENTIDADE
+      // coincidem com ataques da música.
+      src={dir("musica_suno.wav")}
+      volume={(fr) => interpolate(fr, [0, 12, FALA - 8, FALA + 8, DURACAO], [0, 0.15, 0.15, 0.36, 0.36], { extrapolateRight: "clamp" })}
     />
     {SONS.map(([nome, t, v], i) => (
       <Sequence key={`s${i}`} from={Math.max(0, f(t))} durationInFrames={f(2)} layout="none">

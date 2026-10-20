@@ -22,16 +22,22 @@ import { WORDS } from "./words";
 // sem serifa pesada, retícula, grão e tela preta cinematográfica.
 
 export const FPS = 30;
-const FALA = 1300; // quadros do corte editado
+// Trecho cortado depois: quadros 497 a 617 do corte de 43s (frase vaga
+// sobre não ver o cerne). Os tempos abaixo seguem a linha antiga e passam
+// por fr() e f(), que pulam o trecho.
+const CORTE_DE = 497;
+const CORTE_ATE = 618;
+const fr = (q: number) => (q < CORTE_DE ? q : q >= CORTE_ATE ? q - (CORTE_ATE - CORTE_DE) : CORTE_DE);
+const FALA = fr(1300); // quadros do corte editado
 const FIM = 50; // cartão final
 export const DURACAO = FALA + FIM;
 
 const VERMELHO = "#c83c1e";
 const PAPEL = "#ece8e1";
-const BEGE = "#e6dfd2";
 const PRETO = "#0d0d0d";
 
-const f = (s: number) => Math.round(s * FPS);
+const f = (s: number) => fr(Math.round(s * FPS));
+const seg = (s: number) => f(s) / FPS;
 const dir = (p: string) => staticFile(`identidade/${p}`);
 
 // Trechos do corte, em segundos. A = câmera, B = cena gráfica.
@@ -41,7 +47,6 @@ const CENAS = {
   cerne: [5.9, 8.967],
   existir: [8.967, 13.667],
   propria: [13.667, 16.567],
-  cerne2: [16.567, 20.6],
   vazio: [20.6, 25.467],
   doutor: [25.467, 29.733],
   tempo: [29.733, 32.567],
@@ -58,7 +63,6 @@ const dur = (c: Cena) => f(CENAS[c][1]) - f(CENAS[c][0]);
 const ZOOM: Partial<Record<Cena, number>> = {
   gancho1: 1.0,
   existir: 1.13,
-  cerne2: 1.0,
   aprimora: 1.12,
   terapia: 1.0,
 };
@@ -69,7 +73,6 @@ const SEM_LEGENDA: [number, number][] = [
   [2.4, 8.967],
   [10.4, 13.667],
   [13.667, 16.567],
-  [19.3, 20.6],
   [20.6, 32.567],
   [32.9, 33.9],
   [35.45, 37.733],
@@ -198,11 +201,10 @@ const Assinatura: React.FC<{ escuro?: boolean }> = ({ escuro }) => (
 // Câmera: o corte editado inteiro, com zoom alternado por trecho.
 const Camera: React.FC<{ filtro?: string; mudo?: boolean }> = ({ filtro, mudo }) => {
   const frame = useCurrentFrame();
-  const t = frame / FPS;
   let z = 1;
   for (const nome of Object.keys(CENAS) as Cena[]) {
     const [a, b] = CENAS[nome];
-    if (t >= a && t < b) {
+    if (frame >= f(a) && frame < f(b)) {
       const base = ZOOM[nome] ?? 1.05;
       const local = (frame - f(a)) / (f(b) - f(a));
       z = nome === "melhorando" ? 1 : base + 0.035 * local;
@@ -217,7 +219,7 @@ const Camera: React.FC<{ filtro?: string; mudo?: boolean }> = ({ filtro, mudo })
   return (
     <AbsoluteFill style={{ overflow: "hidden", backgroundColor: PRETO }}>
       <AbsoluteFill style={{ transform: `scale(${z})`, transformOrigin: "50% 22%", filter: filtro }}>
-        <OffthreadVideo src={dir("base.mp4")} muted={mudo} />
+        <OffthreadVideo src={dir("base_corte.mp4")} muted={mudo} />
       </AbsoluteFill>
     </AbsoluteFill>
   );
@@ -248,10 +250,13 @@ const Recorte: React.FC<{
 const paginas = (() => {
   const out: { palavras: [string, number][]; de: number; ate: number }[] = [];
   let atual: [string, number][] = [];
-  WORDS.forEach((w, i) => {
+  const palavras = WORDS.filter(([, s]) => s < CORTE_DE / FPS || s >= CORTE_ATE / FPS).map(
+    ([w, s]) => [w, seg(s)] as [string, number],
+  );
+  palavras.forEach((w, i) => {
     atual.push(w);
     const fimFrase = /[.,?]$/.test(w[0]);
-    if (atual.length >= 3 || fimFrase || i === WORDS.length - 1) {
+    if (atual.length >= 3 || fimFrase || i === palavras.length - 1) {
       out.push({ palavras: atual, de: atual[0][1], ate: 0 });
       atual = [];
     }
@@ -267,7 +272,7 @@ const paginas = (() => {
 const Legenda: React.FC = () => {
   const frame = useCurrentFrame();
   const t = frame / FPS + 0.04;
-  if (SEM_LEGENDA.some(([a, b]) => t >= a && t < b)) return null;
+  if (SEM_LEGENDA.some(([a, b]) => t >= seg(a) && t < seg(b))) return null;
   const p = paginas.find((x) => t >= x.de && t < x.ate);
   if (!p) return null;
   return (
@@ -319,6 +324,34 @@ const Gancho1: React.FC = () => {
   const sombra = { textShadow: "0 6px 30px rgba(0,0,0,0.55)" };
   return (
     <AbsoluteFill style={sombra}>
+      {/* Gancho legível desde o primeiro quadro, sem animação de entrada. */}
+      <div
+        style={{
+          position: "absolute",
+          top: 235,
+          left: 80,
+          right: 80,
+          textAlign: "center",
+          textShadow: "none",
+        }}
+      >
+        <span
+          style={{
+            fontFamily: SANS,
+            fontWeight: 800,
+            fontSize: 62,
+            letterSpacing: -1.5,
+            lineHeight: 1.35,
+            color: "white",
+            backgroundColor: PRETO,
+            padding: "6px 22px",
+            boxDecorationBreak: "clone",
+            WebkitBoxDecorationBreak: "clone",
+          }}
+        >
+          Você pega de quem está perto
+        </span>
+      </div>
       <Entra at={f(0.42)} style={{ ...linha, top: 1150 }}>
         <span style={serif}>o </span>
         <span style={sans}>gosto.</span>
@@ -454,143 +487,87 @@ const Existir: React.FC = () => {
   );
 };
 
-const Propria: React.FC = () => {
-  const o = ini("propria");
-  const L = (s: number) => f(s) - o;
-  const pb = "grayscale(1) contrast(1.3) brightness(1.05)";
-  const eco = (x: number, atraso: number, op: number) => (
-    <Recorte
-      arquivo="cut_propria.webm"
-      inicio={-(o - 404)}
-      atraso={atraso}
-      style={{
-        transform: `translateX(${x}px) scale(0.8)`,
-        transformOrigin: "50% 100%",
-        opacity: op,
-        filter: `${pb} brightness(0.55)`,
-      }}
-    />
-  );
+// Tomada de apoio (B-roll gerada), com leve aproximação e cor contida.
+const Apoio: React.FC<{ arquivo: string; velocidade?: number; corteInicio?: number }> = ({
+  arquivo,
+  velocidade = 1,
+  corteInicio = 0,
+}) => {
+  const frame = useCurrentFrame();
+  const { durationInFrames } = useVideoConfig();
   return (
-    <Chega de="lado">
-      <AbsoluteFill style={{ backgroundColor: VERMELHO }}>
-        {eco(-330, 8, 0.22)}
-        {eco(330, 16, 0.22)}
-        <Recorte
-          arquivo="cut_propria.webm"
-          inicio={-(o - 404)}
-          style={{ transform: "scale(0.9)", transformOrigin: "50% 100%", filter: pb }}
+    <AbsoluteFill style={{ overflow: "hidden", backgroundColor: PRETO }}>
+      <AbsoluteFill
+        style={{
+          scale: interpolate(frame, [0, durationInFrames], [1.0, 1.06]),
+          filter: "saturate(0.82) contrast(1.06)",
+        }}
+      >
+        <OffthreadVideo
+          src={dir(arquivo)}
+          muted
+          playbackRate={velocidade}
+          trimBefore={corteInicio}
+          style={{ width: "100%", height: "100%", objectFit: "cover" }}
         />
-        <AbsoluteFill style={{ background: "linear-gradient(180deg, rgba(0,0,0,0) 58%, rgba(13,13,13,0.92) 82%)" }} />
-        <div style={{ position: "absolute", left: 0, right: 0, top: 1420, textAlign: "center", color: "white" }}>
-          <Entra at={L(13.9)} style={{ fontFamily: SANS, fontWeight: 800, fontSize: 64, letterSpacing: -1 }}>
-            alguém sendo
-          </Entra>
-          <Entra
-            at={L(15.5)}
-            style={{ fontFamily: SERIF, fontStyle: "italic", fontSize: 150, lineHeight: 1 }}
-          >
-            a própria pessoa.
-          </Entra>
-        </div>
       </AbsoluteFill>
-    </Chega>
-  );
-};
-
-const Cerne2: React.FC = () => {
-  const o = ini("cerne2");
-  const L = (s: number) => f(s) - o;
-  return (
-    <AbsoluteFill style={{ color: "white", textShadow: "0 6px 30px rgba(0,0,0,0.6)" }}>
-      <Entra at={L(19.3)} style={{ position: "absolute", top: 1230, left: 0, right: 0, textAlign: "center" }}>
-        <div style={{ fontFamily: SANS, fontWeight: 700, fontSize: 56 }}>e no fim não vê</div>
-        <div style={{ fontFamily: SERIF, fontStyle: "italic", fontSize: 190, lineHeight: 1 }}>o cerne.</div>
-      </Entra>
     </AbsoluteFill>
   );
 };
 
-// Círculo em retícula: pontos maiores perto da borda (vazio) ou cheios (outro).
-const Reticula: React.FC<{ r: number; cheio: boolean; cor: string; p: number }> = ({ r, cheio, cor, p }) => {
-  const passo = 22;
-  const pontos: React.ReactNode[] = [];
-  for (let y = -r; y <= r; y += passo) {
-    for (let x = -r; x <= r; x += passo) {
-      const d = Math.hypot(x, y) / r;
-      if (d > 1) continue;
-      const tam = cheio ? 9.5 * (1 - d * d * 0.55) : 9.5 * Math.max(0, (d - 0.62) / 0.38) ** 1.4;
-      if (tam < 0.6) continue;
-      pontos.push(<circle key={`${x}_${y}`} cx={x + r} cy={y + r} r={tam * p} fill={cor} />);
-    }
-  }
+const Sombra: React.FC<{ topo?: boolean }> = ({ topo }) => (
+  <AbsoluteFill
+    style={{
+      background: topo
+        ? "linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 35%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.75) 85%)"
+        : "linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(0,0,0,0.8) 85%)",
+    }}
+  />
+);
+
+const Propria: React.FC = () => {
+  const o = ini("propria");
+  const L = (s: number) => f(s) - o;
   return (
-    <svg width={r * 2} height={r * 2} style={{ overflow: "visible" }}>
-      {pontos}
-    </svg>
+    <Chega de="lado">
+      <Apoio arquivo="broll_cafe.mp4" corteInicio={10} />
+      <Sombra />
+      <div style={{ position: "absolute", left: 0, right: 0, top: 1360, textAlign: "center", color: "white" }}>
+        <Entra at={L(13.9)} style={{ fontFamily: SANS, fontWeight: 800, fontSize: 60, letterSpacing: -1 }}>
+          alguém sendo
+        </Entra>
+        <Entra at={L(15.5)} style={{ fontFamily: SERIF, fontStyle: "italic", fontSize: 140, lineHeight: 1 }}>
+          a própria pessoa.
+        </Entra>
+      </div>
+    </Chega>
   );
 };
 
 const Vazio: React.FC = () => {
-  const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
   const o = ini("vazio");
   const L = (s: number) => f(s) - o;
-  const pv = entrada(frame, L(22.8), fps, 18);
-  const po = spring({ frame: frame - L(24.55), fps, config: { damping: 16, mass: 0.9 } });
-  const giro = frame * 0.15;
   return (
     <Chega>
-      <AbsoluteFill style={{ backgroundColor: BEGE, color: PRETO }}>
-        <div style={{ position: "absolute", top: 330, left: 0, right: 0, textAlign: "center" }}>
-          <Entra at={L(20.8)} style={{ fontFamily: SANS, fontWeight: 700, fontSize: 52 }}>
-            acaba sempre
-          </Entra>
-          <Entra at={L(21.7)} style={{ fontFamily: SANS, fontWeight: 900, fontSize: 116, letterSpacing: -4 }}>
-            preenchendo
-          </Entra>
-          <Entra at={L(22.8)} style={{ fontFamily: SERIF, fontStyle: "italic", fontSize: 140, lineHeight: 0.9 }}>
-            o vazio
-          </Entra>
-        </div>
-        <div
-          style={{
-            position: "absolute",
-            left: 540 - 300,
-            top: 860,
-            transform: `rotate(${giro}deg) scale(${0.7 + 0.3 * pv})`,
-            opacity: pv,
-          }}
-        >
-          <Reticula r={300} cheio={false} cor={PRETO} p={1} />
-        </div>
-        <div
-          style={{
-            position: "absolute",
-            left: 540 - 190 + (1 - po) * 700,
-            top: 860 + 110,
-            opacity: frame >= L(24.5) ? 1 : 0,
-          }}
-        >
-          <Reticula r={190} cheio cor={VERMELHO} p={1} />
-        </div>
-        <Entra
-          at={L(24.6)}
-          style={{
-            position: "absolute",
-            top: 1540,
-            left: 0,
-            right: 0,
-            textAlign: "center",
-            fontFamily: SERIF,
-            fontStyle: "italic",
-            fontSize: 130,
-          }}
-        >
-          com o outro.
+      <Apoio arquivo="broll_celular.mp4" velocidade={0.8} />
+      <Sombra topo />
+      <div style={{ position: "absolute", top: 330, left: 0, right: 0, textAlign: "center", color: "white", textShadow: "0 4px 24px rgba(0,0,0,0.6)" }}>
+        <Entra at={L(20.8)} style={{ fontFamily: SANS, fontWeight: 700, fontSize: 52 }}>
+          acaba sempre
         </Entra>
-        <Grao forca={0.18} />
-      </AbsoluteFill>
+        <Entra at={L(21.7)} style={{ fontFamily: SANS, fontWeight: 900, fontSize: 108, letterSpacing: -4 }}>
+          preenchendo
+        </Entra>
+        <Entra at={L(22.8)} style={{ fontFamily: SERIF, fontStyle: "italic", fontSize: 130, lineHeight: 0.9 }}>
+          o vazio
+        </Entra>
+      </div>
+      <Entra
+        at={L(24.6)}
+        style={{ position: "absolute", top: 1440, left: 0, right: 0, textAlign: "center", fontFamily: SERIF, fontStyle: "italic", fontSize: 130, color: "white" }}
+      >
+        com o outro.
+      </Entra>
     </Chega>
   );
 };
@@ -659,64 +636,25 @@ const Tempo: React.FC = () => {
   const o = ini("tempo");
   const L = (s: number) => f(s) - o;
   const para = L(31.47);
-  const anda = Math.min(frame, para);
-  const ponteiro = -90 + anda * 12;
-  const freezeFim = para + 16;
-  const r = 380;
-  const marcas = Array.from({ length: 60 }, (_, i) => i);
   return (
     <Chega de="lado">
-      <AbsoluteFill style={{ backgroundColor: PRETO }}>
-        <div style={{ position: "absolute", left: 540 - r, top: 560 - r + 160, width: r * 2, height: r * 2, borderRadius: "50%", overflow: "hidden", backgroundColor: VERMELHO }}>
-          <div style={{ position: "absolute", width: 1080, height: 1920, left: r - 540, top: -10, filter: "grayscale(1) contrast(1.15)" }}>
-            <Freeze frame={para} active={frame >= para && frame < freezeFim}>
-              <CameraNaCena o={o} />
-            </Freeze>
-          </div>
-        </div>
-        <svg width="1080" height="1920" style={{ position: "absolute" }}>
-          <g transform={`translate(540 ${720})`}>
-            {marcas.map((i) => {
-              const a = (i / 60) * Math.PI * 2;
-              const grande = i % 5 === 0;
-              const r1 = r + 30;
-              const r2 = r + (grande ? 78 : 52);
-              return (
-                <line
-                  key={i}
-                  x1={Math.cos(a) * r1}
-                  y1={Math.sin(a) * r1}
-                  x2={Math.cos(a) * r2}
-                  y2={Math.sin(a) * r2}
-                  stroke="white"
-                  strokeWidth={grande ? 6 : 3}
-                  opacity={grande ? 0.95 : 0.5}
-                />
-              );
-            })}
-            <line
-              x1={0}
-              y1={0}
-              x2={Math.cos((ponteiro * Math.PI) / 180) * (r + 70)}
-              y2={Math.sin((ponteiro * Math.PI) / 180) * (r + 70)}
-              stroke={VERMELHO}
-              strokeWidth={7}
-              strokeLinecap="round"
-            />
-          </g>
-        </svg>
-        <div style={{ position: "absolute", top: 1320, left: 0, right: 0, textAlign: "center", color: "white" }}>
-          <Entra at={L(30.0)} style={{ fontFamily: SANS, fontWeight: 700, fontSize: 52 }}>
-            aquela coisa em que
+      <Freeze frame={para} active={frame >= para}>
+        <Apoio arquivo="broll_desenho.mp4" corteInicio={6} />
+      </Freeze>
+      <Sombra />
+      <div style={{ position: "absolute", top: 1330, left: 0, right: 0, textAlign: "center", color: "white" }}>
+        <Entra at={L(30.0)} style={{ fontFamily: SANS, fontWeight: 700, fontSize: 52 }}>
+          aquela coisa em que
+        </Entra>
+        <div style={{ fontFamily: SERIF, fontStyle: "italic", fontSize: 150, lineHeight: 1 }}>
+          <Entra at={L(31.2)} style={{ display: "inline-block" }}>
+            o tempo&nbsp;
           </Entra>
-          <Entra at={L(31.2)} style={{ fontFamily: SERIF, fontStyle: "italic", fontSize: 140, lineHeight: 1 }}>
-            o tempo
-          </Entra>
-          <Entra at={para} de={1.7} style={{ fontFamily: Anton, fontSize: 230, color: VERMELHO, lineHeight: 1 }}>
-            PARA
+          <Entra at={para} style={{ display: "inline-block", color: "#ff6a4a" }}>
+            para.
           </Entra>
         </div>
-      </AbsoluteFill>
+      </div>
     </Chega>
   );
 };
@@ -793,7 +731,7 @@ const Melhorando: React.FC = () => {
           );
         })}
       </div>
-      <Recorte arquivo="cut_melhor.webm" inicio={-(o - 1126)} />
+      <Recorte arquivo="cut_melhor.webm" inicio={-(o - fr(1126))} />
       <Entra at={L(37.85)} style={{ position: "absolute", top: 1330, left: 0, right: 0, textAlign: "center", fontFamily: SANS, fontWeight: 800, fontSize: 60, color: "white", letterSpacing: -1, textShadow: "0 6px 30px rgba(0,0,0,0.7)" }}>
         melhorando a
       </Entra>
@@ -845,13 +783,11 @@ const SONS: Sfx[] = [
   ["pop", 12.9, 0.25],
   ["whoosh", 13.58, 0.32],
   ["thud", 15.5, 0.32],
-  ["swoosh", 19.3, 0.2],
   ["whoosh", 20.52, 0.3],
-  ["pop", 22.8, 0.25],
   ["thud", 24.75, 0.32],
   ["whoosh", 25.4, 0.26],
   ["whoosh", 29.66, 0.3],
-  ["stop", 31.47, 0.3],
+  ["stop", 31.47, 0.18],
   ["swoosh", 32.95, 0.2],
   ["thud", 35.5, 0.32],
   ["riser", 36.88, 0.26],
@@ -859,13 +795,10 @@ const SONS: Sfx[] = [
   ["shimmer", 43.4, 0.25],
 ];
 
-// Teclas do diálogo digitado e tique do relógio.
+// Teclas do diálogo digitado.
 const TECLAS: number[] = [];
 for (let t = 25.6; t < 27.4; t += 0.13) TECLAS.push(t);
 for (let t = 28.15; t < 29.45; t += 0.1) TECLAS.push(t);
-const TIQUES: number[] = [];
-for (let t = 29.9; t < 31.45; t += 0.25) TIQUES.push(t);
-
 const Som: React.FC = () => (
   <>
     <Audio
@@ -880,11 +813,6 @@ const Som: React.FC = () => (
     {TECLAS.map((t, i) => (
       <Sequence key={`k${i}`} from={f(t)} durationInFrames={6} layout="none">
         <Audio src={dir("sfx/key.wav")} volume={0.1 + (i % 3) * 0.03} playbackRate={0.9 + (i % 4) * 0.07} />
-      </Sequence>
-    ))}
-    {TIQUES.map((t, i) => (
-      <Sequence key={`t${i}`} from={f(t)} durationInFrames={6} layout="none">
-        <Audio src={dir(i % 2 ? "sfx/tock.wav" : "sfx/tick.wav")} volume={0.18} />
       </Sequence>
     ))}
   </>
@@ -924,9 +852,6 @@ export const IdentidadeReel: React.FC = () => {
       <B c="propria">
         <Propria />
       </B>
-      <B c="cerne2">
-        <Cerne2 />
-      </B>
       <B c="vazio">
         <Vazio />
       </B>
@@ -960,7 +885,6 @@ export const IdentidadeReel: React.FC = () => {
 // Assinatura escura nas cenas de fundo claro.
 const AssinaturaAuto: React.FC = () => {
   const frame = useCurrentFrame();
-  const t = frame / FPS;
-  const claro = (["gancho2", "vazio", "doutor"] as Cena[]).some((c) => t >= CENAS[c][0] && t < CENAS[c][1]);
+  const claro = (["gancho2", "doutor"] as Cena[]).some((c) => frame >= f(CENAS[c][0]) && frame < f(CENAS[c][1]));
   return <Assinatura escuro={claro} />;
 };

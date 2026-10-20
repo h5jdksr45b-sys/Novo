@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/vendor/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "EB Garamond"; font-weight: 400; src: url("assets/fonts/EBGaramond-400.woff2") format("woff2"); }
+      @font-face { font-family: "EB Garamond"; font-weight: 400; font-style: italic; src: url("assets/fonts/EBGaramond-400i.woff2") format("woff2"); }
+      @font-face { font-family: "EB Garamond"; font-weight: 500; src: url("assets/fonts/EBGaramond-500.woff2") format("woff2"); }
+      @font-face { font-family: "EB Garamond"; font-weight: 600; src: url("assets/fonts/EBGaramond-600.woff2") format("woff2"); }
+      @font-face { font-family: "Caveat"; font-weight: 700; src: url("assets/fonts/Caveat-700.woff2") format("woff2"); }
+      @font-face { font-family: "Caveat"; font-weight: 500; src: url("assets/fonts/Caveat-500.woff2") format("woff2"); }
+      @font-face { font-family: "Inter"; font-weight: 400; src: url("assets/fonts/Inter-400.woff2") format("woff2"); }
+      @font-face { font-family: "Inter"; font-weight: 500; src: url("assets/fonts/Inter-500.woff2") format("woff2"); }
+      @font-face { font-family: "Inter"; font-weight: 600; src: url("assets/fonts/Inter-600.woff2") format("woff2"); }
+
+      :root {
+        --tinta: #1f1a17;
+        --creme: #f4efe4;
+        --creme-apagado: #b9b1a4;
+        --terracota: #d0693f;
+        --balao: #2b2622;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #171412; }
+      #root { position: relative; width: 1080px; height: 1920px; font-family: "EB Garamond", serif; color: var(--creme); }
+      .camada { position: absolute; inset: 0; width: 1080px; height: 1920px; }
+      img.fundo { position: absolute; inset: 0; width: 1080px; height: 1920px; object-fit: cover; }
+
+      /* Cena A: a conversa */
+      #hora { position: absolute; left: 0; top: 330px; width: 1080px; text-align: center; font-family: "Inter", sans-serif; font-weight: 400; font-size: 132px; letter-spacing: 0.04em; color: var(--creme); visibility: hidden; }
+      #hora small { display: block; font-size: 30px; letter-spacing: 0.3em; color: var(--creme-apagado); margin-top: 6px; }
+
+      #chat { position: absolute; left: 130px; top: 600px; width: 820px; height: 760px; border-radius: 44px; background: #141210; border: 2px solid rgba(255,255,255,0.08); overflow: hidden; visibility: hidden; }
+      #chat .topo { height: 110px; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; gap: 18px; padding: 0 36px; }
+      #chat .topo .foto { width: 58px; height: 58px; border-radius: 50%; background: #3a342f; }
+      #chat .topo .nome { width: 190px; height: 18px; border-radius: 9px; background: #3a342f; }
+      #chat .lista { position: absolute; left: 0; right: 0; bottom: 34px; display: flex; flex-direction: column; align-items: flex-end; gap: 12px; padding: 0 36px; }
+      .msg { max-width: 560px; background: var(--balao); color: var(--creme); font-family: "Inter", sans-serif; font-weight: 400; font-size: 36px; line-height: 1.25; padding: 18px 28px; border-radius: 34px 34px 8px 34px; visibility: hidden; transform-origin: 100% 100%; }
+      #estado { font-family: "Inter", sans-serif; font-size: 24px; color: var(--creme-apagado); margin-right: 10px; margin-top: -4px; visibility: hidden; }
+
+      #titulo { position: absolute; left: 70px; top: 300px; width: 940px; text-align: center; }
+      #titulo .linha { display: block; font-weight: 500; font-size: 92px; line-height: 1.08; letter-spacing: -0.01em; visibility: hidden; }
+      #titulo .b { color: var(--terracota); }
+
+      #logica { position: absolute; left: 90px; top: 1410px; width: 900px; text-align: center; font-size: 56px; line-height: 1.2; }
+      #logica .linha { display: block; visibility: hidden; }
+      #logica .it { font-style: italic; }
+      #logica .forte { font-weight: 600; color: var(--terracota); }
+
+      /* Cena B: a cabeceira */
+      #chamada { position: absolute; left: 100px; top: 330px; width: 880px; text-align: center; font-weight: 500; font-size: 60px; line-height: 1.18; visibility: hidden; }
+      #chamada .b { color: var(--terracota); }
+      #assina { position: absolute; left: 90px; top: 482px; width: 760px; text-align: center; font-family: "Inter", sans-serif; font-weight: 400; font-size: 24px; color: var(--creme-apagado); visibility: hidden; }
+
+      #nota { position: absolute; left: 90px; top: 900px; width: 320px; height: 320px; visibility: hidden; transform-origin: 50% 50%; }
+      #nota img { position: absolute; inset: 0; width: 320px; height: 320px; }
+      #nota div { position: absolute; left: 28px; top: 66px; width: 264px; text-align: center; font-family: "Caveat", cursive; font-weight: 700; font-size: 54px; line-height: 1.05; color: var(--tinta); transform: rotate(-4deg); }
+      #nota small { display: block; font-size: 42px; font-weight: 500; }
+
+      #cta { position: absolute; left: 300px; top: 1584px; width: 480px; height: 92px; border-radius: 46px; background: var(--creme); color: var(--tinta); display: flex; align-items: center; justify-content: center; gap: 18px; font-family: "Inter", sans-serif; font-weight: 600; font-size: 36px; visibility: hidden; transform-origin: 50% 50%; }
+      #cta svg { width: 34px; height: 34px; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="12" data-width="1080" data-height="1920">
+      <div id="fundo" class="clip camada" data-start="0" data-duration="12" data-track-index="0">
+        <img class="fundo" src="assets/img/fundo-grafite.jpg" alt="" />
+      </div>
+
+      <!-- Cena A: as mensagens -->
+      <div id="cenaA" class="clip camada" data-start="0" data-duration="8.3" data-track-index="1">
+       <div id="cenaA-conteudo" class="camada">
+        <div id="hora">02:47<small>MADRUGADA</small></div>
+        <div id="titulo">
+          <span class="linha a" id="tit1">Vinte mensagens.</span>
+          <span class="linha b" id="tit2">Depois, a vergonha.</span>
+        </div>
+
+        <div id="chat">
+          <div class="topo"><div class="foto"></div><div class="nome"></div></div>
+          <div class="lista">
+            <div class="msg" id="m1">oi</div>
+            <div class="msg" id="m2">tá aí?</div>
+            <div class="msg" id="m3">desculpa</div>
+            <div class="msg" id="m4">esquece o que eu falei</div>
+            <div class="msg" id="m5">não esquece não</div>
+            <div class="msg" id="m6">por favor me responde</div>
+            <div id="estado">Visualizada</div>
+          </div>
+        </div>
+
+        <div id="logica">
+          <span class="linha it" id="l1">Isso tem uma lógica.</span>
+          <span class="linha" id="l2"><span class="forte">E não é mau-caráter.</span></span>
+        </div>
+       </div>
+      </div>
+
+      <!-- Cena B: o e-book na cabeceira -->
+      <div id="cenaB" class="clip camada" data-start="7.9" data-duration="4.1" data-track-index="1">
+       <div id="cenaB-conteudo" class="camada">
+        <div id="cenaB-grupo" class="camada"><img class="fundo" src="assets/img/cabeceira-9x16.jpg" alt="" /></div>
+        <div id="chamada">Um livro que explica o que acontece <span class="b">antes, durante e depois.</span></div>
+        <div id="assina">Dr. Fabio Schmidt, médico, CRM-SP 183549. Conteúdo educativo.</div>
+        <div id="nota"><img src="assets/img/nota-adesiva.png" alt="" /><div>e-book<small>160 páginas</small></div></div>
+        <div id="cta"><span>Saiba mais</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+       </div>
+      </div>
+
+      <!-- Efeitos sonoros, um por faixa -->
+      <audio id="sfx-click-0" src="assets/sfx/click-soft.mp3" data-start="0.15" data-duration="0.37" data-track-index="2" data-volume="0.5"></audio>
+      <audio id="sfx-whoosh-0" src="assets/sfx/whoosh-short.mp3" data-start="0.5" data-duration="0.57" data-track-index="3" data-volume="0.35"></audio>
+      <audio id="sfx-env-1" src="assets/sfx/pop.mp3" data-start="0.9" data-duration="0.72" data-track-index="4" data-volume="0.4"></audio>
+      <audio id="sfx-env-2" src="assets/sfx/pop.mp3" data-start="1.45" data-duration="0.72" data-track-index="5" data-volume="0.4"></audio>
+      <audio id="sfx-env-3" src="assets/sfx/pop.mp3" data-start="2.0" data-duration="0.72" data-track-index="6" data-volume="0.4"></audio>
+      <audio id="sfx-env-4" src="assets/sfx/pop.mp3" data-start="2.55" data-duration="0.72" data-track-index="7" data-volume="0.4"></audio>
+      <audio id="sfx-env-5" src="assets/sfx/pop.mp3" data-start="3.1" data-duration="0.72" data-track-index="8" data-volume="0.4"></audio>
+      <audio id="sfx-env-6" src="assets/sfx/pop.mp3" data-start="3.65" data-duration="0.72" data-track-index="9" data-volume="0.4"></audio>
+      <audio id="sfx-visto" src="assets/sfx/click-soft.mp3" data-start="4.3" data-duration="0.37" data-track-index="10" data-volume="0.7"></audio>
+      <audio id="sfx-whoosh-1" src="assets/sfx/whoosh-short.mp3" data-start="4.95" data-duration="0.57" data-track-index="11" data-volume="0.45"></audio>
+      <audio id="sfx-impacto-1" src="assets/sfx/impact-bass-1.mp3" data-start="5.05" data-duration="2.1" data-track-index="12" data-volume="0.3"></audio>
+      <audio id="sfx-whoosh-2" src="assets/sfx/whoosh-short.mp3" data-start="5.6" data-duration="0.57" data-track-index="13" data-volume="0.35"></audio>
+      <audio id="sfx-click-1" src="assets/sfx/click-soft.mp3" data-start="6.5" data-duration="0.37" data-track-index="14" data-volume="0.6"></audio>
+      <audio id="sfx-impacto-2" src="assets/sfx/impact-bass-1.mp3" data-start="7.05" data-duration="2.1" data-track-index="15" data-volume="0.28"></audio>
+      <audio id="sfx-whoosh-3" src="assets/sfx/whoosh.mp3" data-start="7.75" data-duration="1.2" data-track-index="16" data-volume="0.45"></audio>
+      <audio id="sfx-pop-7" src="assets/sfx/pop.mp3" data-start="8.9" data-duration="0.72" data-track-index="17" data-volume="0.45"></audio>
+      <audio id="sfx-pop-8" src="assets/sfx/pop.mp3" data-start="9.8" data-duration="0.72" data-track-index="18" data-volume="0.5"></audio>
+      <audio id="sfx-click-2" src="assets/sfx/click-soft.mp3" data-start="10.4" data-duration="0.37" data-track-index="19" data-volume="0.7"></audio>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      // Cena A: a hora acende, o chat sobe
+      tl.fromTo("#hora", { autoAlpha: 0, scale: 1.15, filter: "blur(12px)" }, { autoAlpha: 1, scale: 1, filter: "blur(0px)", duration: 0.5, ease: "power4.out" }, 0.15);
+      tl.fromTo("#chat", { autoAlpha: 0, y: 90 }, { autoAlpha: 1, y: 0, duration: 0.55, ease: "expo.out" }, 0.5);
+
+      // Mensagens enviadas em sequência (spring-pop-entrance, origem no canto de envio)
+      const msgs = ["#m1", "#m2", "#m3", "#m4", "#m5", "#m6"];
+      msgs.forEach((id, i) => {
+        tl.fromTo(id, { autoAlpha: 0, scale: 0.6, y: 18 }, { autoAlpha: 1, scale: 1, y: 0, duration: 0.4, ease: "power3.out" }, 0.9 + i * 0.55);
+      });
+      tl.fromTo("#estado", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.25 }, 4.3);
+
+      // Título bate em duas batidas (kinetic-beat-slam) no lugar da hora
+      tl.to("#hora", { autoAlpha: 0, y: -30, duration: 0.3, ease: "power2.in" }, 4.7);
+      tl.fromTo("#tit1", { autoAlpha: 0, scale: 1.35, filter: "blur(14px)" }, { autoAlpha: 1, scale: 1, filter: "blur(0px)", duration: 0.55, ease: "power4.out" }, 5.0);
+      tl.fromTo("#tit2", { autoAlpha: 0, x: 220 }, { autoAlpha: 1, x: 0, duration: 0.5, ease: "expo.out" }, 5.6);
+
+      // O chat recua, a lógica entra
+      tl.to("#chat", { autoAlpha: 0.35, scale: 0.96, duration: 0.5, ease: "power2.out" }, 6.4);
+      tl.fromTo("#l1", { autoAlpha: 0, y: 26 }, { autoAlpha: 1, y: 0, duration: 0.4, ease: "power3.out" }, 6.5);
+      tl.fromTo("#l2", { autoAlpha: 0, scale: 1.3, filter: "blur(10px)" }, { autoAlpha: 1, scale: 1, filter: "blur(0px)", duration: 0.5, ease: "power4.out" }, 7.05);
+
+      // Saída da cena A
+      tl.to("#cenaA-conteudo", { autoAlpha: 0, y: -60, duration: 0.4, ease: "power2.in" }, 7.85);
+
+      // Cena B: a cabeceira entra com avanço lento
+      tl.fromTo("#cenaB-conteudo", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.5, ease: "power2.out" }, 7.9);
+      tl.fromTo("#cenaB-grupo", { scale: 1.08 }, { scale: 1, duration: 4.1, ease: "power1.out" }, 7.9);
+      tl.fromTo("#chamada", { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: 0.5, ease: "power3.out" }, 8.9);
+      tl.fromTo("#assina", { autoAlpha: 0, y: 12 }, { autoAlpha: 1, y: 0, duration: 0.35, ease: "power2.out" }, 9.35);
+      tl.fromTo("#nota", { autoAlpha: 0, scale: 0.5, rotation: -16 }, { autoAlpha: 1, scale: 1, rotation: 0, duration: 0.5, ease: "power3.out" }, 9.8);
+      tl.fromTo("#cta", { autoAlpha: 0, scale: 0.7, y: 20 }, { autoAlpha: 1, scale: 1, y: 0, duration: 0.45, ease: "power3.out" }, 10.4);
+      tl.fromTo("#cta", { scale: 1 }, { scale: 1.04, duration: 0.5, yoyo: true, repeat: 1, ease: "sine.inOut", immediateRender: false }, 11.1);
+
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

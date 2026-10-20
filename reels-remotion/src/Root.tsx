@@ -10,6 +10,7 @@ import {
 } from "./ComparacaoLadoALado";
 import { MitoApego } from "./MitoApego";
 import { MitoRindo } from "./MitoRindo";
+import { DURACAO, FPS, IdentidadeReel } from "./IdentidadeReel";
 
 // Each <Composition> is an entry in the sidebar!
 
@@ -54,6 +55,14 @@ export const RemotionRoot: React.FC = () => {
         component={MitoApego}
         durationInFrames={450}
         fps={30}
+        width={1080}
+        height={1920}
+      />
+      <Composition
+        id="IdentidadeReel"
+        component={IdentidadeReel}
+        durationInFrames={DURACAO}
+        fps={FPS}
         width={1080}
         height={1920}
       />

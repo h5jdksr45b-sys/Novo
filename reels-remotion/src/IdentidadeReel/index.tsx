@@ -530,7 +530,7 @@ const Propria: React.FC = () => {
   const L = (s: number) => f(s) - o;
   return (
     <Chega de="lado">
-      <Apoio arquivo="broll_cafe.mp4" corteInicio={10} />
+      <Apoio arquivo="broll_cafe.mp4" corteInicio={30} />
       <Sombra />
       <div style={{ position: "absolute", left: 0, right: 0, top: 1360, textAlign: "center", color: "white" }}>
         <Entra at={L(13.9)} style={{ fontFamily: SANS, fontWeight: 800, fontSize: 60, letterSpacing: -1 }}>

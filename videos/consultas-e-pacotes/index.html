@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/vendor/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "EB Garamond"; font-weight: 400 800; src: url("assets/fonts/EBGaramond-400.woff2") format("woff2"); }
+      @font-face { font-family: "EB Garamond"; font-weight: 400 800; font-style: italic; src: url("assets/fonts/EBGaramond-400i.woff2") format("woff2"); }
+      @font-face { font-family: "Inter"; font-weight: 100 900; src: url("assets/fonts/Inter-400.woff2") format("woff2"); }
+
+      :root {
+        --tinta: #1d1916;
+        --creme: #f4efe4;
+        --papel: #fbf8f2;
+        --terracota: #b5542f;
+        --terracota-viva: #d0693f;
+        --cinza: #6f665f;
+        --linha: rgba(29, 25, 22, 0.09);
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--creme); }
+      #root { position: relative; width: 1080px; height: 1920px; color: var(--tinta); font-family: "Inter", sans-serif; }
+      .camada { position: absolute; inset: 0; width: 1080px; height: 1920px; }
+      img.fundo { position: absolute; inset: 0; width: 1080px; height: 1920px; object-fit: cover; }
+      .sans { font-family: "Inter", sans-serif; font-weight: 800; letter-spacing: -0.035em; }
+      .serif { font-family: "EB Garamond", serif; font-style: italic; font-weight: 500; letter-spacing: -0.01em; }
+      .grade { position: absolute; inset: 0; background-image: linear-gradient(var(--linha) 2px, transparent 2px), linear-gradient(90deg, var(--linha) 2px, transparent 2px); background-size: 120px 120px; background-position: 60px 0; }
+      .rotulo { font-family: "Inter", sans-serif; font-weight: 600; font-size: 24px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--terracota); }
+
+      /* Marca fixa no canto, como nas referências */
+      #marca { position: absolute; right: 70px; top: 270px; text-align: right; font-family: "Inter", sans-serif; font-weight: 600; font-size: 18px; letter-spacing: 0.06em; }
+      #marca svg { width: 34px; height: 34px; display: block; margin-left: auto; margin-bottom: 6px; }
+
+      /* Cena 1: gancho */
+      #c1 { color: var(--creme); }
+      .palavra { position: absolute; left: 0; width: 1080px; text-align: center; visibility: hidden; line-height: 1; }
+      #p-borderline { top: 640px; font-size: 168px; }
+      #p-e { top: 830px; font-size: 96px; color: #b9b1a4; }
+      #p-tratavel { top: 905px; font-size: 230px; color: var(--terracota-viva); }
+      #p-melhor { top: 700px; font-size: 150px; }
+      #p-antes { top: 860px; font-size: 200px; color: var(--terracota-viva); }
+
+      /* Cena 2: como trabalho */
+      #c2-titulo { position: absolute; left: 90px; top: 330px; width: 900px; }
+      #c2-titulo .rotulo { display: block; margin-bottom: 18px; visibility: hidden; }
+      #c2-titulo .t { display: block; font-size: 120px; line-height: 0.95; visibility: hidden; }
+      #c2-titulo .sub { display: block; margin-top: 22px; font-size: 32px; font-weight: 400; color: var(--cinza); letter-spacing: 0; visibility: hidden; }
+      .pilar { position: absolute; left: 90px; width: 900px; height: 150px; background: var(--papel); border-radius: 28px; box-shadow: 0 18px 40px rgba(29,25,22,0.08), 0 2px 0 rgba(29,25,22,0.04); display: flex; align-items: center; gap: 34px; padding: 0 40px; visibility: hidden; }
+      .pilar svg { flex: 0 0 64px; width: 64px; height: 64px; }
+      .pilar svg * { fill: none; stroke: var(--terracota); stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; }
+      .pilar b { display: block; font-weight: 800; font-size: 40px; letter-spacing: -0.02em; }
+      .pilar span { display: block; font-size: 30px; color: var(--cinza); margin-top: 4px; }
+      #pl1 { top: 720px; } #pl2 { top: 890px; } #pl3 { top: 1060px; } #pl4 { top: 1230px; } #pl5 { top: 1400px; }
+
+      /* Cena 3: virada */
+      #c3 { background: var(--terracota); color: var(--creme); }
+      #c3 .a { position: absolute; left: 0; width: 1080px; top: 760px; text-align: center; font-size: 140px; line-height: 1; visibility: hidden; }
+      #c3 .b { position: absolute; left: 0; width: 1080px; top: 900px; text-align: center; font-size: 190px; line-height: 1; visibility: hidden; }
+
+      /* Cena 4: consultas avulsas */
+      .cab { position: absolute; left: 90px; top: 330px; width: 900px; }
+      .cab .rotulo { display: block; visibility: hidden; }
+      .cab .t { display: block; margin-top: 16px; font-size: 96px; line-height: 1; visibility: hidden; }
+      .cartao { position: absolute; background: var(--papel); border-radius: 34px; box-shadow: 0 24px 60px rgba(29,25,22,0.10), 0 2px 0 rgba(29,25,22,0.04); padding: 46px 48px; visibility: hidden; }
+      .cartao .nome { font-weight: 600; font-size: 26px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--cinza); }
+      .cartao .preco { margin-top: 18px; font-weight: 800; font-size: 104px; letter-spacing: -0.045em; line-height: 1; white-space: nowrap; }
+      .cartao .preco small { font-size: 46px; font-weight: 700; letter-spacing: -0.02em; margin-right: 6px; }
+      .cartao .desc { margin-top: 18px; font-size: 32px; line-height: 1.3; color: var(--tinta); }
+      #k1 { left: 90px; top: 640px; width: 900px; height: 360px; }
+      #k2 { left: 90px; top: 1050px; width: 900px; height: 360px; }
+      .nota-c4 { position: absolute; left: 90px; top: 1460px; width: 900px; font-size: 34px; color: var(--cinza); visibility: hidden; }
+
+      /* Cena 5: pacotes */
+      #k3 { left: 90px; top: 520px; width: 900px; height: 390px; }
+      #k4 { left: 90px; top: 950px; width: 900px; height: 600px; background: var(--tinta); color: var(--creme); }
+      #k4 .nome { color: #c9c0b3; }
+      #k4 .desc { color: var(--creme); }
+      .selo { position: absolute; right: 44px; top: 44px; background: var(--terracota-viva); color: var(--creme); font-weight: 700; font-size: 22px; letter-spacing: 0.2em; padding: 12px 20px; border-radius: 40px; visibility: hidden; }
+      .linha-qtd { display: flex; gap: 14px; margin-top: 22px; }
+      .linha-qtd i { width: 54px; height: 54px; border-radius: 14px; border: 3px solid currentColor; opacity: 0.85; display: block; visibility: hidden; }
+      #k3 .linha-qtd i { color: var(--terracota); }
+      #k4 .linha-qtd i { color: var(--terracota-viva); }
+      .extras { margin-top: 26px; display: flex; flex-direction: column; gap: 14px; }
+      .extras div { display: flex; align-items: center; gap: 18px; font-size: 32px; visibility: hidden; }
+      .extras svg { width: 38px; height: 38px; flex: 0 0 38px; }
+      .extras svg path { fill: none; stroke: var(--terracota-viva); stroke-width: 3.4; stroke-linecap: round; stroke-linejoin: round; }
+
+      /* Cena 6: a diferença */
+      #c6 .t1 { position: absolute; left: 90px; top: 520px; width: 900px; font-size: 92px; line-height: 1.02; visibility: hidden; }
+      #c6 .t2 { position: absolute; left: 90px; top: 760px; width: 900px; font-size: 118px; line-height: 1; color: var(--terracota); visibility: hidden; }
+      #c6 svg { position: absolute; left: 90px; top: 1060px; width: 900px; height: 300px; overflow: visible; }
+      #c6 .ponto { fill: var(--tinta); visibility: hidden; }
+      #c6 .ponto-txt { font-family: "Inter", sans-serif; font-weight: 600; font-size: 24px; fill: var(--cinza); visibility: hidden; }
+      #c6 .arco { fill: none; stroke: var(--terracota); stroke-width: 5; stroke-linecap: round; }
+      #c6 .legenda { position: absolute; left: 90px; top: 1400px; width: 900px; font-size: 34px; color: var(--cinza); visibility: hidden; }
+
+      /* Cena 7: como agendar */
+      .passo { position: absolute; left: 90px; width: 900px; height: 170px; display: flex; align-items: center; gap: 36px; visibility: hidden; }
+      .passo .n { flex: 0 0 120px; height: 120px; border-radius: 60px; border: 3px solid var(--tinta); display: flex; align-items: center; justify-content: center; font-family: "EB Garamond", serif; font-style: italic; font-size: 72px; }
+      .passo b { display: block; font-weight: 800; font-size: 44px; letter-spacing: -0.02em; }
+      .passo span { display: block; font-size: 30px; color: var(--cinza); margin-top: 4px; }
+      #s1 { top: 660px; } #s2 { top: 870px; } #s3 { top: 1080px; }
+      #s3 .n { background: var(--terracota); border-color: var(--terracota); color: var(--creme); }
+      #contato { position: absolute; left: 90px; top: 1330px; width: 900px; height: 150px; border-radius: 75px; background: var(--tinta); color: var(--creme); display: flex; align-items: center; justify-content: center; gap: 22px; font-weight: 700; font-size: 38px; visibility: hidden; }
+      #contato svg { width: 44px; height: 44px; }
+      #site { position: absolute; left: 0; top: 1510px; width: 1080px; text-align: center; font-size: 30px; color: var(--cinza); visibility: hidden; }
+
+      /* Cena 8: fecho */
+      #c8 { color: var(--creme); }
+      #f-nome { position: absolute; left: 0; width: 1080px; top: 640px; text-align: center; font-size: 104px; line-height: 1; visibility: hidden; }
+      #f-traco { position: absolute; left: 480px; top: 790px; width: 120px; height: 5px; background: var(--terracota-viva); visibility: hidden; }
+      #f-cargo { position: absolute; left: 140px; width: 800px; top: 840px; text-align: center; font-size: 34px; line-height: 1.35; color: #d8d0c4; visibility: hidden; }
+      #f-ig { position: absolute; left: 0; width: 1080px; top: 1060px; text-align: center; visibility: hidden; }
+      #f-ig svg { width: 120px; height: 120px; }
+      #f-ig div { margin-top: 18px; font-weight: 700; font-size: 34px; letter-spacing: 0.04em; }
+      #f-aviso { position: absolute; left: 140px; width: 800px; top: 1440px; text-align: center; font-size: 25px; line-height: 1.45; color: #a59c90; visibility: hidden; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="35" data-width="1080" data-height="1920">
+
+      <!-- Cena 1: gancho, fundo escuro -->
+      <div id="c1" class="clip camada" data-start="0" data-duration="4.7" data-track-index="0">
+        <img class="fundo" src="assets/img/fundo-grafite.jpg" alt="" />
+        <div class="palavra sans" id="p-borderline">Borderline</div>
+        <div class="palavra serif" id="p-e">é</div>
+        <div class="palavra serif" id="p-tratavel">tratável.</div>
+        <div class="palavra sans" id="p-melhor">E melhor</div>
+        <div class="palavra serif" id="p-antes">quanto antes.</div>
+      </div>
+
+      <!-- Fundo de papel com grade, das cenas 2 a 7 -->
+      <div id="papel" class="clip camada" data-start="4.5" data-duration="27.0" data-track-index="1">
+        <img class="fundo" src="assets/img/fundo-creme.jpg" alt="" />
+        <div class="grade"></div>
+      </div>
+
+      <!-- Cena 2: como eu trabalho -->
+      <div id="c2" class="clip camada" data-start="4.6" data-duration="6.9" data-track-index="2">
+       <div id="c2-in" class="camada">
+        <div id="c2-titulo">
+          <span class="rotulo" id="c2-r">Como eu trabalho</span>
+          <span class="t sans" id="c2-t1">Modelo</span>
+          <span class="t serif" id="c2-t2" style="color: var(--terracota)">GPM.</span>
+          <span class="sub" id="c2-sub">Good Psychiatric Management, desenvolvido no McLean Hospital (Harvard).</span>
+        </div>
+        <div class="pilar" id="pl1"><svg viewBox="0 0 64 64"><circle cx="28" cy="28" r="16"/><path d="M40 40 L54 54"/></svg><div><b>Diagnóstico</b><span>dito com clareza, sem mitos</span></div></div>
+        <div class="pilar" id="pl2"><svg viewBox="0 0 64 64"><path d="M10 52 L10 30 L32 12 L54 30 L54 52 Z"/><path d="M26 52 L26 38 L38 38 L38 52"/></svg><div><b>Vida real</b><span>escola, trabalho e relações</span></div></div>
+        <div class="pilar" id="pl3"><svg viewBox="0 0 64 64"><circle cx="22" cy="20" r="8"/><circle cx="44" cy="20" r="8"/><path d="M8 52 C8 38 36 38 36 52"/><path d="M30 52 C30 38 58 38 58 52"/></svg><div><b>Família</b><span>rede de apoio, não plateia</span></div></div>
+        <div class="pilar" id="pl4"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="20"/><circle cx="32" cy="32" r="10"/><circle cx="32" cy="32" r="2"/></svg><div><b>Medicação</b><span>com alvo e prazo definidos</span></div></div>
+        <div class="pilar" id="pl5"><svg viewBox="0 0 64 64"><path d="M12 14 L52 14 L52 42 L30 42 L18 52 L18 42 L12 42 Z"/></svg><div><b>Sentido</b><span>nomear o que se sente</span></div></div>
+       </div>
+      </div>
+
+      <!-- Cena 3: virada para os planos -->
+      <div id="c3" class="clip camada" data-start="11.4" data-duration="2.1" data-track-index="3">
+        <div class="a sans" id="c3a">Escolha sua</div>
+        <div class="b serif" id="c3b">modalidade.</div>
+      </div>
+
+      <!-- Cena 4: consultas avulsas -->
+      <div id="c4" class="clip camada" data-start="13.4" data-duration="5.0" data-track-index="2">
+       <div id="c4-in" class="camada">
+        <div class="cab"><span class="rotulo" id="c4-r">Consultas avulsas</span><span class="t sans" id="c4-t">Uma de cada vez.</span></div>
+        <div class="cartao" id="k1"><div class="nome">Primeira consulta</div><div class="preco"><small>R$</small><span id="v1">700</span></div><div class="desc">Avaliação inicial completa e história detalhada.</div></div>
+        <div class="cartao" id="k2"><div class="nome">Consulta de retorno</div><div class="preco"><small>R$</small><span id="v2">650</span></div><div class="desc">Acompanhamento contínuo da evolução.</div></div>
+       </div>
+      </div>
+
+      <!-- Cena 5: pacotes -->
+      <div id="c5" class="clip camada" data-start="18.3" data-duration="6.6" data-track-index="2">
+       <div id="c5-in" class="camada">
+        <div class="cab"><span class="rotulo" id="c5-r">Pacotes</span><span class="t sans" id="c5-t">Quatro consultas.</span></div>
+        <div class="cartao" id="k3">
+          <div class="nome">Pacote Simples</div>
+          <div class="preco"><small>R$</small><span id="v3">2.200</span></div>
+          <div class="linha-qtd"><i></i><i></i><i></i><i></i></div>
+          <div class="desc">R$ 550 por consulta. Até 3x no cartão.</div>
+        </div>
+        <div class="cartao" id="k4">
+          <div class="selo" id="selo">EXCLUSIVO</div>
+          <div class="nome">Plano Suporte</div>
+          <div class="preco"><small>R$</small><span id="v4">2.900</span></div>
+          <div class="linha-qtd"><i></i><i></i><i></i><i></i></div>
+          <div class="extras">
+            <div><svg viewBox="0 0 38 38"><path d="M8 20 L16 28 L31 10"/></svg>Prioridade na agenda</div>
+            <div><svg viewBox="0 0 38 38"><path d="M8 20 L16 28 L31 10"/></svg>Suporte combinado por WhatsApp</div>
+            <div><svg viewBox="0 0 38 38"><path d="M8 20 L16 28 L31 10"/></svg>Materiais de apoio</div>
+          </div>
+        </div>
+       </div>
+      </div>
+
+      <!-- Cena 6: a diferença entre os pacotes -->
+      <div id="c6" class="clip camada" data-start="24.8" data-duration="3.4" data-track-index="2">
+       <div id="c6-in" class="camada">
+        <div class="t1 sans" id="c6t1">A diferença?</div>
+        <div class="t2 serif" id="c6t2">o cuidado entre as consultas.</div>
+        <svg viewBox="0 0 900 300" data-layout-allow-overflow="true">
+          <path class="arco" id="arco1" d="M 60 200 C 140 70, 260 70, 330 200" />
+          <path class="arco" id="arco2" d="M 330 200 C 410 70, 530 70, 600 200" />
+          <path class="arco" id="arco3" d="M 600 200 C 680 70, 800 70, 870 200" />
+          <circle class="ponto" cx="60" cy="200" r="22" /><circle class="ponto" cx="330" cy="200" r="22" /><circle class="ponto" cx="600" cy="200" r="22" /><circle class="ponto" cx="870" cy="200" r="22" />
+          <text class="ponto-txt" x="60" y="262" text-anchor="middle">1</text><text class="ponto-txt" x="330" y="262" text-anchor="middle">2</text><text class="ponto-txt" x="600" y="262" text-anchor="middle">3</text><text class="ponto-txt" x="870" y="262" text-anchor="middle">4</text>
+        </svg>
+        <div class="legenda" id="c6leg">Os pontos são as consultas. A linha é o que o Plano Suporte acrescenta.</div>
+       </div>
+      </div>
+
+      <!-- Cena 7: como agendar -->
+      <div id="c7" class="clip camada" data-start="28.0" data-duration="3.5" data-track-index="2">
+       <div id="c7-in" class="camada">
+        <div class="cab"><span class="rotulo" id="c7-r">Como agendar</span><span class="t sans" id="c7-t">Três passos.</span></div>
+        <div class="passo" id="s1"><div class="n">1</div><div><b>Escolha a modalidade</b><span>avulsa ou pacote</span></div></div>
+        <div class="passo" id="s2"><div class="n">2</div><div><b>Pagamento via Asaas</b><span>cartão em até 3x no Pacote Simples</span></div></div>
+        <div class="passo" id="s3"><div class="n">3</div><div><b>Horário confirmado</b><span>após o pagamento</span></div></div>
+        <div id="contato"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="0.6" fill="currentColor"/></svg>Chame no direct @drfabioschmidt</div>
+        <div id="site">ou acesse drfabioschmidt.net</div>
+       </div>
+      </div>
+
+      <!-- Cena 8: fecho, fundo escuro -->
+      <div id="c8" class="clip camada" data-start="31.3" data-duration="3.7" data-track-index="3">
+        <img class="fundo" src="assets/img/fundo-grafite.jpg" alt="" />
+        <div class="sans" id="f-nome">Dr. Fabio Schmidt</div>
+        <div id="f-traco"></div>
+        <div id="f-cargo">Médico com foco em transtorno de personalidade borderline. Adolescentes e adultos. CRM-SP 183549.</div>
+        <div id="f-ig"><svg viewBox="0 0 24 24" fill="none" stroke="#f4efe4" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="0.5" fill="#f4efe4"/></svg><div>@DRFABIOSCHMIDT</div></div>
+        <div id="f-aviso">Os pacotes não substituem atendimento de crise. Em crise grave, procure o pronto-socorro mais próximo ou ligue 188 (CVV).</div>
+      </div>
+
+      <!-- Marca no canto, sobre tudo -->
+      <div id="marca-clip" class="clip camada" data-start="0" data-duration="31.3" data-track-index="4">
+        <div id="marca"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="0.6" fill="currentColor"/></svg>@DRFABIOSCHMIDT</div>
+      </div>
+
+      <!-- Efeitos sonoros, um por faixa -->
+      <audio id="a01" src="assets/sfx/impact-bass-1.mp3" data-start="0.15" data-duration="2.1" data-track-index="10" data-volume="0.3"></audio>
+      <audio id="a02" src="assets/sfx/whoosh-short.mp3" data-start="0.95" data-duration="0.57" data-track-index="11" data-volume="0.35"></audio>
+      <audio id="a03" src="assets/sfx/impact-bass-1.mp3" data-start="2.55" data-duration="2.1" data-track-index="12" data-volume="0.22"></audio>
+      <audio id="a04" src="assets/sfx/whoosh.mp3" data-start="4.3" data-duration="1.2" data-track-index="13" data-volume="0.4"></audio>
+      <audio id="a05" src="assets/sfx/pop.mp3" data-start="7.0" data-duration="0.72" data-track-index="14" data-volume="0.35"></audio>
+      <audio id="a06" src="assets/sfx/pop.mp3" data-start="7.6" data-duration="0.72" data-track-index="15" data-volume="0.35"></audio>
+      <audio id="a07" src="assets/sfx/pop.mp3" data-start="8.2" data-duration="0.72" data-track-index="16" data-volume="0.35"></audio>
+      <audio id="a08" src="assets/sfx/pop.mp3" data-start="8.8" data-duration="0.72" data-track-index="17" data-volume="0.35"></audio>
+      <audio id="a09" src="assets/sfx/pop.mp3" data-start="9.4" data-duration="0.72" data-track-index="18" data-volume="0.35"></audio>
+      <audio id="a10" src="assets/sfx/whoosh.mp3" data-start="11.2" data-duration="1.2" data-track-index="19" data-volume="0.45"></audio>
+      <audio id="a11" src="assets/sfx/impact-bass-1.mp3" data-start="11.85" data-duration="2.1" data-track-index="20" data-volume="0.25"></audio>
+      <audio id="a12" src="assets/sfx/whoosh-short.mp3" data-start="13.3" data-duration="0.57" data-track-index="21" data-volume="0.4"></audio>
+      <audio id="a13" src="assets/sfx/click-soft.mp3" data-start="14.4" data-duration="0.37" data-track-index="22" data-volume="0.55"></audio>
+      <audio id="a14" src="assets/sfx/click-soft.mp3" data-start="15.5" data-duration="0.37" data-track-index="23" data-volume="0.55"></audio>
+      <audio id="a15" src="assets/sfx/whoosh-short.mp3" data-start="18.2" data-duration="0.57" data-track-index="24" data-volume="0.4"></audio>
+      <audio id="a16" src="assets/sfx/click-soft.mp3" data-start="19.3" data-duration="0.37" data-track-index="25" data-volume="0.55"></audio>
+      <audio id="a17" src="assets/sfx/click-soft.mp3" data-start="21.0" data-duration="0.37" data-track-index="26" data-volume="0.55"></audio>
+      <audio id="a18" src="assets/sfx/sparkle.mp3" data-start="21.4" data-duration="1.8" data-track-index="27" data-volume="0.2"></audio>
+      <audio id="a19" src="assets/sfx/pop.mp3" data-start="22.6" data-duration="0.72" data-track-index="28" data-volume="0.3"></audio>
+      <audio id="a20" src="assets/sfx/pop.mp3" data-start="23.0" data-duration="0.72" data-track-index="29" data-volume="0.3"></audio>
+      <audio id="a21" src="assets/sfx/pop.mp3" data-start="23.4" data-duration="0.72" data-track-index="30" data-volume="0.3"></audio>
+      <audio id="a22" src="assets/sfx/whoosh-short.mp3" data-start="24.7" data-duration="0.57" data-track-index="31" data-volume="0.4"></audio>
+      <audio id="a23" src="assets/sfx/whoosh-short.mp3" data-start="27.9" data-duration="0.57" data-track-index="32" data-volume="0.4"></audio>
+      <audio id="a24" src="assets/sfx/key-press.mp3" data-start="28.9" data-duration="0.43" data-track-index="33" data-volume="0.4"></audio>
+      <audio id="a25" src="assets/sfx/key-press.mp3" data-start="29.3" data-duration="0.43" data-track-index="34" data-volume="0.4"></audio>
+      <audio id="a26" src="assets/sfx/key-press.mp3" data-start="29.7" data-duration="0.43" data-track-index="35" data-volume="0.4"></audio>
+      <audio id="a27" src="assets/sfx/click-soft.mp3" data-start="30.3" data-duration="0.37" data-track-index="36" data-volume="0.6"></audio>
+      <audio id="a28" src="assets/sfx/whoosh.mp3" data-start="31.1" data-duration="1.2" data-track-index="37" data-volume="0.4"></audio>
+      <audio id="a29" src="assets/sfx/impact-bass-1.mp3" data-start="31.45" data-duration="2.1" data-track-index="38" data-volume="0.22"></audio>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      const marca = document.getElementById("marca");
+
+      // Contadores de preço (counting-dynamic-scale), deterministas sob seek
+      const fmt = (n) => Math.round(n).toLocaleString("pt-BR");
+      const conta = (sel, alvo, t, dur) => {
+        const el = document.querySelector(sel); const o = { v: 0 };
+        tl.fromTo(o, { v: 0 }, { v: alvo, duration: dur, ease: "power3.out", onUpdate: () => { el.textContent = fmt(o.v); } }, t);
+      };
+
+      // Cena 1: palavra a palavra (kinetic-beat-slam), com entradas distintas
+      tl.set(marca, { color: "#f4efe4" }, 0);
+      tl.fromTo("#p-borderline", { autoAlpha: 0, scale: 1.4, filter: "blur(18px)" }, { autoAlpha: 1, scale: 1, filter: "blur(0px)", duration: 0.55, ease: "power4.out" }, 0.15);
+      tl.fromTo("#p-e", { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: 0.3, ease: "power3.out" }, 0.8);
+      tl.fromTo("#p-tratavel", { autoAlpha: 0, x: -260 }, { autoAlpha: 1, x: 0, duration: 0.5, ease: "expo.out" }, 1.0);
+      tl.to(["#p-borderline", "#p-e", "#p-tratavel"], { autoAlpha: 0, y: -50, duration: 0.3, ease: "power2.in", stagger: 0.04 }, 2.25);
+      tl.fromTo("#p-melhor", { autoAlpha: 0, scale: 0.7 }, { autoAlpha: 1, scale: 1, duration: 0.45, ease: "power3.out" }, 2.55);
+      tl.fromTo("#p-antes", { autoAlpha: 0, y: 120, rotation: -4 }, { autoAlpha: 1, y: 0, rotation: 0, duration: 0.55, ease: "expo.out" }, 3.0);
+      tl.to(["#p-melhor", "#p-antes"], { autoAlpha: 0, scale: 1.1, filter: "blur(10px)", duration: 0.35, ease: "power2.in" }, 4.3);
+
+      // Cena 2: título e pilares
+      tl.set(marca, { color: "#1d1916" }, 4.6);
+      tl.fromTo("#c2-r", { autoAlpha: 0, x: -30 }, { autoAlpha: 1, x: 0, duration: 0.35, ease: "power3.out" }, 4.75);
+      tl.fromTo("#c2-t1", { autoAlpha: 0, y: 60 }, { autoAlpha: 1, y: 0, duration: 0.45, ease: "expo.out" }, 4.95);
+      tl.fromTo("#c2-t2", { autoAlpha: 0, y: 60 }, { autoAlpha: 1, y: 0, duration: 0.45, ease: "expo.out" }, 5.15);
+      tl.fromTo("#c2-sub", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.5 }, 5.7);
+      ["#pl1", "#pl2", "#pl3", "#pl4", "#pl5"].forEach((id, i) => {
+        const t = 7.0 + i * 0.6;
+        tl.fromTo(id, { autoAlpha: 0, x: 120 }, { autoAlpha: 1, x: 0, duration: 0.5, ease: "expo.out" }, t);
+        document.querySelectorAll(id + " svg *").forEach((p) => { const len = p.getTotalLength ? p.getTotalLength() : 200; p.style.strokeDasharray = len; p.style.strokeDashoffset = len; });
+        tl.to(id + " svg *", { strokeDashoffset: 0, duration: 0.6, ease: "power2.out" }, t + 0.15);
+      });
+      tl.to("#c2-in", { autoAlpha: 0, y: -60, duration: 0.35, ease: "power2.in" }, 11.1);
+
+      // Cena 3: cortina terracota
+      tl.set(marca, { color: "#f4efe4" }, 11.4);
+      tl.fromTo("#c3", { clipPath: "inset(100% 0 0 0)" }, { clipPath: "inset(0% 0 0 0)", duration: 0.45, ease: "expo.out" }, 11.4);
+      tl.fromTo("#c3a", { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 0.4, ease: "power3.out" }, 11.65);
+      tl.fromTo("#c3b", { autoAlpha: 0, scale: 1.4, filter: "blur(14px)" }, { autoAlpha: 1, scale: 1, filter: "blur(0px)", duration: 0.5, ease: "power4.out" }, 11.9);
+      tl.to("#c3", { clipPath: "inset(0 0 100% 0)", duration: 0.4, ease: "expo.in", immediateRender: false }, 13.1);
+
+      // Cena 4: consultas avulsas
+      tl.set(marca, { color: "#1d1916" }, 13.4);
+      tl.fromTo("#c4-r", { autoAlpha: 0, x: -30 }, { autoAlpha: 1, x: 0, duration: 0.35, ease: "power3.out" }, 13.5);
+      tl.fromTo("#c4-t", { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: 0.45, ease: "expo.out" }, 13.65);
+      tl.fromTo("#k1", { autoAlpha: 0, y: 140, rotation: 2 }, { autoAlpha: 1, y: 0, rotation: 0, duration: 0.6, ease: "expo.out" }, 14.3);
+      conta("#v1", 700, 14.45, 0.9);
+      tl.fromTo("#k2", { autoAlpha: 0, y: 140, rotation: -2 }, { autoAlpha: 1, y: 0, rotation: 0, duration: 0.6, ease: "expo.out" }, 15.4);
+      conta("#v2", 650, 15.55, 0.9);
+      tl.to("#c4-in", { autoAlpha: 0, x: -140, duration: 0.4, ease: "power2.in" }, 17.9);
+
+      // Cena 5: pacotes
+      tl.fromTo("#c5-r", { autoAlpha: 0, x: -30 }, { autoAlpha: 1, x: 0, duration: 0.35, ease: "power3.out" }, 18.4);
+      tl.fromTo("#c5-t", { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: 0.45, ease: "expo.out" }, 18.55);
+      tl.fromTo("#k3", { autoAlpha: 0, x: 200 }, { autoAlpha: 1, x: 0, duration: 0.6, ease: "expo.out" }, 19.2);
+      conta("#v3", 2200, 19.35, 1.0);
+      tl.fromTo("#k3 .linha-qtd i", { autoAlpha: 0, scale: 0.4 }, { autoAlpha: 1, scale: 1, duration: 0.3, ease: "power3.out", stagger: 0.1 }, 19.7);
+      tl.fromTo("#k4", { autoAlpha: 0, x: 200 }, { autoAlpha: 1, x: 0, duration: 0.6, ease: "expo.out" }, 20.9);
+      conta("#v4", 2900, 21.05, 1.0);
+      tl.fromTo("#selo", { autoAlpha: 0, scale: 0.4, rotation: -10 }, { autoAlpha: 1, scale: 1, rotation: 0, duration: 0.45, ease: "power3.out" }, 21.4);
+      tl.fromTo("#k4 .linha-qtd i", { autoAlpha: 0, scale: 0.4 }, { autoAlpha: 1, scale: 1, duration: 0.3, ease: "power3.out", stagger: 0.1 }, 21.6);
+      tl.fromTo("#k4 .extras div", { autoAlpha: 0, x: 40 }, { autoAlpha: 1, x: 0, duration: 0.4, ease: "power3.out", stagger: 0.4 }, 22.6);
+      tl.to("#c5-in", { autoAlpha: 0, y: -80, duration: 0.4, ease: "power2.in" }, 24.45);
+
+      // Cena 6: a diferença, desenhada
+      tl.fromTo("#c6t1", { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: 0.45, ease: "expo.out" }, 24.9);
+      tl.fromTo("#c6t2", { autoAlpha: 0, x: -200 }, { autoAlpha: 1, x: 0, duration: 0.5, ease: "expo.out" }, 25.3);
+      tl.fromTo("#c6 .ponto", { autoAlpha: 0, scale: 0, transformOrigin: "50% 50%" }, { autoAlpha: 1, scale: 1, duration: 0.3, ease: "power3.out", stagger: 0.12 }, 25.8);
+      tl.fromTo("#c6 .ponto-txt", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.3, stagger: 0.12 }, 25.9);
+      document.querySelectorAll("#c6 .arco").forEach((p) => { const len = p.getTotalLength(); p.style.strokeDasharray = len; p.style.strokeDashoffset = len; });
+      tl.to(["#arco1", "#arco2", "#arco3"], { strokeDashoffset: 0, duration: 0.45, ease: "power2.inOut", stagger: 0.3 }, 26.4);
+      tl.fromTo("#c6leg", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.4 }, 26.9);
+      tl.to("#c6-in", { autoAlpha: 0, y: -60, duration: 0.35, ease: "power2.in" }, 27.85);
+
+      // Cena 7: como agendar
+      tl.fromTo("#c7-r", { autoAlpha: 0, x: -30 }, { autoAlpha: 1, x: 0, duration: 0.35, ease: "power3.out" }, 28.1);
+      tl.fromTo("#c7-t", { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: 0.45, ease: "expo.out" }, 28.25);
+      ["#s1", "#s2", "#s3"].forEach((id, i) => tl.fromTo(id, { autoAlpha: 0, x: 120 }, { autoAlpha: 1, x: 0, duration: 0.45, ease: "expo.out" }, 28.9 + i * 0.4));
+      tl.fromTo("#contato", { autoAlpha: 0, scale: 0.8, y: 30 }, { autoAlpha: 1, scale: 1, y: 0, duration: 0.45, ease: "power3.out" }, 30.3);
+      tl.fromTo("#site", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.35 }, 30.6);
+      tl.to("#c7-in", { autoAlpha: 0, duration: 0.3, ease: "power2.in" }, 31.05);
+
+      // Cena 8: fecho
+      tl.fromTo("#f-nome", { autoAlpha: 0, scale: 1.3, filter: "blur(14px)" }, { autoAlpha: 1, scale: 1, filter: "blur(0px)", duration: 0.55, ease: "power4.out" }, 31.45);
+      tl.fromTo("#f-traco", { autoAlpha: 0, scaleX: 0 }, { autoAlpha: 1, scaleX: 1, duration: 0.4, ease: "power3.out" }, 31.9);
+      tl.fromTo("#f-cargo", { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: 0.4, ease: "power3.out" }, 32.1);
+      tl.fromTo("#f-ig", { autoAlpha: 0, scale: 0.6 }, { autoAlpha: 1, scale: 1, duration: 0.5, ease: "power3.out" }, 32.5);
+      tl.fromTo("#f-ig svg", { scale: 1 }, { scale: 1.08, duration: 0.45, yoyo: true, repeat: 1, ease: "sine.inOut", immediateRender: false }, 33.3);
+      tl.fromTo("#f-aviso", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.4 }, 32.8);
+
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

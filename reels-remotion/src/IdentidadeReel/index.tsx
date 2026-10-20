@@ -312,7 +312,7 @@ const Legenda: React.FC = () => {
 
 // ---------- Cenas ----------
 
-const Gancho1: React.FC = () => {
+const Gancho1: React.FC<{ texto: string }> = ({ texto }) => {
   const linha: React.CSSProperties = { position: "absolute", left: 80, color: "white" };
   const serif: React.CSSProperties = { fontFamily: SERIF, fontStyle: "italic", fontSize: 96 };
   const sans: React.CSSProperties = {
@@ -328,9 +328,9 @@ const Gancho1: React.FC = () => {
       <div
         style={{
           position: "absolute",
-          top: 235,
-          left: 80,
-          right: 80,
+          top: 225,
+          left: 60,
+          right: 60,
           textAlign: "center",
           textShadow: "none",
         }}
@@ -339,7 +339,7 @@ const Gancho1: React.FC = () => {
           style={{
             fontFamily: SANS,
             fontWeight: 800,
-            fontSize: 62,
+            fontSize: texto.length > 40 ? 50 : 62,
             letterSpacing: -1.5,
             lineHeight: 1.35,
             color: "white",
@@ -349,7 +349,7 @@ const Gancho1: React.FC = () => {
             WebkitBoxDecorationBreak: "clone",
           }}
         >
-          Você pega de quem está perto
+          {texto}
         </span>
       </div>
       <Entra at={f(0.42)} style={{ ...linha, top: 1150 }}>
@@ -829,7 +829,11 @@ const B: React.FC<{ c: Cena; children: React.ReactNode }> = ({ c, children }) =>
   </Sequence>
 );
 
-export const IdentidadeReel: React.FC = () => {
+// Texto do gancho no primeiro quadro. Duas versões para testar no modo de teste.
+export const GANCHO_B = "Você pega de quem está perto";
+export const GANCHO_A = "Você começou a gostar de uma música só porque a pessoa gostava?";
+
+export const IdentidadeReel: React.FC<{ gancho?: string }> = ({ gancho = GANCHO_B }) => {
   useEffect(() => {
     loadAnton();
     loadIdentidadeFonts();
@@ -841,7 +845,7 @@ export const IdentidadeReel: React.FC = () => {
         <Vinheta />
       </Sequence>
       <B c="gancho1">
-        <Gancho1 />
+        <Gancho1 texto={gancho} />
       </B>
       <B c="gancho2">
         <Gancho2 />

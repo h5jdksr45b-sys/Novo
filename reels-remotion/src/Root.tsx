@@ -10,7 +10,7 @@ import {
 } from "./ComparacaoLadoALado";
 import { MitoApego } from "./MitoApego";
 import { MitoRindo } from "./MitoRindo";
-import { DURACAO, FPS, IdentidadeReel } from "./IdentidadeReel";
+import { DURACAO, FPS, GANCHO_A, IdentidadeReel } from "./IdentidadeReel";
 import {
   DUR_ABERTURA,
   DUR_FECHAMENTO,
@@ -75,6 +75,15 @@ export const RemotionRoot: React.FC = () => {
         fps={FPS}
         width={1080}
         height={1920}
+      />
+      <Composition
+        id="IdentidadeReelGanchoA"
+        component={IdentidadeReel}
+        durationInFrames={DURACAO}
+        fps={FPS}
+        width={1080}
+        height={1920}
+        defaultProps={{ gancho: GANCHO_A }}
       />
       <Folder name="StoriesRespiracao">
         <Composition

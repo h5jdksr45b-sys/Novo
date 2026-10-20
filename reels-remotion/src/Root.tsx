@@ -1,4 +1,4 @@
-import { Composition, staticFile } from "remotion";
+import { Composition, Folder, staticFile } from "remotion";
 import {
   CaptionedVideo,
   calculateCaptionedVideoMetadata,
@@ -11,6 +11,16 @@ import {
 import { MitoApego } from "./MitoApego";
 import { MitoRindo } from "./MitoRindo";
 import { DURACAO, FPS, IdentidadeReel } from "./IdentidadeReel";
+import {
+  DUR_ABERTURA,
+  DUR_FECHAMENTO,
+  StoryAbertura,
+  StoryFechamento,
+  StoryLonga,
+  StoryQuadrada,
+  StorySuspiro,
+  duracao,
+} from "./StoriesRespiracao";
 
 // Each <Composition> is an entry in the sidebar!
 
@@ -66,6 +76,48 @@ export const RemotionRoot: React.FC = () => {
         width={1080}
         height={1920}
       />
+      <Folder name="StoriesRespiracao">
+        <Composition
+          id="Story1Abertura"
+          component={StoryAbertura}
+          durationInFrames={DUR_ABERTURA}
+          fps={FPS}
+          width={1080}
+          height={1920}
+        />
+        <Composition
+          id="Story2Suspiro"
+          component={StorySuspiro}
+          durationInFrames={duracao("suspiro")}
+          fps={FPS}
+          width={1080}
+          height={1920}
+        />
+        <Composition
+          id="Story3Quadrada"
+          component={StoryQuadrada}
+          durationInFrames={duracao("quadrada")}
+          fps={FPS}
+          width={1080}
+          height={1920}
+        />
+        <Composition
+          id="Story4Longa"
+          component={StoryLonga}
+          durationInFrames={duracao("longa")}
+          fps={FPS}
+          width={1080}
+          height={1920}
+        />
+        <Composition
+          id="Story5Fechamento"
+          component={StoryFechamento}
+          durationInFrames={DUR_FECHAMENTO}
+          fps={FPS}
+          width={1080}
+          height={1920}
+        />
+      </Folder>
     </>
   );
 };

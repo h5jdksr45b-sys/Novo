@@ -1,0 +1,10 @@
+# Conteúdo aberto dos guias: nunca vai para o repositório público.
+# Os originais ficam criptografados em originais.tgz.enc.
+src/vol1.*
+src/vol2.*
+dist/*.html
+dist/*.pdf
+dist/artifact/
+dist/arquivo/
+*.raw.pdf
+*.heads.json

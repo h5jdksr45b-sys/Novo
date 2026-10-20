@@ -1,4 +1,4 @@
-// Gera versões protegidas por senha (dist/protegido/): o HTML inteiro é criptografado com
+// Gera versões protegidas por senha (/crise/, /kit/, /crise.pdf, /kit.pdf na raiz do repositório): o HTML inteiro é criptografado com
 // AES-GCM 256 e chave derivada da senha por PBKDF2-SHA256 (600 mil iterações).
 // O arquivo publicado não contém o texto do guia; ele só existe depois da senha certa.
 // Também gera os PDFs com a mesma senha de abertura (AES-256).
@@ -18,7 +18,9 @@ const VOLS = [
   { slug: "kit-de-regulacao", title: "Kit de Regulação", vol: "Volume II" },
 ];
 const b64 = (u8) => Buffer.from(u8).toString("base64");
-mkdirSync(join(ROOT, "dist", "protegido"), { recursive: true });
+// saída na raiz do repositório para links curtos no GitHub Pages: /crise/, /kit/, /crise.pdf, /kit.pdf
+const REPO = join(ROOT, "..");
+const SHORT = { "protocolo-da-crise": "crise", "kit-de-regulacao": "kit" };
 
 for (const v of VOLS) {
   const src = join(ROOT, "dist", "arquivo", `${v.slug}.html`);
@@ -30,7 +32,8 @@ for (const v of VOLS) {
   const key = await crypto.subtle.deriveKey({ name: "PBKDF2", salt, iterations: ITER, hash: "SHA-256" }, base, { name: "AES-GCM", length: 256 }, false, ["encrypt"]);
   const data = new Uint8Array(await crypto.subtle.encrypt({ name: "AES-GCM", iv }, key, plain));
   const page = gate(v, { salt: b64(salt), iv: b64(iv), iter: ITER, data: b64(data) });
-  writeFileSync(join(ROOT, "dist", "protegido", `${v.slug}.html`), page);
+  mkdirSync(join(REPO, SHORT[v.slug]), { recursive: true });
+  writeFileSync(join(REPO, SHORT[v.slug], "index.html"), page);
   console.log(`ok ${v.slug}: ${(page.length / 1048576).toFixed(2)} MB`);
 }
 
@@ -121,6 +124,6 @@ import pymupdf, sys
 d = pymupdf.open(sys.argv[1])
 d.save(sys.argv[2], encryption=pymupdf.PDF_ENCRYPT_AES_256, user_pw=sys.argv[3], owner_pw=sys.argv[3] + "-FS",
        permissions=pymupdf.PDF_PERM_PRINT | pymupdf.PDF_PERM_FORM | pymupdf.PDF_PERM_ACCESSIBILITY | pymupdf.PDF_PERM_ANNOTATE | pymupdf.PDF_PERM_PRINT_HQ)
-`, pdf, join(ROOT, "dist", "protegido", `${v.slug}.pdf`), PASS], { stdio: "inherit" });
+`, pdf, join(REPO, `${SHORT[v.slug]}.pdf`), PASS], { stdio: "inherit" });
   console.log(`ok ${v.slug}.pdf protegido`);
 }

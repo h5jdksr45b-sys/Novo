@@ -10,7 +10,7 @@ import {
 } from "./ComparacaoLadoALado";
 import { MitoApego } from "./MitoApego";
 import { MitoRindo } from "./MitoRindo";
-import { DURACAO, FPS, GANCHO_A, IdentidadeReel } from "./IdentidadeReel";
+import { DURACAO, FPS, GANCHO_A, GANCHO_CONVIVE, IdentidadeReel } from "./IdentidadeReel";
 import { CapaIdentidade } from "./IdentidadeReel/Capa";
 import {
   DUR_ABERTURA,
@@ -87,6 +87,22 @@ export const RemotionRoot: React.FC = () => {
         defaultProps={{ gancho: GANCHO_A }}
       />
       <Still id="IdentidadeCapa" component={CapaIdentidade} width={1080} height={1920} />
+      <Composition
+        id="IdentidadeReelConvive"
+        component={IdentidadeReel}
+        durationInFrames={DURACAO}
+        fps={FPS}
+        width={1080}
+        height={1920}
+        defaultProps={{ gancho: GANCHO_CONVIVE }}
+      />
+      <Still
+        id="IdentidadeCapaConvive"
+        component={CapaIdentidade}
+        width={1080}
+        height={1920}
+        defaultProps={{ linha1: "Muda até o jeito", linha2: "de falar perto de", destaque: "você?" }}
+      />
       <Folder name="StoriesRespiracao">
         <Composition
           id="Story1Abertura"

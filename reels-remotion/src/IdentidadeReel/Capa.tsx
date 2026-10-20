@@ -4,7 +4,11 @@ import { loadIdentidadeFonts, SANS, SERIF } from "./fonts";
 
 // Capa do reel. O texto fica dentro do recorte 4:5 que aparece na grade
 // do perfil (faixa de y 285 a 1635).
-export const CapaIdentidade: React.FC = () => {
+export const CapaIdentidade: React.FC<{ linha1?: string; linha2?: string; destaque?: string }> = ({
+  linha1 = "Você pega o jeito",
+  linha2 = "de quem está",
+  destaque = "perto?",
+}) => {
   useEffect(() => {
     loadIdentidadeFonts();
   }, []);
@@ -32,11 +36,11 @@ export const CapaIdentidade: React.FC = () => {
         }}
       >
         <div style={{ fontFamily: SERIF, fontStyle: "italic", fontSize: 128, lineHeight: 1 }}>
-          Você pega o jeito
+          {linha1}
         </div>
         <div style={{ fontFamily: SANS, fontWeight: 900, fontSize: 104, letterSpacing: -4, lineHeight: 1.1, marginTop: 10 }}>
-          de quem está{" "}
-          <span style={{ backgroundColor: "#c83c1e", padding: "0 16px" }}>perto?</span>
+          {linha2}{" "}
+          <span style={{ backgroundColor: "#c83c1e", padding: "0 16px" }}>{destaque}</span>
         </div>
       </div>
     </AbsoluteFill>

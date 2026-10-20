@@ -832,6 +832,7 @@ const B: React.FC<{ c: Cena; children: React.ReactNode }> = ({ c, children }) =>
 // Texto do gancho no primeiro quadro. Duas versões para testar no modo de teste.
 export const GANCHO_B = "Você pega de quem está perto";
 export const GANCHO_A = "Você começou a gostar de uma música só porque a pessoa gostava?";
+export const GANCHO_CONVIVE = "A pessoa que você ama muda até o jeito de falar perto de você?";
 
 export const IdentidadeReel: React.FC<{ gancho?: string }> = ({ gancho = GANCHO_B }) => {
   useEffect(() => {

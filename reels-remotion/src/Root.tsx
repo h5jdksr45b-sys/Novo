@@ -1,4 +1,4 @@
-import { Composition, Folder, staticFile } from "remotion";
+import { Composition, Folder, Still, staticFile } from "remotion";
 import {
   CaptionedVideo,
   calculateCaptionedVideoMetadata,
@@ -11,6 +11,7 @@ import {
 import { MitoApego } from "./MitoApego";
 import { MitoRindo } from "./MitoRindo";
 import { DURACAO, FPS, GANCHO_A, IdentidadeReel } from "./IdentidadeReel";
+import { CapaIdentidade } from "./IdentidadeReel/Capa";
 import {
   DUR_ABERTURA,
   DUR_FECHAMENTO,
@@ -85,6 +86,7 @@ export const RemotionRoot: React.FC = () => {
         height={1920}
         defaultProps={{ gancho: GANCHO_A }}
       />
+      <Still id="IdentidadeCapa" component={CapaIdentidade} width={1080} height={1920} />
       <Folder name="StoriesRespiracao">
         <Composition
           id="Story1Abertura"

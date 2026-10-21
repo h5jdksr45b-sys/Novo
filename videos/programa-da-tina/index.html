@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/vendor/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Abril Fatface"; src: url("assets/fonts/abril.woff2") format("woff2"); }
+      @font-face { font-family: "Pacifico"; src: url("assets/fonts/pacifico.woff2") format("woff2"); }
+      @font-face { font-family: "Anton"; src: url("assets/fonts/anton.woff2") format("woff2"); }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #0b0614; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: #0b0614; }
+      .full { position: absolute; inset: 0; width: 100%; height: 100%; }
+      .still { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+      #tina-video { object-fit: cover; }
+      .shade { position: absolute; inset: 0; }
+      .beam {
+        position: absolute; top: -200px; width: 420px; height: 2400px;
+        background: linear-gradient(180deg, rgba(255, 236, 250, 0.55) 0%, rgba(255, 120, 200, 0.18) 45%, rgba(255, 120, 200, 0) 80%);
+        filter: blur(18px); mix-blend-mode: screen; transform-origin: 50% 0%;
+      }
+      .sparkles { position: absolute; inset: 0; pointer-events: none; }
+      .spark {
+        position: absolute; width: 34px; height: 34px;
+        background: radial-gradient(circle, #fff 0 12%, rgba(255, 220, 245, 0.9) 18%, rgba(255, 105, 200, 0) 60%);
+        clip-path: polygon(50% 0, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0 50%, 40% 40%);
+      }
+      .logo {
+        position: absolute; left: 0; right: 0; display: flex; flex-direction: column; align-items: center;
+      }
+      .kicker {
+        font-family: "Pacifico"; font-size: 104px; line-height: 1.1; color: #fff7fb;
+        text-shadow: 0 0 22px rgba(255, 70, 180, 0.9), 0 6px 0 rgba(120, 0, 70, 0.6);
+      }
+      .name {
+        font-family: "Abril Fatface"; font-size: 310px; line-height: 0.95; letter-spacing: 0.02em;
+        background: linear-gradient(100deg, #ff2fa8 0%, #ff8ad4 22%, #fff3c4 40%, #ffd15c 50%, #fff3c4 60%, #ff8ad4 78%, #ff2fa8 100%);
+        background-size: 260% 100%; background-position: 100% 50%;
+        -webkit-background-clip: text; background-clip: text; color: transparent;
+        filter: drop-shadow(0 0 26px rgba(255, 40, 170, 0.85)) drop-shadow(0 10px 0 #5b0036);
+      }
+      .tag {
+        margin-top: 34px; padding: 14px 44px 10px; border-radius: 999px;
+        background: #ff1f9a; border: 5px solid #ffe08a;
+        font-family: "Anton"; font-size: 66px; letter-spacing: 0.08em; color: #fff;
+        box-shadow: 0 0 40px rgba(255, 31, 154, 0.75);
+      }
+      .cta {
+        margin-top: 70px; font-family: "Anton"; font-size: 58px; letter-spacing: 0.06em; color: #fff;
+        text-shadow: 0 4px 18px rgba(0, 0, 0, 0.8);
+      }
+      .flash { position: absolute; inset: 0; background: #fff4fb; opacity: 0; mix-blend-mode: screen; }
+      #bug-pill {
+        position: absolute; top: 150px; left: 56px; display: flex; align-items: baseline; gap: 12px;
+        padding: 12px 28px 14px; border-radius: 999px;
+        background: rgba(20, 4, 18, 0.62); border: 3px solid rgba(255, 70, 180, 0.9);
+        box-shadow: 0 0 24px rgba(255, 31, 154, 0.55);
+      }
+      #bug-pill .k { font-family: "Pacifico"; font-size: 34px; color: #fff; }
+      #bug-pill .n {
+        font-family: "Abril Fatface"; font-size: 54px; line-height: 1;
+        background: linear-gradient(100deg, #ff5bbd, #ffe7a3, #ff5bbd); -webkit-background-clip: text; background-clip: text; color: transparent;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="16.06" data-width="1080" data-height="1920">
+      <!-- Track 0: the original clip, after the intro -->
+      <video id="tina-video" class="clip full" src="assets/media/tina.mp4" playsinline data-has-audio="true"
+        data-start="1.8" data-duration="12.064" data-track-index="0" data-volume="1"></video>
+
+      <!-- Track 1: intro, built on the clip's first frame so the cut into the video is seamless -->
+      <div id="intro" class="clip full" data-start="0" data-duration="1.8" data-track-index="1">
+        <img id="intro-bg" class="still" src="assets/media/first.jpg" alt="" />
+        <div id="intro-shade" class="shade" style="background: radial-gradient(ellipse at 50% 38%, rgba(40, 0, 40, 0.25) 0%, rgba(12, 2, 20, 0.82) 75%)"></div>
+        <div id="beam-l" class="beam" style="left: 40px"></div>
+        <div id="beam-r" class="beam" style="left: 620px"></div>
+        <div id="intro-sparks" class="sparkles"></div>
+        <div id="intro-logo" class="logo" style="top: 960px">
+          <div id="intro-kicker" class="kicker">Programa da</div>
+          <div id="intro-name" class="name">TINA</div>
+          <div id="intro-tag" class="tag">A ÚLTIMA SINCERA</div>
+        </div>
+        <div id="intro-flash" class="flash"></div>
+      </div>
+
+      <!-- Track 2: channel bug while the clip plays -->
+      <div id="bug" class="clip full" data-start="1.8" data-duration="12.064" data-track-index="2">
+        <div id="bug-pill"><span class="k">Programa da</span><span class="n">TINA</span></div>
+      </div>
+
+      <!-- Track 3: outro on the clip's last frame -->
+      <div id="outro" class="clip full" data-start="13.864" data-duration="2.196" data-track-index="3">
+        <img id="outro-bg" class="still" src="assets/media/last.jpg" alt="" />
+        <div id="outro-shade" class="shade" style="background: linear-gradient(180deg, rgba(12, 2, 20, 0.35) 0%, rgba(12, 2, 20, 0.88) 60%, rgba(12, 2, 20, 0.95) 100%)"></div>
+        <div id="outro-sparks" class="sparkles"></div>
+        <div id="outro-logo" class="logo" style="top: 600px">
+          <div id="outro-kicker" class="kicker">Programa da</div>
+          <div id="outro-name" class="name">TINA</div>
+          <div id="outro-tag" class="tag">A ÚLTIMA SINCERA</div>
+          <div id="outro-cta" class="cta">SIGA PARA O PRÓXIMO EPISÓDIO</div>
+        </div>
+        <div id="outro-flash" class="flash"></div>
+      </div>
+
+      <!-- Audio: jingle on top of the clip's own sound -->
+      <audio id="jingle-intro" src="assets/media/jingle-intro.wav" data-start="0" data-duration="1.9" data-track-index="4" data-volume="0.85"></audio>
+      <audio id="jingle-outro" src="assets/media/jingle-outro.wav" data-start="13.864" data-duration="2.196" data-track-index="5" data-volume="0.85"></audio>
+    </div>
+    <script>
+      // Seeded sparkles so every render is identical
+      let seed = 20261021;
+      const rand = () => ((seed = (seed * 1664525 + 1013904223) % 4294967296) / 4294967296);
+      function sprinkle(id, count) {
+        const host = document.getElementById(id);
+        const out = [];
+        for (let i = 0; i < count; i++) {
+          const s = document.createElement("div");
+          s.className = "spark";
+          s.style.left = Math.round(60 + rand() * 960) + "px";
+          s.style.top = Math.round(380 + rand() * 900) + "px";
+          host.appendChild(s);
+          out.push({ el: s, scale: 0.6 + rand() * 1.6, delay: rand() });
+        }
+        return out;
+      }
+      const introSparks = sprinkle("intro-sparks", 22);
+      const outroSparks = sprinkle("outro-sparks", 20);
+
+      const tl = gsap.timeline({ paused: true });
+
+      // INTRO 0 to 1.8: ta ta ta hits at 0.25, 0.42, 0.59, big chord at 0.80
+      tl.fromTo("#intro-bg", { scale: 1.14 }, { scale: 1.0, duration: 1.8, ease: "power2.out" }, 0);
+      tl.fromTo("#beam-l", { rotation: -28, opacity: 0 }, { rotation: 14, opacity: 1, duration: 1.6, ease: "sine.inOut" }, 0);
+      tl.fromTo("#beam-r", { rotation: 28, opacity: 0 }, { rotation: -14, opacity: 1, duration: 1.6, ease: "sine.inOut" }, 0);
+      tl.fromTo("#intro-kicker", { y: 60, opacity: 0, scale: 0.8 }, { y: 0, opacity: 1, scale: 1, duration: 0.16, ease: "back.out(2.2)" }, 0.25);
+      [0.42, 0.59].forEach((t) => {
+        tl.fromTo("#intro-kicker", { scale: 1.08 }, { scale: 1, duration: 0.14, ease: "power2.out", immediateRender: false }, t);
+      });
+      tl.fromTo("#intro-name", { scale: 1.9, opacity: 0, filter: "blur(18px) drop-shadow(0 0 26px rgba(255,40,170,0.85))" },
+        { scale: 1, opacity: 1, filter: "blur(0px) drop-shadow(0 0 26px rgba(255,40,170,0.85))", duration: 0.22, ease: "power3.out" }, 0.78);
+      tl.fromTo("#intro-name", { backgroundPosition: "100% 50%" }, { backgroundPosition: "0% 50%", duration: 0.8, ease: "power1.inOut" }, 0.9);
+      tl.fromTo("#intro-flash", { opacity: 0.85 }, { opacity: 0, duration: 0.35, ease: "power2.out", immediateRender: false }, 0.8);
+      tl.fromTo("#intro-tag", { scale: 0, opacity: 0, rotation: -8 }, { scale: 1, opacity: 1, rotation: -3, duration: 0.32, ease: "back.out(2.5)" }, 0.95);
+      introSparks.forEach((s) => {
+        const t = 0.8 + s.delay * 0.7;
+        tl.fromTo(s.el, { scale: 0, opacity: 1, rotation: 0 }, { scale: s.scale, rotation: 90, duration: 0.22, ease: "power2.out" }, t);
+        tl.to(s.el, { scale: 0, opacity: 0, duration: 0.25, ease: "power2.in" }, t + 0.22);
+      });
+      // hand off to the live clip: logo lifts away, shade clears to the first frame
+      tl.to("#intro-logo", { y: -140, scale: 0.7, opacity: 0, duration: 0.3, ease: "power2.in" }, 1.5);
+      tl.to(["#intro-shade", "#beam-l", "#beam-r"], { opacity: 0, duration: 0.3, ease: "power1.in" }, 1.5);
+
+      // BUG: small brand pill while the clip plays
+      tl.fromTo("#bug-pill", { x: -60, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "power3.out" }, 2.0);
+      tl.to("#bug-pill", { opacity: 0, duration: 0.25 }, 13.6);
+
+      // OUTRO 13.864 to 16.06: ta at +0, DAAA at +0.22
+      const O = 13.864;
+      tl.fromTo("#outro-bg", { scale: 1.0 }, { scale: 1.12, duration: 2.196, ease: "sine.out" }, O);
+      tl.fromTo("#outro-shade", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.out" }, O);
+      tl.fromTo("#outro-kicker", { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.25, ease: "back.out(2)" }, O);
+      tl.fromTo("#outro-name", { scale: 1.9, opacity: 0, filter: "blur(18px) drop-shadow(0 0 26px rgba(255,40,170,0.85))" },
+        { scale: 1, opacity: 1, filter: "blur(0px) drop-shadow(0 0 26px rgba(255,40,170,0.85))", duration: 0.22, ease: "power3.out" }, O + 0.2);
+      tl.fromTo("#outro-name", { backgroundPosition: "100% 50%" }, { backgroundPosition: "0% 50%", duration: 1.0, ease: "power1.inOut" }, O + 0.35);
+      tl.fromTo("#outro-flash", { opacity: 0.8 }, { opacity: 0, duration: 0.4, ease: "power2.out", immediateRender: false }, O + 0.22);
+      tl.fromTo("#outro-tag", { scale: 0, opacity: 0, rotation: 8 }, { scale: 1, opacity: 1, rotation: -3, duration: 0.3, ease: "back.out(2.5)" }, O + 0.38);
+      tl.fromTo("#outro-cta", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, ease: "power3.out" }, O + 0.7);
+      outroSparks.forEach((s) => {
+        const t = O + 0.22 + s.delay * 1.2;
+        tl.fromTo(s.el, { scale: 0, opacity: 1, rotation: 0 }, { scale: s.scale, rotation: 90, duration: 0.22, ease: "power2.out" }, t);
+        tl.to(s.el, { scale: 0, opacity: 0, duration: 0.3, ease: "power2.in" }, t + 0.22);
+      });
+
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

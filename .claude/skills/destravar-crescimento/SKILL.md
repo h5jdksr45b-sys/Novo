@@ -93,7 +93,7 @@ O relato do Dr. Fabio é que a lapidação estraga o vídeo. Até E1 terminar:
 
 - Sem nota de viralidade, previsão de alcance ou limiar universal.
 - Amostra abaixo de 30 posts descreve, não prova causa.
-- Repostagens com minutos de diferença não são tentativas independentes. Veja as leituras A e B em `references/experimentos.md`.
+- Repostagens com minutos de diferença não são tentativas independentes. De maio a agosto, uma cópia de cada par era Reel de teste (trial). Veja `references/experimentos.md` antes de comparar meses.
 - Prints e Windsor podem dar números diferentes para a mesma métrica. Registre a fonte de cada número.
 - Alcance é a prioridade atual. Venda é secundária. Não acrescente oferta por reflexo.
 - Quando um comentário ou dado indicar risco imediato, a orientação de segurança vem antes de qualquer análise.

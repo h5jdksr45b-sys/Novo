@@ -15,13 +15,18 @@ De maio a julho, 46 Reels foram publicados duas vezes, com a mesma legenda e 1,6
 
 Os dados não decidem entre A e B. O que as duas mostram é o mesmo: **um conteúdo bom pode ficar no basal sem que nada nele esteja errado.** Um flop isolado não prova que o vídeo era ruim.
 
+**Informação nova (Dr. Fabio, 2026-10-21):** em cada par, uma das publicações era Reel de teste (trial). O teste é mostrado primeiro só a quem não segue a conta. Então os pares não eram duplicatas. Eram o mesmo vídeo em duas rotas de distribuição. A leitura B (duplicata suprimida) perde força. Falta saber qual das duas era o teste: a que ficou no basal ou a que foi longe.
+
+Os últimos pares são de 05/08 e 09/08. Depois disso quase não houve teste junto com Reel normal, e agosto e setembro ficaram no basal.
+
 ### Relato do Dr. Fabio (2026-10-21)
 
 - Quando ele refaz um vídeo idêntico, o resultado se repete e às vezes melhora.
 - Quando adapta com ajuda de IA, lapida ou usa o mesmo esqueleto em outro tema, quase nunca funciona.
 - O momento em que estraga, segundo ele, é a lapidação.
+- Ele sempre lapidou com IA. Não começou em agosto.
 
-Isto é observação dele, não medida. Combina com dois fatos do histórico: em agosto e setembro, o tempo médio assistido dos Reels caiu (8,2 s contra 10,9 a 12,2 s de maio a julho) e a legenda genérica ficou mais frequente (20% a 23% contra 12% a 14%). Não prova a causa.
+Isto é observação dele, não medida. Como a lapidação sempre existiu, ela pode explicar por que adaptações rendem menos que o original, mas não explica a queda de agosto.
 
 ### Fatos
 
@@ -44,7 +49,7 @@ Isto é observação dele, não medida. Combina com dois fatos do histórico: em
 
 Existe um basal de cerca de 1.500 a 2.000 views por Reel. O mesmo vídeo pode ficar nele ou sair dele, como mostram as repostagens. Então um flop isolado não prova que o vídeo era ruim. Julho, com publicação única, saiu do basal. Agosto e setembro voltaram para ele. Os picos, quase sempre carrosséis, não levantam o basal dos posts seguintes. Esse é o ciclo.
 
-O que mudou em agosto não aparece nas colunas do histórico. A pista mais forte é o relato do Dr. Fabio sobre a lapidação (H5). A causa ainda é hipótese.
+O que mudou em agosto não aparece nas colunas do histórico. A pista mais forte é o fim da publicação em par, teste e normal, no começo de agosto (H6). A lapidação (H5) explica outra coisa: por que adaptar rende menos que o original. As duas causas ainda são hipótese.
 
 ## Hipóteses
 
@@ -53,7 +58,8 @@ O que mudou em agosto não aparece nas colunas do histórico. A pista mais forte
 | H1 | A abertura dos Reels não mostra uma situação reconhecível nos 2 primeiros segundos. Metade sai, e o Instagram não leva o vídeo além do primeiro grupo. | Fatos 2 e 7. Correlação, não causa. | A testar depois (E2) |
 | H2 | Vários Reels no mesmo dia dividem a distribuição. | Fato 6. Efeito moderado. | A testar depois de E1 |
 | H4 | Algo feito em julho, que não aparece nos dados, levantou o basal. | Fato 1. Só um mês. | Perguntar ao Dr. Fabio |
-| H5 | A lapidação (reescrever com IA, adaptar um esqueleto a outro tema) tira do vídeo o que fazia a pessoa ficar: a fala própria e a cena concreta. | Relato do Dr. Fabio, queda do tempo assistido e mais legenda genérica a partir de agosto. | A testar primeiro (E1) |
+| H6 | Publicar o mesmo Reel também como teste (trial) era o que tirava os vídeos do basal. Quando isso parou, no começo de agosto, o basal voltou. | 44 de 46 pares, fim dos pares em 09/08, queda em agosto. Falta saber qual cópia era o teste. | Prioridade. Confirmar qual cópia era o teste |
+| H5 | A lapidação (reescrever com IA, adaptar um esqueleto a outro tema) tira do vídeo o que fazia a pessoa ficar: a fala própria e o gesto concreto. | Relato do Dr. Fabio. Ele sempre lapidou, então isso explica adaptações que rendem menos, não a queda de agosto. | A testar (E1) |
 | H3 | Carrosséis com cena concreta e familiar puxam mais seguidores por visualização que carrosséis de metáfora. | 8 posts com print (conclusões v2, 2026-10-19). | Amostra pequena |
 
 ## Experimentos
@@ -70,7 +76,7 @@ O que mudou em agosto não aparece nas colunas do histórico. A pista mais forte
 - **Amostra:** os próximos 12 Reels.
 - **Apoio:** 35% ou menos dos 12 abaixo de 1.500 de alcance, com tempo assistido maior que a linha de base.
 - **Refutação:** 50% ou mais abaixo de 1.500.
-- **Status:** não iniciado.
+- **Status:** não iniciado. Antes de começar, confirmar H6. Se o Reel de teste era a cópia que ia longe, testar a rota de teste primeiro, porque ela pode explicar mais que a lapidação.
 - **Resultado:** (preencher)
 
 ### E2. Abertura com situação concreta nos 2 primeiros segundos

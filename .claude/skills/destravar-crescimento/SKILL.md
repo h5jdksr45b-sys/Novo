@@ -36,7 +36,8 @@ Pergunte em que ponto o problema aparece, na ordem:
 2. **Quando.** Em que mês começou? Mudou o volume de posts nesse mês?
 3. **Distribuição.** A mediana caiu porque todos caíram, ou porque cresceu a parte que não sai do chão? Separe os posts que alcançam bem dos que morrem cedo e compare os dois grupos.
 4. **Repostagens.** O histórico guarda só a cópia de mais views de cada conteúdo repostado. Compare pela coluna views/tent. do script, que conta cada tentativa. Sem isso, um mês com muitas repostagens parece melhor do que foi.
-5. **Ponto de saída.** Em Reels, compare tempo médio assistido e saída em 3 segundos entre os grupos. A duração dos vídeos não foi coletada, então um vídeo curto tem tempo assistido baixo por definição. Confira a duração antes de concluir.
+5. **Cadeia de produção.** Quando o pedido for "replicar o que funcionou", localize o passo em que o resultado se perde: ideia bruta, roteiro, gravação, edição, legenda, publicação. Para cada peça, compare o que entrou e o que saiu de cada passo. Uma cópia idêntica que funciona e uma adaptação que não funciona apontam para o passo da adaptação, não para o tema.
+6. **Ponto de saída.** Em Reels, compare tempo médio assistido e saída em 3 segundos entre os grupos. A duração dos vídeos não foi coletada, então um vídeo curto tem tempo assistido baixo por definição. Confira a duração antes de concluir.
 
 Pare quando conseguir dizer: trava em tal formato, desde tal mês, neste grupo de posts, neste ponto do vídeo.
 
@@ -79,10 +80,19 @@ Inconclusiva é um resultado válido. Não arredonde para sucesso.
 
 Separe sempre fato do Instagram, cálculo, hipótese editorial e preferência.
 
+## Ao ajudar a escrever ou adaptar
+
+O relato do Dr. Fabio é que a lapidação estraga o vídeo. Até E1 terminar:
+- preserve as palavras e a cena dele;
+- corrija só imprecisão clínica, risco ou erro de fato, e diga o que mudou;
+- não troque uma cena por um conceito;
+- não encaixe uma ideia nova no esqueleto de um post antigo sem ele pedir.
+
 ## Limites
 
 - Sem nota de viralidade, previsão de alcance ou limiar universal.
 - Amostra abaixo de 30 posts descreve, não prova causa.
+- Repostagens com minutos de diferença não são tentativas independentes. Veja as leituras A e B em `references/experimentos.md`.
 - Prints e Windsor podem dar números diferentes para a mesma métrica. Registre a fonte de cada número.
 - Alcance é a prioridade atual. Venda é secundária. Não acrescente oferta por reflexo.
 - Quando um comentário ou dado indicar risco imediato, a orientação de segurança vem antes de qualquer análise.

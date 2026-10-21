@@ -6,13 +6,26 @@ Atualize a cada leitura. Mais recente primeiro dentro de cada seção.
 
 Fonte: histórico Windsor coletado em 2026-10-13, 364 posts de 13/04 a 12/10/2026. Posts depois de 05/10 ficaram fora porque ainda acumulavam números. O histórico estava com 9 dias de atraso e a conta do Instagram não estava selecionada no Windsor. O período coberto é de 6 meses. Não há dado dos anos anteriores.
 
-### Correção da primeira leitura
+### Repostagens: duas leituras possíveis
 
-A primeira leitura dizia que os Reels travados subiram de cerca de 32% para 59% em agosto. Parte disso era erro de medida. De abril a julho, 44 Reels foram publicados mais de uma vez, e o histórico guarda só a cópia de mais views. Contando cada tentativa, o quadro é outro. O script agora mostra a coluna views/tent. para evitar esse erro.
+De maio a julho, 46 Reels foram publicados duas vezes, com a mesma legenda e 1,6 minuto de intervalo na mediana. O horário foi lido no código de cada post. Em 44 dos 46 pares, a primeira publicação ficou no basal (de 150 a 2.400 views) e a segunda foi muito mais longe. Em 2026-10-21, o Vamos comparou 6 pares e confirmou o mesmo vídeo nas duas publicações: duração, fala, montagem, legenda e áudio audível. Isso vale inclusive para um Reel sem o rosto (os copos). Nada visível separa as duas.
+
+- **Leitura A:** cada cópia é uma tentativa. Contando todas, o basal fica em 1.500 a 2.200 views em quase todos os meses. Coluna views/tent. do script.
+- **Leitura B:** o Instagram trata a cópia como duplicata e distribui só uma das duas. Nesse caso, a medida justa do conteúdo é a melhor cópia, e a queda de cerca de 6 mil (maio a julho) para cerca de 1.500 (agosto e setembro) é real. Coluna views do script.
+
+Os dados não decidem entre A e B. O que as duas mostram é o mesmo: **um conteúdo bom pode ficar no basal sem que nada nele esteja errado.** Um flop isolado não prova que o vídeo era ruim.
+
+### Relato do Dr. Fabio (2026-10-21)
+
+- Quando ele refaz um vídeo idêntico, o resultado se repete e às vezes melhora.
+- Quando adapta com ajuda de IA, lapida ou usa o mesmo esqueleto em outro tema, quase nunca funciona.
+- O momento em que estraga, segundo ele, é a lapidação.
+
+Isto é observação dele, não medida. Combina com dois fatos do histórico: em agosto e setembro, o tempo médio assistido dos Reels caiu (8,2 s contra 10,9 a 12,2 s de maio a julho) e a legenda genérica ficou mais frequente (20% a 23% contra 12% a 14%). Não prova a causa.
 
 ### Fatos
 
-1. **O basal está parado há 6 meses.** Mediana de views por tentativa de Reel: abril 1.456, maio 2.216, junho 1.777, julho 5.530, agosto 1.430, setembro 1.860. Julho é a exceção.
+1. **Agosto e setembro ficaram no basal pelas duas leituras.** Mediana de views por Reel, contando a melhor cópia (leitura B): abril 1.456, maio 7.110, junho 6.005, julho 5.812, agosto 1.545, setembro 1.860. Contando cada cópia (leitura A): 1.456, 2.216, 1.777, 5.530, 1.430, 1.860. Julho teve só 2 repostagens e mesmo assim ficou alto.
 2. **Metade das pessoas sai nos 3 primeiros segundos, todo mês.** A saída em 3 segundos mediana ficou entre 0,49 e 0,55 em todos os meses. Ela não piorou. Ela é constante.
 3. **Os picos não levantam o basal.** Em setembro houve 9 posts com 50 mil ou mais de alcance. A mediana dos Reels nas semanas seguintes ficou entre 107 e 4.443, como antes.
 4. **O alcance grande vem de carrosséis.** 37 de 122 carrosséis passaram de 20 mil contas. Entre os Reels, 12 de 239. Das 25 publicações de maior alcance, 19 são carrosséis. Dois terços da produção são Reels.
@@ -29,33 +42,43 @@ A primeira leitura dizia que os Reels travados subiram de cerca de 32% para 59% 
 
 ### Leitura
 
-O perfil não caiu. Ele está parado num patamar. Cada Reel costuma ser mostrado para cerca de 1.500 a 2.200 pessoas, metade sai nos primeiros segundos, e a maioria para por aí. De vez em quando um post, quase sempre carrossel, sai desse patamar, mas o seguinte volta para ele. Esse é o ciclo. A causa ainda é hipótese.
+Existe um basal de cerca de 1.500 a 2.000 views por Reel. O mesmo vídeo pode ficar nele ou sair dele, como mostram as repostagens. Então um flop isolado não prova que o vídeo era ruim. Julho, com publicação única, saiu do basal. Agosto e setembro voltaram para ele. Os picos, quase sempre carrosséis, não levantam o basal dos posts seguintes. Esse é o ciclo.
+
+O que mudou em agosto não aparece nas colunas do histórico. A pista mais forte é o relato do Dr. Fabio sobre a lapidação (H5). A causa ainda é hipótese.
 
 ## Hipóteses
 
 | # | Hipótese | Base | Status |
 |---|---|---|---|
-| H1 | A abertura dos Reels não mostra uma situação reconhecível nos 2 primeiros segundos. Metade sai, e o Instagram não leva o vídeo além do primeiro grupo. | Fatos 2 e 7. Correlação, não causa. | A testar (E1) |
+| H1 | A abertura dos Reels não mostra uma situação reconhecível nos 2 primeiros segundos. Metade sai, e o Instagram não leva o vídeo além do primeiro grupo. | Fatos 2 e 7. Correlação, não causa. | A testar depois (E2) |
 | H2 | Vários Reels no mesmo dia dividem a distribuição. | Fato 6. Efeito moderado. | A testar depois de E1 |
 | H4 | Algo feito em julho, que não aparece nos dados, levantou o basal. | Fato 1. Só um mês. | Perguntar ao Dr. Fabio |
-| H3 | Carrosséis com cena concreta e familiar puxam mais seguidores por visualização que carrosséis de metáfora. | 8 posts com print, ver conclusoes-v3.md. | Amostra pequena |
+| H5 | A lapidação (reescrever com IA, adaptar um esqueleto a outro tema) tira do vídeo o que fazia a pessoa ficar: a fala própria e a cena concreta. | Relato do Dr. Fabio, queda do tempo assistido e mais legenda genérica a partir de agosto. | A testar primeiro (E1) |
+| H3 | Carrosséis com cena concreta e familiar puxam mais seguidores por visualização que carrosséis de metáfora. | 8 posts com print (conclusões v2, 2026-10-19). | Amostra pequena |
 
 ## Experimentos
 
-### E1. Abertura com situação concreta nos 2 primeiros segundos
+### E1. Do bruto para a publicação, sem lapidar
 
-- **Hipótese:** H1.
-- **Condição:** um Reel por dia no máximo, sem repostagem, para não misturar com H2.
-- **Mudança única:** todo Reel abre com uma coisa que a pessoa fez, ouviu ou percebeu, dita nos 2 primeiros segundos e com texto grande na tela. Tema, duração, horário, legenda e frequência ficam como estão.
+- **Hipótese:** H5.
+- **Condição:** no máximo um Reel por dia, sem repostagem. Isso serve para medir sem confusão. Não é a mudança testada.
+- **Mudança única:** o Reel sai da ideia bruta do Dr. Fabio, com as palavras dele. A IA pode checar precisão clínica, segurança e erros de fato. Ela não reescreve frases, não troca a cena por um conceito e não encaixa a ideia num esqueleto anterior. Tema, duração, horário e frequência ficam como estão.
+- **Registro em cada Reel:** salvar o texto bruto e o texto publicado, a duração e o que mudou entre eles. É assim que se descobre em que passo da cadeia o resultado se perde.
 - **Métrica que decide:** porcentagem dos Reels com alcance abaixo de 1.500, lida 7 dias depois de cada post.
-- **Métricas de apoio:** saída em 3 segundos mediana e tempo médio assistido mediano.
-- **Linha de base:** em agosto e setembro, 54% a 59% abaixo de 1.500 de alcance. Saída em 3 segundos mediana de cerca de 50% em todos os meses. Mediana de 1.430 a 1.860 views por tentativa.
+- **Métricas de apoio:** views, tempo médio assistido e saída em 3 segundos.
+- **Linha de base (agosto e setembro):** 54% a 59% abaixo de 1.500 de alcance. Mediana de 1.545 a 1.860 views. Tempo médio assistido mediano de 8,2 segundos.
 - **Amostra:** os próximos 12 Reels.
-- **Apoio:** 35% ou menos dos 12 abaixo de 1.500, com saída em 3 segundos menor que a da linha de base.
+- **Apoio:** 35% ou menos dos 12 abaixo de 1.500 de alcance, com tempo assistido maior que a linha de base.
 - **Refutação:** 50% ou mais abaixo de 1.500.
-- **Antes de começar:** registrar a duração de cada Reel do teste.
 - **Status:** não iniciado.
 - **Resultado:** (preencher)
+
+### E2. Abertura com situação concreta nos 2 primeiros segundos
+
+- **Hipótese:** H1. Só começa depois de E1, para não misturar as duas mudanças.
+- **Mudança única:** a primeira frase mostra uma coisa que a pessoa fez, ouviu ou percebeu, com texto grande na tela.
+- **Métrica, linha de base e critérios:** os mesmos de E1, usando o resultado de E1 como nova linha de base.
+- **Status:** não iniciado.
 
 ### Medidas permanentes
 

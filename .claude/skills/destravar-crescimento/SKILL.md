@@ -86,6 +86,7 @@ O relato do Dr. Fabio é que a lapidação estraga o vídeo. Até E1 terminar:
 - preserve as palavras e a cena dele;
 - corrija só imprecisão clínica, risco ou erro de fato, e diga o que mudou;
 - não troque uma cena por um conceito;
+- concreto é o gesto que quem assiste já fez, ouviu ou percebeu, dito para essa pessoa. Não é uma cena de ficção. Nada de horário, nome, idade ou personagem narrado, como "ela acordou às 23:47". O texto para o Dr. Fabio colar em outras IAs está em `references/pedido-para-ia.md`;
 - não encaixe uma ideia nova no esqueleto de um post antigo sem ele pedir.
 
 ## Limites

@@ -90,7 +90,7 @@ Classificado pela força da evidência. Alta: muitos posts e o mesmo padrão em 
 | H7 | Publicar Reels à tarde é o que mais prende os vídeos no basal. | Fato 8 e item 3 do que é mais certeiro. Controlado por legenda, repostagem e Reels no mesmo dia. O Dr. Fabio não escolhia horário, porque ouviu do CEO do Instagram que o horário não influencia. Então a tarde não era reservada a um tipo de vídeo, o que reduz essa mistura. | Prioridade. Testar em E0 |
 | H6 | Publicar o mesmo Reel também como teste (trial) tirava os vídeos do basal. | Perdeu força: os pares saíam à noite. Normal do par à noite: 7.601 views. Reel sozinho à noite com legenda completa: 6.867. A primeira publicação de cada par quase nunca passou de 1.580 views, o que sugere que ela era o teste. | Em espera |
 | H5 | A lapidação (reescrever com IA, adaptar um esqueleto a outro tema) tira do vídeo o que fazia a pessoa ficar: a fala própria e o gesto concreto. | Relato do Dr. Fabio. Ele sempre lapidou, então isso explica adaptações que rendem menos, não a queda de agosto. | A testar (E1) |
-| H8 | Carrossel com música também aparece na aba Reels e ganha alcance fora da base. | Fonte externa: post de @design.deb (2026-10-21) e notícias sobre o anúncio do Instagram. Nada medido nesta conta: o histórico não registra música em carrossel. | Perguntar se os carrosséis já usam música. Se não, testar |
+| H8 | Carrossel com música também aparece na aba Reels e ganha alcance fora da base. | Fonte externa: post de @design.deb (2026-10-21) e notícias sobre o anúncio do Instagram. Nada medido nesta conta: o histórico não registra música em carrossel. | Já em vigor: o Dr. Fabio sempre coloca música nos carrosséis (2026-10-21). Não é uma mudança a testar. Parte do alcance dos carrosséis pode vir da aba Reels, e o histórico não separa a origem |
 | H9 | A foto do Dr. Fabio no último slide converte mais alcance em seguidor. | Fonte externa: framework de @design.deb. Ligado à lacuna da conta: alcance alto, poucos seguidores (mesa, 72 seguidores com cerca de 290 mil visualizadores). Nada medido. | A testar. Precisa de seguidores por post |
 | H3 | Carrosséis com cena concreta e familiar puxam mais seguidores por visualização que carrosséis de metáfora. | 8 posts com print (conclusões v2, 2026-10-19). | Amostra pequena |
 
@@ -148,7 +148,7 @@ Classificado pela força da evidência. Alta: muitos posts e o mesmo padrão em 
 - 10 slides: não adotado. A página funcionou com 7 a 9 (evidência fraca).
 - Música faz o carrossel aparecer na aba Reels: virou H8.
 - Foto do autor no slide de CTA: virou H9.
-- Margem de segurança embaixo: se o carrossel tiver música e for para a aba Reels, a interface cobre a parte de baixo. Manter assinatura e texto longe da borda inferior.
+- Margem de segurança embaixo: como os carrosséis sempre têm música e podem ir para a aba Reels, a interface pode cobrir a parte de baixo. Manter assinatura e texto longe da borda inferior em todo carrossel.
 
 ### Medidas permanentes
 

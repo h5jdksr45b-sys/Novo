@@ -72,6 +72,7 @@ Título profissional: médico, pós-graduado em psiquiatria, ou médico com foco
 
 - Reel: fala filmável e direção de imagem em blocos separados. Legenda automática pequena abaixo do queixo. Texto grande só nos momentos de ênfase.
 - Carrossel: siga o sistema visual do arquivo de voz e formatos do Dr. Fabio. Ele não está neste repositório. Se não estiver à mão, peça o arquivo ou entregue o texto por slide e avise.
+- Imagens de carrossel no Higgsfield: modelo GPT Image 2.5, variante Sunburst, sempre, com o texto embutido nos slides. Não use Nano Banana nem outro modelo sem o Dr. Fabio pedir. Confira o custo com get_cost antes de disparar um lote. Paleta do site: creme #f4f1ea, preto #0d0d0d, dourado #C8A96E. Fonte do site: Archivo.
 - Chamada para ação coerente com a função da peça. Para conteúdo que ajude alguém a explicar o que sente, prefira o envio a uma pessoa específica.
 - COMEÇAR só quando a peça fizer uma ponte clara e pertinente para o Protocolo 7 Dias.
 - Não peça relatos íntimos de crise, autolesão ou violência nos comentários.

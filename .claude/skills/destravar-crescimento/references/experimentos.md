@@ -135,6 +135,8 @@ Classificado pela força da evidência. Alta: muitos posts e o mesmo padrão em 
 - **Publicada em:** (preencher)
 - **Estrutura:** 8 slides. Capa, cinco nomes (grudenta, fria, dramática, explosiva, falsa), explicação, tratamento com chamada para envio. Imagens no Higgsfield: ilustrações no Recraft V4.1 e texto embutido no GPT Image 2.5 Sunburst.
 - **Por que 8:** os carrosséis com contagem conhecida que mais alcançaram tinham de 7 a 9 slides. Evidência fraca, 4 posts.
+- **Chamada para envio:** Manda para quem você queria que entendesse isso sem precisar explicar. A versão anterior pedia envio a quem deu o nome, e o Dr. Fabio apontou que ninguém manda para quem a magoou. Coerente com a mesa, que pedia envio a quem leu errado e teve 1,4 envio por mil, a menor taxa entre os carrosséis grandes. Pista, não prova.
+- **Slide 7:** Grudenta e fria têm o mesmo medo. Responde à pergunta da capa. **Slide 8:** O sexto nome é borderline, com o aviso de que só uma avaliação confirma.
 - **Leitura em 7 dias.** Linha de base: mediana dos carrosséis de setembro, 23 mil de alcance. Funcionou: acima de 23 mil e acima de 12 compartilhamentos por mil views. Entre os melhores: 70 mil ou mais e 15 por mil ou mais.
 - **Resultado:** (preencher)
 

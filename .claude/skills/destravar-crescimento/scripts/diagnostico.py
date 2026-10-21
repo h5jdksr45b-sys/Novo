@@ -9,6 +9,7 @@ Uso (a partir da pasta da skill):
     python3 -I scripts/diagnostico.py --fmt R        # so Reels (R), carrosseis (C) ou imagens (I)
     python3 -I scripts/diagnostico.py --checar       # so as checagens de consistencia
     python3 -I scripts/diagnostico.py --mensal       # medianas mes a mes, por formato
+    python3 -I scripts/diagnostico.py --horario      # alcance por faixa de horario (Brasilia)
 
 Descreve o que mudou entre dois periodos. Nao calcula nota, limiar, previsao
 nem causa. Posts dos ultimos 7 dias do arquivo ficam fora da comparacao,
@@ -27,6 +28,18 @@ COLS = ["data", "fmt", "codigo", "views", "alcance", "compart", "salvos",
 NUM = ["views", "alcance", "compart", "salvos", "curtidas", "coment", "ret_ms", "skip3s"]
 FMT = {"R": "Reels", "C": "Carrosseis", "I": "Imagens"}
 CARENCIA = 7
+ALFABETO = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_"
+EPOCA_IG_MS = 1314220021721
+BRASILIA = dt.timezone(dt.timedelta(hours=-3))
+FAIXAS = [("manha 6-12", 6, 12), ("tarde 12-18", 12, 18), ("noite 18-24", 18, 24), ("madrugada 0-6", 0, 6)]
+
+
+def hora_do_codigo(codigo):
+    """Horario de publicacao lido do codigo do post (o id do Instagram guarda o instante)."""
+    n = 0
+    for ch in codigo:
+        n = n * 64 + ALFABETO.index(ch)
+    return dt.datetime.fromtimestamp(((n >> 23) + EPOCA_IG_MS) / 1000, BRASILIA)
 
 
 def carregar():
@@ -127,12 +140,35 @@ def mensal(posts, corte, fmt):
     print("Meses com poucos posts oscilam muito. O primeiro e o ultimo mes podem estar incompletos.")
 
 
+def horario(posts, corte, fmt):
+    erradas = sum(1 for r in posts
+                  if hora_do_codigo(r["codigo"]).astimezone(dt.timezone.utc).date() != r["data"])
+    print(f"\nHorario lido do codigo de cada post. Datas que nao batem com o arquivo: {erradas}.")
+    if erradas:
+        print("AVISO: a leitura do horario falhou em parte dos posts. Nao use esta tabela.")
+    base = [r for r in posts if r["data"] <= corte and not r["copias"]
+            and "genérica" not in r["tese"] and "versão" not in r["tese"]
+            and "fora do tema" not in r["tese"]]
+    print("Posts sem repostagem e com legenda completa.")
+    for g in [fmt] if fmt else ["R", "C"]:
+        print(f"\n{FMT[g]}")
+        for nome, ini, fim in FAIXAS:
+            v = [r["alcance"] for r in base if r["fmt"] == g
+                 and ini <= hora_do_codigo(r["codigo"]).hour < fim and r["alcance"] is not None]
+            if v:
+                baixo = 100 * sum(x < 1500 for x in v) / len(v)
+                print(f"  {nome:13}  posts {len(v):>3}  alcance (mediana) {fmt_num(mediana(v)):>7}  "
+                      f"abaixo de 1.500: {baixo:3.0f}%")
+    print("\nHorario de Brasilia (UTC-3). Faixa com menos de 30 posts descreve, nao prova causa.")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--janela", type=int, default=30)
     ap.add_argument("--fmt", choices=["R", "C", "I"])
     ap.add_argument("--checar", action="store_true")
     ap.add_argument("--mensal", action="store_true")
+    ap.add_argument("--horario", action="store_true")
     a = ap.parse_args()
 
     posts = carregar()
@@ -155,6 +191,9 @@ def main():
     corte = fim_arquivo - dt.timedelta(days=CARENCIA)
     if a.mensal:
         mensal(posts, corte, a.fmt)
+        return
+    if a.horario:
+        horario(posts, corte, a.fmt)
         return
 
     atual_ini = corte - dt.timedelta(days=a.janela)

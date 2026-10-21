@@ -40,6 +40,7 @@ Isto é observação dele, não medida. Como a lapidação sempre existiu, ela p
 4. **O alcance grande vem de carrosséis.** 37 de 122 carrosséis passaram de 20 mil contas. Entre os Reels, 12 de 239. Das 25 publicações de maior alcance, 19 são carrosséis. Dois terços da produção são Reels.
 5. **O mesmo vídeo teve resultados muito diferentes.** Exemplos de cópias publicadas com minutos de diferença: 7.511, 1.307 e 109 views; 13.714 e 1.255; 10.156 e 198. Um Reel isolado diz pouco sobre o conteúdo.
 6. **Dividir o dia com outro Reel pesa um pouco.** De abril a julho, entre Reels com legenda completa, ficaram abaixo de 1.500 de alcance 11% dos que estavam sozinhos no dia e 29% dos que dividiam o dia. Em agosto e setembro, 40% e 49%.
+8. **O horário mudou em agosto.** Reels publicados à tarde: abril 41%, maio 17%, junho 29%, julho 29%, agosto 56%, setembro 37%. À noite, com legenda completa e sem par, a mediana de views quase não caiu: 6.880 de maio a julho e 6.019 em agosto e setembro.
 7. **Nos Reels que travam, quase ninguém assiste.** Tempo médio assistido mediano: 4,8 segundos abaixo de 1.500 de alcance e 13 segundos acima. 37% dos travados têm legenda genérica, contra 4% dos outros.
 
 ### O que ainda não dá para saber
@@ -53,7 +54,7 @@ Isto é observação dele, não medida. Como a lapidação sempre existiu, ela p
 
 Existe um basal de cerca de 1.500 a 2.000 views por Reel. O mesmo vídeo pode ficar nele ou sair dele, como mostram as repostagens. Então um flop isolado não prova que o vídeo era ruim. Julho, com publicação única, saiu do basal. Agosto e setembro voltaram para ele. Os picos, quase sempre carrosséis, não levantam o basal dos posts seguintes. Esse é o ciclo.
 
-O que mudou em agosto não aparece nas colunas do histórico. A pista mais forte é o fim da publicação em par, teste e normal, no começo de agosto (H6). A lapidação (H5) explica outra coisa: por que adaptar rende menos que o original. As duas causas ainda são hipótese.
+A pista mais forte para agosto é o horário (H7). Mais da metade dos Reels de agosto saiu à tarde, e os Reels da tarde travam em cerca de 3 de cada 4 casos, em qualquer mês. À noite, agosto e setembro renderam quase como maio a julho. Os pares (H6) pareciam explicar, mas saíam todos à noite, e o Reel normal do par rendeu quase o mesmo que um Reel sozinho à noite. A lapidação (H5) explica outra coisa: por que adaptar rende menos que o original.
 
 ## O que é mais certeiro (2026-10-21)
 
@@ -64,11 +65,14 @@ Classificado pela força da evidência. Alta: muitos posts e o mesmo padrão em 
 1. **Carrossel alcança mais que Reel, todo mês.** Porcentagem com 10 mil contas ou mais de alcance. Carrosséis: abril 57%, maio 32%, junho 39%, julho 55%, agosto 72%, setembro 89% (17 de 19). Reels: 12%, 14%, 12%, 3%, 12%, 20%.
 2. **Reel com legenda genérica, versão curta ou fora do tema quase sempre trava.** 42 de 47 ficaram abaixo de 1.500 de alcance (89%), em todos os meses: 10 de 11, 5 de 6, 5 de 5, 5 de 6, 10 de 10, 7 de 9. Reels com legenda completa: 56 de 181 (31%). Não prova que a legenda causa. Pode acompanhar vídeos feitos com menos cuidado. Como regra prática de evitar, é a mais segura que o histórico tem.
 
+3. **Reel publicado à noite trava muito menos que à tarde.** Reels sem repostagem e com legenda completa: das 18h às 24h, 81 posts, alcance mediano de 4.744 e 21% abaixo de 1.500. Das 12h às 18h, 45 posts, mediana de 1.021 e 73% abaixo de 1.500. O padrão aparece de abril a julho (19% contra 75%) e em agosto e setembro (25% contra 71%). Só com Reels sozinhos no dia: 12% contra 77%. Horário lido do código de cada post, com as 364 datas conferidas. Não exclui que os vídeos da tarde sejam de outro tipo.
+
 ### Média
 
-3. Reel em par, teste e normal (H6, E0).
-4. Republicar o que já foi longe.
-5. No máximo um Reel por dia (fato 6).
+3. Carrossel também rende menos à tarde. Mediana de alcance de 8.590 à tarde (63 posts), contra 15.374 de manhã (24) e 15.037 à noite (30).
+4. Reel em par, teste e normal (H6). Perdeu força: veja H6.
+5. Republicar o que já foi longe.
+6. No máximo um Reel por dia (fato 6).
 
 ### Baixa ou desconhecida
 
@@ -83,24 +87,22 @@ Classificado pela força da evidência. Alta: muitos posts e o mesmo padrão em 
 | H1 | A abertura dos Reels não mostra uma situação reconhecível nos 2 primeiros segundos. Metade sai, e o Instagram não leva o vídeo além do primeiro grupo. | Fatos 2 e 7. Correlação, não causa. | A testar depois (E2) |
 | H2 | Vários Reels no mesmo dia dividem a distribuição. | Fato 6. Efeito moderado. | A testar depois de E1 |
 | H4 | Algo feito em julho, que não aparece nos dados, levantou o basal. | Fato 1. Só um mês. | Perguntar ao Dr. Fabio |
-| H6 | Publicar o mesmo Reel também como teste (trial) era o que tirava os vídeos do basal. Quando isso parou, no começo de agosto, o basal voltou. | 44 de 46 pares, fim dos pares em 09/08, queda em agosto. Falta saber qual cópia era o teste. | Prioridade. Testar em E0 |
+| H7 | Publicar Reels à tarde é o que mais prende os vídeos no basal. | Fato 8 e item 3 do que é mais certeiro. Controlado por legenda, repostagem e Reels no mesmo dia. | Prioridade. Testar em E0 |
+| H6 | Publicar o mesmo Reel também como teste (trial) tirava os vídeos do basal. | Perdeu força: os pares saíam à noite. Normal do par à noite: 7.601 views. Reel sozinho à noite com legenda completa: 6.867. A primeira publicação de cada par quase nunca passou de 1.580 views, o que sugere que ela era o teste. | Em espera |
 | H5 | A lapidação (reescrever com IA, adaptar um esqueleto a outro tema) tira do vídeo o que fazia a pessoa ficar: a fala própria e o gesto concreto. | Relato do Dr. Fabio. Ele sempre lapidou, então isso explica adaptações que rendem menos, não a queda de agosto. | A testar (E1) |
 | H3 | Carrosséis com cena concreta e familiar puxam mais seguidores por visualização que carrosséis de metáfora. | 8 posts com print (conclusões v2, 2026-10-19). | Amostra pequena |
 
 ## Experimentos
 
-### E0. Voltar a publicar em par, teste e normal
+### E0. Reels à noite
 
-- **Hipótese:** H6.
-- **Mudança única:** cada Reel sai em duas publicações, uma como Reel de teste e outra como Reel normal, do mesmo jeito que de maio a julho. O conteúdo continua sendo feito como em agosto e setembro, para não misturar com E1.
-- **Registro em cada par:** qual das duas era o teste, a ordem e o horário de cada uma, views e alcance das duas.
-- **Métrica que decide:** mediana de views da melhor publicação de cada par, lida 7 dias depois.
-- **Métricas de apoio:** porcentagem de pares em que a melhor publicação ficou abaixo de 1.500 de alcance, e qual rota venceu em cada par.
-- **Linha de base:** agosto e setembro, só Reel normal: mediana de 1.545 a 1.860 views, 54% a 59% abaixo de 1.500 de alcance. Maio a julho, em par: mediana de 5.812 a 7.110 views na melhor publicação.
+- **Hipótese:** H7.
+- **Mudança única:** todo Reel sai entre 19h e 22h, horário de Brasília. Um Reel por dia, sem repostagem e sem par. Conteúdo, tema e duração ficam como estão. Legenda completa, que já é a prática dos Reels que funcionam.
+- **Métrica que decide:** porcentagem dos Reels com alcance abaixo de 1.500, lida 7 dias depois de cada post.
+- **Linha de base:** Reels à tarde, 73% abaixo de 1.500. Agosto e setembro no geral, 54% a 59%. Reels à noite no histórico, 21%.
 - **Amostra:** os próximos 12 Reels.
-- **Apoio:** mediana da melhor publicação de 4.000 views ou mais.
-- **Refutação:** mediana de 2.000 views ou menos. Nesse caso, a queda de agosto tem outra causa.
-- **Risco conhecido:** não há dado sobre como o Instagram trata o mesmo vídeo em duas rotas. De maio a julho não apareceu sinal de punição na conta.
+- **Apoio:** 35% ou menos abaixo de 1.500.
+- **Refutação:** 50% ou mais abaixo de 1.500. Nesse caso, o horário acompanhava outra coisa, provavelmente o tipo de vídeo da tarde.
 - **Status:** não iniciado.
 - **Resultado:** (preencher)
 

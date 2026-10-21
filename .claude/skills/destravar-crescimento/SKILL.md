@@ -22,7 +22,7 @@ Uma frase como "o problema é o gancho" ou "o algoritmo mudou" sem essa etapa é
 
 ## Fase 1. Ver os dados antes de explicar
 
-1. Rode, a partir da pasta da skill: `python3 -I scripts/diagnostico.py --mensal` e `python3 -I scripts/diagnostico.py --janela 60`.
+1. Rode, a partir da pasta da skill: `python3 -I scripts/diagnostico.py --mensal`, `python3 -I scripts/diagnostico.py --janela 60` e `python3 -I scripts/diagnostico.py --horario`.
 2. Se o histórico tiver mais de 2 dias de atraso, atualize pelo Windsor. Sem acesso, siga com o que há e diga o atraso em uma linha.
 3. Defina o sintoma com uma métrica e um período. Ficar na mesma não é sintoma. Mediana de alcance dos Reels caiu de 4.211 em julho para 1.100 em agosto é sintoma.
 4. Nunca misture alcance, views, compartilhamentos, salvamentos, retenção e seguidores. Cada um responde a uma pergunta diferente.
@@ -33,7 +33,7 @@ Uma frase como "o problema é o gancho" ou "o algoritmo mudou" sem essa etapa é
 Pergunte em que ponto o problema aparece, na ordem:
 
 1. **Formato.** O travamento é em Reels, carrosséis ou nos dois?
-2. **Quando.** Em que mês começou? Mudou o volume de posts nesse mês?
+2. **Quando.** Em que mês começou? Mudou o volume de posts ou o horário de publicação nesse mês? O horário sai do código de cada post (`--horario`).
 3. **Distribuição.** A mediana caiu porque todos caíram, ou porque cresceu a parte que não sai do chão? Separe os posts que alcançam bem dos que morrem cedo e compare os dois grupos.
 4. **Repostagens.** O histórico guarda só a cópia de mais views de cada conteúdo repostado. Compare pela coluna views/tent. do script, que conta cada tentativa. Sem isso, um mês com muitas repostagens parece melhor do que foi.
 5. **Cadeia de produção.** Quando o pedido for "replicar o que funcionou", localize o passo em que o resultado se perde: ideia bruta, roteiro, gravação, edição, legenda, publicação. Para cada peça, compare o que entrou e o que saiu de cada passo. Uma cópia idêntica que funciona e uma adaptação que não funciona apontam para o passo da adaptação, não para o tema.

@@ -40,8 +40,8 @@ Isto é observação dele, não medida. Como a lapidação sempre existiu, ela p
 4. **O alcance grande vem de carrosséis.** 37 de 122 carrosséis passaram de 20 mil contas. Entre os Reels, 12 de 239. Das 25 publicações de maior alcance, 19 são carrosséis. Dois terços da produção são Reels.
 5. **O mesmo vídeo teve resultados muito diferentes.** Exemplos de cópias publicadas com minutos de diferença: 7.511, 1.307 e 109 views; 13.714 e 1.255; 10.156 e 198. Um Reel isolado diz pouco sobre o conteúdo.
 6. **Dividir o dia com outro Reel pesa um pouco.** De abril a julho, entre Reels com legenda completa, ficaram abaixo de 1.500 de alcance 11% dos que estavam sozinhos no dia e 29% dos que dividiam o dia. Em agosto e setembro, 40% e 49%.
-8. **O horário mudou em agosto.** Reels publicados à tarde: abril 41%, maio 17%, junho 29%, julho 29%, agosto 56%, setembro 37%. À noite, com legenda completa e sem par, a mediana de views quase não caiu: 6.880 de maio a julho e 6.019 em agosto e setembro.
 7. **Nos Reels que travam, quase ninguém assiste.** Tempo médio assistido mediano: 4,8 segundos abaixo de 1.500 de alcance e 13 segundos acima. 37% dos travados têm legenda genérica, contra 4% dos outros.
+8. **O horário mudou em agosto.** Reels publicados à tarde: abril 41%, maio 17%, junho 29%, julho 29%, agosto 56%, setembro 37%. À noite, com legenda completa e sem par, a mediana de views quase não caiu: 6.880 de maio a julho e 6.019 em agosto e setembro.
 
 ### O que ainda não dá para saber
 
@@ -69,10 +69,10 @@ Classificado pela força da evidência. Alta: muitos posts e o mesmo padrão em 
 
 ### Média
 
-3. Carrossel também rende menos à tarde. Mediana de alcance de 8.590 à tarde (63 posts), contra 15.374 de manhã (24) e 15.037 à noite (30).
-4. Reel em par, teste e normal (H6). Perdeu força: veja H6.
-5. Republicar o que já foi longe.
-6. No máximo um Reel por dia (fato 6).
+4. Carrossel também rende menos à tarde. Mediana de alcance de 8.590 à tarde (63 posts), contra 15.374 de manhã (24) e 15.037 à noite (30).
+5. Reel em par, teste e normal (H6). Perdeu força: veja H6.
+6. Republicar o que já foi longe.
+7. No máximo um Reel por dia (fato 6).
 
 ### Baixa ou desconhecida
 

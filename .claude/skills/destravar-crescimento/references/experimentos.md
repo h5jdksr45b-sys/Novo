@@ -21,7 +21,7 @@ Os últimos pares são de 05/08 e 09/08. Depois disso quase não houve teste jun
 
 **Por que parou (Dr. Fabio):** achou que não funcionava, e uma orientação do Claude em conversa anterior disse que o teste podia ser ruim e servir só para testes. Desde então publica só como Reel normal. A mudança foi feita sem medir antes e depois. Coincide com a queda, o que não prova causa.
 
-**Ponto que não encaixa:** julho teve só 2 pares e mesmo assim ficou alto. Falta saber se em julho os Reels saíam só como teste, depois compartilhados com seguidores. Um teste compartilhado depois continua sendo um post só no histórico.
+**Ponto que não encaixa:** julho teve só 2 pares e mesmo assim ficou alto. Falta saber se em julho os Reels saíam só como teste, depois compartilhados com seguidores. Um teste compartilhado depois continua sendo um post só no histórico. O Dr. Fabio não lembra como publicava em julho. Fica em aberto até haver dado do Windsor ou dos insights.
 
 ### Relato do Dr. Fabio (2026-10-21)
 

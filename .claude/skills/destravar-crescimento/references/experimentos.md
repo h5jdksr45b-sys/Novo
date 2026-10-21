@@ -128,6 +128,14 @@ Classificado pela força da evidência. Alta: muitos posts e o mesmo padrão em 
 - **Métrica, linha de base e critérios:** os mesmos de E1, usando o resultado de E1 como nova linha de base.
 - **Status:** não iniciado.
 
+### Peça em acompanhamento: carrossel dos nomes contraditórios
+
+- **Publicada em:** (preencher)
+- **Estrutura:** 8 slides. Capa, cinco nomes (grudenta, fria, dramática, explosiva, falsa), explicação, tratamento com chamada para envio. Imagens no Higgsfield: ilustrações no Recraft V4.1 e texto embutido no GPT Image 2.5 Sunburst.
+- **Por que 8:** os carrosséis com contagem conhecida que mais alcançaram tinham de 7 a 9 slides. Evidência fraca, 4 posts.
+- **Leitura em 7 dias.** Linha de base: mediana dos carrosséis de setembro, 23 mil de alcance. Funcionou: acima de 23 mil e acima de 12 compartilhamentos por mil views. Entre os melhores: 70 mil ou mais e 15 por mil ou mais.
+- **Resultado:** (preencher)
+
 ### Medidas permanentes
 
 - Toda segunda-feira: total de seguidores, anotado com a data.

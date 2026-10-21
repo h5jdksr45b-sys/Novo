@@ -90,6 +90,8 @@ Classificado pela força da evidência. Alta: muitos posts e o mesmo padrão em 
 | H7 | Publicar Reels à tarde é o que mais prende os vídeos no basal. | Fato 8 e item 3 do que é mais certeiro. Controlado por legenda, repostagem e Reels no mesmo dia. O Dr. Fabio não escolhia horário, porque ouviu do CEO do Instagram que o horário não influencia. Então a tarde não era reservada a um tipo de vídeo, o que reduz essa mistura. | Prioridade. Testar em E0 |
 | H6 | Publicar o mesmo Reel também como teste (trial) tirava os vídeos do basal. | Perdeu força: os pares saíam à noite. Normal do par à noite: 7.601 views. Reel sozinho à noite com legenda completa: 6.867. A primeira publicação de cada par quase nunca passou de 1.580 views, o que sugere que ela era o teste. | Em espera |
 | H5 | A lapidação (reescrever com IA, adaptar um esqueleto a outro tema) tira do vídeo o que fazia a pessoa ficar: a fala própria e o gesto concreto. | Relato do Dr. Fabio. Ele sempre lapidou, então isso explica adaptações que rendem menos, não a queda de agosto. | A testar (E1) |
+| H8 | Carrossel com música também aparece na aba Reels e ganha alcance fora da base. | Fonte externa: post de @design.deb (2026-10-21) e notícias sobre o anúncio do Instagram. Nada medido nesta conta: o histórico não registra música em carrossel. | Perguntar se os carrosséis já usam música. Se não, testar |
+| H9 | A foto do Dr. Fabio no último slide converte mais alcance em seguidor. | Fonte externa: framework de @design.deb. Ligado à lacuna da conta: alcance alto, poucos seguidores (mesa, 72 seguidores com cerca de 290 mil visualizadores). Nada medido. | A testar. Precisa de seguidores por post |
 | H3 | Carrosséis com cena concreta e familiar puxam mais seguidores por visualização que carrosséis de metáfora. | 8 posts com print (conclusões v2, 2026-10-19). | Amostra pequena |
 
 ## Experimentos
@@ -135,6 +137,18 @@ Classificado pela força da evidência. Alta: muitos posts e o mesmo padrão em 
 - **Por que 8:** os carrosséis com contagem conhecida que mais alcançaram tinham de 7 a 9 slides. Evidência fraca, 4 posts.
 - **Leitura em 7 dias.** Linha de base: mediana dos carrosséis de setembro, 23 mil de alcance. Funcionou: acima de 23 mil e acima de 12 compartilhamentos por mil views. Entre os melhores: 70 mil ou mais e 15 por mil ou mais.
 - **Resultado:** (preencher)
+
+### Referências externas avaliadas
+
+**2026-10-21, framework de carrossel de @design.deb (5 prints, nicho de design).** Material de consulta, não regra. Os números do post (2.260 curtidas, 1.434 envios) não mostram visualizações, então não dão taxa.
+- Estrutura gancho, exemplo, valor, CTA: o carrossel dos nomes já segue.
+- Slide 2 confirma o gancho: o carrossel dos nomes já faz (capa grudenta e fria, slide 2 grudenta).
+- Pouco texto e muito visual nos slides de valor: já aplicado depois do ajuste dos slides 7 e 8.
+- Duas fontes e três cores: já seguido (Archivo, creme, preto, dourado).
+- 10 slides: não adotado. A página funcionou com 7 a 9 (evidência fraca).
+- Música faz o carrossel aparecer na aba Reels: virou H8.
+- Foto do autor no slide de CTA: virou H9.
+- Margem de segurança embaixo: se o carrossel tiver música e for para a aba Reels, a interface cobre a parte de baixo. Manter assinatura e texto longe da borda inferior.
 
 ### Medidas permanentes
 

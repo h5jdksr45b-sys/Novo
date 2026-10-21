@@ -19,6 +19,10 @@ Os dados não decidem entre A e B. O que as duas mostram é o mesmo: **um conte�
 
 Os últimos pares são de 05/08 e 09/08. Depois disso quase não houve teste junto com Reel normal, e agosto e setembro ficaram no basal.
 
+**Por que parou (Dr. Fabio):** achou que não funcionava, e uma orientação do Claude em conversa anterior disse que o teste podia ser ruim e servir só para testes. Desde então publica só como Reel normal. A mudança foi feita sem medir antes e depois. Coincide com a queda, o que não prova causa.
+
+**Ponto que não encaixa:** julho teve só 2 pares e mesmo assim ficou alto. Falta saber se em julho os Reels saíam só como teste, depois compartilhados com seguidores. Um teste compartilhado depois continua sendo um post só no histórico.
+
 ### Relato do Dr. Fabio (2026-10-21)
 
 - Quando ele refaz um vídeo idêntico, o resultado se repete e às vezes melhora.
@@ -58,11 +62,26 @@ O que mudou em agosto não aparece nas colunas do histórico. A pista mais forte
 | H1 | A abertura dos Reels não mostra uma situação reconhecível nos 2 primeiros segundos. Metade sai, e o Instagram não leva o vídeo além do primeiro grupo. | Fatos 2 e 7. Correlação, não causa. | A testar depois (E2) |
 | H2 | Vários Reels no mesmo dia dividem a distribuição. | Fato 6. Efeito moderado. | A testar depois de E1 |
 | H4 | Algo feito em julho, que não aparece nos dados, levantou o basal. | Fato 1. Só um mês. | Perguntar ao Dr. Fabio |
-| H6 | Publicar o mesmo Reel também como teste (trial) era o que tirava os vídeos do basal. Quando isso parou, no começo de agosto, o basal voltou. | 44 de 46 pares, fim dos pares em 09/08, queda em agosto. Falta saber qual cópia era o teste. | Prioridade. Confirmar qual cópia era o teste |
+| H6 | Publicar o mesmo Reel também como teste (trial) era o que tirava os vídeos do basal. Quando isso parou, no começo de agosto, o basal voltou. | 44 de 46 pares, fim dos pares em 09/08, queda em agosto. Falta saber qual cópia era o teste. | Prioridade. Testar em E0 |
 | H5 | A lapidação (reescrever com IA, adaptar um esqueleto a outro tema) tira do vídeo o que fazia a pessoa ficar: a fala própria e o gesto concreto. | Relato do Dr. Fabio. Ele sempre lapidou, então isso explica adaptações que rendem menos, não a queda de agosto. | A testar (E1) |
 | H3 | Carrosséis com cena concreta e familiar puxam mais seguidores por visualização que carrosséis de metáfora. | 8 posts com print (conclusões v2, 2026-10-19). | Amostra pequena |
 
 ## Experimentos
+
+### E0. Voltar a publicar em par, teste e normal
+
+- **Hipótese:** H6.
+- **Mudança única:** cada Reel sai em duas publicações, uma como Reel de teste e outra como Reel normal, do mesmo jeito que de maio a julho. O conteúdo continua sendo feito como em agosto e setembro, para não misturar com E1.
+- **Registro em cada par:** qual das duas era o teste, a ordem e o horário de cada uma, views e alcance das duas.
+- **Métrica que decide:** mediana de views da melhor publicação de cada par, lida 7 dias depois.
+- **Métricas de apoio:** porcentagem de pares em que a melhor publicação ficou abaixo de 1.500 de alcance, e qual rota venceu em cada par.
+- **Linha de base:** agosto e setembro, só Reel normal: mediana de 1.545 a 1.860 views, 54% a 59% abaixo de 1.500 de alcance. Maio a julho, em par: mediana de 5.812 a 7.110 views na melhor publicação.
+- **Amostra:** os próximos 12 Reels.
+- **Apoio:** mediana da melhor publicação de 4.000 views ou mais.
+- **Refutação:** mediana de 2.000 views ou menos. Nesse caso, a queda de agosto tem outra causa.
+- **Risco conhecido:** não há dado sobre como o Instagram trata o mesmo vídeo em duas rotas. De maio a julho não apareceu sinal de punição na conta.
+- **Status:** não iniciado.
+- **Resultado:** (preencher)
 
 ### E1. Do bruto para a publicação, sem lapidar
 
@@ -76,7 +95,7 @@ O que mudou em agosto não aparece nas colunas do histórico. A pista mais forte
 - **Amostra:** os próximos 12 Reels.
 - **Apoio:** 35% ou menos dos 12 abaixo de 1.500 de alcance, com tempo assistido maior que a linha de base.
 - **Refutação:** 50% ou mais abaixo de 1.500.
-- **Status:** não iniciado. Antes de começar, confirmar H6. Se o Reel de teste era a cópia que ia longe, testar a rota de teste primeiro, porque ela pode explicar mais que a lapidação.
+- **Status:** não iniciado. Começa depois de E0.
 - **Resultado:** (preencher)
 
 ### E2. Abertura com situação concreta nos 2 primeiros segundos

@@ -55,6 +55,27 @@ Existe um basal de cerca de 1.500 a 2.000 views por Reel. O mesmo vídeo pode fi
 
 O que mudou em agosto não aparece nas colunas do histórico. A pista mais forte é o fim da publicação em par, teste e normal, no começo de agosto (H6). A lapidação (H5) explica outra coisa: por que adaptar rende menos que o original. As duas causas ainda são hipótese.
 
+## O que é mais certeiro (2026-10-21)
+
+Classificado pela força da evidência. Alta: muitos posts e o mesmo padrão em todos os meses de abril a setembro.
+
+### Alta
+
+1. **Carrossel alcança mais que Reel, todo mês.** Porcentagem com 10 mil contas ou mais de alcance. Carrosséis: abril 57%, maio 32%, junho 39%, julho 55%, agosto 72%, setembro 89% (17 de 19). Reels: 12%, 14%, 12%, 3%, 12%, 20%.
+2. **Reel com legenda genérica, versão curta ou fora do tema quase sempre trava.** 42 de 47 ficaram abaixo de 1.500 de alcance (89%), em todos os meses: 10 de 11, 5 de 6, 5 de 5, 5 de 6, 10 de 10, 7 de 9. Reels com legenda completa: 56 de 181 (31%). Não prova que a legenda causa. Pode acompanhar vídeos feitos com menos cuidado. Como regra prática de evitar, é a mais segura que o histórico tem.
+
+### Média
+
+3. Reel em par, teste e normal (H6, E0).
+4. Republicar o que já foi longe.
+5. No máximo um Reel por dia (fato 6).
+
+### Baixa ou desconhecida
+
+- O que faz a pessoa seguir. Falta seguidores por data.
+- Qual tema de carrossel vai melhor. Cada eixo tem menos de 30 carrosséis.
+- Se mais carrosséis por mês mantêm o alcance de cada um. O histórico nunca passou de 23 carrosséis num mês.
+
 ## Hipóteses
 
 | # | Hipótese | Base | Status |

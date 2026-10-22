@@ -10,12 +10,24 @@ import {
 } from "./ComparacaoLadoALado";
 import { MitoApego } from "./MitoApego";
 import { MitoRindo } from "./MitoRindo";
+import { ReelLinehan, calcularMetadados, propsPadrao, reelLinehanSchema } from "./Linehan1961";
 
 // Each <Composition> is an entry in the sidebar!
 
 export const RemotionRoot: React.FC = () => {
   return (
     <>
+      <Composition
+        id="ReelLinehan1961"
+        component={ReelLinehan}
+        calculateMetadata={calcularMetadados}
+        schema={reelLinehanSchema}
+        width={1080}
+        height={1920}
+        fps={30}
+        durationInFrames={30 * 70}
+        defaultProps={propsPadrao}
+      />
       <Composition
         id="CaptionedVideo"
         component={CaptionedVideo}

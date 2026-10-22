@@ -37,6 +37,21 @@ npx remotion render
 npx remotion upgrade
 ```
 
+## Reel "1961" (Marsha Linehan), estilo editorial noir
+
+Composição `ReelLinehan1961` em `src/Linehan1961/`. Briefing, leitura das referências,
+roteiro e fontes em `docs/reel-linehan-1961/BRIEF.md`. Assets e como substituí-los em
+`public/linehan/LEIA-ME.md`.
+
+```console
+node sub.mjs public/linehan/fala.mp4      # transcreve o take (Whisper medium, pt)
+npm run dev                               # Studio
+npx remotion render ReelLinehan1961 out/reel.mp4
+```
+
+Em ambientes sem o Chrome do Remotion, aponte o binário:
+`npx remotion render ReelLinehan1961 out/reel.mp4 --browser-executable=/caminho/do/chrome-headless-shell`.
+
 ## Captioning
 
 Replace the `sample-video.mp4` with your video file.

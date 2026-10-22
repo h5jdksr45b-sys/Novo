@@ -1,0 +1,102 @@
+import React from "react";
+import { AbsoluteFill, OffthreadVideo, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
+import { SANS, SERIFA } from "./fontes";
+import type { CenaNoTempo } from "./timeline";
+import type { CenaFala } from "./roteiro";
+
+// Camada do Fabio em câmera. Um único take, contínuo, por baixo de tudo:
+// o áudio nunca é cortado. O que muda entre cenas é só o enquadramento (punch-in).
+export const VideoFala: React.FC<{ src: string | null; pretoEBranco: boolean; cenas: CenaNoTempo[] }> = ({
+  src,
+  pretoEBranco,
+  cenas,
+}) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const agoraMs = (frame / fps) * 1000;
+  const atual = cenas.find((c) => agoraMs >= c.inicioMs && agoraMs < c.fimMs);
+  const plano = atual && atual.tipo === "fala" ? atual.plano : "aberto";
+  // Micro-aproximação contínua dentro de cada plano, para a imagem nunca ficar parada.
+  const dentro = atual ? (agoraMs - atual.inicioMs) / Math.max(1, atual.fimMs - atual.inicioMs) : 0;
+  const escala = (plano === "fechado" ? 1.16 : 1.0) + dentro * 0.025;
+  const filtro = pretoEBranco ? "grayscale(1) contrast(1.18) brightness(0.92)" : "none";
+
+  if (!src) {
+    return <SlateFala plano={plano} fala={atual && atual.tipo === "fala" ? atual : null} />;
+  }
+  return (
+    <AbsoluteFill style={{ background: "#050505", overflow: "hidden" }}>
+      <OffthreadVideo
+        src={src}
+        style={{
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          transform: `scale(${escala})`,
+          transformOrigin: "50% 38%",
+          filter: filtro,
+        }}
+      />
+    </AbsoluteFill>
+  );
+};
+
+// Sem gravação ainda: placa de demonstração no lugar do Fabio.
+const SlateFala: React.FC<{ plano: "aberto" | "fechado"; fala: CenaFala | null }> = ({ plano, fala }) => {
+  const frame = useCurrentFrame();
+  const respira = 1 + Math.sin(frame / 18) * 0.01;
+  return (
+    <AbsoluteFill
+      style={{
+        background: "radial-gradient(ellipse 80% 55% at 50% 42%, #2a2a2a 0%, #0c0c0c 70%)",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <div
+        style={{
+          width: plano === "fechado" ? 520 : 420,
+          height: plano === "fechado" ? 640 : 520,
+          borderRadius: "50% 50% 44% 44%",
+          background: "linear-gradient(180deg, #3a3a3a, #161616)",
+          transform: `translateY(-120px) scale(${respira})`,
+          opacity: 0.55,
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          top: 150,
+          left: 0,
+          right: 0,
+          textAlign: "center",
+          fontFamily: SANS,
+          fontSize: 26,
+          letterSpacing: 5,
+          color: "#8a8a8a",
+        }}
+      >
+        FABIO EM CÂMERA · PLANO {plano.toUpperCase()}
+      </div>
+      {fala ? (
+        <div
+          style={{
+            position: "absolute",
+            top: 1500,
+            left: 120,
+            right: 120,
+            textAlign: "center",
+            fontFamily: SERIFA,
+            fontStyle: "italic",
+            fontSize: 28,
+            color: "#6f6f6f",
+          }}
+        >
+          demo: substitua pelo take gravado
+        </div>
+      ) : null}
+    </AbsoluteFill>
+  );
+};
+
+export const caminhoVideo = (nome: string | null) => (nome ? staticFile(nome) : null);

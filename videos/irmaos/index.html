@@ -11,8 +11,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=1080, height=1920" />
     <title>Os irmãos</title>
-    <!-- GSAP local (cópia de gsap@3.14.2), para o render não depender de rede. -->
+    <!-- GSAP e o helper de câmera na mão são cópias locais, para o render não depender de rede. -->
     <script src="assets/vendor/gsap.min.js"></script>
+    <script src="assets/vendor/camera-shake.js"></script>
     <style>
       /* Tipografia: Playfair Display italic para as frases, Inter (bundled) para a assinatura. */
       @font-face {
@@ -71,15 +72,27 @@
         inset: 0;
       }
 
-      /* Shots: uma foto por shot. O Ken Burns anima o wrapper .cam, nunca a imagem. */
+      /* Shots: uma foto por shot. Câmera na mão no rig, Ken Burns e transições no wrapper .cam. */
       .shot {
         z-index: 1;
         overflow: hidden;
+      }
+      .camera-shake-frame {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+      }
+      .camera-shake-rig {
+        position: absolute;
+        inset: 0;
+        transform-style: preserve-3d;
+        will-change: transform;
       }
       .shot .cam {
         position: absolute;
         inset: 0;
         transform-origin: 50% 50%;
+        will-change: transform, filter;
       }
       .shot img {
         position: absolute;
@@ -90,6 +103,19 @@
         object-fit: cover;
         display: block;
       }
+      /* O chicote lateral usa um desfoque só horizontal (filtro SVG), no quadro do shot 2 (saída) e do shot 3 (entrada). */
+      #frame2 {
+        filter: url(#whip-out);
+      }
+      #frame3 {
+        filter: url(#whip-in);
+      }
+      #whip-defs {
+        position: absolute;
+        width: 0;
+        height: 0;
+        overflow: hidden;
+      }
 
       /* Texto: bloco centrado, dentro da faixa segura do Reels (168 a 1330 px). */
       .text {
@@ -99,9 +125,8 @@
         align-items: center;
         padding: 330px 110px 0;
       }
-      /* Variações de posição por shot, conforme onde cada foto deixa espaço calmo. */
       .text.low {
-        padding-top: 990px;
+        padding-top: 1010px;
       }
       .text.high {
         padding-top: 240px;
@@ -162,11 +187,15 @@
         display: inline-block;
         opacity: 0;
       }
+      /* A caixa de acento é pintada por um varrido da esquerda para a direita (background-size). */
       .hl {
-        background: var(--color-accent);
         color: var(--color-ink-dark);
         padding: 0 0.16em;
         border-radius: 4px;
+        background-image: linear-gradient(var(--color-accent), var(--color-accent));
+        background-repeat: no-repeat;
+        background-position: left center;
+        background-size: 0% 100%;
       }
       #sig {
         position: absolute;
@@ -182,10 +211,62 @@
         opacity: 0;
       }
 
-      /* Overlays de grão e vinheta (componentes do registry), por cima de tudo. */
+      /* Camadas de efeito: mergulho no preto do corte 4 para 5, cintilação de projetor, vinheta e grão. */
+      #dip {
+        position: absolute;
+        inset: 0;
+        background: #000;
+        opacity: 0;
+        z-index: 60;
+        pointer-events: none;
+      }
+      #leak-host {
+        z-index: 70;
+        filter: grayscale(1);
+        pointer-events: none;
+      }
       #fx {
         z-index: 80;
         pointer-events: none;
+      }
+      #flicker {
+        position: absolute;
+        inset: 0;
+        background: #fff;
+        mix-blend-mode: soft-light;
+        animation: hf-flicker 0.7s steps(1) infinite;
+      }
+      @keyframes hf-flicker {
+        0% {
+          opacity: 0.02;
+        }
+        11% {
+          opacity: 0.06;
+        }
+        22% {
+          opacity: 0;
+        }
+        33% {
+          opacity: 0.04;
+        }
+        44% {
+          opacity: 0.01;
+        }
+        55% {
+          opacity: 0.07;
+        }
+        66% {
+          opacity: 0.03;
+        }
+        77% {
+          opacity: 0;
+        }
+        88% {
+          opacity: 0.05;
+        }
+        100% {
+          opacity: 0.02;
+        }
       }
       #hf-vignette {
         background: radial-gradient(
@@ -248,25 +329,57 @@
       data-width="1080"
       data-height="1920"
     >
-      <!-- Shot 1: plano aberto, duas plantas iguais. Zoom in lento. -->
+      <!-- Filtros de desfoque horizontal do chicote. O stdDeviation é animado pelo timeline. -->
+      <svg id="whip-defs" aria-hidden="true">
+        <defs>
+          <filter id="whip-out" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
+            <feGaussianBlur id="whip-out-blur" stdDeviation="0 0" edgeMode="duplicate" />
+          </filter>
+          <filter id="whip-in" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
+            <feGaussianBlur id="whip-in-blur" stdDeviation="0 0" edgeMode="duplicate" />
+          </filter>
+        </defs>
+      </svg>
+
+      <!-- Shot 1: plano aberto, duas plantas iguais. Zoom in lento, depois o zoom através que vira o corte. -->
       <section id="shot1" class="clip shot" data-start="0" data-duration="4" data-track-index="0">
-        <div class="cam" data-layout-allow-overflow id="cam1"><img id="img1" src="assets/img/s1.png" alt="" /></div>
+        <div class="camera-shake-frame" id="frame1">
+          <div class="camera-shake-rig" id="rig1">
+            <div class="cam" data-layout-allow-overflow id="cam1"><img id="img1" src="assets/img/s1.png" alt="" /></div>
+          </div>
+        </div>
       </section>
-      <!-- Shot 2: close na planta da esquerda, murcha, com o regador. Zoom out lento. -->
+      <!-- Shot 2: close na planta da esquerda, murcha, com o regador. Chega do zoom, respira, sai no chicote. -->
       <section id="shot2" class="clip shot" data-start="4" data-duration="4" data-track-index="0">
-        <div class="cam" data-layout-allow-overflow id="cam2"><img id="img2" src="assets/img/s2.png" alt="" /></div>
+        <div class="camera-shake-frame" id="frame2">
+          <div class="camera-shake-rig" id="rig2">
+            <div class="cam" data-layout-allow-overflow id="cam2"><img id="img2" src="assets/img/s2.png" alt="" /></div>
+          </div>
+        </div>
       </section>
-      <!-- Shot 3: close na planta da direita, folha caída no parapeito. Zoom in lento. -->
+      <!-- Shot 3: close na planta da direita, folha caída. Chega do chicote, zoom in lento, sai no zoom através. -->
       <section id="shot3" class="clip shot" data-start="8" data-duration="4" data-track-index="0">
-        <div class="cam" data-layout-allow-overflow id="cam3"><img id="img3" src="assets/img/s3.png" alt="" /></div>
+        <div class="camera-shake-frame" id="frame3">
+          <div class="camera-shake-rig" id="rig3">
+            <div class="cam" data-layout-allow-overflow id="cam3"><img id="img3" src="assets/img/s3.png" alt="" /></div>
+          </div>
+        </div>
       </section>
-      <!-- Shot 4: macro na terra seca. Push in lento. -->
+      <!-- Shot 4: macro na terra seca. Chega do zoom, push in lento, mergulha no preto. -->
       <section id="shot4" class="clip shot" data-start="12" data-duration="4" data-track-index="0">
-        <div class="cam" data-layout-allow-overflow id="cam4"><img id="img4" src="assets/img/s4.png" alt="" /></div>
+        <div class="camera-shake-frame" id="frame4">
+          <div class="camera-shake-rig" id="rig4">
+            <div class="cam" data-layout-allow-overflow id="cam4"><img id="img4" src="assets/img/s4.png" alt="" /></div>
+          </div>
+        </div>
       </section>
-      <!-- Shot 5: plano aberto final, planta da direita caída. Zoom out lento. -->
+      <!-- Shot 5: plano aberto final, planta da direita caída. Sai do preto com um vazamento de luz, push in lento. -->
       <section id="shot5" class="clip shot" data-start="16" data-duration="4" data-track-index="0">
-        <div class="cam" data-layout-allow-overflow id="cam5"><img id="img5" src="assets/img/s5.png" alt="" /></div>
+        <div class="camera-shake-frame" id="frame5">
+          <div class="camera-shake-rig" id="rig5">
+            <div class="cam" data-layout-allow-overflow id="cam5"><img id="img5" src="assets/img/s5.png" alt="" /></div>
+          </div>
+        </div>
       </section>
 
       <!-- Texto do shot 1: tinta clara sobre a parede escura acima da janela -->
@@ -279,7 +392,7 @@
         </div>
       </section>
 
-      <!-- Texto do shot 2: tinta escura sobre o vidro, acima do regador; as duas linhas acumulam -->
+      <!-- Texto do shot 2: tinta escura sobre o vidro, entre o caixilho e o regador; as duas linhas acumulam -->
       <section id="text2" class="clip text high glass" data-start="4" data-duration="4" data-track-index="1">
         <div class="box" id="box2">
           <p class="line" id="l2a"><span class="w">Uma</span> <span class="w">murcha.</span></p>
@@ -290,7 +403,7 @@
         </div>
       </section>
 
-      <!-- Texto do shot 3: tinta escura, alinhada à esquerda, sobre o vidro (a parede escura fica à direita) -->
+      <!-- Texto do shot 3: tinta escura, alinhada à esquerda, sobre o vidro -->
       <section id="text3" class="clip text high left" data-start="8" data-duration="4" data-track-index="1">
         <div class="box" id="box3">
           <p class="line" id="l3a">
@@ -300,18 +413,18 @@
         </div>
       </section>
 
-      <!-- Texto do shot 4: tinta clara sobre o vaso escuro, caixa de acento em estar bem -->
+      <!-- Texto do shot 4: tinta clara sobre a sombra abaixo do vaso, caixa de acento varrida em estar bem -->
       <section id="text4" class="clip text light low" data-start="12" data-duration="4" data-track-index="1">
         <div class="box" id="box4">
           <p class="line" id="l4a"><span class="w">Parecer</span> <span class="w">bem</span></p>
-          <p class="line" id="l4b"><span class="w">e</span> <span class="w hl">estar bem</span></p>
+          <p class="line" id="l4b"><span class="w">e</span> <span class="w hl" id="hl">estar bem</span></p>
           <p class="line" id="l4c">
             <span class="w">são</span> <span class="w">coisas</span> <span class="w">diferentes.</span>
           </p>
         </div>
       </section>
 
-      <!-- Texto do shot 5: chamada e assinatura, tinta clara na parede escura (a foto é empurrada para baixo pela câmera) -->
+      <!-- Texto do shot 5: chamada e assinatura, tinta clara na parede escura -->
       <section id="text5" class="clip text light top" data-start="16" data-duration="4" data-track-index="1">
         <div class="box" id="box5">
           <p class="line" id="l5a">
@@ -322,8 +435,27 @@
         <div id="sig">Dr. Fabio Schmidt, CRM-SP 183549</div>
       </section>
 
-      <!-- Grão e vinheta sobre o filme inteiro -->
-      <section id="fx" class="clip" data-start="0" data-duration="20" data-track-index="2" data-layout-ignore>
+      <!-- Mergulho no preto entre o shot 4 e o 5 -->
+      <div id="dip" data-layout-ignore></div>
+
+      <!-- Vazamento de luz (bloco do registry, em tons de cinza) abrindo o shot 5 -->
+      <div
+        id="leak-host"
+        class="clip"
+        data-composition-id="organic-light-leak-overlay"
+        data-composition-src="compositions/organic-light-leak-overlay.html"
+        data-start="15.8"
+        data-duration="2.0"
+        data-track-index="2"
+        data-track-kind="graphics"
+        data-width="1080"
+        data-height="1920"
+        data-layout-ignore
+      ></div>
+
+      <!-- Cintilação, vinheta e grão sobre o filme inteiro -->
+      <section id="fx" class="clip" data-start="0" data-duration="20" data-track-index="3" data-layout-ignore>
+        <div id="flicker"></div>
         <div
           id="hf-vignette"
           style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 90"
@@ -335,61 +467,120 @@
           <div class="grain-texture"></div>
         </div>
       </section>
+
+      <!-- Efeitos sonoros (biblioteca embutida do media-use, licença Pixabay). Cada um começa de modo que o pico caia 1 frame depois da imagem. -->
+      <audio id="sfx-zoom1" src="assets/sfx/whoosh-cinematic.mp3" data-start="1.53" data-duration="5.54" data-volume="0.4" data-track-index="4"></audio>
+      <audio id="sfx-whip" src="assets/sfx/whoosh-short.mp3" data-start="7.87" data-duration="0.57" data-volume="0.5" data-track-index="4"></audio>
+      <audio id="sfx-zoom2" src="assets/sfx/whoosh.mp3" data-start="11.87" data-duration="0.57" data-volume="0.45" data-track-index="4"></audio>
+      <audio id="sfx-impact" src="assets/sfx/impact-bass-2.mp3" data-start="11.75" data-duration="2.59" data-volume="0.55" data-track-index="5"></audio>
     </div>
 
     <script>
       // Um timeline pausado, registrado depois de montado. Tudo o que se vê é função do tempo.
       const tl = gsap.timeline({ paused: true });
 
-      // Ken Burns: um movimento contínuo por shot, ease linear, 6 a 8% de escala em 4 s.
-      // Alterna zoom in e zoom out para que cada corte mude a direção do movimento.
-      const kenBurns = (sel, from, to, at) =>
-        tl.fromTo(sel, from, { ...to, duration: 4, ease: "none", immediateRender: false }, at);
+      // ---- Câmera na mão (helper do registry): teleobjetiva, leve, com frequência diferente em cada shot. ----
+      const shake = (rig, at, frequency, intensity) =>
+        window.cameraShake(tl, rig, {
+          profile: "handheld-tele-mild",
+          intensity,
+          frequency,
+          rotation: true,
+          duration: 4,
+          at,
+          fps: 30,
+        });
+      shake("#rig1", 0, 1.0, 0.35);
+      shake("#rig2", 4, 1.2, 0.45);
+      shake("#rig3", 8, 0.9, 0.4);
+      shake("#rig4", 12, 1.15, 0.3);
+      shake("#rig5", 16, 0.85, 0.3);
 
-      kenBurns("#cam1", { scale: 1.0, y: 0 }, { scale: 1.07, y: -12 }, 0);
-      kenBurns("#cam2", { scale: 1.1, x: 0 }, { scale: 1.02, x: 10 }, 4);
-      kenBurns("#cam3", { scale: 1.0, x: 0 }, { scale: 1.08, x: -14 }, 8);
-      // Shot 4: a foto sobe um pouco para o aro do vaso sair de baixo do texto.
-      kenBurns("#cam4", { scale: 1.06, y: -50 }, { scale: 1.12, y: -70 }, 12);
-      // Shot 5: push in lento com a foto deslocada para baixo, para a parede escura receber a chamada.
-      kenBurns("#cam5", { scale: 1.12, y: 100 }, { scale: 1.16, y: 120 }, 16);
+      // ---- Ken Burns: um movimento contínuo por trecho de shot, ease linear. ----
+      const drift = (sel, from, to, at, duration) =>
+        tl.fromTo(sel, from, { ...to, duration, ease: "none", immediateRender: false }, at);
 
-      // Palavras: blur 8 px -> 0, opacidade 0 -> 1, escala 0.97 -> 1, 0.32 s por palavra, 0.09 s entre palavras.
+      // Shot 1 (0 a 4 s): zoom in lento e, nos últimos 0.4 s, o zoom através com desfoque que vira o corte.
+      drift("#cam1", { scale: 1.0, y: 0, filter: "blur(0px)" }, { scale: 1.06, y: -10 }, 0, 3.6);
+      tl.to("#cam1", { scale: 1.5, y: -30, filter: "blur(14px)", duration: 0.4, ease: "power3.in" }, 3.6);
+
+      // Shot 2 (4 a 8 s): chega grande e desfocado do zoom, assenta em 0.4 s, respira em zoom out, sai no chicote.
+      tl.fromTo(
+        "#cam2",
+        { scale: 1.24, x: 0, filter: "blur(10px)" },
+        { scale: 1.1, filter: "blur(0px)", duration: 0.4, ease: "power3.out", immediateRender: false },
+        4,
+      );
+      drift("#cam2", { scale: 1.1, x: 0 }, { scale: 1.03, x: 8 }, 4.4, 3.32);
+      // Chicote para a direita: a imagem corre para a esquerda e cresce, com desfoque só horizontal.
+      tl.to("#cam2", { scale: 1.6, x: -300, duration: 0.28, ease: "power3.in" }, 7.72);
+      tl.to("#whip-out-blur", { attr: { stdDeviation: "40 0" }, duration: 0.28, ease: "power3.in" }, 7.72);
+
+      // Shot 3 (8 a 12 s): chega do chicote vindo da direita, assenta, zoom in lento, sai no zoom através.
+      tl.fromTo(
+        "#cam3",
+        { scale: 1.5, x: 300, filter: "blur(0px)" },
+        { scale: 1.0, x: 0, duration: 0.32, ease: "power3.out", immediateRender: false },
+        8,
+      );
+      tl.fromTo(
+        "#whip-in-blur",
+        { attr: { stdDeviation: "40 0" } },
+        { attr: { stdDeviation: "0 0" }, duration: 0.32, ease: "power3.out", immediateRender: false },
+        8,
+      );
+      drift("#cam3", { scale: 1.0, x: 0 }, { scale: 1.08, x: -14 }, 8.32, 3.33);
+      tl.to("#cam3", { scale: 1.65, x: -40, filter: "blur(14px)", duration: 0.35, ease: "power3.in" }, 11.65);
+
+      // Shot 4 (12 a 16 s): chega do zoom, assenta, push in lento com a foto um pouco para cima.
+      tl.fromTo(
+        "#cam4",
+        { scale: 1.3, y: -50, filter: "blur(10px)" },
+        { scale: 1.06, filter: "blur(0px)", duration: 0.4, ease: "power3.out", immediateRender: false },
+        12,
+      );
+      drift("#cam4", { scale: 1.06, y: -50 }, { scale: 1.12, y: -70 }, 12.4, 3.6);
+
+      // Shot 5 (16 a 20 s): push in lento com a foto deslocada para baixo, para a parede escura receber a chamada.
+      drift("#cam5", { scale: 1.12, y: 100 }, { scale: 1.16, y: 120 }, 16, 4);
+
+      // Mergulho no preto: 3 frames escurecendo antes do corte, e o shot 5 sai do escuro em 0.5 s.
+      tl.to("#dip", { opacity: 0.5, duration: 0.1, ease: "none" }, 15.87);
+      tl.set("#dip", { opacity: 0.85 }, 16);
+      tl.to("#dip", { opacity: 0, duration: 0.5, ease: "power2.out" }, 16);
+
+      // ---- Palavras: desfoque 8 px -> 0, opacidade 0 -> 1, sobe 12 px, escala 0.97 -> 1; 0.09 s entre palavras. ----
       const words = (lineSel, at) =>
         tl.fromTo(
           `${lineSel} .w`,
-          { opacity: 0, filter: "blur(8px)", scale: 0.97 },
-          { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.32, ease: "power3.out", stagger: 0.09 },
+          { opacity: 0, filter: "blur(8px)", scale: 0.97, y: 12 },
+          { opacity: 1, filter: "blur(0px)", scale: 1, y: 0, duration: 0.32, ease: "power3.out", stagger: 0.09 },
           at,
         );
-
-      // Saída da linha: o bloco inteiro desfoca e some 6 frames antes do corte.
+      // Saída da linha: o bloco inteiro desfoca e some em 0.2 s, antes da transição.
       const exitBox = (boxSel, at) =>
         tl.to(boxSel, { opacity: 0, filter: "blur(8px)", duration: 0.2, ease: "power2.in" }, at);
 
-      // Shot 1 (0 a 4 s)
       words("#l1a", 0.25);
-      exitBox("#box1", 3.78);
+      exitBox("#box1", 3.4);
 
-      // Shot 2 (4 a 8 s)
-      words("#l2a", 4.3);
-      words("#l2b", 5.3);
-      exitBox("#box2", 7.78);
+      words("#l2a", 4.5);
+      words("#l2b", 5.5);
+      exitBox("#box2", 7.5);
 
-      // Shot 3 (8 a 12 s)
-      words("#l3a", 8.3);
-      words("#l3b", 9.6);
-      exitBox("#box3", 11.78);
+      words("#l3a", 8.5);
+      words("#l3b", 9.7);
+      exitBox("#box3", 11.4);
 
-      // Shot 4 (12 a 16 s)
-      words("#l4a", 12.3);
-      words("#l4b", 13.1);
-      words("#l4c", 13.9);
-      exitBox("#box4", 15.78);
+      words("#l4a", 12.5);
+      words("#l4b", 13.3);
+      // A caixa amarela é varrida da esquerda para a direita assim que a palavra pousa; o impacto grave cai aqui.
+      tl.to("#hl", { backgroundSize: "100% 100%", duration: 0.3, ease: "power3.out" }, 13.65);
+      words("#l4c", 14.1);
+      exitBox("#box4", 15.72);
 
-      // Shot 5 (16 a 20 s): a chamada fica até o fim; a assinatura entra depois.
-      words("#l5a", 16.3);
-      tl.fromTo("#sig", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.out" }, 17.6);
+      words("#l5a", 16.7);
+      tl.fromTo("#sig", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.out" }, 17.8);
 
       window.__timelines["main"] = tl;
       tl.seek(0);

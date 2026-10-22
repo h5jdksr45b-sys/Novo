@@ -1,6 +1,6 @@
 GOAL:    Quem foi o filho que não dava trabalho se reconhece e manda o vídeo para a mãe ou o pai.
 OUTPUT:  HyperFrames, 1080 x 1920, 30 fps. Instagram Reels.
-TIME:    20 s x 30 = 600 frames. Sem música nesta entrega (sem fonte de áudio na máquina); o Reel pode receber trilha no app.
+TIME:    20 s x 30 = 600 frames. Sem música (sem fonte de música na máquina; o Reel recebe trilha no app). Efeitos sonoros da biblioteca embutida do media-use (licença Pixabay), um por transição e um no pagamento.
 LOOK:    Noir editorial em cinco fotografias (Higgsfield, gpt_image_2_5, 2k, preto e branco, grão 35 mm): uma janela iluminada vista de dentro de um quarto escuro, com dois vasos no parapeito.
          Chão/quarto #0b0a09 sem gradiente. Luz da janela: radial de #e8e3d8 (centro) a #a9a399 (borda), vidro sem textura.
          Plantas, vasos, caixilho e regador: silhuetas pretas #0b0a09 contra a luz, nenhum contorno, nenhum brilho.
@@ -14,9 +14,17 @@ OBJECTS: Janela: vidro luminoso 840 x 1130 com caixilho preto de 48 px e cruz ce
          Planta: caule de 14 px com seis folhas em lente (210 px a maior), alternadas, diminuindo até a ponta. Esquerda e direita idênticas no frame 0.
          Regador: corpo 260 x 180 com bico e alça, silhueta. Água: feixe preto afunilado do bico até a terra.
          Terra seca: rachaduras de 3 px #8a8378 desenhadas sobre a elipse de terra do vaso da direita.
-MOTION:  Câmera (Ken Burns): um movimento contínuo por shot em ease none, 6 a 8% de escala em 4 s. Cortes secos: salto de câmera no frame do corte, sem dissolve.
-         Palavras: blur 8 px -> 0, opacidade 0 -> 1, escala 0.97 -> 1 em 0.32 s power3.out, 0.09 s entre palavras. Linha pousada fica parada.
-         Saída da linha: blur 8 px e opacidade 0 em 0.2 s power2.in, 6 frames antes do corte.
+MOTION:  Câmera na mão: helper camera-shake do registry, perfil handheld-tele-mild, intensidade 0.3 a 0.45, frequência diferente em cada shot.
+         Ken Burns: um movimento contínuo por trecho de shot em ease none, 6 a 8% de escala. Transições com causa, uma por corte:
+         1 -> 2 zoom através (escala 1.06 -> 1.5 com blur 14 px em 0.4 s power3.in; o shot 2 chega em 1.24 e assenta em 0.4 s power3.out).
+         2 -> 3 chicote lateral (imagem corre 300 px para a esquerda e cresce a 1.6 em 0.28 s; desfoque só horizontal via filtro SVG, stdDeviation 40 0; o shot 3 chega de +300 px e afia em 0.32 s).
+         3 -> 4 zoom através (1.08 -> 1.65 com blur em 0.35 s; o shot 4 chega em 1.3 e assenta).
+         4 -> 5 mergulho no preto (3 frames a 50%, corte, 0.85 -> 0 em 0.5 s) com vazamento de luz em tons de cinza do registry (pico a 60% em 16.4 s, zero em 17.7 s).
+         Cintilação de projetor: véu branco em soft-light, 0 a 7% de opacidade, 10 degraus por 0.7 s. Grão 9%. Vinheta 45% a partir de 55%.
+         Palavras: blur 8 px -> 0, opacidade 0 -> 1, sobe 12 px, escala 0.97 -> 1 em 0.32 s power3.out, 0.09 s entre palavras. Linha pousada fica parada. A caixa amarela é varrida da esquerda em 0.3 s.
+         Saída da linha: blur 8 px e opacidade 0 em 0.2 s power2.in, antes de cada transição.
+SOUND:   whoosh-cinematic (pico em 2.50 s do arquivo) começa em 1.53 s para cristar no corte de 4.0 s, volume 0.4. whoosh-short em 7.87 s para o chicote (pico 8.03 s), 0.5.
+         whoosh em 11.87 s para o zoom através (pico 12.03 s), 0.45. impact-bass-2 em 11.75 s: a batida grave (1.99 s do arquivo) cai em 13.73 s, quando a caixa amarela termina de pintar, 0.55.
          Murchar: folhas giram 55 graus para baixo e a planta encolhe 12% em altura em 2.4 s power2.inOut.
          Regador: entra em 0.7 s expo.out, inclina 30 graus em 0.5 s power2.inOut, o feixe de água cresce em 0.4 s power2.out.
          Folha que cai: 1.6 s power1.in, gira 40 graus, pousa no parapeito.

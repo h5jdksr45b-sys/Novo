@@ -171,6 +171,14 @@
         align-items: center;
         gap: 14px;
       }
+      .text .lines {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .text.left .lines {
+        align-items: flex-start;
+      }
       .line {
         font-family: var(--font-display), "Playfair Display", serif;
         font-style: italic;
@@ -409,9 +417,10 @@
       <!-- Texto do shot 3: tinta escura, alinhada à esquerda, sobre o vidro -->
       <section id="text3" class="clip text high left" data-start="8" data-duration="4" data-track-index="1">
         <div class="box" id="box3">
-          <p class="line" id="l3a">
-            <span class="w">A</span> <span class="w">outra</span> <span class="w">parece</span> <span class="w">bem.</span>
-          </p>
+          <div id="l3a" class="lines">
+            <p class="line"><span class="w">A</span> <span class="w">outra</span></p>
+            <p class="line"><span class="w">parece</span> <span class="w">bem.</span></p>
+          </div>
           <p class="line" id="l3b"><span class="w">Ninguém</span> <span class="w">rega.</span></p>
         </div>
       </section>

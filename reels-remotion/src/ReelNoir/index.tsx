@@ -246,7 +246,7 @@ export const propsPadrao: z.infer<typeof reelNoirSchema> = {
   videoFala: "reel-noir/fala.mp4",
   legendasJson: "reel-noir/fala.json",
   corDestaque: "#c83c1e",
-  pretoEBranco: true,
-  sfx: true,
-  volumeSfx: 0.5,
+  pretoEBranco: false,
+  sfx: false,
+  volumeSfx: 0.35,
 };

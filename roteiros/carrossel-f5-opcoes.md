@@ -43,13 +43,13 @@ A pessoa se reconhece numa lista de atos concretos antes de ouvir a explicação
 
 Formato de frases prontas. Tende a ser salvo para usar depois.
 
-1. Ela pediu de novo. Você já sabe o que vai acontecer se disser sim. E não sabe o que dizer se disser não.
-2. Resolver por ela acalma os dois na hora. Por isso vira hábito. O que ajuda é ter a frase pronta antes do pedido.
-3. Quando ela pede dinheiro: Dessa vez eu não vou pagar. Posso sentar com você para ver o que dá para fazer.
-4. Quando ela pede para você ligar por ela: Eu não vou ligar. Fico do seu lado enquanto você liga.
-5. Quando ela diz que você não se importa: Eu me importo. É por isso que não vou fazer por você.
-6. Ela pode ficar com raiva. Isso não quer dizer que a frase estava errada.
-7. Se ela falar em se machucar, a regra muda: segurança primeiro. CVV 188, SAMU 192.
+1. Ele pediu de novo. Você já sabe o que vai acontecer se disser sim. E não sabe o que dizer se disser não.
+2. Resolver por ele acalma os dois na hora. Por isso vira hábito. O que ajuda é ter a frase pronta antes do pedido.
+3. Quando ele pede dinheiro: Dessa vez eu não vou pagar. Posso sentar com você para ver o que dá para fazer.
+4. Quando ele pede para você ligar por ele: Eu não vou ligar. Fico do seu lado enquanto você liga.
+5. Quando ele diz que você não se importa: Eu me importo. É por isso que não vou fazer por você.
+6. Ele pode ficar com raiva. Isso não quer dizer que a frase estava errada.
+7. Se ele falar em se machucar, a regra muda: segurança primeiro. CVV 188, SAMU 192.
 8. Salva pra ter a frase na hora. Dr. Fabio Schmidt, médico com foco em TPB. CRM-SP 183549. Conteúdo educativo.
 
-**Legenda:** Salva pra ter a frase na hora. Resolver por ela acalma os dois naquele momento, e é por isso que vira hábito. Ter a frase pronta antes do pedido ajuda a sair do automático: dizer não ao resgate e sim à presença. Se houver risco à vida, a regra é outra: segurança primeiro, CVV 188 e SAMU 192. Conteúdo educativo. Não substitui avaliação individual.
+**Legenda:** Salva pra ter a frase na hora. Resolver por ele acalma os dois naquele momento, e é por isso que vira hábito. Ter a frase pronta antes do pedido ajuda a sair do automático: dizer não ao resgate e sim à presença. Se houver risco à vida, a regra é outra: segurança primeiro, CVV 188 e SAMU 192. Conteúdo educativo. Não substitui avaliação individual.

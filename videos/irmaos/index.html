@@ -1,15 +1,51 @@
 <!doctype html>
-<html lang="en">
+<html
+  lang="pt-BR"
+  data-composition-variables='[
+    {"id":"color-ink-dark","type":"color","label":"Tinta sobre a luz","default":"#0f0e0c"},
+    {"id":"color-ink-light","type":"color","label":"Tinta sobre o escuro","default":"#ece7dd"},
+    {"id":"color-accent","type":"color","label":"Acento (caixa)","default":"#e2c84a"}
+  ]'
+>
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=1920, height=1080" />
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Os irmãos</title>
+    <!-- GSAP local (cópia de gsap@3.14.2), para o render não depender de rede. -->
+    <script src="assets/vendor/gsap.min.js"></script>
     <style>
-      /* Placeholders: replace all three with the film's own palette and display face. */
+      /* Tipografia: Playfair Display italic para as frases, Inter (bundled) para a assinatura. */
+      @font-face {
+        font-family: "Playfair Display";
+        font-style: italic;
+        font-weight: 400;
+        src: url("assets/fonts/playfair-italic-400.woff2") format("woff2");
+      }
+      @font-face {
+        font-family: "Playfair Display";
+        font-style: italic;
+        font-weight: 700;
+        src: url("assets/fonts/playfair-italic-700.woff2") format("woff2");
+      }
+      @font-face {
+        font-family: "Playfair Display";
+        font-style: normal;
+        font-weight: 400;
+        src: url("assets/fonts/playfair-normal-400.woff2") format("woff2");
+      }
+      @font-face {
+        font-family: "Playfair Display";
+        font-style: normal;
+        font-weight: 700;
+        src: url("assets/fonts/playfair-normal-700.woff2") format("woff2");
+      }
+
       :root {
-        --ground: #6b6b6b;
-        --ink: #ffffff;
-        --font-display: sans-serif;
+        --color-ink-dark: #0f0e0c;
+        --color-ink-light: #ece7dd;
+        --color-accent: #e2c84a;
+        --font-display: "Playfair Display";
+        --font-support: Inter;
       }
       * {
         margin: 0;
@@ -18,25 +54,188 @@
       }
       html,
       body {
-        margin: 0;
-        width: 1920px;
-        height: 1080px;
+        width: 1080px;
+        height: 1920px;
         overflow: hidden;
-        background: var(--ground);
+        background: #0b0a09;
       }
       #root {
+        position: relative;
         width: 100%;
         height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: var(--font-display);
+        overflow: hidden;
+        background: #0b0a09;
       }
-      #title {
-        color: var(--ink);
-        font-size: 72px;
-        font-weight: 600;
-        letter-spacing: -0.03em;
+      .clip {
+        position: absolute;
+        inset: 0;
+      }
+
+      /* Shots: uma foto por shot. O Ken Burns anima o wrapper .cam, nunca a imagem. */
+      .shot {
+        z-index: 1;
+        overflow: hidden;
+      }
+      .shot .cam {
+        position: absolute;
+        inset: 0;
+        transform-origin: 50% 50%;
+      }
+      .shot img {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 1080px;
+        height: 1920px;
+        object-fit: cover;
+        display: block;
+      }
+
+      /* Texto: bloco centrado, dentro da faixa segura do Reels (168 a 1330 px). */
+      .text {
+        z-index: 50;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 330px 110px 0;
+      }
+      /* Variações de posição por shot, conforme onde cada foto deixa espaço calmo. */
+      .text.low {
+        padding-top: 990px;
+      }
+      .text.high {
+        padding-top: 240px;
+      }
+      .text.top {
+        padding-top: 200px;
+      }
+      .text.left {
+        align-items: flex-start;
+        padding-left: 80px;
+      }
+      .text.left .box {
+        align-items: flex-start;
+      }
+      .text.left .line {
+        text-align: left;
+        max-width: 780px;
+      }
+      /* Shot 2: o caixilho escuro ocupa a esquerda e o regador a direita; o texto fica no vidro entre os dois. */
+      .text.glass {
+        align-items: flex-start;
+        padding-left: 300px;
+      }
+      .text.glass .box {
+        align-items: flex-start;
+      }
+      .text.glass .line {
+        text-align: left;
+        max-width: 640px;
+      }
+      /* Shot 5: quebra antes de ou, para a chamada ler em duas linhas equilibradas. */
+      .text.top .line {
+        max-width: 760px;
+      }
+      .text .box {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+      }
+      .line {
+        font-family: var(--font-display), "Playfair Display", serif;
+        font-style: italic;
+        font-weight: 400;
+        font-size: 88px;
+        line-height: 1.12;
+        letter-spacing: -0.01em;
+        text-align: center;
+        max-width: 860px;
+        color: var(--color-ink-dark);
+      }
+      .text.light .line {
+        color: var(--color-ink-light);
+      }
+      /* Cada palavra entra sozinha: começa invisível e o timeline a traz. */
+      .w {
+        display: inline-block;
+        opacity: 0;
+      }
+      .hl {
+        background: var(--color-accent);
+        color: var(--color-ink-dark);
+        padding: 0 0.16em;
+        border-radius: 4px;
+      }
+      #sig {
+        position: absolute;
+        top: 446px;
+        left: 0;
+        right: 0;
+        text-align: center;
+        font-family: var(--font-support), Inter, sans-serif;
+        font-weight: 500;
+        font-size: 30px;
+        letter-spacing: 0.06em;
+        color: var(--color-ink-light);
+        opacity: 0;
+      }
+
+      /* Overlays de grão e vinheta (componentes do registry), por cima de tudo. */
+      #fx {
+        z-index: 80;
+        pointer-events: none;
+      }
+      #hf-vignette {
+        background: radial-gradient(
+          var(--vignette-shape, ellipse) at center,
+          transparent var(--vignette-size, 55%),
+          var(--vignette-color, rgba(0, 0, 0, 0.45)) var(--vignette-edge, 100%)
+        );
+      }
+      @keyframes hf-grain-noise {
+        0%,
+        100% {
+          transform: translate(0, 0);
+        }
+        10% {
+          transform: translate(-5%, -5%);
+        }
+        20% {
+          transform: translate(-10%, 5%);
+        }
+        30% {
+          transform: translate(5%, -10%);
+        }
+        40% {
+          transform: translate(-5%, 15%);
+        }
+        50% {
+          transform: translate(-10%, 5%);
+        }
+        60% {
+          transform: translate(15%, 0);
+        }
+        70% {
+          transform: translate(0, 10%);
+        }
+        80% {
+          transform: translate(-15%, 0);
+        }
+        90% {
+          transform: translate(10%, 5%);
+        }
+      }
+      #grain-overlay .grain-texture {
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        opacity: 0.09;
+        animation: hf-grain-noise 0.5s steps(1) infinite;
       }
     </style>
   </head>
@@ -45,15 +244,153 @@
       id="root"
       data-composition-id="main"
       data-start="0"
-      data-duration="10"
-      data-width="1920"
-      data-height="1080"
+      data-duration="20"
+      data-width="1080"
+      data-height="1920"
     >
-      <h1 id="title" class="clip" data-start="0" data-duration="10" data-track-index="0">Title</h1>
+      <!-- Shot 1: plano aberto, duas plantas iguais. Zoom in lento. -->
+      <section id="shot1" class="clip shot" data-start="0" data-duration="4" data-track-index="0">
+        <div class="cam" data-layout-allow-overflow id="cam1"><img id="img1" src="assets/img/s1.png" alt="" /></div>
+      </section>
+      <!-- Shot 2: close na planta da esquerda, murcha, com o regador. Zoom out lento. -->
+      <section id="shot2" class="clip shot" data-start="4" data-duration="4" data-track-index="0">
+        <div class="cam" data-layout-allow-overflow id="cam2"><img id="img2" src="assets/img/s2.png" alt="" /></div>
+      </section>
+      <!-- Shot 3: close na planta da direita, folha caída no parapeito. Zoom in lento. -->
+      <section id="shot3" class="clip shot" data-start="8" data-duration="4" data-track-index="0">
+        <div class="cam" data-layout-allow-overflow id="cam3"><img id="img3" src="assets/img/s3.png" alt="" /></div>
+      </section>
+      <!-- Shot 4: macro na terra seca. Push in lento. -->
+      <section id="shot4" class="clip shot" data-start="12" data-duration="4" data-track-index="0">
+        <div class="cam" data-layout-allow-overflow id="cam4"><img id="img4" src="assets/img/s4.png" alt="" /></div>
+      </section>
+      <!-- Shot 5: plano aberto final, planta da direita caída. Zoom out lento. -->
+      <section id="shot5" class="clip shot" data-start="16" data-duration="4" data-track-index="0">
+        <div class="cam" data-layout-allow-overflow id="cam5"><img id="img5" src="assets/img/s5.png" alt="" /></div>
+      </section>
+
+      <!-- Texto do shot 1: tinta clara sobre a parede escura acima da janela -->
+      <section id="text1" class="clip text light" data-start="0" data-duration="4" data-track-index="1">
+        <div class="box" id="box1">
+          <p class="line" id="l1a">
+            <span class="w">Você</span> <span class="w">era</span> <span class="w">o</span> <span class="w">filho</span>
+            <span class="w">que</span> <span class="w">não</span> <span class="w">dava</span> <span class="w">trabalho.</span>
+          </p>
+        </div>
+      </section>
+
+      <!-- Texto do shot 2: tinta escura sobre o vidro, acima do regador; as duas linhas acumulam -->
+      <section id="text2" class="clip text high glass" data-start="4" data-duration="4" data-track-index="1">
+        <div class="box" id="box2">
+          <p class="line" id="l2a"><span class="w">Uma</span> <span class="w">murcha.</span></p>
+          <p class="line" id="l2b">
+            <span class="w">Toda</span> <span class="w">a</span> <span class="w">água</span> <span class="w">vai</span>
+            <span class="w">para</span> <span class="w">ela.</span>
+          </p>
+        </div>
+      </section>
+
+      <!-- Texto do shot 3: tinta escura, alinhada à esquerda, sobre o vidro (a parede escura fica à direita) -->
+      <section id="text3" class="clip text high left" data-start="8" data-duration="4" data-track-index="1">
+        <div class="box" id="box3">
+          <p class="line" id="l3a">
+            <span class="w">A</span> <span class="w">outra</span> <span class="w">parece</span> <span class="w">bem.</span>
+          </p>
+          <p class="line" id="l3b"><span class="w">Ninguém</span> <span class="w">rega.</span></p>
+        </div>
+      </section>
+
+      <!-- Texto do shot 4: tinta clara sobre o vaso escuro, caixa de acento em estar bem -->
+      <section id="text4" class="clip text light low" data-start="12" data-duration="4" data-track-index="1">
+        <div class="box" id="box4">
+          <p class="line" id="l4a"><span class="w">Parecer</span> <span class="w">bem</span></p>
+          <p class="line" id="l4b"><span class="w">e</span> <span class="w hl">estar bem</span></p>
+          <p class="line" id="l4c">
+            <span class="w">são</span> <span class="w">coisas</span> <span class="w">diferentes.</span>
+          </p>
+        </div>
+      </section>
+
+      <!-- Texto do shot 5: chamada e assinatura, tinta clara na parede escura (a foto é empurrada para baixo pela câmera) -->
+      <section id="text5" class="clip text light top" data-start="16" data-duration="4" data-track-index="1">
+        <div class="box" id="box5">
+          <p class="line" id="l5a">
+            <span class="w">Manda</span> <span class="w">pra</span> <span class="w">sua</span> <span class="w">mãe</span>
+            <span class="w">ou</span> <span class="w">seu</span> <span class="w">pai.</span>
+          </p>
+        </div>
+        <div id="sig">Dr. Fabio Schmidt, CRM-SP 183549</div>
+      </section>
+
+      <!-- Grão e vinheta sobre o filme inteiro -->
+      <section id="fx" class="clip" data-start="0" data-duration="20" data-track-index="2" data-layout-ignore>
+        <div
+          id="hf-vignette"
+          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 90"
+        ></div>
+        <div
+          id="grain-overlay"
+          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 100"
+        >
+          <div class="grain-texture"></div>
+        </div>
+      </section>
     </div>
+
     <script>
+      // Um timeline pausado, registrado depois de montado. Tudo o que se vê é função do tempo.
       const tl = gsap.timeline({ paused: true });
-      // Example: tl.fromTo("#title", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.18, ease: "power4.out" }, 0);
+
+      // Ken Burns: um movimento contínuo por shot, ease linear, 6 a 8% de escala em 4 s.
+      // Alterna zoom in e zoom out para que cada corte mude a direção do movimento.
+      const kenBurns = (sel, from, to, at) =>
+        tl.fromTo(sel, from, { ...to, duration: 4, ease: "none", immediateRender: false }, at);
+
+      kenBurns("#cam1", { scale: 1.0, y: 0 }, { scale: 1.07, y: -12 }, 0);
+      kenBurns("#cam2", { scale: 1.1, x: 0 }, { scale: 1.02, x: 10 }, 4);
+      kenBurns("#cam3", { scale: 1.0, x: 0 }, { scale: 1.08, x: -14 }, 8);
+      // Shot 4: a foto sobe um pouco para o aro do vaso sair de baixo do texto.
+      kenBurns("#cam4", { scale: 1.06, y: -50 }, { scale: 1.12, y: -70 }, 12);
+      // Shot 5: push in lento com a foto deslocada para baixo, para a parede escura receber a chamada.
+      kenBurns("#cam5", { scale: 1.12, y: 100 }, { scale: 1.16, y: 120 }, 16);
+
+      // Palavras: blur 8 px -> 0, opacidade 0 -> 1, escala 0.97 -> 1, 0.32 s por palavra, 0.09 s entre palavras.
+      const words = (lineSel, at) =>
+        tl.fromTo(
+          `${lineSel} .w`,
+          { opacity: 0, filter: "blur(8px)", scale: 0.97 },
+          { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.32, ease: "power3.out", stagger: 0.09 },
+          at,
+        );
+
+      // Saída da linha: o bloco inteiro desfoca e some 6 frames antes do corte.
+      const exitBox = (boxSel, at) =>
+        tl.to(boxSel, { opacity: 0, filter: "blur(8px)", duration: 0.2, ease: "power2.in" }, at);
+
+      // Shot 1 (0 a 4 s)
+      words("#l1a", 0.25);
+      exitBox("#box1", 3.78);
+
+      // Shot 2 (4 a 8 s)
+      words("#l2a", 4.3);
+      words("#l2b", 5.3);
+      exitBox("#box2", 7.78);
+
+      // Shot 3 (8 a 12 s)
+      words("#l3a", 8.3);
+      words("#l3b", 9.6);
+      exitBox("#box3", 11.78);
+
+      // Shot 4 (12 a 16 s)
+      words("#l4a", 12.3);
+      words("#l4b", 13.1);
+      words("#l4c", 13.9);
+      exitBox("#box4", 15.78);
+
+      // Shot 5 (16 a 20 s): a chamada fica até o fim; a assinatura entra depois.
+      words("#l5a", 16.3);
+      tl.fromTo("#sig", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.out" }, 17.6);
+
       window.__timelines["main"] = tl;
       tl.seek(0);
     </script>

@@ -1,7 +1,7 @@
 GOAL:    Quem foi o filho que não dava trabalho se reconhece e manda o vídeo para a mãe ou o pai.
 OUTPUT:  HyperFrames, 1080 x 1920, 30 fps. Instagram Reels.
 TIME:    20 s x 30 = 600 frames. Sem música nesta entrega (sem fonte de áudio na máquina); o Reel pode receber trilha no app.
-LOOK:    Noir editorial, uma cena só: uma janela iluminada vista de dentro de um quarto escuro, com dois vasos no parapeito.
+LOOK:    Noir editorial em cinco fotografias (Higgsfield, gpt_image_2_5, 2k, preto e branco, grão 35 mm): uma janela iluminada vista de dentro de um quarto escuro, com dois vasos no parapeito.
          Chão/quarto #0b0a09 sem gradiente. Luz da janela: radial de #e8e3d8 (centro) a #a9a399 (borda), vidro sem textura.
          Plantas, vasos, caixilho e regador: silhuetas pretas #0b0a09 contra a luz, nenhum contorno, nenhum brilho.
          Tinta do texto: #0f0e0c sobre a luz da janela; #ece7dd quando a câmera está no vaso escuro (shot 4).
@@ -22,10 +22,10 @@ MOTION:  Câmera (Ken Burns): um movimento contínuo por shot em ease none, 6 a 
          Folha que cai: 1.6 s power1.in, gira 40 graus, pousa no parapeito.
          Rachaduras: traçado de 0 a 100% em 1.6 s power2.inOut, uma a uma com 0.15 s de atraso.
 SHOTS:   1  f0-120   (0-4 s)   Plano aberto, zoom in 1.00 -> 1.06. Lê: Você era o filho que não dava trabalho. (7 palavras, 2.6 s de leitura). Corte.
-         2  f120-240 (4-8 s)   Planta da esquerda em primeiro plano, zoom out 1.68 -> 1.58. A planta murcha; o regador entra e despeja só nela. Lê: Uma murcha. depois Toda a água vai para ela. (acumulam). Corte.
-         3  f240-360 (8-12 s)  Planta da direita, zoom in 1.48 -> 1.56. O regador sai pela esquerda do quadro; uma folha se solta e cai. Lê: A outra parece bem. depois Ninguém rega. Corte.
-         4  f360-480 (12-16 s) Macro no vaso da direita, zoom in 2.6 -> 2.75. A terra racha. Lê: Parecer bem / e estar bem / são coisas diferentes. Caixa amarela em estar bem. Corte.
-         5  f480-600 (16-20 s) Plano aberto, zoom out 1.08 -> 1.00. As duas plantas; a da direita sem uma folha e levemente caída. Lê: Manda pra sua mãe ou seu pai. (segura 3.5 s). Assinatura no topo a partir de 17.5 s.
+         2  f120-240 (4-8 s)   Planta da esquerda murcha com o regador (foto 2), zoom out 1.10 -> 1.02. Texto escuro no vidro, entre o caixilho e o regador. Lê: Uma murcha. depois Toda a água vai para ela. (acumulam). Corte.
+         3  f240-360 (8-12 s)  Planta da direita com a folha caída no parapeito (foto 3), zoom in 1.00 -> 1.08. Texto escuro alinhado à esquerda, no vidro. Lê: A outra parece bem. depois Ninguém rega. Corte.
+         4  f360-480 (12-16 s) Macro no vaso da direita (foto 4), push in 1.06 -> 1.12 com a foto 50 a 70 px para cima. Terra rachada. Lê: Parecer bem / e estar bem / são coisas diferentes, em tinta clara sobre o vaso. Caixa amarela em estar bem. Corte.
+         5  f480-600 (16-20 s) Plano aberto (foto 5), push in 1.12 -> 1.16 com a foto 100 a 120 px para baixo. As duas plantas; a da direita caída, com uma folha no parapeito. Lê: Manda pra sua mãe / ou seu pai. em tinta clara na parede (segura 3.5 s). Assinatura logo abaixo a partir de 17.6 s.
 BANNED:  Vazio preto com elementos pequenos flutuando no meio; glow, bloom, partículas; gradiente na tela inteira; papel creme com serifa e rótulos numerados;
          tudo entrando com fade e slide para cima; texto que continua escalando depois de pousar; dissolve entre shots; logo no canto;
          emoji, aspas e travessão no texto; mais de uma caixa de acento no filme.

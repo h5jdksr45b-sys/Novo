@@ -41,7 +41,7 @@ export const Sfx: React.FC<{
               1,
               Math.max(0, (totalFrames - f) / (fps * 2)),
             );
-            return volume * 0.4 * fadeIn * fadeOut;
+            return volume * 0.55 * fadeIn * fadeOut;
           }}
           loop
         />
@@ -68,7 +68,10 @@ export const Sfx: React.FC<{
             ) : null}
             {impacto ? (
               <Sequence from={paraFrame(c.inicioMs)} durationInFrames={fps * 2}>
-                <Audio src={staticFile("sfx/impacto.wav")} volume={volume * 0.8} />
+                <Audio
+                  src={staticFile("sfx/impacto.wav")}
+                  volume={volume * 0.8}
+                />
               </Sequence>
             ) : null}
           </React.Fragment>

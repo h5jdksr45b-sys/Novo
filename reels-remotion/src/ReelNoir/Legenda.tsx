@@ -6,6 +6,7 @@ import {
   useVideoConfig,
 } from "remotion";
 import { SANS } from "./fontes";
+import { PALAVRAS_CHAVE } from "./roteiro";
 import type { Palavra } from "./timeline";
 
 // Legenda pequena, em sans, abaixo do queixo. Só nos planos em que o Fabio aparece.
@@ -46,12 +47,21 @@ const montarBlocos = (palavras: Palavra[]): Bloco[] => {
   });
 };
 
+const CHAVES = new Set(PALAVRAS_CHAVE.map((p) => p.toLowerCase()));
+
 export const Legenda: React.FC<{
   palavras: Palavra[]; // tempos absolutos, todas as palavras do vídeo
   ativaDeMs: number;
   ativaAteMs: number;
   topo?: number;
-}> = ({ palavras, ativaDeMs, ativaAteMs, topo = 1250 }) => {
+  corDestaque?: string;
+}> = ({
+  palavras,
+  ativaDeMs,
+  ativaAteMs,
+  topo = 1250,
+  corDestaque = "#c83c1e",
+}) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const agoraMs = (frame / fps) * 1000;
@@ -85,10 +95,23 @@ export const Legenda: React.FC<{
       >
         {bloco.palavras.map((p, i) => {
           const dita = agoraMs >= p.inicioMs;
+          const atual = dita && agoraMs < p.fimMs + 80;
+          const chave = CHAVES.has(p.texto.toLowerCase());
+          const pop = atual
+            ? 1 + 0.06 * Math.max(0, 1 - (agoraMs - p.inicioMs) / 220)
+            : 1;
           return (
             <span
               key={`${p.inicioMs}-${i}`}
-              style={{ opacity: dita ? 1 : 0.42, whiteSpace: "pre" }}
+              style={{
+                display: "inline-block",
+                whiteSpace: "pre",
+                opacity: dita ? 1 : 0.42,
+                color: chave && dita ? corDestaque : "#f4f4f4",
+                fontWeight: chave ? 700 : 500,
+                transform: `scale(${pop})`,
+                transformOrigin: "center bottom",
+              }}
             >
               {p.texto}
               {i < bloco.palavras.length - 1 ? " " : ""}

@@ -47,6 +47,26 @@ export const ETIQUETAS = {
   rodape: "CRM-SP 183549",
 };
 
+// Palavras que a legenda pequena destaca em cor (ajuda a leitura sem som).
+export const PALAVRAS_CHAVE = [
+  "mente.",
+  "briga?",
+  "mentiroso",
+  "certeza",
+  "estreitos",
+  "ameaça",
+  "cachorro",
+  "dente,",
+  "coleira",
+  "palavra,",
+  "voz.",
+  "verdadeiros",
+  "mentira.",
+  "marcou?",
+  "manda",
+  "discussão.",
+];
+
 export const ASSINATURA = {
   nome: "Dr. Fabio Schmidt",
   registro: "CRM-SP 183549",
@@ -61,7 +81,7 @@ export const CENAS: Cena[] = [
     plano: "aberto",
     fala: "Borderline mente. Quantas vezes que você ouviu isso num dia depois da briga?",
     enfase: {
-      texto: "Borderline mente.",
+      texto: "Mesma briga, duas memórias.",
       gatilho: "Borderline",
       posicao: "alto",
     },

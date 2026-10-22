@@ -43,7 +43,7 @@ A pessoa se reconhece numa lista de atos concretos antes de ouvir a explicação
 
 Formato de frases prontas. Tende a ser salvo para usar depois.
 
-1. Ele pediu de novo. Você já sabe o que vai acontecer se disser sim. E não sabe o que dizer se disser não.
+1. Ele pediu de novo. Você sabe que não devia dizer sim. Só não sabe como dizer não.
 2. Resolver por ele acalma os dois na hora. Por isso vira hábito. O que ajuda é ter a frase pronta antes do pedido.
 3. Quando ele pede dinheiro: Dessa vez eu não vou pagar. Posso sentar com você para ver o que dá para fazer.
 4. Quando ele pede para você ligar por ele: Eu não vou ligar. Fico do seu lado enquanto você liga.

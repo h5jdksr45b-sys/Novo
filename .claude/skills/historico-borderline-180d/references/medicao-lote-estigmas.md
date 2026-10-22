@@ -11,8 +11,9 @@ O objetivo é medir cada Reel com a mesma idade, em 7 e em 30 dias após a publi
 3. Registre cada métrica na sua coluna. Não some nem misture as métricas:
    - alcance: contas únicas
    - views: visualizações
-   - envios e reposts: vêm do print dos insights do app, em colunas separadas
-   - compartilhamentos do Windsor (`media_shares`): ficam só como conferência, porque o campo não separa envios de reposts
+   - envios: o campo `media_shares` do Windsor. Ele bateu com os envios do app no post DeZxVp6FN0p e não incluiu os reposts. Isso foi conferido em 1 post só. Se o print existir, confira.
+   - reposts: só no print do app
+   - visualizadores do app: só no print. Não é o mesmo número que o `media_reach` do Windsor (veja `insights-prints.md`)
    - salvamentos
    - tempo médio assistido, em ms (não é percentual)
    - saída nos 3 primeiros segundos
@@ -31,7 +32,7 @@ Anote o dia do print. É ele que define a idade do Reel na medição.
 
 ## Tabela
 
-| Peça | Gancho | Publicado | Código | D7 alcance | D7 views | D7 envios (print) | D7 reposts (print) | D7 salvos | D7 ret_ms | D7 skip3s | D30 alcance | D30 views | D30 envios (print) | D30 reposts (print) | D30 salvos |
+| Peça | Gancho | Publicado | Código | D7 alcance | D7 views | D7 envios | D7 reposts (print) | D7 salvos | D7 ret_ms | D7 skip3s | D30 alcance | D30 views | D30 envios | D30 reposts (print) | D30 salvos |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | B1 Perigoso (em pausa: tese repetida em 14, 16 e 20/10) | estereótipo riscado | | | | | | | | | | | | | | |
 | B2 Toda raiva vira sintoma | cena | | | | | | | | | | | | | | |

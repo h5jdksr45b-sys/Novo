@@ -65,7 +65,7 @@ Um eixo por publicação. É uma etiqueta para varrer o arquivo, não uma lista 
 ## Limites
 
 1. Retenção: `ret_ms` é tempo absoluto. A duração dos Reels não foi coletada, então não dá para calcular percentual assistido nem comparar vídeos de durações diferentes. Carrosséis não têm retenção.
-2. Alcance, views, compartilhamentos, salvamentos e retenção são métricas diferentes. Não funda uma na outra.
+2. Alcance, views, compartilhamentos, salvamentos e retenção são métricas diferentes. Não funda uma na outra. O `alcance` do arquivo vem do `media_reach` do Windsor e não é o número de visualizadores do app: no post DeZxVp6FN0p, em 22/10, foram 45.376 contra 29.074. Já o `compart` bateu com os envios do app e não incluiu os reposts. Detalhes em `insights-prints.md`.
 3. Posts dos últimos 7 dias do arquivo ainda acumulam números.
 4. Reenvios do mesmo conteúdo têm alcance muito diferente entre si no arquivo. Os dados não dizem por quê.
 5. Não há dados de seguidores ganhos por post, horário, duração, fonte do tráfego ou comentários individuais.

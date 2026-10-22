@@ -54,7 +54,7 @@ export const CENAS: Cena[] = [
     descricaoImagem:
       "Fachada ou corredor de hospital psiquiátrico dos anos 1960, preto e branco, vazio, luz dura de janela.",
     movimento: "aproxima",
-    posicaoTexto: "alto",
+    posicaoTexto: "baixo",
     destaques: ["17 anos"],
     flashNaEntrada: true,
     impacto: true,
@@ -118,7 +118,7 @@ export const CENAS: Cena[] = [
     descricaoImagem:
       "Prédio de universidade americana nos anos 1990 ou arquivo com pastas de papel, P&B, grão forte.",
     movimento: "aproxima",
-    posicaoTexto: "alto",
+    posicaoTexto: "baixo",
     flashNaEntrada: true,
     impacto: true,
   },

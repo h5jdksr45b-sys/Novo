@@ -75,7 +75,13 @@ export const ReelLinehan: React.FC<Props> = ({ videoFala, corDestaque, pretoEBra
           <Sequence key={cena.id} from={de} durationInFrames={dur} name={cena.id}>
             {cena.tipo === "broll" ? (
               <>
-                <KenBurns src={cena.imagem} movimento={cena.movimento} duracaoFrames={dur} pretoEBranco={pretoEBranco} />
+                <KenBurns
+                  src={cena.imagem}
+                  movimento={cena.movimento}
+                  duracaoFrames={dur}
+                  pretoEBranco={pretoEBranco}
+                  escurecer={cena.posicaoTexto}
+                />
                 <TextoCinetico
                   palavras={cena.palavras}
                   inicioCenaMs={cena.inicioMs}

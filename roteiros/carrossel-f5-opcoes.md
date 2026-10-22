@@ -53,3 +53,20 @@ Formato de frases prontas. Tende a ser salvo para usar depois.
 8. Salva pra ter a frase na hora. Dr. Fabio Schmidt, médico com foco em TPB. CRM-SP 183549. Conteúdo educativo.
 
 **Legenda:** Salva pra ter a frase na hora. Resolver por ele acalma os dois naquele momento, e é por isso que vira hábito. Ter a frase pronta antes do pedido ajuda a sair do automático: dizer não ao resgate e sim à presença. Se houver risco à vida, a regra é outra: segurança primeiro, CVV 188 e SAMU 192. Conteúdo educativo. Não substitui avaliação individual.
+
+---
+
+## Opção 4: a boia (capa escolhida em 2026-10-22)
+
+Capa gerada no Higgsfield: parede amarela texturizada, boia salva-vidas com duas cordas saindo do quadro. Job 62d9378a-0ac2-4051-9404-b32d38d5fa1c.
+
+1. Socorrer quem tem borderline toda vez acalma alguém. Nem sempre é ele.
+2. Você paga a conta, liga pra explicar, muda o plano da família. E na hora sente alívio.
+3. Esse alívio é seu. Ver alguém que você ama sofrendo dá uma angústia difícil de aguentar. Resolver acaba com ela na hora.
+4. Por isso o socorro se repete. Mesmo depois de jurar que era a última vez.
+5. Isso acontece em muitas famílias, com ou sem borderline. Não é fraqueza de quem ajuda.
+6. A pergunta que ajuda: estou resolvendo pra ele ou pra parar de sentir isso?
+7. Fique perto enquanto ele resolve, em vez de resolver por ele. Os primeiros dias pesam. Para os dois. Se houver risco à vida, a regra muda: segurança primeiro. CVV 188, SAMU 192.
+8. Manda pra quem sempre socorre todo mundo na família. Dr. Fabio Schmidt, médico com foco em TPB. CRM-SP 183549. Conteúdo educativo.
+
+**Legenda:** Manda pra quem sempre socorre todo mundo na família. Ver alguém que você ama sofrendo dá uma angústia difícil de aguentar, e resolver acaba com ela na hora. Por isso o socorro se repete, mesmo depois de jurar que era a última vez. Isso acontece em muitas famílias, com ou sem borderline, e não é fraqueza de quem ajuda. A pergunta que ajuda: estou resolvendo pra ele ou pra parar de sentir isso? Se houver risco à vida, a regra é outra: segurança primeiro, CVV 188 e SAMU 192. Conteúdo educativo. Não substitui avaliação individual.

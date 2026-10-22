@@ -2,6 +2,7 @@ import { continueRender, delayRender, staticFile } from "remotion";
 
 export const SERIFA = "Playfair Display";
 export const SANS = "Inter";
+export const DISPLAY = "Anton"; // condensada e pesada, para as palavras de ênfase
 
 let carregado: Promise<void> | null = null;
 
@@ -31,6 +32,7 @@ export const carregarFontes = (): Promise<void> => {
       weight: "400 900",
       style: "italic",
     }),
+    carregar(DISPLAY, "fonts/anton.woff2", { weight: "400", style: "normal" }),
     carregar(SANS, "fonts/Inter-400.woff2", {
       weight: "100 900",
       style: "normal",

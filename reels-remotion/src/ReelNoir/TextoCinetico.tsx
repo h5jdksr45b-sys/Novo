@@ -6,7 +6,7 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
-import { SANS, SERIFA } from "./fontes";
+import { DISPLAY, SANS, SERIFA } from "./fontes";
 import { normalizar, type Palavra } from "./timeline";
 
 // Tipografia cinética no padrão das referências:
@@ -155,13 +155,19 @@ export const TextoCinetico: React.FC<{
                   position: "relative",
                   display: "inline-block",
                   whiteSpace: "pre",
-                  fontFamily: SERIFA,
-                  fontStyle: "italic",
-                  fontWeight: grande ? 700 : 400,
-                  fontSize: grande ? corpo * 1.75 : corpo,
-                  lineHeight: 1.08,
+                  fontFamily: grande ? DISPLAY : SERIFA,
+                  fontStyle: grande ? "normal" : "italic",
+                  fontWeight: 400,
+                  textTransform: grande ? "uppercase" : "none",
+                  letterSpacing: grande ? 2 : 0,
+                  fontSize: grande
+                    ? corpo * 2.3
+                    : emCaixa
+                      ? corpo * 1.2
+                      : corpo,
+                  lineHeight: 1.0,
                   color: emCaixa ? "#0a0a0a" : "#f4f4f4",
-                  padding: emCaixa ? "2px 16px" : 0,
+                  padding: emCaixa ? "4px 20px" : 0,
                   textShadow: emCaixa
                     ? "none"
                     : "0 0 22px rgba(255,255,255,0.28), 0 2px 10px rgba(0,0,0,0.65)",

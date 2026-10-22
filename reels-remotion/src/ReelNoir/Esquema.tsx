@@ -102,7 +102,7 @@ export const Esquema: React.FC<{
               opacity: apareceu * opacidade,
               fontFamily: SERIFA,
               fontStyle: "italic",
-              fontSize: d.ameaca ? 64 : 46,
+              fontSize: d.ameaca ? 80 : 46,
               color: "#f2f2f2",
               whiteSpace: "nowrap",
               background:

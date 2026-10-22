@@ -8,7 +8,7 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
-import { SANS, SERIFA } from "./fontes";
+import { DISPLAY, SANS, SERIFA } from "./fontes";
 import { tempoDaPalavra, type CenaNoTempo } from "./timeline";
 import type { CenaFala } from "./roteiro";
 
@@ -149,16 +149,16 @@ export const Enfase: React.FC<{
           right: 90,
           ...(posicao === "alto" ? { top: 300 } : { bottom: 560 }),
           textAlign: "center",
-          fontFamily: SERIFA,
-          fontStyle: "italic",
-          fontWeight: 700,
-          fontSize: 92,
-          lineHeight: 1.05,
+          fontFamily: DISPLAY,
+          textTransform: "uppercase",
+          fontWeight: 400,
+          fontSize: 118,
+          lineHeight: 1.0,
           color: "#f4f4f4",
           textShadow:
             "0 0 26px rgba(255,255,255,0.25), 0 4px 18px rgba(0,0,0,0.8)",
           opacity: p,
-          letterSpacing: `${(1 - p) * 6}px`,
+          letterSpacing: `${2 + (1 - p) * 8}px`,
           transform: `translateY(${(1 - p) * 28}px) scale(${0.96 + p * 0.04})`,
         }}
       >
@@ -169,7 +169,7 @@ export const Enfase: React.FC<{
               key={k}
               style={{
                 color: ultima ? "transparent" : "#f4f4f4",
-                WebkitTextStroke: ultima ? "2px #f4f4f4" : "0",
+                WebkitTextStroke: ultima ? "3px #f4f4f4" : "0",
                 textShadow: ultima ? "none" : undefined,
               }}
             >

@@ -6,7 +6,7 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
-import { SANS, SERIFA } from "./fontes";
+import { DISPLAY, SANS } from "./fontes";
 
 // Palavra gigante atrás da imagem, cortada pelo quadro, deslizando devagar (padrão "SKILLS" / "implementing").
 export const PalavraFundo: React.FC<{
@@ -32,11 +32,11 @@ export const PalavraFundo: React.FC<{
           left: 0,
           top: y,
           transform: `translate(${x + (1 - entrada) * 120}px, -50%)`,
-          fontFamily: SERIFA,
-          fontWeight: 900,
-          fontSize: 440,
+          fontFamily: DISPLAY,
+          fontWeight: 400,
+          fontSize: 560,
           lineHeight: 1,
-          letterSpacing: -12,
+          letterSpacing: 4,
           whiteSpace: "nowrap",
           color: vazada ? "transparent" : "rgba(255,255,255,0.07)",
           WebkitTextStroke: vazada ? "2px rgba(255,255,255,0.22)" : "0",

@@ -4,7 +4,8 @@ Público: família e quem tem borderline. Função: alcance. Tese: o estigma por
 
 Capa aprovada em 2026-10-22: papel sépia, retrato antigo de família com os rostos sombreados. Job 70aa8ff2-e979-48e6-98e8-f7fcb0c4674a.
 
-1. Borderline não pega. O estigma pega na família inteira.
+1. Você não tem borderline. E mesmo assim é julgado por ele. Isso tem nome.
+   (Capa anterior, como alternativa: Borderline não pega. O estigma pega na família inteira.)
 2. No grupo da família, alguém pergunta: e ele, ainda está daquele jeito? A pergunta é sobre ele. O peso cai em você.
 3. Isso tem nome: estigma por associação. Quem convive com alguém julgado também passa a ser julgado.
 4. A família sente vergonha. Para de contar. Para de ir. Se fecha.

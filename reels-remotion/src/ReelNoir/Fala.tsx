@@ -1,7 +1,7 @@
 import React from "react";
-import { AbsoluteFill, OffthreadVideo, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
+import { AbsoluteFill, OffthreadVideo, interpolate, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { SANS, SERIFA } from "./fontes";
-import type { CenaNoTempo } from "./timeline";
+import { tempoDaPalavra, type CenaNoTempo } from "./timeline";
 import type { CenaFala } from "./roteiro";
 
 // Camada do Fabio em câmera. Um único take, contínuo, por baixo de tudo:
@@ -100,3 +100,39 @@ const SlateFala: React.FC<{ plano: "aberto" | "fechado"; fala: CenaFala | null }
 };
 
 export const caminhoVideo = (nome: string | null) => (nome ? staticFile(nome) : null);
+
+// Texto grande só no momento de ênfase: entra quando a palavra-gatilho é dita e fica até o fim do plano.
+export const Enfase: React.FC<{ cena: CenaNoTempo & CenaFala; corDestaque: string }> = ({ cena }) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  if (!cena.enfase) return null;
+  const agoraMs = (frame / fps) * 1000;
+  const gatilhoMs = tempoDaPalavra(cena.palavras, cena.enfase.gatilho) ?? cena.inicioMs;
+  if (agoraMs < gatilhoMs || agoraMs >= cena.fimMs) return null;
+  const p = interpolate(agoraMs - gatilhoMs, [0, 160], [0, 1], { extrapolateRight: "clamp" });
+  const posicao = cena.enfase.posicao ?? "alto";
+  return (
+    <AbsoluteFill style={{ pointerEvents: "none" }}>
+      <div
+        style={{
+          position: "absolute",
+          left: 90,
+          right: 90,
+          ...(posicao === "alto" ? { top: 300 } : { bottom: 560 }),
+          textAlign: "center",
+          fontFamily: SERIFA,
+          fontStyle: "italic",
+          fontWeight: 700,
+          fontSize: 92,
+          lineHeight: 1.05,
+          color: "#f4f4f4",
+          textShadow: "0 0 26px rgba(255,255,255,0.25), 0 4px 18px rgba(0,0,0,0.8)",
+          opacity: p,
+          transform: `translateY(${(1 - p) * 10}px) scale(${0.97 + p * 0.03})`,
+        }}
+      >
+        {cena.enfase.texto}
+      </div>
+    </AbsoluteFill>
+  );
+};

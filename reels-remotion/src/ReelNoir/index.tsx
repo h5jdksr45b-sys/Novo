@@ -1,25 +1,26 @@
 import type { Caption } from "@remotion/captions";
+import { ALL_FORMATS, Input, UrlSource } from "mediabunny";
 import { zColor } from "@remotion/zod-types";
 import React, { useEffect } from "react";
 import { AbsoluteFill, CalculateMetadataFunction, Sequence, getStaticFiles, staticFile, useVideoConfig } from "remotion";
 import { z } from "zod";
 import { Assinatura } from "./Assinatura";
 import { Esquema } from "./Esquema";
-import { VideoFala, caminhoVideo } from "./Fala";
+import { Enfase, VideoFala, caminhoVideo } from "./Fala";
 import { Flash } from "./Flash";
 import { carregarFontes } from "./fontes";
 import { Grao } from "./Grao";
 import { KenBurns } from "./KenBurns";
 import { Legenda } from "./Legenda";
-import { CENAS } from "./roteiro";
+import { CENAS, type CenaFala } from "./roteiro";
 import { Sfx } from "./Sfx";
 import { Rotulo, TextoCinetico } from "./TextoCinetico";
-import { alinharComLegendas, estimarTimeline, type Timeline } from "./timeline";
+import { alinharComLegendas, estimarTimeline, type CenaNoTempo, type Timeline } from "./timeline";
 
-export const reelLinehanSchema = z.object({
-  // Take único do Fabio em câmera, em public/ (ex.: "linehan/fala.mp4"). null = placa de demonstração.
+export const reelNoirSchema = z.object({
+  // Take único do Fabio em câmera, em public/ (ex.: "reel-noir/fala.mp4"). null = placa de demonstração.
   videoFala: z.string().nullable(),
-  // JSON de legendas gerado por `node sub.mjs public/linehan/fala.mp4`. null = tempos estimados.
+  // JSON de legendas gerado por `node sub.mjs public/reel-noir/fala.mp4`. null = tempos estimados.
   legendasJson: z.string().nullable(),
   corDestaque: zColor(),
   pretoEBranco: z.boolean(),
@@ -27,7 +28,7 @@ export const reelLinehanSchema = z.object({
   volumeSfx: z.number().min(0).max(1),
 });
 
-type Props = z.infer<typeof reelLinehanSchema> & { timeline?: Timeline };
+type Props = z.infer<typeof reelNoirSchema> & { timeline?: Timeline; videoDuracaoMs?: number };
 
 const FPS = 30;
 
@@ -43,16 +44,22 @@ export const calcularMetadados: CalculateMetadataFunction<Props> = async ({ prop
       }
     }
   }
+  let videoDuracaoMs: number | undefined;
+  if (props.videoFala && getStaticFiles().some((f) => f.name === props.videoFala)) {
+    // mediabunny lê o contêiner em JavaScript: não depende dos codecs do navegador.
+    const entrada = new Input({ formats: ALL_FORMATS, source: new UrlSource(staticFile(props.videoFala)) });
+    videoDuracaoMs = (await entrada.computeDuration()) * 1000;
+  }
   return {
     fps: FPS,
     durationInFrames: Math.ceil((timeline.duracaoMs / 1000) * FPS),
-    props: { ...props, timeline },
+    props: { ...props, timeline, videoDuracaoMs },
   };
 };
 
 const paraFrames = (ms: number, fps: number) => Math.round((ms / 1000) * fps);
 
-export const ReelLinehan: React.FC<Props> = ({ videoFala, corDestaque, pretoEBranco, sfx, volumeSfx, timeline }) => {
+export const ReelNoir: React.FC<Props> = ({ videoFala, corDestaque, pretoEBranco, sfx, volumeSfx, timeline, videoDuracaoMs }) => {
   const { fps } = useVideoConfig();
   useEffect(() => {
     carregarFontes();
@@ -64,7 +71,9 @@ export const ReelLinehan: React.FC<Props> = ({ videoFala, corDestaque, pretoEBra
   return (
     <AbsoluteFill style={{ background: "#050505" }}>
       {/* Camada 0: o Fabio, take contínuo. O áudio da fala vem daqui e nunca é cortado. */}
-      <VideoFala src={videoExiste ? caminhoVideo(videoFala) : null} pretoEBranco={pretoEBranco} cenas={tl.cenas} />
+      <Sequence durationInFrames={videoDuracaoMs ? Math.floor((videoDuracaoMs / 1000) * fps) : undefined} layout="none">
+        <VideoFala src={videoExiste ? caminhoVideo(videoFala) : null} pretoEBranco={pretoEBranco} cenas={tl.cenas} />
+      </Sequence>
 
       {/* Camada 1: planos que cobrem o Fabio (B-roll, esquema, assinatura). Corte seco. */}
       {tl.cenas.map((cena) => {
@@ -115,6 +124,9 @@ export const ReelLinehan: React.FC<Props> = ({ videoFala, corDestaque, pretoEBra
       {cenasFala.map((c) => (
         <Legenda key={`leg-${c.id}`} palavras={tl.palavras} ativaDeMs={c.inicioMs} ativaAteMs={c.fimMs} />
       ))}
+      {cenasFala.map((c) => (
+        <Enfase key={`enf-${c.id}`} cena={c as CenaNoTempo & CenaFala} corDestaque={corDestaque} />
+      ))}
 
       {/* Camada 3: grão e vinheta sobre tudo, menos sobre a assinatura. */}
       <Sequence durationInFrames={paraFrames(tl.cenas[tl.cenas.length - 1].inicioMs, fps)}>
@@ -126,9 +138,9 @@ export const ReelLinehan: React.FC<Props> = ({ videoFala, corDestaque, pretoEBra
   );
 };
 
-export const propsPadrao: z.infer<typeof reelLinehanSchema> = {
-  videoFala: "linehan/fala.mp4",
-  legendasJson: "linehan/fala.json",
+export const propsPadrao: z.infer<typeof reelNoirSchema> = {
+  videoFala: "reel-noir/fala.mp4",
+  legendasJson: "reel-noir/fala.json",
   corDestaque: "#c83c1e",
   pretoEBranco: true,
   sfx: true,

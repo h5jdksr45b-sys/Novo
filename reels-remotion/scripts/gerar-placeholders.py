@@ -1,19 +1,16 @@
 # Gera imagens provisórias (1080x1920, P&B, com grão) para os planos de B-roll.
-# Substitua cada arquivo em public/linehan/ por uma foto de arquivo com o mesmo nome.
+# Substitua cada arquivo em public/reel-noir/ por uma foto com o mesmo nome.
 # Uso: python3 scripts/gerar-placeholders.py
 import os, random
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
-RAIZ = os.path.join(os.path.dirname(__file__), "..", "public", "linehan")
+RAIZ = os.path.join(os.path.dirname(__file__), "..", "public", "reel-noir")
 W, H = 1080, 1920
 PLANOS = [
-    ("01-hartford-1961.jpg", "HARTFORD · 1961", "fachada ou corredor de hospital, anos 1960"),
-    ("02-janela.jpg", "JANELA", "janela alta com grade, contraluz"),
-    ("03-quarto-isolamento.jpg", "ISOLAMENTO", "quarto vazio, porta pesada, piso refletindo"),
-    ("04-prontuario.jpg", "PRONTUÁRIO", "folha datilografada em close"),
-    ("05-universidade-1991.jpg", "1991", "prédio de universidade ou arquivo"),
-    ("06-corredor-vazio.jpg", "CORREDOR", "corredor vazio com luz no fim"),
-    ("07-auditorio-2011.jpg", "2011", "auditório visto do palco"),
+    ("01-cachorro-dentes.jpg", "DENTES", "close dos dentes de um cachorro bravo"),
+    ("02-coleira.jpg", "COLEIRA", "coleira fora de foco"),
+    ("03-palavra.jpg", "PALAVRA", "palavra escrita e circulada numa folha"),
+    ("04-duas-poltronas.jpg", "A CENA", "sala vazia com duas poltronas de frente"),
 ]
 
 def fonte(tam, negrito=False):

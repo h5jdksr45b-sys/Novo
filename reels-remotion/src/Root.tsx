@@ -10,7 +10,7 @@ import {
 } from "./ComparacaoLadoALado";
 import { MitoApego } from "./MitoApego";
 import { MitoRindo } from "./MitoRindo";
-import { ReelLinehan, calcularMetadados, propsPadrao, reelLinehanSchema } from "./Linehan1961";
+import { ReelNoir, calcularMetadados, propsPadrao, reelNoirSchema } from "./ReelNoir";
 
 // Each <Composition> is an entry in the sidebar!
 
@@ -18,10 +18,10 @@ export const RemotionRoot: React.FC = () => {
   return (
     <>
       <Composition
-        id="ReelLinehan1961"
-        component={ReelLinehan}
+        id="ReelNoir"
+        component={ReelNoir}
         calculateMetadata={calcularMetadados}
-        schema={reelLinehanSchema}
+        schema={reelNoirSchema}
         width={1080}
         height={1920}
         fps={30}

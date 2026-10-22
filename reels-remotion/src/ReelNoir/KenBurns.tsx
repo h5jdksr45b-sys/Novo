@@ -7,6 +7,8 @@ import {
   staticFile,
   useCurrentFrame,
   useVideoConfig,
+  OffthreadVideo,
+  Loop,
 } from "remotion";
 
 export const DESLIZE_FRAMES = 9;
@@ -41,6 +43,7 @@ export const KenBurns: React.FC<{
   escurecer?: "alto" | "baixo"; // lado em que o texto vai ficar: recebe um degradê escuro
   deslizeEntrada?: boolean; // entra empurrando o plano anterior, da direita para a esquerda
   glitch?: boolean; // 4 frames de fatias deslocadas no corte (junto do flash)
+  duracaoClipeFrames?: number; // duração do clipe animado, para repetir se a cena for mais longa
 }> = ({
   src,
   movimento,
@@ -50,6 +53,7 @@ export const KenBurns: React.FC<{
   escurecer,
   deslizeEntrada = false,
   glitch = false,
+  duracaoClipeFrames = 150,
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -74,6 +78,18 @@ export const KenBurns: React.FC<{
   const filtro = pretoEBranco
     ? "grayscale(1) contrast(1.2) brightness(0.94)"
     : "contrast(1.1) brightness(0.92)";
+  // Aceita .mp4: clipe mudo em loop com a mesma grade e um zoom bem leve por cima.
+  const ehVideo = /\.(mp4|webm|mov)$/i.test(src);
+  const estiloMidia: React.CSSProperties = {
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    transform: ehVideo
+      ? `scale(${1.02 + progresso * 0.02})`
+      : `scale(${escala}) translateX(${x}px)`,
+    transformOrigin: "50% 45%",
+    filter: filtro,
+  };
   return (
     <AbsoluteFill
       style={{
@@ -82,18 +98,14 @@ export const KenBurns: React.FC<{
         transform: `translateX(${empurrao}px)`,
       }}
     >
-      <Img
-        src={staticFile(src)}
-        style={{
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          transform: `scale(${escala}) translateX(${x}px)`,
-          transformOrigin: "50% 45%",
-          filter: filtro,
-        }}
-      />
-      {fatias
+      {ehVideo ? (
+        <Loop durationInFrames={duracaoClipeFrames} layout="none">
+          <OffthreadVideo src={staticFile(src)} muted style={estiloMidia} />
+        </Loop>
+      ) : (
+        <Img src={staticFile(src)} style={estiloMidia} />
+      )}
+      {fatias && !ehVideo
         ? fatias.map(([topo, altura, dx], k) => (
             <Img
               key={k}

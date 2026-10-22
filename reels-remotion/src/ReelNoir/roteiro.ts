@@ -16,6 +16,7 @@ export type CenaFala = Base & {
 export type CenaBroll = Base & {
   tipo: "broll";
   imagem: string; // caminho dentro de public/
+  video?: string; // versão animada do mesmo plano (mp4 em public/); usada se o arquivo existir
   descricaoImagem: string; // o que buscar/gerar para esse plano
   movimento: "aproxima" | "afasta";
   posicaoTexto: "alto" | "baixo";
@@ -88,6 +89,7 @@ export const CENAS: Cena[] = [
     tipo: "broll",
     fala: "É como um cachorro bravo latindo e correndo na sua direção.",
     imagem: "reel-noir/01-cachorro-dentes.jpg",
+    video: "reel-noir/01-cachorro-dentes.mp4",
     fundo: "AMEAÇA",
     descricaoImagem:
       "Close extremo dos dentes de um cachorro bravo, fundo escuro, P&B de contraste alto.",
@@ -102,6 +104,7 @@ export const CENAS: Cena[] = [
     tipo: "broll",
     fala: "Você lembra de detalhes do dente, mas não da cor da coleira que ele estava usando.",
     imagem: "reel-noir/02-coleira.jpg",
+    video: "reel-noir/02-coleira.mp4",
     fundo: "RESTO",
     descricaoImagem:
       "Coleira de couro com plaquinha, muito perto e fora de foco, tons de cinza.",
@@ -115,6 +118,7 @@ export const CENAS: Cena[] = [
     tipo: "broll",
     fala: "Você guardou a palavra, o outro guardou o tom de voz.",
     imagem: "reel-noir/03-palavra.jpg",
+    video: "reel-noir/03-palavra.mp4",
     fundo: "PALAVRA",
     descricaoImagem:
       "Uma palavra escrita à mão numa folha pautada, circulada a lápis, luz de janela, P&B.",
@@ -127,6 +131,7 @@ export const CENAS: Cena[] = [
     tipo: "broll",
     fala: "Os dois podem estar contando pedaços verdadeiros de uma mesma cena.",
     imagem: "reel-noir/04-duas-poltronas.jpg",
+    video: "reel-noir/04-duas-poltronas.mp4",
     fundo: "CENA",
     descricaoImagem:
       "Sala vazia com duas poltronas de frente uma para a outra, luz baixa de fim de tarde, P&B.",

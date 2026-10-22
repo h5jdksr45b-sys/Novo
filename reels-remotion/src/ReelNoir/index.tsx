@@ -141,7 +141,12 @@ export const ReelNoir: React.FC<Props> = ({
             {cena.tipo === "broll" ? (
               <>
                 <KenBurns
-                  src={cena.imagem}
+                  src={
+                    cena.video &&
+                    getStaticFiles().some((f) => f.name === cena.video)
+                      ? cena.video
+                      : cena.imagem
+                  }
                   movimento={cena.movimento}
                   duracaoFrames={dur}
                   pretoEBranco={pretoEBranco}
@@ -247,6 +252,6 @@ export const propsPadrao: z.infer<typeof reelNoirSchema> = {
   legendasJson: "reel-noir/fala.json",
   corDestaque: "#c83c1e",
   pretoEBranco: false,
-  sfx: false,
+  sfx: true,
   volumeSfx: 0.35,
 };

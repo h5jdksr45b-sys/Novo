@@ -12,7 +12,8 @@ import type { CenaNoTempo } from "./timeline";
 // - cama grave contínua, baixa, por baixo da voz;
 // - riser (sopro agudo) terminando exatamente no corte para B-roll ou esquema;
 // - impacto grave nos cortes marcados com flash.
-// Os arquivos em public/sfx são sintéticos (scripts/gerar-sfx.py). Troque por biblioteca licenciada.
+// Os arquivos em public/sfx foram extraídos dos trechos sem narração dos vídeos de referência
+// (cama grave filtrada abaixo de 70 Hz, riser e impacto do encerramento). Troque por biblioteca licenciada se preferir.
 const existe = (arquivo: string) =>
   getStaticFiles().some((f) => f.name === arquivo);
 
@@ -26,7 +27,7 @@ export const Sfx: React.FC<{
   const temDrone = existe("sfx/drone.wav");
   const temRiser = existe("sfx/riser.wav");
   const temImpacto = existe("sfx/impacto.wav");
-  const RISER_MS = 1100;
+  const RISER_MS = 1450;
 
   return (
     <>
@@ -40,7 +41,7 @@ export const Sfx: React.FC<{
               1,
               Math.max(0, (totalFrames - f) / (fps * 2)),
             );
-            return volume * 0.55 * fadeIn * fadeOut;
+            return volume * 0.4 * fadeIn * fadeOut;
           }}
           loop
         />
@@ -67,7 +68,7 @@ export const Sfx: React.FC<{
             ) : null}
             {impacto ? (
               <Sequence from={paraFrame(c.inicioMs)} durationInFrames={fps * 2}>
-                <Audio src={staticFile("sfx/impacto.wav")} volume={volume} />
+                <Audio src={staticFile("sfx/impacto.wav")} volume={volume * 0.8} />
               </Sequence>
             ) : null}
           </React.Fragment>

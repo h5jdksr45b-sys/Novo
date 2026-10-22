@@ -1,10 +1,20 @@
-# Três formatos, três peças
+# Três formatos, três peças, escolhidas para alcance
 
-Escolhi uma peça do lote para cada formato, pelo encaixe entre o mecanismo e o que o formato faz bem. Versão de 2026-10-22.
+Versão de 2026-10-22. Uma peça do lote para cada formato.
 
-- Animação de 20 segundos em código: F2, Os irmãos. A imagem das duas plantas conta sozinha.
-- Reel com rosto: B2, Toda raiva vira sintoma. A peça pede alguém dizendo na cara que a pessoa tem razão.
-- Carrossel: B7, Contar o diagnóstico. Tem uma frase pronta para guardar, e isso pede salvamento.
+**Critério:** não dá para prever o que vai viralizar, e o histórico não serve para isso. O que dá para fazer é olhar os posts de maior alcance e compartilhamento dos últimos 180 dias e escolher as peças do lote que mais se parecem com eles em estrutura. Isso é hipótese editorial, não previsão.
+
+O que o histórico mostra, só como observação:
+- Maior alcance entre carrosséis do documento de conclusões: Quieta na mesa, ilustrado, cena concreta, sem rosto (437 mil visualizações).
+- Maiores compartilhamentos em Reels recentes: Reação que parece justa por dentro (759 em 13 dias), Disseram que é para sempre (342 em 11 dias), ambos desmontando uma leitura errada sobre a pessoa.
+- Carrosséis com mais envios: Cacto (2.381), Convivência, para quem convive (1.784), Love bombing (562 em 8 dias).
+
+Escolhas:
+- Animação de 20 segundos: F2, Os irmãos. Cena concreta, ilustrada, sem rosto, e qualquer pessoa que foi o filho fácil se reconhece, com ou sem borderline em casa.
+- Reel com rosto: B4, Borderline mente. Desmonta uma frase que a pessoa ouviu, com um mecanismo que vale para qualquer ser humano. Quem tem o diagnóstico manda para o parceiro, e o parceiro se reconhece também.
+- Carrossel: F5, Quando ajudar piora. Para quem convive, com uma virada que a pessoa não espera (o alívio é seu também) e envio para alguém específico da família.
+
+Alternativas, se preferir trocar: B2 para o Reel e B7 para o carrossel, nas versões do arquivo lote-estigmas-2026-10.md.
 
 ---
 
@@ -26,56 +36,62 @@ Escolhi uma peça do lote para cada formato, pelo encaixe entre o mecanismo e o 
 
 ---
 
-## 2. Reel com rosto: Toda raiva vira sintoma
+## 2. Reel com rosto: Borderline mente
 
-**Público:** pessoa com borderline. **Função:** alcance. Cerca de 40 segundos.
+**Público:** pessoa com borderline, e quem briga com ela. **Função:** alcance. Cerca de 40 segundos.
 
 **Fala**
 
-Você reclamou de uma coisa errada de verdade. A promessa quebrada, o atraso de três horas. E ouviu: lá vem você, está em crise de novo?
+Borderline mente. Você ouve isso toda vez que lembra de uma briga diferente do outro.
 
-Isso tem nome. Depois de um diagnóstico, as pessoas em volta começam a explicar tudo por ele. Até o que tem outra causa.
+Talvez não seja mentira. Quando a emoção sobe muito, a atenção fica estreita. A pessoa grava com detalhe o que pareceu ameaça e quase nada do resto. Isso acontece com qualquer ser humano.
 
-É como o aluno com fama de bagunceiro. Sumiu uma borracha, todo mundo olha para ele. Mesmo quando não foi ele.
+É como quando um cachorro late para você. Você lembra do dente. A cor da coleira some.
 
-O efeito é cruel. A pessoa para de confiar no que sente. Se toda raiva é sintoma, nenhuma raiva vira motivo.
+Numa briga forte, um lembra do tom de voz. O outro lembra da palavra. Os dois contam pedaços verdadeiros de uma cena maior.
 
-Ter borderline não tira o direito de estar certa numa briga.
+Lembrar diferente não prova mentira.
 
-Manda pra quem pergunta se é crise antes de perguntar o que aconteceu.
+Em vez de disputar quem lembra certo, pergunte: o que mais te marcou?
+
+Manda pra pessoa com quem você sempre discute a mesma briga.
 
 **Imagem**
 
 - Peito para cima, olhar na câmera, fundo do consultório.
+- Primeiro segundo: a frase BORDERLINE MENTE aparece grande na tela enquanto você a diz. Na pausa, ela é riscada e some.
 - Legenda automática pequena, abaixo do queixo, o tempo todo.
-- Na frase lá vem você, está em crise de novo, vire o rosto de leve, como quem repete o que ouviu. Volte para a câmera na frase seguinte.
-- Texto grande, uma vez só, na frase: nenhuma raiva vira motivo.
-- Corte seco entre o bloco do aluno e o bloco do efeito. O resto em plano único.
+- No trecho do cachorro, uma pausa curta depois de dente. Deixe a frase da coleira sair mais baixa.
+- Texto grande, uma vez só, na frase: lembrar diferente não prova mentira.
+- Na pergunta final, o que mais te marcou, fale mais devagar, como quem está perguntando de verdade.
+- Plano único, sem corte. O gancho riscado já é o movimento da abertura.
 
-**Legenda:** Manda pra quem sempre acha que é crise. Depois de um diagnóstico, muita gente passa a explicar tudo por ele, até o que tem outra causa. Ter borderline não tira o direito de estar certa numa briga. Antes de perguntar se é crise, pergunte o que aconteceu. Conteúdo educativo. Não substitui avaliação individual. Dr. Fabio Schmidt, médico com foco em TPB. CRM-SP 183549.
+**Legenda:** Manda pra quem já te chamou de mentirosa por lembrar diferente. Quando a emoção sobe muito, a atenção fica estreita: a pessoa grava o que pareceu ameaça e quase nada do resto. Isso vale para qualquer ser humano. Numa briga forte, cada um guarda um pedaço, e os dois pedaços podem ser verdadeiros. Lembrar diferente não prova mentira. Antes de disputar quem lembra certo, pergunte o que mais marcou. Conteúdo educativo. Não substitui avaliação individual. Dr. Fabio Schmidt, médico com foco em TPB. CRM-SP 183549.
+
+**Cuidado:** a peça não diz que ninguém mente. Diz que lembrar diferente não prova mentira. Se cortar a legenda, mantenha essa frase.
 
 ---
 
-## 3. Carrossel: Contar o diagnóstico
+## 3. Carrossel: Quando ajudar piora
 
-**Público:** pessoa com borderline. **Função:** confiança. 8 slides. O sistema visual segue o arquivo de voz e formatos, que não está neste repositório. Abaixo vai o texto por slide.
+**Público:** família. **Função:** alcance. 8 slides. O sistema visual segue o arquivo de voz e formatos, que não está neste repositório. Abaixo vai o texto por slide.
 
-1. Você está há meses com alguém e ainda não contou o diagnóstico.
+1. Você pagou a dívida de novo. E na hora sentiu alívio.
 
-2. Toda vez que o assunto chega perto, você muda de conversa. Não é falta de coragem. São duas coisas acontecendo ao mesmo tempo.
+2. Não só por ela. Por você.
 
-3. A primeira: você espera ser rejeitado. Por isso um sinal pequeno, um silêncio ou uma resposta curta, vira prova de que vai dar errado.
+3. Ver alguém que você ama em apuros dá uma angústia difícil de aguentar. Resolver acaba com essa angústia na hora.
 
-4. A segunda: guardar segredo cansa. Esconder gasta energia o dia inteiro e afasta as pessoas aos poucos.
+4. Por isso o resgate se repete. Mesmo depois de jurar que era a última vez.
 
-5. É como andar com uma mochila escondida debaixo da blusa. Ninguém vê. O peso fica.
+5. É como fazer a lição do filho para parar de ouvir o choro. A lição fica pronta. Ele não aprende. Você fica mais cansado.
 
-6. Contar pode começar pelo que você sente, antes do nome. Eu tenho muito medo de ser deixado, e às vezes isso aparece forte.
+6. A pergunta que ajuda: estou resolvendo pra ela ou pra parar de sentir isso?
 
-7. Você decide quando e para quem. Esconder para sempre também tem custo.
+7. Avise antes o que não vai mais fazer. Fique perto enquanto ela resolve. Os primeiros dias doem. Para os dois.
 
-8. Salva pro dia em que for contar. Dr. Fabio Schmidt, médico com foco em TPB. CRM-SP 183549. Conteúdo educativo.
+8. Manda pra quem sempre resolve tudo na família. Dr. Fabio Schmidt, médico com foco em TPB. CRM-SP 183549. Conteúdo educativo.
 
-**Legenda:** Salva pro dia em que for contar. Esperar rejeição e carregar segredo se somam, e a conversa vai sendo adiada. Contar pode começar pelo que você sente, antes do nome. Você decide quando e para quem. Conteúdo educativo. Não substitui avaliação individual.
+**Legenda:** Manda pra quem jura toda vez que é a última vez. Ver alguém que você ama em apuros dá uma angústia difícil de aguentar, e resolver acaba com ela na hora. É por isso que o resgate se repete, e não por fraqueza de quem ajuda. A pergunta que muda o jogo: estou resolvendo pra ela ou pra parar de sentir isso? Avise antes o que não vai mais fazer e fique perto enquanto ela resolve. Se houver risco à vida, a regra é outra: segurança primeiro, CVV 188 e SAMU 192. Conteúdo educativo. Não substitui avaliação individual.
 
-**Fonte a conferir antes de publicar:** Pachankis, 2007, sobre o custo de esconder um estigma.
+**Diferença do carrossel A compulsão funciona:** ali, o alívio curto é de quem tem borderline. Aqui, o alívio é de quem resgata.

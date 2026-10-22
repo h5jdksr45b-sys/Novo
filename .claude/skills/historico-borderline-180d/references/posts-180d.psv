@@ -1,19 +1,43 @@
-# Historico de posts @drfabioschmidt, 2026-04-13 a 2026-10-12. Coleta em 2026-10-13 via Windsor (conector instagram). Mais recente primeiro.
+# Historico de posts @drfabioschmidt, 2026-04-13 a 2026-10-22. Coleta em 2026-10-13; posts de 09 a 22/10 atualizados em 2026-10-22 via Windsor (conector instagram). Curtidas e comentarios desses posts nao vieram na coleta de 22/10. Mais recente primeiro.
 # Colunas: data|fmt|codigo|views|alcance|compart|salvos|curtidas|coment|ret_ms|skip3s|cta|eixo|flags|tese
 # Leitura das colunas, codigos e limites: references/leitura-dos-dados.md
 data|fmt|codigo|views|alcance|compart|salvos|curtidas|coment|ret_ms|skip3s|cta|eixo|flags|tese
-2026-10-12|C|DeZxVp6FN0p|23229|12755|146|274|438|11|||N|DD||Bloqueio, sumiço e volta: borderline e narcisista fazem igual; impulso em comum, frieza não
-2026-10-12|R|DeZe1kpOm2e|154|145|0|0|2|0|2187|0.866|N|IM|neuro,dado|Emoção dispara e demora a baixar; alarme reage mais e freio ativa menos (médias de grupo)
-2026-10-12|R|DeX-a1AO86E|13962|9099|105|185|731|58|18598|0.488|N|DD|dado|Estabilizador não trata borderline; trata bipolaridade comórbida que ninguém viu
-2026-10-11|C|DeXrEDqFKv-|9703|4112|20|47|207|8|||N|AF|anedota|Elogiada por esconder a dor; elogio só à calma ensina a esconder mais
-2026-10-11|R|DeVZESrO_va|25344|14252|260|358|782|69|15214|0.429|N|RO|dado|Disseram que borderline é para sempre; traços diminuem com a idade e tratamento muda o caminho
-2026-10-11|R|DeVXdv4ukiN|1720|1400|6|4|46|0|7995|0.549|N|RO|dado|Traços borderline mudam com o tempo (legenda genérica)
-2026-10-10|C|DeVOek4FIkU|33162|18334|38|110|446|7|||N|CV|anedota|Não consegue aceitar cuidado sem pagar de volta; recusar foi proteção e segue ligado com quem não cobra
-2026-10-10|R|DeUrZhKu2an|873|764|5|6|33|0|11700|0.482|N|CM||Crise à distância: três perguntas de segurança antes de ligar dez vezes; pausa combinada e cumprida
-2026-10-09|R|DeSvS8muvXy|30849|19870|602|512|1442|52|17607|0.412|N|IM||Reação que parece justa por dentro; explicar não autoriza; limite e cuidado coexistem
-2026-10-09|R|DeSqWDmOpk8|2450|2001|3|5|65|0|10643|0.281|C|CV||Perdão encerra a briga mas a vergonha de quem foi humilhado fica
+2026-10-22|R|DezI2SQup4A|84|43|0|0|||1973|0.461|N|ID||Elogio parece engano e crítica parece verdade; imagem de si fica do lado duro nos dias difíceis
+2026-10-22|R|DexsJ1_uj3R|7491|5678|227|125|||19309|0.45|C|IF|dado|Avó nervosa, mãe difícil, você dramática: mesma dor com três nomes errados; herança sem destino
+2026-10-21|R|Dexdl60ua1b|1382|1043|5|7|||8299|0.584|C|IM||Em segundos decide o que vai lamentar por meses; agir dói menos que esperar; estopim é medo de ser deixada
+2026-10-21|C|DewzSpIlJXg|14016|6988|37|89|||||N|RO|dado|Grudenta e fria, dramática e falsa: cada rótulo é um pedaço; o mesmo medo de perder liga os pedaços
+2026-10-21|R|DevPYV6uAyx|113|113|0|0|||2426|0.852|N|FT||Humor: programa da Tina (fora do tema)
+2026-10-21|C|DevKEQtlDBG|20474|9147|31|75|||||N|FT||Parou a droga e não acabou: o que a droga calava aparece; onde fica o cuidado da família (dependência química)
+2026-10-20|R|Deu9S3VO471|3608|2497|32|32|||12491|0.536|N|ID||Vira um pouco quem está do lado; perturbação da identidade; começar pelo que faz o tempo parar
+2026-10-20|C|DeuRRAHlOEv|23121|11409|46|93|||||N|RO||Diagnóstico usado como acusação; procure maldade nos nove critérios; crueldade é atitude, não critério
+2026-10-19|R|DesWg2-uJaE|10130|7201|166|140|||10313|0.511|N|IF||Pico da raiva visto como mau caráter; defesa rápida em lugar sem segurança; tratamento abre espaço (com emoji)
+2026-10-19|R|DesTdhHOSvT|239|152|0|0|||4532|0.576|N|IM||Esperou a raiva baixar e foi lido como castigo; avisar a pausa antes
+2026-10-19|C|Derx6hvlHVs|56137|35455|167|200|||||N|IN|anedota|Parou de ir ao almoço de domingo; comentário de dez segundos dura sete dias na cabeça
+2026-10-19|R|Derfx9sOKGp|1402|1189|5|3|||11114|0.505|N|RO||Mito ou verdade: quatro crenças sobre borderline (autolesão, adolescente, família, relacionamento)
+2026-10-18|R|DepRTVdOkfc|1771|1374|3|0|||5589|0.486|N|AB||Fechamento repentino é proteção contra ameaça de abandono (legenda genérica)
+2026-10-18|C|DenYhywFJME|11182|4754|29|34|||||N|AB||Amanhã a gente precisa conversar: concluir o pior alivia a espera; separar confirmado de hipótese
+2026-10-17|R|Dek1kYHuePe|120|109|0|0|||4810|0.773|N|RO||Chamada de exagerada a vida inteira; dor chega mais rápido e mais forte; do que preciso para sofrer menos
+2026-10-16|R|DekkE5rOO_N|9151|6310|89|79|||10198|0.49|N|RE||Fila de áudios depois da briga; escrever numa linha o principal e mandar primeiro
+2026-10-16|R|Dej2dkNuOFU|108|104|0|0|||2228|0.83|N|CV||Culpa por sentir raiva; emoção que vem antes da escolha (Tomás de Aquino); esforço no intervalo
+2026-10-16|R|Dejyu26u0rq|19691|12403|161|136|||12121|0.502|N|RO||Fatos sobre borderline em tom de humor (legenda genérica, com emoji)
+2026-10-16|C|DeiPFFjFB0U|32393|17921|211|333|||||N|DD|dado|Todo borderline tem lado psicopata é falso; sofrimento versus cálculo; fatores da PCL-R
+2026-10-15|R|Deh8HvzOoo4|205|186|0|0|||4583|0.684|N|ID||Dependência emocional como falta de identidade (legenda genérica, com emoji)
+2026-10-14|R|DefheX6vdJb|312|277|3|0|||6294|0.724|N|RE||Foi só brincadeira e virou briga: provocar, prometer e debochar chegam como ataque; limites valem
+2026-10-14|C|Deer1ORlDlO|59664|34926|562|870|||||N|RO||Love bombing no borderline não tem plano; o começo é real e a queda também
+2026-10-14|R|DedRCpuurPT|150|133|0|0|||3567|0.843|N|FT||Inteligência melhora ou piora o borderline (legenda genérica)
+2026-10-13|R|Dece-XpuoRB|206|174|0|0|||4189|0.749|N|IF||Fala se eu não tenho razão: triangulação; filho colocado no lugar de juiz
+2026-10-12|C|DeZxVp6FN0p|49885|45376|483|1028|438|11|||N|DD||Bloqueio, sumiço e volta: borderline e narcisista fazem igual; impulso em comum, frieza não
+2026-10-12|R|DeZe1kpOm2e|155|146|0|0|2|0|2177|0.867|N|IM|neuro,dado|Emoção dispara e demora a baixar; alarme reage mais e freio ativa menos (médias de grupo)
+2026-10-12|R|DeX-a1AO86E|18444|11803|146|235|731|58|18502|0.49|N|DD|dado|Estabilizador não trata borderline; trata bipolaridade comórbida que ninguém viu
+2026-10-11|C|DeXrEDqFKv-|12457|5509|30|57|207|8|||N|AF|anedota|Elogiada por esconder a dor; elogio só à calma ensina a esconder mais
+2026-10-11|R|DeVZESrO_va|32187|18236|342|437|782|69|15285|0.423|N|RO|dado|Disseram que borderline é para sempre; traços diminuem com a idade e tratamento muda o caminho
+2026-10-11|R|DeVXdv4ukiN|1721|1402|6|4|46|0|7991|0.55|N|RO|dado|Traços borderline mudam com o tempo (legenda genérica)
+2026-10-10|C|DeVOek4FIkU|38530|21208|53|135|446|7|||N|CV|anedota|Não consegue aceitar cuidado sem pagar de volta; recusar foi proteção e segue ligado com quem não cobra
+2026-10-10|R|DeUrZhKu2an|877|766|5|6|33|0|11685|0.482|N|CM||Crise à distância: três perguntas de segurança antes de ligar dez vezes; pausa combinada e cumprida
+2026-10-09|R|DeSvS8muvXy|39026|26224|759|641|1442|52|17511|0.409|N|IM||Reação que parece justa por dentro; explicar não autoriza; limite e cuidado coexistem
+2026-10-09|R|DeSqWDmOpk8|2461|2011|3|5|65|0|10627|0.281|C|CV||Perdão encerra a briga mas a vergonha de quem foi humilhado fica
 2026-10-09|R|DeSENvyO7K6|167|150|0|0|2|0|3024|0.794|N|FT||Por trás do está tudo bem há medo de julgamento (legenda genérica)
-2026-10-09|C|DeRl6QuDiCv|10453|4307|83|114|257|1|||N|AB||A parte mais difícil de amar é aguentar a paz; rosto neutro lido como ameaça
+2026-10-09|C|DeRl6QuDiCv|13286|5783|110|146|257|1|||N|AB||A parte mais difícil de amar é aguentar a paz; rosto neutro lido como ameaça
 2026-10-08|R|DeNtB4nu3ck|27866|18895|667|733|1983|47|22300|0.464|N|RE||Sexualidade no borderline oscila entre evitar e anestesiar; vulnerabilidade a assédio
 2026-10-07|C|DeMs6-XlLAt|14734|6608|56|76|265|2|||N|AB||Olhou o celular por três segundos e o medo de ser deixado chega antes do fato
 2026-10-06|R|DeKwE-Lsp8r|8861|6842|77|88|403|12|10638|0.494|N|IM||Cobrar maturidade na crise soa como rejeição e aumenta o desespero

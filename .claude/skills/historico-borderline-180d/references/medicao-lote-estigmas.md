@@ -33,7 +33,7 @@ Anote o dia do print. É ele que define a idade do Reel na medição.
 
 | Peça | Gancho | Publicado | Código | D7 alcance | D7 views | D7 envios (print) | D7 reposts (print) | D7 salvos | D7 ret_ms | D7 skip3s | D30 alcance | D30 views | D30 envios (print) | D30 reposts (print) | D30 salvos |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| B1 Perigoso | estereótipo riscado | | | | | | | | | | | | | | |
+| B1 Perigoso (em pausa: tese repetida em 14, 16 e 20/10) | estereótipo riscado | | | | | | | | | | | | | | |
 | B2 Toda raiva vira sintoma | cena | | | | | | | | | | | | | | |
 | B3 Profissional que foge | cena | | | | | | | | | | | | | | |
 | B4 Borderline mente | estereótipo riscado | | | | | | | | | | | | | | |

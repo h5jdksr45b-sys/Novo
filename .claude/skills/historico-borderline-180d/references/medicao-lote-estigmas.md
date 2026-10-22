@@ -11,32 +11,43 @@ O objetivo é medir cada Reel com a mesma idade, em 7 e em 30 dias após a publi
 3. Registre cada métrica na sua coluna. Não some nem misture as métricas:
    - alcance: contas únicas
    - views: visualizações
-   - envios: o campo `media_shares` do Windsor
+   - envios e reposts: vêm do print dos insights do app, em colunas separadas
+   - compartilhamentos do Windsor (`media_shares`): ficam só como conferência, porque o campo não separa envios de reposts
    - salvamentos
    - tempo médio assistido, em ms (não é percentual)
    - saída nos 3 primeiros segundos
 4. Se a coleta atrasar, registre a idade real do Reel no dia da coleta, por exemplo D9 em vez de D7. Não ajuste os números.
 5. O Windsor só lê dados acumulados. Por isso o número de cada idade depende de alguém coletar no dia certo.
 
+## O que precisa aparecer no print
+
+No dia 7 e no dia 30, abra os insights do Reel e faça os prints destas telas:
+- Topo do Reel, com a data de publicação visível.
+- Visão geral: visualizações, contas alcançadas, curtidas, comentários, salvamentos, envios e reposts.
+- Retenção: tempo médio assistido e o gráfico de retenção, quando o app mostrar.
+- Público, quando o app mostrar: seguidores e não seguidores, e a origem das visualizações.
+
+Anote o dia do print. É ele que define a idade do Reel na medição.
+
 ## Tabela
 
-| Peça | Gancho | Publicado | Código | D7 alcance | D7 views | D7 envios | D7 salvos | D7 ret_ms | D7 skip3s | D30 alcance | D30 views | D30 envios | D30 salvos |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| B1 Perigoso | estereótipo riscado | | | | | | | | | | | | |
-| B2 Toda raiva vira sintoma | cena | | | | | | | | | | | | |
-| B3 Profissional que foge | cena | | | | | | | | | | | | |
-| B4 Borderline mente | estereótipo riscado | | | | | | | | | | | | |
-| B5 Não serve para ter filhos | cena | | | | | | | | | | | | |
-| B6 Não ama, só depende | frase riscada | | | | | | | | | | | | |
-| B7 Contar o diagnóstico | cena | | | | | | | | | | | | |
-| B8 Chamar atenção | frase riscada | | | | | | | | | | | | |
-| F1 Limite e ameaça | frase ouvida | | | | | | | | | | | | |
-| F2 Os irmãos | cena | | | | | | | | | | | | |
-| F3 Fui machucado | frase ouvida | | | | | | | | | | | | |
-| F4 Adulto que não quer tratamento | frase ouvida | | | | | | | | | | | | |
-| F5 Quando ajudar piora | cena | | | | | | | | | | | | |
-| F6 Os outros parentes | cena | | | | | | | | | | | | |
-| F7 Me afastar sem ser vilão | cena | | | | | | | | | | | | |
+| Peça | Gancho | Publicado | Código | D7 alcance | D7 views | D7 envios (print) | D7 reposts (print) | D7 salvos | D7 ret_ms | D7 skip3s | D30 alcance | D30 views | D30 envios (print) | D30 reposts (print) | D30 salvos |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| B1 Perigoso | estereótipo riscado | | | | | | | | | | | | | | |
+| B2 Toda raiva vira sintoma | cena | | | | | | | | | | | | | | |
+| B3 Profissional que foge | cena | | | | | | | | | | | | | | |
+| B4 Borderline mente | estereótipo riscado | | | | | | | | | | | | | | |
+| B5 Não serve para ter filhos | cena | | | | | | | | | | | | | | |
+| B6 Não ama, só depende | frase riscada | | | | | | | | | | | | | | |
+| B7 Contar o diagnóstico | cena | | | | | | | | | | | | | | |
+| B8 Chamar atenção | frase riscada | | | | | | | | | | | | | | |
+| F1 Limite e ameaça | frase ouvida | | | | | | | | | | | | | | |
+| F2 Os irmãos | cena | | | | | | | | | | | | | | |
+| F3 Fui machucado | frase ouvida | | | | | | | | | | | | | | |
+| F4 Adulto que não quer tratamento | frase ouvida | | | | | | | | | | | | | | |
+| F5 Quando ajudar piora | cena | | | | | | | | | | | | | | |
+| F6 Os outros parentes | cena | | | | | | | | | | | | | | |
+| F7 Me afastar sem ser vilão | cena | | | | | | | | | | | | | | |
 
 ## Referência do histórico
 

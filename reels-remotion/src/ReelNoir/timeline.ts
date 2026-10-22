@@ -70,9 +70,16 @@ export const estimarTimeline = (cenas: Cena[], inicioMs = 400): Timeline => {
 // Alinha o roteiro com a transcrição real (Whisper, uma palavra por item).
 // Resultado: cada palavra do roteiro recebe o tempo em que foi dita.
 // Os cortes passam a cair exatamente no início da primeira palavra da cena.
-export const alinharComLegendas = (cenas: Cena[], captions: Caption[]): Timeline => {
+export const alinharComLegendas = (
+  cenas: Cena[],
+  captions: Caption[],
+): Timeline => {
   const tokens = captions
-    .map((c) => ({ chave: normalizar(c.text), inicioMs: c.startMs, fimMs: c.endMs }))
+    .map((c) => ({
+      chave: normalizar(c.text),
+      inicioMs: c.startMs,
+      fimMs: c.endMs,
+    }))
     .filter((c) => c.chave.length > 0);
 
   const roteiro: { cenaIdx: number; texto: string; chave: string }[] = [];
@@ -93,21 +100,28 @@ export const alinharComLegendas = (cenas: Cena[], captions: Caption[]): Timeline
       const t = tokens[k].chave;
       const iguais = t === alvo;
       const prefixo =
-        alvo.length >= 4 && t.length >= 4 && (t.startsWith(alvo.slice(0, 4)) || alvo.startsWith(t.slice(0, 4)));
+        alvo.length >= 4 &&
+        t.length >= 4 &&
+        (t.startsWith(alvo.slice(0, 4)) || alvo.startsWith(t.slice(0, 4)));
       if (iguais || (prefixo && Math.abs(t.length - alvo.length) <= 2)) {
         achou = k;
         break;
       }
     }
     if (achou >= 0) {
-      tempos[i] = { texto: roteiro[i].texto, inicioMs: tokens[achou].inicioMs, fimMs: tokens[achou].fimMs };
+      tempos[i] = {
+        texto: roteiro[i].texto,
+        inicioMs: tokens[achou].inicioMs,
+        fimMs: tokens[achou].fimMs,
+      };
       j = achou + 1;
     }
   }
 
   // Palavras não encontradas: interpola entre vizinhas conhecidas.
   const primeiroConhecido = tempos.findIndex((t) => t !== null);
-  const inicioPadrao = primeiroConhecido >= 0 ? tempos[primeiroConhecido]!.inicioMs : 0;
+  const inicioPadrao =
+    primeiroConhecido >= 0 ? tempos[primeiroConhecido]!.inicioMs : 0;
   let ultimoFim = inicioPadrao;
   for (let i = 0; i < tempos.length; i++) {
     if (tempos[i]) {
@@ -116,12 +130,17 @@ export const alinharComLegendas = (cenas: Cena[], captions: Caption[]): Timeline
     }
     let fim = i + 1;
     while (fim < tempos.length && !tempos[fim]) fim++;
-    const proximoInicio = fim < tempos.length ? tempos[fim]!.inicioMs : ultimoFim + (fim - i) * 320;
+    const proximoInicio =
+      fim < tempos.length ? tempos[fim]!.inicioMs : ultimoFim + (fim - i) * 320;
     const faltam = fim - i;
     const passo = Math.max(60, (proximoInicio - ultimoFim) / faltam);
     for (let k = 0; k < faltam; k++) {
       const ini = ultimoFim + passo * k;
-      tempos[i + k] = { texto: roteiro[i + k].texto, inicioMs: ini, fimMs: ini + passo };
+      tempos[i + k] = {
+        texto: roteiro[i + k].texto,
+        inicioMs: ini,
+        fimMs: ini + passo,
+      };
     }
     ultimoFim = proximoInicio;
     i = fim - 1;
@@ -160,7 +179,11 @@ export const alinharComLegendas = (cenas: Cena[], captions: Caption[]): Timeline
 };
 
 // Tempo em que uma palavra do roteiro é dita (n-ésima ocorrência dentro da cena).
-export const tempoDaPalavra = (palavras: Palavra[], alvo: string, ocorrencia = 0) => {
+export const tempoDaPalavra = (
+  palavras: Palavra[],
+  alvo: string,
+  ocorrencia = 0,
+) => {
   const chave = normalizar(alvo);
   let n = 0;
   for (const p of palavras) {

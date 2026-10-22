@@ -2,20 +2,33 @@ import type { Caption } from "@remotion/captions";
 import { ALL_FORMATS, Input, UrlSource } from "mediabunny";
 import { zColor } from "@remotion/zod-types";
 import React, { useEffect } from "react";
-import { AbsoluteFill, CalculateMetadataFunction, Sequence, getStaticFiles, staticFile, useVideoConfig } from "remotion";
+import {
+  AbsoluteFill,
+  CalculateMetadataFunction,
+  Sequence,
+  getStaticFiles,
+  staticFile,
+  useVideoConfig,
+} from "remotion";
 import { z } from "zod";
 import { Assinatura } from "./Assinatura";
 import { Esquema } from "./Esquema";
 import { Enfase, VideoFala, caminhoVideo } from "./Fala";
+import { Moldura, PalavraFundo } from "./Editorial";
 import { Flash } from "./Flash";
 import { carregarFontes } from "./fontes";
 import { Grao } from "./Grao";
-import { KenBurns } from "./KenBurns";
+import { DESLIZE_FRAMES, KenBurns } from "./KenBurns";
 import { Legenda } from "./Legenda";
-import { CENAS, type CenaFala } from "./roteiro";
+import { CENAS, ETIQUETAS, type CenaFala } from "./roteiro";
 import { Sfx } from "./Sfx";
-import { Rotulo, TextoCinetico } from "./TextoCinetico";
-import { alinharComLegendas, estimarTimeline, type CenaNoTempo, type Timeline } from "./timeline";
+import { Marca, Rotulo, TextoCinetico } from "./TextoCinetico";
+import {
+  alinharComLegendas,
+  estimarTimeline,
+  type CenaNoTempo,
+  type Timeline,
+} from "./timeline";
 
 export const reelNoirSchema = z.object({
   // Take único do Fabio em câmera, em public/ (ex.: "reel-noir/fala.mp4"). null = placa de demonstração.
@@ -28,11 +41,16 @@ export const reelNoirSchema = z.object({
   volumeSfx: z.number().min(0).max(1),
 });
 
-type Props = z.infer<typeof reelNoirSchema> & { timeline?: Timeline; videoDuracaoMs?: number };
+type Props = z.infer<typeof reelNoirSchema> & {
+  timeline?: Timeline;
+  videoDuracaoMs?: number;
+};
 
 const FPS = 30;
 
-export const calcularMetadados: CalculateMetadataFunction<Props> = async ({ props }) => {
+export const calcularMetadados: CalculateMetadataFunction<Props> = async ({
+  props,
+}) => {
   let timeline: Timeline = estimarTimeline(CENAS);
   if (props.legendasJson) {
     const existe = getStaticFiles().some((f) => f.name === props.legendasJson);
@@ -45,9 +63,15 @@ export const calcularMetadados: CalculateMetadataFunction<Props> = async ({ prop
     }
   }
   let videoDuracaoMs: number | undefined;
-  if (props.videoFala && getStaticFiles().some((f) => f.name === props.videoFala)) {
+  if (
+    props.videoFala &&
+    getStaticFiles().some((f) => f.name === props.videoFala)
+  ) {
     // mediabunny lê o contêiner em JavaScript: não depende dos codecs do navegador.
-    const entrada = new Input({ formats: ALL_FORMATS, source: new UrlSource(staticFile(props.videoFala)) });
+    const entrada = new Input({
+      formats: ALL_FORMATS,
+      source: new UrlSource(staticFile(props.videoFala)),
+    });
     videoDuracaoMs = (await entrada.computeDuration()) * 1000;
   }
   return {
@@ -59,29 +83,61 @@ export const calcularMetadados: CalculateMetadataFunction<Props> = async ({ prop
 
 const paraFrames = (ms: number, fps: number) => Math.round((ms / 1000) * fps);
 
-export const ReelNoir: React.FC<Props> = ({ videoFala, corDestaque, pretoEBranco, sfx, volumeSfx, timeline, videoDuracaoMs }) => {
+export const ReelNoir: React.FC<Props> = ({
+  videoFala,
+  corDestaque,
+  pretoEBranco,
+  sfx,
+  volumeSfx,
+  timeline,
+  videoDuracaoMs,
+}) => {
   const { fps } = useVideoConfig();
   useEffect(() => {
     carregarFontes();
   }, []);
   const tl = timeline ?? estimarTimeline(CENAS);
-  const videoExiste = videoFala ? getStaticFiles().some((f) => f.name === videoFala) : false;
+  const videoExiste = videoFala
+    ? getStaticFiles().some((f) => f.name === videoFala)
+    : false;
   const cenasFala = tl.cenas.filter((c) => c.tipo === "fala");
 
   return (
     <AbsoluteFill style={{ background: "#050505" }}>
       {/* Camada 0: o Fabio, take contínuo. O áudio da fala vem daqui e nunca é cortado. */}
-      <Sequence durationInFrames={videoDuracaoMs ? Math.floor((videoDuracaoMs / 1000) * fps) : undefined} layout="none">
-        <VideoFala src={videoExiste ? caminhoVideo(videoFala) : null} pretoEBranco={pretoEBranco} cenas={tl.cenas} />
+      <Sequence
+        durationInFrames={
+          videoDuracaoMs ? Math.floor((videoDuracaoMs / 1000) * fps) : undefined
+        }
+        layout="none"
+      >
+        <VideoFala
+          src={videoExiste ? caminhoVideo(videoFala) : null}
+          pretoEBranco={pretoEBranco}
+          cenas={tl.cenas}
+        />
       </Sequence>
 
       {/* Camada 1: planos que cobrem o Fabio (B-roll, esquema, assinatura). Corte seco. */}
-      {tl.cenas.map((cena) => {
+      {tl.cenas.map((cena, i) => {
         const de = paraFrames(cena.inicioMs, fps);
-        const dur = Math.max(1, paraFrames(cena.fimMs, fps) - de);
+        const anterior = tl.cenas[i - 1];
+        const proxima = tl.cenas[i + 1];
+        // Entre dois planos de B-roll seguidos o novo entra empurrando o anterior (deslize curto).
+        const entraDeslizando =
+          cena.tipo === "broll" && anterior?.tipo === "broll";
+        const saiEmpurrado = cena.tipo === "broll" && proxima?.tipo === "broll";
+        const dur =
+          Math.max(1, paraFrames(cena.fimMs, fps) - de) +
+          (saiEmpurrado ? DESLIZE_FRAMES : 0);
         if (cena.tipo === "fala") return null;
         return (
-          <Sequence key={cena.id} from={de} durationInFrames={dur} name={cena.id}>
+          <Sequence
+            key={cena.id}
+            from={de}
+            durationInFrames={dur}
+            name={cena.id}
+          >
             {cena.tipo === "broll" ? (
               <>
                 <KenBurns
@@ -90,7 +146,16 @@ export const ReelNoir: React.FC<Props> = ({ videoFala, corDestaque, pretoEBranco
                   duracaoFrames={dur}
                   pretoEBranco={pretoEBranco}
                   escurecer={cena.posicaoTexto}
+                  deslizeEntrada={entraDeslizando}
+                  glitch={cena.flashNaEntrada}
                 />
+                {cena.fundo ? (
+                  <PalavraFundo
+                    texto={cena.fundo}
+                    duracaoFrames={dur}
+                    y={cena.posicaoTexto === "alto" ? 1180 : 760}
+                  />
+                ) : null}
                 <TextoCinetico
                   palavras={cena.palavras}
                   inicioCenaMs={cena.inicioMs}
@@ -113,7 +178,29 @@ export const ReelNoir: React.FC<Props> = ({ videoFala, corDestaque, pretoEBranco
               </>
             ) : null}
             {cena.tipo === "esquema" ? (
-              <Esquema palavras={cena.palavras} inicioCenaMs={cena.inicioMs} fimCenaMs={cena.fimMs} corDestaque={corDestaque} />
+              <>
+                <Esquema
+                  palavras={cena.palavras}
+                  inicioCenaMs={cena.inicioMs}
+                  fimCenaMs={cena.fimMs}
+                  corDestaque={corDestaque}
+                />
+                {cena.fundo ? (
+                  <PalavraFundo
+                    texto={cena.fundo}
+                    duracaoFrames={dur}
+                    vazada
+                    y={1500}
+                  />
+                ) : null}
+              </>
+            ) : null}
+            {cena.tipo !== "assinatura" ? (
+              <Moldura
+                esquerda={ETIQUETAS.esquerda}
+                direita={ETIQUETAS.direita}
+                rodape={ETIQUETAS.rodape}
+              />
             ) : null}
             {cena.tipo === "assinatura" ? <Assinatura /> : null}
           </Sequence>
@@ -122,18 +209,35 @@ export const ReelNoir: React.FC<Props> = ({ videoFala, corDestaque, pretoEBranco
 
       {/* Camada 2: legenda pequena abaixo do queixo, só quando o Fabio está em quadro. */}
       {cenasFala.map((c) => (
-        <Legenda key={`leg-${c.id}`} palavras={tl.palavras} ativaDeMs={c.inicioMs} ativaAteMs={c.fimMs} />
+        <Legenda
+          key={`leg-${c.id}`}
+          palavras={tl.palavras}
+          ativaDeMs={c.inicioMs}
+          ativaAteMs={c.fimMs}
+        />
       ))}
       {cenasFala.map((c) => (
-        <Enfase key={`enf-${c.id}`} cena={c as CenaNoTempo & CenaFala} corDestaque={corDestaque} />
+        <Enfase
+          key={`enf-${c.id}`}
+          cena={c as CenaNoTempo & CenaFala}
+          corDestaque={corDestaque}
+        />
       ))}
 
-      {/* Camada 3: grão e vinheta sobre tudo, menos sobre a assinatura. */}
-      <Sequence durationInFrames={paraFrames(tl.cenas[tl.cenas.length - 1].inicioMs, fps)}>
+      {/* Camada 3: marca d'água, grão e vinheta sobre tudo, menos sobre a assinatura. */}
+      <Sequence
+        durationInFrames={paraFrames(
+          tl.cenas[tl.cenas.length - 1].inicioMs,
+          fps,
+        )}
+      >
+        <Marca texto="@drfabioschmidt" />
         <Grao />
       </Sequence>
 
-      {sfx ? <Sfx cenas={tl.cenas} duracaoMs={tl.duracaoMs} volume={volumeSfx} /> : null}
+      {sfx ? (
+        <Sfx cenas={tl.cenas} duracaoMs={tl.duracaoMs} volume={volumeSfx} />
+      ) : null}
     </AbsoluteFill>
   );
 };

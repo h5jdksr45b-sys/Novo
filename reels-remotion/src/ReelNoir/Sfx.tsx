@@ -1,5 +1,11 @@
 import React from "react";
-import { Audio, Sequence, getStaticFiles, staticFile, useVideoConfig } from "remotion";
+import {
+  Audio,
+  Sequence,
+  getStaticFiles,
+  staticFile,
+  useVideoConfig,
+} from "remotion";
 import type { CenaNoTempo } from "./timeline";
 
 // Desenho de som no padrão das referências:
@@ -7,9 +13,14 @@ import type { CenaNoTempo } from "./timeline";
 // - riser (sopro agudo) terminando exatamente no corte para B-roll ou esquema;
 // - impacto grave nos cortes marcados com flash.
 // Os arquivos em public/sfx são sintéticos (scripts/gerar-sfx.py). Troque por biblioteca licenciada.
-const existe = (arquivo: string) => getStaticFiles().some((f) => f.name === arquivo);
+const existe = (arquivo: string) =>
+  getStaticFiles().some((f) => f.name === arquivo);
 
-export const Sfx: React.FC<{ cenas: CenaNoTempo[]; duracaoMs: number; volume: number }> = ({ cenas, duracaoMs, volume }) => {
+export const Sfx: React.FC<{
+  cenas: CenaNoTempo[];
+  duracaoMs: number;
+  volume: number;
+}> = ({ cenas, duracaoMs, volume }) => {
   const { fps } = useVideoConfig();
   const paraFrame = (ms: number) => Math.max(0, Math.round((ms / 1000) * fps));
   const temDrone = existe("sfx/drone.wav");
@@ -25,14 +36,18 @@ export const Sfx: React.FC<{ cenas: CenaNoTempo[]; duracaoMs: number; volume: nu
           volume={(f) => {
             const totalFrames = paraFrame(duracaoMs);
             const fadeIn = Math.min(1, f / (fps * 1.5));
-            const fadeOut = Math.min(1, Math.max(0, (totalFrames - f) / (fps * 2)));
+            const fadeOut = Math.min(
+              1,
+              Math.max(0, (totalFrames - f) / (fps * 2)),
+            );
             return volume * 0.55 * fadeIn * fadeOut;
           }}
           loop
         />
       ) : null}
       {cenas.map((c, i) => {
-        if (i === 0 || (c.tipo !== "broll" && c.tipo !== "esquema")) return null;
+        if (i === 0 || (c.tipo !== "broll" && c.tipo !== "esquema"))
+          return null;
         const anterior = cenas[i - 1];
         const cortaDeFala = anterior.tipo === "fala";
         const riser = temRiser && cortaDeFala;
@@ -40,8 +55,14 @@ export const Sfx: React.FC<{ cenas: CenaNoTempo[]; duracaoMs: number; volume: nu
         return (
           <React.Fragment key={c.id}>
             {riser ? (
-              <Sequence from={paraFrame(c.inicioMs - RISER_MS)} durationInFrames={paraFrame(RISER_MS) + 2}>
-                <Audio src={staticFile("sfx/riser.wav")} volume={volume * 0.7} />
+              <Sequence
+                from={paraFrame(c.inicioMs - RISER_MS)}
+                durationInFrames={paraFrame(RISER_MS) + 2}
+              >
+                <Audio
+                  src={staticFile("sfx/riser.wav")}
+                  volume={volume * 0.7}
+                />
               </Sequence>
             ) : null}
             {impacto ? (

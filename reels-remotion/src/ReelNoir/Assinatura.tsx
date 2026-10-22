@@ -1,5 +1,10 @@
 import React from "react";
-import { AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
+import {
+  AbsoluteFill,
+  interpolate,
+  useCurrentFrame,
+  useVideoConfig,
+} from "remotion";
 import { SANS, SERIFA } from "./fontes";
 import { ASSINATURA } from "./roteiro";
 
@@ -7,10 +12,20 @@ export const Assinatura: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const entra = (atraso: number) =>
-    interpolate(frame, [atraso, atraso + fps * 0.4], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+    interpolate(frame, [atraso, atraso + fps * 0.4], [0, 1], {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+    });
   const sobe = (atraso: number) => (1 - entra(atraso)) * 14;
   return (
-    <AbsoluteFill style={{ background: "#050505", alignItems: "center", justifyContent: "center", color: "#f2f2f2" }}>
+    <AbsoluteFill
+      style={{
+        background: "#050505",
+        alignItems: "center",
+        justifyContent: "center",
+        color: "#f2f2f2",
+      }}
+    >
       <div style={{ textAlign: "center" }}>
         <div
           style={{

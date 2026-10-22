@@ -1,5 +1,12 @@
 import React from "react";
-import { AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
+import {
+  AbsoluteFill,
+  Easing,
+  interpolate,
+  spring,
+  useCurrentFrame,
+  useVideoConfig,
+} from "remotion";
 import { SANS, SERIFA } from "./fontes";
 import { tempoDaPalavra, type Palavra } from "./timeline";
 
@@ -27,19 +34,33 @@ export const Esquema: React.FC<{
   const { fps } = useVideoConfig();
   const agoraMs = inicioCenaMs + (frame / fps) * 1000;
   const dur = fimCenaMs - inicioCenaMs;
-  const t = (alvo: string, padrao: number) => tempoDaPalavra(palavras, alvo) ?? inicioCenaMs + dur * padrao;
+  const t = (alvo: string, padrao: number) =>
+    tempoDaPalavra(palavras, alvo) ?? inicioCenaMs + dur * padrao;
   const tEstreitos = t("estreitos", 0.3);
   const tAmeaca = t("ameaça", 0.55);
   const tResto = t("resto.", 0.7);
   const tQualquer = t("qualquer", 0.88);
 
-  const desde = (ms: number) => Math.max(0, Math.round(((agoraMs - ms) / 1000) * fps));
+  const desde = (ms: number) =>
+    Math.max(0, Math.round(((agoraMs - ms) / 1000) * fps));
   const mola = (ms: number) =>
-    agoraMs < ms ? 0 : spring({ frame: desde(ms), fps, config: { damping: 20, stiffness: 90, mass: 1 } });
+    agoraMs < ms
+      ? 0
+      : spring({
+          frame: desde(ms),
+          fps,
+          config: { damping: 20, stiffness: 90, mass: 1 },
+        });
   const suave = (ms: number, s = 0.4) =>
-    agoraMs < ms ? 0 : interpolate(desde(ms), [0, fps * s], [0, 1], { extrapolateRight: "clamp" });
+    agoraMs < ms
+      ? 0
+      : interpolate(desde(ms), [0, fps * s], [0, 1], {
+          extrapolateRight: "clamp",
+        });
 
-  const entrada = interpolate(frame, [0, fps * 0.5], [0, 1], { extrapolateRight: "clamp" });
+  const entrada = interpolate(frame, [0, fps * 0.5], [0, 1], {
+    extrapolateRight: "clamp",
+  });
   const fecha = mola(tEstreitos); // abertura da atenção fechando
   const marcaAmeaca = suave(tAmeaca, 0.3);
   const someResto = suave(tResto, 0.5);
@@ -50,11 +71,26 @@ export const Esquema: React.FC<{
 
   return (
     <AbsoluteFill style={{ background: "#070707" }}>
+      {/* a palavra de fundo é inserida pelo index por cima deste fundo e por baixo do texto, via ordem de camadas */}
       {DETALHES.map((d, i) => {
-        const apareceu = interpolate(frame, [i * 4, i * 4 + fps * 0.35], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+        const apareceu = interpolate(
+          frame,
+          [i * 4, i * 4 + fps * 0.45],
+          [0, 1],
+          {
+            extrapolateLeft: "clamp",
+            extrapolateRight: "clamp",
+            easing: Easing.out(Easing.cubic),
+          },
+        );
+        const lado = d.x < 540 ? -1 : 1;
         const dist = Math.hypot(d.x - alvo.x, d.y - alvo.y);
         const foraDaAbertura = dist > raio;
-        const opacidade = d.ameaca ? 1 : foraDaAbertura ? 0.18 * (1 - someResto) : 1 - someResto * 0.6;
+        const opacidade = d.ameaca
+          ? 1
+          : foraDaAbertura
+            ? 0.18 * (1 - someResto)
+            : 1 - someResto * 0.6;
         return (
           <div
             key={d.texto}
@@ -62,16 +98,20 @@ export const Esquema: React.FC<{
               position: "absolute",
               left: d.x,
               top: d.y,
-              transform: `translate(-50%, -50%) scale(${d.ameaca ? 1 + marcaAmeaca * 0.18 : 1})`,
+              transform: `translate(-50%, -50%) translateX(${(1 - apareceu) * lado * 60}px) scale(${d.ameaca ? 1 + marcaAmeaca * 0.18 : 1})`,
               opacity: apareceu * opacidade,
               fontFamily: SERIFA,
               fontStyle: "italic",
               fontSize: d.ameaca ? 64 : 46,
               color: "#f2f2f2",
               whiteSpace: "nowrap",
-              background: d.ameaca && marcaAmeaca > 0 ? corDestaque : "transparent",
+              background:
+                d.ameaca && marcaAmeaca > 0 ? corDestaque : "transparent",
               padding: d.ameaca ? "4px 18px" : 0,
-              textShadow: d.ameaca && marcaAmeaca > 0 ? "none" : "0 0 20px rgba(255,255,255,0.25)",
+              textShadow:
+                d.ameaca && marcaAmeaca > 0
+                  ? "none"
+                  : "0 0 20px rgba(255,255,255,0.25)",
             }}
           >
             {d.texto}

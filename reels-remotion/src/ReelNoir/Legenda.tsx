@@ -1,6 +1,11 @@
 import { createTikTokStyleCaptions, type Caption } from "@remotion/captions";
 import React, { useMemo } from "react";
-import { AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
+import {
+  AbsoluteFill,
+  interpolate,
+  useCurrentFrame,
+  useVideoConfig,
+} from "remotion";
 import { SANS } from "./fontes";
 import type { Palavra } from "./timeline";
 
@@ -24,13 +29,20 @@ export const Legenda: React.FC<{
       timestampMs: null,
       confidence: null,
     }));
-    return createTikTokStyleCaptions({ captions, combineTokensWithinMilliseconds: 1100 }).pages;
+    return createTikTokStyleCaptions({
+      captions,
+      combineTokensWithinMilliseconds: 1100,
+    }).pages;
   }, [palavras]);
 
   if (agoraMs < ativaDeMs || agoraMs >= ativaAteMs) return null;
-  const pagina = paginas.find((pg) => agoraMs >= pg.startMs && agoraMs < pg.startMs + pg.durationMs);
+  const pagina = paginas.find(
+    (pg) => agoraMs >= pg.startMs && agoraMs < pg.startMs + pg.durationMs,
+  );
   if (!pagina) return null;
-  const entrada = interpolate(agoraMs - pagina.startMs, [0, 80], [0, 1], { extrapolateRight: "clamp" });
+  const entrada = interpolate(agoraMs - pagina.startMs, [0, 80], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   return (
     <AbsoluteFill style={{ pointerEvents: "none" }}>
@@ -54,7 +66,10 @@ export const Legenda: React.FC<{
         {pagina.tokens.map((t, i) => {
           const dita = agoraMs >= t.fromMs;
           return (
-            <span key={`${t.fromMs}-${i}`} style={{ opacity: dita ? 1 : 0.45, whiteSpace: "pre" }}>
+            <span
+              key={`${t.fromMs}-${i}`}
+              style={{ opacity: dita ? 1 : 0.45, whiteSpace: "pre" }}
+            >
               {t.text}
             </span>
           );

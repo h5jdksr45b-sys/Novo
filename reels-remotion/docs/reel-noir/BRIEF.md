@@ -31,6 +31,14 @@ Vídeos 2 e 3 são da mesma casa (@hex_creatives): Elisha Otis e o elevador (73 
 **Vídeo 1 (talking head)**
 - Uma câmera, luz de janela, lapela na mão. Alterna plano aberto (cadeira e corpo) e plano fechado (punch-in digital) a cada 5 ou 6 s, sempre num início de frase. Sem trilha, sem SFX, sem legenda. Serve de modelo para os blocos em que o Fabio aparece.
 
+**Três exemplos extras (motion graphics tipográfico: @mrbpmgfx, uma peça de 3D com relógios, @miraclestudios_)**
+- Palavra gigante atrás da imagem, cortada pelo quadro, deslizando devagar ("SKILLS", "implementing" repetido atrás do astronauta).
+- Palavra de ênfase vazada, só com contorno, ao lado de palavra cheia ("WITHOUT" em contorno, "BALANCE" cheia).
+- Etiquetas minúsculas em caixa alta nos cantos e linha fina de moldura, como cartaz editorial ("DISCOVER", "ARCH / VHS").
+- Glitch de uma fração de segundo (fatias deslocadas, separação RGB) na batida da trilha.
+- Objetos recortados flutuando e texto que sai do quadro em tamanho enorme.
+Aplicado no reel: palavra de fundo em cada plano de B-roll e no esquema, última palavra da ênfase vazada, etiquetas nos cantos com moldura nos planos sem o Fabio, glitch de 4 frames junto do flash. Os objetos 3D e as cores ficaram de fora para manter o noir.
+
 ## 2. Decisões
 
 - **Tecnologia: Remotion.** O repositório já tem o projeto `reels-remotion` com pipeline de legenda. Tudo do reel está em `src/ReelNoir/`. Render com `npx remotion render ReelNoir`.

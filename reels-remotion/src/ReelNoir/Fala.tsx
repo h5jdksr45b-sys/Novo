@@ -1,28 +1,45 @@
 import React from "react";
-import { AbsoluteFill, OffthreadVideo, interpolate, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
+import {
+  AbsoluteFill,
+  Easing,
+  OffthreadVideo,
+  interpolate,
+  staticFile,
+  useCurrentFrame,
+  useVideoConfig,
+} from "remotion";
 import { SANS, SERIFA } from "./fontes";
 import { tempoDaPalavra, type CenaNoTempo } from "./timeline";
 import type { CenaFala } from "./roteiro";
 
 // Camada do Fabio em câmera. Um único take, contínuo, por baixo de tudo:
 // o áudio nunca é cortado. O que muda entre cenas é só o enquadramento (punch-in).
-export const VideoFala: React.FC<{ src: string | null; pretoEBranco: boolean; cenas: CenaNoTempo[] }> = ({
-  src,
-  pretoEBranco,
-  cenas,
-}) => {
+export const VideoFala: React.FC<{
+  src: string | null;
+  pretoEBranco: boolean;
+  cenas: CenaNoTempo[];
+}> = ({ src, pretoEBranco, cenas }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const agoraMs = (frame / fps) * 1000;
   const atual = cenas.find((c) => agoraMs >= c.inicioMs && agoraMs < c.fimMs);
   const plano = atual && atual.tipo === "fala" ? atual.plano : "aberto";
   // Micro-aproximação contínua dentro de cada plano, para a imagem nunca ficar parada.
-  const dentro = atual ? (agoraMs - atual.inicioMs) / Math.max(1, atual.fimMs - atual.inicioMs) : 0;
+  const dentro = atual
+    ? (agoraMs - atual.inicioMs) / Math.max(1, atual.fimMs - atual.inicioMs)
+    : 0;
   const escala = (plano === "fechado" ? 1.16 : 1.0) + dentro * 0.025;
-  const filtro = pretoEBranco ? "grayscale(1) contrast(1.18) brightness(0.92)" : "none";
+  const filtro = pretoEBranco
+    ? "grayscale(1) contrast(1.18) brightness(0.92)"
+    : "none";
 
   if (!src) {
-    return <SlateFala plano={plano} fala={atual && atual.tipo === "fala" ? atual : null} />;
+    return (
+      <SlateFala
+        plano={plano}
+        fala={atual && atual.tipo === "fala" ? atual : null}
+      />
+    );
   }
   return (
     <AbsoluteFill style={{ background: "#050505", overflow: "hidden" }}>
@@ -42,13 +59,17 @@ export const VideoFala: React.FC<{ src: string | null; pretoEBranco: boolean; ce
 };
 
 // Sem gravação ainda: placa de demonstração no lugar do Fabio.
-const SlateFala: React.FC<{ plano: "aberto" | "fechado"; fala: CenaFala | null }> = ({ plano, fala }) => {
+const SlateFala: React.FC<{
+  plano: "aberto" | "fechado";
+  fala: CenaFala | null;
+}> = ({ plano, fala }) => {
   const frame = useCurrentFrame();
   const respira = 1 + Math.sin(frame / 18) * 0.01;
   return (
     <AbsoluteFill
       style={{
-        background: "radial-gradient(ellipse 80% 55% at 50% 42%, #2a2a2a 0%, #0c0c0c 70%)",
+        background:
+          "radial-gradient(ellipse 80% 55% at 50% 42%, #2a2a2a 0%, #0c0c0c 70%)",
         alignItems: "center",
         justifyContent: "center",
       }}
@@ -99,17 +120,25 @@ const SlateFala: React.FC<{ plano: "aberto" | "fechado"; fala: CenaFala | null }
   );
 };
 
-export const caminhoVideo = (nome: string | null) => (nome ? staticFile(nome) : null);
+export const caminhoVideo = (nome: string | null) =>
+  nome ? staticFile(nome) : null;
 
 // Texto grande só no momento de ênfase: entra quando a palavra-gatilho é dita e fica até o fim do plano.
-export const Enfase: React.FC<{ cena: CenaNoTempo & CenaFala; corDestaque: string }> = ({ cena }) => {
+export const Enfase: React.FC<{
+  cena: CenaNoTempo & CenaFala;
+  corDestaque: string;
+}> = ({ cena }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   if (!cena.enfase) return null;
   const agoraMs = (frame / fps) * 1000;
-  const gatilhoMs = tempoDaPalavra(cena.palavras, cena.enfase.gatilho) ?? cena.inicioMs;
+  const gatilhoMs =
+    tempoDaPalavra(cena.palavras, cena.enfase.gatilho) ?? cena.inicioMs;
   if (agoraMs < gatilhoMs || agoraMs >= cena.fimMs) return null;
-  const p = interpolate(agoraMs - gatilhoMs, [0, 160], [0, 1], { extrapolateRight: "clamp" });
+  const p = interpolate(agoraMs - gatilhoMs, [0, 260], [0, 1], {
+    extrapolateRight: "clamp",
+    easing: Easing.out(Easing.cubic),
+  });
   const posicao = cena.enfase.posicao ?? "alto";
   return (
     <AbsoluteFill style={{ pointerEvents: "none" }}>
@@ -126,12 +155,29 @@ export const Enfase: React.FC<{ cena: CenaNoTempo & CenaFala; corDestaque: strin
           fontSize: 92,
           lineHeight: 1.05,
           color: "#f4f4f4",
-          textShadow: "0 0 26px rgba(255,255,255,0.25), 0 4px 18px rgba(0,0,0,0.8)",
+          textShadow:
+            "0 0 26px rgba(255,255,255,0.25), 0 4px 18px rgba(0,0,0,0.8)",
           opacity: p,
-          transform: `translateY(${(1 - p) * 10}px) scale(${0.97 + p * 0.03})`,
+          letterSpacing: `${(1 - p) * 6}px`,
+          transform: `translateY(${(1 - p) * 28}px) scale(${0.96 + p * 0.04})`,
         }}
       >
-        {cena.enfase.texto}
+        {cena.enfase.texto.split(" ").map((palavra, k, todas) => {
+          const ultima = k === todas.length - 1;
+          return (
+            <span
+              key={k}
+              style={{
+                color: ultima ? "transparent" : "#f4f4f4",
+                WebkitTextStroke: ultima ? "2px #f4f4f4" : "0",
+                textShadow: ultima ? "none" : undefined,
+              }}
+            >
+              {palavra}
+              {ultima ? "" : " "}
+            </span>
+          );
+        })}
       </div>
     </AbsoluteFill>
   );

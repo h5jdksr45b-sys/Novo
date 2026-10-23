@@ -39,6 +39,7 @@ export const reelNoirSchema = z.object({
   pretoEBranco: z.boolean(),
   sfx: z.boolean(),
   volumeSfx: z.number().min(0).max(1),
+  volumeTrilha: z.number().min(0).max(1),
 });
 
 type Props = z.infer<typeof reelNoirSchema> & {
@@ -89,6 +90,7 @@ export const ReelNoir: React.FC<Props> = ({
   pretoEBranco,
   sfx,
   volumeSfx,
+  volumeTrilha,
   timeline,
   videoDuracaoMs,
 }) => {
@@ -241,7 +243,12 @@ export const ReelNoir: React.FC<Props> = ({
       </Sequence>
 
       {sfx ? (
-        <Sfx cenas={tl.cenas} duracaoMs={tl.duracaoMs} volume={volumeSfx} />
+        <Sfx
+          cenas={tl.cenas}
+          duracaoMs={tl.duracaoMs}
+          volume={volumeSfx}
+          volumeTrilha={volumeTrilha}
+        />
       ) : null}
     </AbsoluteFill>
   );
@@ -254,4 +261,5 @@ export const propsPadrao: z.infer<typeof reelNoirSchema> = {
   pretoEBranco: false,
   sfx: true,
   volumeSfx: 0.35,
+  volumeTrilha: 1,
 };

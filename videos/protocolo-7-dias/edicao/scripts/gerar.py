@@ -2,18 +2,19 @@
 import json, sys, pathlib
 
 OUT = pathlib.Path(sys.argv[1])
-W, H, DUR = 1080, 1920, 30.0
+W, H, DUR = 1080, 1920, 36.0
+VOZ = 0.3  # a narracao comeca aos 0,3 s; tempos abaixo ja somam esse atraso
 
 DARK, WHITE = "#141414", "#F4F1EC"
 WINE, RED = "#7E1621", "#D24A4A"
 
-# cenas: id, arquivo, inicio, duracao, playback, tinta, destaque
+# cenas: id, arquivo, inicio, duracao, playback (cortes nas pausas longas da narracao)
 SCENES = [
-    ("v1", "1-celular", 0.0, 5.0, 1.0),
-    ("v2", "2-corredor", 5.0, 5.0, 1.0),
-    ("v3", "3-soleira", 10.0, 5.0, 1.0),
-    ("v4", "4-timer", 15.0, 5.9, 0.85),
-    ("v5", "5-sala", 20.9, 6.7, 0.75),
+    ("v1", "1-celular", 0.0, 4.6, 1.0),
+    ("v2", "2-corredor", 4.6, 5.7, 0.88),
+    ("v3", "3-soleira", 10.3, 4.3, 1.0),
+    ("v4", "4-timer", 14.6, 7.7, 0.65),
+    ("v5", "5-sala", 22.3, 8.6, 0.58),
 ]
 
 # Legendas: (id, ini, fim, top, tinta, linhas)
@@ -23,34 +24,34 @@ def L(t, s="i", size=150, d=0.0, acc=False):
 
 CAPS = [
     # Cena 1, mesa clara: tinta escura
-    ("c1", 0.12, 1.35, 400, DARK, [L("Ela sumiu", size=180)]),
-    ("c2", 1.35, 2.40, 400, DARK, [L("por", "r", 60), L("dois dias.", size=200, acc=True)]),
-    ("c3", 2.45, 3.30, 400, DARK, [L("Voltou", size=180)]),
-    ("c4", 3.30, 4.10, 400, DARK, [L("como se nada", size=150)]),
-    ("c5", 4.10, 4.95, 400, DARK, [L("tivesse", "r", 60), L("acontecido.", size=170)]),
+    ("c1", 0.45, 1.00, 400, DARK, [L("Ela sumiu", size=180)]),
+    ("c2", 1.00, 1.80, 400, DARK, [L("por", "r", 60), L("dois dias.", size=200, acc=True)]),
+    ("c3", 1.80, 2.25, 400, DARK, [L("Voltou", size=180)]),
+    ("c4", 2.25, 3.05, 400, DARK, [L("como se nada", size=150)]),
+    ("c5", 3.05, 4.50, 400, DARK, [L("tivesse", "r", 60), L("acontecido.", size=170, d=0.55)]),
     # Cena 2, corredor: branco
-    ("c6", 5.12, 5.90, 380, WHITE, [L("E você", size=180)]),
-    ("c7", 5.90, 6.95, 380, WHITE, [L("passou", "r", 60), L("esses dias", size=170)]),
-    ("c8", 7.00, 7.75, 380, WHITE, [L("medindo", size=210)]),
-    ("c9", 7.75, 8.60, 380, WHITE, [L("cada", "r", 60), L("palavra.", size=210, acc=True)]),
-    ("c10", 8.60, 9.95, 380, WHITE, [L("do lado de fora", "r", 60), L("da porta.", size=180)]),
+    ("c6", 4.98, 5.42, 380, WHITE, [L("E você", size=180)]),
+    ("c7", 5.42, 6.50, 380, WHITE, [L("passou", "r", 60), L("esses dias", size=170, d=0.3)]),
+    ("c8", 6.53, 7.00, 380, WHITE, [L("medindo", size=210)]),
+    ("c9", 7.00, 7.95, 380, WHITE, [L("cada", "r", 60), L("palavra.", size=210, d=0.25, acc=True)]),
+    ("c10", 8.27, 10.20, 380, WHITE, [L("do lado de fora", "r", 60), L("da porta.", size=180, d=0.7)]),
     # Cena 3, soleira: branco
-    ("c11", 10.12, 11.25, 460, WHITE, [L("Entender", size=190)]),
-    ("c12", 11.25, 12.20, 460, WHITE, [L("o pânico", size=170), L("de perder", "r", 64, 0.25)]),
-    ("c13", 12.25, 14.95, 440, WHITE, [L("não obriga você", "r", 64), L("a aguentar", size=190, d=0.35),
-                                        L("tudo.", size=260, d=0.75, acc=True)]),
+    ("c11", 10.95, 11.55, 460, WHITE, [L("Entender", size=190)]),
+    ("c12", 11.58, 12.47, 460, WHITE, [L("o pânico", size=170), L("de perder", "r", 64, 0.4)]),
+    ("c13", 12.47, 14.50, 440, WHITE, [L("não obriga você", "r", 64), L("a aguentar", size=190, d=0.75),
+                                        L("tudo.", size=260, d=1.2, acc=True)]),
     # Cena 4, timer: tinta escura
-    ("c14", 15.12, 16.00, 380, DARK, [L("Uma pausa", size=180)]),
-    ("c15", 16.00, 16.85, 380, DARK, [L("combinada", size=180)]),
-    ("c16", 16.85, 18.45, 330, DARK, [L("de", "r", 60), L("20", size=330, acc=True), L("minutos.", size=150, d=0.2)]),
-    ("c17", 18.50, 19.60, 380, DARK, [L("Uma frase", "r", 64), L("fixa.", size=210)]),
-    ("c18", 19.60, 20.85, 380, DARK, [L("um roteiro para", "r", 60), L("depois da crise.", size=140)]),
+    ("c14", 15.12, 15.67, 380, DARK, [L("Uma pausa", size=180)]),
+    ("c15", 15.67, 16.17, 380, DARK, [L("combinada", size=180)]),
+    ("c16", 16.17, 17.85, 330, DARK, [L("de", "r", 60), L("20", size=330, d=0.1, acc=True), L("minutos.", size=150, d=0.5)]),
+    ("c17", 17.89, 19.95, 380, DARK, [L("Uma frase", "r", 64), L("fixa.", size=210, d=0.6)]),
+    ("c18", 20.05, 22.15, 380, DARK, [L("um roteiro para", "r", 60), L("depois da crise.", size=140, d=0.75)]),
     # Cena 5, sala: branco
-    ("c19", 21.05, 22.30, 380, WHITE, [L("Sete", size=230, acc=True), L("procedimentos.", size=130, d=0.2)]),
-    ("c20", 22.30, 23.30, 380, WHITE, [L("um por dia.", size=170)]),
-    ("c21", 23.35, 24.60, 380, WHITE, [L("para quem mora com", "r", 60), L("alguém com", size=150, d=0.15),
-                                        L("borderline.", size=150, d=0.3)]),
-    ("c22", 24.65, 25.50, 380, WHITE, [L("ela não precisa", "r", 60), L("participar.", size=170)]),
+    ("c19", 23.25, 24.85, 380, WHITE, [L("Sete", size=230, acc=True), L("procedimentos.", size=130, d=0.3)]),
+    ("c20", 25.00, 25.88, 380, WHITE, [L("um por dia.", size=170)]),
+    ("c21", 25.90, 28.95, 380, WHITE, [L("para quem mora com", "r", 60), L("alguém com", size=150, d=0.75),
+                                        L("borderline.", size=150, d=1.6)]),
+    ("c22", 29.08, 30.40, 380, WHITE, [L("ela não precisa", "r", 60), L("participar.", size=170, d=0.6)]),
 ]
 
 
@@ -114,13 +115,13 @@ def tag(gid, a, b, x, y, text, path, ink, size=46):
 def graficos():
     els, tw = [], []
     # Cena 1: etiqueta perto do celular (celular ~ x544 y1155 apos punch 1.5 com origem no celular)
-    els.append(tag("t1", 2.55, 4.95, 600, 690, "visto há 2 dias",
+    els.append(tag("t1", 1.85, 4.48, 600, 690, "visto há 2 dias",
                    "M 760 762 C 790 820, 760 880, 690 905 M 690 905 L 718 912 M 690 905 L 708 884", WINE))
     # Cena 2: etiqueta na mulher (cabeca ~ x420 y1000)
-    els.append(tag("t2", 5.35, 6.95, 650, 1010, "quem cuida",
+    els.append(tag("t2", 5.0, 6.48, 650, 1010, "quem cuida",
                    "M 700 1085 C 700 1130, 670 1160, 615 1175 M 615 1175 L 640 1188 M 615 1175 L 634 1155", WHITE))
     # Cena 4: seta do 20 para o timer (timer ~ x244 y1280)
-    els.append(f'    <div id="t4" class="clip" data-start="17.1" data-duration="1.35" style="position:absolute;inset:0" data-layout-allow-overflow>\n'
+    els.append(f'    <div id="t4" class="clip" data-start="16.5" data-duration="1.35" style="position:absolute;inset:0" data-layout-allow-overflow>\n'
                f'      <svg class="arrow" width="{W}" height="{H}" viewBox="0 0 {W} {H}"><path id="t4-arr" '
                f'd="M 380 900 C 300 990, 250 1080, 255 1170 M 255 1170 L 238 1145 M 255 1170 L 275 1150" fill="none" '
                f'stroke="{WINE}" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" pathLength="1"/></svg>\n    </div>')
@@ -129,25 +130,25 @@ def graficos():
                f'      <svg class="arrow" width="{W}" height="{H}" viewBox="0 0 {W} {H}"><path id="u3-arr" '
                f'd="M 380 1010 C 470 1000, 600 1004, 700 996" fill="none" stroke="{RED}" stroke-width="7" '
                f'stroke-linecap="round" pathLength="1"/></svg>\n    </div>')
-    for gid, a, b in (("t1", 2.55, 4.95), ("t2", 5.35, 6.95)):
+    for gid, a, b in (("t1", 1.85, 4.48), ("t2", 5.0, 6.48)):
         tw.append(f'tl.fromTo("#{gid}-box", {{opacity:0, scale:0.86}}, {{opacity:1, scale:1, duration:0.32, ease:"back.out(1.6)"}}, {a});')
         tw.append(f'tl.fromTo("#{gid}-arr", {{strokeDashoffset:1}}, {{strokeDashoffset:0, duration:0.4, ease:"power2.out"}}, {a + 0.15});')
         tw.append(f'tl.to(["#{gid}-box", "#{gid}-arr"], {{opacity:0, duration:0.12, ease:"power2.in"}}, {b - 0.12});')
-    tw.append('tl.fromTo("#t4-arr", {strokeDashoffset:1}, {strokeDashoffset:0, duration:0.45, ease:"power2.out"}, 17.1);')
-    tw.append('tl.to("#t4-arr", {opacity:0, duration:0.12}, 18.33);')
+    tw.append('tl.fromTo("#t4-arr", {strokeDashoffset:1}, {strokeDashoffset:0, duration:0.45, ease:"power2.out"}, 16.5);')
+    tw.append('tl.to("#t4-arr", {opacity:0, duration:0.12}, 17.73);')
 
     # Cena 5: numeros 1 a 7 acendendo
     dots = "".join(f'<div class="dia" id="d{i}">{i}</div>' for i in range(1, 8))
-    els.append(f'    <div id="dias" class="clip" data-start="22.3" data-duration="3.2" style="position:absolute;inset:0">\n'
+    els.append(f'    <div id="dias" class="clip" data-start="25.0" data-duration="3.95" style="position:absolute;inset:0">\n'
                f'      <div class="row">{dots}</div>\n    </div>')
     for i in range(1, 8):
-        t0 = round(22.35 + (i - 1) * 0.11, 3)
+        t0 = round(25.05 + (i - 1) * 0.11, 3)
         tw.append(f'tl.fromTo("#d{i}", {{opacity:0, y:14}}, {{opacity:1, y:0, duration:0.25, ease:"expo.out"}}, {t0});')
         tw.append(f'tl.to("#d{i}", {{backgroundColor:"{RED}", borderColor:"{RED}", duration:0.2}}, {round(t0 + 0.25, 3)});')
-    tw.append('tl.to("#dias .dia", {opacity:0, duration:0.13, stagger:0.02}, 25.3);')
+    tw.append('tl.to("#dias .dia", {opacity:0, duration:0.13, stagger:0.02}, 28.75);')
 
     # Escurecimento final e cartao
-    els.append(f'    <div id="fim" class="clip" data-start="25.4" data-duration="{round(DUR - 25.4, 3)}" style="position:absolute;inset:0">\n'
+    els.append(f'    <div id="fim" class="clip" data-start="30.4" data-duration="{round(DUR - 30.4, 3)}" style="position:absolute;inset:0">\n'
                f'      <div id="fim-dim" style="position:absolute;inset:0;background:#0d0d0d;opacity:0"></div>\n'
                f'      <div class="card">\n'
                f'        <div id="f1" class="r" style="font-size:64px">Protocolo</div>\n'
@@ -156,9 +157,8 @@ def graficos():
                f'        <div id="f4" class="tag" style="position:relative;display:inline-block;margin-top:70px;font-size:58px">COMEÇAR</div>\n'
                f'        <div id="f5" class="r" style="font-size:34px;margin-top:120px;color:#9a958e">Dr. Fabio Schmidt · Médico · CRM-SP 183549</div>\n'
                f'      </div>\n    </div>')
-    tw.append('tl.fromTo("#fim-dim", {opacity:0}, {opacity:0.82, duration:0.6, ease:"power2.inOut"}, 25.4);')
-    tw.append('tl.to("#fim-dim", {opacity:1, duration:1.2, ease:"power2.inOut"}, 26.4);')
-    for fid, t0 in (("f1", 25.75), ("f2", 26.0), ("f3", 26.45), ("f4", 26.9), ("f5", 27.25)):
+    tw.append('tl.fromTo("#fim-dim", {opacity:0}, {opacity:1, duration:0.55, ease:"power2.inOut"}, 30.4);')
+    for fid, t0 in (("f1", 31.5), ("f2", 32.6), ("f3", 33.1), ("f4", 33.5), ("f5", 33.85)):
         tw.append(f'tl.fromTo("#{fid}", {{opacity:0, filter:"blur(10px)"}}, {{opacity:1, filter:"blur(0px)", duration:0.25, ease:"expo.out"}}, {t0});')
 
     return f"""<template>
@@ -191,8 +191,8 @@ def graficos():
 
 
 # Cortes de aproximacao (punch-in) dentro das cenas: (wrapper, tempo, escala, origem)
-PUNCH = [("w1", 2.42, 1.5, "50% 60%"), ("w2", 7.0, 1.6, "39% 57%"), ("w4", 18.5, 1.4, "28% 66%")]
-DIPS = [4.9, 9.9, 20.8]
+PUNCH = [("w1", 1.8, 1.5, "50% 60%"), ("w2", 6.53, 1.6, "39% 57%"), ("w4", 17.89, 1.4, "28% 66%")]
+DIPS = [4.5, 10.2, 22.2]
 
 
 def index():
@@ -230,6 +230,7 @@ def index():
     <div id="root" data-composition-id="main" data-start="0" data-duration="{DUR}" data-width="{W}" data-height="{H}">
       <div id="ground"></div>
 {chr(10).join(vids)}
+      <audio id="narracao" class="clip" src="assets/audio/narracao.wav" data-start="{VOZ}" data-volume="1" data-track-index="4"></audio>
       <div id="dip"></div>
       <div id="graficos" data-composition-id="graficos" data-composition-src="compositions/graficos.html"
         data-start="0" data-duration="{DUR}" data-track-index="2" data-track-kind="graphics"

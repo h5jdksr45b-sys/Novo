@@ -117,8 +117,8 @@ def graficos():
     els.append(tag("t1", 2.55, 4.95, 600, 690, "visto há 2 dias",
                    "M 760 762 C 790 820, 760 880, 690 905 M 690 905 L 718 912 M 690 905 L 708 884", WINE))
     # Cena 2: etiqueta na mulher (cabeca ~ x420 y1000)
-    els.append(tag("t2", 5.35, 6.95, 560, 800, "quem cuida",
-                   "M 600 875 C 590 930, 540 960, 480 975 M 480 975 L 505 990 M 480 975 L 500 955", WHITE))
+    els.append(tag("t2", 5.35, 6.95, 650, 1010, "quem cuida",
+                   "M 700 1085 C 700 1130, 670 1160, 615 1175 M 615 1175 L 640 1188 M 615 1175 L 634 1155", WHITE))
     # Cena 4: seta do 20 para o timer (timer ~ x244 y1280)
     els.append(f'    <div id="t4" class="clip" data-start="17.1" data-duration="1.35" style="position:absolute;inset:0" data-layout-allow-overflow>\n'
                f'      <svg class="arrow" width="{W}" height="{H}" viewBox="0 0 {W} {H}"><path id="t4-arr" '

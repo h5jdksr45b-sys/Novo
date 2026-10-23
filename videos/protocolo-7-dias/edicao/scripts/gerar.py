@@ -195,21 +195,33 @@ PUNCH = [("w1", 1.8, 1.5, "50% 60%"), ("w2", 6.53, 1.6, "39% 57%"), ("w4", 17.89
 DIPS = [4.5, 10.2, 22.2]
 
 
-# Efeitos (Pixabay, uso comercial livre): (id, arquivo, momento do impacto na tela, pico do arquivo, volume)
-SFX = ([("sx-w1", "whoosh", 4.6, 0.164, 0.3), ("sx-w2", "whoosh-short", 10.3, 0.164, 0.26),
-        ("sx-w3", "whoosh", 22.3, 0.164, 0.3), ("sx-p1", "pop", 1.95, 0.122, 0.22),
-        ("sx-p2", "pop", 5.1, 0.122, 0.2), ("sx-fim", "impact-bass-2", 32.47, 2.066, 0.35)]
-       + [(f"sx-d{i}", "click-soft", round(25.05 + (i - 1) * 0.11 + 0.1, 3), 0.075, 0.12) for i in range(1, 8)])
+# Efeitos gerados no Higgsfield (assets/sfx-hf, picos normalizados em -3 dBFS)
+# (id, arquivo, momento do impacto na tela, pico do arquivo, duracao do arquivo, volume, faixa, fade-in, fade-out)
+SFX = [
+    ("sx-cel", "celular-vibrando", 1.80, 0.556, 2.02, 0.45, 6, 0, 0.2),   # celular vibra no Voltou
+    ("sx-w1", "whoosh-ar", 4.60, 1.179, 1.21, 0.28, 7, 0, 0),           # corte para o corredor
+    ("sx-w2", "whoosh-abafado", 10.30, 0.897, 1.21, 0.22, 7, 0, 0),     # corte para a soleira
+    ("sx-porta", "porta", 12.30, 3.277, 4.02, 0.32, 6, 0.3, 0.5),       # porta abrindo na soleira
+    ("sx-timer", "timer-giro", 14.60, 1.168, 1.51, 0.4, 8, 0, 0),       # giro do timer no corte
+    ("sx-w3", "whoosh-ar", 22.30, 1.179, 1.21, 0.28, 7, 0, 0),          # corte para a sala
+    ("sx-fim", "grave-final", 32.47, 2.794, 4.02, 0.4, 6, 0.4, 0.8),    # grave no 7 Dias
+]
+# Som ambiente de 10 s em loop, com cruzamento de 0,5 s entre copias
+AMB = [(0.0, 1), (9.5, 2), (19.0, 1), (28.5, 2)]
 
 
 def sfx_tags():
     out = []
-    durs = {"whoosh": 0.57, "whoosh-short": 0.57, "pop": 0.72, "click-soft": 0.37, "impact-bass-2": 2.59}
-    for n, (sid, f, hit, peak, vol) in enumerate(SFX):
+    for sid, f, hit, peak, dur, vol, track, fi, fo in SFX:
         start = round(hit + 1 / 30 - peak, 3)  # pico um quadro depois da imagem
-        track = 6 + (n % 4 if f == "click-soft" else (1 if f == "pop" else 0))  # cliques seguidos se sobrepoem: faixas alternadas
-        out.append(f'      <audio id="{sid}" class="clip" src="assets/sfx/{f}.mp3" data-start="{start}" '
-                   f'data-duration="{durs[f]}" data-volume="{vol}" data-track-index="{track}"></audio>')
+        fades = (f' data-fade-in="{fi}"' if fi else "") + (f' data-fade-out="{fo}"' if fo else "")
+        out.append(f'      <audio id="{sid}" class="clip" src="assets/sfx-hf/{f}.mp3" data-start="{start}" '
+                   f'data-duration="{dur}" data-volume="{vol}"{fades} data-track-index="{track}"></audio>')
+    for n, (t0, k) in enumerate(AMB, start=1):
+        d = round(min(10.0, DUR - t0), 2)
+        out.append(f'      <audio id="amb{n}" class="clip" src="assets/sfx-hf/ambiente.mp3" data-start="{t0}" '
+                   f'data-duration="{d}" data-volume="0.08" data-fade-in="0.5" data-fade-out="0.5" '
+                   f'data-track-index="{8 + k}"></audio>')
     return "\n".join(out)
 
 

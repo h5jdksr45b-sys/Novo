@@ -206,6 +206,10 @@ SFX = [
     ("sx-w3", "whoosh-ar", 22.30, 1.179, 1.21, 0.28, 7, 0, 0),          # corte para a sala
     ("sx-fim", "grave-final", 32.47, 2.794, 4.02, 0.4, 6, 0.4, 0.8),    # grave no 7 Dias
 ]
+# Entrada e saida dos cartoes das telas
+for _n, (_tid, _f, _a, _d, _top) in enumerate([("tela1", 0, 18.45, 1.4, 0), ("tela2", 0, 20.50, 1.4, 0), ("tela3", 0, 23.40, 1.45, 0)]):
+    SFX.append((f"sx-{_tid}-in", "whoosh-ar", round(_a + 0.12, 3), 1.179, 1.21, 0.16, 11, 0, 0))
+    SFX.append((f"sx-{_tid}-out", "whoosh-abafado", round(_a + _d - 0.05, 3), 0.897, 1.21, 0.12, 12, 0, 0))
 # Som ambiente de 10 s em loop, com cruzamento de 0,5 s entre copias
 AMB = [(0.0, 1), (9.5, 2), (19.0, 1), (28.5, 2)]
 
@@ -247,8 +251,8 @@ def index():
                      f'data-track-index="{9 + n}" muted playsinline></video>\n      </div>')
     tw = []
     for tid, f, a, d, top in TELAS:
-        tw.append(f'tl.fromTo("#{tid}", {{opacity:0, scale:0.93}}, {{opacity:1, scale:1, duration:0.25, ease:"expo.out"}}, {a});')
-        tw.append(f'tl.to("#{tid}", {{opacity:0, scale:0.97, duration:0.14, ease:"power2.in"}}, {round(a + d - 0.14, 3)});')
+        tw.append(f'tl.fromTo("#{tid}", {{opacity:0, y:90, scale:0.92}}, {{opacity:1, y:0, scale:1, duration:0.32, ease:"expo.out"}}, {a});')
+        tw.append(f'tl.to("#{tid}", {{opacity:0, y:-60, scale:0.96, duration:0.18, ease:"power3.in"}}, {round(a + d - 0.18, 3)});')
     for w, t, s, o in PUNCH:
         tw.append(f'tl.fromTo("#{w}", {{scale:{round(s * 1.04, 3)}, transformOrigin:"{o}"}}, '
                   f'{{scale:{s}, transformOrigin:"{o}", duration:0.35, ease:"power3.out"}}, {t});')

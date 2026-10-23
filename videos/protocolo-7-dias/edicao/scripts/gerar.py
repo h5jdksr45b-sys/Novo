@@ -195,6 +195,24 @@ PUNCH = [("w1", 1.8, 1.5, "50% 60%"), ("w2", 6.53, 1.6, "39% 57%"), ("w4", 17.89
 DIPS = [4.5, 10.2, 22.2]
 
 
+# Efeitos (Pixabay, uso comercial livre): (id, arquivo, momento do impacto na tela, pico do arquivo, volume)
+SFX = ([("sx-w1", "whoosh", 4.6, 0.164, 0.3), ("sx-w2", "whoosh-short", 10.3, 0.164, 0.26),
+        ("sx-w3", "whoosh", 22.3, 0.164, 0.3), ("sx-p1", "pop", 1.95, 0.122, 0.22),
+        ("sx-p2", "pop", 5.1, 0.122, 0.2), ("sx-fim", "impact-bass-2", 32.47, 2.066, 0.35)]
+       + [(f"sx-d{i}", "click-soft", round(25.05 + (i - 1) * 0.11 + 0.1, 3), 0.075, 0.12) for i in range(1, 8)])
+
+
+def sfx_tags():
+    out = []
+    durs = {"whoosh": 0.57, "whoosh-short": 0.57, "pop": 0.72, "click-soft": 0.37, "impact-bass-2": 2.59}
+    for n, (sid, f, hit, peak, vol) in enumerate(SFX):
+        start = round(hit + 1 / 30 - peak, 3)  # pico um quadro depois da imagem
+        track = 6 + (n % 4 if f == "click-soft" else (1 if f == "pop" else 0))  # cliques seguidos se sobrepoem: faixas alternadas
+        out.append(f'      <audio id="{sid}" class="clip" src="assets/sfx/{f}.mp3" data-start="{start}" '
+                   f'data-duration="{durs[f]}" data-volume="{vol}" data-track-index="{track}"></audio>')
+    return "\n".join(out)
+
+
 def index():
     vids = []
     for n, (vid, f, a, d, rate) in enumerate(SCENES, start=1):
@@ -233,6 +251,7 @@ def index():
       <!-- Trilha Warm Resolve (Suno): corte de 0,76 s para a abertura cair no corte da sala (22,3 s) e o acorde no 7 Dias (32,5 s) -->
       <audio id="musica" class="clip" src="assets/audio/musica.m4a" data-start="0" data-duration="{DUR}" data-media-start="0.76" data-volume="1" data-track-index="5"
         data-automation="{{&quot;version&quot;: 1, &quot;lanes&quot;: [{{&quot;target&quot;: &quot;volume&quot;, &quot;points&quot;: [{{&quot;t&quot;: 0, &quot;v&quot;: 0.22}}, {{&quot;t&quot;: 21.6, &quot;v&quot;: 0.22}}, {{&quot;t&quot;: 22.1, &quot;v&quot;: 0.42}}, {{&quot;t&quot;: 23.1, &quot;v&quot;: 0.42}}, {{&quot;t&quot;: 23.4, &quot;v&quot;: 0.22}}, {{&quot;t&quot;: 33.1, &quot;v&quot;: 0.22}}, {{&quot;t&quot;: 33.6, &quot;v&quot;: 0.6}}, {{&quot;t&quot;: 35.0, &quot;v&quot;: 0.6}}, {{&quot;t&quot;: 35.95, &quot;v&quot;: 0.0}}]}}]}}"></audio>
+{sfx_tags()}
       <audio id="narracao" class="clip" src="assets/audio/narracao.wav" data-start="{VOZ}" data-volume="1" data-track-index="4"></audio>
       <div id="dip"></div>
       <div id="graficos" data-composition-id="graficos" data-composition-src="compositions/graficos.html"

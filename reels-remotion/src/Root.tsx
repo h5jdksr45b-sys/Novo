@@ -63,6 +63,17 @@ export const RemotionRoot: React.FC = () => {
         width={1080}
         height={1920}
       />
+      <Composition
+        id="ClipeMusicaB"
+        component={ClipeMusica}
+        durationInFrames={Math.round(DURACAO_SEGUNDOS * 30)}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          abertura: ["Pedi ajuda.", "Me chamaram de louco."],
+        }}
+      />
     </>
   );
 };

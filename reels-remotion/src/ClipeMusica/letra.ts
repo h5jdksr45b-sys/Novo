@@ -1,7 +1,7 @@
 // Letra transcrita do áudio enviado, com tempos aproximados em segundos.
 // A transcrição foi feita por janelas sobrepostas do Whisper, sem marcação
 // palavra a palavra. Para ajustar a sincronia, mude início e fim aqui.
-// duvida: true marca versos que a transcrição não ouviu com clareza.
+// Letra conferida pelo autor.
 
 export type Verso = {
   inicio: number;
@@ -15,8 +15,8 @@ export const LETRA: Verso[] = [
   { inicio: 2.9, fim: 4.4, texto: "que dão ouvido pro outro" },
   { inicio: 4.4, fim: 5.6, texto: "mesmo largado no chão." },
   { inicio: 5.6, fim: 6.8, texto: "Pra quem tá se afogando," },
-  { inicio: 6.8, fim: 7.9, texto: "a mão é muito pouco.", duvida: true },
-  { inicio: 7.9, fim: 9.4, texto: "Peço ajuda e", duvida: true },
+  { inicio: 6.8, fim: 7.9, texto: "a mão é muito pouco." },
+  { inicio: 7.9, fim: 9.4, texto: "Peço ajuda e" },
   { inicio: 9.4, fim: 10.3, texto: "me chamam de louco." },
   {
     inicio: 10.3,
@@ -28,7 +28,7 @@ export const LETRA: Verso[] = [
     fim: 15.0,
     texto: "porque o meu jeito de sentir não cabe no comum.",
   },
-  { inicio: 15.0, fim: 16.0, texto: "Basta um silêncio", duvida: true },
+  { inicio: 15.0, fim: 16.0, texto: "Basta um silêncio" },
   { inicio: 16.0, fim: 17.6, texto: "e eu já me perco no pensamento," },
   { inicio: 17.6, fim: 18.6, texto: "explodo no segundo." },
   { inicio: 18.6, fim: 19.8, texto: "A culpa é um tormento." },

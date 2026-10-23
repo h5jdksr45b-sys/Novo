@@ -18,7 +18,8 @@ import { ENFASES, LETRA } from "./letra";
 // Cada verso ganha um elemento de interface que mostra o que a letra diz.
 // Legenda pequena sempre visível; texto grande só nas ênfases de letra.ts.
 
-export const MUSICA = staticFile("clipe-musica/musica.m4a");
+// musica-radio.m4a é a original com filtro leve de rádio (ver README da pasta).
+export const MUSICA = staticFile("clipe-musica/musica-radio.m4a");
 export const DURACAO_SEGUNDOS = 30.1;
 
 const VERMELHO = "#c83c1e";
@@ -993,7 +994,55 @@ const Player: React.FC = () => {
   );
 };
 
-export const ClipeMusica: React.FC = () => {
+// Versão B: frase grande nos primeiros 1,6 s, antes da letra começar.
+const Abertura: React.FC<{ linhas: string[] }> = ({ linhas }) => {
+  const t = useSegundos();
+  const { fps } = useVideoConfig();
+  const frame = useCurrentFrame();
+  if (t >= 1.6) {
+    return null;
+  }
+  return (
+    <div
+      style={{
+        position: "absolute",
+        top: 250,
+        left: 40,
+        right: 40,
+        textAlign: "center",
+        fontFamily: Anton,
+        fontSize: 92,
+        lineHeight: 1.05,
+        textTransform: "uppercase",
+        opacity: faixa(t, 1.4, 1.6, [1, 0]),
+      }}
+    >
+      {linhas.map((linha, i) => {
+        const mola = spring({
+          frame: frame - i * 0.45 * fps,
+          fps,
+          config: { damping: 14, stiffness: 200 },
+        });
+        return (
+          <div
+            key={linha}
+            style={{
+              color: i === linhas.length - 1 ? VERMELHO : "white",
+              opacity: mola,
+              transform: `scale(${0.8 + mola * 0.2})`,
+            }}
+          >
+            {linha}
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+export const ClipeMusica: React.FC<{ abertura?: string[] }> = ({
+  abertura,
+}) => {
   useEffect(() => {
     loadAnton();
   }, []);
@@ -1021,6 +1070,7 @@ export const ClipeMusica: React.FC = () => {
       <CenaPonto />
       <CenaFinal />
       <Enfase />
+      {abertura ? <Abertura linhas={abertura} /> : null}
       <Legenda />
       <Player />
     </AbsoluteFill>

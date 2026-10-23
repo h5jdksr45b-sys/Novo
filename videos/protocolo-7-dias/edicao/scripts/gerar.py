@@ -225,6 +225,14 @@ def sfx_tags():
     return "\n".join(out)
 
 
+# Flashes das telas do guia: (id, arquivo, inicio, duracao, topo)
+TELAS = [
+    ("tela1", "frase-fixa", 18.45, 1.4, 700),   # Uma frase fixa
+    ("tela2", "mapa-crise", 20.50, 1.4, 700),   # depois da crise
+    ("tela3", "escala", 23.40, 1.45, 800),      # Sete procedimentos
+]
+
+
 def index():
     vids = []
     for n, (vid, f, a, d, rate) in enumerate(SCENES, start=1):
@@ -232,7 +240,15 @@ def index():
         vids.append(f'      <div id="w{n}" class="wrap" style="z-index:{n}">\n'
                     f'        <video id="{vid}" class="clip" src="assets/clips/{f}.mp4" data-start="{a}" data-duration="{d}"'
                     f'{rate_attr} data-track-index="1" muted playsinline></video>\n      </div>')
+    telas = []
+    for n, (tid, f, a, d, top) in enumerate(TELAS, start=1):
+        telas.append(f'      <div id="{tid}" class="tela" style="top:{top}px">\n'
+                     f'        <video id="{tid}-v" class="clip" src="assets/telas/{f}.mp4" data-start="{a}" data-duration="{d}" '
+                     f'data-track-index="{9 + n}" muted playsinline></video>\n      </div>')
     tw = []
+    for tid, f, a, d, top in TELAS:
+        tw.append(f'tl.fromTo("#{tid}", {{opacity:0, scale:0.93}}, {{opacity:1, scale:1, duration:0.25, ease:"expo.out"}}, {a});')
+        tw.append(f'tl.to("#{tid}", {{opacity:0, scale:0.97, duration:0.14, ease:"power2.in"}}, {round(a + d - 0.14, 3)});')
     for w, t, s, o in PUNCH:
         tw.append(f'tl.fromTo("#{w}", {{scale:{round(s * 1.04, 3)}, transformOrigin:"{o}"}}, '
                   f'{{scale:{s}, transformOrigin:"{o}", duration:0.35, ease:"power3.out"}}, {t});')
@@ -253,6 +269,9 @@ def index():
       #ground {{ position: absolute; inset: 0; background: #0d0d0d; }}
       .wrap {{ position: absolute; left: 0; top: 0; width: {W}px; height: {H}px; }}
       .wrap video {{ position: absolute; left: 0; top: 0; width: {W}px; height: {H}px; object-fit: cover; }}
+      .tela {{ position: absolute; left: 160px; width: 760px; height: 704px; border-radius: 26px; overflow: hidden;
+               box-shadow: 0 30px 70px rgba(0,0,0,0.5); outline: 1px solid rgba(255,255,255,0.18); opacity: 0; z-index: 25; }}
+      .tela video {{ position: absolute; left: 0; top: 0; width: 760px; height: 704px; }}
       #dip {{ position: absolute; inset: 0; background: #000; opacity: 0; z-index: 20; }}
     </style>
   </head>
@@ -265,6 +284,7 @@ def index():
         data-automation="{{&quot;version&quot;: 1, &quot;lanes&quot;: [{{&quot;target&quot;: &quot;volume&quot;, &quot;points&quot;: [{{&quot;t&quot;: 0, &quot;v&quot;: 0.22}}, {{&quot;t&quot;: 21.6, &quot;v&quot;: 0.22}}, {{&quot;t&quot;: 22.1, &quot;v&quot;: 0.42}}, {{&quot;t&quot;: 23.1, &quot;v&quot;: 0.42}}, {{&quot;t&quot;: 23.4, &quot;v&quot;: 0.22}}, {{&quot;t&quot;: 33.1, &quot;v&quot;: 0.22}}, {{&quot;t&quot;: 33.6, &quot;v&quot;: 0.6}}, {{&quot;t&quot;: 35.0, &quot;v&quot;: 0.6}}, {{&quot;t&quot;: 35.95, &quot;v&quot;: 0.0}}]}}]}}"></audio>
 {sfx_tags()}
       <audio id="narracao" class="clip" src="assets/audio/narracao.wav" data-start="{VOZ}" data-volume="1" data-track-index="4"></audio>
+{chr(10).join(telas)}
       <div id="dip"></div>
       <div id="graficos" data-composition-id="graficos" data-composition-src="compositions/graficos.html"
         data-start="0" data-duration="{DUR}" data-track-index="2" data-track-kind="graphics"

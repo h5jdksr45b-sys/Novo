@@ -11,6 +11,9 @@
       #ground { position: absolute; inset: 0; background: #0d0d0d; }
       .wrap { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
       .wrap video { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; object-fit: cover; }
+      .tela { position: absolute; left: 160px; width: 760px; height: 704px; border-radius: 26px; overflow: hidden;
+               box-shadow: 0 30px 70px rgba(0,0,0,0.5); outline: 1px solid rgba(255,255,255,0.18); opacity: 0; z-index: 25; }
+      .tela video { position: absolute; left: 0; top: 0; width: 760px; height: 704px; }
       #dip { position: absolute; inset: 0; background: #000; opacity: 0; z-index: 20; }
     </style>
   </head>
@@ -47,6 +50,15 @@
       <audio id="amb3" class="clip" src="assets/sfx-hf/ambiente.mp3" data-start="19.0" data-duration="10.0" data-volume="0.08" data-fade-in="0.5" data-fade-out="0.5" data-track-index="9"></audio>
       <audio id="amb4" class="clip" src="assets/sfx-hf/ambiente.mp3" data-start="28.5" data-duration="7.5" data-volume="0.08" data-fade-in="0.5" data-fade-out="0.5" data-track-index="10"></audio>
       <audio id="narracao" class="clip" src="assets/audio/narracao.wav" data-start="0.3" data-volume="1" data-track-index="4"></audio>
+      <div id="tela1" class="tela" style="top:700px">
+        <video id="tela1-v" class="clip" src="assets/telas/frase-fixa.mp4" data-start="18.45" data-duration="1.4" data-track-index="10" muted playsinline></video>
+      </div>
+      <div id="tela2" class="tela" style="top:700px">
+        <video id="tela2-v" class="clip" src="assets/telas/mapa-crise.mp4" data-start="20.5" data-duration="1.4" data-track-index="11" muted playsinline></video>
+      </div>
+      <div id="tela3" class="tela" style="top:800px">
+        <video id="tela3-v" class="clip" src="assets/telas/escala.mp4" data-start="23.4" data-duration="1.45" data-track-index="12" muted playsinline></video>
+      </div>
       <div id="dip"></div>
       <div id="graficos" data-composition-id="graficos" data-composition-src="compositions/graficos.html"
         data-start="0" data-duration="36.0" data-track-index="2" data-track-kind="graphics"
@@ -57,6 +69,12 @@
     </div>
     <script>
       const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#tela1", {opacity:0, scale:0.93}, {opacity:1, scale:1, duration:0.25, ease:"expo.out"}, 18.45);
+      tl.to("#tela1", {opacity:0, scale:0.97, duration:0.14, ease:"power2.in"}, 19.71);
+      tl.fromTo("#tela2", {opacity:0, scale:0.93}, {opacity:1, scale:1, duration:0.25, ease:"expo.out"}, 20.5);
+      tl.to("#tela2", {opacity:0, scale:0.97, duration:0.14, ease:"power2.in"}, 21.76);
+      tl.fromTo("#tela3", {opacity:0, scale:0.93}, {opacity:1, scale:1, duration:0.25, ease:"expo.out"}, 23.4);
+      tl.to("#tela3", {opacity:0, scale:0.97, duration:0.14, ease:"power2.in"}, 24.71);
       tl.fromTo("#w1", {scale:1.56, transformOrigin:"50% 60%"}, {scale:1.5, transformOrigin:"50% 60%", duration:0.35, ease:"power3.out"}, 1.8);
       tl.fromTo("#w2", {scale:1.664, transformOrigin:"39% 57%"}, {scale:1.6, transformOrigin:"39% 57%", duration:0.35, ease:"power3.out"}, 6.53);
       tl.fromTo("#w4", {scale:1.456, transformOrigin:"28% 66%"}, {scale:1.4, transformOrigin:"28% 66%", duration:0.35, ease:"power3.out"}, 17.89);

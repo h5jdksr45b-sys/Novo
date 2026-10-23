@@ -4,10 +4,8 @@ import {
   calculateCaptionedVideoMetadata,
   captionedVideoSchema,
 } from "./CaptionedVideo";
-import {
-  ComparacaoLadoALado,
-  comparacaoSchema,
-} from "./ComparacaoLadoALado";
+import { ComparacaoLadoALado, comparacaoSchema } from "./ComparacaoLadoALado";
+import { ClipeMusica, DURACAO_SEGUNDOS } from "./ClipeMusica";
 import { MitoApego } from "./MitoApego";
 import { MitoRindo } from "./MitoRindo";
 
@@ -53,6 +51,14 @@ export const RemotionRoot: React.FC = () => {
         id="MitoApego"
         component={MitoApego}
         durationInFrames={450}
+        fps={30}
+        width={1080}
+        height={1920}
+      />
+      <Composition
+        id="ClipeMusica"
+        component={ClipeMusica}
+        durationInFrames={Math.round(DURACAO_SEGUNDOS * 30)}
         fps={30}
         width={1080}
         height={1920}

@@ -158,7 +158,7 @@ def graficos():
                f'        <div id="f5" class="r" style="font-size:34px;margin-top:120px;color:#9a958e">Dr. Fabio Schmidt · Médico · CRM-SP 183549</div>\n'
                f'      </div>\n    </div>')
     tw.append('tl.fromTo("#fim-dim", {opacity:0}, {opacity:1, duration:0.55, ease:"power2.inOut"}, 30.4);')
-    for fid, t0 in (("f1", 31.5), ("f2", 32.6), ("f3", 33.1), ("f4", 33.5), ("f5", 33.85)):
+    for fid, t0 in (("f1", 31.5), ("f2", 32.47), ("f3", 33.1), ("f4", 33.5), ("f5", 33.85)):
         tw.append(f'tl.fromTo("#{fid}", {{opacity:0, filter:"blur(10px)"}}, {{opacity:1, filter:"blur(0px)", duration:0.25, ease:"expo.out"}}, {t0});')
 
     return f"""<template>
@@ -230,6 +230,9 @@ def index():
     <div id="root" data-composition-id="main" data-start="0" data-duration="{DUR}" data-width="{W}" data-height="{H}">
       <div id="ground"></div>
 {chr(10).join(vids)}
+      <!-- Trilha Warm Resolve (Suno): corte de 0,76 s para a abertura cair no corte da sala (22,3 s) e o acorde no 7 Dias (32,5 s) -->
+      <audio id="musica" class="clip" src="assets/audio/musica.m4a" data-start="0" data-duration="{DUR}" data-media-start="0.76" data-volume="1" data-track-index="5"
+        data-automation="{{&quot;version&quot;: 1, &quot;lanes&quot;: [{{&quot;target&quot;: &quot;volume&quot;, &quot;points&quot;: [{{&quot;t&quot;: 0, &quot;v&quot;: 0.22}}, {{&quot;t&quot;: 21.6, &quot;v&quot;: 0.22}}, {{&quot;t&quot;: 22.1, &quot;v&quot;: 0.42}}, {{&quot;t&quot;: 23.1, &quot;v&quot;: 0.42}}, {{&quot;t&quot;: 23.4, &quot;v&quot;: 0.22}}, {{&quot;t&quot;: 33.1, &quot;v&quot;: 0.22}}, {{&quot;t&quot;: 33.6, &quot;v&quot;: 0.6}}, {{&quot;t&quot;: 35.0, &quot;v&quot;: 0.6}}, {{&quot;t&quot;: 35.95, &quot;v&quot;: 0.0}}]}}]}}"></audio>
       <audio id="narracao" class="clip" src="assets/audio/narracao.wav" data-start="{VOZ}" data-volume="1" data-track-index="4"></audio>
       <div id="dip"></div>
       <div id="graficos" data-composition-id="graficos" data-composition-src="compositions/graficos.html"

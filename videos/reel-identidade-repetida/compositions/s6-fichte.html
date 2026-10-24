@@ -32,7 +32,7 @@
     <div id="s6-alca" data-layout-ignore><i></i><b></b></div>
     <div id="s6-texto">O eu e o outro se limitam. Quando a relação muda, a fronteira se redesenha.</div>
     <div id="s6-serif">O eu é uma ação que se refaz.</div>
-    <div id="s6-selo"><strong>Hipótese editorial</strong><span>Fichte fala da consciência em geral, não de doença. Aqui ele serve como lente, não como causa.</span></div>
+    <div id="s6-selo"><strong>Hipótese editorial</strong><span>Fichte fala da consciência em geral. Aqui ele é lente, não causa.</span></div>
   </div>
   <script>
     (function () {
@@ -50,8 +50,8 @@
         tl.to("#s6-alca", { x: X(pos[i]), duration: 0.8, ease: "power2.inOut" }, t);
       }
       tl.fromTo("#s6-texto", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 1.2);
-      tl.fromTo("#s6-serif", { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: 0.6, ease: "power2.out" }, 2.0);
-      tl.fromTo("#s6-selo", { opacity: 0, scale: 0.96 }, { opacity: 1, scale: 1, duration: 0.4, ease: "power3.out" }, 2.4);
+      tl.fromTo("#s6-serif", { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: 0.6, ease: "power2.out" }, 2.4);
+      tl.fromTo("#s6-selo", { opacity: 0, scale: 0.96 }, { opacity: 1, scale: 1, duration: 0.4, ease: "power3.out" }, 2.9);
       window.__timelines["s6"] = tl;
     })();
   </script>

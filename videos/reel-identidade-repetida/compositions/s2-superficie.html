@@ -25,12 +25,12 @@
       tl.fromTo("#s2-topo", { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: 0.4, ease: "power3.out" }, 0);
       const ws = ["#s2-w1", "#s2-w2", "#s2-w3", "#s2-w4"];
       ws.forEach((w, i) => {
-        const t = 0.35 + i * 0.5;
-        tl.fromTo(w, { yPercent: 110 }, { yPercent: 0, duration: 0.28, ease: "expo.out" }, t);
-        if (i < ws.length - 1) tl.fromTo(w, { yPercent: 0 }, { yPercent: -110, duration: 0.28, ease: "expo.in", immediateRender: false }, t + 0.42);
+        const t = 0.15 + i * 0.3;
+        tl.fromTo(w, { yPercent: 110 }, { yPercent: 0, duration: 0.2, ease: "expo.out" }, t);
+        if (i < ws.length - 1) tl.fromTo(w, { yPercent: 0 }, { yPercent: -110, duration: 0.2, ease: "expo.in", immediateRender: false }, t + 0.26);
       });
-      tl.fromTo("#s2-base", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 2.1);
-      tl.fromTo("#s2-claro", { clipPath: "inset(100% 6% 0% 6% round 60px)" }, { clipPath: "inset(0% 0% 0% 0% round 0px)", duration: 0.55, ease: "expo.inOut" }, 3.2);
+      tl.fromTo("#s2-base", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, 0.55);
+      tl.fromTo("#s2-claro", { clipPath: "inset(100% 6% 0% 6% round 60px)" }, { clipPath: "inset(0% 0% 0% 0% round 0px)", duration: 0.45, ease: "expo.inOut" }, 1.25);
       window.__timelines["s2"] = tl;
     })();
   </script>

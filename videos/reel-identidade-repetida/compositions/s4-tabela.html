@@ -55,16 +55,17 @@
 
       const tl = gsap.timeline({ paused: true });
       tl.fromTo("#s4-titulo", { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: 0.5, ease: "power3.out" }, 0.05);
-      tl.fromTo(".s4-cab", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 0.4);
+      tl.fromTo(".s4-cab", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 0.2);
+      tl.fromTo(".s4-esq", { opacity: 0, scaleY: 0.5, transformOrigin: "50% 0%" }, { opacity: 1, scaleY: 1, duration: 0.35, ease: "power3.out", stagger: 0.1 }, 0.1);
       [1, 2, 3, 4].forEach((n, i) => {
-        const t = 0.8 + i * 0.38;
+        const t = 1.0 + i * 0.3;
         tl.fromTo("#s4-d" + n, { opacity: 0, x: 60 }, { opacity: 1, x: 0, duration: 0.4, ease: "power3.out" }, t);
         tl.fromTo(".s4-no" + n, { scale: 0, transformOrigin: "50% 50%" }, { scale: 1, duration: 0.35, ease: "back.out(2)", stagger: 0.08 }, t + 0.1);
         tl.fromTo(".s4-arco" + n, { strokeDasharray: 200, strokeDashoffset: 200 }, { strokeDashoffset: 0, duration: 0.45, ease: "power2.inOut", stagger: 0.12 }, t + 0.25);
       });
-      tl.fromTo(".s4-esq", { opacity: 1 }, { opacity: 0.45, duration: 0.5 }, 3.0);
-      tl.fromTo("#s4-rect", { strokeDasharray: 2400, strokeDashoffset: 2400 }, { strokeDashoffset: 0, duration: 0.8, ease: "power2.inOut" }, 3.0);
-      tl.fromTo("#s4-rot", { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: 0.6, ease: "power3.out" }, 3.7);
+      tl.to(".s4-esq", { opacity: 0.45, duration: 0.4 }, 2.4);
+      tl.fromTo("#s4-rect", { strokeDasharray: 2400, strokeDashoffset: 2400 }, { strokeDashoffset: 0, duration: 0.6, ease: "power2.inOut" }, 2.4);
+      tl.fromTo("#s4-rot", { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: 0.5, ease: "power3.out" }, 2.6);
       window.__timelines["s4"] = tl;
     })();
   </script>

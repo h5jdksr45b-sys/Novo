@@ -4,5 +4,17 @@
   "scripts": {
     "render": "remotion render src/index.ts Anuncio out/anuncio-protocolo-7-dias.mp4",
     "still": "remotion still src/index.ts Anuncio"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.535",
+    "lucide-react": "0.468.0",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "remotion": "4.0.535"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.7",
+    "@types/web": "0.0.166",
+    "typescript": "5.9.3"
   }
 }

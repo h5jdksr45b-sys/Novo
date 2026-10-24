@@ -1,0 +1,86 @@
+# Aprendizados com o Dr. Fabio
+
+Correções, rejeições e aprovações dele, tiradas de 48 sessões entre 19/09 e 24/10/2026. As frases entre aspas são dele, copiadas como ele escreveu. Cada regra vem com a prova.
+
+Isto vale junto com as preferências fixas dele (voz, título profissional, fontes). Quando uma correção daqui parecer bater com uma preferência fixa, siga a mais específica e avise.
+
+## 1. Como responder
+
+- Responda só o que ele perguntou, curto. "Não perguntei isso", "Só a fórmula", "Só fala OK", "mande escrito só".
+- Quando ele perguntar qual trecho, o que ajustar ou onde colocar, responda em texto e não mexa em arquivo. "não muda o vídeo só vê qual trecho ponho", "só me fala oq ajusto aqui no CapCut".
+- Sem ressalva de que não dá para prever. Compare com os posts gigantes dele e dê um veredito sincero, uma vez, antes de ele gravar ou postar. "Pule a parte de não é certeza já sei", "Consegue sim / É só fazer comparações", "Ficou bom? Sincero", "Brutalmente sincero".
+- Avise todo limite técnico no começo, não aos poucos depois que ele já gravou. "eu pedi pra vc passo a paso e depois que gravo flopa".
+- Decida e faça. "Decida tudo", "sim pra tudo só faz", "Vai logo".
+- Faça o trabalho em vez de devolver para ele. "esse comando é impossível / Vou ficar horas".
+- Entregue o arquivo pronto e usável: PNG separado um a um, texto escrito no chat, vídeo fechado. "Não quero github quero as imagens", "Mande imagens png separada uma a uma".
+- Links: um por mensagem, senão só aparece a prévia de um.
+- Na quantidade pedida. "16 imagens??? Pq tudo isso? / são 5 dias / Um por dia", "(máximo 4)".
+- Opções de verdade diferentes, cada uma com por que pode funcionar e por que tende a não flopar. "Explica 1. Opções 2. Pq podem funcionar mto 3. Pq não tendem flop", "3 TOTALMWNRE diferentes".
+- Não dê opinião moral ou estratégica que ele não pediu. Chamar o vídeo da Tina de algo que dilui a autoridade médica gerou "Vc foi homofóbico". "Esquece suas sugestões não vou seguir".
+- Análise precisa de fundamento. "Tudo q vc falou não tem fundamento", "Faça funcionar e tenha embasamento técnico".
+- Use a ferramenta que ele nomear: CutCraft, Remotion, GPT Image 2.5. "Cutcraft como eu pedi desde o início".
+- Prefira skills profissionais de fora às que foram criadas aqui. "(não as que criamos)", "alguma skill que não formos nós que fizemos".
+
+## 2. Nunca genérico, nunca repetido
+
+O motivo central das reclamações.
+
+- Clichê é rejeitado. "Ta ruim ta clichê", "Está mto clichê tente outros", "Todas vão flopar", "Não está uma bosta?".
+- Não repita frase, gancho, sugestão ou música de uma rodada ou sessão anterior. "A mesma frase não / Sempre usa isso / Seja mais criativo", "Sempre a msm indicação? Não dá", "Fale outro diferente que não tenh nos que já fizemos", "Vc copiou".
+- Revisão tem que mudar de verdade. "Vc mandou igual".
+- Mas não estrague o que funcionava. Na revisão, mude a cena e não a frase boa. "é o gancho agora tá zoado", "Não dá pra deixar a anterior e mudar a cena só ?", "A outra tava melhor".
+- Se o tema é bom, mantenha o tema e suba o nível. "Se aquele tema era bom mantém / Mas eu quero que seja bom como os grandes".
+- Quando ele disser para não mudar o texto, não mude uma palavra. "SEM / UDAR NADA Q TÁ ESCRITO / MAS COM VISUAL MELHOR".
+- Os "motores" antigos (conjuntos de regras) dele foram abandonados por ele mesmo. "Esquece meus motores estão me fazendo flopar". Não aplique fórmula às cegas.
+
+## 3. Capa e gancho
+
+- A referência é o próprio post gigante dele. "Olha como eram as capas dos meus virais", "bom como os grandes", "Está lado a lado com meus gigantes / Então tem que ir pro feed".
+- A regra dele: só vai pro feed o que fica lado a lado com os gigantes. Senão vai como teste ou não sai. "Senão eu vou no trial ou lixo".
+- Imagem e frase precisam ter uma ligação que se entende de relance. "Tem que ter uma ligação genial que prenda institinvamente ao de olhar", "consonância da imagem com o texto", "bate olho entende", "Não é uma metáfora rápida".
+- Gancho contraintuitivo e forte. O modelo que ele deu: "borderline adoece a família ou a família adoece o borderline?". "Quero outras opções mais fortes / Contraintuitivas".
+- Nenhuma frase pode começar com pronome, sobretudo ele ou ela. "Não pode começar com pronome", "Audite para não ter nenhuma frase começando com ele ou ela".
+- A palavra borderline vai na capa. "Postei mas não sei pq não tem borderline na capa".
+- Linguagem neutra de gênero quando couber. "Faz neutro genero".
+- No vídeo, o texto de abertura na tela não repete o gancho falado. "início viral texto na tela que prenda sem repetir o gancho".
+- Ele desconfia de gancho pedido por fórmula. "sempre q Pedi isso deu merda". Gancho tem que nascer de cena ou contraste real.
+- Português natural, nada que soe tradução do inglês. "tire 'da sala' nada a ver isso deve ser uma forma de falar em inglês traduzida".
+- Nenhum ângulo que reforce estigma, soe ameaçador ou provoque briga. "Vai parecer q tô falando que borderline tem treco de pedir dinheiro", "parece que induz ameaçar", "esse final não tá legal vá dar briga".
+- Sem drama e sem comédia sem querer. "Drama não", "o começo do um é levemente cômico".
+
+## 4. Carrossel e imagem
+
+- Carrossel sem fundo preto. "Não quero fundo preto", "Dispare sem esse estilo fundo preto".
+- Legível. "Prexiso que fique mais legível". Quebra de linha ruim é erro: "A palavra 'ir' isolada ficou estranha".
+- Menos informação por slide, padronizado, objetivo. "menos informação por slide e mais padronizado", "não está mto objetivo".
+- No miolo, alternar tipografia pura, tipografia com imagem de apoio e tipografia presa a uma imagem, sempre com hierarquia visual. "oscilar entre tipografia, tipografia + imagem de apoio", "pra não ficar monótono". Em um slide, quebrar o tom ou as cores.
+- Misturar fonte serifada com sem serifa. "Misturar uma serifada com não serifada".
+- Criativo sem exagero. "Seja criativo sem exageros".
+- Imagens: GPT Image 2.5, alta qualidade, 9:16 em Stories. "Gpt image 2.5 sunbust sempre alta qualidade".
+- Nada de textura estranha, pele com cara de IA, rosto distorcido ou sangue. "sem deixar a imagem com textura estranha", "a textura das pessoas", "rosto vermelho distorcido", "O sangue não atrapalha?".
+- Chega de mão e celular. "não aguento mais mão e celular". Sem motivo de eletrocardiograma.
+- Use os estilos de referência que ele manda, um de cada, sem copiar o conteúdo deles e sem exagerar no uso. "Use os estilos q mandei um de cada", "sem considerar conteúdo deles", "Não precisa usar tanto q mandei".
+- Stories de venda precisam de imagem, ícone ou gráfico, não só texto. "Não quero só texto na tela".
+
+## 5. Vídeo
+
+- Profissional, dinâmico, cinematográfico, sem exagero. "Está muito simples e pouco dinâmico e lento", "Precisa ser profissional mas não deixar assim", "Mais curto".
+- Legenda: no máximo três palavras por vez, destaques maiores, sem quebrar feio, com hierarquia, destaques em vermelho e alternando serifada com sem serifa. "Três palavras por vez na legenda no máximo", "E destaques maiores", "A legenda pequena tudo errado também quebrando".
+- Tipografia forte e movimento que desliza. "melhore a porra das topografias bold", "Tipografia e movimentos tem q deslizar".
+- Efeitos sonoros baixos, e só os da biblioteca já extraída. "Sfx baixos", "só aqueles que já tínhamos extraído lembra?". Som fora de lugar ou piano sem ligação é erro. Impacto só com pedido.
+- Padrão de edição aprovado: `memoria/efeitos-video-aprovados.md`. Use só ele, salvo pedido. "os únicos efeitos qu tenhamos guardados sejam os do vídeo que te mandei".
+- Narração: não cortar o começo das palavras, tirar silêncio, voz natural e com ritmo. "Está cortando início da palavra e mto silêncio", "parece literalmente um robô", "sussurra as vezes fica mto teatral".
+- CTA final só com imagem e efeito sonoro, sem narração, quando ele pedir assim.
+- Respeite escolhas dele no material. "o corte é proposital".
+- Vídeo vai sempre com legenda do post e capa. "Mande tbm descrição e Thumb".
+- Arquivos acima de cerca de 30 MB não sobem no chat dele.
+- Música para o Suno: um prompt de até 400 caracteres, com marcação de tempo, volume estável, nem triste nem pesada. "Tá mto triste quero algo mais presente", "Ficou mto pesado", "Coloque timestumps".
+
+## 6. Sinais que ele mesmo deu sobre o que funcionou
+
+Observação dele ou de post. Não é regra nem previsão.
+
+- Reels com o rosto dele: ele afirma que flopam. "Tudo q aparece meu rosto flopa". Os dados de out/2026 mostram Reels recentes com bem menos views que os carrosséis (ver `conta.md`). Os dados não separam Reels com e sem rosto.
+- Família e estigma é o tema que ele vê como viral. "Tem um vídeo que bombou disso".
+- "Quero sumir" foi citado por ele como um viral dele.
+- Aprovados: capa da boia; capa sépia "BORDERLINE NÃO PEGA / O ESTIGMA PEGA NA FAMÍLIA INTEIRA"; clipe com Remotion e gráficos de interface ("Nossa ficou mto bom"); vídeo vertical cinematográfico de 22/10 ("não está com cara de flopar").

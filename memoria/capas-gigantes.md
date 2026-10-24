@@ -35,3 +35,15 @@ Ele mandou três slides de explicação e disse que vale colocar como formato.
 1. Formatos de carrossel: comparação (ruim x bom), tutorial, nativo (foto dele no design), compilação (guia), história (contar o que sabe).
 2. Estrutura: slide de gancho (confirmar o gancho no slide 2 e empurrar a pessoa), slides de valor (pouco texto, muito visual), slide de CTA (imagem dele + uma ação simples).
 3. Design: duas fontes (título + corpo), três cores (fundo + texto + destaque), um estilo de imagem constante no carrossel inteiro.
+
+## Molde de legenda (análise do Vamos a pedido dele, 24/10)
+
+Base: só curtidas e comentários públicos; envios e alcance dos carrosséis não entraram. Observação, não regra.
+
+- Curta, de 3 a 6 linhas. Tamanho sozinho não separa bom de ruim.
+- Abre pela cena ou pelo destinatário do envio. Quieta na mesa abre com "Manda pra quem te viu quieta na mesa e achou que era timidez."
+- Frases de uma linha, uma ideia cada, e um parágrafo curto de absolvição ou de limite.
+- Fecha com envio a uma pessoa específica (quem te viu quieta, quem sempre recebe o seu pior). Envio genérico ("alguém que precisa ler") rendeu pouco.
+- Assinatura no fim: Dr. Fabio Schmidt, Médico, CRM-SP 183549.
+- Os fracos abriram com pergunta, estatística ou produto, ficaram em tom de aula, ou fecharam com link na bio ou COMEÇAR.
+- Cacto e Família adoece tiveram muitos comentários por pedirem palavra-chave e depoimento; para alcance orgânico, o envio pesa mais.

@@ -27,4 +27,20 @@ para antes da parede; configurações com intensidade de fábrica e botão de re
 que não muda nada; folha de envio no final. Barra de abas e toques na tela em
 todas as telas.
 
+## Versão 3: meio da música (borderline-a-intensa-meio.mp4, capa-meio.png)
+
+Pedido do Dr. Fabio em 24/10: outro trecho. Corte de 0:33 a 0:59 do original
+(de "Se desmarca nosso encontro" até "que eu sinto em alta corrente"), 26 s de
+música com fade curto, mais folha de envio de 2 s. Total: 28 s.
+Composição: `reels-remotion/src/BorderlineIntensa/Meio.tsx`. A capa vem da
+composição `BorderlineIntensaMeioCapa`, que troca a letra pelo título para a
+palavra borderline aparecer.
+
+Telas: agenda com encontro desmarcado e sensação correndo até o fim da prancha;
+terapia com dois anos e balança que para de oscilar; respiração e modo descanso;
+gastos de repente até a barra do aluguel; grupo bonde das intensas com selo
+consciente; rotina da noite com chá marcado e diário subindo para o primeiro
+lugar; aviso com ponteiro em alta corrente. Chamada final: Manda pra quem ainda
+acha que não tem jeito.
+
 Pendente de aprovação do Dr. Fabio.

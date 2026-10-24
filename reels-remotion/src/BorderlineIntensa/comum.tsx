@@ -336,3 +336,72 @@ export const Switch: React.FC<{ ligado: number }> = ({ ligado }) => (
 );
 
 export const fontes = { Inter, Montserrat, Playfair };
+
+export const Avatar: React.FC<{ tam?: number; cor?: string }> = ({ tam = 64, cor = "#2E2E2E" }) => (
+  <div style={{ width: tam, height: tam, borderRadius: tam / 2, background: cor, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
+    {Icones.pessoa("#5A5A5A", tam * 0.55)}
+  </div>
+);
+
+export const BarraTexto: React.FC<{ largura: number; alto?: number }> = ({ largura, alto = 18 }) => (
+  <div style={{ width: largura, height: alto, borderRadius: alto / 2, background: CARD3 }} />
+);
+
+// Cartão final: chamada grande e folha de envio com o botão sendo tocado.
+export const FolhaEnvio: React.FC<{
+  t: number;
+  fps: number;
+  frame: number;
+  em: number;
+  linhas: [string, string, string];
+}> = ({ t, fps, frame, em, linhas }) => {
+  if (t < em) {
+    return null;
+  }
+  const s = spring({ frame: frame - Math.round((em + 0.1) * fps), fps, config: { damping: 18, stiffness: 150 } });
+  const s2 = spring({ frame: frame - Math.round((em + 0.5) * fps), fps, config: { damping: 18, stiffness: 150 } });
+  const enviaEm = em + 1.25;
+  const enviado = suave(t, enviaEm + 0.1, enviaEm + 0.4);
+  return (
+    <div style={{ position: "absolute", inset: 0 }}>
+      <div style={{ position: "absolute", left: 80, top: 330, opacity: s, transform: `translateY(${(1 - s) * 40}px)`, fontFamily: Montserrat, fontWeight: 800, fontSize: 92, lineHeight: 1.04, letterSpacing: -2, color: WHITE }}>
+        {linhas[0]}
+        <br />
+        {linhas[1]}
+        <br />
+        <span style={{ fontFamily: Playfair, fontStyle: "italic", fontWeight: 600, color: RED, fontSize: 120, letterSpacing: 0 }}>{linhas[2]}</span>
+      </div>
+      <div style={{ position: "absolute", left: 100, width: 800, top: 760, opacity: s2, transform: `translateY(${(1 - s2) * 50}px)`, background: CARD, border: `2px solid ${BORDER}`, borderRadius: 44, padding: "40px 60px", fontFamily: Inter, display: "flex", flexDirection: "column", gap: 28, boxShadow: "0 30px 80px rgba(0,0,0,0.55)" }}>
+        <Rotulo>Enviar para</Rotulo>
+        <div style={{ display: "flex", gap: 26 }}>
+          {[0, 1, 2, 3, 4].map((i) => (
+            <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 10 }}>
+              <div style={{ position: "relative" }}>
+                <Avatar tam={92} cor={i === 1 ? "#3A3A3A" : "#2E2E2E"} />
+                {i === 1 && enviado > 0 && (
+                  <div style={{ position: "absolute", right: -6, bottom: -6, width: 38, height: 38, borderRadius: 19, background: RED, display: "flex", alignItems: "center", justifyContent: "center", transform: `scale(${enviado})` }}>
+                    {Icones.check(WHITE, 24)}
+                  </div>
+                )}
+              </div>
+              <BarraTexto largura={64} alto={12} />
+            </div>
+          ))}
+        </div>
+        <div style={{ height: 2, background: BORDER }} />
+        <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
+          <div style={{ flex: 1, height: 70, borderRadius: 35, background: CARD2, display: "flex", alignItems: "center", padding: "0 26px", fontSize: 26, color: MUTED, fontWeight: 500 }}>
+            {enviado > 0.5 ? "enviado" : "escrever mensagem"}
+          </div>
+          <div style={{ width: 70, height: 70, borderRadius: 35, background: RED, display: "flex", alignItems: "center", justifyContent: "center", transform: `scale(${1 - 0.15 * Math.sin(Math.min(1, prog(t, enviaEm, enviaEm + 0.3)) * Math.PI)})` }}>
+            {Icones.enviar(WHITE, 34)}
+          </div>
+        </div>
+        <Toque t={t} em={enviaEm} x={705} y={303} />
+      </div>
+      <div style={{ position: "absolute", left: 80, top: 1360, opacity: s2, fontFamily: Inter, fontWeight: 500, fontSize: 30, color: MUTED }}>
+        Dr. Fabio Schmidt, médico, CRM-SP 183549
+      </div>
+    </div>
+  );
+};

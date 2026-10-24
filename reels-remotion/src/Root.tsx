@@ -12,6 +12,7 @@ import { MitoApego } from "./MitoApego";
 import { MitoRindo } from "./MitoRindo";
 import { BorderlineIntensa } from "./BorderlineIntensa";
 import { BorderlineIntensaInicio } from "./BorderlineIntensa/Inicio";
+import { BorderlineIntensaMeio } from "./BorderlineIntensa/Meio";
 
 // Each <Composition> is an entry in the sidebar!
 
@@ -66,6 +67,23 @@ export const RemotionRoot: React.FC = () => {
         fps={30}
         width={1080}
         height={1920}
+      />
+      <Composition
+        id="BorderlineIntensaMeio"
+        component={BorderlineIntensaMeio}
+        durationInFrames={850}
+        fps={30}
+        width={1080}
+        height={1920}
+      />
+      <Composition
+        id="BorderlineIntensaMeioCapa"
+        component={BorderlineIntensaMeio}
+        durationInFrames={850}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{ capa: true }}
       />
       <Composition
         id="MitoApego"

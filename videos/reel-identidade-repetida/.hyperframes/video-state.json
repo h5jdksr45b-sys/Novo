@@ -551,5 +551,16 @@
         "attribution": "inputs-changed"
       }
     ]
-  }
+  },
+  "renders": {
+    "latest": {
+      "id": "cddf0383-e3c7-4599-ba98-58be6e38d1c3",
+      "completedAt": 1792804376309,
+      "output": "/home/user/Novo/videos/reel-identidade-repetida/renders/rascunho-identidade-repetida.mp4",
+      "status": "completed",
+      "revision": null
+    },
+    "retainedRevisions": []
+  },
+  "pendingArtifactCleanup": []
 }

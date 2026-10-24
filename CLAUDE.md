@@ -15,7 +15,9 @@ Se a peça bater em algo que ele já rejeitou, refaça antes de entregar.
 
 ## Quando ele corrigir, rejeitar ou aprovar algo
 
-Registre na hora em `memoria/correcoes.md`, com data e a frase dele, e faça commit e push. Não espere o fim da sessão.
+Registre na hora em `memoria/correcoes.md`, com data e a frase dele. Não espere o fim da sessão.
+
+Grave direto no branch `main`, não no branch da sessão. O Dr. Fabio autorizou isso de forma permanente em 24/10/2026, só para arquivos dentro de `memoria/`. Use a ferramenta do GitHub que cria ou atualiza arquivo (`create_or_update_file`, branch `main`), lendo antes a versão atual para não apagar o que outra sessão escreveu. Qualquer outro arquivo segue o fluxo normal de branch.
 
 ## Por que isto existe
 

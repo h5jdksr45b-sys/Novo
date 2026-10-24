@@ -1,0 +1,8 @@
+{
+  "name": "anuncio-protocolo-7-dias",
+  "private": true,
+  "scripts": {
+    "render": "remotion render src/index.ts Anuncio out/anuncio-protocolo-7-dias.mp4",
+    "still": "remotion still src/index.ts Anuncio"
+  }
+}

@@ -2,7 +2,6 @@ import React from "react";
 import {
   AbsoluteFill,
   Img,
-  OffthreadVideo,
   Sequence,
   interpolate,
   spring,
@@ -12,107 +11,60 @@ import {
 } from "remotion";
 import {
   CalendarCheck,
-  DoorClosed,
+  Check,
+  Clock,
   EyeOff,
+  Handshake,
   HeartHandshake,
-  House,
   Lightbulb,
   MessageCircle,
   MessageCircleHeart,
-  Moon,
   MousePointerClick,
   Repeat,
-  RotateCcw,
   ShieldCheck,
   Timer,
-  Clock,
   VolumeX,
-  Handshake,
-  Check,
   type LucideIcon,
 } from "lucide-react";
 
-// Referência: edição rápida em P&B, flashes em negativo, palavras vermelhas em
-// serifada aparecendo uma a uma e palavra gigante atrás da pessoa.
+// Referência: cortes a cada meio segundo, P&B, flashes em negativo, uma palavra
+// gigante por corte, vermelho em serifada, palavra atrás da pessoa.
 
 const VERMELHO = "#CC0000";
 const FUNDO = "#0D0D0D";
 const SANS = "Montserrat";
 const SERIF = "Playfair";
+const BATIDA = 15; // meio segundo a 30 fps
 
 const fontes = `
 @font-face { font-family: ${SANS}; font-weight: 800; src: url(${staticFile("fonts/montserrat-latin-800-normal.woff2")}) format("woff2"); }
 @font-face { font-family: ${SANS}; font-weight: 900; src: url(${staticFile("fonts/montserrat-latin-900-normal.woff2")}) format("woff2"); }
-@font-face { font-family: ${SERIF}; font-style: italic; font-weight: 800; src: url(${staticFile("fonts/playfair-display-latin-800-italic.woff2")}) format("woff2"); }
 @font-face { font-family: ${SERIF}; font-style: italic; font-weight: 900; src: url(${staticFile("fonts/playfair-display-latin-900-italic.woff2")}) format("woff2"); }
 `;
 
-// Tratamento das cenas: preto e branco quente, contraste alto.
-const PB = "grayscale(1) sepia(0.18) contrast(1.18) brightness(0.88)";
-const NEGATIVO = "grayscale(1) invert(1) contrast(1.3)";
+const pb = (luz = 1.1) => `grayscale(1) sepia(0.12) contrast(1.15) brightness(${luz})`;
+const NEGATIVO = "grayscale(1) invert(1) contrast(1.4)";
 
-// Margens: nada nos 20% de baixo nem colado na lateral direita.
-const ESQ = 80;
-const DIR = 150;
+// ---------- Imagem ----------
 
-type Estilo = "sans" | "serif" | "pequeno";
+type Quadro = { src: string; zoom?: number; ox?: number; oy?: number; luz?: number; cor?: boolean };
 
-const estiloTexto = (estilo: Estilo, tamanho: number, cor: string): React.CSSProperties => ({
-  fontFamily: estilo === "serif" ? SERIF : SANS,
-  fontStyle: estilo === "serif" ? "italic" : "normal",
-  fontWeight: estilo === "pequeno" ? 800 : 900,
-  fontSize: tamanho,
-  lineHeight: estilo === "serif" ? 0.95 : 1.05,
-  letterSpacing: estilo === "serif" ? -2 : estilo === "pequeno" ? 1 : -1,
-  textTransform: estilo === "serif" ? "none" : "uppercase",
-  color: cor,
-  textShadow: "0 4px 24px rgba(0,0,0,0.55)",
-});
-
-// Entrada que desliza: sobe, ganha nitidez e opacidade.
-const Texto: React.FC<{
-  de: number;
-  y: number;
-  x?: number;
-  estilo?: Estilo;
-  tamanho?: number;
-  cor?: string;
-  alinhar?: "left" | "center";
-  children: React.ReactNode;
-}> = ({ de, y, x = ESQ, estilo = "sans", tamanho = 64, cor = "#fff", alinhar = "left", children }) => {
-  const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
-  const p = spring({ frame: frame - de, fps, config: { damping: 18, stiffness: 140 } });
-  if (frame < de) return null;
-  return (
-    <div
-      style={{
-        position: "absolute",
-        top: y,
-        left: alinhar === "center" ? ESQ : x,
-        right: DIR,
-        textAlign: alinhar,
-        opacity: p,
-        transform: `translateY(${(1 - p) * 46}px)`,
-        filter: `blur(${(1 - p) * 14}px)`,
-        ...estiloTexto(estilo, tamanho, cor),
-      }}
-    >
-      {children}
-    </div>
-  );
-};
-
-// Imagem parada com empurrão lento e um pequeno punch no corte.
-const Cena: React.FC<{ src: string; dur: number; filtro?: string; origem?: string }> = ({
+// Um corte: enquadramento próprio, punch de entrada e tremida leve.
+const Corte: React.FC<Quadro & { dur: number; tremida?: boolean }> = ({
   src,
+  zoom = 1,
+  ox = 50,
+  oy = 50,
+  luz = 1.1,
+  cor = false,
   dur,
-  filtro = PB,
-  origem = "50% 40%",
+  tremida = true,
 }) => {
   const frame = useCurrentFrame();
-  const punch = interpolate(frame, [0, 5], [1.07, 1], { extrapolateRight: "clamp" });
-  const empurra = interpolate(frame, [0, dur], [1.02, 1.1]);
+  const punch = interpolate(frame, [0, 4], [1.12, 1], { extrapolateRight: "clamp" });
+  const deriva = interpolate(frame, [0, dur], [1, 1.06]);
+  const tx = tremida ? Math.sin(frame * 1.7) * 3 : 0;
+  const ty = tremida ? Math.cos(frame * 1.3) * 3 : 0;
   return (
     <AbsoluteFill style={{ overflow: "hidden" }}>
       <Img
@@ -121,163 +73,47 @@ const Cena: React.FC<{ src: string; dur: number; filtro?: string; origem?: strin
           width: "100%",
           height: "100%",
           objectFit: "cover",
-          transform: `scale(${punch * empurra})`,
-          transformOrigin: origem,
-          filter: filtro,
+          transformOrigin: `${ox}% ${oy}%`,
+          transform: `translate(${tx}px, ${ty}px) scale(${zoom * punch * deriva})`,
+          filter: cor ? `sepia(0.1) contrast(1.05) brightness(${luz})` : pb(luz),
         }}
       />
     </AbsoluteFill>
   );
 };
 
-const Flash: React.FC<{ src: string }> = ({ src }) => (
-  <AbsoluteFill>
-    <OffthreadVideo src={staticFile(src)} muted style={{ filter: NEGATIVO, width: "100%", height: "100%", objectFit: "cover" }} />
+const Negativo: React.FC<{ src: string; zoom?: number; ox?: number; oy?: number }> = ({ src, zoom = 1.3, ox = 50, oy = 50 }) => (
+  <AbsoluteFill style={{ overflow: "hidden", background: "#fff" }}>
+    <Img
+      src={staticFile(src)}
+      style={{ width: "100%", height: "100%", objectFit: "cover", transformOrigin: `${ox}% ${oy}%`, transform: `scale(${zoom})`, filter: NEGATIVO }}
+    />
   </AbsoluteFill>
 );
 
-const FlashBranco: React.FC<{ dur?: number }> = ({ dur = 3 }) => {
+// Vazamento de luz quente na entrada do corte.
+const Luz: React.FC = () => {
   const frame = useCurrentFrame();
-  return <AbsoluteFill style={{ background: "#fff", opacity: interpolate(frame, [0, dur], [0.9, 0], { extrapolateRight: "clamp" }) }} />;
-};
-
-// Ícone em selo de vidro que entra com mola.
-const Selo: React.FC<{
-  de: number;
-  x: number;
-  y: number;
-  Icone: LucideIcon;
-  tamanho?: number;
-  cor?: string;
-  fundo?: string;
-}> = ({ de, x, y, Icone, tamanho = 96, cor = "#fff", fundo = "rgba(255,255,255,0.12)" }) => {
-  const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
-  const p = spring({ frame: frame - de, fps, config: { damping: 12, stiffness: 180 } });
-  if (frame < de) return null;
+  const op = interpolate(frame, [0, 6], [0.55, 0], { extrapolateRight: "clamp" });
   return (
-    <div
+    <AbsoluteFill
       style={{
-        position: "absolute",
-        left: x,
-        top: y,
-        width: tamanho,
-        height: tamanho,
-        borderRadius: tamanho,
-        background: fundo,
-        border: "2px solid rgba(255,255,255,0.28)",
-        backdropFilter: "blur(10px)",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        transform: `scale(${p})`,
-        opacity: Math.min(1, p * 1.4),
-        boxShadow: "0 10px 30px rgba(0,0,0,0.35)",
+        opacity: op,
+        mixBlendMode: "screen",
+        background: "radial-gradient(circle at 15% 20%, rgba(255,140,60,0.9), rgba(204,0,0,0.35) 40%, transparent 70%)",
       }}
-    >
-      <Icone size={tamanho * 0.5} color={cor} strokeWidth={2.2} />
-    </div>
+    />
   );
 };
 
-// Pílula de interface com ícone e texto.
-const Pilula: React.FC<{ de: number; x: number; y: number; Icone: LucideIcon; children: React.ReactNode; destaque?: boolean }> = ({
-  de,
-  x,
-  y,
-  Icone,
-  children,
-  destaque = false,
-}) => {
-  const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
-  const p = spring({ frame: frame - de, fps, config: { damping: 16, stiffness: 160 } });
-  if (frame < de) return null;
-  return (
-    <div
-      style={{
-        position: "absolute",
-        left: x,
-        top: y,
-        display: "flex",
-        alignItems: "center",
-        gap: 18,
-        padding: "20px 34px 20px 24px",
-        borderRadius: 999,
-        background: destaque ? VERMELHO : "rgba(20,20,20,0.55)",
-        border: destaque ? "none" : "2px solid rgba(255,255,255,0.25)",
-        backdropFilter: "blur(12px)",
-        transform: `translateX(${(1 - p) * -60}px)`,
-        opacity: p,
-        ...estiloTexto("pequeno", 36, "#fff"),
-        textShadow: "none",
-      }}
-    >
-      <Icone size={44} color="#fff" strokeWidth={2.4} />
-      {children}
-    </div>
-  );
-};
+const Sombra: React.FC = () => (
+  <AbsoluteFill style={{ background: "radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 35%, rgba(0,0,0,0.55) 100%)" }} />
+);
 
-// Toque na tela: círculo que encolhe e depois abre em onda.
-const Toque: React.FC<{ de: number; x: number; y: number }> = ({ de, x, y }) => {
-  const frame = useCurrentFrame();
-  const f = frame - de;
-  if (f < 0 || f > 22) return null;
-  const onda = interpolate(f, [4, 22], [40, 190], { extrapolateLeft: "clamp" });
-  const op = interpolate(f, [4, 22], [0.7, 0], { extrapolateLeft: "clamp" });
-  const dedo = interpolate(f, [0, 4, 10], [70, 52, 60], { extrapolateRight: "clamp" });
-  return (
-    <>
-      <div style={{ position: "absolute", left: x - onda / 2, top: y - onda / 2, width: onda, height: onda, borderRadius: onda, border: "4px solid #fff", opacity: op }} />
-      <div style={{ position: "absolute", left: x - dedo / 2, top: y - dedo / 2, width: dedo, height: dedo, borderRadius: dedo, background: "rgba(255,255,255,0.75)", opacity: f < 14 ? 1 : 0 }} />
-    </>
-  );
-};
-
-// Os sete dias do Protocolo, um ícone por procedimento.
-const DIAS: LucideIcon[] = [MessageCircleHeart, ShieldCheck, Timer, Clock, VolumeX, CalendarCheck, HeartHandshake];
-
-const Semana: React.FC<{ de: number; y: number }> = ({ de, y }) => {
-  const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
-  const tam = 104;
-  const gap = 14;
-  return (
-    <>
-      {DIAS.map((Icone, i) => {
-        const p = spring({ frame: frame - de - i * 4, fps, config: { damping: 12, stiffness: 200 } });
-        const marcado = frame >= de + 28 + i * 3;
-        return (
-          <div key={i} style={{ position: "absolute", left: ESQ + i * (tam + gap), top: y, width: tam, textAlign: "center", opacity: frame >= de + i * 4 ? 1 : 0 }}>
-            <div
-              style={{
-                width: tam,
-                height: tam,
-                borderRadius: 26,
-                background: marcado ? VERMELHO : "rgba(20,20,20,0.6)",
-                border: marcado ? "none" : "2px solid rgba(255,255,255,0.3)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                transform: `scale(${p})`,
-              }}
-            >
-              <Icone size={50} color="#fff" strokeWidth={2.2} />
-            </div>
-            <div style={{ ...estiloTexto("pequeno", 26, "#fff"), marginTop: 12, transform: `scale(${p})` }}>dia {i + 1}</div>
-          </div>
-        );
-      })}
-    </>
-  );
-};
-
-// Grão de filme animado.
 const Grao: React.FC = () => {
   const frame = useCurrentFrame();
   return (
-    <AbsoluteFill style={{ opacity: 0.16, mixBlendMode: "overlay", pointerEvents: "none" }}>
+    <AbsoluteFill style={{ opacity: 0.18, mixBlendMode: "overlay", pointerEvents: "none" }}>
       <svg width="100%" height="100%">
         <filter id="g">
           <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves={2} seed={frame % 12} />
@@ -288,191 +124,305 @@ const Grao: React.FC = () => {
   );
 };
 
-// Vinheta para segurar a leitura do texto no terço de cima.
-const Vinheta: React.FC = () => (
-  <AbsoluteFill
-    style={{
-      background:
-        "linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.1) 45%, rgba(0,0,0,0) 60%, rgba(0,0,0,0.35) 100%)",
-    }}
-  />
-);
+// ---------- Texto ----------
 
-// Cozinha: palavra gigante entre o fundo e a pessoa recortada.
-const Cozinha: React.FC<{ dur: number }> = ({ dur }) => {
+type Estilo = "sans" | "serif";
+
+// Palavra gigante centralizada, do tamanho da largura útil.
+const Gigante: React.FC<{
+  texto: string;
+  estilo?: Estilo;
+  cor?: string;
+  y?: number;
+  max?: number;
+  de?: number;
+  sombra?: boolean;
+}> = ({ texto, estilo = "sans", cor = "#fff", y = 760, max = 300, de = 0, sombra = true }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const empurra = interpolate(frame, [0, dur], [1.02, 1.08]);
+  const p = spring({ frame: frame - de, fps, config: { damping: 15, stiffness: 220 } });
+  if (frame < de) return null;
+  const largura = 900;
+  const porLetra = estilo === "serif" ? 0.52 : 0.74;
+  const tamanho = Math.min(max, largura / (texto.length * porLetra));
+  return (
+    <div
+      style={{
+        position: "absolute",
+        top: y,
+        left: 40,
+        right: 40,
+        textAlign: "center",
+        whiteSpace: "nowrap",
+        fontFamily: estilo === "serif" ? SERIF : SANS,
+        fontStyle: estilo === "serif" ? "italic" : "normal",
+        fontWeight: 900,
+        textTransform: estilo === "serif" ? "none" : "uppercase",
+        fontSize: tamanho,
+        lineHeight: 1,
+        letterSpacing: estilo === "serif" ? -3 : -2,
+        color: cor,
+        opacity: p,
+        transform: `translateY(-50%) scale(${1.25 - p * 0.25})`,
+        filter: `blur(${(1 - p) * 16}px)`,
+        textShadow: sombra ? "0 6px 40px rgba(0,0,0,0.6)" : "none",
+      }}
+    >
+      {texto}
+    </div>
+  );
+};
+
+// Linha pequena de apoio, centralizada.
+const Apoio: React.FC<{ texto: string; y: number; de?: number; cor?: string; tamanho?: number }> = ({
+  texto,
+  y,
+  de = 0,
+  cor = "#fff",
+  tamanho = 46,
+}) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const p = spring({ frame: frame - de, fps, config: { damping: 18, stiffness: 160 } });
+  if (frame < de) return null;
+  return (
+    <div
+      style={{
+        position: "absolute",
+        top: y,
+        left: 60,
+        right: 60,
+        textAlign: "center",
+        fontFamily: SANS,
+        fontWeight: 800,
+        fontSize: tamanho,
+        letterSpacing: 2,
+        textTransform: "uppercase",
+        color: cor,
+        opacity: p,
+        transform: `translateY(${(1 - p) * 30}px)`,
+        textShadow: "0 4px 24px rgba(0,0,0,0.7)",
+      }}
+    >
+      {texto}
+    </div>
+  );
+};
+
+// Ícone grande em círculo, entra com mola.
+const IconeGrande: React.FC<{ Icone: LucideIcon; y: number; tam?: number; de?: number; fundo?: string }> = ({
+  Icone,
+  y,
+  tam = 170,
+  de = 0,
+  fundo = VERMELHO,
+}) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const p = spring({ frame: frame - de, fps, config: { damping: 11, stiffness: 200 } });
+  if (frame < de) return null;
+  return (
+    <div
+      style={{
+        position: "absolute",
+        top: y,
+        left: (1080 - tam) / 2,
+        width: tam,
+        height: tam,
+        borderRadius: tam,
+        background: fundo,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        transform: `scale(${p}) rotate(${(1 - p) * -20}deg)`,
+        boxShadow: "0 16px 50px rgba(0,0,0,0.45)",
+      }}
+    >
+      <Icone size={tam * 0.52} color="#fff" strokeWidth={2.2} />
+    </div>
+  );
+};
+
+const Toque: React.FC<{ de: number; x: number; y: number }> = ({ de, x, y }) => {
+  const frame = useCurrentFrame();
+  const f = frame - de;
+  if (f < 0 || f > 22) return null;
+  const onda = interpolate(f, [4, 22], [60, 260], { extrapolateLeft: "clamp" });
+  const op = interpolate(f, [4, 22], [0.8, 0], { extrapolateLeft: "clamp" });
+  const dedo = interpolate(f, [0, 4, 10], [90, 66, 78], { extrapolateRight: "clamp" });
+  return (
+    <>
+      <div style={{ position: "absolute", left: x - onda / 2, top: y - onda / 2, width: onda, height: onda, borderRadius: onda, border: "5px solid #fff", opacity: op }} />
+      <div style={{ position: "absolute", left: x - dedo / 2, top: y - dedo / 2, width: dedo, height: dedo, borderRadius: dedo, background: "rgba(255,255,255,0.8)", opacity: f < 14 ? 1 : 0 }} />
+    </>
+  );
+};
+
+// ---------- Blocos ----------
+
+// Os sete dias do Protocolo, um ícone por procedimento.
+const DIAS: LucideIcon[] = [MessageCircleHeart, ShieldCheck, Timer, Clock, VolumeX, CalendarCheck, HeartHandshake];
+
+const Semana: React.FC<{ de: number; y: number }> = ({ de, y }) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const tam = 122;
+  const gap = 12;
+  const x0 = (1080 - (7 * tam + 6 * gap)) / 2;
+  return (
+    <>
+      {DIAS.map((Icone, i) => {
+        const p = spring({ frame: frame - de - i * 3, fps, config: { damping: 11, stiffness: 220 } });
+        const marcado = frame >= de + 24 + i * 3;
+        return (
+          <div key={i} style={{ position: "absolute", left: x0 + i * (tam + gap), top: y, width: tam, textAlign: "center", opacity: frame >= de + i * 3 ? 1 : 0 }}>
+            <div
+              style={{
+                width: tam,
+                height: tam,
+                borderRadius: 30,
+                background: marcado ? VERMELHO : "rgba(15,15,15,0.7)",
+                border: marcado ? "none" : "3px solid rgba(255,255,255,0.4)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                transform: `scale(${p})`,
+              }}
+            >
+              <Icone size={62} color="#fff" strokeWidth={2.2} />
+            </div>
+            <div style={{ fontFamily: SANS, fontWeight: 800, fontSize: 28, color: "#fff", marginTop: 12, textTransform: "uppercase" }}>dia {i + 1}</div>
+          </div>
+        );
+      })}
+    </>
+  );
+};
+
+// Palavra gigante entre a foto e a pessoa recortada.
+const AtrasDaPessoa: React.FC<{ dur: number }> = ({ dur }) => {
+  const frame = useCurrentFrame();
+  const deriva = interpolate(frame, [0, dur], [1.04, 1.12]);
   const camada: React.CSSProperties = {
     position: "absolute",
     inset: 0,
     width: "100%",
     height: "100%",
     objectFit: "cover",
-    transform: `scale(${empurra})`,
-    transformOrigin: "50% 70%",
-    filter: PB,
+    transformOrigin: "50% 55%",
+    transform: `scale(${deriva})`,
+    filter: pb(1.15),
   };
-  const DE_BRIGA = 66;
-  const p = spring({ frame: frame - DE_BRIGA, fps, config: { damping: 20, stiffness: 90 } });
-  const palavras = ["conversou.", "explicou.", "cedeu.", "insistiu."];
-  const icones = [MessageCircle, Lightbulb, Handshake, Repeat];
   return (
     <AbsoluteFill style={{ overflow: "hidden" }}>
       <Img src={staticFile("s3.png")} style={camada} />
-      <Vinheta />
-      {frame >= DE_BRIGA && (
-        <div
-          style={{
-            position: "absolute",
-            top: 640,
-            left: -20,
-            right: -20,
-            textAlign: "center",
-            opacity: p,
-            transform: `translateY(${(1 - p) * 60}px) scale(${1.15 - p * 0.15})`,
-            ...estiloTexto("serif", 300, VERMELHO),
-            textShadow: "none",
-          }}
-        >
-          briga
-        </div>
-      )}
+      <Sombra />
+      <Apoio texto="e volta a mesma" y={470} />
+      <Gigante texto="briga" estilo="serif" cor={VERMELHO} y={740} max={360} de={3} sombra={false} />
       <Img src={staticFile("s3_cut.png")} style={camada} />
-      <Texto de={2} y={220} estilo="pequeno" tamanho={44}>você</Texto>
-      {palavras.map((w, i) => (
-        <React.Fragment key={w}>
-          <Selo de={8 + i * 13} x={ESQ + (i % 2) * 120} y={290 + i * 76} Icone={icones[i]} tamanho={74} />
-          <Texto de={10 + i * 13} y={282 + i * 76} x={ESQ + 96 + (i % 2) * 120} estilo={i % 2 ? "serif" : "sans"} tamanho={i % 2 ? 80 : 64} cor={i % 2 ? VERMELHO : "#fff"}>
-            {w}
-          </Texto>
-        </React.Fragment>
-      ))}
-      <Selo de={DE_BRIGA - 8} x={ESQ} y={588} Icone={RotateCcw} tamanho={64} fundo={VERMELHO} />
-      <Texto de={DE_BRIGA - 6} y={596} x={ESQ + 84} estilo="pequeno" tamanho={48}>e volta a mesma</Texto>
     </AbsoluteFill>
   );
 };
 
 const CartaoFinal: React.FC = () => {
   const frame = useCurrentFrame();
-  const linha = interpolate(frame, [14, 30], [0, 520], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const { fps } = useVideoConfig();
+  const botao = spring({ frame: frame - 26, fps, config: { damping: 12, stiffness: 180 } });
   return (
     <AbsoluteFill style={{ background: FUNDO }}>
-      <Texto de={2} y={520} estilo="sans" tamanho={96} alinhar="center">Protocolo</Texto>
-      <Texto de={8} y={620} estilo="serif" tamanho={210} cor={VERMELHO} alinhar="center">7 Dias</Texto>
-      <div style={{ position: "absolute", top: 880, left: (1080 - linha) / 2 - 35, width: linha, height: 3, background: VERMELHO }} />
-      <Texto de={16} y={920} estilo="pequeno" tamanho={38} alinhar="center">para quem mora<br />com alguém com borderline</Texto>
-      <Selo de={4} x={(1080 - 110) / 2 - 35} y={380} Icone={House} tamanho={110} fundo={VERMELHO} />
-      <Pilula de={22} x={150} y={1030} Icone={ShieldCheck}>garantia de 7 dias</Pilula>
-      <Texto de={26} y={1170} estilo="serif" tamanho={64} alinhar="center">Dr. Fabio Schmidt</Texto>
-      <Texto de={30} y={1255} estilo="pequeno" tamanho={30} cor="#bdbdbd" alinhar="center">médico com foco em TPB</Texto>
-      <Texto de={36} y={1340} estilo="pequeno" tamanho={42} alinhar="center">R$219 ou 12x de R$21,90</Texto>
-      <Pilula de={48} x={300} y={1430} Icone={MousePointerClick} destaque>saiba mais</Pilula>
-      <Toque de={66} x={470} y={1475} />
+      <Apoio texto="protocolo" y={420} tamanho={84} />
+      <Gigante texto="7 Dias" estilo="serif" cor={VERMELHO} y={640} max={300} de={4} />
+      <Apoio texto="para quem mora" y={810} tamanho={38} de={10} />
+      <Apoio texto="com alguém com borderline" y={862} tamanho={38} de={10} />
+      <Apoio texto="R$219 ou 12x de R$21,90" y={1000} tamanho={48} de={16} />
+      <Apoio texto="garantia de 7 dias" y={1070} tamanho={32} cor="#bdbdbd" de={18} />
+      {frame >= 26 && (
+        <div
+          style={{
+            position: "absolute",
+            top: 1180,
+            left: 290,
+            width: 500,
+            height: 110,
+            borderRadius: 110,
+            background: VERMELHO,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 20,
+            transform: `scale(${botao})`,
+            fontFamily: SANS,
+            fontWeight: 900,
+            fontSize: 44,
+            color: "#fff",
+            textTransform: "uppercase",
+          }}
+        >
+          <MousePointerClick size={50} color="#fff" strokeWidth={2.4} />
+          saiba mais
+        </div>
+      )}
+      <Toque de={44} x={540} y={1235} />
+      <Apoio texto="Dr. Fabio Schmidt · médico com foco em TPB" y={1340} tamanho={26} cor="#9a9a9a" de={20} />
     </AbsoluteFill>
   );
 };
 
-// Linha do tempo em quadros (30 fps).
-const T = {
-  f1: [0, 8],
-  olho: [8, 22],
-  relogio: [22, 70],
-  f2: [70, 76],
-  porta: [76, 130],
-  cozinha: [130, 252],
-  f3: [252, 258],
-  corredor: [258, 336],
-  sofa: [336, 420],
-  manha: [420, 474],
-  final: [474, 564],
-} as const;
+// ---------- Linha do tempo ----------
 
-export const DURACAO = T.final[1];
+type Item = { dur: number; el: React.ReactNode };
 
-const Seq: React.FC<{ t: readonly [number, number]; children: React.ReactNode }> = ({ t, children }) => (
-  <Sequence from={t[0]} durationInFrames={t[1] - t[0]}>
-    {children}
-  </Sequence>
-);
+const B = BATIDA;
 
-const dur = (t: readonly [number, number]) => t[1] - t[0];
+const roteiro: Item[] = [
+  // Abertura: olho em negativo, depois o olho real.
+  { dur: 4, el: <Negativo src="s0.png" zoom={1.6} oy={45} /> },
+  { dur: B, el: (<><Corte src="s0.png" zoom={1.9} ox={52} oy={45} dur={B} /><Sombra /><Gigante texto="três da manhã" y={1350} max={110} de={2} /></>) },
+  // Relógio.
+  { dur: B, el: (<><Corte src="s1.png" zoom={2.1} ox={60} oy={18} luz={1.6} dur={B} /><Luz /></>) },
+  { dur: B + 6, el: (<><Corte src="s1.png" zoom={1.15} ox={55} oy={30} luz={1.5} dur={B + 6} /><Sombra /><Gigante texto="outra vez" estilo="serif" cor={VERMELHO} y={900} max={260} /></>) },
+  { dur: 3, el: <Negativo src="s2.png" /> },
+  // Porta.
+  { dur: B, el: (<><Corte src="s2.png" zoom={1.05} luz={1.35} dur={B} /><Sombra /><Gigante texto="a porta" y={520} max={210} /></>) },
+  { dur: B + 6, el: (<><Corte src="s2.png" zoom={2.2} ox={50} oy={50} luz={1.4} dur={B + 6} /><Sombra /><Gigante texto="fechou" estilo="serif" cor={VERMELHO} y={760} max={300} /></>) },
+  // Tentativas: um corte e um ícone por palavra.
+  { dur: B, el: (<><Corte src="s3.png" zoom={1.1} luz={1.2} dur={B} /><Luz /><Sombra /><IconeGrande Icone={MessageCircle} y={420} /><Gigante texto="conversou" y={720} /></>) },
+  { dur: B, el: (<><Corte src="s3.png" zoom={2.4} ox={15} oy={12} luz={1.2} dur={B} /><Sombra /><IconeGrande Icone={Lightbulb} y={420} fundo="#fff2" /><Gigante texto="explicou" estilo="serif" cor={VERMELHO} y={720} /></>) },
+  { dur: B, el: (<><Corte src="s3.png" zoom={2.6} ox={15} oy={72} luz={1.2} dur={B} /><Sombra /><IconeGrande Icone={Handshake} y={420} /><Gigante texto="cedeu" y={720} /></>) },
+  { dur: B, el: (<><Corte src="s3.png" zoom={1.8} ox={55} oy={55} luz={1.2} dur={B} /><Sombra /><IconeGrande Icone={Repeat} y={420} fundo="#fff2" /><Gigante texto="insistiu" estilo="serif" cor={VERMELHO} y={720} /></>) },
+  { dur: 3, el: <Negativo src="s3.png" zoom={1.1} /> },
+  { dur: 2 * B + 10, el: <AtrasDaPessoa dur={2 * B + 10} /> },
+  { dur: 4, el: <Negativo src="s4.png" /> },
+  // Virada: um passo por dia.
+  { dur: B, el: (<><Corte src="s4.png" zoom={2} ox={70} oy={88} luz={1.3} dur={B} /><Luz /><Sombra /><Gigante texto="um passo por dia" y={760} max={110} /></>) },
+  { dur: 3 * B, el: (<><Corte src="s4.png" zoom={1.05} luz={1.2} dur={3 * B} tremida={false} /><Sombra /><Gigante texto="7 dias" estilo="serif" cor={VERMELHO} y={500} max={330} /><Semana de={8} y={760} /></>) },
+  // Quem tem borderline não precisa concordar.
+  { dur: B + 5, el: (<><Corte src="s5.png" zoom={1.1} luz={1.05} cor dur={B + 5} /><Sombra /><Gigante texto="a pessoa com borderline" y={620} max={70} /></>) },
+  { dur: B, el: (<><Corte src="s5.png" zoom={2} ox={85} oy={45} luz={1.05} cor dur={B} /><Sombra /><Gigante texto="não precisa" y={620} max={150} /></>) },
+  { dur: 2 * B + 5, el: (<><Corte src="s5.png" zoom={1.6} ox={20} oy={45} luz={1.05} cor dur={2 * B + 5} /><Sombra /><Gigante texto="concordar" estilo="serif" cor={VERMELHO} y={620} max={300} /><Apoio texto="nem assistir" y={800} de={12} /><IconeGrande Icone={EyeOff} y={900} tam={120} de={12} /></>) },
+  // Manhã: dia 1 marcado.
+  { dur: 2 * B + 10, el: (<><Corte src="s6.png" zoom={1.05} cor dur={2 * B + 10} tremida={false} /><Luz /><Gigante texto="dia 1" estilo="serif" cor={VERMELHO} y={520} max={280} de={2} sombra={false} /><IconeGrande Icone={Check} y={720} de={20} /><Toque de={14} x={540} y={805} /></>) },
+  { dur: 3 * B + 15, el: <CartaoFinal /> },
+];
+
+export const DURACAO = roteiro.reduce((s, i) => s + i.dur, 0);
 
 export const Anuncio: React.FC = () => {
   const frame = useCurrentFrame();
   const fadeFinal = interpolate(frame, [DURACAO - 4, DURACAO], [0, 1], { extrapolateLeft: "clamp" });
+  let inicio = 0;
   return (
     <AbsoluteFill style={{ background: FUNDO }}>
       <style>{fontes}</style>
-
-      <Seq t={T.f1}>
-        <Flash src="f1.mp4" />
-        <FlashBranco />
-      </Seq>
-
-      <Seq t={T.olho}>
-        <Cena src="s0.png" dur={dur(T.olho)} origem="50% 50%" />
-      </Seq>
-
-      <Seq t={T.relogio}>
-        <Cena src="s1.png" dur={dur(T.relogio)} />
-        <Vinheta />
-        <Selo de={2} x={ESQ} y={318} Icone={Moon} tamanho={76} />
-        <Texto de={4} y={330} x={ESQ + 96} estilo="pequeno" tamanho={52}>três da manhã</Texto>
-        <Texto de={16} y={400} estilo="serif" tamanho={170} cor={VERMELHO}>outra vez</Texto>
-      </Seq>
-
-      <Seq t={T.f2}>
-        <Flash src="f2.mp4" />
-      </Seq>
-
-      <Seq t={T.porta}>
-        <Cena src="s2.png" dur={dur(T.porta)} origem="50% 60%" />
-        <Vinheta />
-        <Texto de={3} y={340} estilo="sans" tamanho={96}>a porta fechou</Texto>
-        <Texto de={20} y={560} estilo="serif" tamanho={74} cor={VERMELHO}>e você do lado de fora</Texto>
-        <Selo de={12} x={ESQ} y={210} Icone={DoorClosed} tamanho={100} fundo={VERMELHO} />
-      </Seq>
-
-      <Seq t={T.cozinha}>
-        <Cozinha dur={dur(T.cozinha)} />
-      </Seq>
-
-      <Seq t={T.f3}>
-        <Flash src="f3.mp4" />
-      </Seq>
-
-      <Seq t={T.corredor}>
-        <Cena src="s4.png" dur={dur(T.corredor)} />
-        <Vinheta />
-        <Texto de={4} y={320} estilo="pequeno" tamanho={52}>um passo por dia</Texto>
-        <Texto de={16} y={380} estilo="serif" tamanho={260} cor={VERMELHO}>7 dias</Texto>
-        <Semana de={24} y={700} />
-      </Seq>
-
-      <Seq t={T.sofa}>
-        <Cena src="s5.png" dur={dur(T.sofa)} filtro="grayscale(0.6) sepia(0.15) contrast(1.1) brightness(0.9)" />
-        <Vinheta />
-        <Texto de={4} y={300} estilo="pequeno" tamanho={46}>para você começar,</Texto>
-        <Texto de={16} y={370} estilo="sans" tamanho={70}>a pessoa com borderline</Texto>
-        <Texto de={30} y={560} estilo="sans" tamanho={70}>não precisa</Texto>
-        <Texto de={40} y={632} estilo="serif" tamanho={150} cor={VERMELHO}>concordar</Texto>
-        <Pilula de={54} x={ESQ} y={830} Icone={EyeOff}>nem assistir</Pilula>
-      </Seq>
-
-      <Seq t={T.manha}>
-        <Cena src="s6.png" dur={dur(T.manha)} filtro="grayscale(0.35) contrast(1.05) brightness(0.95)" />
-        <FlashBranco dur={5} />
-        <Pilula de={8} x={ESQ} y={420} Icone={CalendarCheck}>dia 1</Pilula>
-        <Toque de={22} x={ESQ + 120} y={470} />
-        <Pilula de={30} x={ESQ} y={420} Icone={Check} destaque>dia 1</Pilula>
-      </Seq>
-
-      <Seq t={T.final}>
-        <CartaoFinal />
-      </Seq>
-
+      {roteiro.map((item, i) => {
+        const de = inicio;
+        inicio += item.dur;
+        return (
+          <Sequence key={i} from={de} durationInFrames={item.dur}>
+            {item.el}
+          </Sequence>
+        );
+      })}
       <Grao />
       <AbsoluteFill style={{ background: "#000", opacity: fadeFinal }} />
     </AbsoluteFill>

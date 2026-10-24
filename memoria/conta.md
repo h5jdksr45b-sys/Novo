@@ -11,6 +11,19 @@
 - Conta de referência para efeitos: timelinestudios_official.
 - Fatos pessoais para Stories: família, Deus, explicar e quebrar estigma, pescar, colecionar selos, barzinho com rock ou MPB.
 
+## Mais fatos, de anotações antigas (branches lidos em 24/10)
+
+- 105 mil seguidores em 12/10. Consulta R$700 (R$650 em outra tabela); pacotes R$2.200 e R$2.900. Atende também online.
+- Protocolo 7 Dias, um por dia: frase de presença; limite sem briga; pausa de 20 minutos; pós-crise de 10 minutos; parar de discutir detalhe no auge; previsibilidade; autocuidado de quem cuida. Garantia de 7 dias. Checkout pay.hotmart.com/S104212285E. Preço riscado de R$297 nunca foi praticado.
+- Sem cupom nem desconto nos anúncios. Ele mandou tirar o DESCONTO25 em 13/10.
+- Livro: 2ª edição expandida de "Quando Escolher Não É Possível", 160 páginas, 21 capítulos. 11 vendas em 60 dias sem anúncio.
+- Outros produtos: Protocolo da Crise R$27; Kit de Regulação R$27, para quem tem TPB.
+- Anúncios, 90 dias pelo pixel: R$2.970 gastos, 13 compras, R$228 por compra. Empate em cerca de R$188 a R$195. Mulheres 45+: 8 compras a R$178. Homens: R$407 sem compra. Stories é o posicionamento mais barato (R$170). Em abril e maio: cerca de 48 compras a R$80, com "Você não está em paz" direto ao checkout.
+- Campanha de 12 a 19/10: 3 compras a R$212. Melhor anúncio: L2 minimalista navy.
+- Pixel 2562728947535171. Contas de anúncio: 1454243259689590 (Protocolo) e 2453219348224260 (livro, sem forma de pagamento em 20/10).
+- Funil de Stories de 5 dias no ManyChat, com as palavras COMEÇAR, ANTES, DURANTE e DEPOIS, respondidas no story ou no direct.
+- Leitura do Claude, não fato: o vazamento está na página de venda, onde 3% das visitas clicam em comprar.
+
 ## Dados de desempenho
 
 Arquivos enviados por ele em 24/10/2026:

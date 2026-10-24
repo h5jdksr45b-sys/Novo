@@ -31,7 +31,9 @@ O motivo central das reclamações.
 - Mas não estrague o que funcionava. Na revisão, mude a cena e não a frase boa. "é o gancho agora tá zoado", "Não dá pra deixar a anterior e mudar a cena só ?", "A outra tava melhor".
 - Se o tema é bom, mantenha o tema e suba o nível. "Se aquele tema era bom mantém / Mas eu quero que seja bom como os grandes".
 - Quando ele disser para não mudar o texto, não mude uma palavra. "SEM / UDAR NADA Q TÁ ESCRITO / MAS COM VISUAL MELHOR".
-- Os "motores" antigos (conjuntos de regras) dele foram abandonados por ele mesmo. "Esquece meus motores estão me fazendo flopar". Não aplique fórmula às cegas.
+- Os "motores" antigos (conjuntos de regras) dele foram abandonados por ele mesmo. "Esquece meus motores estão me fazendo flopar". Não aplique fórmula às cegas. Isso inclui a "régua" e o MOTOR do branch arena.
+- O eixo família está liberado desde 02/10. A proibição antiga (C1) foi suspensa por ele.
+- Palavras que afastam: manipuladora, narcisista como rótulo, cura, transforme sua vida.
 
 ## 3. Capa e gancho
 
@@ -61,6 +63,13 @@ O motivo central das reclamações.
 - Chega de mão e celular. "não aguento mais mão e celular". Sem motivo de eletrocardiograma.
 - Use os estilos de referência que ele manda, um de cada, sem copiar o conteúdo deles e sem exagerar no uso. "Use os estilos q mandei um de cada", "sem considerar conteúdo deles", "Não precisa usar tanto q mandei".
 - Stories de venda precisam de imagem, ícone ou gráfico, não só texto. "Não quero só texto na tela".
+- Texto embutido na imagem gerada, não montado por cima depois. "montar flopa".
+- Carrossel com no máximo 7 slides. Rejeitou um de 11: "muito slide".
+- Capa concreta: cena, gesto, objeto ou número. Nada de sensação, paz ou caos. Rejeitou mulher de costas na cama com celular ("clichê") e aprovou rosto pintado em retrato a óleo.
+- Sem frase entre aspas atribuída a alguém.
+- Ele mede o post na primeira hora.
+
+Estas cinco vêm de anotações de sessão, não de fala dele copiada inteira (branch `claude/install-arena-skill-6onf90`).
 
 ## 5. Vídeo
 

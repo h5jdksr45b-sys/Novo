@@ -55,7 +55,8 @@ Lote de estigmas de 22/10, roteiros prontos que podem não ter saído: mente, ir
 
 ## Vídeos feitos (out/2026)
 
-- Irmãos: o filho que não dava trabalho. Parecer bem e estar bem são coisas diferentes.
+- Ninguém sabe da semana: amigos há anos e nenhum sabe como foi a semana; borderline de alto funcionamento (nome informal, não é diagnóstico); uma pessoa, uma coisa pequena. Versão final narrada de 43 s com a voz clonada do Higgsfield, feita em 24/10 para sair como Reel teste. Branch `claude/nifty-hypatia-sj3sui`, pasta `videos/reel-ninguem-sabe-da-semana/renders/`. Ainda não publicado na data do registro.
+- Irmãos: o filho que não dava trabalho. Parecer bem e estar bem são coisas diferentes. O MP4 de 20 s está corrompido na biblioteca e no branch de origem (`claude/cool-fermat-at3p5v`); precisa renderizar de novo.
 - Identidade repetida: a identidade não some, se repete.
 - Sensação de casa: nenhum lugar parece casa.
 - Você não me ama: responder ao medo e manter o limite, sem listar provas.
@@ -68,6 +69,8 @@ Lote de estigmas de 22/10, roteiros prontos que podem não ter saído: mente, ir
 - Borderline mente (noir): lembrar diferente não é mentir.
 - Cérebro e neuroimagem: fora do feed.
 - Anúncios do livro (duas leituras; mensagens às 02:47), consultas e pacotes, promo do Protocolo, tutorial do app.
+
+Biblioteca com os MP4 finais de outubro: `biblioteca-videos/prontos/` no branch `claude/funny-davinci-239qh0` (LINKS.txt tem o link de cada arquivo).
 
 Recursos já muito usados: pausa de 20 minutos (três vídeos e o dia 3 do Protocolo); mão e celular.
 

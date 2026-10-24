@@ -1,0 +1,28 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; background: #0c0c0e; overflow: hidden; color: #f3f1ec; }
+    #s7-bloco { position: absolute; left: 90px; top: 500px; width: 900px; }
+    #s7-serif { font-family: "Playfair Display", serif; font-style: italic; font-size: 116px; line-height: 1.05; }
+    #s7-l2 { font-family: "Inter", sans-serif; font-weight: 900; font-size: 124px; line-height: 1.0; letter-spacing: -0.045em; color: #8b8b90; }
+    #s7-l3 { margin-top: 60px; font-family: "Inter", sans-serif; font-weight: 900; font-size: 150px; line-height: 1.0; letter-spacing: -0.045em; }
+    #s7-rep { position: relative; display: inline-block; color: #c8323a; }
+    #s7-sub { position: absolute; left: 0; bottom: -8px; height: 14px; width: 100%; background: #c8323a; transform-origin: left center; }
+  </style>
+  <div id="root" data-composition-id="s7" data-width="1080" data-height="1920">
+    <div id="s7-bloco">
+      <div id="s7-serif">Sua identidade</div>
+      <div id="s7-l2">não está ausente.</div>
+      <div id="s7-l3">Ela se <span id="s7-rep">repete.<span id="s7-sub"></span></span></div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#s7-serif", { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: 0.5, ease: "power2.out" }, 0.0);
+      tl.fromTo("#s7-l2", { opacity: 0, scale: 1.08, transformOrigin: "left center" }, { opacity: 1, scale: 1, duration: 0.22, ease: "power4.out" }, 0.55);
+      tl.fromTo("#s7-l3", { opacity: 0, scale: 1.12, transformOrigin: "left center" }, { opacity: 1, scale: 1, duration: 0.24, ease: "power4.out" }, 1.5);
+      tl.fromTo("#s7-sub", { scaleX: 0 }, { scaleX: 1, duration: 0.45, ease: "power2.inOut" }, 2.0);
+      window.__timelines["s7"] = tl;
+    })();
+  </script>
+</template>

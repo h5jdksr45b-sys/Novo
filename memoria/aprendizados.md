@@ -4,6 +4,18 @@ Correções, rejeições e aprovações dele, tiradas de 48 sessões entre 19/09
 
 Isto vale junto com as preferências fixas dele (voz, título profissional, fontes). Quando uma correção daqui parecer bater com uma preferência fixa, siga a mais específica e avise.
 
+## 0. Auditoria obrigatória antes de disparar qualquer texto
+
+Leia cada frase de capa e de cada slide e confira as cinco coisas abaixo. Ele já pegou cada uma delas mais de uma vez.
+
+1. Contraste em fórmula: NÃO É X, É Y; X, NÃO Y; NA A, X. NO B, Y; SOLIDÃO É... O VAZIO É... Nenhuma, nem na capa, nem no miolo. "Acho que começar com não é x e y não é uma boa", "Tem mais não é x é y porra não acredito" (24/10, depois de Claude corrigir só parte dos slides).
+2. Frase começando com ele ou ela. Claude deixou passar ELE PEDE TRATAMENTO em 24/10.
+3. Palavra curta isolada numa linha (é o, ir, de, o). "E esse é o isolado", "A palavra ir isolada ficou estranha".
+4. Duplo sentido ou gíria (dar, comer, pegar, ficar, gozar, mamar, encher). "Não sei a um não mano da o que ? Ta loko" sobre VOCÊ DÁ TUDO.
+5. Repetição de tese do histórico de 180 dias e de `ja-produzido.md`.
+
+Quando corrigir um desses erros, varra o carrossel inteiro, não só o slide apontado.
+
 ## 1. Como responder
 
 - Responda só o que ele perguntou, curto. "Não perguntei isso", "Só a fórmula", "Só fala OK", "mande escrito só".
@@ -20,6 +32,7 @@ Isto vale junto com as preferências fixas dele (voz, título profissional, font
 - Análise precisa de fundamento. "Tudo q vc falou não tem fundamento", "Faça funcionar e tenha embasamento técnico".
 - Use a ferramenta que ele nomear: CutCraft, Remotion, GPT Image 2.5. "Cutcraft como eu pedi desde o início".
 - Prefira skills profissionais de fora às que foram criadas aqui. "(não as que criamos)", "alguma skill que não formos nós que fizemos".
+- Pedido de capa já inclui gerar a imagem em GPT Image 2.5 Sunburst, qualidade alta. "Disparou?" (24/10).
 
 ## 2. Nunca genérico, nunca repetido
 
@@ -28,7 +41,7 @@ O motivo central das reclamações.
 - Clichê é rejeitado. "Ta ruim ta clichê", "Está mto clichê tente outros", "Todas vão flopar", "Não está uma bosta?".
 - Não repita frase, gancho, sugestão ou música de uma rodada ou sessão anterior. "A mesma frase não / Sempre usa isso / Seja mais criativo", "Sempre a msm indicação? Não dá", "Fale outro diferente que não tenh nos que já fizemos", "Vc copiou".
 - Revisão tem que mudar de verdade. "Vc mandou igual".
-- Mas não estrague o que funcionava. Na revisão, mude a cena e não a frase boa. "é o gancho agora tá zoado", "Não dá pra deixar a anterior e mudar a cena só ?", "A outra tava melhor".
+- Mas não estrague o que funcionava. Na revisão, mude a cena e não a frase boa. "é o gancho agora tá zoado", "Não dá pra deixar a anterior e mudar a cena só ?", "A outra tava melhor", "O primeiro tava melhor" (24/10).
 - Se o tema é bom, mantenha o tema e suba o nível. "Se aquele tema era bom mantém / Mas eu quero que seja bom como os grandes".
 - Quando ele disser para não mudar o texto, não mude uma palavra. "SEM / UDAR NADA Q TÁ ESCRITO / MAS COM VISUAL MELHOR".
 - Os "motores" antigos (conjuntos de regras) dele foram abandonados por ele mesmo. "Esquece meus motores estão me fazendo flopar". Não aplique fórmula às cegas. Isso inclui a "régua" e o MOTOR do branch arena.
@@ -37,9 +50,10 @@ O motivo central das reclamações.
 
 ## 3. Capa e gancho
 
-- A referência é o próprio post gigante dele. "Olha como eram as capas dos meus virais", "bom como os grandes", "Está lado a lado com meus gigantes / Então tem que ir pro feed".
+- A referência é o próprio post gigante dele. "Olha como eram as capas dos meus virais", "bom como os grandes", "Está lado a lado com meus gigantes / Então tem que ir pro feed". Prints e leitura em `capas-gigantes.md`.
 - A regra dele: só vai pro feed o que fica lado a lado com os gigantes. Senão vai como teste ou não sai. "Senão eu vou no trial ou lixo".
-- Imagem e frase precisam ter uma ligação que se entende de relance. "Tem que ter uma ligação genial que prenda institinvamente ao de olhar", "consonância da imagem com o texto", "bate olho entende", "Não é uma metáfora rápida".
+- Imagem e frase precisam ter uma ligação que se entende de relance. "Tem que ter uma ligação genial que prenda institinvamente ao de olhar", "consonância da imagem com o texto", "bate olho entende", "Não é uma metáfora rápida". A imagem é a própria frase, a tipografia domina a capa. "Como imagem e texto com ênfase no texto e tipografia tem uma conexão genial / Isso tá faltando" (24/10).
+- Tipografia gigante para o scroll mais do que Claude costuma estimar. Não vetar capa assim por ambiguidade pequena; propor ajuste. "Eu acho que esse aqui prende mais" (24/10).
 - Gancho contraintuitivo e forte. O modelo que ele deu: "borderline adoece a família ou a família adoece o borderline?". "Quero outras opções mais fortes / Contraintuitivas".
 - Nenhuma frase pode começar com pronome, sobretudo ele ou ela. "Não pode começar com pronome", "Audite para não ter nenhuma frase começando com ele ou ela".
 - A palavra borderline vai na capa. "Postei mas não sei pq não tem borderline na capa".
@@ -49,13 +63,15 @@ O motivo central das reclamações.
 - Português natural, nada que soe tradução do inglês. "tire 'da sala' nada a ver isso deve ser uma forma de falar em inglês traduzida".
 - Nenhum ângulo que reforce estigma, soe ameaçador ou provoque briga. "Vai parecer q tô falando que borderline tem treco de pedir dinheiro", "parece que induz ameaçar", "esse final não tá legal vá dar briga".
 - Sem drama e sem comédia sem querer. "Drama não", "o começo do um é levemente cômico".
+- Feed orgânico é para alcance, não venda. "Para orgânico não venda" (24/10).
 
 ## 4. Carrossel e imagem
 
 - Carrossel sem fundo preto. "Não quero fundo preto", "Dispare sem esse estilo fundo preto".
-- Legível. "Prexiso que fique mais legível". Quebra de linha ruim é erro: "A palavra 'ir' isolada ficou estranha".
+- Legível. "Prexiso que fique mais legível". Quebra de linha ruim é erro: "A palavra 'ir' isolada ficou estranha", "E esse é o isolado".
 - Menos informação por slide, padronizado, objetivo. "menos informação por slide e mais padronizado", "não está mto objetivo".
 - No miolo, alternar tipografia pura, tipografia com imagem de apoio e tipografia presa a uma imagem, sempre com hierarquia visual. "oscilar entre tipografia, tipografia + imagem de apoio", "pra não ficar monótono". Em um slide, quebrar o tom ou as cores.
+- Miolo técnico sempre simplificado. "Claro que simplificado" (24/10).
 - Misturar fonte serifada com sem serifa. "Misturar uma serifada com não serifada".
 - Criativo sem exagero. "Seja criativo sem exageros".
 - Imagens: GPT Image 2.5, alta qualidade, 9:16 em Stories. "Gpt image 2.5 sunbust sempre alta qualidade".

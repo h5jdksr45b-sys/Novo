@@ -46,7 +46,8 @@
         top: 0;
         width: 1080px;
         height: 860px;
-        padding: 280px 90px 0;
+        padding: 300px 90px 0;
+        z-index: 3;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -65,8 +66,9 @@
       .cartao .menor { font-size: 76px; color: var(--cinza-claro); }
       .vermelho { color: var(--vermelho-texto); }
 
-      /* Gancho: três linhas juntas, já no primeiro quadro */
-      .gancho { padding-top: 250px; }
+      /* Gancho: três linhas juntas, já no primeiro quadro.
+         Começa abaixo dos 14% de cima, onde o Instagram põe a barra dos Reels. */
+      .gancho { padding-top: 330px; }
       .gancho .linha { font-size: 94px; }
       .gancho .etiqueta {
         margin-top: 34px;
@@ -137,6 +139,36 @@
         top: 880px;
         width: 1080px;
         height: 640px;
+        z-index: 1;
+      }
+
+      /* B-roll ilustrado: entra por cima do diagrama, por baixo do texto */
+      .broll {
+        position: absolute;
+        inset: 0;
+        width: 1080px;
+        height: 1920px;
+        object-fit: cover;
+        z-index: 2;
+      }
+      #sombra-topo {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 1080px;
+        height: 760px;
+        background: linear-gradient(to bottom, rgba(5, 5, 5, 0.85) 0%, rgba(5, 5, 5, 0.55) 70%, rgba(5, 5, 5, 0) 100%);
+        z-index: 2;
+        visibility: hidden;
+      }
+      #flash {
+        position: absolute;
+        inset: 0;
+        width: 1080px;
+        height: 1920px;
+        background: #fff;
+        z-index: 4;
+        visibility: hidden;
       }
     </style>
   </head>
@@ -170,6 +202,11 @@
           <circle class="pessoa" id="p5" cx="540" cy="320" r="22" fill="#bdbdbd" />
           <circle id="voce" cx="540" cy="320" r="34" fill="#c83c1e" />
         </svg>
+
+        <video class="clip broll" id="broll-a" src="../assets/media/parede-a.mp4" data-start="18.6" data-duration="1.4" data-track-index="1" muted playsinline preload="auto"></video>
+        <video class="clip broll" id="broll-b" src="../assets/media/parede-b.mp4" data-start="21.3" data-duration="1.0" data-track-index="1" muted playsinline preload="auto"></video>
+        <div id="sombra-topo"></div>
+        <div id="flash"></div>
       </div>
     </div>
     <script>
@@ -237,6 +274,16 @@
 
       // Sai antes da chamada final
       tl.fromTo("#diagrama", { autoAlpha: 1 }, { autoAlpha: 0, duration: 0.4, immediateRender: false }, 37.2);
+
+      // B-roll da parede: sombra no topo para o texto continuar legível
+      tl.fromTo("#sombra-topo", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.1 }, 18.6);
+      tl.fromTo("#sombra-topo", { autoAlpha: 1 }, { autoAlpha: 0, duration: 0.1, immediateRender: false }, 19.9);
+      tl.fromTo("#sombra-topo", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.1, immediateRender: false }, 21.3);
+      tl.fromTo("#sombra-topo", { autoAlpha: 1 }, { autoAlpha: 0, duration: 0.1, immediateRender: false }, 22.2);
+
+      // Flash branco curto na abertura e na saída do primeiro b-roll
+      tl.fromTo("#flash", { autoAlpha: 0 }, { autoAlpha: 0.75, duration: 0.05, yoyo: true, repeat: 1 }, 18.6);
+      tl.fromTo("#flash", { autoAlpha: 0 }, { autoAlpha: 0.75, duration: 0.05, yoyo: true, repeat: 1, immediateRender: false }, 19.95);
 
       window.__timelines["reel"] = tl;
       tl.seek(0);

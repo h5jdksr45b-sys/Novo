@@ -93,3 +93,14 @@ Observação dele ou de post. Não é regra nem previsão.
 - Família e estigma é o tema que ele vê como viral. "Tem um vídeo que bombou disso".
 - "Quero sumir" foi citado por ele como um viral dele.
 - Aprovados: capa da boia; capa sépia "BORDERLINE NÃO PEGA / O ESTIGMA PEGA NA FAMÍLIA INTEIRA"; clipe com Remotion e gráficos de interface ("Nossa ficou mto bom"); vídeo vertical cinematográfico de 22/10 ("não está com cara de flopar").
+
+## 7. Decisões de 24/10/2026
+
+Ele aprovou com "Ok" as recomendações abaixo.
+
+- Nenhuma frase começa com ele ou ela, nem capa, nem miolo, nem narração. Você é permitido.
+- Fundo preto proibido só no carrossel. Vídeo e Stories podem usar fundo escuro, como o padrão do Protocolo (#0D0D0D).
+- Vídeo: padrão de `efeitos-video-aprovados.md` (Montserrat ExtraBold no gancho), com serifada e sem serifa alternando nos destaques. Vermelho #CC0000. Efeitos sonoros sem grave, sem impacto e sem glitch, salvo pedido.
+- Reel com o rosto dele: pergunte antes de propor. Os dados não separam Reel com e sem rosto; não afirme que o rosto é a causa.
+- Título: médico, pós-graduado em psiquiatria, ou médico com foco em TPB. Nunca psiquiatra.
+- COMEÇAR: no feed, comentar. Nos Stories, responder no story ou no direct.

@@ -140,6 +140,7 @@
         width: 1080px;
         height: 640px;
         z-index: 1;
+        overflow: visible; /* o svg corta por padrão o que passa da borda */
       }
 
       /* B-roll ilustrado: entra por cima do diagrama, por baixo do texto */
@@ -247,11 +248,11 @@
       const pessoas = angulos.map((_, i) => "#p" + i);
 
       // Primeiro quadro: as pessoas já existem, mas longe
-      pessoas.forEach((p, i) => tl.set(p, pos(angulos[i], 360), 0));
+      pessoas.forEach((p, i) => tl.set(p, pos(angulos[i], 330), 0));
 
       // Cartão 3: elas se aproximam e param no anel
       pessoas.forEach((p, i) => {
-        tl.fromTo(p, pos(angulos[i], 360), { ...pos(angulos[i], 250), duration: 1.4, ease: "power3.out", immediateRender: false }, 7.4 + i * 0.08);
+        tl.fromTo(p, pos(angulos[i], 330), { ...pos(angulos[i], 250), duration: 1.4, ease: "power3.out", immediateRender: false }, 7.4 + i * 0.08);
       });
       tl.fromTo("#anel", { attr: { "stroke-width": 4 } }, { attr: { "stroke-width": 8 }, duration: 0.25, yoyo: true, repeat: 1 }, 8.9);
 

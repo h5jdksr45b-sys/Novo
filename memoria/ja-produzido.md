@@ -53,6 +53,11 @@ Outros: Cacto (2.381 envios), Reação que parece justa (759 compartilhamentos e
 
 Lote de estigmas de 22/10, roteiros prontos que podem não ter saído: mente, irmãos, dependência, contar o diagnóstico, fui machucado, toda raiva vira sintoma, adulto que não quer tratar, profissional que foge, filhos, se afastar sem ser vilão, chamar atenção, limite e ameaça. Arquivo: `roteiros/lote-estigmas-2026-10.md` no branch `claude/cool-fermat-at3p5v`.
 
+## Capas geradas em 24/10 (GPT Image 2.5 Sunburst, ainda sem publicação)
+
+Seis temas dele, com ajustes do Claude: vazio (amor da casa não enche); anedonia (parou de brigar, nem sempre é paz); pedido de espaço invertido (quando você pede espaço, o borderline ouve adeus); ressaca da crise (também acorda destruído); despersonalização (se vê de fora da própria vida); alegria intensa (a família já espera a queda; parente do Reel de 24/07 sobre a família vigiar a queda).
+Cinco temas do Claude: idealização (conheceu na segunda, na sexta era o amor da vida); ideação paranoide sob estresse (desconfia até de quem mais cuida); metas e carreira instáveis (já quis ser tudo, ainda procura quem é); Natal (conta quem faltou); autoimagem no mesmo dia (de manhã capaz, à noite não se suporta).
+
 ## Vídeos feitos (out/2026)
 
 - Ninguém sabe da semana: amigos há anos e nenhum sabe como foi a semana; borderline de alto funcionamento (nome informal, não é diagnóstico); uma pessoa, uma coisa pequena. Versão final narrada de 43 s com a voz clonada do Higgsfield, feita em 24/10 para sair como Reel teste. Branch `claude/nifty-hypatia-sj3sui`, pasta `videos/reel-ninguem-sabe-da-semana/renders/`. Ainda não publicado na data do registro.

@@ -26,3 +26,15 @@ Link direto para uma situação: acrescente `#id` no fim. Exemplo: curso.drfabio
 Os botões da Hotmart levam `src=respirar`, para a venda aparecer com essa origem no relatório.
 
 O aviso da eleição fica no parágrafo `aviso-eleicao`. Apague depois do segundo turno.
+
+## Movimento, interface e som (versão de 25/10, à noite)
+
+Feito com as receitas das skills externas `better-ui` e `ui-ux-pro-max`:
+- Entrada em etapas na abertura (100 ms entre título, texto, aviso e bolinha) e nos cartões (60 ms entre eles, com a linha da respiração se desenhando).
+- Toque com escala 0,96 em 150 ms em botões e cartões; sombra em anel no lugar de borda; hover só em mouse.
+- Folha do exercício sobe de baixo no celular e aparece no centro no computador; fundo escurece com desfoque.
+- Barra de fases proporcional aos segundos, halo atrás da bolinha, troca do nome da fase com fade, ícone play/pausa/de novo com cruzamento de 300 ms.
+- Botão de som na folha (lembra a escolha no aparelho) e aviso curto no pé da tela.
+- Tudo respeita a preferência de menos movimento do sistema: fica só o fade.
+
+Sons: vêm da biblioteca da skill externa `media-use` (`.claude/skills/media-use/audio/assets/sfx/`): `click-soft` nos toques, `whoosh` ao abrir a folha, `pop` a cada troca de fase, `chime` no fim do exercício. Cortados e baixados (picos entre -14 e -20 dBFS), sem grave e sem impacto. Estão embutidos na própria página, em base64, dentro de `const SONS`. O som só toca depois do primeiro toque na página e só dentro do exercício; a bolinha da abertura é muda. Vibração curta (8 ms) a cada fase, em aparelhos que aceitam.

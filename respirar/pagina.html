@@ -114,7 +114,6 @@ h2{font-family:var(--f-display);font-weight:600;font-size:clamp(1.5rem,4.6vw,2.1
 .secao-sub{flex-basis:100%;color:var(--muted);margin:0;font-size:.98rem}
 .grade{display:grid;gap:12px;grid-template-columns:1fr}
 @media (min-width:640px){.grade{grid-template-columns:1fr 1fr}}
-@media (min-width:980px){.grade-pago{grid-template-columns:repeat(3,1fr)}}
 
 .cartao{display:grid;gap:10px;text-align:left;background:var(--surface);border:1px solid transparent;box-shadow:var(--shadow-border);border-radius:16px;padding:18px 18px 16px;cursor:pointer;min-width:0;width:100%;
   transition-property:box-shadow;transition-duration:150ms;transition-timing-function:ease-out;
@@ -170,13 +169,27 @@ h2{font-family:var(--f-display);font-weight:600;font-size:clamp(1.5rem,4.6vw,2.1
 .produto{display:grid;gap:8px;align-content:start;background:transparent;border:1px solid transparent;box-shadow:var(--shadow-border);border-radius:16px;padding:18px;min-width:0;transition-property:box-shadow;transition-duration:150ms;transition-timing-function:ease-out}
 @media (hover:hover){.produto:hover{box-shadow:var(--shadow-border-hover)}}
 .produto .tipo{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.chip{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:2px 7px}
+.chip{display:inline-flex;align-items:center;gap:5px;font-family:var(--f-mono);font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:2px 7px 2px 6px}
+.chip svg{width:13px;height:13px;flex:none}
 .produto .para{font-size:.82rem;color:var(--muted)}
 .produto h3{font-family:var(--f-display);font-weight:600;font-size:1.2rem;line-height:1.2;margin:2px 0 0;text-wrap:balance}
 .produto p{margin:0;font-size:.95rem}
 .produto-pe{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:8px}
 .preco{font-family:var(--f-mono);font-weight:600;font-size:1.02rem;font-variant-numeric:tabular-nums}
 .preco small{display:block;font-weight:400;font-size:.72rem;color:var(--muted)}
+
+/* Atendimento: faixa própria, fora da grade dos materiais */
+.atendimento{display:grid;grid-template-columns:auto 1fr;gap:14px 16px;align-items:start;margin-top:20px;padding:20px;border-radius:16px;border:1px solid transparent;box-shadow:var(--shadow-border);background:var(--surface);transition-property:box-shadow;transition-duration:150ms;transition-timing-function:ease-out}
+@media (hover:hover){.atendimento:hover{box-shadow:var(--shadow-border-hover)}}
+@media (min-width:640px){.atendimento{grid-template-columns:auto 1fr auto;align-items:center;padding:22px 24px}}
+.atend-foto{width:72px;height:72px;border-radius:50%;object-fit:cover;display:block;outline:1px solid var(--image-outline);outline-offset:-1px}
+.atend-texto{display:grid;gap:4px;min-width:0}
+.atend-titulo{font-size:1.25rem;line-height:1.2}
+.atend-texto p{margin:0;font-size:.95rem}
+.atend-meta{font-family:var(--f-mono);font-size:.74rem;color:var(--muted);letter-spacing:.02em;font-variant-numeric:tabular-nums}
+.atend-texto .preco-linha{white-space:nowrap}
+.atendimento .btn{grid-column:1/-1;justify-self:start}
+@media (min-width:640px){.atendimento .btn{grid-column:auto;justify-self:end}}
 
 /* Segurança e rodapé */
 .seguranca{margin-top:44px;display:grid;gap:10px;padding:18px 20px;border-radius:16px;border:1.5px solid var(--ink);max-width:720px}
@@ -287,35 +300,40 @@ dialog.folha[open]::backdrop{background:var(--scrim);backdrop-filter:blur(3px);t
     </div>
     <div class="grade grade-pago">
       <article class="produto">
-        <div class="tipo"><span class="chip">PDF</span><span class="para">Para quem tem borderline</span></div>
+        <div class="tipo"><span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6"/><path d="M9 17h6"/></svg>PDF</span><span class="para">Para quem tem borderline</span></div>
         <h3>Kit de Regulação</h3>
         <p>Dez ferramentas da terapia comportamental dialética para usar por conta própria, antes que a crise chegue.</p>
         <div class="produto-pe"><span class="preco">R$ 27</span><a class="btn btn-linha" href="https://pay.hotmart.com/M105447307K?src=respirar" target="_blank" rel="noopener">Ver na Hotmart</a></div>
       </article>
       <article class="produto">
-        <div class="tipo"><span class="chip">PDF</span><span class="para">Para parceiros e familiares</span></div>
+        <div class="tipo"><span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6"/><path d="M9 17h6"/></svg>PDF</span><span class="para">Para parceiros e familiares</span></div>
         <h3>Protocolo da Crise</h3>
         <p>O que fazer nos 60 minutos mais difíceis, quando a crise já começou.</p>
         <div class="produto-pe"><span class="preco">R$ 27</span><a class="btn btn-linha" href="https://pay.hotmart.com/H105440271K?src=respirar" target="_blank" rel="noopener">Ver na Hotmart</a></div>
       </article>
       <article class="produto">
-        <div class="tipo"><span class="chip">Curso</span><span class="para">Para quem mora com alguém com borderline</span></div>
+        <div class="tipo"><span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m10 8 6 4-6 4z"/></svg>Curso</span><span class="para">Para quem mora com alguém com borderline</span></div>
         <h3>Protocolo 7 Dias</h3>
         <p>Um procedimento por dia, durante sete dias. A pessoa com borderline não precisa assistir nem concordar.</p>
         <div class="produto-pe"><span class="preco">R$ 219<small>ou 12x de R$ 21,90</small></span><a class="btn btn-linha" href="https://pay.hotmart.com/S104212285E?src=respirar" target="_blank" rel="noopener">Ver na Hotmart</a></div>
       </article>
       <article class="produto">
-        <div class="tipo"><span class="chip">Livro</span><span class="para">Para quem convive</span></div>
+        <div class="tipo"><span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>Livro</span><span class="para">Para quem convive</span></div>
         <h3>Quando Escolher Não É Possível</h3>
         <p>Guia de convivência para quem vive ao lado de alguém com desregulação emocional intensa.</p>
         <div class="produto-pe"><span class="preco">R$ 69</span><a class="btn btn-linha" href="https://pay.hotmart.com/U103950622S?off=3xv992tf&amp;src=respirar" target="_blank" rel="noopener">Ver na Hotmart</a></div>
       </article>
-      <article class="produto">
-        <div class="tipo"><span class="chip">Consulta</span><span class="para">Individual ou de casal</span></div>
-        <h3>Consulta com o Dr. Fabio</h3>
-        <p>Presencial em Mogi das Cruzes, SP, ou online. Sem convênio.</p>
-        <div class="produto-pe"><span class="preco">R$ 700<small>primeira consulta</small></span><a class="btn btn-linha" href="https://cal.com/drfabioschmidt/consulta" target="_blank" rel="noopener">Ver horários</a></div>
-      </article>
+    </div>
+
+    <div class="atendimento" role="group" aria-labelledby="t-atend">
+      <img class="atend-foto" src="data:image/jpeg;base64,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" alt="Foto do Dr. Fabio Schmidt" width="72" height="72">
+      <div class="atend-texto">
+        <span class="rotulo">Atendimento</span>
+        <h2 id="t-atend" class="atend-titulo">Consulta com o Dr. Fabio Schmidt</h2>
+        <p>Individual ou de casal, presencial em Mogi das Cruzes, SP, ou online. Sem convênio. <span class="preco-linha">Primeira consulta R$ 700.</span></p>
+        <p class="atend-meta">Médico, pós-graduado em psiquiatria · CRM-SP 183549</p>
+      </div>
+      <a class="btn btn-linha" href="https://cal.com/drfabioschmidt/consulta" target="_blank" rel="noopener">Ver horários</a>
     </div>
   </section>
 

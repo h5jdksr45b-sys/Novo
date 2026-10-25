@@ -12,6 +12,7 @@ Leia, nesta ordem:
 5. `memoria/a-decidir.md`: contradições ainda abertas.
 6. Para vídeo: `memoria/efeitos-video-aprovados.md`.
 7. Skill `historico-borderline-180d` para não repetir tese.
+8. Para tema, ideia ou formato que já funcionou fora: skill `pesquisa-validados` (Vamos + memória + histórico).
 
 Se a peça bater em algo que ele já rejeitou, refaça antes de entregar.
 

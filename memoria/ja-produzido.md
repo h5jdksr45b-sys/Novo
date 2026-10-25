@@ -80,3 +80,8 @@ Biblioteca com os MP4 finais de outubro: `biblioteca-videos/prontos/` no branch 
 Recursos já muito usados: pausa de 20 minutos (três vídeos e o dia 3 do Protocolo); mão e celular.
 
 Reels de baixo alcance, para não reaproveitar sem mudar o ângulo: fica calma, mas ontem você conseguiu, supera, foi do nada, Rivotril, vasculhou o celular, manipulação como rótulo, gesso invisível.
+
+## Feito em 25/10/2026
+
+- Página Respire Agora (`respirar/`): respirações por situação para a véspera do segundo turno. Respiração lenta 5-5 (apuração), suspiro duplo, 4-7-8 (dormir), sopro lento (conversa sobre política), respiração pequena e lenta (crise de ansiedade), quadrada (antes de sair), respiração com as mãos (emoção que sobe rápido, DBT), respirar junto (alguém da casa em crise). Link de prévia: claude.ai/artifact/UWhYe9JFa1XhWw8q6EaEcp. Vídeos dele ainda não colocados.
+- 28 temas de Reels curtos falados propostos, ainda não gravados: `temas/reels-curtos-falados-2026-10-25.md`. Antes de propor tema novo, confira essa lista também.

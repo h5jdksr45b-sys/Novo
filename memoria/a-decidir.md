@@ -15,3 +15,9 @@ Os oito pontos de 24/10/2026 foram decididos e estão em `aprendizados.md`, seç
 - Preferência fixa dele: sem neurobiologia no feed.
 - O gigante No cérebro borderline, rejeição ativa a mesma área de sentir dor física teve 109 mil views.
 - Regra provisória: seguir a preferência fixa e perguntar antes de propor capa com cérebro.
+
+## Nome do livro (aberto em 25/10/2026)
+
+- `conta.md`, fatos informados por ele: livro "Quem sofre não escolhe como gritar", R$69.
+- `novo/hub.html` e anotações antigas: "Quando Escolher Não É Possível", R$69, 2ª edição expandida, link pay.hotmart.com/U103950622S?off=3xv992tf.
+- Regra provisória: a página Respire Agora usou o título e o link do hub. Perguntar qual é o nome atual antes da próxima peça que cite o livro.

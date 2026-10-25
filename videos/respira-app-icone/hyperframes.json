@@ -1,0 +1,60 @@
+{
+  "$schema": "https://hyperframes.heygen.com/schema/hyperframes.json",
+  "registry": "https://raw.githubusercontent.com/heygen-com/hyperframes/main/registry",
+  "paths": {
+    "blocks": "compositions",
+    "components": "compositions/components",
+    "assets": "assets"
+  },
+  "media": {
+    "autoProxy": true
+  },
+  "authoringSkill": "general-video",
+  "registryItems": [
+    {
+      "name": "device-frame-stage",
+      "type": "hyperframes:component",
+      "target": "compositions/components/device-frame-stage.html"
+    },
+    {
+      "name": "gesture-tap",
+      "type": "hyperframes:component",
+      "target": "compositions/components/gesture-tap.html"
+    },
+    {
+      "name": "sheet-spring-up",
+      "type": "hyperframes:component",
+      "target": "compositions/components/sheet-spring-up.html"
+    },
+    {
+      "name": "native-notification-pop",
+      "type": "hyperframes:component",
+      "target": "compositions/components/native-notification-pop.html"
+    },
+    {
+      "name": "yt-feather-highlight",
+      "type": "hyperframes:component",
+      "target": "compositions/components/yt-feather-highlight.html"
+    },
+    {
+      "name": "icon-swap",
+      "type": "hyperframes:component",
+      "target": "compositions/components/icon-swap.html"
+    },
+    {
+      "name": "oversized-cursor",
+      "type": "hyperframes:component",
+      "target": "compositions/components/oversized-cursor.html"
+    },
+    {
+      "name": "ios26-liquid-glass",
+      "type": "hyperframes:block",
+      "target": "compositions/ios26-liquid-glass.html"
+    },
+    {
+      "name": "share-sheet-carousel",
+      "type": "hyperframes:block",
+      "target": "compositions/share-sheet-carousel.html"
+    }
+  ]
+}

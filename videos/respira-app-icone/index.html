@@ -1,0 +1,1098 @@
+<!doctype html>
+<html lang="pt-BR" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>RESPIRA JÁ! vira app na tela</title>
+    <script src="assets/js/gsap.min.js"></script>
+    <style>
+      /* Paleta: palco escuro do padrão de vídeo dele, brilho verde do app atrás do celular,
+         texto branco em Montserrat pesada, vermelho #CC0000 no destaque, serifada Playfair na linha de apoio. */
+      :root {
+        --palco: #0d0d0d;
+        --tinta: #f6f4ef;
+        --tinta-serifa: #e9e4d8;
+        --vermelho: #cc0000;
+        --app-verde: #2f6f5e;
+        --app-creme: #edf0eb;
+        --ios-azul: #0a7aff;
+        --ios-verde: #34c759;
+        --ios-cinza: #f2f2f7;
+        --ios-texto: #111114;
+        --ios-texto-2: #6c6c70;
+        --fonte-titulo: "Montserrat", "Arial Black", sans-serif;
+        --fonte-serifa: "Playfair Display", Georgia, serif;
+        --fonte-ui: "Inter", "Helvetica Neue", Arial, sans-serif;
+        /* celular: tela lógica 390x844, escala 1.26 -> 491.4x1063.4; moldura com bisel 9 e raio 46 */
+        --escala-tela: 1.26;
+        --tela-w: calc(390px * var(--escala-tela));
+        --tela-h: calc(844px * var(--escala-tela));
+        --bisel: 9px;
+        --raio-aparelho: 46px;
+        --topo-aparelho: 470px;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: var(--palco);
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: var(--palco);
+        color: var(--tinta);
+        font-family: var(--fonte-ui);
+      }
+      .clip {
+        position: absolute;
+        inset: 0;
+      }
+      #fundo {
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(58% 34% at 50% 66%, rgba(47, 111, 94, 0.42) 0%, rgba(47, 111, 94, 0) 72%),
+          radial-gradient(90% 60% at 50% 110%, rgba(20, 32, 25, 0.9) 0%, rgba(13, 13, 13, 0) 70%),
+          var(--palco);
+      }
+      #flash {
+        position: absolute;
+        inset: 0;
+        background: #fff;
+        opacity: 0;
+        pointer-events: none;
+      }
+      #preto {
+        position: absolute;
+        inset: 0;
+        background: #000;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      /* ---------- blocos de texto, terço superior, nada à direita ---------- */
+      .texto {
+        padding: 104px 150px 0 72px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 22px;
+      }
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 20px;
+        border: 2px solid rgba(246, 244, 239, 0.55);
+        border-radius: 999px;
+        font-family: var(--fonte-titulo);
+        font-weight: 700;
+        font-size: 28px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--tinta);
+        opacity: 0;
+      }
+      .chip i {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--vermelho);
+      }
+      .titulo {
+        font-family: var(--fonte-titulo);
+        font-weight: 900;
+        font-size: 86px;
+        line-height: 0.98;
+        letter-spacing: -0.02em;
+        text-transform: uppercase;
+        color: var(--tinta);
+        text-shadow: 0 4px 26px rgba(0, 0, 0, 0.5);
+        max-width: 860px;
+        opacity: 0;
+      }
+      .titulo b {
+        font-weight: 900;
+        color: var(--vermelho);
+        text-shadow: 0 0 2px rgba(255, 255, 255, 0.08);
+      }
+      .titulo.menor {
+        font-size: 62px;
+        max-width: 900px;
+      }
+      .serifa {
+        font-family: var(--fonte-serifa);
+        font-weight: 400;
+        font-size: 44px;
+        line-height: 1.2;
+        color: var(--tinta-serifa);
+        max-width: 800px;
+        opacity: 0;
+      }
+
+      /* ---------- celular ---------- */
+      #celular {
+        position: absolute;
+        inset: 0;
+      }
+      #aparelho {
+        position: absolute;
+        left: calc(50% - (var(--tela-w) + var(--bisel) * 2) / 2);
+        top: var(--topo-aparelho);
+        width: calc(var(--tela-w) + var(--bisel) * 2);
+        height: calc(var(--tela-h) + var(--bisel) * 2);
+        padding: var(--bisel);
+        border-radius: var(--raio-aparelho);
+        background: linear-gradient(145deg, #343740, #1b1d22 42%, #111318);
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        box-shadow:
+          0 52px 110px rgba(0, 0, 0, 0.5),
+          0 18px 38px rgba(0, 0, 0, 0.35),
+          0 3px 9px rgba(0, 0, 0, 0.3),
+          inset 0 1px 0 rgba(255, 255, 255, 0.24),
+          inset 0 0 0 1px rgba(0, 0, 0, 0.48);
+        transform-origin: 50% 88%;
+        will-change: transform;
+      }
+      #tela {
+        position: relative;
+        width: var(--tela-w);
+        height: var(--tela-h);
+        overflow: hidden;
+        border-radius: calc(var(--raio-aparelho) - var(--bisel));
+        background: var(--app-creme);
+        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.42);
+        isolation: isolate;
+      }
+      #ilha {
+        position: absolute;
+        left: 50%;
+        top: 1.4%;
+        width: 28%;
+        height: 3.2%;
+        margin-left: -14%;
+        border-radius: 999px;
+        background: #050607;
+        z-index: 60;
+      }
+      /* espaço lógico 390x844 */
+      .vp {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 390px;
+        height: 844px;
+        transform-origin: 0 0;
+        transform: scale(var(--escala-tela));
+        font-family: var(--fonte-ui);
+        color: var(--ios-texto);
+      }
+      .status {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 390px;
+        height: 47px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 28px 0 30px;
+        font-size: 15px;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+      }
+      .status .dir {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .status .sinal {
+        display: flex;
+        align-items: flex-end;
+        gap: 1.5px;
+        height: 11px;
+      }
+      .status .sinal i {
+        width: 3px;
+        border-radius: 1px;
+        background: currentColor;
+      }
+      .status .bat {
+        width: 25px;
+        height: 12px;
+        border: 1.5px solid currentColor;
+        border-radius: 4px;
+        padding: 1.5px;
+        position: relative;
+      }
+      .status .bat::after {
+        content: "";
+        position: absolute;
+        right: -4px;
+        top: 3px;
+        width: 2px;
+        height: 4px;
+        background: currentColor;
+        border-radius: 1px;
+        opacity: 0.5;
+      }
+      .status .bat i {
+        display: block;
+        width: 100%;
+        height: 100%;
+        background: currentColor;
+        border-radius: 1.5px;
+      }
+      .indicador {
+        position: absolute;
+        left: 128px;
+        bottom: 8px;
+        width: 134px;
+        height: 5px;
+        border-radius: 3px;
+        background: #000;
+        opacity: 0.85;
+      }
+
+      /* camada Safari: vídeo real, quadro parado, barra de baixo */
+      #camada-safari {
+        position: absolute;
+        inset: 0;
+      }
+      #v-safari,
+      #i-safari {
+        position: absolute;
+        left: 0;
+        top: 47px;
+        width: 390px;
+        height: 693px;
+        bottom: auto;
+        right: auto;
+        object-fit: cover;
+        display: block;
+      }
+      #barra-safari {
+        position: absolute;
+        left: 0;
+        top: 740px;
+        width: 390px;
+        height: 104px;
+        background: #f6f6f8;
+        border-top: 0.5px solid #c8c8cc;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 14px 32px 0;
+      }
+      #barra-safari svg {
+        width: 26px;
+        height: 26px;
+        stroke: var(--ios-azul);
+        fill: none;
+        stroke-width: 1.8;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      #barra-safari svg.apagado {
+        stroke: #b8b8bd;
+      }
+
+      /* escurecer atrás das folhas */
+      #escurecer {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.38);
+        opacity: 0;
+      }
+
+      /* folha de compartilhar, genérica, sem dados reais */
+      #folha {
+        position: absolute;
+        left: 0;
+        top: 106px;
+        width: 390px;
+        height: 760px;
+        border-radius: 12px 12px 0 0;
+        background: #f4f4f6;
+        box-shadow: 0 -6px 30px rgba(0, 0, 0, 0.18);
+        overflow: hidden;
+        opacity: 0;
+      }
+      #folha .puxador {
+        position: absolute;
+        left: 177px;
+        top: 6px;
+        width: 36px;
+        height: 5px;
+        border-radius: 3px;
+        background: #c4c4c8;
+      }
+      #folha-rolagem {
+        position: absolute;
+        left: 0;
+        top: 98px;
+        width: 390px;
+      }
+      .f-cab {
+        position: relative;
+        z-index: 2;
+        background: #f4f4f6;
+        height: 98px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 24px 16px 14px 16px;
+        border-bottom: 0.5px solid #d6d6da;
+      }
+      .f-cab .nome {
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 1.2;
+      }
+      .f-cab .url {
+        font-size: 13px;
+        color: var(--ios-texto-2);
+        margin-top: 2px;
+      }
+      .f-cab .x {
+        margin-left: auto;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: #e3e3e7;
+        display: grid;
+        place-items: center;
+        color: #4a4a4f;
+        font-size: 16px;
+        font-weight: 700;
+      }
+      .icone-app {
+        width: 60px;
+        height: 60px;
+        border-radius: 14px;
+        display: block;
+        flex: none;
+      }
+      .f-apps {
+        display: flex;
+        justify-content: space-between;
+        padding: 14px 26px 12px;
+        border-bottom: 0.5px solid #d6d6da;
+      }
+      .f-apps .app {
+        width: 64px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 7px;
+        font-size: 11px;
+        color: var(--ios-texto);
+        text-align: center;
+      }
+      .f-apps img {
+        width: 60px;
+        height: 60px;
+        border-radius: 14px;
+        display: block;
+        object-fit: cover;
+      }
+      .f-grupo {
+        margin: 14px 16px 0;
+        background: #fff;
+        border-radius: 12px;
+        overflow: hidden;
+      }
+      .f-linha {
+        height: 52px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 0 16px;
+        font-size: 16px;
+        border-bottom: 0.5px solid #e1e1e5;
+        background: #fff;
+        position: relative;
+      }
+      .f-linha:last-child {
+        border-bottom: 0;
+      }
+      .f-linha svg {
+        width: 22px;
+        height: 22px;
+        stroke: var(--ios-texto);
+        fill: none;
+        stroke-width: 1.7;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        flex: none;
+      }
+
+      /* folha de confirmação */
+      #confirma {
+        position: absolute;
+        left: 0;
+        top: 60px;
+        width: 390px;
+        height: 784px;
+        border-radius: 12px 12px 0 0;
+        background: #f2f2f7;
+        box-shadow: 0 -6px 30px rgba(0, 0, 0, 0.18);
+        opacity: 0;
+      }
+      #confirma .nav {
+        height: 56px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 16px;
+        font-size: 16px;
+        border-bottom: 0.5px solid #d6d6da;
+        background: #fff;
+        border-radius: 12px 12px 0 0;
+      }
+      #confirma .nav .cancelar {
+        color: var(--ios-azul);
+      }
+      #confirma .nav .tit {
+        font-weight: 600;
+      }
+      #confirma .nav .adicionar {
+        color: var(--ios-azul);
+        font-weight: 700;
+        padding: 6px 2px;
+        border-radius: 8px;
+      }
+      .c-cartao {
+        margin: 22px 16px 0;
+        background: #fff;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 14px 16px;
+      }
+      .c-cartao .campo {
+        flex: 1;
+        min-width: 0;
+      }
+      .c-cartao .campo .nome {
+        font-size: 17px;
+        font-weight: 600;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .c-cartao .campo .nome i {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: #c7c7cc;
+        display: grid;
+        place-items: center;
+        font-style: normal;
+        font-size: 11px;
+        color: #fff;
+        font-weight: 700;
+      }
+      .c-cartao .campo .url {
+        font-size: 13px;
+        color: var(--ios-texto-2);
+        margin-top: 6px;
+        padding-top: 6px;
+        border-top: 0.5px solid #e1e1e5;
+      }
+      .c-toggle {
+        margin: 22px 16px 0;
+        background: #fff;
+        border-radius: 12px;
+        padding: 12px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 16px;
+      }
+      .interruptor {
+        width: 51px;
+        height: 31px;
+        border-radius: 16px;
+        background: var(--ios-verde);
+        position: relative;
+        flex: none;
+      }
+      .interruptor i {
+        position: absolute;
+        top: 2px;
+        left: 22px;
+        width: 27px;
+        height: 27px;
+        border-radius: 50%;
+        background: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+      .c-ajuda {
+        margin: 8px 32px 0;
+        font-size: 12px;
+        line-height: 1.35;
+        color: var(--ios-texto-2);
+      }
+
+      /* tela inicial genérica */
+      #inicio {
+        position: absolute;
+        inset: 0;
+        color: #fff;
+      }
+      #inicio-in {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        background:
+          radial-gradient(70% 40% at 50% 30%, rgba(61, 96, 160, 0.45) 0%, rgba(61, 96, 160, 0) 70%),
+          linear-gradient(180deg, #0a1730 0%, #0f2a52 48%, #0a1a35 100%);
+      }
+      #inicio .status {
+        color: #fff;
+      }
+      .grade {
+        position: absolute;
+        left: 25px;
+        top: 86px;
+        width: 340px;
+        display: grid;
+        grid-template-columns: repeat(4, 85px);
+        grid-auto-rows: 104px;
+      }
+      .ap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        font-size: 11px;
+        letter-spacing: -0.01em;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+        width: 85px;
+      }
+      .ap img,
+      .ap svg {
+        width: 60px;
+        height: 60px;
+        border-radius: 14px;
+        display: block;
+        object-fit: cover;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+      }
+      #novo-icone {
+        position: absolute;
+        left: 25px;
+        top: calc(86px + 312px);
+        width: 85px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        font-size: 11px;
+        color: #fff;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+        opacity: 0;
+      }
+      #novo-icone svg {
+        width: 60px;
+        height: 60px;
+        display: block;
+        border-radius: 14px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+      }
+      #anel {
+        position: absolute;
+        left: calc(25px + 12.5px - 8px);
+        top: calc(86px + 312px - 8px);
+        width: 76px;
+        height: 76px;
+        border-radius: 20px;
+        border: 2px solid rgba(255, 255, 255, 0.85);
+        opacity: 0;
+      }
+      .busca {
+        position: absolute;
+        left: 150px;
+        top: 718px;
+        width: 90px;
+        height: 30px;
+        border-radius: 15px;
+        background: rgba(255, 255, 255, 0.22);
+        display: grid;
+        place-items: center;
+        font-size: 12px;
+        color: #fff;
+      }
+      .dock {
+        position: absolute;
+        left: 13px;
+        top: 756px;
+        width: 364px;
+        height: 80px;
+        border-radius: 30px;
+        background: rgba(255, 255, 255, 0.18);
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+      }
+      .dock img {
+        width: 60px;
+        height: 60px;
+        border-radius: 14px;
+        display: block;
+        object-fit: cover;
+      }
+
+      /* app aberto em tela cheia */
+      #lanc {
+        position: absolute;
+        inset: 0;
+        background: var(--app-creme);
+        transform-origin: 67px 432px;
+        overflow: hidden;
+        opacity: 0;
+      }
+      #tela-app {
+        position: absolute;
+        inset: 0;
+      }
+      #v-app {
+        position: absolute;
+        left: 0;
+        top: 47px;
+        width: 390px;
+        height: 693px;
+        bottom: auto;
+        right: auto;
+        object-fit: cover;
+        display: block;
+      }
+
+      /* holofote e toque */
+      #holofote {
+        --hx: 90%;
+        --hy: 9%;
+        --hrx: 16%;
+        --hry: 7%;
+        position: absolute;
+        inset: 0;
+        background: rgba(4, 6, 10, 0.55);
+        -webkit-mask-image: radial-gradient(
+          ellipse var(--hrx) var(--hry) at var(--hx) var(--hy),
+          transparent 0%,
+          transparent 52%,
+          black 88%
+        );
+        mask-image: radial-gradient(
+          ellipse var(--hrx) var(--hry) at var(--hx) var(--hy),
+          transparent 0%,
+          transparent 52%,
+          black 88%
+        );
+        opacity: 0;
+        z-index: 40;
+      }
+      #contato {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        border: 1.5px solid rgba(255, 255, 255, 0.85);
+        background: rgba(255, 255, 255, 0.36);
+        box-shadow:
+          inset 0 0 0 4px rgba(255, 255, 255, 0.12),
+          0 6px 16px rgba(15, 23, 42, 0.3);
+        opacity: 0;
+        z-index: 50;
+      }
+      .onda {
+        position: absolute;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        border: 2px solid rgba(255, 255, 255, 0.9);
+        opacity: 0;
+        z-index: 49;
+      }
+
+      /* banner Android, geometria de notificação iOS, dentro da tela */
+      #banner {
+        position: absolute;
+        left: 12px;
+        top: 56px;
+        width: 366px;
+        height: 84px;
+        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.94);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.22);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 0 16px;
+        opacity: 0;
+        z-index: 55;
+        color: var(--ios-texto);
+      }
+      #banner .ponto {
+        width: 40px;
+        height: 40px;
+        border-radius: 11px;
+        background: #1f7a4d;
+        display: grid;
+        place-items: center;
+        color: #fff;
+        font-weight: 800;
+        font-size: 12px;
+        flex: none;
+        letter-spacing: 0.04em;
+      }
+      #banner .t {
+        font-size: 15px;
+        font-weight: 700;
+        line-height: 1.2;
+      }
+      #banner .b {
+        font-size: 13px;
+        color: #3a3a3f;
+        line-height: 1.25;
+        margin-top: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="24" data-width="1080" data-height="1920" data-fps="30">
+      <div id="fundo"></div>
+
+      <!-- textos, um bloco por etapa -->
+      <section id="texto-1" class="clip texto" data-start="0" data-duration="2.4" data-track-index="1">
+        <span class="chip"><i></i>Gratuito · sem baixar nada</span>
+        <h1 class="titulo">Vira <b>app</b> na sua tela</h1>
+        <p class="serifa">em três toques</p>
+      </section>
+      <section id="texto-2" class="clip texto" data-start="2.4" data-duration="2.8" data-track-index="1">
+        <span class="chip"><i></i>Passo 1 de 3</span>
+        <h1 class="titulo">Toque em <b>compartilhar</b></h1>
+        <p class="serifa">o quadrado com a seta</p>
+      </section>
+      <section id="texto-3" class="clip texto" data-start="5.2" data-duration="4.4" data-track-index="1">
+        <span class="chip"><i></i>Passo 2 de 3</span>
+        <h1 class="titulo menor">Role e toque em Adicionar à <b>Tela de Início</b></h1>
+        <p class="serifa">fica mais para baixo na lista</p>
+      </section>
+      <section id="texto-4" class="clip texto" data-start="9.6" data-duration="3.6" data-track-index="1">
+        <span class="chip"><i></i>Passo 3 de 3</span>
+        <h1 class="titulo">Confirme em <b>Adicionar</b></h1>
+        <p class="serifa">só isso</p>
+      </section>
+      <section id="texto-5" class="clip texto" data-start="13.2" data-duration="6" data-track-index="1">
+        <span class="chip"><i></i>Ícone na tela</span>
+        <h1 class="titulo"><b>Pronto.</b> Virou app</h1>
+        <p class="serifa">abre em tela cheia, sem barra do navegador</p>
+      </section>
+      <section id="texto-6" class="clip texto" data-start="19.2" data-duration="4.8" data-track-index="1">
+        <span class="chip"><i></i>Respira já</span>
+        <h1 class="titulo menor">Salva e <b>manda</b> pra quem precisa respirar hoje</h1>
+        <p class="serifa">respira.base44.app</p>
+      </section>
+
+      <!-- celular -->
+      <section id="celular">
+        <div id="aparelho">
+          <div id="tela">
+            <div id="ilha"></div>
+
+            <!-- camada Safari -->
+            <div id="camada-safari" class="vp" data-layout-ignore>
+              <div class="status">
+                <span>9:41</span>
+                <span class="dir">
+                  <span class="sinal"><i style="height: 4px"></i><i style="height: 6px"></i><i style="height: 8px"></i><i style="height: 11px"></i></span>
+                  <span class="bat"><i></i></span>
+                </span>
+              </div>
+              <video id="v-safari" class="clip" src="assets/video/safari-app.mp4" muted playsinline data-start="0" data-duration="3" data-track-index="2"></video>
+              <img id="i-safari" class="clip" src="assets/video/safari-parado.png" alt="" data-start="3" data-duration="10.2" data-track-index="2" />
+              <div id="barra-safari">
+                <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" /></svg>
+                <svg viewBox="0 0 24 24" class="apagado"><path d="M9 5l7 7-7 7" /></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 15V4" /><path d="M8 8l4-4 4 4" /><path d="M5 12v7a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-7" /></svg>
+                <svg viewBox="0 0 24 24"><path d="M5 4h14v16l-7-4-7 4z" /></svg>
+                <svg viewBox="0 0 24 24"><rect x="4" y="7" width="14" height="14" rx="2" /><path d="M8 7V5a1 1 0 0 1 1-1h11v12" /></svg>
+              </div>
+              <div class="indicador"></div>
+            </div>
+
+            <!-- escurecer e folhas -->
+            <div class="vp" data-layout-ignore>
+              <div id="escurecer"></div>
+
+              <div id="folha">
+                <div class="puxador"></div>
+                <div class="f-cab">
+                    <svg class="icone-app" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="23" fill="#d9dbf1" /><path d="M20 64c12 0 16-22 30-25 13-3 21 9 15 18-5 7-14 3-11-5 3-7 13-7 19 0 5 6 7 13 9 15" fill="none" stroke="#67c3cf" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                    <div>
+                      <div class="nome">RESPIRA JÁ!</div>
+                      <div class="url">respira.base44.app</div>
+                    </div>
+                    <div class="x">×</div>
+                </div>
+                <div id="folha-rolagem">
+                  <div class="f-apps">
+                    <div class="app"><img src="assets/icons/messages.jpg" alt="" /><span>Mensagens</span></div>
+                    <div class="app"><img src="assets/icons/whatsapp.jpg" alt="" /><span>WhatsApp</span></div>
+                    <div class="app"><img src="assets/icons/instagram.jpg" alt="" /><span>Instagram</span></div>
+                    <div class="app"><img src="assets/icons/gmail.jpg" alt="" /><span>Gmail</span></div>
+                  </div>
+                  <div class="f-grupo">
+                    <div class="f-linha"><svg viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="13" rx="2" /><path d="M16 8V5a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h2" /></svg>Copiar</div>
+                    <div class="f-linha"><svg viewBox="0 0 24 24"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z" /></svg>Adicionar aos favoritos</div>
+                    <div class="f-linha"><svg viewBox="0 0 24 24"><circle cx="7" cy="15" r="3.5" /><circle cx="17" cy="15" r="3.5" /><path d="M10.5 15h3M3.5 15l2-7h3M20.5 15l-2-7h-3" /></svg>Adicionar à Lista de Leitura</div>
+                  </div>
+                  <div class="f-grupo">
+                    <div class="f-linha" id="linha-tela"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4" /><path d="M12 8v8M8 12h8" /></svg>Adicionar à Tela de Início</div>
+                    <div class="f-linha"><svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z" /><circle cx="12" cy="14" r="2.5" /><path d="M14 16l2.5 2.5" /></svg>Buscar na página</div>
+                    <div class="f-linha"><svg viewBox="0 0 24 24"><path d="M7 9V4h10v5" /><rect x="4" y="9" width="16" height="8" rx="2" /><path d="M7 14h10v6H7z" /></svg>Imprimir</div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="confirma">
+                <div class="nav">
+                  <span class="cancelar">Cancelar</span>
+                  <span class="tit">Adicionar à Tela de Início</span>
+                  <span class="adicionar" id="botao-adicionar">Adicionar</span>
+                </div>
+                <div class="c-cartao">
+                  <svg class="icone-app" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="23" fill="#d9dbf1" /><path d="M20 64c12 0 16-22 30-25 13-3 21 9 15 18-5 7-14 3-11-5 3-7 13-7 19 0 5 6 7 13 9 15" fill="none" stroke="#67c3cf" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                  <div class="campo">
+                    <div class="nome">RESPIRA JÁ! <i>×</i></div>
+                    <div class="url">https://respira.base44.app/</div>
+                  </div>
+                </div>
+                <div class="c-toggle"><span>Abrir como app web</span><span class="interruptor"><i></i></span></div>
+                <p class="c-ajuda">Um ícone será adicionado à Tela de Início para acessar este site rapidamente.</p>
+              </div>
+            </div>
+
+            <!-- tela inicial -->
+            <div id="inicio" class="vp" data-layout-ignore>
+              <div id="inicio-in">
+              <div class="status">
+                <span>9:41</span>
+                <span class="dir">
+                  <span class="sinal"><i style="height: 4px"></i><i style="height: 6px"></i><i style="height: 8px"></i><i style="height: 11px"></i></span>
+                  <span class="bat"><i></i></span>
+                </span>
+              </div>
+              <div class="grade">
+                <div class="ap"><img src="assets/icons/photos.jpg" alt="" /><span>Fotos</span></div>
+                <div class="ap"><img src="assets/icons/calendar.jpg" alt="" /><span>Calendário</span></div>
+                <div class="ap"><img src="assets/icons/weather.jpg" alt="" /><span>Tempo</span></div>
+                <div class="ap"><img src="assets/icons/notify-messages.jpg" alt="" /><span>Mensagens</span></div>
+                <div class="ap"><img src="assets/icons/music.jpg" alt="" /><span>Música</span></div>
+                <div class="ap"><img src="assets/icons/contacts.jpg" alt="" /><span>Contatos</span></div>
+                <div class="ap"><img src="assets/icons/files.jpg" alt="" /><span>Arquivos</span></div>
+                <div class="ap"><img src="assets/icons/books.jpg" alt="" /><span>Livros</span></div>
+                <div class="ap"><img src="assets/icons/fitness.jpg" alt="" /><span>Fitness</span></div>
+                <div class="ap"><img src="assets/icons/home.jpg" alt="" /><span>Casa</span></div>
+                <div class="ap"><img src="assets/icons/translate.jpg" alt="" /><span>Tradutor</span></div>
+                <div class="ap"><img src="assets/icons/find-my.jpg" alt="" /><span>Buscar</span></div>
+              </div>
+              <div id="anel"></div>
+              <div id="novo-icone">
+                <svg viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="23" fill="#d9dbf1" /><path d="M20 64c12 0 16-22 30-25 13-3 21 9 15 18-5 7-14 3-11-5 3-7 13-7 19 0 5 6 7 13 9 15" fill="none" stroke="#67c3cf" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                <span>RESPIRA JÁ!</span>
+              </div>
+              <div class="busca">Buscar</div>
+              <div class="dock">
+                <img src="assets/icons/phone.jpg" alt="" />
+                <img src="assets/icons/brave.jpg" alt="" />
+                <img src="assets/icons/slack.jpg" alt="" />
+                <img src="assets/icons/x.jpg" alt="" />
+              </div>
+              </div>
+            </div>
+
+            <!-- app aberto em tela cheia -->
+            <div id="tela-app">
+              <div class="vp" data-layout-ignore>
+                <div id="lanc">
+                  <div class="status">
+                    <span>9:41</span>
+                    <span class="dir">
+                      <span class="sinal"><i style="height: 4px"></i><i style="height: 6px"></i><i style="height: 8px"></i><i style="height: 11px"></i></span>
+                      <span class="bat"><i></i></span>
+                    </span>
+                  </div>
+                  <video id="v-app" class="clip" src="assets/video/app-cheio.mp4" muted playsinline data-start="15.6" data-duration="8.4" data-track-index="3"></video>
+                  <div class="indicador"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- holofote, toque, ondas e banner -->
+            <div class="vp" data-layout-ignore>
+              <div id="holofote"></div>
+              <div class="onda" id="onda-1"></div>
+              <div class="onda" id="onda-2"></div>
+              <div id="contato"></div>
+              <div id="banner">
+                <div class="ponto">AND</div>
+                <div>
+                  <div class="t">No Android</div>
+                  <div class="b">Chrome, três pontos, Adicionar à tela inicial.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- sons: biblioteca da skill media-use, baixos -->
+      <audio id="sfx-whoosh-1" src="assets/som/whoosh.mp3" data-start="0.9" data-duration="0.55" data-track-index="5" data-volume="0.45"></audio>
+      <audio id="sfx-clique-1" src="assets/som/clique.mp3" data-start="3.55" data-duration="0.32" data-track-index="5" data-volume="0.8"></audio>
+      <audio id="sfx-whoosh-2" src="assets/som/whoosh.mp3" data-start="5.0" data-duration="0.55" data-track-index="5" data-volume="0.4"></audio>
+      <audio id="sfx-clique-2" src="assets/som/clique.mp3" data-start="7.75" data-duration="0.32" data-track-index="5" data-volume="0.8"></audio>
+      <audio id="sfx-whoosh-3" src="assets/som/whoosh.mp3" data-start="8.55" data-duration="0.55" data-track-index="5" data-volume="0.3"></audio>
+      <audio id="sfx-clique-3" src="assets/som/clique.mp3" data-start="10.95" data-duration="0.32" data-track-index="5" data-volume="0.8"></audio>
+      <audio id="sfx-pop-1" src="assets/som/pop.mp3" data-start="13.4" data-duration="0.63" data-track-index="5" data-volume="0.7"></audio>
+      <audio id="sfx-chime-1" src="assets/som/chime.mp3" data-start="13.7" data-duration="1.83" data-track-index="6" data-volume="0.45"></audio>
+      <audio id="sfx-clique-4" src="assets/som/clique.mp3" data-start="15.35" data-duration="0.32" data-track-index="7" data-volume="0.8"></audio>
+      <audio id="sfx-pop-2" src="assets/som/pop.mp3" data-start="20.0" data-duration="0.63" data-track-index="5" data-volume="0.45"></audio>
+
+      <div id="flash"></div>
+      <div id="preto"></div>
+    </div>
+
+    <script>
+      (function () {
+        "use strict";
+        var tl = gsap.timeline({ paused: true });
+
+        /* ---------- abertura: flash curto, celular sobe e assenta ---------- */
+        tl.fromTo("#flash", { opacity: 0.7 }, { opacity: 0, duration: 0.12, ease: "power2.out" }, 0);
+        tl.fromTo("#aparelho", { y: 110, scale: 0.97, opacity: 1 }, { y: -12, scale: 1, opacity: 1, duration: 0.72, ease: "power3.out" }, 0.05);
+        tl.to("#aparelho", { y: 0, duration: 0.18, ease: "power2.inOut" }, 0.77);
+
+        /* ---------- textos: cada bloco entra em cascata e sai curto ---------- */
+        function entraTexto(sel, t, dur, slam) {
+          var chip = sel + " .chip", tit = sel + " .titulo", ser = sel + " .serifa";
+          tl.fromTo(chip, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, t + 0.05);
+          if (slam === "parado") {
+            tl.fromTo(tit, { scale: 1.06, filter: "blur(3px)" }, { scale: 1, filter: "blur(0px)", duration: 0.5, ease: "power3.out" }, t);
+          } else if (slam === "slam") {
+            tl.fromTo(tit, { opacity: 0, scale: 1.28, filter: "blur(14px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.5, ease: "power4.out" }, t + 0.18);
+          } else if (slam === "lado") {
+            tl.fromTo(tit, { opacity: 0, x: -140 }, { opacity: 1, x: 0, duration: 0.45, ease: "expo.out" }, t + 0.18);
+          } else {
+            tl.fromTo(tit, { opacity: 0, y: 40, filter: "blur(6px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.45, ease: "power3.out" }, t + 0.18);
+          }
+          tl.fromTo(ser, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, t + 0.42);
+          var fim = t + dur - 0.22;
+          tl.to([chip, tit, ser], { opacity: 0, y: -12, duration: 0.2, ease: "power2.in", stagger: 0.02 }, fim);
+        }
+        tl.set("#texto-1 .titulo", { opacity: 1 }, 0);
+        entraTexto("#texto-1", 0, 2.4, "parado");
+        entraTexto("#texto-2", 2.4, 2.8, "lado");
+        entraTexto("#texto-3", 5.2, 4.4, "sobe");
+        entraTexto("#texto-4", 9.6, 3.6, "lado");
+        entraTexto("#texto-5", 13.2, 6, "slam");
+        entraTexto("#texto-6", 19.2, 4.8, "sobe");
+
+        /* ---------- toque: círculo de contato aparece no alvo, pressiona, solta, ondas ---------- */
+        function toque(t, x, y, alvo, alvoEscala) {
+          tl.set("#contato", { left: x - 24, top: y - 24, scale: 1, y: 0 }, t - 0.01);
+          tl.set(["#onda-1", "#onda-2"], { left: x - 24, top: y - 24, scale: 0.6, opacity: 0 }, t - 0.01);
+          tl.fromTo("#contato", { opacity: 0, scale: 0.82 }, { opacity: 0.72, scale: 1, duration: 0.18, ease: "power2.out" }, t);
+          var press = t + 0.35, solta = press + 0.18;
+          tl.to("#contato", { scale: 0.78, duration: 0.18, ease: "power4.in" }, press);
+          if (alvo) {
+            tl.to(alvo, { scale: alvoEscala || 0.94, duration: 0.18, ease: "power1.in" }, press);
+            tl.to(alvo, { scale: 1, duration: 0.32, ease: "back.out(1.4)" }, solta);
+          }
+          tl.to("#contato", { opacity: 0, scale: 1.04, y: -14, duration: 0.34, ease: "power2.in" }, solta);
+          tl.to(["#onda-1", "#onda-2"], { opacity: 0.9, duration: 0.01 }, solta);
+          tl.to(["#onda-1", "#onda-2"], { scale: 2.6, opacity: 0, duration: 0.55, ease: "power2.out", stagger: 0.08 }, solta);
+          return solta;
+        }
+
+        /* ---------- passo 1: holofote no compartilhar e toque ---------- */
+        tl.to("#holofote", { opacity: 1, duration: 0.3, ease: "power2.out" }, 2.9);
+        toque(3.2, 352, 78, null);
+        tl.to("#holofote", { opacity: 0, duration: 0.3, ease: "power2.in" }, 4.4);
+
+        /* ---------- passo 2: folha sobe com a mola medida (sheet-spring-up, reescalada) ---------- */
+        var MOLA = [
+          [0.0, 1450, 0.0], [0.057, 1198, 0.13], [0.09, 903, 0.21], [0.123, 648, 0.36], [0.157, 437, 0.43],
+          [0.19, 262, 0.5], [0.223, 120, 0.62], [0.257, 8, 0.78], [0.29, -76, 0.89], [0.323, -138, 1.0],
+          [0.357, -175, null], [0.39, -191, null], [0.423, -192, null], [0.457, -181, null], [0.49, -159, null],
+          [0.523, -131, null], [0.557, -100, null], [0.59, -68, null], [0.623, -41, null], [0.657, -18, null],
+          [0.69, -5, null], [0.723, 0, null],
+        ];
+        function mola(sel, t, fator) {
+          MOLA.forEach(function (p) {
+            var props = { y: p[1] * fator };
+            if (p[2] !== null) props.opacity = p[2];
+            tl.set(sel, props, t + p[0]);
+          });
+        }
+        tl.to("#escurecer", { opacity: 1, duration: 0.3, ease: "power2.out" }, 5.0);
+        mola("#folha", 5.0, 0.44);
+        /* rolar a lista: o dedo arrasta para cima e a lista acompanha */
+        tl.set("#contato", { left: 195 - 24, top: 600 - 24, scale: 1, y: 0 }, 6.05);
+        tl.fromTo("#contato", { opacity: 0, scale: 0.9 }, { opacity: 0.72, scale: 1, duration: 0.16, ease: "power2.out" }, 6.1);
+        tl.to("#contato", { y: -110, duration: 0.45, ease: "power2.inOut" }, 6.3);
+        tl.to("#folha-rolagem", { y: -110, duration: 0.45, ease: "power2.inOut" }, 6.3);
+        tl.to("#contato", { opacity: 0, duration: 0.2, ease: "power2.in" }, 6.8);
+        /* holofote na linha certa e toque nela */
+        tl.set("#holofote", { "--hx": "50%", "--hy": "48.6%", "--hrx": "48%", "--hry": "5.2%" }, 6.9);
+        tl.to("#holofote", { opacity: 1, duration: 0.25, ease: "power2.out" }, 7.0);
+        tl.to("#linha-tela", { backgroundColor: "#d7d7dc", duration: 0.18, ease: "power1.in" }, 7.75);
+        tl.to("#linha-tela", { backgroundColor: "#ffffff", duration: 0.3, ease: "power2.out" }, 7.93);
+        toque(7.4, 195, 410, null);
+        tl.to("#holofote", { opacity: 0, duration: 0.2, ease: "power2.in" }, 8.3);
+        /* folha de compartilhar desce, folha de confirmação sobe */
+        tl.to("#folha", { y: 820, duration: 0.3, ease: "power3.in" }, 8.4);
+        tl.to("#folha", { opacity: 0, duration: 0.05 }, 8.7);
+        mola("#confirma", 8.55, 0.5);
+
+        /* ---------- passo 3: toque em Adicionar ---------- */
+        toque(10.6, 352, 88, "#botao-adicionar", 0.9);
+        tl.to("#botao-adicionar", { color: "#005ec4", duration: 0.15 }, 10.95);
+        tl.to("#botao-adicionar", { color: "#0a7aff", duration: 0.25 }, 11.13);
+        tl.to("#confirma", { y: 900, duration: 0.35, ease: "power3.in" }, 11.5);
+        tl.to("#escurecer", { opacity: 0, duration: 0.3, ease: "power2.in" }, 11.5);
+
+        /* ---------- tela inicial: Safari some, tela inicial entra, ícone surge ---------- */
+        tl.to("#camada-safari", { opacity: 0, duration: 0.4, ease: "power2.inOut" }, 11.75);
+        tl.fromTo("#inicio-in", { opacity: 0, scale: 1.05 }, { opacity: 1, scale: 1, duration: 0.55, ease: "power3.out" }, 11.8);
+        tl.fromTo("#novo-icone", { opacity: 0, scale: 0 }, { opacity: 1, scale: 1, duration: 0.55, ease: "power3.out" }, 13.4);
+        tl.fromTo("#anel", { opacity: 0.6, scale: 0.78 }, { opacity: 0, scale: 1.22, duration: 0.6, ease: "power2.out", immediateRender: false }, 13.45);
+        /* toque no ícone e abertura do app a partir dele */
+        toque(15.0, 67, 432, "#novo-icone", 0.9);
+        tl.fromTo("#lanc", { scale: 0.14, opacity: 0.4, borderRadius: 70 }, { scale: 1, opacity: 1, borderRadius: 0, duration: 0.6, ease: "power3.out", immediateRender: false }, 15.6);
+        tl.to("#inicio-in", { scale: 1.08, opacity: 0, duration: 0.45, ease: "power2.in" }, 15.7);
+
+        /* ---------- fecho: banner Android cai como notificação, fade para preto ---------- */
+        tl.fromTo("#banner", { opacity: 0, y: -130 }, { opacity: 1, y: 0, duration: 0.6, ease: "back.out(1.2)" }, 20.0);
+        tl.to("#preto", { opacity: 1, duration: 0.18, ease: "power2.in" }, 23.82);
+
+        tl.seek(0);
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>

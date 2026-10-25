@@ -74,6 +74,7 @@ Cinco temas do Claude: idealização (conheceu na segunda, na sexta era o amor d
 - Borderline mente (noir): lembrar diferente não é mentir.
 - Cérebro e neuroimagem: fora do feed.
 - Anúncios do livro (duas leituras; mensagens às 02:47), consultas e pacotes, promo do Protocolo, tutorial do app.
+- RESPIRA JÁ! vira app na tela (25/10, HyperFrames): tutorial de 24 s, 9:16, para pôr o respira.base44.app como ícone na tela inicial do iPhone (Compartilhar, Adicionar à Tela de Início, Adicionar), com aviso curto para Android no fim. Projeto e MP4 em `videos/respira-app-icone/` no branch `claude/clever-carson-b4y4wj`. Sem narração; sons baixos da media-use. Aguardando a reação dele.
 
 Biblioteca com os MP4 finais de outubro: `biblioteca-videos/prontos/` no branch `claude/funny-davinci-239qh0` (LINKS.txt tem o link de cada arquivo).
 
@@ -83,5 +84,5 @@ Reels de baixo alcance, para não reaproveitar sem mudar o ângulo: fica calma, 
 
 ## Feito em 25/10/2026
 
-- Página Respire Agora (`respirar/`): respirações por situação para a véspera do segundo turno. Respiração lenta 5-5 (apuração), suspiro duplo, 4-7-8 (dormir), sopro lento (conversa sobre política), respiração pequena e lenta (crise de ansiedade), quadrada (antes de sair), respiração com as mãos (emoção que sobe rápido, DBT), respirar junto (alguém da casa em crise). Link de prévia: claude.ai/artifact/UWhYe9JFa1XhWw8q6EaEcp. Vídeos dele ainda não colocados.
+- Página Respire Agora (`respirar/`): respirações por situação para a véspera do segundo turno. Respiração lenta 5-5 (apuração), suspiro duplo, 4-7-8 (dormir), sopro lento (conversa sobre política), respiração pequena e lenta (crise de ansiedade), quadrada (antes de sair), respiração com as mãos (emoção que sobe rápido, DBT), respirar junto (alguém da casa em crise). Link de prévia: claude.ai/artifact/UWhYe9JFa1XhWw8q6EaEcp. Vídeos dele ainda não colocados. Ele publicou a versão dele no Base44: respira.base44.app (RESPIRA JÁ!).
 - 28 temas de Reels curtos falados propostos, ainda não gravados: `temas/reels-curtos-falados-2026-10-25.md`. Antes de propor tema novo, confira essa lista também.

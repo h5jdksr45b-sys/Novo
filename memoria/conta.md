@@ -10,6 +10,7 @@
 - Depoimento autorizado: uma mãe em outra cidade conduziu a filha numa crise por mensagem no celular.
 - Conta de referência para efeitos: timelinestudios_official.
 - Fatos pessoais para Stories: família, Deus, explicar e quebrar estigma, pescar, colecionar selos, barzinho com rock ou MPB.
+- Consulta: o link para marcar é https://consultadrfabio.base44.app/ (25/10: "Consulta é pra mandar pra cá"). O `novo/hub.html` ainda aponta para cal.com/drfabioschmidt/consulta; em peça nova, usar o app.
 
 ## Mais fatos, de anotações antigas (branches lidos em 24/10)
 

@@ -172,21 +172,25 @@ img{display:block}
 </div>
 
 <script>
-const FPS = 30, DUR = 46.5;
-const SC = [['s1', 0, 5], ['s2', 5, 11], ['s3', 11, 16.5], ['s4', 16.5, 22.5], ['s5', 22.5, 31], ['s6', 31, 37.5], ['s7', 37.5, 42], ['s8', 42, 46.5]];
-// efeitos sonoros: [tempo em s, tipo]
-const SFX = [
-  [0.1, 'click'], [0.3, 'click'], [0.5, 'tap'], [0.75, 'ping'],
-  [6.2, 'pop'], [7.4, 'pop'], [8.6, 'pop'], [5.3, 'tap'],
-  [11.5, 'swipe'], [12.7, 'tick'], [12.92, 'tick'], [13.14, 'tick'], [13.36, 'tick'], [13.58, 'tick'], [13.8, 'tick'],
-  [17.7, 'pop'], [18.9, 'pop'], [20.1, 'pop'],
-  [23.3, 'click'], [24.2, 'tap'], [25.6, 'tap'], [27.0, 'tap'], [28.5, 'swipe'], [23.9, 'flame'],
-  [31.7, 'rise'], [33.0, 'pop'], [35.1, 'swipe'],
-  [37.75, 'crash'], [38.4, 'tap'], [39.1, 'click'], [40.1, 'tap'],
-  [42.15, 'click'], [42.35, 'click'], [42.55, 'click'], [44.2, 'click'], [44.25, 'whoosh'],
-];
+const FPS = 30;
+// Cenas: [id, início, fim]. A duração de cada uma segue a narração (narr/c{n}.wav), que começa em NARR_IN depois do início.
+const SC = [['s1', 0, 5.9], ['s2', 5.9, 15.2], ['s3', 15.2, 23.4], ['s4', 23.4, 31.6], ['s5', 31.6, 45.8], ['s6', 45.8, 56.6], ['s7', 56.6, 62.8], ['s8', 62.8, 67.6]];
+const DUR = 67.6, NARR_IN = .35;
+// efeitos sonoros por cena: [tempo relativo em s, tipo]
+const SFX_REL = {
+  s1: [[.1, 'click'], [.3, 'click'], [.5, 'tap'], [2.6, 'ping']],
+  s2: [[.3, 'tap'], [2.37, 'pop'], [4.37, 'pop'], [6.87, 'pop']],
+  s3: [[.5, 'swipe'], [4.6, 'tick'], [4.71, 'tick'], [4.82, 'tick'], [4.93, 'tick'], [5.04, 'tick'], [5.15, 'tick'], [5.3, 'pop']],
+  s4: [[1.2, 'pop'], [3.45, 'pop'], [4.9, 'pop']],
+  s5: [[.5, 'swipe'], [.8, 'click'], [1.4, 'flame'], [3.0, 'tap'], [7.2, 'tap'], [10.2, 'tap']],
+  s6: [[.7, 'rise'], [1.9, 'pop'], [6.05, 'swipe']],
+  s7: [[.25, 'crash'], [.9, 'tap'], [2.7, 'click'], [3.9, 'tap']],
+  s8: [[.15, 'click'], [.35, 'click'], [.55, 'click'], [2.2, 'click'], [2.25, 'whoosh']],
+};
+const SFX = [];
+SC.forEach(([id, a]) => SFX_REL[id].forEach(([t, k]) => SFX.push([a + t, k])));
 SC.slice(1).forEach(([, a]) => SFX.push([a - .25, 'whoosh']));
-window.SFX = SFX; window.DUR = DUR;
+window.SFX = SFX; window.DUR = DUR; window.SC = SC; window.NARR_IN = NARR_IN;
 
 const $ = id => document.getElementById(id);
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
@@ -258,14 +262,15 @@ function checkItem(id, t, s) {
 }
 const wob = (t, f, a) => Math.sin(t * f) * a;
 
+// Os tempos abaixo seguem as palavras da narração (narr/timings.json), somados a NARR_IN.
 const UPD = {
   s1(t) {
     tf('s1rays', `rotate(${t * 4}deg)`);
     const ph = P(t, -.35, .6, E.back);
     tf('s1phone', `translateY(${lerp(500, 0, ph)}px) rotate(${lerp(10, -4, ph) + wob(t, 1.3, .8)}deg)`);
-    // notificação sai da tela do celular
-    const n = P(t, .7, .5, E.back);
-    op('s1notif', clamp((t - .7) / .1));
+    // notificação sai da tela do celular quando a fala diz "você já deve ter ouvido isso"
+    const n = P(t, 2.6, .5, E.back);
+    op('s1notif', clamp((t - 2.6) / .1));
     tf('s1notif', `translateY(${lerp(120, 0, n) + wob(t, 1.7, 4)}px) scale(${lerp(.42, 1, n)})`);
     slam('s1l1', t, -.1); slam('s1l2', t, .1); slam('s1l3', t, .3); slam('s1l4', t, .5, 1.5);
     // leve tremor do bloco na batida final
@@ -278,35 +283,35 @@ const UPD = {
     tf('s2img', `translate(${lerp(500, 0, k) + P(t, 3.0, 1.2, E.io) * -60}px,${P(t, 3.0, 1.2, E.io) * -40}px) rotate(${lerp(8, 0, k)}deg)`);
     rise('s2tab', t, .25, 30); rise('s2title', t, .4, 40);
     tf('s2ul', `scaleX(${P(t, .75, .5)})`);
-    checkItem('s2i1', t, 1.2); checkItem('s2i2', t, 2.4); checkItem('s2i3', t, 3.6);
+    checkItem('s2i1', t, 2.37); checkItem('s2i2', t, 4.37); checkItem('s2i3', t, 6.87);
   },
   s3(t) {
-    tf('s3crowdimg', `scale(${lerp(1.06, 1.14, t / 5.5)}) translateX(${lerp(0, -30, t / 5.5)}px)`);
+    tf('s3crowdimg', `scale(${lerp(1.06, 1.14, t / 8.2)}) translateX(${lerp(0, -30, t / 8.2)}px)`);
     const lk = P(t, .1, 2.6, E.io);
     tf('s3lupa', `translate(${lerp(560, -420, lk)}px,${Math.sin(lk * Math.PI * 2) * 40}px) rotate(${lerp(-8, 6, lk)}deg)`);
-    rise('s3head', t, .6, 40);
+    rise('s3head', t, .35, 40);
     document.querySelectorAll('#s3grid .dot').forEach((d, i) => {
       const r = Math.floor(i / 10), c = i % 10;
       const k = P(t, 1.0 + (r + c) * .025, .3, E.back);
       let s = k, bg = 'var(--cream)', o = .3;
       if (i < 6) {
-        const on = P(t, 1.7 + i * .22, .18);
+        const on = P(t, 4.6 + i * .11, .14);
         o = lerp(.3, 1, on);
         if (on > .01) bg = i === 0 ? '#151211' : 'repeating-linear-gradient(45deg,#151211 0 6px,#EDE3CD 6px 11px)';
         s = k * (1 + .3 * Math.sin(Math.PI * on));
       }
       d.style.transform = `scale(${s})`; d.style.opacity = o; d.style.background = bg;
     });
-    const k = P(t, 1.7, .3, E.back);
-    op('s3num', clamp((t - 1.7) / .1));
+    const k = P(t, 4.6, .3, E.back);
+    op('s3num', clamp((t - 4.6) / .1));
     tf('s3num', `scale(${lerp(.6, 1, k)})`);
     $('s3num').style.transformOrigin = 'left center';
-    $('s3num').textContent = t < 2.8 ? String(1 + Math.min(5, Math.floor(Math.max(0, t - 1.7) / .22))) : '1 a 6';
-    rise('s3sub', t, 3.0, 30); rise('s3note', t, 3.5, 20);
+    $('s3num').textContent = t < 5.3 ? String(1 + Math.min(5, Math.floor(Math.max(0, t - 4.6) / .11))) : '1 a 6';
+    rise('s3sub', t, 5.63, 30); rise('s3note', t, 6.3, 20);
   },
   s4(t) {
     const k = P(t, .1, .9, E.expo);
-    tf('s4img', `translateY(${lerp(400, 0, k)}px) scale(${lerp(1, 1.05, t / 6)})`);
+    tf('s4img', `translateY(${lerp(400, 0, k)}px) scale(${lerp(1, 1.05, t / 8.2)})`);
     $('s4img').style.transformOrigin = 'center bottom';
     // batimento: anéis saindo da mão no peito
     [['s4pulse', 0], ['s4pulse2', .55]].forEach(([id, off]) => {
@@ -317,7 +322,7 @@ const UPD = {
     });
     rise('s4tab', t, .25, 30); rise('s4title', t, .4, 40);
     tf('s4ul', `scaleX(${P(t, .75, .5)})`);
-    checkItem('s4i1', t, 1.2); checkItem('s4i2', t, 2.4); checkItem('s4i3', t, 3.6);
+    checkItem('s4i1', t, 1.2); checkItem('s4i2', t, 3.45); checkItem('s4i3', t, 4.9);
   },
   s5(t) {
     rise('s5head', t, .2, 50);
@@ -326,27 +331,27 @@ const UPD = {
     op('s5gelo', clamp((t - 1) / .1)); tf('s5gelo', `scale(${gi}) rotate(${wob(t, 2, 3)}deg)`);
     const fi = P(t, 1.2, .5, E.back);
     op('s5fosf', clamp((t - 1.2) / .1)); tf('s5fosf', `scale(${fi}) rotate(${8 + wob(t, 13, 1.2)}deg) scaleY(${1 + wob(t, 23, .015)})`);
-    rise('s5r1', t, 1.7, 30); rise('s5r2', t, 3.1, 30); rise('s5r3', t, 4.5, 30);
-    op('s5foot', clamp((t - 6.0) / .15));
-    $('s5hl').style.setProperty('--hl', P(t, 6.0, .45));
+    rise('s5r1', t, 3.0, 30); rise('s5r2', t, 7.2, 30); rise('s5r3', t, 10.2, 30);
+    op('s5foot', clamp((t - .5) / .15));
+    $('s5hl').style.setProperty('--hl', P(t, .5, .45));
   },
   s6(t) {
     rise('s6head', t, .2, 40);
     $('vA').style.strokeDashoffset = 1194 * (1 - P(t, .7, .8, E.io));
     $('vB').style.strokeDashoffset = 1194 * (1 - P(t, 1.0, .8, E.io));
     op('vtA', P(t, 1.3, .3)); op('vtB', P(t, 1.5, .3));
-    $('vX').style.opacity = P(t, 2.0, .3);
-    rise('s6a1', t, 2.2, 30); rise('s6a2', t, 3.6, 30); rise('s6a3', t, 4.6, 20);
-    $('s6hl').style.setProperty('--hl', P(t, 4.1, .45));
+    $('vX').style.opacity = P(t, 1.9, .3);
+    rise('s6a1', t, 1.8, 30); rise('s6a2', t, 4.9, 30); rise('s6a3', t, 8.2, 20);
+    $('s6hl').style.setProperty('--hl', P(t, 6.05, .45));
   },
   s7(t) {
     const k = P(t, .0, .3, t => t * t);
     const settle = P(t, .3, .6, E.back);
     const sh = t > .25 && t < .6 ? (.6 - t) * 30 : 0;
     tf('s7prato', `translate(${wob(t, 80, sh)}px,${lerp(-800, 0, k)}px) rotate(${lerp(-20, -6, settle)}deg) scale(${lerp(.9, 1, settle)})`);
-    rise('s7card', t, .8, 60);
-    slam('s7dor', t, 1.6, 1.6);
-    rise('s7card2', t, 2.6, 40);
+    rise('s7card', t, .9, 60);
+    slam('s7dor', t, 2.7, 1.6);
+    rise('s7card2', t, 3.9, 40);
   },
   s8(t) {
     slam('s8l1', t, .15, 1.35, 'center'); slam('s8l2', t, .35, 1.35, 'center'); slam('s8l3', t, .55, 1.35, 'center');

@@ -1,7 +1,10 @@
 # Borderline não é psicopata (vídeo do carrossel)
 
 Versão em vídeo do carrossel TODO BORDERLINE TEM SEU LADO PSICOPATA? (out/2026), feita em 26/10/2026.
-9:16, 1080x1920, 30 fps, 46,5 s, sem narração. Só tem efeitos sonoros baixos (pico de -24 dBFS): a música entra no Instagram.
+9:16, 1080x1920, 30 fps. Duas versões:
+
+- Narrada (67,6 s): voz clonada do Dr. Fabio no Higgsfield, uma fala por cena, com efeitos sonoros baixos por baixo. Roteiro, jobs e tempos em `narr/roteiro.md`. É a versão atual de `index.html`.
+- Sem narração (46,5 s): só efeitos (pico de -24 dBFS), para a música entrar no Instagram. Para gerá-la de novo, use a tabela `SC` do commit anterior ou encurte as cenas e apague a pasta `narr/`.
 
 ## Roteiro
 

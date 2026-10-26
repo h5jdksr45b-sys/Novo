@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/vendor/gsap.min.js"></script>
+    <script src="assets/media/palavras.js"></script>
+    <style>
+      @font-face { font-family: "Montserrat"; font-weight: 800; src: url("assets/fonts/montserrat-latin-800-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Montserrat"; font-weight: 900; src: url("assets/fonts/montserrat-latin-900-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Montserrat"; font-weight: 500; src: url("assets/fonts/montserrat-latin-500-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Instrument Serif"; font-style: italic; src: url("assets/fonts/instrument-serif-latin-400-italic.woff2") format("woff2"); }
+      @font-face { font-family: "Instrument Serif"; font-style: normal; src: url("assets/fonts/instrument-serif-latin-400-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Inter"; font-weight: 500; src: url("assets/fonts/inter-latin-500-normal.woff2") format("woff2"); }
+
+      :root {
+        --papel: #ebe7e0;
+        --tinta: #141414;
+        --cinza: #7d7a75;
+        --vermelho: #cc0000;
+        --branco: #f7f5f2;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #0d0d0d; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: #0d0d0d; font-family: "Montserrat", sans-serif; }
+      .cheio { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+
+      #cam { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 50% 38%; }
+      #cam video { width: 1080px; height: 1920px; object-fit: cover; display: block; }
+      .broll video { width: 1080px; height: 1920px; object-fit: cover; display: block; }
+
+      /* Papel editorial dos esquemas */
+      .papel {
+        background-color: var(--papel);
+        background-image:
+          radial-gradient(ellipse at 50% 40%, rgba(255,255,255,0.55), rgba(0,0,0,0.10) 100%),
+          url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='7'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.10 0'/></filter><rect width='300' height='300' filter='url(%23n)'/></svg>");
+        color: var(--tinta);
+      }
+      .rotulo { font-family: "Inter", sans-serif; font-weight: 500; font-size: 30px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cinza); }
+      .serif { font-family: "Instrument Serif", serif; font-style: italic; font-weight: 400; }
+      .grosso { font-family: "Montserrat", sans-serif; font-weight: 900; text-transform: uppercase; letter-spacing: -0.01em; }
+      .verm { color: var(--vermelho); }
+      .bloco { position: absolute; left: 90px; width: 900px; }
+
+      /* Texto grande sobre o rosto e sobre b-roll */
+      .topo { position: absolute; left: 70px; top: 250px; width: 900px; display: flex; flex-direction: column; gap: 6px; }
+      .topo .l { font-family: "Montserrat", sans-serif; font-weight: 800; font-size: 74px; line-height: 1.04; color: #fff; text-transform: uppercase; text-shadow: 0 4px 22px rgba(0,0,0,0.55); }
+      .chave-texto { position: absolute; left: 0; top: 740px; width: 1080px; display: flex; flex-direction: column; align-items: center; }
+      .chave-texto .g { font-family: "Montserrat", sans-serif; font-weight: 900; font-size: 190px; line-height: 1; color: #fff; letter-spacing: -0.02em; text-shadow: 0 6px 40px rgba(0,0,0,0.6); }
+      .chave-texto .p { font-family: "Instrument Serif", serif; font-style: italic; font-size: 76px; color: #fff; text-shadow: 0 4px 24px rgba(0,0,0,0.7); margin-top: 6px; }
+
+      /* Legenda interativa */
+      .leg { position: absolute; left: 70px; width: 880px; display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; gap: 0 18px; opacity: 0; }
+      .leg .w { display: inline-block; font-family: "Montserrat", sans-serif; font-weight: 800; font-size: 60px; line-height: 1.15; color: #fff; opacity: 0.32; text-shadow: 0 3px 16px rgba(0,0,0,0.75); }
+      .leg .w.dest { font-family: "Instrument Serif", serif; font-style: italic; font-weight: 400; font-size: 92px; color: #ff2a1f; }
+      .leg.tinta .w { color: var(--tinta); text-shadow: none; }
+      .leg.tinta .w.dest { color: var(--vermelho); }
+
+      /* Cartões de notificação */
+      .notif { position: absolute; left: 110px; width: 860px; height: 150px; background: #fff; border-radius: 34px; box-shadow: 0 18px 40px rgba(0,0,0,0.12); display: flex; align-items: center; gap: 28px; padding: 0 36px; }
+      .notif .ic { width: 84px; height: 84px; border-radius: 50%; background: var(--vermelho); display: flex; align-items: center; justify-content: center; flex: none; }
+      .notif .tx { display: flex; flex-direction: column; gap: 4px; }
+      .notif .t1 { font-family: "Inter", sans-serif; font-weight: 500; font-size: 38px; color: var(--tinta); }
+      .notif .t2 { font-family: "Inter", sans-serif; font-weight: 500; font-size: 28px; color: var(--cinza); }
+
+      .chip { display: inline-flex; align-items: center; height: 92px; padding: 0 40px; border-radius: 46px; border: 3px solid var(--tinta); font-family: "Inter", sans-serif; font-weight: 500; font-size: 38px; color: var(--tinta); background: transparent; }
+      .chip.cheia { background: var(--vermelho); border-color: var(--vermelho); color: #fff; }
+      .chips { display: flex; flex-wrap: wrap; gap: 22px 20px; }
+
+      .bolha { display: inline-block; background: var(--vermelho); color: #fff; font-family: "Inter", sans-serif; font-weight: 500; font-size: 34px; padding: 16px 28px; border-radius: 30px 30px 8px 30px; }
+      .item { display: flex; align-items: center; gap: 34px; height: 130px; border-bottom: 2px solid rgba(20,20,20,0.15); }
+      .caixa { width: 74px; height: 74px; border: 4px solid var(--tinta); border-radius: 16px; position: relative; flex: none; }
+      .caixa .fill { position: absolute; inset: -4px; border-radius: 16px; background: var(--vermelho); opacity: 0; display: flex; align-items: center; justify-content: center; }
+      .item .txt { font-family: "Inter", sans-serif; font-weight: 500; font-size: 46px; color: var(--tinta); }
+
+      .flash { background: #fff; opacity: 0; }
+      .preto { background: #000; opacity: 0; }
+      .escuro { background: rgba(13,13,13,0.84); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="carro" data-start="0" data-duration="50.95" data-width="1080" data-height="1920">
+
+      <!-- Gravação com cortes de silêncio -->
+      <div id="cam">
+        <video id="fala" class="clip" src="assets/media/base.mp4" data-start="0" data-duration="50.95" data-track-index="0" data-has-audio="true"></video>
+      </div>
+
+      <!-- Gancho na tela -->
+      <div id="c-gancho" class="clip cheio" data-start="0" data-duration="3.36" data-track-index="2">
+        <div class="topo" id="gancho">
+          <div class="l">Pegou a chave.</div>
+          <div class="l">Bateu a porta.</div>
+          <div class="l" style="color:#ff2a1f">Não atende.</div>
+        </div>
+      </div>
+
+      <!-- 1. Ligações sem resposta -->
+      <div id="c-lig" class="clip cheio papel" data-start="3.40" data-duration="4.72" data-track-index="2">
+        <div class="bloco rotulo" style="top:190px">Do outro lado</div>
+        <div class="bloco serif" id="lig-tit" style="top:240px; font-size:120px; line-height:1">você liga.</div>
+        <div id="lig-cont" class="bloco grosso" style="top:390px; font-size:52px; white-space:nowrap; color:var(--cinza)"><span id="lig-n" class="verm">3</span> ligações sem resposta</div>
+        <div class="notif" id="n1" style="top:520px"><div class="ic"><svg width="44" height="44" viewBox="0 0 24 24"><path fill="#fff" d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.4 11.4 0 00.57 3.6 1 1 0 01-.25 1z"/></svg></div><div class="tx"><div class="t1">Chamada não atendida</div><div class="t2">agora</div></div></div>
+        <div class="notif" id="n2" style="top:690px"><div class="ic"><svg width="44" height="44" viewBox="0 0 24 24"><path fill="#fff" d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.4 11.4 0 00.57 3.6 1 1 0 01-.25 1z"/></svg></div><div class="tx"><div class="t1">Chamada não atendida</div><div class="t2">há 2 min</div></div></div>
+        <div class="notif" id="n3" style="top:860px"><div class="ic"><svg width="44" height="44" viewBox="0 0 24 24"><path fill="#fff" d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.4 11.4 0 00.57 3.6 1 1 0 01-.25 1z"/></svg></div><div class="tx"><div class="t1">Chamada não atendida</div><div class="t2">há 5 min</div></div></div>
+        <div id="castigo" class="bloco" style="top:1040px; display:flex; align-items:baseline; gap:24px">
+          <span class="rotulo" style="font-size:32px">primeira leitura:</span>
+          <span class="serif verm" style="font-size:150px; line-height:1">castigo?</span>
+        </div>
+      </div>
+
+      <!-- 2. Curva da tensão -->
+      <div id="c-tensao" class="clip cheio papel" data-start="8.15" data-duration="7.78" data-track-index="2">
+        <div class="bloco rotulo" style="top:190px">Na briga</div>
+        <div class="bloco" style="top:236px; display:flex; align-items:baseline; gap:22px">
+          <span class="grosso" style="font-size:96px">a tensão</span><span class="serif" style="font-size:110px">sobe</span>
+        </div>
+        <svg id="graf" style="position:absolute; left:70px; top:430px; overflow:visible" width="940" height="760" viewBox="0 0 940 760">
+          <line x1="40" y1="700" x2="920" y2="700" stroke="#141414" stroke-width="3"/>
+          <line x1="40" y1="60" x2="40" y2="700" stroke="#141414" stroke-width="3"/>
+          <text x="54" y="44" font-family="Inter" font-size="28" fill="#7d7a75" letter-spacing="3">TENSÃO</text>
+          <text x="920" y="740" text-anchor="end" font-family="Inter" font-size="28" fill="#7d7a75" letter-spacing="3">TEMPO</text>
+          <line id="limite" x1="40" y1="170" x2="920" y2="170" stroke="#cc0000" stroke-width="3" stroke-dasharray="14 12" opacity="0"/>
+          <text id="limite-tx" x="56" y="152" font-family="Inter" font-size="30" fill="#cc0000" opacity="0">o corpo não para</text>
+          <path id="p1" d="M40 640 C 180 620, 260 560, 330 470 S 470 240, 560 170" fill="none" stroke="#141414" stroke-width="9" stroke-linecap="round"/>
+          <path id="p2" d="M560 170 C 590 170, 600 560, 660 600" fill="none" stroke="#141414" stroke-width="9" stroke-linecap="round"/>
+          <path id="p3" d="M660 600 C 740 610, 820 450, 900 420" fill="none" stroke="#cc0000" stroke-width="9" stroke-linecap="round" stroke-dasharray="18 14"/>
+          <g id="m-sai" opacity="0"><circle cx="560" cy="170" r="22" fill="#cc0000"/><text x="560" y="116" text-anchor="middle" font-family="Montserrat" font-weight="900" font-size="46" fill="#141414">SAI</text></g>
+          <g id="m-alivio" opacity="0"><circle cx="660" cy="600" r="16" fill="#141414"/><text x="640" y="660" text-anchor="end" font-family="Instrument Serif" font-style="italic" font-size="64" fill="#141414">alívio</text></g>
+          <g id="m-arrep" opacity="0"><circle cx="900" cy="420" r="16" fill="#cc0000"/><text x="920" y="372" text-anchor="end" font-family="Instrument Serif" font-style="italic" font-size="46" fill="#cc0000">arrependimento</text></g>
+        </svg>
+      </div>
+
+      <!-- B-roll 1: garagem vazia -->
+      <div id="br1-z" class="cheio"><video id="br1" class="clip broll" src="assets/media/broll-garagem.mp4" muted data-start="15.95" data-duration="2.62" data-track-index="3" style="position:absolute;left:0;top:0;width:1080px;height:1920px;object-fit:cover"></video></div>
+      <div id="c-br1" class="clip cheio" data-start="15.95" data-duration="2.62" data-track-index="4">
+        <div class="chave-texto" id="br1-tx"><div class="g">SAÍDA</div><div class="p">a mais perto</div></div>
+      </div>
+
+      <!-- 3. DSM -->
+      <div id="c-dsm" class="clip cheio papel" data-start="18.58" data-duration="5.40" data-track-index="2">
+        <div id="dsm-circ" style="position:absolute; left:880px; top:40px; width:320px; height:320px; border-radius:50%; background:var(--vermelho)"></div>
+        <div class="bloco rotulo" style="top:190px">DSM-5 · critério do borderline</div>
+        <div class="bloco" id="dsm-tit" style="top:250px; width:760px; font-family:Inter; font-weight:500; font-size:58px; line-height:1.18">Impulsividade em pelo menos duas áreas que podem prejudicar a própria pessoa</div>
+        <div class="bloco chips" style="top:560px">
+          <span class="chip" id="ch1">gastos</span>
+          <span class="chip" id="ch2">sexo</span>
+          <span class="chip" id="ch3">substâncias</span>
+          <span class="chip" id="ch4">compulsão alimentar</span>
+          <span class="chip cheia" id="ch5">direção imprudente</span>
+        </div>
+        <div class="bloco" id="sobdor" style="top:900px; display:flex; flex-direction:column">
+          <span class="serif" style="font-size:150px; line-height:1">impulsividade</span>
+          <span class="grosso verm" style="font-size:120px; line-height:1.05">sob dor</span>
+        </div>
+      </div>
+
+      <!-- 4. Vinte mensagens -->
+      <div id="c-msg" class="clip cheio papel" data-start="23.99" data-duration="5.32" data-track-index="2">
+        <div class="bloco rotulo" style="top:190px">Na hora</div>
+        <div class="bloco" style="top:236px; display:flex; align-items:baseline; gap:20px">
+          <span class="serif" style="font-size:110px">mas</span><span class="grosso" style="font-size:96px">calma</span>
+        </div>
+        <div id="pilha" style="position:absolute; right:90px; top:420px; width:600px; height:640px; overflow:hidden; display:flex; flex-direction:column; align-items:flex-end; justify-content:flex-end; gap:12px"></div>
+        <div id="msg-n" class="grosso" style="position:absolute; left:90px; top:470px; font-size:230px; line-height:1">0</div>
+        <div class="rotulo" style="position:absolute; left:96px; top:710px; color:var(--tinta)">mensagens</div>
+        <svg id="xis" style="position:absolute; left:60px; top:400px; overflow:visible; opacity:0" width="960" height="700" viewBox="0 0 960 700">
+          <path id="x1" d="M80 60 L 880 640" stroke="#cc0000" stroke-width="22" stroke-linecap="round" fill="none"/>
+          <path id="x2" d="M880 60 L 80 640" stroke="#cc0000" stroke-width="22" stroke-linecap="round" fill="none"/>
+        </svg>
+        <div class="bloco" id="corre" style="top:1150px"><span class="chip" style="height:96px; font-size:42px">correr atrás&nbsp;&nbsp;<b class="verm" style="font-size:46px">✕</b></span></div>
+      </div>
+
+      <!-- 5. Uma mensagem só -->
+      <div id="c-uma" class="clip cheio papel" data-start="29.33" data-duration="3.08" data-track-index="2">
+        <div class="bloco" style="top:236px; display:flex; align-items:baseline; gap:20px">
+          <span class="grosso" style="font-size:96px">manda</span><span class="serif verm" style="font-size:120px">uma só</span>
+        </div>
+        <div id="uma-bolha" style="position:absolute; right:90px; top:560px; max-width:780px; background:var(--tinta); color:#fff; font-family:Inter; font-weight:500; font-size:50px; line-height:1.25; padding:34px 44px; border-radius:46px 46px 12px 46px; clip-path: inset(0 100% 0 0 round 46px)">Quando estiver em segurança, me avisa.</div>
+        <div id="uma-ok" class="rotulo" style="position:absolute; right:96px; top:800px; color:var(--tinta)">Entregue ✓</div>
+      </div>
+
+      <!-- Texto sobre o rosto: dia calmo -->
+      <div id="c-calmo" class="clip cheio" data-start="32.43" data-duration="5.02" data-track-index="2">
+        <div class="topo" id="calmo">
+          <div class="l">Num dia calmo,</div>
+          <div class="l" style="color:#ff2a1f">combine a saída.</div>
+        </div>
+      </div>
+
+      <!-- 6. O combinado -->
+      <div id="c-comb" class="clip cheio papel" data-start="37.48" data-duration="6.08" data-track-index="2">
+        <div class="bloco rotulo" style="top:190px">Feito num dia calmo</div>
+        <div class="bloco" style="top:236px; display:flex; align-items:baseline; gap:20px">
+          <span class="serif" style="font-size:120px">o</span><span class="grosso" style="font-size:104px">combinado</span>
+        </div>
+        <div class="bloco" style="top:470px">
+          <div class="item" id="it1"><div class="caixa"><div class="fill" id="f1"><svg width="46" height="46" viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5" stroke="#fff" stroke-width="3.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div><div class="txt">sai <b>a pé</b></div></div>
+          <div class="item" id="it2"><div class="caixa"><div class="fill" id="f2"><svg width="46" height="46" viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5" stroke="#fff" stroke-width="3.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div><div class="txt">em <b>20 min</b>, avisa que está bem</div></div>
+          <div class="item" id="it3"><div class="caixa"><div class="fill" id="f3"><svg width="46" height="46" viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5" stroke="#fff" stroke-width="3.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div><div class="txt">a <b>chave</b> fica longe</div></div>
+        </div>
+      </div>
+
+      <!-- B-roll 2: chave congelando -->
+      <div id="br2-z" class="cheio"><video id="br2" class="clip broll" src="assets/media/broll-chave.mp4" muted data-start="43.56" data-duration="2.70" data-track-index="3" style="position:absolute;left:0;top:0;width:1080px;height:1920px;object-fit:cover"></video></div>
+      <div id="c-br2" class="clip cheio" data-start="43.56" data-duration="2.70" data-track-index="4">
+        <div class="chave-texto" id="br2-tx" style="top:250px"><div class="g">LONGE</div><div class="p">até a briga esfriar</div></div>
+      </div>
+
+      <!-- Segurança -->
+      <div id="c-risco" class="clip cheio" data-start="46.27" data-duration="2.64" data-track-index="2">
+        <div class="topo">
+          <div class="l" id="r1">Bebida no meio?</div>
+          <div class="l" id="r2" style="color:#ff2a1f">Falou em se machucar?</div>
+        </div>
+      </div>
+      <div id="c-ajuda" class="clip cheio escuro" data-start="48.92" data-duration="2.03" data-track-index="2">
+        <div class="bloco rotulo" id="aj0" style="top:420px; color:#bdbab5">Esquece o combinado</div>
+        <div class="bloco grosso" id="aj1" style="top:480px; font-size:150px; line-height:1; color:#fff">chama</div>
+        <div class="bloco grosso verm" id="aj2" style="top:630px; font-size:150px; line-height:1; color:#ff2a1f">ajuda</div>
+        <div class="bloco grosso verm" id="aj2b" style="top:780px; font-size:150px; line-height:1; color:#ff2a1f">agora</div>
+        <div class="bloco chips" id="aj3" style="top:980px">
+          <span class="chip cheia" style="font-size:44px">SAMU 192</span>
+          <span class="chip" style="font-size:44px; color:#fff; border-color:#fff">CVV 188</span>
+        </div>
+      </div>
+
+      <!-- Legendas -->
+      <div id="legendas" class="cheio" style="pointer-events:none"></div>
+
+      <div id="flash" class="clip cheio flash" data-start="15.85" data-duration="2.85" data-track-index="5"></div>
+      <div id="fim" class="clip cheio preto" data-start="50.7" data-duration="0.25" data-track-index="5"></div>
+
+      <!-- Sons -->
+      <audio id="s-wh1" src="assets/sfx/whoosh-short.mp3" data-start="3.36" data-duration="0.57" data-volume="0.035"></audio>
+      <audio id="s-wh2" src="assets/sfx/whoosh-short.mp3" data-start="8.11" data-duration="0.57" data-volume="0.035"></audio>
+      <audio id="s-wh3" src="assets/sfx/whoosh-short.mp3" data-start="15.91" data-duration="0.57" data-volume="0.035"></audio>
+      <audio id="s-wh4" src="assets/sfx/whoosh-short.mp3" data-start="18.54" data-duration="0.57" data-volume="0.035"></audio>
+      <audio id="s-wh5" src="assets/sfx/whoosh-short.mp3" data-start="23.95" data-duration="0.57" data-volume="0.035"></audio>
+      <audio id="s-wh6" src="assets/sfx/whoosh-short.mp3" data-start="29.29" data-duration="0.57" data-volume="0.035"></audio>
+      <audio id="s-wh7" src="assets/sfx/whoosh-short.mp3" data-start="37.44" data-duration="0.57" data-volume="0.035"></audio>
+      <audio id="s-wh8" src="assets/sfx/whoosh-short.mp3" data-start="43.52" data-duration="0.57" data-volume="0.035"></audio>
+      <audio id="s-wh9" src="assets/sfx/whoosh-short.mp3" data-start="48.88" data-duration="0.57" data-volume="0.035"></audio>
+      <audio id="s-pop1" src="assets/sfx/pop.mp3" data-start="19.18" data-duration="0.72" data-volume="0.04"></audio>
+      <audio id="s-ck1" src="assets/sfx/click-soft.mp3" data-start="39.73" data-duration="0.36" data-volume="0.05"></audio>
+      <audio id="s-ck2" src="assets/sfx/click-soft.mp3" data-start="40.80" data-duration="0.36" data-volume="0.05"></audio>
+      <audio id="s-ck3" src="assets/sfx/click-soft.mp3" data-start="43.31" data-duration="0.36" data-volume="0.05"></audio>
+      <audio id="s-ck4" src="assets/sfx/click-soft.mp3" data-start="31.31" data-duration="0.36" data-volume="0.05"></audio>
+    </div>
+
+    <script>
+      (function () {
+        const tl = gsap.timeline({ paused: true });
+        const P = window.PALAVRAS;
+
+        // Janelas de fundo: decide cor e altura da legenda
+        const papel = [[3.40, 8.12], [8.15, 15.93], [18.58, 23.98], [23.99, 29.31], [29.33, 32.41], [37.48, 43.56]];
+        const broll = [[15.95, 18.57], [43.56, 46.26]];
+        const dentro = (t, js) => js.some(([a, b]) => t >= a && t < b);
+
+        const DEST = new Set(["borderline", "carro", "some", "castigo", "tensão", "corpo", "alívio", "arrependimento", "saída", "arriscada", "dsm", "impulsividade", "dor", "calma", "20", "mensagens", "só", "em segurança", "calmo", "combine", "risco", "pé", "minutos", "chave", "longe", "esfriar", "bebida", "machucar", "emergência", "ajuda", "agora"]);
+        const limpa = (w) => w.toLowerCase().replace(/[.,:?!]/g, "");
+
+        // Grupos de até 3 palavras, quebrando na pontuação
+        const grupos = [];
+        let g = [];
+        P.forEach((p, i) => {
+          g.push(p);
+          const fimFrase = /[.,:?!]$/.test(p[2]);
+          const prox = P[i + 1];
+          const pausa = prox && prox[0] - p[1] > 0.25;
+          if (g.length === 3 || fimFrase || pausa || !prox) { grupos.push(g); g = []; }
+        });
+
+        const box = document.getElementById("legendas");
+        grupos.forEach((gr, gi) => {
+          const ini = gr[0][0];
+          const fim = gi < grupos.length - 1 ? Math.min(grupos[gi + 1][0][0], gr[gr.length - 1][1] + 0.6) : 50.9;
+          const el = document.createElement("div");
+          el.className = "leg";
+          const noPapel = dentro(ini + 0.05, papel);
+          const noBroll = dentro(ini + 0.05, broll);
+          if (noPapel) el.classList.add("tinta");
+          el.style.top = noPapel ? "1300px" : noBroll ? "1420px" : "1210px";
+          if (noBroll && ini > 43) el.style.top = "560px";
+          gr.forEach((p) => {
+            const s = document.createElement("span");
+            s.className = "w";
+            s.textContent = p[2].replace(/[,:]$/, "");
+            if (DEST.has(limpa(p[2]))) s.classList.add("dest");
+            el.appendChild(s);
+          });
+          box.appendChild(el);
+          tl.set(el, { opacity: 1 }, ini);
+          tl.fromTo(el, { y: 26 }, { y: 0, duration: 0.22, ease: "power3.out" }, ini);
+          [...el.children].forEach((s, k) => {
+            const t = gr[k][0];
+            tl.to(s, { opacity: 1, duration: 0.08 }, t);
+            if (s.classList.contains("dest")) tl.fromTo(s, { scale: 0.7 }, { scale: 1, duration: 0.28, ease: "back.out(2.4)" }, t);
+          });
+          tl.set(el, { opacity: 0 }, fim);
+        });
+
+        // Zoom em cortes alternados (padrão aprovado: 1,05 a 1,16)
+        const cortes = [0, 3.365, 14.224, 16.475, 18.566, 22.292, 24.031, 32.364, 33.32, 34.601, 37.501, 40.13, 43.182, 46.265, 50.872];
+        const escalas = [1.0, 1.08, 1.0, 1.12, 1.0, 1.1, 1.0, 1.12, 1.0, 1.14, 1.0, 1.08, 1.0, 1.12, 1.12];
+        cortes.forEach((t, i) => {
+          const fimSeg = i < cortes.length - 1 ? cortes[i + 1] : 50.95;
+          // zoom leve contínuo dentro de cada trecho, partindo da escala do corte
+          tl.fromTo("#cam", { scale: escalas[i] }, { scale: escalas[i] + 0.03, duration: fimSeg - t, ease: "none", immediateRender: false }, t);
+        });
+        tl.fromTo("#br1-z", { scale: 1 }, { scale: 1.07, duration: 2.62, ease: "none", immediateRender: false }, 15.95);
+        tl.fromTo("#br2-z", { scale: 1.06 }, { scale: 1, duration: 2.70, ease: "none", immediateRender: false }, 43.56);
+
+        // Gancho
+        tl.fromTo("#gancho", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3, ease: "power3.out" }, 0.05);
+
+        // 1. Ligações
+        tl.fromTo("#lig-tit", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, ease: "power3.out" }, 3.42);
+        ["#n3", "#n2", "#n1"].forEach((id, k) => tl.fromTo(id, { y: -60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3, ease: "back.out(1.6)" }, 3.75 + k * 0.38));
+        const cont = { v: 3 };
+        tl.to(cont, { v: 7, duration: 1.4, ease: "none", onUpdate: () => { document.getElementById("lig-n").textContent = Math.round(cont.v); } }, 4.1);
+        tl.fromTo("#lig-cont", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 3.9);
+        tl.fromTo("#castigo", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, ease: "power3.out" }, 7.15);
+
+        // 2. Tensão
+        const desenha = (id, a, d, ease) => {
+          const p = document.getElementById(id);
+          const L = p.getTotalLength();
+          if (id === "p3") {
+            tl.fromTo(p, { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: d, ease: ease || "power2.inOut" }, a);
+          } else {
+            p.style.strokeDasharray = L;
+            tl.fromTo(p, { strokeDashoffset: L }, { strokeDashoffset: 0, duration: d, ease: ease || "power2.inOut" }, a);
+          }
+        };
+        desenha("p1", 8.7, 2.8);
+        tl.to(["#limite", "#limite-tx"], { opacity: 1, duration: 0.3 }, 9.96);
+        tl.fromTo("#m-sai", { opacity: 0, scale: 0.4, transformOrigin: "560px 170px" }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2)" }, 11.5);
+        desenha("p2", 12.0, 1.9, "power2.in");
+        tl.to("#m-alivio", { opacity: 1, duration: 0.3 }, 13.94);
+        desenha("p3", 14.38, 0.9);
+        tl.to("#m-arrep", { opacity: 1, duration: 0.3 }, 14.5);
+
+        // B-roll 1
+        tl.fromTo("#br1-tx", { opacity: 0, scale: 1.15 }, { opacity: 1, scale: 1, duration: 0.35, ease: "power3.out" }, 17.3);
+        tl.fromTo("#flash", { opacity: 0 }, { opacity: 0.9, duration: 0.05 }, 15.9);
+        tl.to("#flash", { opacity: 0, duration: 0.07 }, 15.97);
+        tl.to("#flash", { opacity: 0.9, duration: 0.05 }, 18.52);
+        tl.to("#flash", { opacity: 0, duration: 0.07 }, 18.59);
+
+        // 3. DSM
+        tl.fromTo("#dsm-circ", { scale: 0 }, { scale: 1, duration: 0.5, ease: "power3.out" }, 18.6);
+        tl.fromTo("#dsm-tit", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35 }, 18.65);
+        ["#ch1", "#ch2", "#ch3", "#ch4"].forEach((id, k) => tl.fromTo(id, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.2 }, 18.7 + k * 0.1));
+        tl.fromTo("#ch5", { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.2)" }, 19.18);
+        tl.to(["#ch1", "#ch2", "#ch3", "#ch4"], { opacity: 0.35, duration: 0.3 }, 19.4);
+        tl.fromTo("#sobdor", { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: "power3.out" }, 22.35);
+
+        // 4. Mensagens
+        const textos = ["oi?", "atende", "cadê você?", "??", "me responde", "por favor", "atende", "oi", "?", "cadê", "responde", "atende por favor", "??", "oi?", "me liga", "???", "atende", "cadê você", "oi", "?"];
+        const pilha = document.getElementById("pilha");
+        const nEl = document.getElementById("msg-n");
+        textos.forEach((t, k) => {
+          const b = document.createElement("div");
+          b.className = "bolha";
+          b.textContent = t;
+          pilha.appendChild(b);
+          const at = 25.55 + k * 0.045;
+          tl.fromTo(b, { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 0.12 }, at);
+          tl.call(() => { nEl.textContent = k + 1; }, null, at);
+          tl.call(() => { nEl.textContent = k; }, null, at - 0.001);
+        });
+        tl.call(() => { nEl.textContent = 0; }, null, 24.0);
+        ["x1", "x2"].forEach((id, k) => {
+          const p = document.getElementById(id);
+          const L = p.getTotalLength();
+          p.style.strokeDasharray = L;
+          tl.fromTo(p, { strokeDashoffset: L }, { strokeDashoffset: 0, duration: 0.22, ease: "power2.out" }, 26.9 + k * 0.16);
+        });
+        tl.set("#xis", { opacity: 1 }, 26.9);
+        tl.fromTo("#corre", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.3, ease: "back.out(1.8)" }, 27.69);
+
+        // 5. Uma só
+        tl.to("#uma-bolha", { clipPath: "inset(0 0% 0 0 round 46px)", duration: 1.1, ease: "none" }, 30.1);
+        tl.fromTo("#uma-ok", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 31.31);
+
+        // Dia calmo
+        tl.fromTo("#calmo", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3, ease: "power3.out" }, 32.45);
+
+        // 6. Combinado
+        [["#it1", "#f1", 39.73], ["#it2", "#f2", 40.8], ["#it3", "#f3", 43.31]].forEach(([it, f, t], k) => {
+          tl.fromTo(it, { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.25 }, 37.7 + k * 0.15);
+          tl.fromTo(f, { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2.4)" }, t);
+        });
+
+        // B-roll 2
+        tl.fromTo("#br2-tx", { opacity: 0, scale: 1.15 }, { opacity: 1, scale: 1, duration: 0.35, ease: "power3.out" }, 44.07);
+
+        // Segurança
+        tl.fromTo("#r1", { y: 26, opacity: 0 }, { y: 0, opacity: 1, duration: 0.25 }, 46.84);
+        tl.fromTo("#r2", { y: 26, opacity: 0 }, { y: 0, opacity: 1, duration: 0.25 }, 47.7);
+        tl.fromTo("#aj0", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 48.96);
+        tl.fromTo("#aj1", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3, ease: "power3.out" }, 50.0);
+        tl.fromTo(["#aj2", "#aj2b"], { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3, ease: "power3.out" }, 50.2);
+        tl.fromTo("#aj3", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 50.3);
+
+        tl.fromTo("#fim", { opacity: 0 }, { opacity: 1, duration: 0.12 }, 50.8);
+
+        window.__timelines["carro"] = tl;
+      })();
+    </script>
+  </body>
+</html>

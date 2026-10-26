@@ -50,6 +50,7 @@ Outros: Cacto (2.381 envios), Reação que parece justa (759 compartilhamentos e
 - A compulsão funciona, por isso repete.
 - Quando ajudar piora (capa da boia, 22/10).
 - Borderline não pega, o estigma pega na família (22/10).
+- Todo borderline tem seu lado psicopata? Não (carrossel de 16/10, 34,7 mil views; versão em vídeo em 26/10). Mesma família do Reel de 28/09 (pesquisar se é psicopata depois de magoar) e do vídeo do PCL-R.
 
 Lote de estigmas de 22/10, roteiros prontos que podem não ter saído: mente, irmãos, dependência, contar o diagnóstico, fui machucado, toda raiva vira sintoma, adulto que não quer tratar, profissional que foge, filhos, se afastar sem ser vilão, chamar atenção, limite e ameaça. Arquivo: `roteiros/lote-estigmas-2026-10.md` no branch `claude/cool-fermat-at3p5v`.
 
@@ -75,6 +76,7 @@ Cinco temas do Claude: idealização (conheceu na segunda, na sexta era o amor d
 - Cérebro e neuroimagem: fora do feed.
 - Anúncios do livro (duas leituras; mensagens às 02:47), consultas e pacotes, promo do Protocolo, tutorial do app.
 - RESPIRA JÁ! vira app na tela (25/10, HyperFrames): tutorial de 24 s, 9:16, para pôr o respira.base44.app como ícone na tela inicial do iPhone (Compartilhar, Adicionar à Tela de Início, Adicionar), com aviso curto para Android no fim. Projeto e MP4 em `videos/respira-app-icone/` no branch `claude/clever-carson-b4y4wj`. Sem narração; sons baixos da media-use. Aguardando a reação dele.
+- Borderline não é psicopata (26/10): versão em vídeo do carrossel de 16/10, 9:16, feita em HTML renderizado quadro a quadro (Playwright + ffmpeg), sem reaproveitar imagem do post. Oito cenas: comentário no celular, psicopatia em palavras simples, 1 a 6 em cada 100 (grade de pontos), borderline em palavras simples, tabela depois de machucar alguém, os dois podem aparecer juntos (círculos), dor explica e não autoriza, manda pra quem ainda acredita nisso. Duas versões: 46,5 s só com SFX e 67,6 s narrada com a voz clonada "Fabio" do Higgsfield (seed_audio), com as cenas esticadas para caber a fala. Fora do vídeo, de propósito: a frase do carrossel de que a comorbidade é igual à da população geral (contradiz o NESARC) e o 15 a 20% sem fonte. Projeto em `videos/borderline-psicopata-carrossel-video/` no branch `claude/adoring-sagan-cljqo2`; MP4 nos envios do Higgsfield. Aguardando a reação dele.
 
 Biblioteca com os MP4 finais de outubro: `biblioteca-videos/prontos/` no branch `claude/funny-davinci-239qh0` (LINKS.txt tem o link de cada arquivo).
 

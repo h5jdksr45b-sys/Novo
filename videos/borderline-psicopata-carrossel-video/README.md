@@ -3,7 +3,9 @@
 Versão em vídeo do carrossel TODO BORDERLINE TEM SEU LADO PSICOPATA? (out/2026), feita em 26/10/2026.
 9:16, 1080x1920, 30 fps. Duas versões:
 
-- Narrada (67,6 s): voz clonada do Dr. Fabio no Higgsfield, uma fala por cena, com efeitos sonoros baixos por baixo. Roteiro, jobs e tempos em `narr/roteiro.md`. É a versão atual de `index.html`.
+- Narrada (77,3 s, v3): voz clonada do Dr. Fabio no Higgsfield, uma fala por cena (o CTA final fica só escrito), legenda da narração com até três palavras por vez, uma linha de explicação por cena e efeitos sonoros baixos por baixo. Roteiro, jobs e tempos em `narr/roteiro.md`. É a versão atual de `index.html`.
+
+Scripts: `trim_narr.py` (corte das falas sem comer palavras), `retime.py` (cenas no tamanho das falas), `explica.py` (legenda e explicações). Os dois últimos já estão aplicados em `index.html` e ficam como registro.
 - Sem narração (46,5 s): só efeitos (pico de -24 dBFS), para a música entrar no Instagram. Para gerá-la de novo, use a tabela `SC` do commit anterior ou encurte as cenas e apague a pasta `narr/`.
 
 ## Roteiro

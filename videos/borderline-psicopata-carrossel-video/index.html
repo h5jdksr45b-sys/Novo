@@ -43,6 +43,9 @@ img{display:block}
 .tbl .cell{font-family:Mont;font-weight:800;font-size:42px;line-height:1.1;padding:20px 24px;min-height:118px;display:flex;align-items:center;color:var(--ink)}
 .tbl .h{font-family:Anton;font-size:60px;letter-spacing:1px;padding:16px 24px 10px;color:var(--cream)}
 .btn{width:560px;height:124px;border-radius:62px;background:var(--ink);color:var(--cream);display:flex;align-items:center;justify-content:center;gap:24px;font-family:Mont;font-weight:800;font-size:46px;box-shadow:0 14px 0 rgba(0,0,0,.3)}
+#cap{position:absolute;left:70px;width:940px;top:1470px;text-align:center;font-family:Mont;font-weight:800;font-size:42px;line-height:1.1;letter-spacing:-.3px;transform-origin:center}
+.cap-h{font-family:Play;font-style:italic;font-weight:900;font-size:56px}
+.expl{font-family:Mont;font-weight:600;font-size:30px;line-height:1.25;padding-left:22px;border-left:8px solid var(--red2)}
 </style>
 </head>
 <body>
@@ -68,7 +71,7 @@ img{display:block}
 
 <!-- 2. O que é psicopatia -->
 <section class="scene paper cream" id="s2">
-  <img class="abs cut" id="s2img" src="assets/img/xadrez.png" style="left:470px;top:960px;width:600px;height:639px">
+  <img class="abs cut" id="s2img" src="assets/img/xadrez.png" style="left:560px;top:880px;width:520px;height:554px">
   <div class="abs tab" id="s2tab" style="left:70px;top:220px">Em palavras simples</div>
   <div class="abs ital" id="s2title" style="left:66px;top:290px;font-size:132px;color:var(--ink)">Psicopatia</div>
   <div class="abs" id="s2ul" style="left:72px;top:452px;width:640px;height:10px;background:var(--red);transform-origin:left"></div>
@@ -77,6 +80,7 @@ img{display:block}
     <div class="item" id="s2i2" style="margin-top:44px"><svg class="check" width="64" height="64" viewBox="0 0 64 64"><circle cx="32" cy="32" r="28" stroke="#C63A24" stroke-width="6"/><path d="M19 33l9 9 17-19" stroke="#151211" stroke-width="7"/></svg><div class="sans" style="font-size:50px;color:var(--ink)">Engana e usa pessoas com frieza.</div></div>
     <div class="item" id="s2i3" style="margin-top:44px"><svg class="check" width="64" height="64" viewBox="0 0 64 64"><circle cx="32" cy="32" r="28" stroke="#C63A24" stroke-width="6"/><path d="M19 33l9 9 17-19" stroke="#151211" stroke-width="7"/></svg><div class="sans" style="font-size:50px;color:var(--ink)">Raramente pede ajuda.</div></div>
   </div>
+  <div class="abs expl" id="exp2" style="left:70px;top:1290px;width:380px;color:var(--ink);border-color:var(--red)">O que define é a falta de culpa e de empatia. Não é a intensidade da emoção.</div>
 </section>
 
 <!-- 3. Quanto aparece -->
@@ -87,7 +91,7 @@ img{display:block}
   <div class="abs" id="s3grid" style="left:70px;top:930px;width:484px;height:484px"></div>
   <div class="abs slab" id="s3num" style="left:600px;top:980px;font-size:150px;white-space:nowrap">1 a 6</div>
   <div class="abs sans" id="s3sub" style="left:604px;top:1140px;width:420px;font-size:44px;color:var(--cream)">em cada 100 pessoas</div>
-  <div class="abs" id="s3note" style="left:70px;width:940px;top:1440px;font-family:Mont;font-weight:600;font-size:28px;color:var(--cream)">Estimativas para psicopatia e narcisismo na população geral.</div>
+  <div class="abs expl" id="s3note" style="left:70px;width:940px;top:1360px;color:var(--cream);border-color:var(--ink)">Estimativa para psicopatia e narcisismo. É raro: a maioria de quem explode não é psicopata.</div>
 </section>
 
 <!-- 4. O que é borderline -->
@@ -103,6 +107,7 @@ img{display:block}
     <div class="item" id="s4i2" style="margin-top:30px"><svg class="check" width="64" height="64" viewBox="0 0 64 64"><circle cx="32" cy="32" r="28" stroke="#E0482F" stroke-width="6"/><path d="M19 33l9 9 17-19" stroke="#EDE3CD" stroke-width="7"/></svg><div class="sans" style="font-size:50px;color:var(--cream)">Tem pavor de ser deixado.</div></div>
     <div class="item" id="s4i3" style="margin-top:30px"><svg class="check" width="64" height="64" viewBox="0 0 64 64"><circle cx="32" cy="32" r="28" stroke="#E0482F" stroke-width="6"/><path d="M19 33l9 9 17-19" stroke="#EDE3CD" stroke-width="7"/></svg><div class="sans" style="font-size:50px;color:var(--cream);width:420px">Explode e depois sofre com o que fez.</div></div>
   </div>
+  <div class="abs expl" id="exp4" style="left:70px;top:1330px;width:360px;color:var(--cream)">Sente demais e reage rápido. É o oposto da frieza.</div>
 </section>
 
 <!-- 5. Tabela: a diferença aparece depois -->
@@ -116,7 +121,8 @@ img{display:block}
     <div id="s5r2"><div class="lab">PEDIR AJUDA</div><div class="row"><div class="cell" style="background:rgba(21,18,17,.08)">Raramente</div><div class="cell" style="background:rgba(198,58,36,.15)">Com frequência</div></div></div>
     <div id="s5r3"><div class="lab">COMO MACHUCA</div><div class="row"><div class="cell" style="background:rgba(21,18,17,.08)">Com cálculo</div><div class="cell" style="background:rgba(198,58,36,.15)">No impulso</div></div></div>
   </div>
-  <div class="abs sans" id="s5foot" style="left:60px;top:1370px;font-size:56px;font-weight:900;color:var(--cream)"><span class="hl" id="s5hl" style="--hlc:#151211">Repare no que vem depois.</span></div>
+  <div class="abs sans" id="s5foot" style="left:60px;top:1140px;font-size:56px;font-weight:900;color:var(--cream)"><span class="hl" id="s5hl" style="--hlc:#151211">Repare no que vem depois.</span></div>
+  <div class="abs expl" id="exp5" style="left:60px;top:1360px;width:940px;color:var(--ink);border-color:var(--red)">A culpa depois é o sinal mais claro. Quem não sente nada é a exceção, não a regra.</div>
 </section>
 
 <!-- 6. Podem aparecer juntos -->
@@ -136,16 +142,17 @@ img{display:block}
     <div class="sans" id="s6a2" style="font-size:52px;color:var(--cream);margin-top:30px">Mas ter borderline <span class="hl" id="s6hl" style="--hlc:#151211">não torna ninguém psicopata.</span></div>
     <div id="s6a3" style="font-family:Mont;font-weight:600;font-size:32px;color:var(--cream);margin-top:34px">Quem avalia é um profissional, pessoa por pessoa.</div>
   </div>
+  <div class="abs expl" id="exp6" style="left:70px;top:1370px;width:940px;color:var(--cream);border-color:var(--ink)">Dois diagnósticos na mesma pessoa é a exceção, não a regra.</div>
 </section>
 
 <!-- 7. Dor e responsabilidade -->
 <section class="scene paper" id="s7">
   <img class="abs cut" id="s7prato" src="assets/img/prato.png" style="left:240px;top:120px;width:600px;height:607px">
-  <div class="abs paper cream" id="s7card" style="left:60px;top:790px;width:720px;height:470px;padding:44px 48px">
-    <div class="sans" style="font-size:56px;font-weight:900;color:var(--ink)">Por trás da explosão, quase sempre tem</div>
-    <div class="anton" id="s7dor" style="font-size:170px;color:var(--red);margin-top:10px">DOR.</div>
+  <div class="abs paper cream" id="s7card" style="left:60px;top:790px;width:720px;height:420px;padding:40px 48px">
+    <div class="sans" style="font-size:50px;font-weight:900;color:var(--ink)">Por trás da explosão, quase sempre tem</div>
+    <div class="anton" id="s7dor" style="font-size:150px;color:var(--red);margin-top:10px">DOR.</div>
   </div>
-  <div class="abs paper ink" id="s7card2" style="left:60px;top:1290px;width:880px;height:200px;padding:34px 44px">
+  <div class="abs paper ink" id="s7card2" style="left:60px;top:1230px;width:880px;height:200px;padding:34px 44px">
     <div class="sans" style="font-size:48px;color:var(--cream)">Dor explica.<br>Não autoriza machucar.</div>
   </div>
 </section>
@@ -166,6 +173,7 @@ img{display:block}
   <div class="abs" id="s8sig" style="left:0;width:1080px;top:1400px;text-align:center"><span style="display:inline-block;background:var(--cream);color:var(--ink);font-family:Mont;font-weight:800;font-size:30px;padding:12px 26px">Dr. Fabio Schmidt · CRM-SP 183549</span></div>
 </section>
 
+<div id="cap" class="abs"></div>
 <div id="wipe" class="paper ink"></div>
 <div id="grain"></div>
 <div id="fade"></div>
@@ -174,17 +182,17 @@ img{display:block}
 <script>
 const FPS = 30;
 // Cenas: [id, início, fim]. A duração de cada uma segue a narração (narr/c{n}.wav), que começa em NARR_IN depois do início.
-const SC = [['s1', 0, 5.9], ['s2', 5.9, 15.2], ['s3', 15.2, 23.4], ['s4', 23.4, 31.6], ['s5', 31.6, 45.8], ['s6', 45.8, 56.6], ['s7', 56.6, 62.8], ['s8', 62.8, 67.6]];
-const DUR = 67.6, NARR_IN = .35;
+const SC = [['s1', 0, 6.7], ['s2', 6.7, 17.6], ['s3', 17.6, 26.2], ['s4', 26.2, 36.2], ['s5', 36.2, 52.4], ['s6', 52.4, 65.0], ['s7', 65.0, 72.5], ['s8', 72.5, 77.3]];
+const DUR = 77.3, NARR_IN = .35;
 // efeitos sonoros por cena: [tempo relativo em s, tipo]
 const SFX_REL = {
-  s1: [[.1, 'click'], [.3, 'click'], [.5, 'tap'], [2.6, 'ping']],
-  s2: [[.3, 'tap'], [2.37, 'pop'], [4.37, 'pop'], [6.87, 'pop']],
-  s3: [[.5, 'swipe'], [4.6, 'tick'], [4.71, 'tick'], [4.82, 'tick'], [4.93, 'tick'], [5.04, 'tick'], [5.15, 'tick'], [5.3, 'pop']],
-  s4: [[1.2, 'pop'], [3.45, 'pop'], [4.9, 'pop']],
-  s5: [[.5, 'swipe'], [.8, 'click'], [1.4, 'flame'], [3.0, 'tap'], [7.2, 'tap'], [10.2, 'tap']],
-  s6: [[.7, 'rise'], [1.9, 'pop'], [6.05, 'swipe']],
-  s7: [[.25, 'crash'], [.9, 'tap'], [2.7, 'click'], [3.9, 'tap']],
+  s1: [[.1, 'click'], [.3, 'click'], [.5, 'tap'], [3.3, 'ping']],
+  s2: [[.3, 'tap'], [2.85, 'pop'], [5.1, 'pop'], [8.05, 'pop']],
+  s3: [[.5, 'swipe'], [5.1, 'tick'], [5.225, 'tick'], [5.35, 'tick'], [5.475, 'tick'], [5.6, 'tick'], [5.725, 'tick'], [5.9, 'pop']],
+  s4: [[1.8, 'pop'], [4.2, 'pop'], [6.2, 'pop']],
+  s5: [[.5, 'swipe'], [.8, 'click'], [1.4, 'flame'], [3.3, 'tap'], [8.3, 'tap'], [12.0, 'tap']],
+  s6: [[.7, 'rise'], [2.6, 'pop'], [7.7, 'swipe']],
+  s7: [[.25, 'crash'], [.9, 'tap'], [3.2, 'click'], [3.95, 'tap']],
   s8: [[.15, 'click'], [.35, 'click'], [.55, 'click'], [2.2, 'click'], [2.25, 'whoosh']],
 };
 const SFX = [];
@@ -192,6 +200,14 @@ SC.forEach(([id, a]) => SFX_REL[id].forEach(([t, k]) => SFX.push([a + t, k])));
 SC.slice(1).forEach(([, a]) => SFX.push([a - .25, 'whoosh']));
 window.SFX = SFX; window.DUR = DUR; window.SC = SC; window.NARR_IN = NARR_IN;
 
+const CAP = [[0.35,1.71,"s1","Todo borderline tem"],[1.71,3.31,"s1","seu lado psicopata."],[3.31,3.91,"s1","Você já deve"],[3.91,5.09,"s1","ter ouvido isso."],[5.09,5.45,"s1","Entenda"],[5.45,6.35,"s1","por que não."],
+[7.05,8.25,"s2","Psicopatia,"],[8.25,9.55,"s2","em palavras simples."],[9.55,10.49,"s2","A pessoa machuca"],[10.49,11.07,"s2","e não sente"],[11.07,11.81,"s2","culpa."],[11.81,12.99,"s2","Engana e usa"],[12.99,13.43,"s2","os outros"],[13.43,14.19,"s2","com frieza."],[14.19,15.51,"s2","E raramente"],[15.51,16.95,"s2","pede ajuda."],
+[17.95,19.11,"s3","Quanto isso aparece"],[19.11,20.51,"s3","na população?"],[20.51,22.21,"s3","As estimativas apontam"],[22.21,23.33,"s3","de uma"],[23.33,23.77,"s3","a seis"],[23.77,24.49,"s3","em cada"],[24.49,25.85,"s3","cem pessoas."],
+[26.55,28.01,"s4","Já o borderline"],[28.01,29.25,"s4","sente tudo"],[29.25,30.43,"s4","muito forte."],[30.43,31.31,"s4","Tem pavor de"],[31.31,32.41,"s4","ser deixado."],[32.41,33.11,"s4","Explode"],[33.11,34.03,"s4","e depois"],[34.03,35.09,"s4","sofre com"],[35.09,35.85,"s4","o que fez."],
+[36.55,37.23,"s5","Repare no que"],[37.23,38.19,"s5","vem depois"],[38.19,39.53,"s5","de machucar alguém."],[39.53,40.31,"s5","Culpa:"],[40.31,41.59,"s5","pouca ou nenhuma"],[41.59,42.87,"s5","na psicopatia,"],[42.87,44.49,"s5","muita no borderline."],[44.49,45.11,"s5","Pedir ajuda:"],[45.11,46.31,"s5","raro num,"],[46.31,48.21,"s5","frequente no outro."],[48.21,48.69,"s5","E o jeito"],[48.69,49.77,"s5","de machucar:"],[49.77,50.91,"s5","com cálculo,"],[50.91,52.05,"s5","ou no impulso."],
+[52.75,53.91,"s6","Os dois podem"],[53.91,55.11,"s6","aparecer juntos?"],[55.11,56.13,"s6","Às vezes,"],[56.13,57.03,"s6","sim."],[57.03,57.71,"s6","Uma pessoa pode"],[57.71,58.89,"s6","ter os dois."],[58.89,60.11,"s6","Mas ter borderline"],[60.11,61.31,"s6","não torna ninguém"],[61.31,62.57,"s6","psicopata."],[62.57,63.83,"s6","Quem avalia é"],[63.83,64.65,"s6","um profissional."],
+[65.35,66.07,"s7","Por trás da"],[66.07,67.01,"s7","explosão,"],[67.01,68.19,"s7","quase sempre tem"],[68.19,68.97,"s7","dor."],[68.97,70.33,"s7","Dor explica."],[70.33,72.15,"s7","Não autoriza machucar."]];
+const HL = new Set(['borderline', 'psicopata', 'psicopatia', 'culpa', 'frieza', 'ajuda', 'pavor', 'explode', 'dor', 'cálculo', 'impulso', 'juntos', 'profissional', 'machuca', 'machucar', 'seis', 'cem', 'deixado', 'sofre', 'explosão']);
 const $ = id => document.getElementById(id);
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 const E = {
@@ -224,7 +240,7 @@ document.documentElement.style.setProperty('--tex', tex);
 function setup() {
   clip('s1band', 1120, 660, 'tb', 16);
   clip('s3crowd', 1080, 604, 'b', 18);
-  clip('s7card', 720, 470, 'tblr', 9, 22);
+  clip('s7card', 720, 420, 'tblr', 9, 22);
   clip('s7card2', 880, 200, 'tblr', 7, 22);
   clip('wipe', 1500, 2000, 'lr', 40, 40);
   const g = $('s3grid');
@@ -269,8 +285,8 @@ const UPD = {
     const ph = P(t, -.35, .6, E.back);
     tf('s1phone', `translateY(${lerp(500, 0, ph)}px) rotate(${lerp(10, -4, ph) + wob(t, 1.3, .8)}deg)`);
     // notificação sai da tela do celular quando a fala diz "você já deve ter ouvido isso"
-    const n = P(t, 2.6, .5, E.back);
-    op('s1notif', clamp((t - 2.6) / .1));
+    const n = P(t, 3.3, .5, E.back);
+    op('s1notif', clamp((t - 3.3) / .1));
     tf('s1notif', `translateY(${lerp(120, 0, n) + wob(t, 1.7, 4)}px) scale(${lerp(.42, 1, n)})`);
     slam('s1l1', t, -.1); slam('s1l2', t, .1); slam('s1l3', t, .3); slam('s1l4', t, .5, 1.5);
     // leve tremor do bloco na batida final
@@ -283,10 +299,11 @@ const UPD = {
     tf('s2img', `translate(${lerp(500, 0, k) + P(t, 3.0, 1.2, E.io) * -60}px,${P(t, 3.0, 1.2, E.io) * -40}px) rotate(${lerp(8, 0, k)}deg)`);
     rise('s2tab', t, .25, 30); rise('s2title', t, .4, 40);
     tf('s2ul', `scaleX(${P(t, .75, .5)})`);
-    checkItem('s2i1', t, 2.37); checkItem('s2i2', t, 4.37); checkItem('s2i3', t, 6.87);
+    checkItem('s2i1', t, 2.85); checkItem('s2i2', t, 5.1); checkItem('s2i3', t, 8.05);
+    rise('exp2', t, 8.7, 30);
   },
   s3(t) {
-    tf('s3crowdimg', `scale(${lerp(1.06, 1.14, t / 8.2)}) translateX(${lerp(0, -30, t / 8.2)}px)`);
+    tf('s3crowdimg', `scale(${lerp(1.06, 1.14, t / 8.6)}) translateX(${lerp(0, -30, t / 8.6)}px)`);
     const lk = P(t, .1, 2.6, E.io);
     tf('s3lupa', `translate(${lerp(560, -420, lk)}px,${Math.sin(lk * Math.PI * 2) * 40}px) rotate(${lerp(-8, 6, lk)}deg)`);
     rise('s3head', t, .35, 40);
@@ -295,23 +312,23 @@ const UPD = {
       const k = P(t, 1.0 + (r + c) * .025, .3, E.back);
       let s = k, bg = 'var(--cream)', o = .3;
       if (i < 6) {
-        const on = P(t, 4.6 + i * .11, .14);
+        const on = P(t, 5.1 + i * .125, .14);
         o = lerp(.3, 1, on);
         if (on > .01) bg = i === 0 ? '#151211' : 'repeating-linear-gradient(45deg,#151211 0 6px,#EDE3CD 6px 11px)';
         s = k * (1 + .3 * Math.sin(Math.PI * on));
       }
       d.style.transform = `scale(${s})`; d.style.opacity = o; d.style.background = bg;
     });
-    const k = P(t, 4.6, .3, E.back);
-    op('s3num', clamp((t - 4.6) / .1));
+    const k = P(t, 5.1, .3, E.back);
+    op('s3num', clamp((t - 5.1) / .1));
     tf('s3num', `scale(${lerp(.6, 1, k)})`);
     $('s3num').style.transformOrigin = 'left center';
-    $('s3num').textContent = t < 5.3 ? String(1 + Math.min(5, Math.floor(Math.max(0, t - 4.6) / .11))) : '1 a 6';
-    rise('s3sub', t, 5.63, 30); rise('s3note', t, 6.3, 20);
+    $('s3num').textContent = t < 5.9 ? String(1 + Math.min(5, Math.floor(Math.max(0, t - 5.1) / .125))) : '1 a 6';
+    rise('s3sub', t, 6.17, 30); rise('s3note', t, 7.0, 20);
   },
   s4(t) {
     const k = P(t, .1, .9, E.expo);
-    tf('s4img', `translateY(${lerp(400, 0, k)}px) scale(${lerp(1, 1.05, t / 8.2)})`);
+    tf('s4img', `translateY(${lerp(400, 0, k)}px) scale(${lerp(1, 1.05, t / 9.95)})`);
     $('s4img').style.transformOrigin = 'center bottom';
     // batimento: anéis saindo da mão no peito
     [['s4pulse', 0], ['s4pulse2', .55]].forEach(([id, off]) => {
@@ -322,7 +339,8 @@ const UPD = {
     });
     rise('s4tab', t, .25, 30); rise('s4title', t, .4, 40);
     tf('s4ul', `scaleX(${P(t, .75, .5)})`);
-    checkItem('s4i1', t, 1.2); checkItem('s4i2', t, 3.45); checkItem('s4i3', t, 4.9);
+    checkItem('s4i1', t, 1.8); checkItem('s4i2', t, 4.2); checkItem('s4i3', t, 6.2);
+    rise('exp4', t, 8.0, 30);
   },
   s5(t) {
     rise('s5head', t, .2, 50);
@@ -331,7 +349,8 @@ const UPD = {
     op('s5gelo', clamp((t - 1) / .1)); tf('s5gelo', `scale(${gi}) rotate(${wob(t, 2, 3)}deg)`);
     const fi = P(t, 1.2, .5, E.back);
     op('s5fosf', clamp((t - 1.2) / .1)); tf('s5fosf', `scale(${fi}) rotate(${8 + wob(t, 13, 1.2)}deg) scaleY(${1 + wob(t, 23, .015)})`);
-    rise('s5r1', t, 3.0, 30); rise('s5r2', t, 7.2, 30); rise('s5r3', t, 10.2, 30);
+    rise('s5r1', t, 3.3, 30); rise('s5r2', t, 8.3, 30); rise('s5r3', t, 12.0, 30);
+    rise('exp5', t, 13.0, 30);
     op('s5foot', clamp((t - .5) / .15));
     $('s5hl').style.setProperty('--hl', P(t, .5, .45));
   },
@@ -340,9 +359,10 @@ const UPD = {
     $('vA').style.strokeDashoffset = 1194 * (1 - P(t, .7, .8, E.io));
     $('vB').style.strokeDashoffset = 1194 * (1 - P(t, 1.0, .8, E.io));
     op('vtA', P(t, 1.3, .3)); op('vtB', P(t, 1.5, .3));
-    $('vX').style.opacity = P(t, 1.9, .3);
-    rise('s6a1', t, 1.8, 30); rise('s6a2', t, 4.9, 30); rise('s6a3', t, 8.2, 20);
-    $('s6hl').style.setProperty('--hl', P(t, 6.05, .45));
+    $('vX').style.opacity = P(t, 2.6, .3);
+    rise('s6a1', t, 2.7, 30); rise('s6a2', t, 6.5, 30); rise('s6a3', t, 10.15, 20);
+    $('s6hl').style.setProperty('--hl', P(t, 7.7, .45));
+    rise('exp6', t, 11.0, 30);
   },
   s7(t) {
     const k = P(t, .0, .3, t => t * t);
@@ -350,8 +370,8 @@ const UPD = {
     const sh = t > .25 && t < .6 ? (.6 - t) * 30 : 0;
     tf('s7prato', `translate(${wob(t, 80, sh)}px,${lerp(-800, 0, k)}px) rotate(${lerp(-20, -6, settle)}deg) scale(${lerp(.9, 1, settle)})`);
     rise('s7card', t, .9, 60);
-    slam('s7dor', t, 2.7, 1.6);
-    rise('s7card2', t, 3.9, 40);
+    slam('s7dor', t, 3.2, 1.6);
+    rise('s7card2', t, 3.95, 40);
   },
   s8(t) {
     slam('s8l1', t, .15, 1.35, 'center'); slam('s8l2', t, .35, 1.35, 'center'); slam('s8l3', t, .55, 1.35, 'center');
@@ -387,6 +407,19 @@ function seek(t) {
     $(id).style.visibility = on ? 'visible' : 'hidden';
     if (on) UPD[id](t - a);
   }
+  // legenda da narração
+  const cap = $('cap'); let cur = null;
+  for (const c of CAP) if (t >= c[0] && t < c[1]) { cur = c; break; }
+  if (cur) {
+    const [a, , sid, txt] = cur;
+    const creamBg = sid === 's2' || sid === 's5';
+    cap.style.color = creamBg ? '#151211' : '#EDE3CD';
+    cap.style.textShadow = creamBg ? 'none' : '0 3px 0 rgba(0,0,0,.25)';
+    const hl = (creamBg || sid === 's4' || sid === 's1') ? '#E0482F' : '#151211';
+    cap.innerHTML = txt.split(' ').map(w => HL.has(w.toLowerCase().replace(/[.,?!:]/g, '')) ? `<span class="cap-h" style="color:${hl}">${w}</span>` : w).join(' ');
+    cap.style.opacity = 1;
+    tf('cap', `scale(${lerp(.9, 1, P(t, a, .16, E.back))})`);
+  } else { cap.innerHTML = ''; cap.style.opacity = 0; }
   let wx = 2000;
   SC.slice(1).forEach(([, a], i) => {
     const k = clamp((t - (a - .3)) / .6);

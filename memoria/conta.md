@@ -39,3 +39,5 @@ O que os arquivos mostram (fato, não regra):
 - Os 3 carrosséis com 2 mil salvamentos ou mais tratam origem e ambiente (genética, três gerações, cacto). Base pequena.
 
 O histórico completo de 180 dias e as regras de leitura das métricas estão na skill `historico-borderline-180d`.
+
+Métricas novas (prints, CSV, Windsor) entram na hora em `insights.md`, mais recente no topo. Leia esse arquivo antes de criar ou revisar peça. Última leitura: 26/10/2026, posts de 13 a 25/10.

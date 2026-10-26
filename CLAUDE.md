@@ -8,13 +8,18 @@ Leia, nesta ordem:
 1. `memoria/aprendizados.md`: o que ele já corrigiu, rejeitou e aprovou. É obrigatório.
 2. `memoria/correcoes.md`: correções mais recentes.
 3. `memoria/conta.md`: oferta, preços e dados.
-4. `memoria/ja-produzido.md`: gigantes e teses já usadas.
-5. `memoria/a-decidir.md`: contradições ainda abertas.
-6. Para vídeo: `memoria/efeitos-video-aprovados.md`.
-7. Skill `historico-borderline-180d` para não repetir tese.
-8. Para tema, ideia ou formato que já funcionou fora: skill `pesquisa-validados` (Vamos + memória + histórico).
+4. `memoria/insights.md`: métricas recentes dos posts, mais nova no topo.
+5. `memoria/ja-produzido.md`: gigantes e teses já usadas.
+6. `memoria/a-decidir.md`: contradições ainda abertas.
+7. Para vídeo: `memoria/efeitos-video-aprovados.md`.
+8. Skill `historico-borderline-180d` para não repetir tese.
+9. Para tema, ideia ou formato que já funcionou fora: skill `pesquisa-validados` (Vamos + memória + histórico).
 
 Se a peça bater em algo que ele já rejeitou, refaça antes de entregar.
+
+## Quando chegar métrica nova
+
+Print, CSV, relatório ou puxada do Windsor: registre na hora em `memoria/insights.md`, com data, origem e tabela, seguindo as regras do topo do arquivo. Número é observação de post, não regra.
 
 ## Quando ele corrigir, rejeitar ou aprovar algo
 

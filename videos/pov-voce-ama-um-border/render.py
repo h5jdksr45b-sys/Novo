@@ -1,0 +1,324 @@
+# POV: VOCÊ AMA UM BORDER. Mesmo modelo do POV BORDER, visto por quem convive.
+# Base: videos/pov-border-em-tratamento/render.py (mesma música do Suno e mesma grade de batidas).
+# Uso: python3 render.py  -> renders/pov-voce-ama-um-border.mp4
+import os, subprocess, math
+import numpy as np
+from PIL import Image, ImageDraw, ImageFont, ImageFilter
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+W, H, FPS = 1080, 1920, 30
+DUR = 25.0
+SERIF = os.path.join(HERE, 'fonts/DMSerifDisplay-Regular.ttf')
+SANS = os.path.join(HERE, 'fonts/Montserrat.ttf')
+HANDLE = '@DRFABIOSCHMIDT'
+
+# (início, fim, tipo, palavra, complemento, início do complemento)
+# Tempos copiados do original, que estão no compasso da música.
+SCENES = [
+    (0.0, 4.2, 'title', 'POV: VOCÊ AMA', 'UM BORDER', 0.0),
+    (4.2, 5.3, 'word', 'SUMIU', 'vergonha de voltar', 4.8),
+    (5.3, 6.4, 'word', 'TESTOU VOCÊ', 'medo de ser trocado', 5.9),
+    (6.4, 7.1, 'blank', '', '', 0),
+    (7.1, 8.2, 'word', 'BRIGOU POR POUCO', 'já estava no limite', 7.7),
+    (8.2, 9.3, 'word', 'PEDIU DESCULPA', 'culpa de verdade', 8.55),
+    (9.3, 10.05, 'flash', 'ainda quer ficar', '', 0),
+    (10.05, 10.2, 'blank', '', '', 0),
+    (10.2, 11.3, 'word', 'CIÚME', 'medo de não bastar', 10.75),
+    (11.3, 11.5, 'blank', '', '', 0),
+    (11.5, 12.4, 'word', 'QUIS TERMINAR', 'pra não ser deixado', 11.9),
+    (12.4, 12.8, 'blank', '', '', 0),
+    (12.8, 14.0, 'word', 'SILÊNCIO', 'tentando não explodir', 13.5),
+    (14.0, 15.2, 'word', 'MUDOU DE HUMOR', 'sem aviso, sem plano', 14.9),
+    (15.2, 16.1, 'flash', 'fica por perto', '', 0),
+    (16.1, 17.2, 'word', 'LIMITE', 'protege os dois', 16.7),
+    (17.2, 18.4, 'word', 'PACIÊNCIA', 'tem limite também', 17.85),
+    (18.4, 19.0, 'blank', '', '', 0),
+    (19.0, 20.7, 'cta', 'manda pra quem', 'precisa entender', 19.9),
+    (20.7, 21.85, 'redblank', '', '', 0),
+    (21.85, DUR, 'end', '', '', 0),
+]
+RED_FROM = {'PEDIU DESCULPA': 8.8, 'MUDOU DE HUMOR': 14.7}  # no original, essas viram vermelho no fim
+
+# Música do Suno (Punchy Warm Groove): o trecho começa 4,2 s antes do drop de 109,1 s,
+# e o fim do refrão (125,65 s) cai na tela final. Os tempos do original são
+# comprimidos para caber e cada corte vai para a batida mais próxima.
+MUSIC = 'suno-punchy-warm-groove.m4a'
+MUSIC_START = 109.1 - 4.2
+BEAT0, BEAT = 109.095, 0.3405
+_F = (125.65 - 109.1) / (21.85 - 4.2)
+
+def _retime(t):
+    if t <= 4.2 or t >= DUR:
+        return t
+    t2 = 4.2 + (t - 4.2) * _F
+    k = round((MUSIC_START + t2 - BEAT0) / BEAT)
+    return BEAT0 + k * BEAT - MUSIC_START
+
+SCENES = [(_retime(a), DUR if b >= DUR else _retime(b), k, w, sub, _retime(st) if st else 0)
+          for a, b, k, w, sub, st in SCENES]
+RED_FROM = {w: _retime(t) for w, t in RED_FROM.items()}
+# complemento entra uma batida depois da palavra, para dar tempo de ler
+SCENES = [(a, b, k, w, sub, a + BEAT if k == 'word' else st) for a, b, k, w, sub, st in SCENES]
+
+rng = np.random.default_rng(7)
+
+def smooth_noise(h, w, scale, seed):
+    r = np.random.default_rng(seed)
+    small = r.random((h // scale + 2, w // scale + 2)).astype(np.float32)
+    img = Image.fromarray((small * 255).astype(np.uint8)).resize((w, h), Image.BICUBIC)
+    return np.asarray(img).astype(np.float32) / 255
+
+def canvas_texture(seed, palette):
+    """Aquarela sobre tela: manchas grandes + trama de tecido + grão."""
+    h, w = H // 2, W // 2
+    n = (0.55 * smooth_noise(h, w, 90, seed) + 0.3 * smooth_noise(h, w, 35, seed + 1)
+         + 0.15 * smooth_noise(h, w, 12, seed + 2))
+    n = (n - n.min()) / (n.max() - n.min())
+    c0, c1, c2 = [np.array(c, np.float32) for c in palette]
+    t = n[..., None]
+    col = np.where(t < 0.5, c0 + (c1 - c0) * (t / 0.5), c1 + (c2 - c1) * ((t - 0.5) / 0.5))
+    img = Image.fromarray(col.clip(0, 255).astype(np.uint8)).resize((W, H), Image.BICUBIC)
+    a = np.asarray(img).astype(np.float32)
+    yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
+    r = np.random.default_rng(seed + 3)
+    weave = (np.sin(xx * 1.05 + r.random() * 6) * np.sin(yy * 1.05) * 0.6
+             + smooth_noise(H, W, 3, seed + 9) - 0.5)
+    grain = r.normal(0, 1, (H, W)).astype(np.float32)
+    a += weave[..., None] * 16 + grain[..., None] * 7
+    # vinheta
+    d = np.sqrt(((xx - W / 2) / (W / 2)) ** 2 + ((yy - H / 2) / (H / 2)) ** 2)
+    a *= (1 - 0.28 * np.clip(d - 0.55, 0, 1))[..., None]
+    return a.clip(0, 255).astype(np.uint8)
+
+BLUE = [(20, 95, 215), (25, 160, 225), (95, 210, 235)]
+RED = [(110, 28, 20), (150, 52, 38), (185, 95, 75)]
+print('texturas...')
+def photo_bg(name):
+    """Fundo gerado no GPT Image 2.5, com 3 variações de enquadramento e grão (stop motion)."""
+    im = Image.open(os.path.join(HERE, 'assets', f'bg-{name}.jpg')).convert('RGB')
+    big = im.resize((int(W * 1.06), int(H * 1.06)), Image.BICUBIC)
+    out = []
+    for k, (ox, oy) in enumerate([(0, 0), (40, 25), (18, 60)]):
+        a = np.asarray(big.crop((ox, oy, ox + W, oy + H))).astype(np.float32) * 0.86
+        a += np.random.default_rng(k + len(name)).normal(0, 6, (H, W, 1))
+        out.append(Image.fromarray(a.clip(0, 255).astype(np.uint8)))
+    return out
+
+BGS = {n: photo_bg(n) for n in ('verde', 'marinho', 'mostarda', 'roxo', 'petroleo', 'vinho')}
+# cada palavra ganha um fundo; os espaços vazios herdam o fundo da palavra anterior
+ORDER = ['marinho', 'petroleo', 'roxo', 'verde', 'mostarda']
+SCENE_BG = {}
+k = 0; last = 'vinho'
+for sc in SCENES:
+    if sc[2] == 'word':
+        last = ORDER[k % len(ORDER)]; k += 1
+    elif sc[2] in ('title', 'flash', 'redblank'):
+        SCENE_BG[sc[0]] = 'vinho'; continue
+    elif sc[2] == 'cta':
+        last = 'marinho'
+    SCENE_BG[sc[0]] = last
+
+def font(path, size, wght=None):
+    f = ImageFont.truetype(path, size)
+    if wght:
+        try:
+            f.set_variation_by_axes([wght])
+        except Exception:
+            pass
+    return f
+
+F_WORD = font(SERIF, 150)
+F_TITLE = font(os.path.join(HERE, 'fonts/Anton-Regular.ttf'), 140)
+F_SUB = font(SERIF, 72)
+F_FLASH = font(SERIF, 110)
+F_HANDLE = font(SANS, 30, 700)
+F_END = font(os.path.join(HERE, 'fonts/Anton-Regular.ttf'), 64)
+
+import functools
+
+@functools.lru_cache(maxsize=None)
+def fit(text, path, size, maxw=920):
+    """Diminui a fonte até a palavra caber na largura."""
+    while size > 60:
+        f = font(path, size)
+        if f.getbbox(text)[2] <= maxw:
+            return f
+        size -= 6
+    return font(path, size)
+
+def text_shadowed(img, xy, text, f, alpha=1.0, anchor='mm', spacing=8):
+    if alpha <= 0:
+        return
+    layer = Image.new('RGBA', img.size, (0, 0, 0, 0))
+    d = ImageDraw.Draw(layer)
+    x, y = xy
+    d.multiline_text((x + 6, y + 7), text, font=f, fill=(15, 20, 40, int(190 * alpha)),
+                     anchor=anchor, align='center', spacing=spacing)
+    sh = layer.filter(ImageFilter.GaussianBlur(3))
+    d2 = ImageDraw.Draw(sh)
+    d2.multiline_text((x, y), text, font=f, fill=(255, 255, 255, int(255 * alpha)),
+                      anchor=anchor, align='center', spacing=spacing)
+    img.alpha_composite(sh)
+
+def ig_logo(size, mono=False):
+    s = size * 4
+    grad = np.zeros((s, s, 3), np.float32)
+    yy, xx = np.mgrid[0:s, 0:s] / s
+    t = ((xx + (1 - yy)) / 2)[..., None]
+    c0, c1, c2 = np.array([254, 218, 117]), np.array([214, 41, 118]), np.array([150, 47, 191])
+    grad = np.where(t < 0.5, c0 + (c1 - c0) * t * 2, c1 + (c2 - c1) * (t - 0.5) * 2)
+    if mono:
+        grad[:] = 255
+    mask = Image.new('L', (s, s), 0)
+    m = ImageDraw.Draw(mask)
+    lw = int(s * 0.09)
+    m.rounded_rectangle([lw, lw, s - lw, s - lw], radius=int(s * 0.28), outline=255, width=lw)
+    m.ellipse([s * 0.29, s * 0.29, s * 0.71, s * 0.71], outline=255, width=lw)
+    m.ellipse([s * 0.70, s * 0.20, s * 0.80, s * 0.30], fill=255)
+    logo = Image.fromarray(grad.clip(0, 255).astype(np.uint8)).convert('RGBA')
+    logo.putalpha(mask)
+    return logo.resize((size, size), Image.LANCZOS)
+
+LOGO_S = ig_logo(56)
+LOGO_S_MONO = ig_logo(56, mono=True)
+LOGO_L = ig_logo(150)
+
+def watermark(img, top=True, t=0):
+    # marca pequena, como no original: em cima à direita, depois embaixo à esquerda
+    logo = LOGO_S if int(t * 2) % 3 == 0 else LOGO_S_MONO
+    if top:
+        x, y = W - 210, 420
+        img.alpha_composite(logo, (x - 28 + 0, y))
+        ImageDraw.Draw(img).text((x, y + 80), HANDLE, font=F_HANDLE, fill=(255, 255, 255, 235), anchor='mm')
+    else:
+        x, y = 70, 1150
+        img.alpha_composite(logo, (x, y))
+        ImageDraw.Draw(img).text((x, y + 80), HANDLE, font=F_HANDLE, fill=(255, 255, 255, 235), anchor='lm')
+
+def glitch(img, t, strength=1.0):
+    """Faixas horizontais claras e deslocamento, como no original."""
+    a = np.asarray(img).copy()
+    r = np.random.default_rng(int(t * FPS) * 13 + 1)
+    for _ in range(int(r.integers(1, 4) * strength)):
+        y = int(r.integers(0, H - 60)); hh = int(r.integers(8, 45))
+        shift = int(r.integers(-60, 60))
+        a[y:y + hh] = np.roll(a[y:y + hh], shift, axis=1)
+        x0 = int(r.integers(0, W // 2)); x1 = int(r.integers(x0 + 80, W))
+        a[y:y + hh // 2, x0:x1, :3] = np.clip(a[y:y + hh // 2, x0:x1, :3].astype(int) + 120, 0, 255)
+    return Image.fromarray(a)
+
+def ease(x):
+    x = max(0.0, min(1.0, x))
+    return 1 - (1 - x) ** 3
+
+def load_photo(name):
+    p = os.path.join(HERE, 'assets', name)
+    if not os.path.exists(p):
+        return None
+    im = Image.open(p).convert('RGB')
+    im = im.resize((W, int(im.height * W / im.width)), Image.LANCZOS)
+    if im.height < H:
+        im = im.resize((int(im.width * H / im.height), H), Image.LANCZOS)
+    left = (im.width - W) // 2; top = (im.height - H) // 2
+    im = im.crop((left, top, left + W, top + H))
+    # tratamento do original: monocromático vermelho, granulado
+    g = np.asarray(im.convert('L')).astype(np.float32) / 255
+    tint = np.stack([60 + g * 195, 25 + g * 105, 20 + g * 80], -1)
+    return tint
+
+PHOTOS = {'ainda quer ficar': load_photo('flash-canecas.jpg'), 'fica por perto': load_photo('flash-corredor.jpg')}
+
+def frame(t):
+    sc = next(s for s in SCENES if s[0] <= t < s[1]) if t < DUR else SCENES[-1]
+    start, end, kind, word, sub, sub_t = sc
+    tex_i = int(t * 3)  # textura troca 3 vezes por segundo, como stop motion
+    if kind == 'end':
+        base = Image.new('RGBA', (W, H), (42, 21, 17, 255))
+        a = np.asarray(base).astype(np.float32)
+        a[..., :3] += rng.normal(0, 4, (H, W, 1))
+        img = Image.fromarray(a.clip(0, 255).astype(np.uint8))
+        lt = t - start
+        if lt > 0.2:
+            al = ease((lt - 0.2) / 0.4)
+            ImageDraw.Draw(img).text((W // 2, 960), HANDLE, font=F_END, fill=(255, 255, 255, int(255 * al)), anchor='mm')
+        if lt < 0.6 or int(t * 10) % 17 == 0:
+            img = glitch(img.convert('RGB'), t, 1.5).convert('RGBA')
+        if t > DUR - 0.12:
+            img = Image.blend(img, Image.new('RGBA', (W, H), (0, 0, 0, 255)), (t - (DUR - 0.12)) / 0.12)
+        return img.convert('RGB')
+
+    red = kind in ('title', 'flash', 'redblank') or (word in RED_FROM and t >= RED_FROM[word])
+    tex = BGS['vinho' if red else SCENE_BG[start]][tex_i % 3]
+    img = tex.convert('RGBA')
+    if kind == 'flash':
+        ph = PHOTOS.get(word)
+        if ph is not None:
+            lt = t - start
+            z = 1.0 + 0.04 * lt
+            base = np.asarray(tex).astype(np.float32)
+            p = Image.fromarray(ph.astype(np.uint8)).resize((int(W * z), int(H * z)), Image.LANCZOS)
+            ox, oy = (p.width - W) // 2, (p.height - H) // 2
+            p = np.asarray(p.crop((ox, oy, ox + W, oy + H))).astype(np.float32)
+            mix = 0.78 * (1 - 0.15 * math.sin(t * 9) ** 2)
+            img = Image.fromarray((base * (1 - mix) + p * mix).clip(0, 255).astype(np.uint8)).convert('RGBA')
+    lt = t - start
+    top_mark = t < 9.3 or kind == 'cta'
+    cy = 830
+    if kind == 'title':
+        text_shadowed(img, (W // 2, 880), word, F_TITLE)
+        text_shadowed(img, (W // 2, 1040), sub, F_TITLE)
+    elif kind == 'word':
+        al = ease(lt / 0.12)
+        dy = int(18 * (1 - ease(lt / 0.25)))
+        text_shadowed(img, (W // 2, cy + dy), word, fit(word, SERIF, 150), al)
+        if t >= sub_t:
+            sal = ease((t - sub_t) / 0.15)
+            nl = sub.count('\n')
+            text_shadowed(img, (W // 2, cy + 120 + nl * 40), sub, F_SUB, sal)
+    elif kind == 'flash':
+        al = ease(lt / 0.1)
+        text_shadowed(img, (W // 2, 960), word, F_FLASH, al)
+    elif kind == 'cta':
+        text_shadowed(img, (W // 2, 930), word, F_SUB)
+        if t >= sub_t:
+            text_shadowed(img, (W // 2, 1015), sub, F_SUB, ease((t - sub_t) / 0.15))
+    out = img.convert('RGB')
+    # glitch nas trocas e no título, como no original
+    if kind == 'title' and (int(t * 10) % 7 in (0, 1)):
+        out = glitch(out, t, 1.5)
+    elif lt < 0.1 and kind in ('flash', 'word') and word in PHOTOS:
+        out = glitch(out, t, 1.0)
+    elif (word in RED_FROM and abs(t - RED_FROM.get(word, -9)) < 0.1) or (red and kind != 'title' and int(t * 10) % 5 == 0):
+        out = glitch(out, t, 0.7)
+    return out
+
+def main():
+    os.makedirs(os.path.join(HERE, 'renders'), exist_ok=True)
+    silent = os.path.join(HERE, 'renders', '_video.mp4')
+    final = os.path.join(HERE, 'renders', 'pov-voce-ama-um-border.mp4')
+    n = int(DUR * FPS)
+    p = subprocess.Popen(['ffmpeg', '-v', 'error', '-y', '-f', 'rawvideo', '-pix_fmt', 'rgb24',
+                          '-s', f'{W}x{H}', '-r', str(FPS), '-i', '-', '-c:v', 'libx264',
+                          '-preset', 'medium', '-crf', '20', '-pix_fmt', 'yuv420p', silent],
+                         stdin=subprocess.PIPE)
+    for i in range(n):
+        p.stdin.write(frame(i / FPS).tobytes())
+        if i % 150 == 0:
+            print(f'{i}/{n}')
+    p.stdin.close(); p.wait()
+    subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', silent,
+                    '-ss', str(MUSIC_START), '-t', str(DUR), '-i', os.path.join(HERE, 'assets', MUSIC),
+                    '-map', '0:v', '-map', '1:a', '-c:v', 'copy',
+                    '-af', f'afade=t=out:st={DUR - 1.0}:d=1.0,loudnorm=I=-14:TP=-1.5:LRA=11', '-ar', '48000',
+                    '-c:a', 'aac', '-b:a', '192k',
+                    '-shortest', '-movflags', '+faststart', final], check=True)
+    os.remove(silent)
+    print(final)
+
+if __name__ == '__main__':
+    import sys
+    if len(sys.argv) > 1:  # python3 render.py 4.5 9.6 ... -> quadros de prova
+        for s in sys.argv[1:]:
+            frame(float(s)).save(os.path.join(HERE, 'renders', f'prova_{s}.png'))
+    else:
+        main()

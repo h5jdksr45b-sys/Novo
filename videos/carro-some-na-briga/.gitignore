@@ -1,4 +1,5 @@
 assets/media/*.mp4
+assets/media/*.m4a
 renders/
 .hyperframes/
 node_modules/

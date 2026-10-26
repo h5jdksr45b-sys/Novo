@@ -256,7 +256,7 @@
 
         // Janelas de fundo: decide cor e altura da legenda
         const papel = [[3.40, 8.12], [8.15, 15.93], [18.58, 23.98], [23.99, 29.31], [29.33, 32.41], [37.48, 43.56]];
-        const broll = [[15.95, 18.57], [43.56, 46.26]];
+        const broll = [[15.95, 18.57], [43.35, 46.26]];
         const dentro = (t, js) => js.some(([a, b]) => t >= a && t < b);
 
         const DEST = new Set(["borderline", "carro", "some", "castigo", "tensão", "corpo", "alívio", "arrependimento", "saída", "arriscada", "dsm", "impulsividade", "dor", "calma", "20", "mensagens", "só", "em segurança", "calmo", "combine", "risco", "pé", "minutos", "chave", "longe", "esfriar", "bebida", "machucar", "emergência", "ajuda", "agora"]);
@@ -283,7 +283,7 @@
           const noBroll = dentro(ini + 0.05, broll);
           if (noPapel) el.classList.add("tinta");
           el.style.top = noPapel ? "1300px" : noBroll ? "1420px" : "1210px";
-          if (noBroll && ini > 43) el.style.top = "560px";
+          if (noBroll && ini > 43) el.style.top = "1400px";
           gr.forEach((p) => {
             const s = document.createElement("span");
             s.className = "w";

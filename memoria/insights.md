@@ -18,6 +18,35 @@ Conector `instagram`, conta 17841401503370732. Janela de até 14 dias por chamad
 - Retenção, em chamada separada: `media_permalink, media_reel_avg_watch_time, media_reel_skip_rate`.
 - Curtidas e comentários vieram vazios em 26/10. Se precisar deles, pedir print a ele.
 
+## Leitura de 26/10/2026, 12h34 (prints dele: posts que mais deram seguidores)
+
+Ranking do app, Insights > Conteúdo > Seguidores, período que ele escolheu na tela. "Anúncio" = post impulsionado; o número de seguidores mistura orgânico e pago. Seg/mil = seguidores por mil views, conta de Claude.
+
+| Post | Data | Formato | Seguidores | Views | Visitas perfil | Envios | Salvos | Anúncio | Seg/mil |
+|---|---|---|---|---|---|---|---|---|---|
+| Quem tem TPB... (diagrama do cérebro, rejeição e dor física) | 28/09 | Reel 1:08 | 264 | 48.110 | 264 atividade | 1,1 mil | 756 | sim, meta compras | 5,5 |
+| Borderline adoece a família ou a família adoece o borderline? | 26/09 | Carrossel | 250 | 121.407 | 518 | 1,6 mil | 1,4 mil | não | 2,1 |
+| Dizem por aí que o borderline é apenas hipersexual | 07/10 | Reel 1:08 | 243 | 49.012 | 243 atividade | 1,1 mil | 1,2 mil | sim, meta compras | 5,0 |
+| Quem mais teme o abandono abandona antes | 28/09 | Carrossel | 184 | 152.532 | 354 | 1.862 | 1.867 | não | 1,2 |
+| O bloqueio, o sumiço e a volta | 12/10 | Carrossel | 158 | 54.379 | 306 | 499 | 1.087 | não | 2,9 |
+| Por que o borderline manda tanto áudio (mil áudios) | 16/10 | Reel 0:34 | 146 | 16.762 (6.426 do anúncio) | 226 pelo anúncio, R$0,31 cada | 118 | 156 | sim, meta visitas ao perfil | 8,7 |
+| Duas mensagens seguidas: termina e implora pra voltar | 30/09 | Reel 0:40 | 131 | 16.922 (7.632 do anúncio) | 296 pelo anúncio | 86 | 133 | sim, meta visitas ao perfil | 7,7 |
+| Quem mais ama o borderline (lugar mais seguro) | 29/09 | Carrossel | 96 | 111.386 | 230 | 1,8 mil | 984 | não | 0,9 |
+| Por que quem tem borderline não consegue deixar uma injustiça | 09/10 | Reel | 81 | n/d | n/d | 781 | n/d | n/d | n/d |
+| Um dia perfeito não protege (apagou meses de amor) | 03/10 | Reel | 81 | n/d | n/d | n/d | n/d | n/d | n/d |
+
+Curtidas por slide (o app mostra quando a pessoa curtiu):
+- Abandono: capa 4,1 mil; último slide (quem tem borderline sobrevive) 1,6 mil; miolo 343 a 994.
+- Família: capa 1,6 mil; slides 2 a 4 entre 276 e 398.
+- Bloqueio: capa 670; último slide (confundir sofrimento com cálculo) 177; miolo 67 a 115.
+
+Observações (fato dos prints, base pequena):
+- Os 4 Reels impulsionados ficaram entre 5,0 e 8,7 seguidores por mil views. Os 4 carrosséis orgânicos, entre 0,9 e 2,9. A diferença inclui o efeito do anúncio; não dá para separar orgânico de pago no print.
+- Visitas ao perfil que viraram seguidor, nos 4 carrosséis: 42% a 52%. O perfil converte cerca de metade de quem chega.
+- Entre os carrosséis orgânicos, os de envio alto e identificação (lugar mais seguro 0,9; abandono 1,2) deram menos seguidor por view que os que respondem uma pergunta ou explicam uma diferença (família 2,1; bloqueio 2,9). Hipótese editorial com 4 posts, coerente com Quieta na mesa (maior alcance, menor ganho de seguidores, em `conta.md`).
+- O Reel que mais deu seguidores usa diagrama do cérebro. Ponto em aberto sobre neurobiologia no feed em `a-decidir.md`.
+- Mil áudios: 16.762 views no print, 10.293 no Windsor. A diferença (cerca de 6.400) bate com as views do anúncio. Leitura provável: o Windsor traz só as views orgânicas.
+
 ## Leitura de 26/10/2026 (Windsor, posts de 13 a 25/10)
 
 36 publicações. Ret = tempo médio assistido, em segundos (não é percentual; a duração não veio). Pulo = fração que saiu nos 3 primeiros segundos. Envios = `media_shares`.

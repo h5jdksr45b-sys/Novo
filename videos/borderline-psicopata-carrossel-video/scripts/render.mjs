@@ -35,7 +35,8 @@ for (let f = from; f < end; f++) {
   if (f % 150 === 0) console.log('quadro', f, '/', total);
 }
 await browser.close();
-if (to && to < total) process.exit(0);
+// com TO definido só gera quadros; a montagem roda sem TO, ou com FROM e TO iguais ao total (só montar)
+if (process.env.TO && from < total) process.exit(0);
 
 // áudio: efeitos sintetizados + narração (narr/c{n}.wav, uma por cena, se existir)
 const R = p => path.join(root, 'renders', p);

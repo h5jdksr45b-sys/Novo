@@ -18,6 +18,29 @@ Conector `instagram`, conta 17841401503370732. Janela de até 14 dias por chamad
 - Retenção, em chamada separada: `media_permalink, media_reel_avg_watch_time, media_reel_skip_rate`.
 - Curtidas e comentários vieram vazios em 26/10. Se precisar deles, pedir print a ele.
 
+## Leitura de 26/10/2026, tarde (vídeos dele: Reels gigantes x Reels médios)
+
+Ele mandou 6 Reels que chama de "os grandes de todos os tempos" e 5 que "funcionaram mas não muito nem perto desses outros grandes". Disse que não mandou os que floparam. Claude transcreveu (Whisper small local) e mediu os arquivos. Views dos gigantes não vieram; pedir a ele.
+
+Gigantes: Por que se cortar (1:30); TPB e TEA existe conexão (0:50); Por que o borderline some do nada (0:30); 5 coisas que borderline faz se gosta de verdade (0:59); Por que quando tá mal prefere sumir, endorfina (1:16); Conviver com border não exige paciência, mini-manual para família (1:04).
+Médios (views do CSV de 24/10): Estabilizador não funciona (17.829); Termina e 1 minuto depois implora (15.833); Precisa ficar sozinho (15.205); A dor que não consegue esquecer (22.305); Dá conta de tudo e desaba sozinho (24.418, histórico).
+
+| Medida | Gigantes | Médios |
+|---|---|---|
+| Troca de imagem antes de 1,5 s | 5 de 6 | 0 de 5 (primeira entre 1,9 e 4,0 s) |
+| Cortes por minuto (detector de cena, subconta jump cut) | 17 a 36, mediana 33 | 8 a 24, mediana 11 |
+| Lista numerada ou em itens | 3 de 6 | 0 de 5 |
+| Legenda palavra a palavra grande no centro | 3 de 6 | 0 de 5 (legenda pequena, texto grande só na ênfase) |
+| Fala para quem está do outro lado (parceiro, família) | 4 de 6 | 1 de 5 |
+| Comportamento visto de fora + acusação desfeita (atenção, frieza, chantagem, defeito) | 4 de 6 | 1 de 5 (termina e implora) |
+| Duração | 30 a 90 s | 37 a 63 s |
+| Palavras por minuto | 178 a 205 | 165 a 209 |
+| Volume integrado | -14 a -18 LUFS | -14,5 LUFS |
+
+Leitura (hipótese editorial, 11 vídeos, sem os flops): duração, velocidade de fala e volume não separam os grupos. O que separa é ritmo de imagem no começo e no miolo, formato de lista, e o tema ser um comportamento que assusta quem convive, explicado de um jeito que tira a acusação. Os médios falam mais da experiência por dentro ou de tratamento. Era diferente (2025 x 2026) e algoritmo diferente também podem explicar parte.
+
+Cuidados para reaproveitar: 3 gigantes usam neurobiologia (frequência cardíaca na autolesão, "endorfinas caem mais de 60%", cérebro em colapso). O 60% está sem fonte conferida. Se cortar pede comentário de quem se identificou com autolesão, o que hoje ele veta. Três pedem like no meio do vídeo.
+
 ## Leitura de 26/10/2026, 12h34 (prints dele: posts que mais deram seguidores)
 
 Ranking do app, Insights > Conteúdo > Seguidores, período que ele escolheu na tela. "Anúncio" = post impulsionado; o número de seguidores mistura orgânico e pago. Seg/mil = seguidores por mil views, conta de Claude.

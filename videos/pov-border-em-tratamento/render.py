@@ -72,8 +72,30 @@ def canvas_texture(seed, palette):
 BLUE = [(20, 95, 215), (25, 160, 225), (95, 210, 235)]
 RED = [(110, 28, 20), (150, 52, 38), (185, 95, 75)]
 print('texturas...')
-BLUE_T = [Image.fromarray(canvas_texture(s, BLUE)) for s in (10, 20, 30, 40)]
-RED_T = [Image.fromarray(canvas_texture(s, RED)) for s in (50, 60, 70)]
+def photo_bg(name):
+    """Fundo gerado no GPT Image 2.5, com 3 variações de enquadramento e grão (stop motion)."""
+    im = Image.open(os.path.join(HERE, 'assets', f'bg-{name}.jpg')).convert('RGB')
+    big = im.resize((int(W * 1.06), int(H * 1.06)), Image.BICUBIC)
+    out = []
+    for k, (ox, oy) in enumerate([(0, 0), (40, 25), (18, 60)]):
+        a = np.asarray(big.crop((ox, oy, ox + W, oy + H))).astype(np.float32) * 0.86
+        a += np.random.default_rng(k + len(name)).normal(0, 6, (H, W, 1))
+        out.append(Image.fromarray(a.clip(0, 255).astype(np.uint8)))
+    return out
+
+BGS = {n: photo_bg(n) for n in ('verde', 'marinho', 'mostarda', 'roxo', 'petroleo', 'vinho')}
+# cada palavra ganha um fundo; os espaços vazios herdam o fundo da palavra anterior
+ORDER = ['verde', 'marinho', 'mostarda', 'roxo', 'petroleo']
+SCENE_BG = {}
+k = 0; last = 'vinho'
+for sc in SCENES:
+    if sc[2] == 'word':
+        last = ORDER[k % len(ORDER)]; k += 1
+    elif sc[2] in ('title', 'flash', 'redblank'):
+        SCENE_BG[sc[0]] = 'vinho'; continue
+    elif sc[2] == 'cta':
+        last = 'marinho'
+    SCENE_BG[sc[0]] = last
 
 def font(path, size, wght=None):
     f = ImageFont.truetype(path, size)
@@ -85,11 +107,11 @@ def font(path, size, wght=None):
     return f
 
 F_WORD = font(SERIF, 150)
-F_TITLE = font(SERIF, 104)
+F_TITLE = font(os.path.join(HERE, 'fonts/Anton-Regular.ttf'), 140)
 F_SUB = font(SERIF, 72)
 F_FLASH = font(SERIF, 110)
 F_HANDLE = font(SANS, 30, 700)
-F_END = font(SANS, 44, 700)
+F_END = font(os.path.join(HERE, 'fonts/Anton-Regular.ttf'), 64)
 
 def text_shadowed(img, xy, text, f, alpha=1.0, anchor='mm', spacing=8):
     if alpha <= 0:
@@ -185,9 +207,7 @@ def frame(t):
         lt = t - start
         if lt > 0.2:
             al = ease((lt - 0.2) / 0.4)
-            logo = LOGO_L.copy(); logo.putalpha(logo.getchannel('A').point(lambda v: int(v * al)))
-            img.alpha_composite(logo, (W // 2 - 75, 820))
-            ImageDraw.Draw(img).text((W // 2, 1040), HANDLE, font=F_END, fill=(255, 255, 255, int(255 * al)), anchor='mm')
+            ImageDraw.Draw(img).text((W // 2, 960), HANDLE, font=F_END, fill=(255, 255, 255, int(255 * al)), anchor='mm')
         if lt < 0.6 or int(t * 10) % 17 == 0:
             img = glitch(img.convert('RGB'), t, 1.5).convert('RGBA')
         if t > DUR - 0.12:
@@ -195,7 +215,7 @@ def frame(t):
         return img.convert('RGB')
 
     red = kind in ('title', 'flash', 'redblank') or (word in RED_FROM and t >= RED_FROM[word])
-    tex = (RED_T if red else BLUE_T)[tex_i % (3 if red else 4)]
+    tex = BGS['vinho' if red else SCENE_BG[start]][tex_i % 3]
     img = tex.convert('RGBA')
     if kind == 'flash':
         ph = PHOTOS.get(word)
@@ -210,11 +230,10 @@ def frame(t):
             img = Image.fromarray((base * (1 - mix) + p * mix).clip(0, 255).astype(np.uint8)).convert('RGBA')
     lt = t - start
     top_mark = t < 9.3 or kind == 'cta'
-    watermark(img, top=top_mark, t=t)
     cy = 830
     if kind == 'title':
-        text_shadowed(img, (W // 2, 900), word, F_TITLE)
-        text_shadowed(img, (W // 2, 1025), sub, F_TITLE)
+        text_shadowed(img, (W // 2, 880), word, F_TITLE)
+        text_shadowed(img, (W // 2, 1040), sub, F_TITLE)
     elif kind == 'word':
         al = ease(lt / 0.12)
         dy = int(18 * (1 - ease(lt / 0.25)))

@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Borderline não é psicopata</title>
+<style>
+@font-face{font-family:Anton;src:url(assets/fonts/anton-latin-400-normal.woff2)}
+@font-face{font-family:Slab;src:url(assets/fonts/alfa-slab-one-latin-400-normal.woff2)}
+@font-face{font-family:Play;font-style:italic;font-weight:900;src:url(assets/fonts/playfair-display-latin-900-italic.woff2)}
+@font-face{font-family:Mont;font-weight:600;src:url(assets/fonts/montserrat-latin-600-normal.woff2)}
+@font-face{font-family:Mont;font-weight:800;src:url(assets/fonts/montserrat-latin-800-normal.woff2)}
+@font-face{font-family:Mont;font-weight:900;src:url(assets/fonts/montserrat-latin-900-normal.woff2)}
+:root{--red:#C63A24;--red2:#E0482F;--cream:#EDE3CD;--ink:#151211;--gray:#7a716a}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;background:var(--ink)}
+.scene{position:absolute;inset:0;visibility:hidden;overflow:hidden}
+.abs{position:absolute}
+.paper{background-color:var(--red);background-image:var(--tex);background-blend-mode:multiply;background-size:1080px 1920px}
+.paper.cream{background-color:var(--cream)}
+.paper.ink{background-color:var(--ink)}
+img{display:block}
+.cut{filter:drop-shadow(0 18px 22px rgba(0,0,0,.38))}
+.slab{font-family:Slab;line-height:.95;color:var(--cream);text-shadow:0 6px 0 var(--ink),0 0 2px var(--ink)}
+.anton{font-family:Anton;text-transform:uppercase;line-height:.95}
+.ital{font-family:Play;font-style:italic;font-weight:900;line-height:1}
+.sans{font-family:Mont;font-weight:800;line-height:1.14;letter-spacing:-.5px}
+.tab{font-family:Mont;font-weight:800;font-size:24px;letter-spacing:5px;padding:12px 20px 10px;background:var(--red);color:var(--cream);text-transform:uppercase}
+.hl{--hl:0;background:linear-gradient(var(--hlc,var(--red)),var(--hlc,var(--red))) no-repeat left 60%/calc(var(--hl)*100%) 80%;-webkit-box-decoration-break:clone;box-decoration-break:clone;padding:0 6px}
+.item{display:flex;gap:26px;align-items:flex-start}
+.item svg{flex:none;margin-top:2px}
+.check circle,.check path{fill:none;stroke-linecap:round;stroke-linejoin:round}
+#grain{position:absolute;inset:0;pointer-events:none;mix-blend-mode:overlay;opacity:.2;background-size:540px 960px}
+#wipe{position:absolute;top:-40px;height:2000px;width:1500px;left:2000px}
+#fade{position:absolute;inset:0;background:#000;opacity:0}
+.notif{width:940px;height:164px;border-radius:40px;background:rgba(246,242,236,.96);box-shadow:0 24px 60px rgba(0,0,0,.5);display:flex;align-items:center;gap:26px;padding:0 34px}
+.notif .av{width:88px;height:88px;border-radius:50%;background:linear-gradient(135deg,#b9b1a6,#857d74);flex:none;display:flex;align-items:center;justify-content:center}
+.notif .t1{font-family:Mont;font-weight:600;font-size:26px;color:#6c655f;display:flex;justify-content:space-between;width:760px}
+.notif .t2{font-family:Mont;font-weight:800;font-size:35px;color:#1b1816;margin-top:6px}
+.tbl{width:960px}
+.tbl .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.tbl .lab{font-family:Mont;font-weight:800;font-size:26px;letter-spacing:5px;color:var(--gray);margin:26px 0 10px}
+.tbl .cell{font-family:Mont;font-weight:800;font-size:42px;line-height:1.1;padding:20px 24px;min-height:118px;display:flex;align-items:center;color:var(--ink)}
+.tbl .h{font-family:Anton;font-size:60px;letter-spacing:1px;padding:16px 24px 10px;color:var(--cream)}
+.btn{width:560px;height:124px;border-radius:62px;background:var(--ink);color:var(--cream);display:flex;align-items:center;justify-content:center;gap:24px;font-family:Mont;font-weight:800;font-size:46px;box-shadow:0 14px 0 rgba(0,0,0,.3)}
+</style>
+</head>
+<body>
+<div id="stage">
+
+<!-- 1. Gancho: o que a pessoa ouviu -->
+<section class="scene paper" id="s1">
+  <div class="abs" id="s1rays" style="left:-460px;top:-500px;width:2000px;height:2000px;opacity:.16;background:repeating-conic-gradient(from 0deg at 50% 50%,#151211 0 6deg,transparent 6deg 18deg)"></div>
+  <img class="abs cut" id="s1phone" src="assets/img/celular.png" style="left:335px;top:110px;width:410px;height:760px">
+  <div class="abs notif" id="s1notif" style="left:70px;top:330px">
+    <div class="av"><svg width="44" height="44" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4.2" fill="#efe9e1"/><path d="M3.5 21c1.2-4.4 4.6-6.6 8.5-6.6s7.3 2.2 8.5 6.6" fill="#efe9e1"/></svg></div>
+    <div>
+      <div class="t1"><span>Comentário novo</span><span>agora</span></div>
+      <div class="t2">Todo borderline tem seu lado psicopata</div>
+    </div>
+  </div>
+  <div class="abs paper ink" id="s1band" style="left:-20px;top:890px;width:1120px;height:660px"></div>
+  <div class="abs slab" id="s1l1" style="left:70px;top:930px;font-size:108px">TODO</div>
+  <div class="abs slab" id="s1l2" style="left:66px;top:1036px;font-size:122px;color:var(--red2)">BORDERLINE</div>
+  <div class="abs slab" id="s1l3" style="left:70px;top:1180px;font-size:104px">TEM SEU LADO</div>
+  <div class="abs anton" id="s1l4" style="left:64px;top:1280px;font-size:200px;color:var(--cream)">PSICOPATA?</div>
+</section>
+
+<!-- 2. O que é psicopatia -->
+<section class="scene paper cream" id="s2">
+  <img class="abs cut" id="s2img" src="assets/img/xadrez.png" style="left:470px;top:960px;width:600px;height:639px">
+  <div class="abs tab" id="s2tab" style="left:70px;top:220px">Em palavras simples</div>
+  <div class="abs ital" id="s2title" style="left:66px;top:290px;font-size:132px;color:var(--ink)">Psicopatia</div>
+  <div class="abs" id="s2ul" style="left:72px;top:452px;width:640px;height:10px;background:var(--red);transform-origin:left"></div>
+  <div class="abs" style="left:70px;top:540px;width:960px">
+    <div class="item" id="s2i1"><svg class="check" width="64" height="64" viewBox="0 0 64 64"><circle cx="32" cy="32" r="28" stroke="#C63A24" stroke-width="6"/><path d="M19 33l9 9 17-19" stroke="#151211" stroke-width="7"/></svg><div class="sans" style="font-size:50px;color:var(--ink)">Machuca e não sente culpa.</div></div>
+    <div class="item" id="s2i2" style="margin-top:44px"><svg class="check" width="64" height="64" viewBox="0 0 64 64"><circle cx="32" cy="32" r="28" stroke="#C63A24" stroke-width="6"/><path d="M19 33l9 9 17-19" stroke="#151211" stroke-width="7"/></svg><div class="sans" style="font-size:50px;color:var(--ink)">Engana e usa pessoas com frieza.</div></div>
+    <div class="item" id="s2i3" style="margin-top:44px"><svg class="check" width="64" height="64" viewBox="0 0 64 64"><circle cx="32" cy="32" r="28" stroke="#C63A24" stroke-width="6"/><path d="M19 33l9 9 17-19" stroke="#151211" stroke-width="7"/></svg><div class="sans" style="font-size:50px;color:var(--ink)">Raramente pede ajuda.</div></div>
+  </div>
+</section>
+
+<!-- 3. Quanto aparece -->
+<section class="scene paper" id="s3">
+  <div class="abs" id="s3crowd" style="left:0;top:110px;width:1080px;height:604px;overflow:hidden"><img id="s3crowdimg" src="assets/img/multidao.jpg" style="width:1080px;height:604px;filter:grayscale(1) contrast(1.15)"></div>
+  <img class="abs cut" id="s3lupa" src="assets/img/lupa.png" style="left:600px;top:260px;width:380px;height:400px">
+  <div class="abs sans" id="s3head" style="left:70px;top:760px;width:940px;font-size:58px;font-weight:900;color:var(--cream)">Quanto isso aparece na população?</div>
+  <div class="abs" id="s3grid" style="left:70px;top:930px;width:484px;height:484px"></div>
+  <div class="abs slab" id="s3num" style="left:600px;top:980px;font-size:150px;white-space:nowrap">1 a 6</div>
+  <div class="abs sans" id="s3sub" style="left:604px;top:1140px;width:420px;font-size:44px;color:var(--cream)">em cada 100 pessoas</div>
+  <div class="abs" id="s3note" style="left:70px;width:940px;top:1440px;font-family:Mont;font-weight:600;font-size:28px;color:var(--cream)">Estimativas para psicopatia e narcisismo na população geral.</div>
+</section>
+
+<!-- 4. O que é borderline -->
+<section class="scene paper ink" id="s4">
+  <div class="abs" id="s4pulse" style="left:610px;top:1170px;width:20px;height:20px;border-radius:50%;border:8px solid var(--red2)"></div>
+  <div class="abs" id="s4pulse2" style="left:610px;top:1170px;width:20px;height:20px;border-radius:50%;border:8px solid var(--red2)"></div>
+  <img class="abs cut" id="s4img" src="assets/img/rapaz.png" style="left:440px;top:800px;width:600px;height:801px">
+  <div class="abs tab" id="s4tab" style="left:70px;top:200px">Em palavras simples</div>
+  <div class="abs ital" id="s4title" style="left:66px;top:270px;font-size:132px;color:var(--cream)">Borderline</div>
+  <div class="abs" id="s4ul" style="left:72px;top:432px;width:600px;height:10px;background:var(--red2);transform-origin:left"></div>
+  <div class="abs" style="left:70px;top:500px;width:960px">
+    <div class="item" id="s4i1"><svg class="check" width="64" height="64" viewBox="0 0 64 64"><circle cx="32" cy="32" r="28" stroke="#E0482F" stroke-width="6"/><path d="M19 33l9 9 17-19" stroke="#EDE3CD" stroke-width="7"/></svg><div class="sans" style="font-size:50px;color:var(--cream)">Sente tudo muito forte.</div></div>
+    <div class="item" id="s4i2" style="margin-top:30px"><svg class="check" width="64" height="64" viewBox="0 0 64 64"><circle cx="32" cy="32" r="28" stroke="#E0482F" stroke-width="6"/><path d="M19 33l9 9 17-19" stroke="#EDE3CD" stroke-width="7"/></svg><div class="sans" style="font-size:50px;color:var(--cream)">Tem pavor de ser deixado.</div></div>
+    <div class="item" id="s4i3" style="margin-top:30px"><svg class="check" width="64" height="64" viewBox="0 0 64 64"><circle cx="32" cy="32" r="28" stroke="#E0482F" stroke-width="6"/><path d="M19 33l9 9 17-19" stroke="#EDE3CD" stroke-width="7"/></svg><div class="sans" style="font-size:50px;color:var(--cream);width:420px">Explode e depois sofre com o que fez.</div></div>
+  </div>
+</section>
+
+<!-- 5. Tabela: a diferença aparece depois -->
+<section class="scene paper cream" id="s5">
+  <div class="abs anton" id="s5head" style="left:60px;top:140px;font-size:100px;color:var(--ink)">Depois de machucar<br>alguém</div>
+  <img class="abs cut" id="s5gelo" src="assets/img/gelo.png" style="left:390px;top:300px;width:170px;height:180px">
+  <img class="abs cut" id="s5fosf" src="assets/img/fosforo.png" style="left:900px;top:205px;width:56px;height:262px">
+  <div class="abs tbl" id="s5tbl" style="left:60px;top:470px">
+    <div class="row" id="s5h"><div class="h" style="background:var(--ink)">PSICOPATIA</div><div class="h" style="background:var(--red)">BORDERLINE</div></div>
+    <div id="s5r1"><div class="lab">CULPA</div><div class="row"><div class="cell" style="background:rgba(21,18,17,.08)">Pouca ou nenhuma</div><div class="cell" style="background:rgba(198,58,36,.15)">Muita, depois da explosão</div></div></div>
+    <div id="s5r2"><div class="lab">PEDIR AJUDA</div><div class="row"><div class="cell" style="background:rgba(21,18,17,.08)">Raramente</div><div class="cell" style="background:rgba(198,58,36,.15)">Com frequência</div></div></div>
+    <div id="s5r3"><div class="lab">COMO MACHUCA</div><div class="row"><div class="cell" style="background:rgba(21,18,17,.08)">Com cálculo</div><div class="cell" style="background:rgba(198,58,36,.15)">No impulso</div></div></div>
+  </div>
+  <div class="abs sans" id="s5foot" style="left:60px;top:1370px;font-size:56px;font-weight:900;color:var(--cream)"><span class="hl" id="s5hl" style="--hlc:#151211">Repare no que vem depois.</span></div>
+</section>
+
+<!-- 6. Podem aparecer juntos -->
+<section class="scene paper" id="s6">
+  <div class="abs sans" id="s6head" style="left:70px;top:190px;width:940px;font-size:64px;font-weight:900;color:var(--cream)">Os dois podem aparecer juntos?</div>
+  <svg class="abs" id="s6venn" style="left:190px;top:400px" width="700" height="500" viewBox="0 0 700 500">
+    <defs><clipPath id="cl"><circle cx="220" cy="250" r="190"/></clipPath>
+      <pattern id="hatch" width="16" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="16" height="16" fill="#151211"/><rect width="5" height="16" fill="#EDE3CD"/></pattern></defs>
+    <circle id="vA" cx="220" cy="250" r="190" fill="rgba(237,227,205,.16)" stroke="#EDE3CD" stroke-width="8"/>
+    <circle id="vB" cx="480" cy="250" r="190" fill="rgba(21,18,17,.22)" stroke="#151211" stroke-width="8"/>
+    <circle id="vX" cx="480" cy="250" r="190" fill="url(#hatch)" clip-path="url(#cl)" opacity="0"/>
+    <text id="vtA" x="150" y="262" text-anchor="middle" font-family="Mont" font-weight="800" font-size="36" fill="#EDE3CD">Borderline</text>
+    <text id="vtB" x="560" y="262" text-anchor="middle" font-family="Mont" font-weight="800" font-size="36" fill="#151211">Psicopatia</text>
+  </svg>
+  <div class="abs" style="left:70px;top:960px;width:940px">
+    <div class="sans" id="s6a1" style="font-size:52px;color:var(--cream)">Às vezes, sim. Uma pessoa pode ter os dois.</div>
+    <div class="sans" id="s6a2" style="font-size:52px;color:var(--cream);margin-top:30px">Mas ter borderline <span class="hl" id="s6hl" style="--hlc:#151211">não torna ninguém psicopata.</span></div>
+    <div id="s6a3" style="font-family:Mont;font-weight:600;font-size:32px;color:var(--cream);margin-top:34px">Quem avalia é um profissional, pessoa por pessoa.</div>
+  </div>
+</section>
+
+<!-- 7. Dor e responsabilidade -->
+<section class="scene paper" id="s7">
+  <img class="abs cut" id="s7prato" src="assets/img/prato.png" style="left:240px;top:120px;width:600px;height:607px">
+  <div class="abs paper cream" id="s7card" style="left:60px;top:790px;width:720px;height:470px;padding:44px 48px">
+    <div class="sans" style="font-size:56px;font-weight:900;color:var(--ink)">Por trás da explosão, quase sempre tem</div>
+    <div class="anton" id="s7dor" style="font-size:170px;color:var(--red);margin-top:10px">DOR.</div>
+  </div>
+  <div class="abs paper ink" id="s7card2" style="left:60px;top:1290px;width:880px;height:200px;padding:34px 44px">
+    <div class="sans" style="font-size:48px;color:var(--cream)">Dor explica.<br>Não autoriza machucar.</div>
+  </div>
+</section>
+
+<!-- 8. Chamada: enviar para alguém -->
+<section class="scene paper" id="s8">
+  <div class="abs slab" id="s8l1" style="left:0;width:1080px;text-align:center;top:190px;font-size:108px">Manda pra quem</div>
+  <div class="abs slab" id="s8l2" style="left:0;width:1080px;text-align:center;top:320px;font-size:118px;color:var(--ink);text-shadow:-4px -4px 0 var(--cream),4px -4px 0 var(--cream),-4px 4px 0 var(--cream),4px 4px 0 var(--cream),0 10px 0 var(--cream)">ainda acredita</div>
+  <div class="abs slab" id="s8l3" style="left:0;width:1080px;text-align:center;top:460px;font-size:118px;color:var(--ink);text-shadow:-4px -4px 0 var(--cream),4px -4px 0 var(--cream),-4px 4px 0 var(--cream),4px 4px 0 var(--cream),0 10px 0 var(--cream)">nisso.</div>
+  <img class="abs cut" id="s8img" src="assets/img/aviao.png" style="left:120px;top:640px;width:720px;height:525px">
+  <svg class="abs" id="s8trail" style="left:0;top:0" width="1080" height="1920"><path id="s8path" d="M540 1262 C 700 1150, 820 900, 1180 700" fill="none" stroke="#EDE3CD" stroke-width="6" stroke-dasharray="4 18" stroke-linecap="round"/></svg>
+  <svg class="abs" id="s8plane" style="left:0;top:0" width="84" height="84" viewBox="0 0 24 24"><path d="M2 11.5L22 3l-6.8 18.5-3.4-7.6z" fill="#EDE3CD" stroke="#151211" stroke-width="1.2" stroke-linejoin="round"/></svg>
+  <div class="abs btn" id="s8btn" style="left:260px;top:1200px">
+    <svg width="54" height="54" viewBox="0 0 24 24"><path d="M3 11.5L21 3l-6.5 18-3.2-7.3z" fill="none" stroke="#EDE3CD" stroke-width="2.2" stroke-linejoin="round"/><path d="M11.3 13.7L21 3" stroke="#EDE3CD" stroke-width="2.2"/></svg>
+    <span id="s8lab">Enviar</span>
+  </div>
+  <div class="abs" id="s8rip" style="left:540px;top:1262px;width:10px;height:10px;border-radius:50%;border:5px solid var(--cream);opacity:0"></div>
+  <div class="abs" id="s8sig" style="left:0;width:1080px;top:1400px;text-align:center"><span style="display:inline-block;background:var(--cream);color:var(--ink);font-family:Mont;font-weight:800;font-size:30px;padding:12px 26px">Dr. Fabio Schmidt · CRM-SP 183549</span></div>
+</section>
+
+<div id="wipe" class="paper ink"></div>
+<div id="grain"></div>
+<div id="fade"></div>
+</div>
+
+<script>
+const FPS = 30, DUR = 46.5;
+const SC = [['s1', 0, 5], ['s2', 5, 11], ['s3', 11, 16.5], ['s4', 16.5, 22.5], ['s5', 22.5, 31], ['s6', 31, 37.5], ['s7', 37.5, 42], ['s8', 42, 46.5]];
+// efeitos sonoros: [tempo em s, tipo]
+const SFX = [
+  [0.1, 'click'], [0.3, 'click'], [0.5, 'tap'], [0.75, 'ping'],
+  [6.2, 'pop'], [7.4, 'pop'], [8.6, 'pop'], [5.3, 'tap'],
+  [11.5, 'swipe'], [12.7, 'tick'], [12.92, 'tick'], [13.14, 'tick'], [13.36, 'tick'], [13.58, 'tick'], [13.8, 'tick'],
+  [17.7, 'pop'], [18.9, 'pop'], [20.1, 'pop'],
+  [23.3, 'click'], [24.2, 'tap'], [25.6, 'tap'], [27.0, 'tap'], [28.5, 'swipe'], [23.9, 'flame'],
+  [31.7, 'rise'], [33.0, 'pop'], [35.1, 'swipe'],
+  [37.75, 'crash'], [38.4, 'tap'], [39.1, 'click'], [40.1, 'tap'],
+  [42.15, 'click'], [42.35, 'click'], [42.55, 'click'], [44.2, 'click'], [44.25, 'whoosh'],
+];
+SC.slice(1).forEach(([, a]) => SFX.push([a - .25, 'whoosh']));
+window.SFX = SFX; window.DUR = DUR;
+
+const $ = id => document.getElementById(id);
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const E = {
+  out: t => 1 - Math.pow(1 - t, 3),
+  expo: t => t === 1 ? 1 : 1 - Math.pow(2, -10 * t),
+  back: t => { const c = 1.9; return 1 + (c + 1) * Math.pow(t - 1, 3) + c * Math.pow(t - 1, 2); },
+  io: t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2,
+};
+const P = (t, s, d, e = E.out) => e(clamp((t - s) / d));
+const lerp = (a, b, k) => a + (b - a) * k;
+
+let seed = 7;
+const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+
+// borda de papel rasgado como clip-path (px)
+function torn(w, h, sides, amp = 14, step = 26) {
+  const pts = [];
+  const j = () => (rnd() - .5) * 2 * amp;
+  for (let x = 0; x <= w; x += step) pts.push([x, sides.includes('t') ? amp + j() : 0]);
+  for (let y = 0; y <= h; y += step) pts.push([w - (sides.includes('r') ? amp + j() : 0), y]);
+  for (let x = w; x >= 0; x -= step) pts.push([x, h - (sides.includes('b') ? amp + j() : 0)]);
+  for (let y = h; y >= 0; y -= step) pts.push([sides.includes('l') ? amp + j() : 0, y]);
+  return `polygon(${pts.map(p => `${p[0].toFixed(1)}px ${p[1].toFixed(1)}px`).join(',')})`;
+}
+const clip = (id, w, h, sides, amp, step) => { $(id).style.clipPath = torn(w, h, sides, amp, step); };
+
+const tex = `url("data:image/svg+xml;utf8,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='1080' height='1920'><filter id='f'><feTurbulence type='fractalNoise' baseFrequency='.012' numOctaves='5' seed='3'/><feColorMatrix values='0 0 0 0 .92  0 0 0 0 .9  0 0 0 0 .88  0 0 0 -1.1 1.15'/></filter><rect width='100%' height='100%' fill='white'/><rect width='100%' height='100%' filter='url(#f)'/></svg>`)}")`;
+document.documentElement.style.setProperty('--tex', tex);
+
+function setup() {
+  clip('s1band', 1120, 660, 'tb', 16);
+  clip('s3crowd', 1080, 604, 'b', 18);
+  clip('s7card', 720, 470, 'tblr', 9, 22);
+  clip('s7card2', 880, 200, 'tblr', 7, 22);
+  clip('wipe', 1500, 2000, 'lr', 40, 40);
+  const g = $('s3grid');
+  for (let i = 0; i < 100; i++) {
+    const d = document.createElement('div');
+    d.className = 'abs dot';
+    d.style.cssText = `left:${(i % 10) * 50}px;top:${Math.floor(i / 10) * 50}px;width:34px;height:34px;border-radius:50%;background:var(--cream)`;
+    g.appendChild(d);
+  }
+  document.querySelectorAll('.check circle').forEach(c => { c.style.strokeDasharray = 176; });
+  document.querySelectorAll('.check path').forEach(c => { c.style.strokeDasharray = 44; });
+  ['vA', 'vB'].forEach(id => $(id).style.strokeDasharray = 1194);
+  window.__plen = $('s8path').getTotalLength();
+  $('s8path').style.strokeDasharray = `4 18`;
+}
+
+const tf = (id, s) => { $(id).style.transform = s; };
+const op = (id, v) => { $(id).style.opacity = v; };
+function slam(id, t, s, from = 1.35, origin = 'left center') {
+  const k = P(t, s, .32, E.expo);
+  op(id, clamp((t - s) / .08));
+  $(id).style.transformOrigin = origin;
+  tf(id, `scale(${lerp(from, 1, k)})`);
+}
+function rise(id, t, s, dy = 50, d = .5) {
+  const k = P(t, s, d, E.expo);
+  op(id, clamp((t - s) / .2));
+  tf(id, `translateY(${lerp(dy, 0, k)}px)`);
+}
+function checkItem(id, t, s) {
+  rise(id, t, s, 36);
+  const el = $(id);
+  el.querySelector('circle').style.strokeDashoffset = 176 * (1 - P(t, s, .35));
+  el.querySelector('path').style.strokeDashoffset = 44 * (1 - P(t, s + .25, .25));
+}
+const wob = (t, f, a) => Math.sin(t * f) * a;
+
+const UPD = {
+  s1(t) {
+    tf('s1rays', `rotate(${t * 4}deg)`);
+    const ph = P(t, -.35, .6, E.back);
+    tf('s1phone', `translateY(${lerp(500, 0, ph)}px) rotate(${lerp(10, -4, ph) + wob(t, 1.3, .8)}deg)`);
+    // notificação sai da tela do celular
+    const n = P(t, .7, .5, E.back);
+    op('s1notif', clamp((t - .7) / .1));
+    tf('s1notif', `translateY(${lerp(120, 0, n) + wob(t, 1.7, 4)}px) scale(${lerp(.42, 1, n)})`);
+    slam('s1l1', t, -.1); slam('s1l2', t, .1); slam('s1l3', t, .3); slam('s1l4', t, .5, 1.5);
+    // leve tremor do bloco na batida final
+    const sh = clamp((t - .5) / .25);
+    const amp = sh > 0 && sh < 1 ? (1 - sh) * 6 : 0;
+    tf('s1band', `translate(${wob(t, 90, amp)}px,${wob(t, 70, amp)}px)`);
+  },
+  s2(t) {
+    const k = P(t, .2, .9, E.expo);
+    tf('s2img', `translate(${lerp(500, 0, k) + P(t, 3.0, 1.2, E.io) * -60}px,${P(t, 3.0, 1.2, E.io) * -40}px) rotate(${lerp(8, 0, k)}deg)`);
+    rise('s2tab', t, .25, 30); rise('s2title', t, .4, 40);
+    tf('s2ul', `scaleX(${P(t, .75, .5)})`);
+    checkItem('s2i1', t, 1.2); checkItem('s2i2', t, 2.4); checkItem('s2i3', t, 3.6);
+  },
+  s3(t) {
+    tf('s3crowdimg', `scale(${lerp(1.06, 1.14, t / 5.5)}) translateX(${lerp(0, -30, t / 5.5)}px)`);
+    const lk = P(t, .1, 2.6, E.io);
+    tf('s3lupa', `translate(${lerp(560, -420, lk)}px,${Math.sin(lk * Math.PI * 2) * 40}px) rotate(${lerp(-8, 6, lk)}deg)`);
+    rise('s3head', t, .6, 40);
+    document.querySelectorAll('#s3grid .dot').forEach((d, i) => {
+      const r = Math.floor(i / 10), c = i % 10;
+      const k = P(t, 1.0 + (r + c) * .025, .3, E.back);
+      let s = k, bg = 'var(--cream)', o = .3;
+      if (i < 6) {
+        const on = P(t, 1.7 + i * .22, .18);
+        o = lerp(.3, 1, on);
+        if (on > .01) bg = i === 0 ? '#151211' : 'repeating-linear-gradient(45deg,#151211 0 6px,#EDE3CD 6px 11px)';
+        s = k * (1 + .3 * Math.sin(Math.PI * on));
+      }
+      d.style.transform = `scale(${s})`; d.style.opacity = o; d.style.background = bg;
+    });
+    const k = P(t, 1.7, .3, E.back);
+    op('s3num', clamp((t - 1.7) / .1));
+    tf('s3num', `scale(${lerp(.6, 1, k)})`);
+    $('s3num').style.transformOrigin = 'left center';
+    $('s3num').textContent = t < 2.8 ? String(1 + Math.min(5, Math.floor(Math.max(0, t - 1.7) / .22))) : '1 a 6';
+    rise('s3sub', t, 3.0, 30); rise('s3note', t, 3.5, 20);
+  },
+  s4(t) {
+    const k = P(t, .1, .9, E.expo);
+    tf('s4img', `translateY(${lerp(400, 0, k)}px) scale(${lerp(1, 1.05, t / 6)})`);
+    $('s4img').style.transformOrigin = 'center bottom';
+    // batimento: anéis saindo da mão no peito
+    [['s4pulse', 0], ['s4pulse2', .55]].forEach(([id, off]) => {
+      const c = ((t - 1 + off) % 1.1 + 1.1) % 1.1 / 1.1;
+      const R = lerp(40, 520, E.out(c));
+      const el = $(id);
+      Object.assign(el.style, { width: R + 'px', height: R + 'px', left: 700 - R / 2 + 'px', top: 1300 - R / 2 + 'px', opacity: t > 1 ? (1 - c) * .55 : 0 });
+    });
+    rise('s4tab', t, .25, 30); rise('s4title', t, .4, 40);
+    tf('s4ul', `scaleX(${P(t, .75, .5)})`);
+    checkItem('s4i1', t, 1.2); checkItem('s4i2', t, 2.4); checkItem('s4i3', t, 3.6);
+  },
+  s5(t) {
+    rise('s5head', t, .2, 50);
+    rise('s5h', t, .8, 30);
+    const gi = P(t, 1.0, .5, E.back);
+    op('s5gelo', clamp((t - 1) / .1)); tf('s5gelo', `scale(${gi}) rotate(${wob(t, 2, 3)}deg)`);
+    const fi = P(t, 1.2, .5, E.back);
+    op('s5fosf', clamp((t - 1.2) / .1)); tf('s5fosf', `scale(${fi}) rotate(${8 + wob(t, 13, 1.2)}deg) scaleY(${1 + wob(t, 23, .015)})`);
+    rise('s5r1', t, 1.7, 30); rise('s5r2', t, 3.1, 30); rise('s5r3', t, 4.5, 30);
+    op('s5foot', clamp((t - 6.0) / .15));
+    $('s5hl').style.setProperty('--hl', P(t, 6.0, .45));
+  },
+  s6(t) {
+    rise('s6head', t, .2, 40);
+    $('vA').style.strokeDashoffset = 1194 * (1 - P(t, .7, .8, E.io));
+    $('vB').style.strokeDashoffset = 1194 * (1 - P(t, 1.0, .8, E.io));
+    op('vtA', P(t, 1.3, .3)); op('vtB', P(t, 1.5, .3));
+    $('vX').style.opacity = P(t, 2.0, .3);
+    rise('s6a1', t, 2.2, 30); rise('s6a2', t, 3.6, 30); rise('s6a3', t, 4.6, 20);
+    $('s6hl').style.setProperty('--hl', P(t, 4.1, .45));
+  },
+  s7(t) {
+    const k = P(t, .0, .3, t => t * t);
+    const settle = P(t, .3, .6, E.back);
+    const sh = t > .25 && t < .6 ? (.6 - t) * 30 : 0;
+    tf('s7prato', `translate(${wob(t, 80, sh)}px,${lerp(-800, 0, k)}px) rotate(${lerp(-20, -6, settle)}deg) scale(${lerp(.9, 1, settle)})`);
+    rise('s7card', t, .8, 60);
+    slam('s7dor', t, 1.6, 1.6);
+    rise('s7card2', t, 2.6, 40);
+  },
+  s8(t) {
+    slam('s8l1', t, .15, 1.35, 'center'); slam('s8l2', t, .35, 1.35, 'center'); slam('s8l3', t, .55, 1.35, 'center');
+    const k = P(t, .6, .7, E.expo);
+    const throwK = P(t, 2.2, .35, E.io);
+    tf('s8img', `translateX(${lerp(-300, 0, k) + throwK * 60}px) rotate(${lerp(-10, 0, k) - throwK * 8}deg)`);
+    op('s8img', clamp((t - .6) / .2));
+    rise('s8btn', t, 1.3, 40);
+    const press = clamp((t - 2.2) / .25);
+    if (t > 1.3) tf('s8btn', `scale(${1 - .07 * Math.sin(Math.PI * press)})`);
+    const r = P(t, 2.25, .6);
+    op('s8rip', t > 2.25 ? (1 - r) * .9 : 0);
+    const R = lerp(10, 420, r);
+    Object.assign($('s8rip').style, { width: R + 'px', height: R + 'px', left: 540 - R / 2 + 'px', top: 1262 - R / 2 + 'px' });
+    $('s8lab').textContent = t > 2.35 ? 'Enviado' : 'Enviar';
+    // avião de papel sai do botão e risca o caminho
+    const fk = P(t, 2.3, 1.1, E.io);
+    const L = window.__plen, path = $('s8path');
+    path.style.opacity = fk > 0 ? 1 - P(t, 3.6, .5) : 0;
+    path.style.clipPath = `inset(0 ${100 - fk * 100}% 0 0)`;
+    const pt = path.getPointAtLength(L * fk), pt2 = path.getPointAtLength(Math.min(L, L * fk + 2));
+    const ang = Math.atan2(pt2.y - pt.y, pt2.x - pt.x) * 180 / Math.PI;
+    op('s8plane', fk > 0 && fk < 1 ? 1 : 0);
+    tf('s8plane', `translate(${pt.x - 42}px,${pt.y - 42}px) rotate(${ang + 20}deg) scale(${lerp(.6, 1.3, fk)})`);
+    rise('s8sig', t, 1.6, 20);
+  },
+};
+
+const grain = [0, 1, 2, 3].map(i => `url(assets/img/grain${i}.png)`);
+function seek(t) {
+  for (const [id, a, b] of SC) {
+    const on = t >= a && t < b;
+    $(id).style.visibility = on ? 'visible' : 'hidden';
+    if (on) UPD[id](t - a);
+  }
+  let wx = 2000;
+  SC.slice(1).forEach(([, a], i) => {
+    const k = clamp((t - (a - .3)) / .6);
+    if (k > 0 && k < 1) {
+      wx = lerp(1100, -1600, E.io(k));
+      $('wipe').style.backgroundColor = ['#151211', '#EDE3CD', '#C63A24'][i % 3];
+    }
+  });
+  $('wipe').style.left = wx + 'px';
+  const f = Math.round(t * FPS);
+  const g = $('grain');
+  g.style.backgroundImage = grain[f % 4];
+  g.style.backgroundPosition = `${(f * 137) % 540}px ${(f * 251) % 960}px`;
+  op('fade', clamp((t - (DUR - .12)) / .1));
+}
+window.seek = seek;
+window.__ready = (async () => { await document.fonts.ready; await Promise.all([...document.images].map(i => i.decode().catch(() => {}))); setup(); seek(0); return true; })();
+</script>
+</body>
+</html>

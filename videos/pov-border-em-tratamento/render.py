@@ -7,7 +7,7 @@ from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 W, H, FPS = 1080, 1920, 30
-DUR = 25.8
+DUR = 25.0
 SERIF = os.path.join(HERE, 'fonts/DMSerifDisplay-Regular.ttf')
 SANS = os.path.join(HERE, 'fonts/Montserrat.ttf')
 HANDLE = '@DRFABIOSCHMIDT'
@@ -38,6 +38,27 @@ SCENES = [
     (21.85, DUR, 'end', '', '', 0),
 ]
 RED_FROM = {'IDENTIDADE': 8.8, 'RAIVA': 14.7}  # no original, essas viram vermelho no fim
+
+# Música do Suno (Punchy Warm Groove): o trecho começa 4,2 s antes do drop de 109,1 s,
+# e o fim do refrão (125,65 s) cai na tela final. Os tempos do original são
+# comprimidos para caber e cada corte vai para a batida mais próxima.
+MUSIC = 'suno-punchy-warm-groove.m4a'
+MUSIC_START = 109.1 - 4.2
+BEAT0, BEAT = 109.095, 0.3405
+_F = (125.65 - 109.1) / (21.85 - 4.2)
+
+def _retime(t):
+    if t <= 4.2 or t >= DUR:
+        return t
+    t2 = 4.2 + (t - 4.2) * _F
+    k = round((MUSIC_START + t2 - BEAT0) / BEAT)
+    return BEAT0 + k * BEAT - MUSIC_START
+
+SCENES = [(_retime(a), DUR if b >= DUR else _retime(b), k, w, sub, _retime(st) if st else 0)
+          for a, b, k, w, sub, st in SCENES]
+RED_FROM = {w: _retime(t) for w, t in RED_FROM.items()}
+# complemento entra uma batida depois da palavra, para dar tempo de ler
+SCENES = [(a, b, k, w, sub, a + BEAT if k == 'word' else st) for a, b, k, w, sub, st in SCENES]
 
 rng = np.random.default_rng(7)
 
@@ -274,8 +295,10 @@ def main():
             print(f'{i}/{n}')
     p.stdin.close(); p.wait()
     subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', silent,
-                    '-i', os.path.join(HERE, 'assets', 'musica-original.m4a'),
-                    '-map', '0:v', '-map', '1:a', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k',
+                    '-ss', str(MUSIC_START), '-t', str(DUR), '-i', os.path.join(HERE, 'assets', MUSIC),
+                    '-map', '0:v', '-map', '1:a', '-c:v', 'copy',
+                    '-af', f'afade=t=out:st={DUR - 1.0}:d=1.0,loudnorm=I=-14:TP=-1.5:LRA=11', '-ar', '48000',
+                    '-c:a', 'aac', '-b:a', '192k',
                     '-shortest', '-movflags', '+faststart', final], check=True)
     os.remove(silent)
     print(final)

@@ -47,3 +47,20 @@ Base: só curtidas e comentários públicos; envios e alcance dos carrosséis n�
 - Assinatura no fim: Dr. Fabio Schmidt, Médico, CRM-SP 183549.
 - Os fracos abriram com pergunta, estatística ou produto, ficaram em tom de aula, ou fecharam com link na bio ou COMEÇAR.
 - Cacto e Família adoece tiveram muitos comentários por pedirem palavra-chave e depoimento; para alcance orgânico, o envio pesa mais.
+
+## Checklist de capa (Vamos olhando o perfil, 27/10/2026)
+
+Pedido dele: o que estrategistas digitais diriam que a capa de carrossel precisa ter para engajar. Prática de mercado e leitura do feed dele, não regra comprovada. Relatório completo e a anatomia dos 16 carrosséis em `memoria/dados/anatomia-carrosseis-2026-10-27.md`.
+
+Precisa ter:
+1. Uma dor que o leitor já carrega: gesto, conversa ou situação atual. O diagnóstico identifica o assunto sem ocupar a maior hierarquia.
+2. Uma crença definida para rever (nervosa, leve, timidez, falta de amor), que continue verdadeira quando o carrossel terminar.
+3. Uma entrada visual dominante: ou a palavra ou a cena. O resto subordinado.
+4. Imagem que acrescenta sentido à frase (Quieta: sentada à mesa e cadeira vazia; Abandona antes: chave diante da porta). Se tirar a imagem e nada mudar, ela só decora.
+5. Leitura preservada em miniatura, no recorte da grade.
+6. Um destinatário possível para o envio, definido antes de escrever.
+7. Promessa paga no slide 2.
+
+Evitar: acusação como palavra dominante (VOCÊ ESTRAGA); título, diálogo e retrato contando o mesmo fato (22h41); retrato triste genérico (Grudenta); mistério sem entrega; nome clínico na maior hierarquia; absolvição universal pelo diagnóstico; produto no lugar da descoberta; cor forte como solução para tese fraca.
+
+O que o feed dele não comprova: letra gigante, cor saturada, paradoxo e CTA de envio aparecem também nos fracos. O que separa é a crença revista e a imagem participando do argumento.

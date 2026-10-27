@@ -26,3 +26,18 @@ Posts mais fortes:
 O que se repete: abertura com veredito de uma frase, cena no meio ou teste de comportamento; 16 a 36 s. Segundo o Vamos, os falados dele acima de 3x a mediana (cerca de 14 mil) tinham 31 a 56 s e os piores abriam com instrução. Dado do Vamos que bate com a memória só em parte: Supera aparece com 33 mil views, mas `ja-produzido.md` lista Supera entre os Reels de baixo alcance.
 
 Descartados por repetição: borderline e narcisista na briga (carrossel de 12/10), quem espera depois do sumiço (eixo abandono), teste se você fica (O teste nunca acaba), pisar em ovos (09/05), humor em horas x semanas (carrossel bipolar de 24/10), ciúme.
+
+## 2026-10-27: carrosséis de borderline, família e relacionamento (Vamos, 90 dias)
+
+Pedido dele: carrossel para hoje, refazendo gigante antigo ou escalando ideia de vídeo, com a atmosfera dos gigantes. O Vamos não achou carrossel de fora muito acima do usual do perfil; os números milionários eram de Reels e ficaram fora. Curtidas foram a medida comparável.
+
+Posts mais fortes:
+- [@frankiestherapy, amor x segurança, 10 slides](https://www.instagram.com/p/De2NR6VCJIb/): 3.547 curtidas, 1,89x a mediana do perfil (23/10). Capa rosa só tipografia, serifa bold. A capa já entrega a contradição (quem você procura feliz x triste) e o slide 2 começa a explicar.
+- [@frankiestherapy, parceiro vira adversário na briga, 11 slides](https://www.instagram.com/p/Deo5KhpCDM1/): 2.918 curtidas, 1,56x (18/10). Cena antes da explicação; ações reconhecíveis (ensaiar a conversa, esperar o bom humor).
+- [@nedratawwab, cansaço depois da conversa, 3 slides](https://www.instagram.com/p/Dd_31alFgb8/): 8.031 curtidas, 2,16x (02/10). Três slides bastaram.
+- [@psi.matheusmattos, TPB e família, 8 slides](https://www.instagram.com/p/DbgwWunnzdF): 3.343 curtidas, 548 comentários (01/08), com palavra-chave FAMÍLIA para mentoria. Capa não confirmada.
+- Construções novas dos últimos 30 dias: objeto sustentado como história (farinha e pão, frankiestherapy 25/10); personagem que pratica uma habilidade (Joana, matheusmattos 22/10); um slide por momento do dia (domingo à noite, hora de dormir, fim de um encontro bom; matheusmattos 22/10).
+
+O que se repete: contradição entre vínculo e experiência entregue na capa (amar e não se sentir seguro; ser amado e virar adversário na briga); ações que o leitor reconhece; texto como elemento principal. O levantamento não prova que objeto na capa, número de slides ou tipo de CTA mudem o alcance.
+
+Anatomia dos 16 carrosséis dele (11 gigantes x 5 fracos), feita pelo Vamos no mesmo dia: `memoria/dados/anatomia-carrosseis-2026-10-27.md`.

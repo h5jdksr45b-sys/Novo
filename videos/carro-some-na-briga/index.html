@@ -248,17 +248,12 @@
       <audio id="s-ck2" src="assets/sfx/click-soft.mp3" data-start="40.80" data-duration="0.36" data-volume="0.05"></audio>
       <audio id="s-ck3" src="assets/sfx/click-soft.mp3" data-start="43.31" data-duration="0.36" data-volume="0.05"></audio>
       <audio id="s-z1" src="assets/sfx/click-soft.mp3" data-start="1.34" data-duration="0.36" data-volume="0.045"></audio>
-      <audio id="s-z2" src="assets/sfx/click-soft.mp3" data-start="2.02" data-duration="0.36" data-volume="0.045"></audio>
       <audio id="s-z3" src="assets/sfx/click-soft.mp3" data-start="3.52" data-duration="0.36" data-volume="0.045"></audio>
       <audio id="s-z4" src="assets/sfx/click-soft.mp3" data-start="6.84" data-duration="0.36" data-volume="0.045"></audio>
       <audio id="s-z5" src="assets/sfx/click-soft.mp3" data-start="11.5" data-duration="0.36" data-volume="0.045"></audio>
-      <audio id="s-z6" src="assets/sfx/click-soft.mp3" data-start="22.35" data-duration="0.36" data-volume="0.045"></audio>
       <audio id="s-z7" src="assets/sfx/click-soft.mp3" data-start="26.9" data-duration="0.36" data-volume="0.045"></audio>
-      <audio id="s-z8" src="assets/sfx/click-soft.mp3" data-start="33.32" data-duration="0.36" data-volume="0.045"></audio>
-      <audio id="s-z9" src="assets/sfx/click-soft.mp3" data-start="35.15" data-duration="0.36" data-volume="0.045"></audio>
       <audio id="s-z10" src="assets/sfx/click-soft.mp3" data-start="36.15" data-duration="0.36" data-volume="0.045"></audio>
-      <audio id="s-z11" src="assets/sfx/click-soft.mp3" data-start="47.44" data-duration="0.36" data-volume="0.045"></audio>
-      <audio id="s-z12" src="assets/sfx/click-soft.mp3" data-start="48.3" data-duration="0.36" data-volume="0.045"></audio>
+      <audio id="s-z11" src="assets/sfx/click-soft.mp3" data-start="47.7" data-duration="0.36" data-volume="0.045"></audio>
       <audio id="s-z13" src="assets/sfx/click-soft.mp3" data-start="50.02" data-duration="0.36" data-volume="0.045"></audio>
       <audio id="s-ck4" src="assets/sfx/click-soft.mp3" data-start="31.31" data-duration="0.36" data-volume="0.05"></audio>
     </div>
@@ -321,13 +316,13 @@
         // Zoom em cortes alternados (padrão aprovado: 1,05 a 1,16)
         // Cortes secos por zoom (padrão aprovado: 1,05 a 1,16), um a cada 1 a 2 s nos trechos de rosto.
         // Nos cortes reais da gravação o zoom entra 0,02 s depois do corte: é quando o quadro novo aparece no render.
-        const punches = [[0, 1.0], [1.34, 1.10], [2.02, 1.0], [3.52, 1.12], [4.758, 1.0], [6.84, 1.06], [8.123, 1.0], [14.224, 1.0], [16.475, 1.12], [18.566, 1.0], [22.292, 1.1], [24.031, 1.0], [32.364, 1.12], [33.32, 1.0], [34.601, 1.14], [35.15, 1.0], [36.15, 1.12], [37.501, 1.0], [40.13, 1.08], [43.182, 1.0], [46.265, 1.12], [47.44, 1.0], [48.3, 1.12], [49.6, 1.0], [50.02, 1.12], [50.872, 1.12]];
+        const punches = [[0, 1.0], [1.34, 1.08], [3.52, 1.0], [4.758, 1.0], [6.84, 1.06], [8.123, 1.0], [14.224, 1.0], [16.475, 1.12], [18.566, 1.0], [22.292, 1.1], [24.031, 1.0], [32.364, 1.12], [33.32, 1.0], [34.601, 1.12], [36.15, 1.0], [37.501, 1.0], [40.13, 1.08], [43.182, 1.0], [46.265, 1.1], [47.7, 1.0], [50.02, 1.1], [50.872, 1.1]];
         punches.forEach(([t, esc], i) => {
           const fim = i < punches.length - 1 ? punches[i + 1][0] : 50.95;
           tl.fromTo("#cam", { scale: esc }, { scale: esc + 0.03, duration: fim - t, ease: "none", immediateRender: false }, t);
         });
         // Punch nos cartões, nas viradas de conteúdo
-        [["#c-tensao", 11.5, 1.06], ["#c-tensao", 14.5, 1.0], ["#c-dsm", 19.18, 1.05], ["#c-dsm", 22.35, 1.0], ["#c-msg", 26.9, 1.06], ["#c-msg", 27.69, 1.0], ["#c-uma", 31.31, 1.06], ["#c-comb", 40.8, 1.04], ["#c-comb", 43.31, 1.08]].forEach(([sel, t, esc]) => tl.set(sel, { scale: esc }, t));
+        [["#c-tensao", 11.5, 1.05], ["#c-tensao", 14.5, 1.0], ["#c-msg", 26.9, 1.05], ["#c-msg", 27.69, 1.0], ["#c-comb", 43.31, 1.05]].forEach(([sel, t, esc]) => tl.set(sel, { scale: esc }, t));
         tl.fromTo("#c-msg", { scale: 1.0 }, { scale: 1.05, duration: 1.0, ease: "none", immediateRender: false }, 25.55);
         tl.fromTo("#br0-z", { scale: 1.08 }, { scale: 1.0, duration: 1.0, ease: "none", immediateRender: false }, 4.70);
         tl.fromTo("#br1-z", { scale: 1 }, { scale: 1.07, duration: 2.62, ease: "none", immediateRender: false }, 15.95);

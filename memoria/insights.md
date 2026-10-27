@@ -18,6 +18,23 @@ Conector `instagram`, conta 17841401503370732. Janela de até 14 dias por chamad
 - Retenção, em chamada separada: `media_permalink, media_reel_avg_watch_time, media_reel_skip_rate`.
 - Curtidas e comentários vieram vazios em 26/10. Se precisar deles, pedir print a ele.
 
+## Leitura de 27/10/2026 (Windsor, posts de 13 a 26/10)
+
+40 publicações. As 36 da leitura de 26/10 só subiram um pouco. Quatro Reels são novos, de 26/10, e tinham menos de 24 h na leitura.
+
+| Data | Código | Tema | Views | Alcance | Envios | Salvos | Ret s | Pulo |
+|---|---|---|---|---|---|---|---|---|
+| 26/10 | De-bmfjug_u | Pega o carro e some no meio da briga | 1.974 | 1.333 | 5 | 10 | 10,5 | 0,50 |
+| 26/10 | De-VQqSOBvA | A intensidade continua, o tempo que manda diminui | 217 | 199 | 0 | 1 | 3,8 | 0,74 |
+| 26/10 | De943djORx_ | Borderline não é psicopata, versão em vídeo | 1.889 | 1.562 | 8 | 17 | 13,7 | 0,62 |
+| 26/10 | De9vIRmOMU4 | Quase rolou (legenda genérica) | 1.344 | 1.221 | 4 | 0 | 7,7 | 0,34 |
+
+Números atualizados dos maiores: almoço de domingo 71.090; vazio do sábado 69.229 (780 envios); love bombing 65.685 (615 envios); fatos pra sair correndo 20.959; avó nervosa em Reel 14.626 (499 envios); cacto em Reel 11.991.
+
+Comparação com o histórico de 180 dias (observação, não regra): a mediana de views dos Reels por mês foi 7.110 em maio, 6.005 em junho, 5.812 em julho, 1.545 em agosto e 1.860 em setembro. De 13 a 26/10 ficou em 1.321 (30 Reels, incluindo os fora do tema). Dos quatro Reels de outubro acima de 10 mil, dois são versões em vídeo de carrosséis gigantes (avó e cacto). O mesmo tema pode render de jeitos opostos: Inteligência não vira freio teve 59.565 views em 10/05, e Inteligência melhora ou piora teve 150 em 14/10.
+
+Mapa de formatos feito a partir desta leitura: `formatos/mapa-formatos-2026-10-27.md`, no branch `claude/awesome-newton-kfh71g`.
+
 ## Leitura de 26/10/2026, tarde (vídeos dele: Reels gigantes x Reels médios)
 
 Ele mandou 6 Reels que chama de "os grandes de todos os tempos" e 5 que "funcionaram mas não muito nem perto desses outros grandes". Disse que não mandou os que floparam. Claude transcreveu (Whisper small local) e mediu os arquivos. Views dos gigantes não vieram; pedir a ele.

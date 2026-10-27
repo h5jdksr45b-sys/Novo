@@ -1,80 +1,85 @@
 {
  "segments": [
   {
-   "src_in": 0.182,
-   "src_out": 3.547,
+   "src_in": 3.742,
+   "src_out": 8.48,
    "out_in": 0
   },
   {
-   "src_in": 3.742,
+   "src_in": 0.182,
+   "src_out": 3.547,
+   "out_in": 4.738
+  },
+  {
+   "src_in": 8.5,
    "src_out": 14.601,
-   "out_in": 3.365
+   "out_in": 8.103
   },
   {
    "src_in": 14.683,
    "src_out": 16.934,
-   "out_in": 14.224
+   "out_in": 14.204
   },
   {
    "src_in": 17.094,
    "src_out": 19.185,
-   "out_in": 16.475
+   "out_in": 16.455
   },
   {
    "src_in": 19.248,
    "src_out": 22.974,
-   "out_in": 18.566
+   "out_in": 18.546
   },
   {
    "src_in": 23.081,
    "src_out": 24.82,
-   "out_in": 22.292
+   "out_in": 22.272
   },
   {
    "src_in": 24.984,
    "src_out": 33.317,
-   "out_in": 24.031
+   "out_in": 24.011
   },
   {
    "src_in": 33.533,
    "src_out": 34.489,
-   "out_in": 32.364
+   "out_in": 32.344
   },
   {
    "src_in": 34.586,
    "src_out": 35.867,
-   "out_in": 33.32
+   "out_in": 33.3
   },
   {
    "src_in": 35.986,
    "src_out": 38.886,
-   "out_in": 34.601
+   "out_in": 34.581
   },
   {
    "src_in": 39.328,
    "src_out": 41.957,
-   "out_in": 37.501
+   "out_in": 37.481
   },
   {
    "src_in": 42.135,
    "src_out": 45.187,
-   "out_in": 40.13
+   "out_in": 40.11
   },
   {
    "src_in": 45.229,
    "src_out": 48.312,
-   "out_in": 43.182
+   "out_in": 43.162
   },
   {
    "src_in": 48.667,
    "src_out": 53.274,
-   "out_in": 46.265
+   "out_in": 46.245
   },
   {
    "src_in": 53.42,
    "src_out": 53.633,
-   "out_in": 50.872
+   "out_in": 50.852
   }
  ],
- "duration": 51.085
+ "duration": 51.065
 }

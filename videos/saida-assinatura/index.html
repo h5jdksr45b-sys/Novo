@@ -1,0 +1,77 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Corm;src:url(fonts/cormorant-garamond-latin-700-normal.woff2)}
+@font-face{font-family:Int;font-weight:800;src:url(fonts/inter-latin-800-normal.woff2)}
+@font-face{font-family:Int;font-weight:500;src:url(fonts/inter-latin-500-normal.woff2)}
+html,body{margin:0;width:1080px;height:1920px;overflow:hidden}
+body{background:var(--bg)}
+.light{--bg:#F3F1EC;--fg:#0E0E0F;--side1:#8d8a84;--side2:#1c1c1d;--sub:#55524c;--glow:rgba(255,255,255,.9);--shadow:rgba(0,0,0,.22);--sheen:rgba(255,255,255,.55)}
+.dark{--bg:#0B0B0C;--fg:#F4F2EE;--side1:#9a9894;--side2:#2a2a2b;--sub:#a8a49c;--glow:rgba(255,255,255,.07);--shadow:rgba(0,0,0,.8);--sheen:rgba(255,255,255,.9)}
+#bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 45% at 50% 46%,var(--glow),transparent 70%)}
+#grain{position:absolute;inset:-50%;opacity:.05;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>")}
+#stage{position:absolute;left:0;right:0;top:0;height:1920px;perspective:1400px;perspective-origin:50% 45%}
+#rig{position:absolute;left:50%;top:46%;transform-style:preserve-3d}
+.word{position:absolute;left:0;top:0;transform-style:preserve-3d}
+.layer{position:absolute;left:0;top:0;white-space:nowrap;transform:translate(-50%,-50%);font-size:98px;line-height:1;letter-spacing:-3px;backface-visibility:hidden}
+.layer .at{font-family:Corm;font-size:124px;letter-spacing:0;margin-right:4px;position:relative;top:5px}
+.layer .nm{font-family:Int;font-weight:800}
+.front{color:var(--fg)}
+.front.sheen{color:transparent;background:linear-gradient(105deg,transparent 40%,var(--sheen) 50%,transparent 60%) no-repeat;background-size:300% 100%;-webkit-background-clip:text;background-clip:text}
+#sub{position:absolute;left:50%;top:calc(46% + 104px);transform:translateX(-50%);font-family:Int;font-weight:500;font-size:30px;letter-spacing:12px;color:var(--sub);white-space:nowrap;text-transform:uppercase}
+#rule{position:absolute;left:50%;top:calc(46% + 78px);height:2px;background:var(--sub);transform:translateX(-50%)}
+#shadow{position:absolute;left:50%;top:calc(46% + 200px);width:760px;height:60px;transform:translateX(-50%);background:radial-gradient(ellipse at center,var(--shadow),transparent 70%);filter:blur(10px)}
+</style></head>
+<body class="light">
+<div id="bg"></div><div id="grain"></div>
+<div id="shadow"></div>
+<div id="stage"><div id="rig"><div class="word" id="word"></div></div></div>
+<div id="rule"></div>
+<div id="sub">Borderline sem estigma</div>
+<script>
+const params=new URLSearchParams(location.search);
+document.body.className=params.get('theme')||'light';
+const DEPTH=40, word=document.getElementById('word');
+const html='<span class="at">@</span><span class="nm">drfabioschmidt</span>';
+const cs=getComputedStyle(document.body);
+function mix(a,b,t){const p=s=>s.match(/\w\w/g).map(h=>parseInt(h,16));const A=p(a),B=p(b);return 'rgb('+A.map((v,i)=>Math.round(v+(B[i]-v)*t)).join(',')+')'}
+const s1=cs.getPropertyValue('--side1').trim().slice(1), s2=cs.getPropertyValue('--side2').trim().slice(1);
+for(let i=DEPTH;i>=1;i--){const d=document.createElement('div');d.className='layer';d.innerHTML=html;d.style.color=mix(s1,s2,i/DEPTH);d.style.transform=`translate(-50%,-50%) translateZ(${-i*1.5}px)`;word.appendChild(d)}
+const f=document.createElement('div');f.className='layer front';f.innerHTML=html;word.appendChild(f);
+const sh=document.createElement('div');sh.className='layer front sheen';sh.innerHTML=html;sh.style.transform='translate(-50%,-50%) translateZ(0.5px)';word.appendChild(sh);
+
+const DUR=4.0;
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const eOutExpo=x=>x>=1?1:1-Math.pow(2,-10*x);
+const eInCubic=x=>x*x*x;
+const eInOut=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const lerp=(a,b,t)=>a+(b-a)*t;
+const rig=document.getElementById('rig'),rule=document.getElementById('rule'),sub=document.getElementById('sub'),shadow=document.getElementById('shadow');
+window.render=function(t){
+  // entrada 0 a 1.2 s, pausa com deriva, saida 2.9 a 3.75 s
+  const a=eOutExpo(clamp(t/1.2));
+  const x=eInCubic(clamp((t-2.9)/0.85));
+  const drift=eInOut(clamp((t-0.6)/2.4));
+  let ry=lerp(-78,0,a)+lerp(-7,7,drift)*a + 95*x;
+  let rx=lerp(24,0,a)+lerp(4,-3,drift)*a - 10*x;
+  let z=lerp(-1100,0,a)+lerp(0,60,drift) + lerp(0,-900,x);
+  let ty=lerp(60,0,a);
+  const op=clamp(t/0.25)*(1-clamp((x-0.75)/0.25));
+  const blur=lerp(14,0,clamp(t/0.7))+x*16;
+  rig.style.transform=`translate3d(0,${ty}px,${z}px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+  rig.style.opacity=op;rig.style.filter=blur>0.05?`blur(${blur}px)`:'none';
+  // brilho atravessa a face uma vez
+  const sp=clamp((t-1.15)/1.1);
+  sh.style.backgroundPosition=`${lerp(100,-10,eInOut(sp))*1.5}% 0`;
+  sh.style.opacity=sp>0&&sp<1?1:0;
+  // linha e subtitulo
+  const r=eOutExpo(clamp((t-0.75)/0.8)), rOut=eInCubic(clamp((t-2.75)/0.5));
+  rule.style.width=lerp(0,120,r)*(1-rOut)+'px';
+  sub.style.opacity=clamp((t-0.95)/0.5)*(1-rOut);
+  sub.style.letterSpacing=lerp(22,12,eOutExpo(clamp((t-0.95)/1)))+'px';
+  shadow.style.opacity=a*(1-x)*0.9;
+  shadow.style.width=lerp(400,760,a)*(1-0.4*x)+'px';
+};
+window.DUR=DUR;
+document.fonts.ready.then(()=>{window.ready=true;render(params.has('t')?+params.get('t'):1.8)});
+</script></body></html>

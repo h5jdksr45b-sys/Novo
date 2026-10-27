@@ -1,0 +1,93 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 2
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Cap,Montserrat ExtraBold,64,&H001E1E1E,&H001E1E1E,&H00E4EEF2,&H00E4EEF2,0,0,0,0,100,100,1,0,4,18,0,2,80,80,420,1
+Style: Hook,Montserrat ExtraBold,86,&H00FFFFFF,&H00FFFFFF,&H00000000,&H80000000,0,0,0,0,100,100,0,0,1,0,4,8,60,60,92,1
+Style: Title,Montserrat ExtraBold,50,&H00FFFFFF,&H00FFFFFF,&H00000000,&H80000000,0,0,0,0,100,100,0,0,1,0,3,8,60,60,170,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 1,0:00:00.00,0:00:00.86,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}A ANSIEDADE
+Dialogue: 1,0:00:00.86,0:00:01.46,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}DE REVELAR
+Dialogue: 1,0:00:01.46,0:00:02.14,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}O {\fnDM Serif Display\fs88\c&H0000CC&}DIAGNÓSTICO{\fnMontserrat ExtraBold\fs64\c&H1E1E1E&}
+Dialogue: 1,0:00:02.14,0:00:02.92,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}DE {\fnDM Serif Display\fs88\c&H0000CC&}BORDERLINE{\fnMontserrat ExtraBold\fs64\c&H1E1E1E&}
+Dialogue: 1,0:00:02.92,0:00:04.18,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}NUM NOVO RELACIONAMENTO
+Dialogue: 1,0:00:04.18,0:00:05.52,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}FAZ MUITA GENTE
+Dialogue: 1,0:00:05.52,0:00:06.25,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}ERRAR O {\fnDM Serif Display\fs88\c&H0000CC&}TOM{\fnMontserrat ExtraBold\fs64\c&H1E1E1E&}
+Dialogue: 1,0:00:06.25,0:00:06.77,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}TRATAR ISSO
+Dialogue: 1,0:00:06.77,0:00:07.87,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}COMO UMA {\fnDM Serif Display\fs88\c&H0000CC&}CONFISSÃO{\fnMontserrat ExtraBold\fs64\c&H1E1E1E&}
+Dialogue: 1,0:00:07.87,0:00:08.57,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}DE {\fnDM Serif Display\fs88\c&H0000CC&}CULPA{\fnMontserrat ExtraBold\fs64\c&H1E1E1E&}
+Dialogue: 1,0:00:08.57,0:00:09.49,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}OU UM AVISO
+Dialogue: 1,0:00:09.49,0:00:10.71,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}{\fnDM Serif Display\fs88\c&H0000CC&}TRÁGICO{\fnMontserrat ExtraBold\fs64\c&H1E1E1E&} SÓ {\fnDM Serif Display\fs88\c&H0000CC&}ASSUSTA{\fnMontserrat ExtraBold\fs64\c&H1E1E1E&}
+Dialogue: 1,0:00:10.71,0:00:12.16,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}QUEM ESTÁ OUVINDO
+Dialogue: 1,0:00:12.16,0:00:12.92,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}IMAGINE QUE VOCÊS
+Dialogue: 1,0:00:12.92,0:00:13.92,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}CONSTRUÍRAM UMA BASE
+Dialogue: 1,0:00:13.92,0:00:14.84,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}DE {\fnDM Serif Display\fs88\c&H0000CC&}CONFIANÇA{\fnMontserrat ExtraBold\fs64\c&H1E1E1E&}
+Dialogue: 1,0:00:14.84,0:00:15.42,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}E CHEGOU
+Dialogue: 1,0:00:15.42,0:00:15.66,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}A HORA
+Dialogue: 1,0:00:15.66,0:00:16.16,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}DE EXPLICAR
+Dialogue: 1,0:00:16.16,0:00:17.92,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}SUAS OSCILAÇÕES EMOCIONAIS
+Dialogue: 1,0:00:17.92,0:00:18.84,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}A {\fnDM Serif Display\fs88\c&H0000CC&}ARMADILHA{\fnMontserrat ExtraBold\fs64\c&H1E1E1E&}
+Dialogue: 1,0:00:18.84,0:00:19.28,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}NÃO É
+Dialogue: 1,0:00:19.28,0:00:19.97,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}O {\fnDM Serif Display\fs88\c&H0000CC&}DIAGNÓSTICO{\fnMontserrat ExtraBold\fs64\c&H1E1E1E&}
+Dialogue: 1,0:00:19.97,0:00:20.99,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}É PEDIR DESCULPAS
+Dialogue: 1,0:00:20.99,0:00:22.21,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}{\fnDM Serif Display\fs88\c&H0000CC&}ANTECIPADAS{\fnMontserrat ExtraBold\fs64\c&H1E1E1E&} POR COISAS
+Dialogue: 1,0:00:22.21,0:00:23.61,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}QUE NEM ACONTECERAM
+Dialogue: 1,0:00:23.61,0:00:24.53,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}CRIANDO UM {\fnDM Serif Display\fs88\c&H0000CC&}FANTASMA{\fnMontserrat ExtraBold\fs64\c&H1E1E1E&}
+Dialogue: 1,0:00:24.53,0:00:24.99,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}QUE AINDA
+Dialogue: 1,0:00:24.99,0:00:25.57,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}NÃO EXISTE
+Dialogue: 1,0:00:25.57,0:00:26.34,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}NA RELAÇÃO
+Dialogue: 1,0:00:26.34,0:00:26.58,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}EM VEZ
+Dialogue: 1,0:00:26.58,0:00:26.82,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}DE DAR
+Dialogue: 1,0:00:26.82,0:00:28.44,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}UM ALERTA ASSUSTADOR
+Dialogue: 1,0:00:28.44,0:00:29.36,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}ENTREGUE UM {\fnDM Serif Display\fs88\c&H0000CC&}MANUAL{\fnMontserrat ExtraBold\fs64\c&H1E1E1E&}
+Dialogue: 1,0:00:29.36,0:00:30.95,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}DE INSTRUÇÕES OBJETIVO
+Dialogue: 1,0:00:30.95,0:00:31.19,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}EXPLIQUE
+Dialogue: 1,0:00:31.19,0:00:32.09,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}QUE SUAS EMOÇÕES
+Dialogue: 1,0:00:32.09,0:00:32.87,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}ÀS VEZES GANHAM
+Dialogue: 1,0:00:32.87,0:00:33.33,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}UM VOLUME
+Dialogue: 1,0:00:33.33,0:00:34.11,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}MUITO ALTO
+Dialogue: 1,0:00:34.11,0:00:35.51,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}E {\fnDM Serif Display\fs88\c&H0000CC&}TRANSBORDAM{\fnMontserrat ExtraBold\fs64\c&H1E1E1E&}
+Dialogue: 1,0:00:35.51,0:00:35.91,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}E O MAIS
+Dialogue: 1,0:00:35.91,0:00:36.71,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}IMPORTANTE
+Dialogue: 1,0:00:36.71,0:00:37.91,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}FOQUE ESTRITAMENTE
+Dialogue: 1,0:00:37.91,0:00:38.71,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}NO QUE FAZER
+Dialogue: 1,0:00:38.71,0:00:39.79,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}DURANTE A {\fnDM Serif Display\fs88\c&H0000CC&}CRISE{\fnMontserrat ExtraBold\fs64\c&H1E1E1E&}
+Dialogue: 1,0:00:39.79,0:00:40.65,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}USANDO {\fnDM Serif Display\fs88\c&H0000CC&}TRÊS{\fnMontserrat ExtraBold\fs64\c&H1E1E1E&} FRASES
+Dialogue: 1,0:00:40.65,0:00:41.44,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}DIRETAS
+Dialogue: 1,0:00:41.44,0:00:42.38,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}A PRIMEIRA
+Dialogue: 1,0:00:42.38,0:00:43.62,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}QUANDO EU {\fnDM Serif Display\fs88\c&H0000CC&}DESABAR{\fnMontserrat ExtraBold\fs64\c&H1E1E1E&}
+Dialogue: 1,0:00:43.62,0:00:44.84,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}NÃO TENTE RESOLVER
+Dialogue: 1,0:00:44.84,0:00:45.32,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}APENAS FIQUE
+Dialogue: 1,0:00:45.32,0:00:45.97,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}DO MEU {\fnDM Serif Display\fs88\c&H0000CC&}LADO{\fnMontserrat ExtraBold\fs64\c&H1E1E1E&}
+Dialogue: 1,0:00:45.97,0:00:47.05,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}A SEGUNDA
+Dialogue: 1,0:00:47.05,0:00:47.93,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}COBRAR A MATURIDADE
+Dialogue: 1,0:00:47.93,0:00:48.27,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}NO AUGE
+Dialogue: 1,0:00:48.27,0:00:49.27,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}DO ESTRESSE FUNCIONA
+Dialogue: 1,0:00:49.27,0:00:50.15,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}COMO UM {\fnDM Serif Display\fs88\c&H0000CC&}GATILHO{\fnMontserrat ExtraBold\fs64\c&H1E1E1E&}
+Dialogue: 1,0:00:50.15,0:00:51.17,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}E PIORA TUDO
+Dialogue: 1,0:00:51.17,0:00:52.23,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}E A TERCEIRA
+Dialogue: 1,0:00:52.23,0:00:52.87,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}SE COMEÇARMOS
+Dialogue: 1,0:00:52.87,0:00:53.77,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}A DISCUTIR
+Dialogue: 1,0:00:53.77,0:00:54.67,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}NÓS VAMOS PAUSAR
+Dialogue: 1,0:00:54.67,0:00:55.80,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}POR {\fnDM Serif Display\fs88\c&H0000CC&}20{\fnMontserrat ExtraBold\fs64\c&H1E1E1E&} {\fnDM Serif Display\fs88\c&H0000CC&}MINUTOS{\fnMontserrat ExtraBold\fs64\c&H1E1E1E&}
+Dialogue: 1,0:00:55.80,0:00:56.30,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}VOCÊ TROCA
+Dialogue: 1,0:00:56.30,0:00:56.64,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}O PESO
+Dialogue: 1,0:00:56.64,0:00:57.44,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}DE UM {\fnDM Serif Display\fs88\c&H0000CC&}SEGREDO{\fnMontserrat ExtraBold\fs64\c&H1E1E1E&}
+Dialogue: 1,0:00:57.44,0:00:58.24,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}POR UM {\fnDM Serif Display\fs88\c&H0000CC&}ROTEIRO{\fnMontserrat ExtraBold\fs64\c&H1E1E1E&}
+Dialogue: 1,0:00:58.24,0:00:59.46,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}CLARO DE AÇÃO
+Dialogue: 1,0:00:59.46,0:01:00.04,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}COM ESSE GUIA
+Dialogue: 1,0:01:00.04,0:01:00.72,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}PRÁTICO
+Dialogue: 1,0:01:00.72,0:01:01.12,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}O PARCEIRO
+Dialogue: 1,0:01:01.12,0:01:02.22,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}NÃO SENTE {\fnDM Serif Display\fs88\c&H0000CC&}MEDO{\fnMontserrat ExtraBold\fs64\c&H1E1E1E&}
+Dialogue: 1,0:01:02.22,0:01:02.86,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}MAS {\fnDM Serif Display\fs88\c&H0000CC&}SEGURANÇA{\fnMontserrat ExtraBold\fs64\c&H1E1E1E&}
+Dialogue: 1,0:01:02.86,0:01:03.50,Cap,,0,0,0,,{\fad(60,0)\t(0,90,\fscx104\fscy104)\t(90,160,\fscx100\fscy100)}PARA AJUDAR
+Dialogue: 2,0:00:00.00,0:00:03.40,Hook,,0,0,0,,{\fad(0,200)}COMO CONTAR\NO DIAGNÓSTICO\NSEM ASSUSTAR
+Dialogue: 2,0:00:03.40,0:00:59.46,Title,,0,0,0,,{\fad(250,200)}COMO CONTAR O DIAGNÓSTICO\N{\fnMontserrat\b0\fs38\c&HD9D9D9&}sem assustar quem está com você
+Dialogue: 2,0:00:59.46,0:01:03.50,Hook,,0,0,0,,{\fad(250,0)}ENVIE PARA QUEM\N{\fnDM Serif Display\c&H3B3BE0&\fs92}você vai contar

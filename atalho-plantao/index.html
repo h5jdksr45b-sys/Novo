@@ -1079,11 +1079,21 @@ function copiar(texto, okMsg) {
 }
 
 /* ---------- exportar ---------- */
-function baixar(nome, blob) {
+let dlNs;
+async function baixar(nome, blob, okMsg) {
+  if (window.claude && window.claude.use) {
+    if (dlNs === undefined) { try { dlNs = await window.claude.use('downloads'); } catch (e) { dlNs = null; } }
+    if (dlNs) {
+      try { await dlNs.save({ filename: nome, data: blob }); toast(okMsg); }
+      catch (e) { if (e && e.code !== 'declined') toast('Não deu para salvar o arquivo aqui. Tente de novo em instantes.'); }
+      return;
+    }
+  }
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url; a.download = nome; document.body.appendChild(a); a.click(); a.remove();
   setTimeout(() => URL.revokeObjectURL(url), 5000);
+  toast(okMsg);
 }
 const nomeArquivo = ext => `atalho-plantao-${ui.mes}${ui.local !== 'todos' ? '-' + nomeLocal(ui.local).normalize('NFD').replace(/[^\w]+/g, '-').toLowerCase() : ''}.${ext}`;
 
@@ -1097,8 +1107,7 @@ function exportarCSV() {
     status(p) === 'atrasado' ? atraso(p) : 0, fmtData(ultimoPgto(p)), p.obs || ''
   ]);
   const csv = '﻿' + [head, ...rows].map(r => r.map(q).join(';')).join('\r\n');
-  baixar(nomeArquivo('csv'), new Blob([csv], { type: 'text/csv;charset=utf-8' }));
-  toast('Planilha gerada.');
+  baixar(nomeArquivo('csv'), new Blob([csv], { type: 'text/csv;charset=utf-8' }), 'Planilha gerada.');
 }
 
 function exportarPDF() {
@@ -1152,8 +1161,7 @@ function exportarPDF() {
     ['Atrasado', soma(lista.filter(p => status(p) === 'atrasado'), aberto)]
   ];
   tot.forEach(([k, v]) => { if (y > 285) { doc.addPage(); y = 18; } doc.text(k, M, y); doc.text(brl(v), 70, y, { align: 'right' }); y += 6; });
-  doc.save(nomeArquivo('pdf'));
-  toast('PDF gerado.');
+  baixar(nomeArquivo('pdf'), doc.output('blob'), 'PDF gerado.');
 }
 
 /* ---------- aviso rápido ---------- */

@@ -295,12 +295,15 @@ class TextBlock:
 
 # ---------- cena e vídeo ----------
 class Scene:
-    def __init__(self, dur, text=None, items=(), overlays=(), whoosh=True):
+    def __init__(self, dur, text=None, items=(), overlays=(), whoosh=True, bg=None):
+        self.bg = bg
         self.dur, self.text, self.items, self.overlays, self.whoosh = dur, text, list(items), list(overlays), whoosh
 
 
 def render_video(name, color, scenes, out_dir):
     bg = paper_bg(hexrgb(color))
+    for s_ in scenes:
+        s_.bg_img = paper_bg(hexrgb(s_.bg)) if s_.bg else None
     total = sum(s.dur for s in scenes)
     nframes = int(round(total * FPS))
     path = f'{out_dir}/{name}-noaudio.mp4'
@@ -324,7 +327,7 @@ def render_video(name, color, scenes, out_dir):
         si = max(i for i, st in enumerate(starts) if st <= t + 1e-9)
         s, lt = scenes[si], t - starts[si]
         tq = math.floor(lt * STEP + 1e-6) / STEP
-        frame = bg.copy()
+        frame = (s.bg_img if getattr(s, 'bg_img', None) else bg).copy()
         for it in sorted(s.items, key=lambda i: i.z):
             st = it.state(tq)
             if not st or st['alpha'] <= 0:

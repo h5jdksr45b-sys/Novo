@@ -1104,7 +1104,7 @@ function vLogin() {
     ? `<div class="field"><label for="lgEmail">Seu e-mail</label>
         <input class="input" id="lgEmail" type="email" inputmode="email" autocomplete="email" placeholder="voce@exemplo.com" value="${esc(login.email)}"></div>
        <button type="button" class="btn btn-primary btn-block" id="lgEnviar" ${login.enviando ? 'disabled' : ''}>${login.enviando ? 'Enviando...' : 'Enviar código'}</button>`
-    : `<p class="note">Mandamos um código de 6 dígitos para <b>${esc(login.email)}</b>. Ele chega em até um minuto.</p>
+    : `<p class="note">Mandamos um e-mail para <b>${esc(login.email)}</b>. Ele chega em até um minuto. Se vier um link, toque nele neste mesmo aparelho. Se vier um código, digite aqui.</p>
        <div class="field"><label for="lgCodigo">Código</label>
         <input class="input input-money" id="lgCodigo" inputmode="numeric" autocomplete="one-time-code" maxlength="10" placeholder="000000"></div>
        <button type="button" class="btn btn-primary btn-block" id="lgEntrar" ${login.enviando ? 'disabled' : ''}>${login.enviando ? 'Entrando...' : 'Entrar'}</button>

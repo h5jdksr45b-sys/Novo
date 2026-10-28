@@ -2,3 +2,4 @@ src/
 __pycache__/
 out/*.wav
 out/*-noaudio.mp4
+out/*-sfx.mp4

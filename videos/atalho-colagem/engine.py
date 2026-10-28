@@ -406,3 +406,40 @@ def make_sfx(events, total, path):
 
 def read_time(markup, base=1.3, per=0.3):
     return base + per * len(markup.split())
+
+
+# ---------- logo 3D animado (quadros do Higgsfield, 12 qps) ----------
+LOGO_N = 61
+
+
+@lru_cache(None)
+def _logo_bg():
+    """Fundo índigo liso tirado das bordas do quadro final (sem objetos)."""
+    a = np.array(Image.open(f'{ROOT}/logo/frames/{LOGO_N:03d}.jpg').convert('RGB').resize((1080, 1080))).astype(np.float32)
+    top, bot = a[:20].mean((0, 1)), a[-20:].mean((0, 1))
+    yy = np.linspace(0, 1, H)[:, None, None]
+    bg = top * (1 - yy) + bot * yy
+    bg = np.broadcast_to(bg, (H, W, 3)).copy()
+    return bg
+
+
+@lru_cache(None)
+def logo_canvas(i):
+    """Quadro i (1..61) do logo em tela 1080x1920; as bordas do quadro somem no fundo liso."""
+    f = np.array(Image.open(f'{ROOT}/logo/frames/{i:03d}.jpg').convert('RGB').resize((1080, 1080), Image.LANCZOS)).astype(np.float32)
+    y0, fe = 380, 140
+    out = _logo_bg().copy()
+    al = np.ones((1080, 1, 1), np.float32)
+    ramp = np.linspace(0, 1, fe)[:, None, None]
+    al[:fe] = ramp
+    al[-fe:] = ramp[::-1]
+    out[y0:y0 + 1080] = out[y0:y0 + 1080] * (1 - al) + f * al
+    out += GRAIN[..., None] * 1.2
+    return Image.fromarray(np.clip(out, 0, 255).astype(np.uint8)).convert('RGBA')
+
+
+def logo_overlay(start=1):
+    def ov(frame, lt, tq):
+        i = min(LOGO_N, start + int(lt * 12))
+        frame.paste(logo_canvas(i), (0, 0))
+    return ov

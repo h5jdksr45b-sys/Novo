@@ -26,15 +26,7 @@ def abertura():
     pos = [(300, 640), (790, 700), (300, 1180), (790, 1150)]
     sc.append(Scene(b2, None, [Item(P(o, int(h * 0.62)), x, y, t0=0.06 * i, frm='pop', rot=(-6, 5, -4, -14)[i])
                                for i, ((o, h), (x, y)) in enumerate(zip(OBJ, pos))], bg='#1C1830'))
-    # assinatura: ATALHO e as quatro pílulas coloridas
-    chips = [card(int(font('Bold', 52).getlength(a)) + 70, 96, hexrgb(c), radius=48,
-                  draw_fn=lambda d, img, x0, y0, a=a: d.text((x0 + img.width / 2 - 10, y0 + 48), a, font=font('Bold', 52), fill=CREAM, anchor='mm'))
-             for a, c in zip(APPS, COLS)]
-    xs = [370, 710, 370, 710]
-    ys = [1110, 1110, 1260, 1260]
-    items = [Item(word('ATALHO', 'anton', 260, CREAM), 540, 820, t0=0.0, frm='pop', shadow=False)]
-    items += [Item(chips[i], xs[i], ys[i], t0=0.25 + 0.15 * i, frm='pop', rot=(-3, 2, 2, -3)[i]) for i in range(4)]
-    sc.append(Scene(1.0, None, items, bg='#1C1830'))
+    sc.append(lockup())
     return sc
 
 

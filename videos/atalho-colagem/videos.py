@@ -33,22 +33,9 @@ def body(markup):
     return TextBlock(markup, 'body', t0=0.0, y=170)
 
 
-def lockup(app, color, t_icon=None):
-    """Tela final com o nome do app."""
-    def ov(frame, lt, tq):
-        pass
-    a = font('anton', 190)
-    s = font('serif', 150)
-    w1 = int(a.getlength('ATALHO'))
-    w2 = int(s.getlength(app))
-    name1 = Image.new('RGBA', (w1 + 30, 240), (0, 0, 0, 0))
-    ImageDraw.Draw(name1).text((10, 200), 'ATALHO', font=a, fill=CREAM + (255,), anchor='ls')
-    name2 = Image.new('RGBA', (w2 + 40, 220), (0, 0, 0, 0))
-    ImageDraw.Draw(name2).text((14, 160), app, font=s, fill=YELLOW + (255,), anchor='ls')
-    items = [Item(name1, 540, 800, t0=0.05, frm='L', shadow=False),
-             Item(name2, 560, 975, t0=0.3, frm='R', shadow=False),
-             Item(tag('em breve', fill=CREAM, size=44), 540, 1180, t0=0.6, frm='pop')]
-    return Scene(2.2, None, items)
+def lockup(app=None, color=None, start=40):
+    """Tela final: o logo 3D animado, do momento em que a seta entra até o final."""
+    return Scene(2.2, None, [], overlays=[logo_overlay(start)], whoosh=True)
 
 
 # ======================= 1. PLANTÃO =======================

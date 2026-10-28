@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Atalho Hora</title>
+<meta name="theme-color" content="#F2EFE6">
+<meta name="description" content="Descubra quanto vale de verdade a sua hora de plantão ou de consultório, depois de imposto, deslocamento, custos e faltas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+/* Mesma família visual do Atalho Plantão: chão creme, cartão grafite com o número principal,
+   verde-limão para ação e destaque, roxo para foco e marca. Celular primeiro, uma coluna de até 560px.
+   No computador (960px ou mais): formulário à esquerda, resultado fixo à direita. */
+:root {
+  --ground: #F2EFE6;
+  --surface: #FFFFFF;
+  --raised: #F7F4EC;
+  --border: #E3DED1;
+  --control: #CFC9BA;
+  --text: #1E1E24;
+  --muted: #5F5C66;
+  --faint: #6E6B74;
+
+  --roxo: #5B3DF5;
+  --roxo-pale: #ECE8FD;
+  --roxo-ink: #3A22B5;
+  --lima: #C6F24E;
+  --lima-ink-on: #1E1E24;
+  --lima-ink: #3B5000;
+  --red-ink: #961227;
+
+  --hero-bg: #1E1E24; --hero-fg: #F6F3EC; --hero-muted: rgb(246 243 236 / 0.68); --hero-line: rgb(246 243 236 / 0.18);
+  --hero-accent: #C6F24E;
+
+  --font: "Figtree", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-fig: "Source Serif 4", Georgia, "Times New Roman", serif;
+
+  --radius-card: 24px;
+  --radius-tile: 18px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground: #141318; --surface: #1F1E25; --raised: #26252D;
+    --border: #2E2D36; --control: #46454F;
+    --text: #F3F0E8; --muted: #B5B2BC; --faint: #A3A0AA;
+    --roxo: #8F7BFF; --roxo-pale: #292345; --roxo-ink: #C7BCFF;
+    --lima-ink: #D2F07C; --red-ink: #FF9AA5;
+    --hero-bg: #F3F0E8; --hero-fg: #1E1E24; --hero-muted: rgb(30 30 36 / 0.64); --hero-line: rgb(30 30 36 / 0.14);
+    --hero-accent: #3B5000;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --ground: #141318; --surface: #1F1E25; --raised: #26252D;
+  --border: #2E2D36; --control: #46454F;
+  --text: #F3F0E8; --muted: #B5B2BC; --faint: #A3A0AA;
+  --roxo: #8F7BFF; --roxo-pale: #292345; --roxo-ink: #C7BCFF;
+  --lima-ink: #D2F07C; --red-ink: #FF9AA5;
+  --hero-bg: #F3F0E8; --hero-fg: #1E1E24; --hero-muted: rgb(30 30 36 / 0.64); --hero-line: rgb(30 30 36 / 0.14);
+  --hero-accent: #3B5000;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-tap-highlight-color: transparent;
+}
+button, input { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 2px solid var(--roxo); outline-offset: 2px; }
+h1, h2, h3, p { margin: 0; }
+h1, h2, h3 { text-wrap: balance; }
+ol, ul { margin: 0; padding: 0; list-style: none; }
+.num { font-variant-numeric: tabular-nums; }
+
+/* ---------- estrutura ---------- */
+.top {
+  display: flex; align-items: center; gap: 10px; min-height: 56px;
+  max-width: 1120px; margin: 0 auto;
+  padding: env(safe-area-inset-top, 0px) max(16px, env(safe-area-inset-right, 0px)) 0 max(16px, env(safe-area-inset-left, 0px));
+}
+.mark { width: 30px; height: 30px; flex: none; display: block; }
+.wordmark { font-family: var(--font-fig); font-weight: 600; font-size: 18px; letter-spacing: -0.01em; line-height: 1.1; }
+.brand small { display: block; color: var(--muted); font-size: 12px; font-weight: 500; }
+
+.page {
+  max-width: 560px; margin: 0 auto;
+  padding: 8px max(16px, env(safe-area-inset-right, 0px)) calc(32px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+  display: grid; gap: 20px;
+}
+.intro h1 { font-family: var(--font-fig); font-size: 30px; font-weight: 700; letter-spacing: -0.015em; line-height: 1.12; }
+.intro p { color: var(--muted); margin-top: 8px; max-width: 46ch; }
+
+.col-form, .col-res { display: grid; gap: 20px; min-width: 0; align-content: start; }
+
+@media (min-width: 960px) {
+  .page {
+    max-width: 1120px; padding-inline: 40px;
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); column-gap: 32px; align-items: start;
+  }
+  .intro { grid-column: 1 / -1; padding-top: 8px; }
+  .intro h1 { font-size: 38px; }
+  .col-res { position: sticky; top: 16px; }
+}
+
+/* ---------- seletor de modo ---------- */
+.seg {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 4px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 999px;
+}
+.seg button {
+  min-height: 44px; border: 0; border-radius: 999px; background: none;
+  font-weight: 600; color: var(--muted);
+}
+.seg button[aria-pressed="true"] { background: var(--text); color: var(--surface); }
+
+/* ---------- formulário ---------- */
+.card { background: var(--surface); border-radius: var(--radius-card); padding: 20px; min-width: 0; }
+.card h2 { font-family: var(--font-fig); font-size: 19px; font-weight: 600; margin-bottom: 4px; }
+.card .lede { color: var(--muted); font-size: 14px; margin-bottom: 18px; }
+.fields { display: grid; gap: 16px; }
+@media (min-width: 360px) { .fields { grid-template-columns: 1fr 1fr; } .field.wide { grid-column: 1 / -1; } }
+.field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.field label { font-size: 14px; font-weight: 600; }
+.hint { color: var(--muted); font-size: 13px; }
+.box {
+  display: flex; align-items: center; min-height: 48px; border-radius: 10px;
+  border: 1px solid var(--control); background: var(--surface);
+}
+.box:focus-within { outline: 2px solid var(--roxo); outline-offset: 0; border-color: var(--roxo); }
+.box span { padding: 0 12px; color: var(--muted); font-size: 14px; flex: none; }
+.box input {
+  flex: 1; min-width: 0; height: 46px; border: 0; background: none; outline: none; padding: 0 14px;
+  font-family: var(--font-fig); font-size: 20px; font-weight: 700; font-variant-numeric: tabular-nums;
+}
+.box span + input { padding-left: 0; }
+.box input::placeholder { color: var(--faint); font-weight: 600; }
+.more { margin-top: 18px; border-top: 1px solid var(--border); padding-top: 14px; }
+.more summary { cursor: pointer; font-weight: 600; font-size: 14px; color: var(--roxo-ink); min-height: 32px; display: flex; align-items: center; }
+.more[open] summary { margin-bottom: 12px; }
+
+/* ---------- resultado ---------- */
+.hero { background: var(--hero-bg); color: var(--hero-fg); border-radius: var(--radius-card); padding: 22px; display: grid; gap: 18px; }
+.eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--hero-accent); }
+.big { font-family: var(--font-fig); font-size: 46px; font-weight: 700; letter-spacing: -0.02em; line-height: 1; font-variant-numeric: tabular-nums; margin-top: 6px; overflow-wrap: anywhere; }
+.big small, .mid small { font-size: 0.45em; font-weight: 600; vertical-align: 0.6em; margin-inline-end: 0.12em; opacity: 0.75; }
+.big .per, .mid .per { font-family: var(--font); font-size: 15px; font-weight: 500; color: var(--hero-muted); margin-inline-start: 6px; letter-spacing: 0; }
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; border-top: 1px solid var(--hero-line); padding-top: 16px; }
+.pair .lbl { font-size: 13px; color: var(--hero-muted); }
+.mid { font-family: var(--font-fig); font-size: 24px; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.15; margin-top: 2px; white-space: nowrap; }
+.mid .per { font-size: 13px; margin-inline-start: 4px; }
+
+.gap-tile { background: var(--lima); color: var(--lima-ink-on); border-radius: var(--radius-tile); padding: 18px 20px; }
+.gap-tile .k { font-size: 14px; font-weight: 600; }
+.gap-tile .v { font-family: var(--font-fig); font-size: 34px; font-weight: 700; line-height: 1.1; font-variant-numeric: tabular-nums; margin-top: 4px; }
+.gap-tile .v small { font-size: 0.5em; vertical-align: 0.45em; margin-inline-end: 0.1em; }
+.gap-tile p { font-size: 14px; margin-top: 6px; }
+.gap-tile.neg { background: var(--surface); color: var(--text); border: 2px solid var(--red-ink); }
+
+.empty { color: var(--hero-muted); font-size: 14px; }
+
+/* passo a passo */
+.steps { counter-reset: s; display: grid; gap: 0; }
+.steps li { counter-increment: s; display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 4px 12px; padding: 14px 0; border-top: 1px solid var(--border); }
+.steps li:first-child { border-top: 0; padding-top: 4px; }
+.steps li::before {
+  content: counter(s); grid-row: span 2; width: 28px; height: 28px; border-radius: 50%;
+  background: var(--roxo-pale); color: var(--roxo-ink); font-weight: 700; font-size: 13px;
+  display: grid; place-items: center; font-variant-numeric: tabular-nums;
+}
+.steps .t { font-weight: 600; }
+.steps .c { color: var(--muted); font-size: 14px; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.steps .c b { color: var(--text); font-weight: 700; }
+
+/* lista */
+.lista { background: var(--raised); border: 1px solid var(--border); }
+.lista h2 { margin-bottom: 14px; }
+.lista form { display: grid; gap: 10px; }
+@media (min-width: 420px) { .lista form { grid-template-columns: minmax(0, 1fr) auto; } .lista form .hint, .lista form .msg { grid-column: 1 / -1; } }
+.lista input[type="email"] {
+  width: 100%; min-height: 48px; padding: 0 14px; border-radius: 10px;
+  border: 1px solid var(--control); background: var(--surface); font-size: 16px;
+}
+.lista input[type="email"]:focus { outline: 2px solid var(--roxo); outline-offset: 0; border-color: var(--roxo); }
+.btn {
+  min-height: 48px; padding: 0 22px; border-radius: 999px; border: 0;
+  background: var(--lima); color: var(--lima-ink-on); font-weight: 700;
+}
+.btn:disabled { opacity: 0.6; cursor: default; }
+.msg { font-size: 14px; font-weight: 600; }
+.msg.ok { color: var(--lima-ink); }
+.msg.err { color: var(--red-ink); }
+
+.foot {
+  max-width: 1120px; margin: 0 auto; color: var(--muted); font-size: 13px;
+  padding: 0 max(16px, env(safe-area-inset-right, 0px)) calc(28px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+}
+.foot p { max-width: 70ch; }
+.foot p + p { margin-top: 6px; }
+@media (min-width: 960px) { .foot, .top { padding-inline: 40px; } }
+
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <svg class="mark" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="11" fill="#5B3DF5"/><path d="M22.5 7 12 22.5h7.5L17.5 33 28 17.5h-7.5L22.5 7Z" fill="#C6F24E"/></svg>
+  <div class="brand"><span class="wordmark">Atalho Hora</span><small>Dr. Atalho</small></div>
+</header>
+
+<main class="page">
+  <div class="intro">
+    <h1>Quanto vale de verdade a sua hora</h1>
+    <p>O valor combinado não é o que fica com você. Coloque seus números e veja a conta inteira.</p>
+  </div>
+
+  <div class="col-form">
+    <div class="seg" role="group" aria-label="Tipo de trabalho">
+      <button type="button" data-mode="plantao" aria-pressed="true">Plantão</button>
+      <button type="button" data-mode="consulta" aria-pressed="false">Consulta</button>
+    </div>
+
+    <section class="card" id="formPlantao" aria-labelledby="hPlantao">
+      <h2 id="hPlantao">Seu plantão</h2>
+      <p class="lede">Os números já preenchidos são só um exemplo. Troque pelos seus.</p>
+      <div class="fields">
+        <div class="field wide">
+          <label for="p_valor">Valor do plantão</label>
+          <div class="box"><span>R$</span><input id="p_valor" inputmode="decimal" autocomplete="off" value="1.200"></div>
+        </div>
+        <div class="field">
+          <label for="p_duracao">Duração</label>
+          <div class="box"><input id="p_duracao" inputmode="decimal" autocomplete="off" value="12"><span>horas</span></div>
+        </div>
+        <div class="field">
+          <label for="p_desloc">Deslocamento</label>
+          <div class="box"><input id="p_desloc" inputmode="decimal" autocomplete="off" value="1,5"><span>horas</span></div>
+          <span class="hint">Ida e volta somadas.</span>
+        </div>
+        <div class="field">
+          <label for="p_transp">Transporte</label>
+          <div class="box"><span>R$</span><input id="p_transp" inputmode="decimal" autocomplete="off" value="60"></div>
+          <span class="hint">Ida e volta: combustível, estacionamento, app.</span>
+        </div>
+        <div class="field">
+          <label for="p_imposto">Imposto</label>
+          <div class="box"><input id="p_imposto" inputmode="decimal" autocomplete="off" value="15"><span>%</span></div>
+          <span class="hint">Sobre o valor do plantão.</span>
+        </div>
+        <div class="field wide">
+          <label for="p_dias">Dias até o pagamento</label>
+          <div class="box"><input id="p_dias" inputmode="numeric" autocomplete="off" value="45"><span>dias</span></div>
+          <span class="hint">Do dia do plantão até o dinheiro cair na conta.</span>
+        </div>
+      </div>
+      <details class="more">
+        <summary>Ajustar quanto custa esperar</summary>
+        <div class="fields">
+          <div class="field wide">
+            <label for="p_juros">Rendimento do dinheiro parado</label>
+            <div class="box"><input id="p_juros" inputmode="decimal" autocomplete="off" value="1"><span>% ao mês</span></div>
+            <span class="hint">Quanto esse dinheiro renderia se já estivesse com você. Use o rendimento da sua aplicação.</span>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section class="card" id="formConsulta" aria-labelledby="hConsulta" hidden>
+      <h2 id="hConsulta">Seu consultório</h2>
+      <p class="lede">Os números já preenchidos são só um exemplo. Troque pelos seus.</p>
+      <div class="fields">
+        <div class="field">
+          <label for="c_valor">Valor da consulta</label>
+          <div class="box"><span>R$</span><input id="c_valor" inputmode="decimal" autocomplete="off" value="400"></div>
+        </div>
+        <div class="field">
+          <label for="c_qtd">Consultas marcadas</label>
+          <div class="box"><input id="c_qtd" inputmode="numeric" autocomplete="off" value="80"><span>por mês</span></div>
+        </div>
+        <div class="field wide">
+          <label for="c_custos">Custos fixos do consultório</label>
+          <div class="box"><span>R$</span><input id="c_custos" inputmode="decimal" autocomplete="off" value="6.000"><span>por mês</span></div>
+          <span class="hint">Aluguel, condomínio, secretária, sistema, contador, luz, internet.</span>
+        </div>
+        <div class="field">
+          <label for="c_faltas">Faltas</label>
+          <div class="box"><input id="c_faltas" inputmode="decimal" autocomplete="off" value="10"><span>%</span></div>
+          <span class="hint">De cada 100 marcadas, quantas não vêm.</span>
+        </div>
+        <div class="field">
+          <label for="c_duracao">Duração média</label>
+          <div class="box"><input id="c_duracao" inputmode="numeric" autocomplete="off" value="50"><span>minutos</span></div>
+          <span class="hint">O horário que fica reservado na agenda.</span>
+        </div>
+        <div class="field wide">
+          <label for="c_imposto">Imposto</label>
+          <div class="box"><input id="c_imposto" inputmode="decimal" autocomplete="off" value="15"><span>%</span></div>
+          <span class="hint">Sobre o que você recebe.</span>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="col-res">
+    <section class="hero" aria-labelledby="hRes" aria-live="polite">
+      <h2 id="hRes" class="sr">Resultado</h2>
+      <div id="resMain"></div>
+    </section>
+    <div id="resGap"></div>
+
+    <section class="card" aria-labelledby="hSteps">
+      <h2 id="hSteps">A conta, passo a passo</h2>
+      <p class="lede">Do valor combinado até o que sobra por hora.</p>
+      <ol class="steps" id="steps"></ol>
+    </section>
+
+    <section class="card lista" aria-labelledby="hLista">
+      <h2 id="hLista">Quer controlar seus plantões? Entre na lista do Atalho Plantão.</h2>
+      <form id="fLista" novalidate>
+        <label for="lEmail" class="sr">Seu e-mail</label>
+        <input id="lEmail" type="email" inputmode="email" autocomplete="email" placeholder="voce@exemplo.com" maxlength="160">
+        <button type="submit" class="btn" id="lBtn">Entrar na lista</button>
+        <span class="hint">Opcional. Só para avisar quando o Atalho Plantão abrir.</span>
+        <p class="msg" id="lMsg" role="status" aria-live="polite" hidden></p>
+      </form>
+    </section>
+  </div>
+</main>
+
+<footer class="foot">
+  <p>Isto é uma estimativa feita com os números que você informou. Não substitui a orientação de um contador, que conhece o seu regime de imposto e a sua situação.</p>
+  <p>Nada do que você digita sai do seu aparelho, exceto o e-mail, se você escolher enviar.</p>
+</footer>
+
+<script>
+// Para onde vai o e-mail da lista. Enquanto estiver vazio, o formulário não envia nada e avisa isso.
+// Exemplo: endpoint de uma tabela do Supabase ou de um formulário (Formspree, Brevo, etc.) que aceite POST JSON { email, origem }.
+const CFG = { listaEndpoint: '' };
+
+const $ = (id) => document.getElementById(id);
+const brl = (v) => v.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const n1 = (v) => v.toLocaleString('pt-BR', { maximumFractionDigits: 1 });
+const n0 = (v) => v.toLocaleString('pt-BR', { maximumFractionDigits: 0 });
+const pct = (v) => v.toLocaleString('pt-BR', { maximumFractionDigits: 1 }) + '%';
+const money = (v) => `R$ ${brl(v)}`;
+const moneyBig = (v, per) => {
+  const neg = v < 0 ? '−' : '';
+  const [int, dec] = brl(Math.abs(v)).split(',');
+  return `${neg}<small>R$</small>${int}<small style="vertical-align:0;font-size:0.5em">,${dec}</small>${per ? `<span class="per">${per}</span>` : ''}`;
+};
+
+// Aceita 1.200,50 ou 1200.50 ou 1200,5
+function num(id) {
+  let s = ($(id).value || '').trim().replace(/\s|R\$/g, '');
+  if (!s) return NaN;
+  if (s.includes(',')) s = s.replace(/\./g, '').replace(',', '.');
+  else if (/^\d{1,3}(\.\d{3})+$/.test(s)) s = s.replace(/\./g, '');
+  const v = Number(s);
+  return Number.isFinite(v) ? v : NaN;
+}
+const val = (id, fallback = 0) => { const v = num(id); return Number.isNaN(v) ? fallback : Math.max(0, v); };
+
+let mode = 'plantao';
+
+function calcPlantao() {
+  const valor = num('p_valor'), dur = num('p_duracao');
+  if (!(valor > 0) || !(dur > 0)) return null;
+  const desloc = val('p_desloc'), transp = val('p_transp');
+  const imp = Math.min(val('p_imposto'), 100) / 100;
+  const dias = val('p_dias'), juros = val('p_juros', 1) / 100;
+
+  const bruto = valor / dur;
+  const impR = valor * imp;
+  const aposImp = valor - impR;
+  const aposTransp = aposImp - transp;
+  // Quanto aquele valor futuro vale hoje: desconta o rendimento perdido nos dias de espera.
+  const fator = Math.pow(1 + juros, dias / 30);
+  const hoje = aposTransp > 0 ? aposTransp / fator : aposTransp;
+  const espera = aposTransp - hoje;
+  const horas = dur + desloc;
+  const real = hoje / horas;
+
+  const steps = [
+    ['Valor bruto por hora', `${money(valor)} ÷ ${n1(dur)} h de plantão = <b>${money(bruto)} por hora</b>. É o número que costuma vir à cabeça.`],
+    ['Tire o imposto', `${pct(imp * 100)} de ${money(valor)} = ${money(impR)}. Sobram <b>${money(aposImp)}</b>.`],
+    ['Tire o transporte', `${money(aposImp)} − ${money(transp)} de ida e volta = <b>${money(aposTransp)}</b>.`],
+    ['Desconte a espera', dias > 0
+      ? `O dinheiro chega em ${n0(dias)} dias. Se estivesse com você, renderia ${pct(juros * 100)} ao mês. Esperar custa ${money(espera)}. Hoje isso vale <b>${money(hoje)}</b>.`
+      : `O pagamento é no mesmo dia, então a espera não custa nada. Continua <b>${money(hoje)}</b>.`],
+    ['Conte todas as horas', `${n1(dur)} h de plantão + ${n1(desloc)} h de deslocamento = <b>${n1(horas)} horas</b> fora de casa por esse plantão.`],
+    ['Valor real por hora', `${money(hoje)} ÷ ${n1(horas)} h = <b>${money(real)} por hora</b>.`],
+  ];
+  return { bruto, real, steps, total: hoje, totalLbl: 'Fica com você no plantão' };
+}
+
+function calcConsulta() {
+  const valor = num('c_valor'), qtd = num('c_qtd'), durMin = num('c_duracao');
+  if (!(valor > 0) || !(qtd > 0) || !(durMin > 0)) return null;
+  const custos = val('c_custos');
+  const faltas = Math.min(val('c_faltas'), 100) / 100;
+  const imp = Math.min(val('c_imposto'), 100) / 100;
+
+  const durH = durMin / 60;
+  const bruto = valor / durH;
+  const atendidas = qtd * (1 - faltas);
+  const perdidas = qtd - atendidas;
+  const receita = atendidas * valor;
+  const impR = receita * imp;
+  const aposImp = receita - impR;
+  const sobra = aposImp - custos;
+  // A agenda fica reservada mesmo quando o paciente falta: as horas contam todas as marcadas.
+  const horas = qtd * durH;
+  const real = sobra / horas;
+
+  const steps = [
+    ['Valor bruto por hora', `Uma consulta de ${money(valor)} ocupa ${n0(durMin)} minutos. Numa hora inteira, isso dá <b>${money(bruto)} por hora</b>. É o número que costuma vir à cabeça.`],
+    ['Tire as faltas', `De ${n0(qtd)} consultas marcadas, ${pct(faltas * 100)} faltam: ${n1(perdidas)} consultas sem receber. Você atende ${n1(atendidas)} e recebe <b>${money(receita)}</b> no mês.`],
+    ['Tire o imposto', `${pct(imp * 100)} de ${money(receita)} = ${money(impR)}. Sobram <b>${money(aposImp)}</b>.`],
+    ['Tire os custos fixos', `${money(aposImp)} − ${money(custos)} do consultório = <b>${money(sobra)}</b> que ficam com você no mês.`],
+    ['Conte as horas de agenda', `${n0(qtd)} horários de ${n0(durMin)} minutos = <b>${n1(horas)} horas</b> reservadas no mês. O horário de quem faltou também conta, porque ficou bloqueado.`],
+    ['Valor real por hora', `${money(sobra)} ÷ ${n1(horas)} h = <b>${money(real)} por hora</b>.`],
+  ];
+  return { bruto, real, steps, total: sobra, totalLbl: 'Fica com você no mês' };
+}
+
+function render() {
+  const r = mode === 'plantao' ? calcPlantao() : calcConsulta();
+  if (!r) {
+    $('resMain').innerHTML = `<p class="eyebrow">Valor real por hora</p><p class="empty" style="margin-top:8px">${mode === 'plantao' ? 'Preencha o valor e a duração do plantão para ver a conta.' : 'Preencha o valor, as consultas por mês e a duração para ver a conta.'}</p>`;
+    $('resGap').innerHTML = '';
+    $('steps').innerHTML = '';
+    return;
+  }
+  const dif = r.bruto - r.real;
+  const perda = r.bruto > 0 ? (dif / r.bruto) * 100 : 0;
+
+  $('resMain').innerHTML = `
+    <div>
+      <p class="eyebrow">Valor real por hora</p>
+      <p class="big">${moneyBig(r.real, 'por hora')}</p>
+    </div>
+    <div class="pair">
+      <div><p class="lbl">Valor bruto</p><p class="mid">${moneyBig(r.bruto, '/h')}</p></div>
+      <div><p class="lbl">${r.totalLbl}</p><p class="mid">${moneyBig(r.total, '')}</p></div>
+    </div>`;
+
+  if (r.real < 0) {
+    $('resGap').innerHTML = `<div class="gap-tile neg">
+      <p class="k">Com esses números, cada hora sai do seu bolso</p>
+      <p class="v num">${moneyBig(r.real, '')}</p>
+      <p>Os custos passam do que entra. Vale revisar os números ou conversar com seu contador.</p></div>`;
+  } else {
+    $('resGap').innerHTML = `<div class="gap-tile">
+      <p class="k">Diferença em cada hora</p>
+      <p class="v num">${moneyBig(dif, '')}</p>
+      <p>De cada hora que você imagina ganhar, ${pct(perda)} não chega até você.</p></div>`;
+  }
+
+  $('steps').innerHTML = r.steps.map(([t, c]) => `<li><span class="t">${t}</span><span class="c">${c}</span></li>`).join('');
+}
+
+// ---------- modo ----------
+function setMode(m) {
+  mode = m;
+  document.querySelectorAll('.seg button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.mode === m)));
+  $('formPlantao').hidden = m !== 'plantao';
+  $('formConsulta').hidden = m !== 'consulta';
+  try { localStorage.setItem('atalhoHora.modo', m); } catch (e) {}
+  render();
+}
+document.querySelectorAll('.seg button').forEach((b) => b.addEventListener('click', () => setMode(b.dataset.mode)));
+
+// ---------- guardar o que a pessoa digitou neste aparelho ----------
+const inputs = [...document.querySelectorAll('.box input')];
+try {
+  const saved = JSON.parse(localStorage.getItem('atalhoHora.campos') || '{}');
+  inputs.forEach((i) => { if (typeof saved[i.id] === 'string') i.value = saved[i.id]; });
+} catch (e) {}
+inputs.forEach((i) => i.addEventListener('input', () => {
+  render();
+  try { localStorage.setItem('atalhoHora.campos', JSON.stringify(Object.fromEntries(inputs.map((x) => [x.id, x.value])))); } catch (e) {}
+}));
+
+let startMode = 'plantao';
+try { if (localStorage.getItem('atalhoHora.modo') === 'consulta') startMode = 'consulta'; } catch (e) {}
+setMode(startMode);
+
+// ---------- lista do Atalho Plantão ----------
+$('fLista').addEventListener('submit', async (ev) => {
+  ev.preventDefault();
+  const email = $('lEmail').value.trim();
+  const msg = $('lMsg');
+  const show = (t, ok) => { msg.textContent = t; msg.className = 'msg ' + (ok ? 'ok' : 'err'); msg.hidden = false; };
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { show('Confira o e-mail. Parece que falta alguma parte.', false); $('lEmail').focus(); return; }
+  if (!CFG.listaEndpoint) { show('A lista ainda não está aberta. Nenhum e-mail foi enviado.', false); return; }
+  $('lBtn').disabled = true;
+  try {
+    const res = await fetch(CFG.listaEndpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, origem: 'atalho-hora' }),
+    });
+    if (!res.ok) throw new Error(String(res.status));
+    show('Pronto. Você vai receber um aviso quando o Atalho Plantão abrir.', true);
+    $('lEmail').value = '';
+  } catch (e) {
+    show('Não deu para enviar agora. Tente de novo em instantes.', false);
+  } finally {
+    $('lBtn').disabled = false;
+  }
+});
+</script>
+</body>
+</html>

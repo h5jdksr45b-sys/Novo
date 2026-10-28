@@ -5,430 +5,537 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Atalho Plantão</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="theme-color" content="#5B3DF5">
+<meta name="theme-color" content="#F6F5FA">
+<meta name="description" content="Controle quanto você tem a receber dos seus plantões, o que já entrou e o que está atrasado.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Figtree:wght@400;500;600;700&display=swap">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
 <style>
-/* Layout: uma coluna de celular. Números no topo, ações no alcance do polegar (barra inferior e botão flutuante à direita). */
+/* Estilo: pastel-consumer com as cores da marca. Cada status é um bloco claro com o texto no tom escuro da mesma cor.
+   Grade: celular em uma coluna com margem de 16px e barra inferior de 5 destinos.
+   Computador (960px ou mais): barra lateral de 240px + área fluida com margem de 40px, máximo 1180px.
+   Início no computador: cartão do dinheiro em largura total (4fr + 3fr + 5fr por dentro), depois 7fr + 5fr com vão de 16px. */
 :root {
-  --roxo: #5B3DF5;
-  --roxo-card: #5B3DF5;
-  --roxo-soft: #ECE8FF;
-  --roxo-text: #4A2DE0;
-  --lima: #C6F24E;
-  --lima-strong: #8DB51F;
-  --lima-ink: #1E1E24;
-  --fg: #1E1E24;
-  --muted: #63617A;
-  --bg: #F5F4FA;
+  --ground: #F6F5FA;
   --surface: #FFFFFF;
-  --line: #E3E1EE;
+  --raised: #F8F7FC;
+  --active: #ECEAF3;
+  --border: #E7E5EF;
+  --rule: #EFEDF5;
+  --control: #D3D0DE;
+  --text: #1E1E24;
+  --muted: #5D5A6B;
+  --faint: #6A6778;
+
+  --roxo: #5B3DF5;
+  --roxo-pale: #EEEBFE;
+  --roxo-ink: #3A22B5;
+  --lima: #C6F24E;
+  --lima-ink-on: #1E1E24;
+  --lima-pale: #EFFAD2;
+  --lima-ink: #3B5000;
+  --lima-dot: #93BE1C;
   --red: #D7263D;
-  --red-soft: #FDEBED;
+  --red-pale: #FDECEE;
+  --red-ink: #961227;
+
   --toast-bg: #1E1E24;
-  --toast-fg: #FFFFFF;
-  --backdrop: rgb(24 20 40 / 0.45);
-  --shadow: 0 1px 2px rgb(30 30 36 / 0.06), 0 6px 20px rgb(30 30 36 / 0.07);
-  --shadow-fab: 0 2px 4px rgb(30 30 36 / 0.12), 0 10px 24px rgb(91 61 245 / 0.22);
+  --toast-ink: #FFFFFF;
+  --backdrop: rgb(22 18 40 / 0.42);
+  --float-shadow: 0 8px 28px rgb(30 30 36 / 0.16);
 
-  --font-display: "Bricolage Grotesque", "Figtree", system-ui, sans-serif;
-  --font-body: "Figtree", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font: "Figtree", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-fig: "Bricolage Grotesque", "Figtree", system-ui, sans-serif;
 
-  --r-lg: 22px;
-  --r-md: 16px;
-  --r-sm: 12px;
-  --nav-h: 66px;
+  --fs-lead: 36px;
+  --fs-title: 24px;
+  --fs-fig: 22px;
+  --fs-section: 17px;
+  --fs-body: 15px;
+  --fs-small: 13px;
+
+  --radius-card: 20px;
+  --radius-tile: 12px;
+  --radius-inner: 8px;
+  --gap: 16px;
+  --card-pad: 20px;
+  --tab-h: 64px;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --roxo: #8A75FF; --roxo-soft: #262044; --roxo-text: #B9AEFF;
-    --lima-strong: #A9D63A;
-    --fg: #F1F0F6; --muted: #A9A7BA; --bg: #121116; --surface: #1C1B22; --line: #2E2C38;
-    --red: #FF6474; --red-soft: #3A1A21;
-    --toast-bg: #F1F0F6; --toast-fg: #1E1E24;
+    --ground: #0F0E13; --surface: #18171E; --raised: #1F1E27; --active: #2A2834;
+    --border: #2A2833; --rule: #24222C; --control: #3D3A48;
+    --text: #F3F2F7; --muted: #B6B3C2; --faint: #A09DAC;
+    --roxo: #8F7BFF; --roxo-pale: #262043; --roxo-ink: #C7BCFF;
+    --lima-pale: #232B10; --lima-ink: #D2F07C; --lima-dot: #C6F24E;
+    --red: #FF5D6E; --red-pale: #3A171D; --red-ink: #FF9AA5;
+    --toast-bg: #F3F2F7; --toast-ink: #1E1E24;
     --backdrop: rgb(0 0 0 / 0.6);
-    --shadow: 0 1px 2px rgb(0 0 0 / 0.4);
-    --shadow-fab: 0 2px 6px rgb(0 0 0 / 0.5);
+    --float-shadow: 0 8px 28px rgb(0 0 0 / 0.5);
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --roxo: #8A75FF; --roxo-soft: #262044; --roxo-text: #B9AEFF;
-  --lima-strong: #A9D63A;
-  --fg: #F1F0F6; --muted: #A9A7BA; --bg: #121116; --surface: #1C1B22; --line: #2E2C38;
-  --red: #FF6474; --red-soft: #3A1A21;
-  --toast-bg: #F1F0F6; --toast-fg: #1E1E24;
+  --ground: #0F0E13; --surface: #18171E; --raised: #1F1E27; --active: #2A2834;
+  --border: #2A2833; --rule: #24222C; --control: #3D3A48;
+  --text: #F3F2F7; --muted: #B6B3C2; --faint: #A09DAC;
+  --roxo: #8F7BFF; --roxo-pale: #262043; --roxo-ink: #C7BCFF;
+  --lima-pale: #232B10; --lima-ink: #D2F07C; --lima-dot: #C6F24E;
+  --red: #FF5D6E; --red-pale: #3A171D; --red-ink: #FF9AA5;
+  --toast-bg: #F3F2F7; --toast-ink: #1E1E24;
   --backdrop: rgb(0 0 0 / 0.6);
-  --shadow: 0 1px 2px rgb(0 0 0 / 0.4);
-  --shadow-fab: 0 2px 6px rgb(0 0 0 / 0.5);
+  --float-shadow: 0 8px 28px rgb(0 0 0 / 0.5);
   color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-block-start: 72px; }
 body {
   margin: 0;
-  background: var(--bg);
-  color: var(--fg);
-  font-family: var(--font-body);
-  font-size: 16px;
-  line-height: 1.45;
+  background: var(--ground);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: var(--fs-body);
+  line-height: 1.5;
   -webkit-tap-highlight-color: transparent;
 }
 button, input, select, textarea { font: inherit; color: inherit; }
 button { cursor: pointer; }
-:focus-visible { outline: 3px solid var(--roxo); outline-offset: 2px; }
-.num { font-variant-numeric: tabular-nums; }
+:focus-visible { outline: 2px solid var(--roxo); outline-offset: 2px; }
+h1, h2, h3, p { margin: 0; }
+h1, h2, h3 { text-wrap: balance; }
+ul, ol { list-style: none; margin: 0; padding: 0; }
+.num, .fig, .fig-lead { font-variant-numeric: tabular-nums; }
 
-.app {
-  max-width: 560px;
-  margin: 0 auto;
+/* ---------- estrutura ---------- */
+.side { display: none; }
+.mtop {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 15;
+  display: flex; align-items: center; gap: 10px; min-height: 52px;
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
-  padding-block: 12px calc(var(--nav-h) + 110px + env(safe-area-inset-bottom, 0px));
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+  background: var(--ground);
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 16; background: var(--ground); }
+.mark { width: 30px; height: 30px; flex: none; display: block; }
+.wordmark { font-family: var(--font-fig); font-weight: 700; font-size: 17px; letter-spacing: -0.01em; }
+.mtop-date { margin-inline-start: auto; color: var(--muted); font-size: var(--fs-small); }
+.canvas {
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 8px calc(var(--tab-h) + 32px + env(safe-area-inset-bottom, 0px));
+  display: flex; flex-direction: column; gap: 20px;
+  max-width: 640px; margin: 0 auto;
 }
 
-/* Cabeçalho */
-.top { display: flex; align-items: center; gap: 12px; padding-top: 4px; }
-.mark { width: 40px; height: 40px; flex: none; }
-.brand { display: flex; flex-direction: column; min-width: 0; }
-.brand b { font-family: var(--font-display); font-size: 20px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.1; }
-.brand small { font-size: 12px; color: var(--muted); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
-.top-date { margin-inline-start: auto; font-size: 14px; color: var(--muted); text-align: end; }
+/* barra inferior (celular) */
+.tabbar {
+  position: fixed; inset: auto 0 0 0; z-index: 20;
+  background: var(--surface); border-top: 1px solid var(--border);
+  padding: 0 max(4px, env(safe-area-inset-right, 0px)) env(safe-area-inset-bottom, 0px) max(4px, env(safe-area-inset-left, 0px));
+}
+.tabbar-in { max-width: 640px; margin: 0 auto; height: var(--tab-h); display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); align-items: center; }
+.tab {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; height: 100%;
+  color: var(--muted); text-decoration: none; font-size: 12px; font-weight: 600; border: 0; background: none;
+}
+.tab svg { width: 22px; height: 22px; }
+.tab[aria-current="page"] { color: var(--text); }
+.tab[aria-current="page"] svg { color: var(--roxo); }
+.tab-cta { color: var(--text); }
+.tab-cta span.plus { width: 44px; height: 44px; border-radius: 999px; background: var(--lima); color: var(--lima-ink-on); display: grid; place-items: center; }
+.tab-cta span.plus svg { width: 24px; height: 24px; }
 
-/* Aviso de exemplos */
-.demo {
-  display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px;
-  padding: 12px 14px; border-radius: var(--r-md);
-  background: var(--roxo-soft); color: var(--roxo-text); font-size: 14px; font-weight: 500;
+@media (min-width: 960px) {
+  .shell { display: grid; grid-template-columns: 240px minmax(0, 1fr); }
+  .mtop, .tabbar { display: none; }
+  .side {
+    display: flex; flex-direction: column; gap: 20px;
+    position: sticky; top: 0; height: 100vh; height: 100dvh;
+    padding: 24px 12px 20px;
+    border-inline-end: 1px solid var(--border);
+  }
+  .side .brand { display: flex; align-items: center; gap: 10px; padding-inline: 10px; }
+  .side .brand small { display: block; color: var(--muted); font-size: 12px; font-weight: 600; }
+  .side .wordmark { display: block; line-height: 1.15; }
+  .side-cta { margin-inline: 4px; }
+  .side-nav { display: flex; flex-direction: column; gap: 2px; }
+  .side-nav a {
+    display: flex; align-items: center; gap: 10px; min-height: 40px; padding: 0 12px; border-radius: 10px;
+    color: var(--muted); text-decoration: none; font-weight: 500;
+  }
+  .side-nav a svg { width: 18px; height: 18px; flex: none; }
+  .side-nav a[aria-current="page"] { background: var(--active); color: var(--text); font-weight: 600; }
+  .side-foot { margin-top: auto; padding: 0 10px; display: flex; flex-direction: column; gap: 6px; font-size: var(--fs-small); color: var(--muted); }
+  .side-foot b { color: var(--text); font-weight: 600; overflow-wrap: anywhere; }
+  .canvas { max-width: 1180px; width: 100%; margin: 0; padding: 32px 40px 48px; gap: 24px; }
 }
-.demo span { flex: 1 1 200px; }
 
-/* Números da tela inicial */
-.stats { display: flex; flex-direction: column; gap: 12px; }
-.hero {
-  background: var(--roxo-card); color: #FFFFFF;
-  border-radius: var(--r-lg); padding: 20px 20px 18px;
-  display: flex; flex-direction: column; gap: 2px;
-}
-.label { font-size: 14px; font-weight: 600; letter-spacing: 0.02em; }
-.hero .label { opacity: 0.88; }
-.big {
-  font-family: var(--font-display); font-weight: 800; letter-spacing: -0.03em; line-height: 1.05;
-  font-size: clamp(2.4rem, 12vw, 3.4rem);
-  font-variant-numeric: tabular-nums;
-  overflow-wrap: anywhere;
-}
-.hero small { font-size: 14px; opacity: 0.88; }
-.duo { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-.tile { border-radius: var(--r-lg); padding: 16px; display: flex; flex-direction: column; gap: 2px; min-width: 0; container-type: inline-size; }
-.tile .mid {
-  font-family: var(--font-display); font-weight: 800; letter-spacing: -0.02em; line-height: 1.1;
-  font-size: clamp(1.25rem, 13cqi, 1.9rem); font-variant-numeric: tabular-nums; overflow-wrap: anywhere;
-}
-.tile small { font-size: 13px; }
-.tile-pago { background: var(--lima); color: var(--lima-ink); }
-.tile-pago small { opacity: 0.75; }
-.tile-atraso { background: var(--red-soft); color: var(--red); }
-.tile-atraso .label, .tile-atraso small { color: var(--fg); }
-.tile-atraso small { color: var(--muted); }
+/* ---------- títulos ---------- */
+.title-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px 16px; flex-wrap: wrap; }
+.title-row > div:first-child { min-width: 0; flex: 1 1 280px; display: flex; flex-direction: column; gap: 4px; }
+h1 { font-size: var(--fs-title); font-weight: 700; letter-spacing: -0.015em; line-height: 1.2; }
+.finding { color: var(--muted); font-size: var(--fs-body); max-width: 60ch; }
+.finding b { color: var(--text); font-weight: 600; }
+.finding .red { color: var(--red-ink); font-weight: 600; }
+.title-actions { display: flex; gap: 8px; flex-wrap: wrap; }
 
-/* Seções */
-.sec { display: flex; flex-direction: column; gap: 12px; }
-.sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
-h1, h2, h3 { margin: 0; font-family: var(--font-display); letter-spacing: -0.01em; text-wrap: balance; }
-h1 { font-size: 26px; font-weight: 700; }
-h2 { font-size: 19px; font-weight: 700; }
-h3 { font-size: 16px; font-weight: 700; }
-.sec-head small, .hint { color: var(--muted); font-size: 14px; }
-.list { display: flex; flex-direction: column; gap: 8px; }
+/* ---------- cartões ---------- */
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); min-width: 0; }
+.card-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px 12px; flex-wrap: wrap; padding: 18px var(--card-pad) 6px; }
+.card-head h2 { font-size: var(--fs-section); font-weight: 700; }
+.card-head .meta { color: var(--muted); font-size: var(--fs-small); }
+.card-foot { padding: 4px var(--card-pad) 16px; }
 
-/* Atrasados */
-.item {
-  background: var(--surface); border-radius: var(--r-md); box-shadow: var(--shadow);
-  border: 1px solid transparent;
-  display: flex; flex-direction: column;
-}
-.item-main {
-  all: unset; box-sizing: border-box; cursor: pointer;
-  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px;
-  padding: 14px 16px 10px; border-radius: var(--r-md) var(--r-md) 0 0;
-}
-.item-main:focus-visible { outline: 3px solid var(--roxo); outline-offset: -3px; }
-.item-name { font-weight: 700; min-width: 0; overflow-wrap: anywhere; }
-.item-sub { grid-column: 1 / -1; font-size: 14px; color: var(--muted); }
-.item-valor { font-family: var(--font-display); font-weight: 700; font-size: 18px; font-variant-numeric: tabular-nums; text-align: end; }
-.dias { color: var(--red); font-weight: 700; font-size: 14px; }
-.item-actions .btn { white-space: nowrap; }
-.item-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; padding: 0 12px 12px; }
+/* cartão do dinheiro */
+.money { padding: var(--card-pad); display: grid; gap: 20px; }
+.lead { display: flex; flex-direction: column; gap: 2px; }
+.card-label { font-size: var(--fs-small); font-weight: 600; color: var(--muted); }
+.fig-lead { font-family: var(--font-fig); font-size: var(--fs-lead); font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; color: var(--text); }
+.cents { font-size: 0.6em; color: var(--muted); letter-spacing: 0; }
+.lead .sub { color: var(--muted); font-size: var(--fs-small); }
+.tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.tile { border-radius: var(--radius-tile); padding: 12px 14px; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.tile-label { font-size: var(--fs-small); font-weight: 600; }
+.tile .fig { font-family: var(--font-fig); font-size: var(--fs-fig); font-weight: 700; letter-spacing: -0.01em; line-height: 1.2; white-space: nowrap; }
+.tile-sub { font-size: 12px; }
+.t-pago { background: var(--lima-pale); color: var(--lima-ink); }
+.t-atraso { background: var(--red-pale); color: var(--red-ink); }
+.t-zero { background: var(--raised); color: var(--muted); }
 
-/* Botões */
+/* quando deve entrar */
+.when h3 { font-size: var(--fs-small); font-weight: 600; color: var(--muted); margin-bottom: 10px; }
+.cols { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; align-items: end; border-bottom: 1px solid var(--control); }
+.col { display: flex; flex-direction: column; align-items: stretch; justify-content: flex-end; height: 132px; gap: 4px; }
+.col-val { font-size: 12px; font-weight: 600; text-align: center; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.col-val.zero { color: var(--faint); font-weight: 500; }
+.col-bar { border-radius: 4px 4px 0 0; background: var(--roxo); min-height: 0; }
+.col-bar.atr { background: var(--red); }
+.col-lbl { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; margin-top: 6px; }
+.col-lbl span { font-size: 12px; color: var(--muted); text-align: center; line-height: 1.25; }
+.col-lbl span.atr { color: var(--red-ink); font-weight: 600; }
+
+.home-grid { display: grid; gap: var(--gap); }
+@media (min-width: 960px) {
+  .money { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-areas: "lead when" "tiles when"; gap: 20px 40px; align-items: start; }
+  .money .lead { grid-area: lead; }
+  .money .tiles { grid-area: tiles; }
+  .money .when { grid-area: when; }
+  .home-grid { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); align-items: start; }
+  .home-side { display: grid; gap: var(--gap); }
+  .row { display: flex; align-items: center; gap: 20px; padding-block: 12px; }
+  .row-main { flex: 1; }
+  .row-acts { flex: none; flex-wrap: nowrap; gap: 4px; margin: 0; }
+}
+.home-side { display: grid; gap: var(--gap); }
+.in-fig { font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--lima-ink); }
+
+/* ---------- linhas ---------- */
+.rows > li + li { border-top: 1px solid var(--rule); }
+.row { padding: 12px var(--card-pad) 6px; }
+.row-main {
+  all: unset; box-sizing: border-box; cursor: pointer; width: 100%;
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; align-items: baseline;
+  border-radius: var(--radius-inner);
+}
+.row-main:focus-visible { outline: 2px solid var(--roxo); outline-offset: 4px; }
+.row-name { font-weight: 600; overflow-wrap: anywhere; }
+.row-fig { font-weight: 700; font-variant-numeric: tabular-nums; text-align: end; white-space: nowrap; }
+.row-sub { color: var(--muted); font-size: var(--fs-small); }
+.row-acts { display: flex; gap: 4px 16px; flex-wrap: wrap; margin-inline-start: -8px; }
+.act {
+  display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 8px;
+  border: 0; background: none; border-radius: var(--radius-inner);
+  font-weight: 600; font-size: 14px; color: var(--roxo-ink);
+}
+.act svg { width: 16px; height: 16px; }
+.act-ok { color: var(--lima-ink); }
+
+/* lista de plantões */
+.plt {
+  all: unset; box-sizing: border-box; cursor: pointer; width: 100%;
+  display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; align-items: center; gap: 12px;
+  padding: 12px var(--card-pad); min-height: 68px;
+}
+.plt:focus-visible { outline: 2px solid var(--roxo); outline-offset: -2px; border-radius: var(--radius-inner); }
+.plt-day { display: flex; flex-direction: column; align-items: center; line-height: 1.1; }
+.plt-day b { font-family: var(--font-fig); font-size: 20px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.plt-day small { font-size: 12px; color: var(--muted); }
+.plt-info { display: flex; flex-direction: column; min-width: 0; }
+.plt-info strong { font-weight: 600; overflow-wrap: anywhere; }
+.plt-info small { color: var(--muted); font-size: var(--fs-small); }
+.plt-end { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+.plt-end b { font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* etiquetas */
+.pill {
+  flex: none; display: inline-flex; align-items: center; height: 22px; padding: 0 9px; border-radius: 999px;
+  font-size: 12px; font-weight: 600; white-space: nowrap; justify-self: end;
+}
+.p-receber, .p-parcial { background: var(--roxo-pale); color: var(--roxo-ink); }
+.p-pago { background: var(--lima-pale); color: var(--lima-ink); }
+.p-atrasado { background: var(--red-pale); color: var(--red-ink); }
+
+/* resumo dentro do cartão */
+.strip { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 8px var(--card-pad); background: var(--raised); border-radius: var(--radius-tile); }
+.strip > div { padding: 10px 12px; min-width: 0; }
+.strip > div:nth-child(2n) { border-inline-start: 1px solid var(--rule); }
+.strip > div:nth-child(n+3) { border-top: 1px solid var(--rule); }
+.strip small { display: block; font-size: 12px; color: var(--muted); font-weight: 600; }
+.strip b { font-family: var(--font-fig); font-size: 18px; font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.strip .red b { color: var(--red-ink); }
+@media (min-width: 560px) {
+  .strip { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .strip > div + div { border-inline-start: 1px solid var(--rule); }
+  .strip > div:nth-child(n+3) { border-top: 0; }
+}
+
+/* ranking */
+.rank li { padding: 14px var(--card-pad); display: grid; grid-template-columns: 22px minmax(0, 1fr) auto; gap: 2px 10px; align-items: baseline; }
+.rank-pos { color: var(--muted); font-weight: 700; font-variant-numeric: tabular-nums; }
+.rank-name { font-weight: 600; overflow-wrap: anywhere; }
+.rank-val { font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; text-align: end; }
+.rank-val.zero { color: var(--faint); font-weight: 500; }
+.rank-bar { grid-column: 2 / -1; height: 3px; border-radius: 2px; background: var(--rule); margin-top: 6px; }
+.rank-bar i { display: block; height: 100%; border-radius: 2px; background: var(--red); }
+.rank-sub { grid-column: 2 / -1; color: var(--muted); font-size: var(--fs-small); }
+.rank .act { grid-column: 2 / -1; justify-self: start; margin-inline-start: -8px; }
+
+/* filtros */
+.filters { display: flex; flex-direction: column; gap: 10px; }
+.stepper { display: flex; align-items: center; gap: 4px; }
+.stepper b { font-weight: 700; font-size: 16px; min-width: 150px; text-align: center; }
+.icon-btn { width: 44px; height: 44px; border-radius: 999px; border: 1px solid var(--control); background: var(--surface); display: grid; place-items: center; flex: none; }
+.icon-btn svg { width: 20px; height: 20px; }
+.chips { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; margin-inline: -16px; padding-inline: 16px; padding-block: 2px; overscroll-behavior-x: contain; }
+.chips::-webkit-scrollbar { display: none; }
+.chips.wrap { flex-wrap: wrap; overflow: visible; margin-inline: 0; padding-inline: 0; }
+.chip {
+  flex: none; min-height: 40px; padding: 0 14px; border-radius: 999px;
+  border: 1px solid var(--control); background: var(--surface); color: var(--text);
+  font-weight: 600; font-size: 14px; white-space: nowrap;
+}
+.chip[aria-pressed="true"] { background: var(--text); border-color: var(--text); color: var(--surface); }
+.list-grid { display: grid; gap: var(--gap); }
+@media (min-width: 960px) {
+  .filters { flex-direction: row; align-items: center; gap: 16px; }
+  .chips { margin-inline: 0; padding-inline: 0; flex-wrap: wrap; }
+  .list-grid { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); align-items: start; }
+}
+
+/* botões */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  min-height: 52px; padding: 0 18px; border-radius: var(--r-sm);
-  border: 1.5px solid transparent; font-weight: 700; font-size: 16px; text-align: center; line-height: 1.2;
-  text-decoration: none;
+  min-height: 48px; padding: 0 20px; border-radius: 999px; border: 1px solid transparent;
+  font-weight: 700; font-size: 15px; line-height: 1.2; text-align: center; text-decoration: none; white-space: nowrap;
 }
-.btn svg { width: 20px; height: 20px; flex: none; }
-.btn-sm { min-height: 44px; font-size: 15px; padding: 0 12px; }
+.btn svg { width: 18px; height: 18px; flex: none; }
+.btn-sm { min-height: 40px; padding: 0 16px; font-size: 14px; }
 .btn-block { width: 100%; }
-.btn-lima { background: var(--lima); color: var(--lima-ink); }
-.btn-roxo { background: var(--roxo); color: #FFFFFF; }
-.btn-ghost { background: var(--surface); border-color: var(--line); color: var(--fg); }
-.btn-danger { background: var(--red-soft); color: var(--red); }
-.btn-link { background: none; border: 0; color: var(--roxo-text); padding: 0 4px; min-height: 44px; font-weight: 700; }
-.btn:disabled { opacity: 0.45; cursor: not-allowed; }
-.row-btns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.btn-primary { background: var(--lima); color: var(--lima-ink-on); }
+.btn-ghost { background: var(--surface); border-color: var(--control); color: var(--text); }
+.btn-dark { background: var(--text); color: var(--surface); }
+.btn-text { background: none; color: var(--roxo-ink); padding: 0 8px; min-height: 44px; }
+.btn-danger { background: var(--surface); border-color: var(--red); color: var(--red-ink); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-row { display: flex; flex-wrap: wrap; gap: 10px; }
+.btn-row > .btn { flex: 1 1 140px; }
 
-/* Etiquetas de status */
-.pill {
-  display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;
-  font-size: 12px; font-weight: 700; padding: 3px 9px; border-radius: 999px; letter-spacing: 0.01em;
-}
-.pill::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
-.pill-receber { background: var(--roxo-soft); color: var(--roxo-text); }
-.pill-pago { background: var(--lima); color: var(--lima-ink); }
-.pill-parcial { background: var(--roxo-soft); color: var(--roxo-text); }
-.pill-parcial::before { background: linear-gradient(90deg, var(--lima-strong) 50%, var(--roxo) 50%); }
-.pill-atrasado { background: var(--red); color: #FFFFFF; }
-
-/* Filtros */
-.monthbar { display: grid; grid-template-columns: 48px minmax(0, 1fr) 48px; align-items: center; gap: 8px; }
-.monthbar h1 { text-align: center; font-size: 22px; }
-.icon-btn {
-  width: 48px; height: 48px; border-radius: 50%; border: 1.5px solid var(--line); background: var(--surface);
-  display: grid; place-items: center;
-}
-.icon-btn svg { width: 22px; height: 22px; }
-.chips { display: flex; flex-wrap: wrap; gap: 8px; }
-.chip {
-  min-height: 44px; padding: 0 16px; border-radius: 999px;
-  border: 1.5px solid var(--line); background: var(--surface); color: var(--fg);
-  font-weight: 600; font-size: 15px;
-}
-.chip[aria-pressed="true"] { background: var(--roxo); border-color: var(--roxo); color: #FFFFFF; }
-
-.summary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
-.summary div { container-type: inline-size; background: var(--surface); border-radius: var(--r-sm); padding: 10px 12px; box-shadow: var(--shadow); border: 1px solid transparent; min-width: 0; }
-.summary small { display: block; font-size: 12px; color: var(--muted); font-weight: 600; }
-.summary b { display: block; white-space: nowrap; font-family: var(--font-display); font-size: clamp(12px, 13.5cqi, 17px); font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
-.summary .s-atraso b { color: var(--red); }
-
-/* Lista de plantões */
-.plt {
-  all: unset; box-sizing: border-box; cursor: pointer;
-  display: grid; grid-template-columns: 48px minmax(0, 1fr) auto; align-items: center; gap: 12px;
-  background: var(--surface); border-radius: var(--r-md); padding: 12px 14px; box-shadow: var(--shadow);
-  border: 1px solid transparent;
-}
-.plt:focus-visible { outline: 3px solid var(--roxo); outline-offset: 2px; }
-.plt-data { display: flex; flex-direction: column; align-items: center; line-height: 1.05; }
-.plt-data b { font-family: var(--font-display); font-size: 22px; font-variant-numeric: tabular-nums; }
-.plt-data small { font-size: 12px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
-.plt-info { display: flex; flex-direction: column; min-width: 0; }
-.plt-info strong { overflow-wrap: anywhere; }
-.plt-info small { color: var(--muted); font-size: 13px; }
-.plt-fim { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
-.plt-fim b { font-variant-numeric: tabular-nums; font-size: 15px; }
-
-/* Ranking */
-.rank { background: var(--surface); border-radius: var(--r-md); box-shadow: var(--shadow); border: 1px solid transparent; display: flex; flex-direction: column; }
-.rank-row { display: grid; grid-template-columns: 32px minmax(0, 1fr); gap: 4px 12px; align-items: start; padding: 14px 16px; }
-.rank-row + .rank-row { border-top: 1px solid var(--line); }
-.rank-pos { font-family: var(--font-display); font-weight: 800; font-size: 20px; color: var(--muted); font-variant-numeric: tabular-nums; }
-.rank-row.hot .rank-pos { color: var(--red); }
-.rank-info { display: flex; flex-direction: column; min-width: 0; }
-.rank-info strong { overflow-wrap: anywhere; }
-.rank-info small { color: var(--muted); font-size: 13px; }
-.rank-info .r-val { color: var(--red); font-weight: 700; font-size: 14px; }
-.rank-info .btn { align-self: flex-start; margin-top: 8px; }
-.rank-info .r-ok { color: var(--muted); font-weight: 600; font-size: 14px; }
-
-/* Calendário */
-.cal { background: var(--surface); border-radius: var(--r-lg); padding: 12px; box-shadow: var(--shadow); border: 1px solid transparent; }
+/* agenda */
+.cal-wrap { display: grid; gap: var(--gap); }
+@media (min-width: 960px) { .cal-wrap { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); align-items: start; } }
+.cal { padding: 14px; }
 .cal-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; }
-.cal-dow { text-align: center; font-size: 12px; font-weight: 700; color: var(--muted); padding-block: 4px 6px; }
+.dow { text-align: center; font-size: 12px; font-weight: 600; color: var(--muted); padding-block: 2px 6px; }
 .day {
-  all: unset; box-sizing: border-box; cursor: pointer; position: relative;
-  min-height: 52px; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
-  padding-top: 7px; gap: 5px; font-weight: 600; font-variant-numeric: tabular-nums;
+  all: unset; box-sizing: border-box; cursor: pointer;
+  min-height: 52px; border-radius: 10px; padding-top: 7px;
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  font-weight: 600; font-variant-numeric: tabular-nums; font-size: 15px;
 }
-.day.has { background: var(--bg); }
-.day.today { box-shadow: inset 0 0 0 2px var(--roxo); }
-.day[aria-pressed="true"] { background: var(--roxo); color: #FFFFFF; }
-.day.empty { cursor: default; }
-.day:focus-visible { outline: 3px solid var(--roxo); outline-offset: 1px; }
+.day.out { visibility: hidden; }
+.day.has { background: var(--raised); }
+.day.today { outline: 1.5px solid var(--roxo); outline-offset: -1.5px; }
+.day[aria-pressed="true"] { background: var(--text); color: var(--surface); }
+.day:focus-visible { outline: 2px solid var(--roxo); outline-offset: 1px; }
 .dots { display: flex; gap: 3px; flex-wrap: wrap; justify-content: center; max-width: 34px; }
-.dot { width: 8px; height: 8px; border-radius: 50%; }
-.dot-receber { background: var(--roxo); }
-.dot-pago { background: var(--lima); box-shadow: inset 0 0 0 1.5px var(--lima-strong); }
-.dot-parcial { background: linear-gradient(90deg, var(--lima) 50%, var(--roxo) 50%); }
-.dot-atrasado { background: var(--red); }
-.day[aria-pressed="true"] .dot { box-shadow: 0 0 0 1.5px #FFFFFF; }
-.legend { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 13px; color: var(--muted); padding: 10px 4px 2px; }
+.dot { width: 7px; height: 7px; border-radius: 50%; flex: none; }
+.d-receber { background: var(--roxo); }
+.d-pago { background: var(--lima-dot); }
+.d-parcial { background: transparent; border: 2px solid var(--roxo); }
+.d-atrasado { background: var(--red); }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; padding: 12px 4px 2px; font-size: 12px; color: var(--muted); }
 .legend span { display: inline-flex; align-items: center; gap: 6px; }
 
-/* Ajustes */
-.panel { background: var(--surface); border-radius: var(--r-md); box-shadow: var(--shadow); border: 1px solid transparent; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
-.loc { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 12px; padding-block: 4px; }
-.loc + .loc { border-top: 1px solid var(--line); padding-top: 12px; }
-.loc strong { display: block; overflow-wrap: anywhere; }
-.loc small { color: var(--muted); font-size: 13px; }
-.note { font-size: 14px; color: var(--muted); margin: 0; }
-
-/* Formulários */
-.field { display: flex; flex-direction: column; gap: 6px; }
-.field > label, .field > .flabel { font-size: 14px; font-weight: 700; }
-.input {
-  width: 100%; min-height: 52px; padding: 0 14px; border-radius: var(--r-sm);
-  border: 1.5px solid var(--line); background: var(--surface); font-size: 16px;
+/* ajustes */
+.set { display: grid; gap: 12px; }
+.set + .set { border-top: 1px solid var(--border); padding-top: 24px; margin-top: 24px; }
+.set-label h2 { font-size: 16px; font-weight: 700; }
+.set-label p { color: var(--muted); font-size: 14px; margin-top: 2px; max-width: 46ch; }
+.panel { background: var(--raised); border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+@media (min-width: 960px) {
+  .set { grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 32px; }
 }
-.input:focus { border-color: var(--roxo); outline: none; box-shadow: 0 0 0 3px var(--roxo-soft); }
-.input-money { font-family: var(--font-display); font-size: 22px; font-weight: 700; font-variant-numeric: tabular-nums; }
-textarea.input { min-height: 140px; padding: 12px 14px; line-height: 1.45; resize: vertical; }
-.preview { font-size: 14px; color: var(--muted); }
-.preview b { color: var(--fg); }
-.err { color: var(--red); font-size: 14px; font-weight: 600; }
+.loc { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 12px; }
+.loc + .loc { border-top: 1px solid var(--border); padding-top: 14px; }
+.loc strong { display: block; overflow-wrap: anywhere; }
+.loc small { color: var(--muted); font-size: var(--fs-small); }
+.kv { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 6px 16px; font-size: 14px; margin: 0; }
+.kv dt { color: var(--muted); }
+.kv dd { margin: 0; text-align: end; font-weight: 600; overflow-wrap: anywhere; }
+.note { color: var(--muted); font-size: 14px; }
+.sync { display: inline-flex; align-items: center; gap: 6px; }
+.sync i { width: 7px; height: 7px; border-radius: 50%; background: var(--lima-dot); }
+.sync.pend i { background: var(--red); }
 
-/* Folha inferior */
+/* formulários */
+.field { display: flex; flex-direction: column; gap: 8px; }
+.field > label, .field > .flabel { font-size: 14px; font-weight: 600; }
+.hint { color: var(--muted); font-size: var(--fs-small); font-weight: 400; }
+.input {
+  width: 100%; min-height: 48px; padding: 0 14px; border-radius: 10px;
+  border: 1px solid var(--control); background: var(--surface); font-size: 16px;
+}
+.input::placeholder { color: var(--faint); }
+.input:focus { outline: 2px solid var(--roxo); outline-offset: 0; border-color: var(--roxo); }
+.input-money { font-family: var(--font-fig); font-size: 22px; font-weight: 700; font-variant-numeric: tabular-nums; }
+textarea.input { min-height: 220px; padding: 12px 14px; line-height: 1.45; resize: vertical; }
+.err { color: var(--red-ink); font-size: 14px; font-weight: 600; }
+.preview { color: var(--muted); font-size: 14px; }
+.preview b { color: var(--text); }
+
+/* folha inferior */
 dialog.sheet {
   margin: auto auto 0; width: 100%; max-width: 560px; border: 0;
-  border-radius: var(--r-lg) var(--r-lg) 0 0;
-  padding: 8px max(16px, env(safe-area-inset-right, 0px)) calc(20px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+  border-radius: var(--radius-card) var(--radius-card) 0 0;
+  padding: 8px max(20px, env(safe-area-inset-right, 0px)) calc(24px + env(safe-area-inset-bottom, 0px)) max(20px, env(safe-area-inset-left, 0px));
   max-height: 92dvh; overflow-y: auto; overscroll-behavior: contain;
-  background: var(--surface); color: var(--fg);
+  background: var(--surface); color: var(--text); box-shadow: var(--float-shadow); /* taste-skill-ignore: folha que flutua */
 }
 dialog.sheet::backdrop { background: var(--backdrop); }
-.grab { width: 40px; height: 5px; border-radius: 3px; background: var(--line); margin: 4px auto 10px; }
-.sheet-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
-.sheet-body { display: flex; flex-direction: column; gap: 18px; }
-.close { width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--bg); display: grid; place-items: center; flex: none; }
+.grab { width: 40px; height: 5px; border-radius: 3px; background: var(--control); margin: 4px auto 12px; }
+@media (min-width: 960px) {
+  dialog.sheet { margin: auto; border-radius: var(--radius-card); max-height: 86vh; padding: 12px 28px 28px; }
+  .grab { display: none; }
+}
+.sheet-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 18px; }
+.sheet-head h2 { font-size: 20px; font-weight: 700; padding-top: 8px; }
+.sheet-body { display: flex; flex-direction: column; gap: 20px; }
+.close { width: 44px; height: 44px; border-radius: 999px; border: 0; background: var(--raised); display: grid; place-items: center; flex: none; }
 .close svg { width: 20px; height: 20px; }
-.dados { margin: 0; display: flex; flex-direction: column; }
-.dados div { display: flex; justify-content: space-between; gap: 16px; padding-block: 10px; border-bottom: 1px solid var(--line); }
-.dados dt { color: var(--muted); }
-.dados dd { margin: 0; font-weight: 600; text-align: end; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; min-width: 0; }
-.dados .red { color: var(--red); }
+.well { background: var(--raised); border-radius: var(--radius-tile); padding: 4px 14px; margin: 0; }
+.well div { display: flex; justify-content: space-between; gap: 16px; min-height: 40px; align-items: center; }
+.well div + div { border-top: 1px solid var(--rule); }
+.well dt { color: var(--muted); font-size: 14px; }
+.well dd { margin: 0; font-weight: 600; text-align: end; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.well .red { color: var(--red-ink); }
 .stack { display: flex; flex-direction: column; gap: 10px; }
+.danger-zone { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; border-top: 1px solid var(--rule); padding-top: 8px; }
 
-/* Barra inferior e botão flutuante */
-.nav {
-  position: fixed; inset: auto 0 0 0; z-index: 20;
-  background: var(--surface); border-top: 1px solid var(--line);
-  padding: 0 max(8px, env(safe-area-inset-right, 0px)) env(safe-area-inset-bottom, 0px) max(8px, env(safe-area-inset-left, 0px));
-}
-.nav-in { max-width: 560px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); height: var(--nav-h); }
-.nav a {
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
-  color: var(--muted); text-decoration: none; font-size: 12px; font-weight: 700; border-radius: 12px;
-}
-.nav a svg { width: 24px; height: 24px; }
-.nav a[aria-current="page"] { color: var(--roxo-text); }
-.fab {
-  position: fixed; z-index: 21;
-  right: max(16px, calc(env(safe-area-inset-right, 0px) + 16px));
-  bottom: calc(var(--nav-h) + 16px + env(safe-area-inset-bottom, 0px));
-  min-height: 60px; padding: 0 22px 0 18px; border-radius: 999px; border: 0;
-  background: var(--lima); color: var(--lima-ink); box-shadow: var(--shadow-fab);
-  display: inline-flex; align-items: center; gap: 8px; font-weight: 800; font-size: 17px;
-}
-.fab svg { width: 24px; height: 24px; }
-@media (min-width: 600px) {
-  .fab { right: calc(50% - 280px + 16px); }
-}
+/* entrada */
+.login { min-height: 100vh; min-height: 100dvh; display: grid; place-items: center; padding: 24px max(16px, env(safe-area-inset-right, 0px)) 24px max(16px, env(safe-area-inset-left, 0px)); }
+.login-card { width: 100%; max-width: 400px; display: flex; flex-direction: column; gap: 20px; }
+.login-card .brand { display: flex; align-items: center; gap: 10px; }
+.login-card .mark { width: 40px; height: 40px; }
+.login-card .wordmark { font-size: 20px; }
+
+/* avisos e estados */
+.notice { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 16px; padding: 8px 8px 8px 16px; border-radius: 16px; background: var(--roxo-pale); color: var(--roxo-ink); font-size: 14px; font-weight: 500; }
+.notice span { flex: 1 1 220px; }
+.notice.red { background: var(--red-pale); color: var(--red-ink); }
+.notice .btn-text { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.empty { padding: 20px var(--card-pad) 12px; color: var(--muted); }
+.empty-box { margin: 4px var(--card-pad) 18px; padding: 12px 16px; border: 1px dashed var(--control); border-radius: var(--radius-inner); color: var(--muted); font-size: 14px; }
+.ok-line { display: flex; align-items: center; gap: 10px; margin: 4px var(--card-pad) 18px; padding: 12px 14px; border-radius: var(--radius-tile); background: var(--lima-pale); color: var(--lima-ink); font-weight: 600; font-size: 14px; }
+.ok-line svg { width: 18px; height: 18px; flex: none; }
+.skel { display: block; background: var(--active); border-radius: 6px; }
 
 .toast {
-  position: fixed; z-index: 30; left: 50%; transform: translateX(-50%);
-  bottom: calc(var(--nav-h) + 92px + env(safe-area-inset-bottom, 0px));
-  width: min(528px, calc(100% - 32px));
-  background: var(--toast-bg); color: var(--toast-fg); border-radius: var(--r-sm);
-  padding: 12px 8px 12px 16px; display: flex; align-items: center; gap: 12px; font-weight: 600; font-size: 15px;
-  box-shadow: var(--shadow-fab);
+  position: fixed; z-index: 30; left: 50%; translate: -50% 0;
+  bottom: calc(var(--tab-h) + 14px + env(safe-area-inset-bottom, 0px));
+  width: min(520px, calc(100% - 32px));
+  background: var(--toast-bg); color: var(--toast-ink); border-radius: 14px; box-shadow: var(--float-shadow); /* taste-skill-ignore: aviso que flutua */
+  padding: 10px 8px 10px 16px; display: flex; align-items: center; gap: 12px; font-weight: 600; font-size: 14px;
 }
 .toast span { flex: 1; }
-.toast-btn { background: none; border: 0; color: inherit; font-weight: 800; text-decoration: underline; min-height: 40px; padding: 0 10px; }
-
-.empty-state { text-align: center; padding: 28px 16px; background: var(--surface); border-radius: var(--r-md); box-shadow: var(--shadow); border: 1px solid transparent; display: flex; flex-direction: column; gap: 12px; align-items: center; }
-.empty-state p { margin: 0; color: var(--muted); max-width: 34ch; }
-.ok-state { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: var(--r-md); background: var(--surface); box-shadow: var(--shadow); border: 1px solid transparent; font-weight: 600; }
-.ok-state i { width: 32px; height: 32px; border-radius: 50%; background: var(--lima); color: var(--lima-ink); display: grid; place-items: center; flex: none; }
-.ok-state svg { width: 18px; height: 18px; }
+.toast-btn { background: none; border: 0; color: inherit; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; min-height: 40px; padding: 0 10px; }
+@media (min-width: 960px) { .toast { bottom: 24px; left: calc(50% + 120px); } }
 
 @media (hover: hover) {
-  .btn-ghost:hover, .chip:hover, .icon-btn:hover { border-color: var(--roxo); }
-  .plt:hover, .item-main:hover { background: var(--roxo-soft); }
-  .nav a:hover { color: var(--fg); }
+  .row-main:hover .row-name, .plt:hover strong { color: var(--roxo-ink); }
+  .plt:hover, .day:not(.out):not([aria-pressed="true"]):hover { background: var(--raised); }
+  .btn-ghost:hover, .chip:not([aria-pressed="true"]):hover, .icon-btn:hover { border-color: var(--text); }
+  .act:hover, .btn-text:hover { background: var(--raised); }
+  .side-nav a:not([aria-current="page"]):hover { background: var(--raised); color: var(--text); }
 }
 @media (prefers-reduced-motion: no-preference) {
-  .btn, .chip, .fab, .icon-btn, .day, .plt { transition-property: scale, background-color, border-color; transition-duration: 150ms; transition-timing-function: ease-out; }
-  .btn:not(:disabled):active, .chip:active, .fab:active, .icon-btn:active, .plt:active, .day:not(.empty):active { scale: 0.96; }
-  dialog.sheet[open] { animation: subir 300ms cubic-bezier(0.2, 0, 0, 1) both; }
-  .toast:not([hidden]) { animation: surgir 200ms ease-out both; }
+  .btn, .chip, .icon-btn, .act, .tab-cta span.plus, .day, .plt { transition-property: scale, background-color, border-color, color; transition-duration: 150ms; transition-timing-function: ease-out; }
+  .btn:not(:disabled):active, .chip:active, .icon-btn:active, .act:active, .tab-cta:active span.plus, .day:not(.out):active { scale: 0.96; }
+  dialog.sheet[open] { animation: subir 280ms cubic-bezier(0.2, 0, 0, 1) both; }
+  .toast:not([hidden]) { animation: aparecer 200ms ease-out both; }
 }
 @media (prefers-reduced-motion: reduce) {
   dialog.sheet[open], .toast:not([hidden]) { animation: aparecer 200ms ease-out both; }
 }
-@keyframes subir { from { translate: 0 40px; opacity: 0; } to { translate: 0 0; opacity: 1; } }
-@keyframes surgir { from { translate: 0 12px; opacity: 0; } to { translate: 0 0; opacity: 1; } }
+@keyframes subir { from { translate: 0 24px; opacity: 0; } to { translate: 0 0; opacity: 1; } }
 @keyframes aparecer { from { opacity: 0; } to { opacity: 1; } }
 
-.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+body.sem-conta .tabbar, body.sem-conta .side, body.sem-conta .mtop { display: none; }
+body.sem-conta .shell { display: block; }
+body.sem-conta .canvas { max-width: none; padding: 0; margin: 0; }
 </style>
 </head>
 <body>
 
-<div class="app">
-  <header class="top">
-    <svg class="mark" viewBox="0 0 40 40" aria-hidden="true">
-      <rect width="40" height="40" rx="12" fill="#5B3DF5"/>
-      <path d="M22.5 7 12 22.5h7.5L17.5 33 28 17.5h-7.5L22.5 7Z" fill="#C6F24E"/>
-    </svg>
-    <div class="brand"><b>Atalho Plantão</b><small>Dr. Atalho</small></div>
-    <div class="top-date num" id="topDate"></div>
+<div class="shell">
+  <aside class="side" aria-label="Menu principal">
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="11" fill="#5B3DF5"/><path d="M22.5 7 12 22.5h7.5L17.5 33 28 17.5h-7.5L22.5 7Z" fill="#C6F24E"/></svg>
+      <span><span class="wordmark">Atalho Plantão</span><small>Dr. Atalho</small></span>
+    </div>
+    <button type="button" class="btn btn-primary side-cta" data-act="lancar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+      Lançar plantão
+    </button>
+    <nav class="side-nav" aria-label="Seções" id="sideNav"></nav>
+    <div class="side-foot" id="sideFoot"></div>
+  </aside>
+
+  <header class="mtop">
+    <svg class="mark" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="11" fill="#5B3DF5"/><path d="M22.5 7 12 22.5h7.5L17.5 33 28 17.5h-7.5L22.5 7Z" fill="#C6F24E"/></svg>
+    <span class="wordmark">Atalho Plantão</span>
+    <span class="mtop-date num" id="topDate"></span>
   </header>
-  <main id="view"></main>
+
+  <main class="canvas" id="view"></main>
 </div>
 
-<button type="button" class="fab" id="fab">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
-  Plantão
-</button>
-
-<nav class="nav" aria-label="Seções">
-  <div class="nav-in">
-    <a href="#inicio" data-tab="inicio">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1v-9.5Z"/></svg>
-      Início
-    </a>
-    <a href="#plantoes" data-tab="plantoes">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg>
-      Plantões
-    </a>
-    <a href="#agenda" data-tab="agenda">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>
-      Agenda
-    </a>
-    <a href="#ajustes" data-tab="ajustes">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21v-6.5M4 10.5V3M12 21v-9M12 8V3M20 21v-4.5M20 12.5V3M1.5 14.5h5M9.5 8h5M17.5 16.5h5"/></svg>
-      Ajustes
-    </a>
-  </div>
+<nav class="tabbar" aria-label="Seções">
+  <div class="tabbar-in" id="tabbar"></div>
 </nav>
 
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 <dialog class="sheet" id="sheet" aria-labelledby="sheetTitle"></dialog>
 
 <script>
+/* Login e assinatura. Deixe vazio para usar só neste aparelho, sem conta.
+   Para ligar, preencha com a URL e a chave pública (anon) do seu projeto Supabase. Veja LEIA.md. */
+window.ATALHO_CONFIG = {
+  supabaseUrl: '',
+  supabaseAnonKey: '',
+  entrarComGoogle: false,
+  precoTexto: ''
+};
+</script>
+
+<script>
 (() => {
 'use strict';
 
 /* ---------- utilidades ---------- */
-const KEY = 'atalho-plantao:v1';
+const KEY_LOCAL = 'atalho-plantao:v1';
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const uid = () => Math.random().toString(36).slice(2, 9) + Date.now().toString(36).slice(-4);
@@ -441,6 +548,7 @@ const difDias = (a, b) => Math.round((parse(a) - parse(b)) / 864e5);
 const fmtData = s => { if (!s) return ''; const [y, m, d] = s.split('-'); return `${d}/${m}/${y}`; };
 const BRL = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
 const brl = n => BRL.format(n || 0);
+const COMPACTO = new Intl.NumberFormat('pt-BR', { notation: 'compact', maximumFractionDigits: 1 });
 const r2 = n => Math.round(n * 100) / 100;
 const mesKey = s => s.slice(0, 7);
 const nomeMes = k => {
@@ -448,7 +556,8 @@ const nomeMes = k => {
   const t = new Intl.DateTimeFormat('pt-BR', { month: 'long', year: 'numeric' }).format(new Date(y, m - 1, 1));
   return t.charAt(0).toUpperCase() + t.slice(1);
 };
-const mesCurto = s => new Intl.DateTimeFormat('pt-BR', { month: 'short' }).format(parse(s)).replace('.', '');
+const mesSo = k => { const [y, m] = k.split('-').map(Number); return new Intl.DateTimeFormat('pt-BR', { month: 'long' }).format(new Date(y, m - 1, 1)); };
+const semana = s => new Intl.DateTimeFormat('pt-BR', { weekday: 'short' }).format(parse(s)).replace('.', '');
 const addMes = (k, n) => { const [y, m] = k.split('-').map(Number); const d = new Date(y, m - 1 + n, 1); return `${d.getFullYear()}-${pad(d.getMonth() + 1)}`; };
 const parseValor = s => {
   s = String(s ?? '').trim().replace(/[R$\s]/g, '');
@@ -460,11 +569,19 @@ const parseValor = s => {
 const valorInput = n => (Number.isInteger(n) ? String(n) : n.toFixed(2).replace('.', ','));
 const soma = (arr, f) => r2(arr.reduce((s, x) => s + f(x), 0));
 const diasTxt = n => `${n} ${n === 1 ? 'dia' : 'dias'}`;
+const plural = (n, um, varios) => `${n} ${n === 1 ? um : varios}`;
+const figSplit = n => { const s = brl(n); const i = s.lastIndexOf(','); return `${s.slice(0, i)}<span class="cents">${s.slice(i)}</span>`; };
 const FORMAS = ['PJ', 'RPA', 'CLT', 'Cooperativa'];
 
-/* ---------- dados ---------- */
-function load() { try { const r = localStorage.getItem(KEY); return r ? JSON.parse(r) : null; } catch (e) { return null; } }
-function save() { try { localStorage.setItem(KEY, JSON.stringify(db)); } catch (e) { /* armazenamento indisponível */ } }
+/* ---------- modo: só neste aparelho ou com conta ---------- */
+const CFG = window.ATALHO_CONFIG || {};
+const NUVEM = !!(CFG.supabaseUrl && CFG.supabaseAnonKey);
+
+function lerLocal() { try { const r = localStorage.getItem(KEY_LOCAL); return r ? JSON.parse(r) : null; } catch (e) { return null; } }
+function save() {
+  if (NUVEM) { nuvemSalvar(); return; }
+  try { localStorage.setItem(KEY_LOCAL, JSON.stringify(db)); } catch (e) { /* armazenamento indisponível */ }
+}
 
 function exemplos() {
   const T = hoje();
@@ -518,8 +635,11 @@ function valorPadrao(l, turno, horas) {
   return l.valor;
 }
 
-let db = load();
-if (!db) { db = { nome: '', ultimoLocal: 'ex-vv', ...exemplos() }; save(); }
+let db = null;
+if (!NUVEM) {
+  db = lerLocal();
+  if (!db) { db = { nome: '', ultimoLocal: 'ex-vv', ...exemplos() }; save(); }
+}
 
 /* ---------- regras ---------- */
 const local = id => db.locais.find(l => l.id === id);
@@ -536,7 +656,8 @@ const atraso = p => Math.max(0, difDias(hoje(), p.venc));
 const turnoTxt = p => (p.turno === 'outro' ? (p.horas ? `${p.horas}h` : 'outro turno') : p.turno);
 const LABEL = { receber: 'A receber', pago: 'Pago', parcial: 'Pago parcial', atrasado: 'Atrasado' };
 const statusTxt = p => { const s = status(p); return s === 'atrasado' && recebido(p) > 0 ? 'Atrasado, parcial' : LABEL[s]; };
-const pill = p => `<span class="pill pill-${status(p)}">${statusTxt(p)}</span>`;
+const pillTxt = p => (status(p) === 'atrasado' ? `${diasTxt(atraso(p))} de atraso` : statusTxt(p));
+const pill = p => `<span class="pill p-${status(p)}">${pillTxt(p)}</span>`;
 const ultimoPgto = p => (p.pagamentos.length ? p.pagamentos[p.pagamentos.length - 1].data : null);
 const temExemplos = () => db.locais.some(l => l.exemplo) || db.plantoes.some(p => p.exemplo);
 
@@ -547,106 +668,201 @@ const filtrados = () => db.plantoes
   .sort((a, b) => (a.data < b.data ? 1 : a.data > b.data ? -1 : 0));
 
 /* ---------- ícones ---------- */
+const svg = (d, w = 2) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
 const I = {
-  prev: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>',
-  next: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>',
-  close: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>',
-  check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>',
-  copy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8.5" y="8.5" width="12" height="12" rx="2.5"/><path d="M15.5 8.5V6a2.5 2.5 0 0 0-2.5-2.5H6A2.5 2.5 0 0 0 3.5 6v7A2.5 2.5 0 0 0 6 15.5h2.5"/></svg>',
-  file: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3.5H7A2.5 2.5 0 0 0 4.5 6v12A2.5 2.5 0 0 0 7 20.5h10a2.5 2.5 0 0 0 2.5-2.5V9L14 3.5Z"/><path d="M14 3.5V9h5.5M12 12.5v5M9.5 15l2.5 2.5 2.5-2.5"/></svg>'
+  inicio: svg('<path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1v-9.5Z"/>', 1.75),
+  plantoes: svg('<path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/>', 1.75),
+  agenda: svg('<rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/>', 1.75),
+  ajustes: svg('<path d="M4 21v-6.5M4 10.5V3M12 21v-9M12 8V3M20 21v-4.5M20 12.5V3M1.5 14.5h5M9.5 8h5M17.5 16.5h5"/>', 1.75),
+  plus: svg('<path d="M12 5v14M5 12h14"/>', 2.5),
+  prev: svg('<path d="m15 18-6-6 6-6"/>', 2),
+  next: svg('<path d="m9 18 6-6-6-6"/>', 2),
+  close: svg('<path d="M6 6l12 12M18 6 6 18"/>', 2),
+  check: svg('<path d="m5 12.5 4.5 4.5L19 7.5"/>', 2.5),
+  copy: svg('<rect x="8.5" y="8.5" width="12" height="12" rx="2.5"/><path d="M15.5 8.5V6a2.5 2.5 0 0 0-2.5-2.5H6A2.5 2.5 0 0 0 3.5 6v7A2.5 2.5 0 0 0 6 15.5h2.5"/>', 1.75),
+  file: svg('<path d="M14 3.5H7A2.5 2.5 0 0 0 4.5 6v12A2.5 2.5 0 0 0 7 20.5h10a2.5 2.5 0 0 0 2.5-2.5V9L14 3.5Z"/><path d="M14 3.5V9h5.5M12 12.5v5M9.5 15l2.5 2.5 2.5-2.5"/>', 1.75)
 };
+const TABS = [
+  { id: 'inicio', nome: 'Início' },
+  { id: 'plantoes', nome: 'Plantões' },
+  { id: 'agenda', nome: 'Agenda' },
+  { id: 'ajustes', nome: 'Ajustes' }
+];
+
+/* ---------- conta e assinatura (só com Supabase ligado) ---------- */
+let sb = null, conta = null, perfil = null, snap = null, carregando = NUVEM, erroNuvem = '';
+let syncTimer = null, sincronizando = false, denovo = false, estadoSync = 'ok';
+const login = { etapa: 'email', email: '', erro: '', enviando: false };
+
+function acessoLiberado() {
+  if (!NUVEM || !perfil) return true;
+  const h = hoje();
+  return (perfil.status === 'teste' && perfil.teste_ate >= h) || (!!perfil.pago_ate && perfil.pago_ate >= h);
+}
+function podeEditar() {
+  if (acessoLiberado()) return true;
+  abrirAssinatura();
+  return false;
+}
+function situacaoConta() {
+  if (!NUVEM || !perfil) return null;
+  const h = hoje();
+  if (perfil.status === 'teste' && perfil.teste_ate >= h) return { tipo: 'teste', txt: `Teste grátis até ${fmtData(perfil.teste_ate)}` };
+  if (perfil.pago_ate && perfil.pago_ate >= h) {
+    if (perfil.status === 'atrasada') return { tipo: 'atrasada', txt: `Mensalidade em aberto. Acesso até ${fmtData(perfil.pago_ate)}` };
+    if (perfil.status === 'cancelada') return { tipo: 'cancelada', txt: `Assinatura cancelada. Acesso até ${fmtData(perfil.pago_ate)}` };
+    return { tipo: 'ativa', txt: `Assinatura ativa até ${fmtData(perfil.pago_ate)}` };
+  }
+  return { tipo: 'pausada', txt: 'Acesso pausado' };
+}
 
 /* ---------- telas ---------- */
-function itemAtraso(p) {
-  const d = atraso(p);
-  return `<article class="item">
-    <button type="button" class="item-main" data-open="${p.id}">
-      <span class="item-name">${esc(nomeLocal(p.localId))}</span>
-      <span class="item-valor">${brl(aberto(p))}</span>
-      <span class="item-sub">Plantão de ${esc(turnoTxt(p))} em ${fmtData(p.data)}. Venceu em ${fmtData(p.venc)}.</span>
-      <span class="item-sub dias">${diasTxt(d)} de atraso${recebido(p) > 0 ? `, já recebeu ${brl(recebido(p))}` : ''}</span>
-    </button>
-    <div class="item-actions">
-      <button type="button" class="btn btn-ghost btn-sm" data-cobrar="${p.id}">Copiar cobrança</button>
-      <button type="button" class="btn btn-lima btn-sm" data-pagar="${p.id}">${I.check} Recebi</button>
+function avisoConta() {
+  const s = situacaoConta();
+  if (!s) return '';
+  if (s.tipo === 'teste') {
+    const n = difDias(perfil.teste_ate, hoje());
+    return n <= 5 ? `<div class="notice"><span>Seu teste grátis acaba em ${diasTxt(n)}, em ${fmtData(perfil.teste_ate)}.</span><button type="button" class="btn btn-text" data-act="assinar">Assinar</button></div>` : '';
+  }
+  if (s.tipo === 'atrasada') return `<div class="notice red"><span>A mensalidade do app está em aberto. Seu acesso segue até ${fmtData(perfil.pago_ate)}.</span><button type="button" class="btn btn-text" data-act="assinar">Pagar</button></div>`;
+  if (s.tipo === 'pausada') return `<div class="notice red"><span>Seu acesso está pausado. Seus plantões continuam guardados e você pode ver e exportar tudo. Para lançar e marcar pagamentos, assine.</span><button type="button" class="btn btn-text" data-act="assinar">Assinar</button></div>`;
+  return '';
+}
+
+function avisoExemplos() {
+  return temExemplos()
+    ? '<div class="notice"><span>Você está vendo dados de exemplo. Os hospitais e valores são inventados.</span><button type="button" class="btn btn-text" data-act="apagar-exemplos">Apagar exemplos</button></div>'
+    : '';
+}
+
+function baldes(abertos) {
+  // Atrasado, quatro semanas a partir de hoje e depois. A soma fecha com o total a receber.
+  const T = hoje();
+  const b = [
+    { lbl: 'Atrasado', sub: '', atr: true, v: 0 },
+    { lbl: 'até', sub: fmtData(addDias(T, 6)).slice(0, 5), v: 0 },
+    { lbl: 'até', sub: fmtData(addDias(T, 13)).slice(0, 5), v: 0 },
+    { lbl: 'até', sub: fmtData(addDias(T, 20)).slice(0, 5), v: 0 },
+    { lbl: 'até', sub: fmtData(addDias(T, 27)).slice(0, 5), v: 0 },
+    { lbl: 'Depois', sub: '', v: 0 }
+  ];
+  abertos.forEach(p => {
+    const d = difDias(p.venc, T);
+    const i = d < 0 ? 0 : d <= 6 ? 1 : d <= 13 ? 2 : d <= 20 ? 3 : d <= 27 ? 4 : 5;
+    b[i].v = r2(b[i].v + aberto(p));
+  });
+  return b;
+}
+
+function grafQuando(b) {
+  const max = Math.max(...b.map(x => x.v), 1);
+  const curto = v => (v >= 1000 ? COMPACTO.format(v) : String(Math.round(v)));
+  return `<div class="when">
+    <h3>Quando deve entrar, pela data de vencimento (R$)</h3>
+    <div class="cols" role="img" aria-label="${b.map(x => `${x.lbl} ${x.sub}: ${brl(x.v)}`).join('; ')}">
+      ${b.map(x => `<div class="col">
+        <span class="col-val${x.v ? '' : ' zero'}">${x.v ? curto(x.v) : '0'}</span>
+        <span class="col-bar${x.atr ? ' atr' : ''}" style="height:${x.v ? Math.max(3, Math.round(x.v / max * 100)) : 0}px"></span>
+      </div>`).join('')}
     </div>
-  </article>`;
+    <div class="col-lbl" aria-hidden="true">${b.map(x => `<span class="${x.atr ? 'atr' : ''}">${x.lbl}${x.sub ? `<br>${x.sub}` : ''}</span>`).join('')}</div>
+  </div>`;
+}
+
+function itemAtraso(p) {
+  return `<li class="row">
+    <button type="button" class="row-main" data-open="${p.id}">
+      <span class="row-name">${esc(nomeLocal(p.localId))}</span>
+      <span class="row-fig">${brl(aberto(p))}</span>
+      <span class="row-sub">Plantão de ${esc(turnoTxt(p))} em ${fmtData(p.data)}. Venceu em ${fmtData(p.venc)}${recebido(p) > 0 ? `. Já entrou ${brl(recebido(p))}` : ''}.</span>
+      <span class="pill p-atrasado">${diasTxt(atraso(p))}</span>
+    </button>
+    <div class="row-acts">
+      <button type="button" class="act" data-cobrar="${p.id}">${I.copy} Copiar cobrança</button>
+      <button type="button" class="act act-ok" data-pagar="${p.id}">${I.check} Recebi</button>
+    </div>
+  </li>`;
+}
+
+function linhaPlantao(p) {
+  const s = status(p);
+  const sub = s === 'pago' ? `pago em ${fmtData(ultimoPgto(p))}` : `vence ${fmtData(p.venc)}`;
+  return `<li><button type="button" class="plt" data-open="${p.id}">
+    <span class="plt-day"><b>${p.data.slice(8)}</b><small>${esc(semana(p.data))}</small></span>
+    <span class="plt-info"><strong>${esc(nomeLocal(p.localId))}</strong><small>${esc(turnoTxt(p))}, ${sub}</small></span>
+    <span class="plt-end"><b>${brl(s === 'pago' ? p.valor : aberto(p))}</b>${pill(p)}</span>
+  </button></li>`;
 }
 
 function vInicio() {
+  let html = avisoConta() + avisoExemplos();
+  if (!db.plantoes.length) {
+    return html + `<div class="title-row"><div><h1>Seu dinheiro</h1><p class="finding">Nenhum plantão lançado ainda.</p></div></div>
+      <section class="card" aria-label="Primeiros passos"><p class="empty">${db.locais.length ? 'Toque em Lançar, escolha o local e salve.' : 'Comece cadastrando os hospitais e empresas onde você dá plantão. Depois, cada plantão leva três toques.'}</p>
+      <div class="card-foot">${db.locais.length
+        ? '<button type="button" class="btn btn-primary" data-act="lancar">Lançar plantão</button>'
+        : '<button type="button" class="btn btn-primary" data-act="novo-local">Cadastrar local</button>'}</div></section>`;
+  }
   const abertos = db.plantoes.filter(p => status(p) !== 'pago');
   const totalAberto = soma(abertos, aberto);
   const atrasados = abertos.filter(p => status(p) === 'atrasado').sort((a, b) => atraso(b) - atraso(a));
   const totalAtraso = soma(atrasados, aberto);
   const mk = mesKey(hoje());
-  const recMes = soma(db.plantoes, p => soma(p.pagamentos.filter(x => mesKey(x.data) === mk), x => x.valor));
-  const nPg = db.plantoes.filter(p => p.pagamentos.some(x => mesKey(x.data) === mk)).length;
-  const proximos = abertos.filter(p => status(p) !== 'atrasado' && difDias(p.venc, hoje()) <= 7)
-    .sort((a, b) => (a.venc < b.venc ? -1 : 1));
-  const mesNome = new Intl.DateTimeFormat('pt-BR', { month: 'long' }).format(new Date());
+  const pgMes = db.plantoes.flatMap(p => p.pagamentos.filter(x => mesKey(x.data) === mk));
+  const recMes = soma(pgMes, x => x.valor);
+  const entradas = db.plantoes.flatMap(p => p.pagamentos.filter(x => mesKey(x.data) === mk).map(x => ({ p, data: x.data, valor: x.valor })))
+    .sort((a, b2) => (a.data < b2.data ? 1 : -1));
+  console.assert(Math.abs(soma(entradas, x => x.valor) - recMes) < 0.01, 'entradas não fecham com o recebido no mês');
+  const b = baldes(abertos);
+  console.assert(Math.abs(soma(b, x => x.v) - totalAberto) < 0.01, 'baldes não fecham com o total a receber');
+  console.assert(Math.abs(b[0].v - totalAtraso) < 0.01, 'balde atrasado não fecha com o total atrasado');
+  const proximos = abertos.filter(p => status(p) !== 'atrasado' && difDias(p.venc, hoje()) <= 7).sort((a, b2) => (a.venc < b2.venc ? -1 : 1));
 
-  let html = '';
-  if (temExemplos()) {
-    html += `<div class="demo"><span>Estes são dados de exemplo para você testar. Nada aqui é real.</span>
-      <button type="button" class="btn btn-roxo btn-sm" data-act="apagar-exemplos">Apagar exemplos</button></div>`;
-  }
-  if (!db.plantoes.length) {
-    html += `<div class="empty-state">
-      <h2>Nenhum plantão lançado</h2>
-      <p>${db.locais.length ? 'Toque em Plantão, escolha o local e salve. São três toques.' : 'Comece cadastrando os hospitais e empresas onde você dá plantão.'}</p>
-      ${db.locais.length ? '' : '<button type="button" class="btn btn-lima" data-act="novo-local">Cadastrar local</button>'}
-    </div>`;
-    return html;
-  }
-  html += `<section class="stats" aria-label="Resumo">
-    <div class="hero">
-      <span class="label">A receber</span>
-      <span class="big">${brl(totalAberto)}</span>
-      <small>${abertos.length} ${abertos.length === 1 ? 'plantão em aberto' : 'plantões em aberto'}, contando os atrasados</small>
+  const velho = atrasados[0];
+  const finding = atrasados.length
+    ? `<span class="red">${brl(totalAtraso)} atrasados</span> em ${plural(atrasados.length, 'plantão', 'plantões')}. O mais antigo é do ${esc(nomeLocal(velho.localId))}, com ${diasTxt(atraso(velho))}.`
+    : 'Nenhum plantão atrasado. Tudo dentro do prazo.';
+
+  html += `<div class="title-row"><div><h1>Seu dinheiro</h1><p class="finding">${finding}</p></div></div>
+  <section class="card money" aria-label="Resumo do dinheiro">
+    <div class="lead">
+      <h2 class="card-label">A receber</h2>
+      <p class="fig-lead">${figSplit(totalAberto)}</p>
+      <p class="sub">${plural(abertos.length, 'plantão em aberto', 'plantões em aberto')}, contando os atrasados</p>
     </div>
-    <div class="duo">
-      <div class="tile tile-pago">
-        <span class="label">Recebido em ${esc(mesNome)}</span>
-        <span class="mid">${brl(recMes)}</span>
-        <small>${nPg} ${nPg === 1 ? 'pagamento' : 'pagamentos'}</small>
-      </div>
-      <div class="tile tile-atraso">
-        <span class="label">Atrasado</span>
-        <span class="mid">${brl(totalAtraso)}</span>
-        <small>${atrasados.length} ${atrasados.length === 1 ? 'plantão' : 'plantões'}</small>
-      </div>
+    <div class="tiles">
+      <div class="tile ${recMes ? 't-pago' : 't-zero'}"><span class="tile-label">Recebido em ${esc(mesSo(mk))}</span><span class="fig">${brl(recMes)}</span><span class="tile-sub">${plural(pgMes.length, 'pagamento', 'pagamentos')}</span></div>
+      <div class="tile ${totalAtraso ? 't-atraso' : 't-zero'}"><span class="tile-label">Atrasado</span><span class="fig">${brl(totalAtraso)}</span><span class="tile-sub">${plural(atrasados.length, 'plantão', 'plantões')}</span></div>
     </div>
-  </section>`;
-
-  html += `<section class="sec"><div class="sec-head"><h2>Atrasados</h2>${atrasados.length ? '<small>do mais antigo para o mais novo</small>' : ''}</div>`;
-  html += atrasados.length
-    ? `<div class="list">${atrasados.map(itemAtraso).join('')}</div>`
-    : `<div class="ok-state"><i>${I.check}</i>Nenhum plantão atrasado. Tudo em dia.</div>`;
-  html += '</section>';
-
-  if (proximos.length) {
-    html += `<section class="sec"><div class="sec-head"><h2>Vencem nos próximos 7 dias</h2></div>
-      <div class="list">${proximos.map(linhaPlantao).join('')}</div></section>`;
-  }
+    ${grafQuando(b)}
+  </section>
+  <div class="home-grid">
+    <section class="card" aria-labelledby="hAtr">
+      <div class="card-head"><h2 id="hAtr">Atrasados</h2>${atrasados.length ? '<span class="meta">do mais antigo para o mais novo</span>' : ''}</div>
+      ${atrasados.length ? `<ul class="rows">${atrasados.map(itemAtraso).join('')}</ul>` : `<p class="ok-line">${I.check} Nenhum plantão passou do vencimento.</p>`}
+    </section>
+    <div class="home-side">
+    <section class="card" aria-labelledby="hProx">
+      <div class="card-head"><h2 id="hProx">Vencem nos próximos 7 dias</h2>${proximos.length ? `<span class="meta">${brl(soma(proximos, aberto))}</span>` : ''}</div>
+      ${proximos.length ? `<ul class="rows">${proximos.map(linhaPlantao).join('')}</ul>` : '<p class="empty-box">Nada vence nos próximos 7 dias.</p>'}
+    </section>
+    <section class="card" aria-labelledby="hEntrou">
+      <div class="card-head"><h2 id="hEntrou">Entrou em ${esc(mesSo(mk))}</h2>${entradas.length ? `<span class="meta">${brl(recMes)}</span>` : ''}</div>
+      ${entradas.length ? `<ul class="rows">${entradas.map(x => `<li><button type="button" class="plt" data-open="${x.p.id}">
+        <span class="plt-day"><b>${x.data.slice(8)}</b><small>${esc(semana(x.data))}</small></span>
+        <span class="plt-info"><strong>${esc(nomeLocal(x.p.localId))}</strong><small>plantão de ${fmtData(x.p.data)}</small></span>
+        <span class="in-fig">+${brl(x.valor)}</span>
+      </button></li>`).join('')}</ul>` : `<p class="empty-box">Nenhum pagamento registrado em ${esc(mesSo(mk))} ainda.</p>`}
+    </section>
+    </div>
+  </div>`;
   return html;
 }
 
-function linhaPlantao(p) {
-  const s = status(p);
-  const sub = s === 'pago' ? `pago em ${fmtData(ultimoPgto(p))}`
-    : s === 'atrasado' ? `${diasTxt(atraso(p))} de atraso`
-    : `vence em ${fmtData(p.venc)}`;
-  return `<button type="button" class="plt" data-open="${p.id}">
-    <span class="plt-data"><b>${p.data.slice(8)}</b><small>${esc(mesCurto(p.data))}</small></span>
-    <span class="plt-info"><strong>${esc(nomeLocal(p.localId))}</strong><small>${esc(turnoTxt(p))}, ${sub}</small></span>
-    <span class="plt-fim"><b>${brl(s === 'pago' ? p.valor : aberto(p))}</b>${pill(p)}</span>
-  </button>`;
-}
-
 function barraMes() {
-  return `<div class="monthbar">
+  return `<div class="stepper">
     <button type="button" class="icon-btn" data-mes="-1" aria-label="Mês anterior">${I.prev}</button>
-    <h1>${nomeMes(ui.mes)}</h1>
+    <b>${nomeMes(ui.mes)}</b>
     <button type="button" class="icon-btn" data-mes="1" aria-label="Próximo mês">${I.next}</button>
   </div>`;
 }
@@ -654,7 +870,7 @@ function barraMes() {
 function chipsLocal() {
   if (db.locais.length < 2) return '';
   return `<div class="chips" role="group" aria-label="Filtrar por local">
-    <button type="button" class="chip" data-filtro="todos" aria-pressed="${ui.local === 'todos'}">Todos</button>
+    <button type="button" class="chip" data-filtro="todos" aria-pressed="${ui.local === 'todos'}">Todos os locais</button>
     ${db.locais.map(l => `<button type="button" class="chip" data-filtro="${l.id}" aria-pressed="${ui.local === l.id}">${esc(l.nome)}</button>`).join('')}
   </div>`;
 }
@@ -663,60 +879,56 @@ function ranking() {
   const linhas = db.locais.map(l => {
     const ps = db.plantoes.filter(p => p.localId === l.id);
     const vencidos = ps.filter(p => p.venc < hoje() || status(p) === 'pago');
-    const atrasos = vencidos.map(p => {
-      if (status(p) === 'pago') return Math.max(0, difDias(ultimoPgto(p), p.venc));
-      return atraso(p);
-    });
+    const atrasos = vencidos.map(p => (status(p) === 'pago' ? Math.max(0, difDias(ultimoPgto(p), p.venc)) : atraso(p)));
     const atrasados = ps.filter(p => status(p) === 'atrasado');
     return {
-      l, n: atrasados.length,
-      valor: soma(atrasados, aberto),
+      l, n: atrasados.length, valor: soma(atrasados, aberto),
       media: atrasos.length ? Math.round(atrasos.reduce((a, b) => a + b, 0) / atrasos.length) : 0,
       base: atrasos.length
     };
-  }).filter(r => r.base > 0 || r.n > 0)
-    .sort((a, b) => b.valor - a.valor || b.media - a.media);
-  if (!linhas.length) return '<p class="note">O ranking aparece quando algum plantão passar do vencimento.</p>';
-  return `<div class="rank">${linhas.map((r, i) => `
-    <div class="rank-row${r.n ? ' hot' : ''}">
-      <span class="rank-pos num">${i + 1}</span>
-      <span class="rank-info">
-        <strong>${esc(r.l.nome)}</strong>
-        ${r.n ? `<span class="r-val">${brl(r.valor)} em atraso, ${r.n} ${r.n === 1 ? 'plantão' : 'plantões'}</span>` : '<span class="r-ok">Nada em atraso agora</span>'}
-        <small>Paga em média ${r.media ? `${diasTxt(r.media)} depois do vencimento` : 'no prazo'}</small>
-        ${r.n ? `<button type="button" class="btn btn-ghost btn-sm" data-cobrar-local="${r.l.id}">${I.copy} Copiar cobrança de tudo</button>` : ''}
-      </span>
-    </div>`).join('')}</div>`;
+  }).filter(r => r.base > 0 || r.n > 0).sort((a, b) => b.valor - a.valor || b.media - a.media);
+  if (!linhas.length) return '<p class="empty-box">O ranking aparece quando algum plantão passar do vencimento.</p>';
+  const max = Math.max(...linhas.map(r => r.valor), 1);
+  return `<ol class="rows rank">${linhas.map((r, i) => `<li>
+    <span class="rank-pos">${i + 1}</span>
+    <span class="rank-name">${esc(r.l.nome)}</span>
+    <span class="rank-val${r.valor ? '' : ' zero'}">${brl(r.valor)}</span>
+    <span class="rank-bar" aria-hidden="true"><i style="width:${Math.round(r.valor / max * 100)}%"></i></span>
+    <span class="rank-sub">${r.n ? `${plural(r.n, 'plantão atrasado', 'plantões atrasados')}. ` : 'Nada atrasado agora. '}Paga em média ${r.media ? `${diasTxt(r.media)} depois do vencimento` : 'no prazo'}.</span>
+    ${r.n ? `<button type="button" class="act" data-cobrar-local="${r.l.id}">${I.copy} Copiar cobrança de tudo</button>` : ''}
+  </li>`).join('')}</ol>`;
 }
 
 function vPlantoes() {
   const lista = filtrados();
   const total = soma(lista, p => p.valor);
   const rec = soma(lista, recebido);
+  const emAberto = soma(lista, aberto);
   const atr = soma(lista.filter(p => status(p) === 'atrasado'), aberto);
-  return `${barraMes()}
-  ${chipsLocal()}
-  <div class="summary">
-    <div><small>Total do mês</small><b>${brl(total)}</b></div>
-    <div><small>Recebido</small><b>${brl(rec)}</b></div>
-    <div class="s-atraso"><small>Atrasado</small><b>${brl(atr)}</b></div>
-  </div>
-  <section class="sec">
-    <div class="sec-head"><h2>${lista.length} ${lista.length === 1 ? 'plantão' : 'plantões'}</h2></div>
-    ${lista.length ? `<div class="list">${lista.map(linhaPlantao).join('')}</div>`
-      : '<div class="empty-state"><p>Nenhum plantão neste mês com esse filtro.</p></div>'}
-  </section>
-  <section class="sec">
-    <div class="sec-head"><h2>Enviar ao contador</h2><small>${nomeMes(ui.mes)}${ui.local !== 'todos' ? `, ${esc(nomeLocal(ui.local))}` : ''}</small></div>
-    <div class="row-btns">
-      <button type="button" class="btn btn-ghost" data-act="csv" ${lista.length ? '' : 'disabled'}>${I.file} CSV</button>
-      <button type="button" class="btn btn-ghost" data-act="pdf" ${lista.length ? '' : 'disabled'}>${I.file} PDF</button>
-    </div>
-  </section>
-  <section class="sec">
-    <div class="sec-head"><h2>Quem mais atrasa</h2><small>todos os meses</small></div>
-    ${ranking()}
-  </section>`;
+  const escopo = `${nomeMes(ui.mes)}${ui.local !== 'todos' ? `, ${esc(nomeLocal(ui.local))}` : ''}`;
+  return `<div class="title-row"><div><h1>Plantões</h1>
+      <p class="finding">${escopo}: ${plural(lista.length, 'plantão', 'plantões')}, <b>${brl(total)}</b>.</p></div>
+    <div class="title-actions">
+      <button type="button" class="btn btn-ghost btn-sm" data-act="csv" ${lista.length ? '' : 'disabled'}>${I.file} Planilha CSV</button>
+      <button type="button" class="btn btn-ghost btn-sm" data-act="pdf" ${lista.length ? '' : 'disabled'}>${I.file} PDF</button>
+    </div></div>
+  <div class="filters">${barraMes()}${chipsLocal()}</div>
+  <div class="list-grid">
+    <section class="card" aria-labelledby="hLista">
+      <div class="card-head"><h2 id="hLista">${escopo}</h2><span class="meta">${plural(lista.length, 'plantão', 'plantões')}</span></div>
+      <div class="strip">
+        <div><small>Total</small><b>${brl(total)}</b></div>
+        <div><small>Recebido</small><b>${brl(rec)}</b></div>
+        <div><small>Em aberto</small><b>${brl(emAberto)}</b></div>
+        <div class="${atr ? 'red' : ''}"><small>Atrasado</small><b>${brl(atr)}</b></div>
+      </div>
+      ${lista.length ? `<ul class="rows">${lista.map(linhaPlantao).join('')}</ul>` : '<p class="empty-box">Nenhum plantão neste mês com esse filtro.</p>'}
+    </section>
+    <section class="card" aria-labelledby="hRank">
+      <div class="card-head"><h2 id="hRank">Quem mais atrasa</h2><span class="meta">todos os meses</span></div>
+      ${ranking()}
+    </section>
+  </div>`;
 }
 
 function vAgenda() {
@@ -727,86 +939,150 @@ function vAgenda() {
   const porDia = {};
   doMes.forEach(p => { (porDia[p.data] = porDia[p.data] || []).push(p); });
   const T = hoje();
-  let cells = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'].map((d, i) =>
-    `<div class="cal-dow" aria-hidden="true">${d}</div>`).join('');
-  for (let i = 0; i < primeiro; i++) cells += '<div class="day empty" aria-hidden="true"></div>';
+  let cells = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'].map(d => `<div class="dow" aria-hidden="true">${d}</div>`).join('');
+  for (let i = 0; i < primeiro; i++) cells += '<div class="day out" aria-hidden="true"></div>';
   for (let d = 1; d <= nDias; d++) {
     const k = `${ui.mes}-${pad(d)}`;
     const ps = porDia[k] || [];
     const cls = ['day', ps.length ? 'has' : '', k === T ? 'today' : ''].join(' ');
-    const desc = ps.length ? `, ${ps.length} ${ps.length === 1 ? 'plantão' : 'plantões'}: ${ps.map(statusTxt).join(', ')}` : '';
+    const desc = ps.length ? `, ${plural(ps.length, 'plantão', 'plantões')}: ${ps.map(statusTxt).join(', ')}` : '';
     cells += `<button type="button" class="${cls}" data-dia="${k}" aria-pressed="${ui.dia === k}" aria-label="${fmtData(k)}${desc}">
-      <span>${d}</span><span class="dots">${ps.slice(0, 4).map(p => `<i class="dot dot-${status(p)}"></i>`).join('')}</span>
+      <span>${d}</span><span class="dots">${ps.slice(0, 4).map(p => `<i class="dot d-${status(p)}"></i>`).join('')}</span>
     </button>`;
   }
-  let detalhe = '';
-  if (ui.dia && mesKey(ui.dia) === ui.mes) {
-    const ps = porDia[ui.dia] || [];
-    detalhe = `<section class="sec">
-      <div class="sec-head"><h2>${fmtData(ui.dia)}</h2></div>
-      ${ps.length ? `<div class="list">${ps.map(linhaPlantao).join('')}</div>` : '<p class="note">Nenhum plantão neste dia.</p>'}
-      <button type="button" class="btn btn-lima btn-block" data-act="lancar-dia">Lançar plantão em ${fmtData(ui.dia)}</button>
-    </section>`;
-  } else {
-    detalhe = '<p class="note">Toque em um dia para ver os plantões ou lançar um novo.</p>';
-  }
-  return `${barraMes()}
-  <div class="cal">
-    <div class="cal-grid">${cells}</div>
-    <div class="legend">
-      <span><i class="dot dot-receber"></i>A receber</span>
-      <span><i class="dot dot-parcial"></i>Parcial</span>
-      <span><i class="dot dot-pago"></i>Pago</span>
-      <span><i class="dot dot-atrasado"></i>Atrasado</span>
-    </div>
-  </div>
-  ${detalhe}`;
+  const dia = ui.dia && mesKey(ui.dia) === ui.mes ? ui.dia : null;
+  const psDia = dia ? (porDia[dia] || []) : [];
+  const detalheDia = dia
+    ? `<section class="card" aria-labelledby="hDia">
+        <div class="card-head"><h2 id="hDia">${fmtData(dia)}</h2><span class="meta">${plural(psDia.length, 'plantão', 'plantões')}</span></div>
+        ${psDia.length ? `<ul class="rows">${psDia.map(linhaPlantao).join('')}</ul>` : '<p class="empty-box">Nenhum plantão neste dia.</p>'}
+        <div class="card-foot"><button type="button" class="btn btn-primary btn-block" data-act="lancar-dia">Lançar plantão em ${fmtData(dia)}</button></div>
+      </section>`
+    : `<section class="card" aria-labelledby="hDia">
+        <div class="card-head"><h2 id="hDia">Plantões do mês</h2><span class="meta">${brl(soma(doMes, p => p.valor))}</span></div>
+        ${doMes.length ? `<ul class="rows">${doMes.slice().sort((a, b) => (a.data < b.data ? -1 : 1)).slice(0, 6).map(linhaPlantao).join('')}</ul>` : '<p class="empty-box">Nenhum plantão neste mês. Toque em um dia para lançar.</p>'}
+        ${doMes.length > 6 ? `<div class="card-foot"><a class="btn btn-ghost btn-sm" href="#plantoes">Ver todos os ${doMes.length}</a></div>` : ''}
+      </section>`;
+  return `<div class="title-row"><div><h1>Agenda</h1><p class="finding">${nomeMes(ui.mes)}: ${plural(doMes.length, 'plantão', 'plantões')}. Toque em um dia para ver ou lançar.</p></div></div>
+  <div class="filters">${barraMes()}</div>
+  <div class="cal-wrap">
+    <section class="card cal" aria-label="Calendário de ${nomeMes(ui.mes)}">
+      <div class="cal-grid">${cells}</div>
+      <div class="legend">
+        <span><i class="dot d-receber"></i>A receber</span>
+        <span><i class="dot d-parcial"></i>Parcial</span>
+        <span><i class="dot d-pago"></i>Pago</span>
+        <span><i class="dot d-atrasado"></i>Atrasado</span>
+      </div>
+    </section>
+    ${detalheDia}
+  </div>`;
 }
 
 function vAjustes() {
-  return `<h1>Ajustes</h1>
-  <section class="sec">
-    <h2>Seu nome</h2>
+  const s = situacaoConta();
+  const contaHtml = NUVEM ? `<div class="set">
+    <div class="set-label"><h2>Sua conta</h2><p>Seus plantões ficam guardados na sua conta. Só você vê.</p></div>
     <div class="panel">
-      <div class="field">
-        <label for="nome">Como você assina as cobranças</label>
-        <input class="input" id="nome" type="text" autocomplete="name" placeholder="Ex.: Dra. Ana Souza" value="${esc(db.nome)}">
+      <dl class="kv">
+        <dt>E-mail</dt><dd>${esc(conta.email || '')}</dd>
+        <dt>Situação</dt><dd>${esc(s ? s.txt : '')}</dd>
+        <dt>Salvamento</dt><dd>${estadoSync === 'ok' ? 'Tudo salvo' : 'Esperando internet para enviar'}</dd>
+      </dl>
+      <div class="btn-row">
+        ${s && s.tipo !== 'ativa' ? '<button type="button" class="btn btn-primary btn-sm" data-act="assinar">Assinar</button>' : ''}
+        ${perfil && perfil.asaas_subscription_id ? '<button type="button" class="btn btn-ghost btn-sm" data-act="cancelar-assinatura">Cancelar assinatura</button>' : ''}
+        <button type="button" class="btn btn-ghost btn-sm" data-act="sair">Sair</button>
       </div>
     </div>
-  </section>
-  <section class="sec">
-    <div class="sec-head"><h2>Locais de trabalho</h2><small>${db.locais.length}</small></div>
+  </div>` : '';
+  return `<div class="title-row"><div><h1>Ajustes</h1><p class="finding">Seu nome, seus locais de trabalho e seus dados.</p></div></div>
+  <section class="card" style="padding:24px var(--card-pad)" aria-label="Ajustes">
+  ${contaHtml}
+  <div class="set">
+    <div class="set-label"><h2>Seu nome</h2><p>Aparece no começo das mensagens de cobrança.</p></div>
+    <div class="panel">
+      <div class="field">
+        <label for="nome">Como você assina</label>
+        <input class="input" id="nome" type="text" autocomplete="name" maxlength="80" placeholder="Ex.: Dra. Ana Souza" value="${esc(db.nome)}">
+      </div>
+    </div>
+  </div>
+  <div class="set">
+    <div class="set-label"><h2>Locais de trabalho</h2><p>Valor do plantão, prazo e forma de pagamento de cada hospital ou empresa. O vencimento de cada plantão sai daqui.</p></div>
     <div class="panel">
       ${db.locais.length ? db.locais.map(l => `<div class="loc">
         <span><strong>${esc(l.nome)}</strong><small>${brl(l.valor)} o plantão de 12h, paga em ${diasTxt(l.prazo)}, ${esc(l.forma)}</small></span>
         <button type="button" class="btn btn-ghost btn-sm" data-edit-local="${l.id}">Editar</button>
       </div>`).join('') : '<p class="note">Nenhum local cadastrado.</p>'}
-      <button type="button" class="btn btn-lima btn-block" data-act="novo-local">Adicionar local</button>
+      <button type="button" class="btn btn-primary" data-act="novo-local">Adicionar local</button>
     </div>
-  </section>
-  ${temExemplos() ? `<section class="sec"><h2>Dados de exemplo</h2><div class="panel">
-    <p class="note">Os hospitais e plantões marcados como exemplo servem só para testar. Seus lançamentos ficam.</p>
-    <button type="button" class="btn btn-roxo btn-block" data-act="apagar-exemplos">Apagar exemplos</button>
-  </div></section>` : ''}
-  <section class="sec">
-    <h2>Privacidade</h2>
+  </div>
+  ${temExemplos() ? `<div class="set">
+    <div class="set-label"><h2>Dados de exemplo</h2><p>Servem só para testar. O que você lançou continua.</p></div>
+    <div class="panel"><button type="button" class="btn btn-dark" data-act="apagar-exemplos">Apagar exemplos</button></div>
+  </div>` : ''}
+  <div class="set">
+    <div class="set-label"><h2>Privacidade</h2><p>${NUVEM ? 'Seus dados ficam na sua conta, protegidos por login.' : 'Seus dados ficam guardados só neste aparelho, neste navegador.'} O app não pede nem guarda nenhum dado de paciente.</p></div>
     <div class="panel">
-      <p class="note">Seus dados ficam guardados só neste aparelho e neste navegador. Ninguém mais vê. O app não pede nem guarda nenhum dado de paciente.</p>
-      <button type="button" class="btn btn-danger btn-block" data-act="apagar-tudo">Apagar todos os meus dados</button>
+      <button type="button" class="btn btn-danger" data-act="apagar-tudo">Apagar todos os meus plantões e locais</button>
+      ${NUVEM ? '<button type="button" class="btn btn-danger" data-act="excluir-conta">Excluir minha conta</button>' : ''}
     </div>
+  </div>
   </section>`;
 }
 
+function vLogin() {
+  const passo = login.etapa === 'email'
+    ? `<div class="field"><label for="lgEmail">Seu e-mail</label>
+        <input class="input" id="lgEmail" type="email" inputmode="email" autocomplete="email" placeholder="voce@exemplo.com" value="${esc(login.email)}"></div>
+       <button type="button" class="btn btn-primary btn-block" id="lgEnviar" ${login.enviando ? 'disabled' : ''}>${login.enviando ? 'Enviando...' : 'Enviar código'}</button>`
+    : `<p class="note">Mandamos um código de 6 dígitos para <b>${esc(login.email)}</b>. Ele chega em até um minuto.</p>
+       <div class="field"><label for="lgCodigo">Código</label>
+        <input class="input input-money" id="lgCodigo" inputmode="numeric" autocomplete="one-time-code" maxlength="10" placeholder="000000"></div>
+       <button type="button" class="btn btn-primary btn-block" id="lgEntrar" ${login.enviando ? 'disabled' : ''}>${login.enviando ? 'Entrando...' : 'Entrar'}</button>
+       <div class="btn-row"><button type="button" class="btn btn-text" id="lgReenviar">Reenviar código</button><button type="button" class="btn btn-text" id="lgTrocar">Usar outro e-mail</button></div>`;
+  return `<div class="login"><div class="login-card">
+    <div class="brand"><svg class="mark" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="11" fill="#5B3DF5"/><path d="M22.5 7 12 22.5h7.5L17.5 33 28 17.5h-7.5L22.5 7Z" fill="#C6F24E"/></svg><span class="wordmark">Atalho Plantão</span></div>
+    <div><h1>Entrar</h1><p class="finding">Saiba em segundos quanto você tem a receber dos seus plantões.</p></div>
+    <section class="card" style="padding:20px" aria-label="Entrar com e-mail"><div class="stack" style="gap:16px">
+      ${passo}
+      ${login.erro ? `<p class="err">${esc(login.erro)}</p>` : ''}
+      ${CFG.entrarComGoogle && login.etapa === 'email' ? '<button type="button" class="btn btn-ghost btn-block" id="lgGoogle">Entrar com Google</button>' : ''}
+    </div></section>
+    <p class="note">Seus dados ficam na sua conta e só você vê. O app não guarda nenhum dado de paciente.</p>
+  </div></div>`;
+}
+
+function vCarregando() {
+  if (erroNuvem) return `<div class="login"><div class="login-card"><h1>Sem conexão</h1><p class="finding">${esc(erroNuvem)}</p><button type="button" class="btn btn-primary" data-act="recarregar">Tentar de novo</button></div></div>`;
+  return `<div class="title-row"><div><h1>Seu dinheiro</h1><span class="skel" style="width:260px;height:20px"></span></div></div>
+    <section class="card money" aria-label="Carregando"><div class="lead"><span class="card-label">A receber</span><span class="skel" style="width:220px;height:40px"></span></div>
+    <div class="tiles"><div class="tile t-zero"><span class="tile-label">Recebido no mês</span><span class="skel" style="width:120px;height:26px"></span></div><div class="tile t-zero"><span class="tile-label">Atrasado</span><span class="skel" style="width:120px;height:26px"></span></div></div></section>`;
+}
+
 const VIEWS = { inicio: vInicio, plantoes: vPlantoes, agenda: vAgenda, ajustes: vAjustes };
-const TABS = Object.keys(VIEWS);
-const tabAtual = () => { const h = location.hash.slice(1); return TABS.includes(h) ? h : 'inicio'; };
+const tabAtual = () => { const h = location.hash.slice(1); return VIEWS[h] ? h : 'inicio'; };
+
+function navs(t) {
+  $('#sideNav').innerHTML = TABS.map(x => `<a href="#${x.id}" ${x.id === t ? 'aria-current="page"' : ''}>${I[x.id]}${x.nome}</a>`).join('');
+  const tab = x => `<a class="tab" href="#${x.id}" ${x.id === t ? 'aria-current="page"' : ''}>${I[x.id]}${x.nome}</a>`;
+  $('#tabbar').innerHTML = tab(TABS[0]) + tab(TABS[1])
+    + `<button type="button" class="tab tab-cta" data-act="lancar"><span class="plus">${I.plus}</span>Lançar</button>`
+    + tab(TABS[2]) + tab(TABS[3]);
+  $('#sideFoot').innerHTML = NUVEM && conta
+    ? `<b>${esc(conta.email || '')}</b><span class="sync${estadoSync === 'ok' ? '' : ' pend'}"><i></i>${estadoSync === 'ok' ? 'Tudo salvo na sua conta' : 'Esperando internet'}</span>`
+    : '<span>Dados salvos neste aparelho.</span>';
+}
 
 function render() {
+  const semConta = NUVEM && (!conta || !db);
+  document.body.classList.toggle('sem-conta', semConta);
+  if (NUVEM && !conta) { $('#view').innerHTML = carregando || erroNuvem ? vCarregando() : vLogin(); ligarLogin(); return; }
+  if (!db) { $('#view').innerHTML = vCarregando(); return; }
   const t = tabAtual();
-  $('#view').innerHTML = `<div class="app-view" style="display:flex;flex-direction:column;gap:24px">${VIEWS[t]()}</div>`;
-  document.querySelectorAll('.nav a').forEach(a => {
-    if (a.dataset.tab === t) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
-  });
+  $('#view').innerHTML = VIEWS[t]();
+  navs(t);
   $('#topDate').textContent = fmtData(hoje());
   const nome = $('#nome');
   if (nome) nome.addEventListener('input', () => { db.nome = nome.value; save(); });
@@ -815,7 +1091,7 @@ function render() {
 let refreshSheet = null;
 function commit() { save(); render(); if (refreshSheet && sheet.open) refreshSheet(); }
 
-/* ---------- folha inferior ---------- */
+/* ---------- folha ---------- */
 const sheet = $('#sheet');
 function abrir(titulo, corpo, onMount, refresh) {
   sheet.innerHTML = `<div class="grab" aria-hidden="true"></div>
@@ -831,9 +1107,9 @@ sheet.addEventListener('click', e => { if (e.target === sheet) fechar(); });
 sheet.addEventListener('close', () => { refreshSheet = null; });
 
 function confirmar({ titulo, texto, ok, perigo, onOk, voltar }) {
-  abrir(esc(titulo), `<p class="note" style="font-size:16px;color:var(--fg)">${esc(texto)}</p>
+  abrir(esc(titulo), `<p style="font-size:16px">${esc(texto)}</p>
     <div class="stack">
-      <button type="button" class="btn btn-block ${perigo ? 'btn-danger' : 'btn-roxo'}" id="cOk">${esc(ok)}</button>
+      <button type="button" class="btn btn-block ${perigo ? 'btn-danger' : 'btn-dark'}" id="cOk">${esc(ok)}</button>
       <button type="button" class="btn btn-ghost btn-block" id="cNo">Cancelar</button>
     </div>`, s => {
     s.querySelector('#cOk').onclick = () => { onOk(); };
@@ -843,6 +1119,7 @@ function confirmar({ titulo, texto, ok, perigo, onOk, voltar }) {
 
 /* ---------- lançar ou editar plantão ---------- */
 function formPlantao({ id = null, data = null } = {}) {
+  if (!podeEditar()) return;
   if (!db.locais.length) { formLocal(); toast('Cadastre um local antes de lançar o plantão.'); return; }
   const p = id ? db.plantoes.find(x => x.id === id) : null;
   const T = hoje(), ontem = addDias(T, -1);
@@ -853,11 +1130,11 @@ function formPlantao({ id = null, data = null } = {}) {
 
   const corpo = `
     <div class="field"><span class="flabel" id="lbLocal">Local</span>
-      <div class="chips" role="group" aria-labelledby="lbLocal">
+      <div class="chips wrap" role="group" aria-labelledby="lbLocal">
         ${db.locais.map(l => `<button type="button" class="chip" data-f-local="${l.id}" aria-pressed="${f.localId === l.id}">${esc(l.nome)}</button>`).join('')}
       </div></div>
     <div class="field"><span class="flabel" id="lbData">Data</span>
-      <div class="chips" role="group" aria-labelledby="lbData">
+      <div class="chips wrap" role="group" aria-labelledby="lbData">
         <button type="button" class="chip" data-f-data="hoje" aria-pressed="${qualData === 'hoje'}">Hoje, ${fmtData(T).slice(0, 5)}</button>
         <button type="button" class="chip" data-f-data="ontem" aria-pressed="${qualData === 'ontem'}">Ontem, ${fmtData(ontem).slice(0, 5)}</button>
         <button type="button" class="chip" data-f-data="outra" aria-pressed="${qualData === 'outra'}">Outra data</button>
@@ -865,7 +1142,7 @@ function formPlantao({ id = null, data = null } = {}) {
       <input class="input" type="date" id="fData" value="${f.data}" aria-label="Data do plantão" ${qualData === 'outra' ? '' : 'hidden'}>
     </div>
     <div class="field"><span class="flabel" id="lbTurno">Turno</span>
-      <div class="chips" role="group" aria-labelledby="lbTurno">
+      <div class="chips wrap" role="group" aria-labelledby="lbTurno">
         ${['12h', '24h', 'outro'].map(t => `<button type="button" class="chip" data-f-turno="${t}" aria-pressed="${f.turno === t}">${t === 'outro' ? 'Outro' : t}</button>`).join('')}
       </div>
       <input class="input" type="number" inputmode="numeric" min="1" max="48" id="fHoras" placeholder="Quantas horas? Ex.: 6" value="${esc(f.horas)}" aria-label="Horas do turno" ${f.turno === 'outro' ? '' : 'hidden'}>
@@ -874,11 +1151,12 @@ function formPlantao({ id = null, data = null } = {}) {
       <input class="input input-money" id="fValor" inputmode="decimal" autocomplete="off" value="${valorInput(f.valor)}">
     </div>
     <div class="field"><label for="fObs">Observação <span class="hint">(opcional)</span></label>
-      <input class="input" id="fObs" type="text" maxlength="140" placeholder="Ex.: troca com colega. Não escreva dados de paciente." value="${esc(f.obs)}">
+      <input class="input" id="fObs" type="text" maxlength="140" placeholder="Ex.: troca com colega" value="${esc(f.obs)}">
+      <span class="hint">Não escreva nome nem dado de paciente.</span>
     </div>
     <p class="preview" id="fPrev"></p>
     <p class="err" id="fErr" hidden></p>
-    <button type="button" class="btn btn-lima btn-block" id="fSalvar">${p ? 'Salvar alterações' : 'Salvar plantão'}</button>`;
+    <button type="button" class="btn btn-primary btn-block" id="fSalvar">${p ? 'Salvar alterações' : 'Salvar plantão'}</button>`;
 
   abrir(p ? 'Editar plantão' : 'Lançar plantão', corpo, s => {
     const vIn = s.querySelector('#fValor'), dIn = s.querySelector('#fData'), hIn = s.querySelector('#fHoras');
@@ -912,7 +1190,7 @@ function formPlantao({ id = null, data = null } = {}) {
       const l = local(f.localId);
       const problema = !l ? 'Escolha o local.' : !f.data ? 'Escolha a data.' : !(valor > 0) ? 'Digite um valor maior que zero. Ex.: 1500 ou 1.500,00' : '';
       if (problema) { err.textContent = problema; err.hidden = false; return; }
-      const horas = f.turno === 'outro' && Number(f.horas) > 0 ? Number(f.horas) : null;
+      const horas = f.turno === 'outro' && Number(f.horas) > 0 ? Math.min(48, Number(f.horas)) : null;
       const dados = { localId: l.id, data: f.data, venc: addDias(f.data, l.prazo), turno: f.turno, horas, valor, obs: s.querySelector('#fObs').value.trim() };
       if (p) { Object.assign(p, dados); if (recebido(p) > p.valor) p.pagamentos = [{ data: ultimoPgto(p), valor: p.valor }]; }
       else db.plantoes.push({ id: uid(), ...dados, pagamentos: [], exemplo: false });
@@ -931,42 +1209,44 @@ function detalhe(id) {
     if (!p) { fechar(); return; }
     const s = status(p), l = local(p.localId);
     const corpo = `
-      <div>${pill(p)}</div>
-      <dl class="dados">
+      <div class="lead">
+        <span class="card-label">${s === 'pago' ? 'Recebido' : 'Falta receber'}</span>
+        <p class="fig-lead" style="font-size:32px">${figSplit(s === 'pago' ? p.valor : aberto(p))}</p>
+        <div style="margin-top:6px">${pill(p)}</div>
+      </div>
+      <dl class="well">
         <div><dt>Data</dt><dd>${fmtData(p.data)}</dd></div>
         <div><dt>Turno</dt><dd>${esc(turnoTxt(p))}</dd></div>
-        <div><dt>Valor</dt><dd>${brl(p.valor)}</dd></div>
-        <div><dt>Recebido</dt><dd>${brl(recebido(p))}${p.pagamentos.length ? ` <span class="hint">(${p.pagamentos.map(x => fmtData(x.data)).join(', ')})</span>` : ''}</dd></div>
-        ${s !== 'pago' ? `<div><dt>Falta receber</dt><dd>${brl(aberto(p))}</dd></div>` : ''}
-        <div><dt>Vencimento</dt><dd>${fmtData(p.venc)}</dd></div>
-        ${s === 'atrasado' ? `<div><dt>Atraso</dt><dd class="red">${diasTxt(atraso(p))}</dd></div>` : ''}
+        <div><dt>Valor do plantão</dt><dd>${brl(p.valor)}</dd></div>
+        <div><dt>Já entrou</dt><dd>${p.pagamentos.length ? `${brl(recebido(p))} em ${p.pagamentos.map(x => fmtData(x.data)).join(', ')}` : brl(0)}</dd></div>
+        <div><dt>Vencimento</dt><dd${s === 'atrasado' ? ' class="red"' : ''}>${fmtData(p.venc)}${s === 'atrasado' ? `, ${diasTxt(atraso(p))} de atraso` : ''}</dd></div>
         <div><dt>Forma</dt><dd>${esc(l ? l.forma : '')}</dd></div>
         ${p.obs ? `<div><dt>Observação</dt><dd>${esc(p.obs)}</dd></div>` : ''}
       </dl>
       ${s !== 'pago' ? `
       <div class="stack">
-        <button type="button" class="btn btn-lima btn-block" id="dTotal">${I.check} Recebi tudo, ${brl(aberto(p))}</button>
-        <div class="row-btns">
+        <button type="button" class="btn btn-primary btn-block" id="dTotal">${I.check} Recebi tudo, ${brl(aberto(p))}</button>
+        <div class="btn-row">
           <button type="button" class="btn btn-ghost" id="dParte">Recebi uma parte</button>
-          <button type="button" class="btn btn-ghost" data-cobrar="${p.id}">${I.copy} Cobrança</button>
+          <button type="button" class="btn btn-ghost" data-cobrar="${p.id}">${I.copy} Copiar cobrança</button>
         </div>
       </div>
-      <div class="panel" id="dParteForm" hidden style="box-shadow:none;border-color:var(--line)">
+      <div class="panel" id="dParteForm" hidden>
         <div class="field"><label for="pValor">Quanto entrou (R$)</label>
           <input class="input input-money" id="pValor" inputmode="decimal" placeholder="Ex.: 600"></div>
         <div class="field"><label for="pData">Quando</label>
           <input class="input" id="pData" type="date" value="${hoje()}"></div>
         <p class="err" id="pErr" hidden></p>
-        <button type="button" class="btn btn-lima btn-block" id="pSalvar">Salvar pagamento</button>
-      </div>` : `<button type="button" class="btn btn-ghost btn-block" id="dDesfazer">Desfazer pagamento</button>`}
-      <div class="row-btns">
-        <button type="button" class="btn btn-ghost" id="dEditar">Editar</button>
-        <button type="button" class="btn btn-danger" id="dApagar">Apagar</button>
+        <button type="button" class="btn btn-primary btn-block" id="pSalvar">Salvar pagamento</button>
+      </div>` : '<button type="button" class="btn btn-ghost btn-block" id="dDesfazer">Desfazer pagamento</button>'}
+      <div class="danger-zone">
+        <button type="button" class="btn btn-text" id="dEditar">Editar plantão</button>
+        <button type="button" class="btn btn-text" id="dApagar" style="color:var(--red-ink)">Apagar plantão</button>
       </div>`;
     abrir(esc(nomeLocal(p.localId)), corpo, sh => {
       const q = sel => sh.querySelector(sel);
       if (q('#dTotal')) q('#dTotal').onclick = () => pagarTudo(p.id);
-      if (q('#dParte')) q('#dParte').onclick = () => { q('#dParteForm').hidden = false; q('#pValor').focus(); };
+      if (q('#dParte')) q('#dParte').onclick = () => { if (!podeEditar()) return; q('#dParteForm').hidden = false; q('#pValor').focus(); };
       if (q('#pSalvar')) q('#pSalvar').onclick = () => {
         const v = parseValor(q('#pValor').value), d = q('#pData').value;
         const e = q('#pErr');
@@ -977,6 +1257,7 @@ function detalhe(id) {
         toast(status(p) === 'pago' ? 'Plantão quitado.' : `Pagamento registrado. Faltam ${brl(aberto(p))}.`);
       };
       if (q('#dDesfazer')) q('#dDesfazer').onclick = () => {
+        if (!podeEditar()) return;
         const antes = p.pagamentos.slice(); p.pagamentos = []; commit();
         toast('Pagamento desfeito.', { label: 'Voltar', fn: () => { p.pagamentos = antes; commit(); } });
       };
@@ -992,6 +1273,7 @@ function detalhe(id) {
 }
 
 function pagarTudo(id) {
+  if (!podeEditar()) return;
   const p = db.plantoes.find(x => x.id === id);
   if (!p) return;
   const falta = aberto(p);
@@ -1002,6 +1284,7 @@ function pagarTudo(id) {
 
 /* ---------- local de trabalho ---------- */
 function formLocal(id = null) {
+  if (!podeEditar()) return;
   const l = id ? local(id) : null;
   const f = l ? { ...l } : { nome: '', valor: '', prazo: 30, forma: 'PJ' };
   const corpo = `
@@ -1011,17 +1294,17 @@ function formLocal(id = null) {
       <input class="input input-money" id="lValor" inputmode="decimal" placeholder="Ex.: 1500" value="${f.valor === '' ? '' : valorInput(f.valor)}">
       <span class="hint">No plantão de 24h o app sugere o dobro. Você pode mudar na hora de lançar.</span></div>
     <div class="field"><span class="flabel" id="lbPrazo">Paga em quantos dias</span>
-      <div class="chips" role="group" aria-labelledby="lbPrazo">
+      <div class="chips wrap" role="group" aria-labelledby="lbPrazo">
         ${[15, 30, 45, 60, 90].map(n => `<button type="button" class="chip" data-l-prazo="${n}" aria-pressed="${Number(f.prazo) === n}">${n} dias</button>`).join('')}
       </div>
       <input class="input" id="lPrazo" type="number" inputmode="numeric" min="0" max="365" value="${esc(f.prazo)}" aria-label="Prazo em dias"></div>
     <div class="field"><span class="flabel" id="lbForma">Forma de pagamento</span>
-      <div class="chips" role="group" aria-labelledby="lbForma">
+      <div class="chips wrap" role="group" aria-labelledby="lbForma">
         ${FORMAS.map(x => `<button type="button" class="chip" data-l-forma="${x}" aria-pressed="${f.forma === x}">${x}</button>`).join('')}
       </div></div>
     <p class="err" id="lErr" hidden></p>
-    <button type="button" class="btn btn-lima btn-block" id="lSalvar">${l ? 'Salvar alterações' : 'Salvar local'}</button>
-    ${l ? '<button type="button" class="btn btn-danger btn-block" id="lApagar">Apagar local</button>' : ''}`;
+    <button type="button" class="btn btn-primary btn-block" id="lSalvar">${l ? 'Salvar alterações' : 'Salvar local'}</button>
+    ${l ? '<div class="danger-zone"><span></span><button type="button" class="btn btn-text" id="lApagar" style="color:var(--red-ink)">Apagar local</button></div>' : ''}`;
   const montar = () => abrir(l ? 'Editar local' : 'Novo local', corpo, s => {
     const q = sel => s.querySelector(sel);
     const pIn = q('#lPrazo');
@@ -1032,7 +1315,7 @@ function formLocal(id = null) {
     q('#lSalvar').onclick = () => {
       const nome = q('#lNome').value.trim(), valor = parseValor(q('#lValor').value), prazo = parseInt(pIn.value, 10);
       const e = q('#lErr');
-      const problema = !nome ? 'Digite o nome do local.' : !(valor > 0) ? 'Digite o valor do plantão. Ex.: 1500' : !(prazo >= 0) ? 'Digite o prazo em dias. Ex.: 30' : '';
+      const problema = !nome ? 'Digite o nome do local.' : !(valor > 0) ? 'Digite o valor do plantão. Ex.: 1500' : !(prazo >= 0 && prazo <= 365) ? 'Digite o prazo em dias, de 0 a 365. Ex.: 30' : '';
       if (problema) { e.textContent = problema; e.hidden = false; return; }
       if (l) Object.assign(l, { nome, valor, prazo, forma: f.forma, exemplo: false });
       else { const novo = { id: uid(), nome, valor, prazo, forma: f.forma, exemplo: false }; db.locais.push(novo); db.ultimoLocal = novo.id; }
@@ -1040,7 +1323,7 @@ function formLocal(id = null) {
     };
     if (q('#lApagar')) q('#lApagar').onclick = () => {
       const n = db.plantoes.filter(p => p.localId === l.id).length;
-      if (n) { const e = q('#lErr'); e.textContent = `Este local tem ${n} ${n === 1 ? 'plantão' : 'plantões'}. Apague os plantões antes.`; e.hidden = false; return; }
+      if (n) { const e = q('#lErr'); e.textContent = `Este local tem ${plural(n, 'plantão', 'plantões')}. Apague os plantões antes.`; e.hidden = false; return; }
       confirmar({ titulo: 'Apagar este local?', texto: l.nome, ok: 'Apagar local', perigo: true, voltar: montar,
         onOk: () => { db.locais = db.locais.filter(x => x.id !== l.id); fechar(); commit(); toast('Local apagado.'); } });
     };
@@ -1069,13 +1352,11 @@ function textoCobranca(lista) {
 function copiar(texto, okMsg) {
   const fallback = () => {
     abrir('Texto da cobrança', `<p class="note">Não deu para copiar sozinho. Segure no texto, toque em Selecionar tudo e depois em Copiar.</p>
-      <textarea class="input" id="cTxt" readonly style="min-height:240px">${esc(texto)}</textarea>
-      <a class="btn btn-lima btn-block" href="https://wa.me/?text=${encodeURIComponent(texto)}" target="_blank" rel="noopener">Abrir no WhatsApp</a>`,
+      <textarea class="input" id="cTxt" readonly>${esc(texto)}</textarea>
+      <a class="btn btn-primary btn-block" href="https://wa.me/?text=${encodeURIComponent(texto)}" target="_blank" rel="noopener">Abrir no WhatsApp</a>`,
       s => { const t = s.querySelector('#cTxt'); t.focus(); t.select(); });
   };
-  try {
-    navigator.clipboard.writeText(texto).then(() => toast(okMsg), fallback);
-  } catch (e) { fallback(); }
+  try { navigator.clipboard.writeText(texto).then(() => toast(okMsg), fallback); } catch (e) { fallback(); }
 }
 
 /* ---------- exportar ---------- */
@@ -1121,9 +1402,9 @@ function exportarPDF() {
   doc.setFont('helvetica', 'bold'); doc.setFontSize(16); doc.setTextColor(30, 30, 36);
   doc.text('Atalho Plantão', M, y);
   doc.setFont('helvetica', 'normal'); doc.setFontSize(11);
-  y += 7; doc.text(`Plantões de ${nomeMes(ui.mes)}${ui.local !== 'todos' ? ' - ' + nomeLocal(ui.local) : ''}`, M, y);
+  y += 7; doc.text(`Plantões de ${nomeMes(ui.mes)}${ui.local !== 'todos' ? ', ' + nomeLocal(ui.local) : ''}`, M, y);
   if (db.nome.trim()) { y += 6; doc.text(db.nome.trim(), M, y); }
-  y += 6; doc.setTextColor(99, 97, 122); doc.text(`Gerado em ${fmtData(hoje())}`, M, y);
+  y += 6; doc.setTextColor(93, 90, 107); doc.text(`Gerado em ${fmtData(hoje())}`, M, y);
   y += 10;
   const cols = [
     { t: 'Data', x: M }, { t: 'Local', x: 34 }, { t: 'Turno', x: 86 },
@@ -1141,7 +1422,7 @@ function exportarPDF() {
     if (y > 278) { doc.addPage(); y = 18; cab(); }
     const s = status(p);
     const st = s === 'atrasado' ? `Atrasado ${atraso(p)}d` : LABEL[s];
-    if (s === 'atrasado') doc.setTextColor(215, 38, 61); else doc.setTextColor(30, 30, 36);
+    if (s === 'atrasado') doc.setTextColor(150, 18, 39); else doc.setTextColor(30, 30, 36);
     doc.text(fmtData(p.data), M, y);
     doc.text(corta(nomeLocal(p.localId), 50), 34, y);
     doc.text(turnoTxt(p), 86, y);
@@ -1154,13 +1435,12 @@ function exportarPDF() {
   doc.setTextColor(30, 30, 36);
   y += 2; doc.line(M, y, W - M, y); y += 7;
   doc.setFont('helvetica', 'bold'); doc.setFontSize(10);
-  const tot = [
+  [
     ['Total dos plantões', soma(lista, p => p.valor)],
     ['Recebido', soma(lista, recebido)],
     ['Em aberto', soma(lista, aberto)],
     ['Atrasado', soma(lista.filter(p => status(p) === 'atrasado'), aberto)]
-  ];
-  tot.forEach(([k, v]) => { if (y > 285) { doc.addPage(); y = 18; } doc.text(k, M, y); doc.text(brl(v), 70, y, { align: 'right' }); y += 6; });
+  ].forEach(([k, v]) => { if (y > 285) { doc.addPage(); y = 18; } doc.text(k, M, y); doc.text(brl(v), 70, y, { align: 'right' }); y += 6; });
   baixar(nomeArquivo('pdf'), doc.output('blob'), 'PDF gerado.');
 }
 
@@ -1175,17 +1455,257 @@ function toast(msg, acao) {
   toastTimer = setTimeout(() => { t.hidden = true; }, acao ? 6000 : 3500);
 }
 
+/* ---------- conta: Supabase ---------- */
+const SUPABASE_JS = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js';
+const cacheKey = () => `atalho-plantao:conta:${conta.id}`;
+function carregarScript(src) {
+  return new Promise((ok, erro) => { const s = document.createElement('script'); s.src = src; s.onload = ok; s.onerror = erro; document.head.appendChild(s); });
+}
+
+const paraLinhaLocal = l => ({ id: l.id, nome: l.nome, valor: l.valor, prazo: l.prazo, forma: l.forma, exemplo: !!l.exemplo });
+const deLinhaLocal = r => ({ id: r.id, nome: r.nome, valor: Number(r.valor), prazo: r.prazo, forma: r.forma, exemplo: !!r.exemplo });
+const paraLinhaPlantao = p => ({ id: p.id, local_id: p.localId, data: p.data, venc: p.venc, turno: p.turno, horas: p.horas ?? null, valor: p.valor, obs: p.obs || '', pagamentos: p.pagamentos, exemplo: !!p.exemplo });
+const deLinhaPlantao = r => ({ id: r.id, localId: r.local_id, data: r.data, venc: r.venc, turno: r.turno, horas: r.horas == null ? null : Number(r.horas), valor: Number(r.valor), obs: r.obs || '', pagamentos: (r.pagamentos || []).map(x => ({ data: x.data, valor: Number(x.valor) })), exemplo: !!r.exemplo });
+function fotografar(d) {
+  return {
+    nome: d.nome || '',
+    locais: Object.fromEntries(d.locais.map(l => [l.id, JSON.stringify(paraLinhaLocal(l))])),
+    plantoes: Object.fromEntries(d.plantoes.map(p => [p.id, JSON.stringify(paraLinhaPlantao(p))]))
+  };
+}
+function deFoto(f) {
+  return {
+    nome: f.nome, ultimoLocal: db ? db.ultimoLocal : null,
+    locais: Object.values(f.locais).map(s => deLinhaLocal(JSON.parse(s))),
+    plantoes: Object.values(f.plantoes).map(s => deLinhaPlantao(JSON.parse(s)))
+  };
+}
+function mudou() {
+  if (!snap || !db) return false;
+  const a = fotografar(db);
+  if (a.nome !== snap.nome) return true;
+  for (const t of ['locais', 'plantoes']) {
+    const ka = Object.keys(a[t]), ks = Object.keys(snap[t]);
+    if (ka.length !== ks.length || ka.some(k => a[t][k] !== snap[t][k])) return true;
+  }
+  return false;
+}
+function guardarCache() { try { localStorage.setItem(cacheKey(), JSON.stringify({ db, snap, perfil })); } catch (e) { /* sem armazenamento */ } }
+function lerCache() { try { const r = localStorage.getItem(cacheKey()); return r ? JSON.parse(r) : null; } catch (e) { return null; } }
+function marcarSync(e) { if (estadoSync !== e) { estadoSync = e; if (conta && db) navs(tabAtual()); } }
+
+function nuvemSalvar() {
+  if (!conta || !db) return;
+  guardarCache();
+  clearTimeout(syncTimer);
+  syncTimer = setTimeout(sincronizar, 400);
+}
+
+async function sincronizar() {
+  if (!sb || !conta || !snap || !db) return;
+  if (sincronizando) { denovo = true; return; }
+  sincronizando = true;
+  const atual = fotografar(db);
+  try {
+    const ok = r => { if (r.error) throw r.error; };
+    const sobe = t => Object.keys(atual[t]).filter(id => atual[t][id] !== snap[t][id]).map(id => ({ user_id: conta.id, ...JSON.parse(atual[t][id]) }));
+    const sai = t => Object.keys(snap[t]).filter(id => !(id in atual[t]));
+    if (atual.nome !== snap.nome) ok(await sb.from('perfis').update({ nome: atual.nome }).eq('id', conta.id));
+    const ul = sobe('locais'), up = sobe('plantoes'), dp = sai('plantoes'), dl = sai('locais');
+    if (ul.length) ok(await sb.from('locais').upsert(ul));
+    if (up.length) ok(await sb.from('plantoes').upsert(up));
+    if (dp.length) ok(await sb.from('plantoes').delete().eq('user_id', conta.id).in('id', dp));
+    if (dl.length) ok(await sb.from('locais').delete().eq('user_id', conta.id).in('id', dl));
+    snap = atual;
+    marcarSync('ok');
+  } catch (e) {
+    if (e && e.code === '42501') {
+      // O servidor recusou: acesso pausado. Volta ao que está salvo na conta.
+      db = deFoto(snap); render(); abrirAssinatura();
+    } else {
+      marcarSync('pendente');
+    }
+  } finally {
+    guardarCache();
+    sincronizando = false;
+    if (denovo) { denovo = false; sincronizar(); }
+  }
+}
+
+const CAMPOS_PERFIL = 'nome,status,teste_ate,pago_ate,asaas_subscription_id,iniciado';
+async function baixarDaNuvem() {
+  const [p, l, pl] = await Promise.all([
+    sb.from('perfis').select(CAMPOS_PERFIL).eq('id', conta.id).maybeSingle(),
+    sb.from('locais').select('*').order('nome'),
+    sb.from('plantoes').select('*').order('data')
+  ]);
+  for (const r of [p, l, pl]) if (r.error) throw r.error;
+  perfil = p.data || { nome: '', status: 'teste', teste_ate: hoje(), pago_ate: null, asaas_subscription_id: null, iniciado: false };
+  db = { nome: perfil.nome || '', ultimoLocal: db ? db.ultimoLocal : null, locais: l.data.map(deLinhaLocal), plantoes: pl.data.map(deLinhaPlantao) };
+  if (!local(db.ultimoLocal)) db.ultimoLocal = db.locais[0] ? db.locais[0].id : null;
+  snap = fotografar(db);
+  guardarCache();
+}
+
+async function entrar(user) {
+  conta = user; carregando = true; erroNuvem = '';
+  const c = lerCache();
+  if (c && c.db) { db = c.db; snap = c.snap; perfil = c.perfil || null; carregando = false; }
+  render();
+  try {
+    if (c && mudou()) await sincronizar();
+    await baixarDaNuvem();
+    marcarSync('ok');
+    if (!perfil.iniciado) primeiraVez();
+  } catch (e) {
+    if (!db) erroNuvem = 'Não deu para abrir sua conta. Confira a internet e tente de novo.';
+    else toast('Sem internet. Mostrando o que está salvo neste aparelho.');
+  }
+  carregando = false;
+  render();
+}
+
+function sairLocal() {
+  try { if (conta) localStorage.removeItem(cacheKey()); } catch (e) { /* sem armazenamento */ }
+  conta = null; db = null; perfil = null; snap = null; estadoSync = 'ok';
+  login.etapa = 'email'; login.erro = ''; login.enviando = false;
+  fechar(); render();
+}
+
+function primeiraVez() {
+  sb.from('perfis').update({ iniciado: true }).eq('id', conta.id).then(() => {});
+  perfil.iniciado = true;
+  if (db.locais.length || db.plantoes.length) return;
+  const daqui = lerLocal();
+  const meusLocais = daqui ? daqui.locais.filter(l => !l.exemplo) : [];
+  const ids = new Set(meusLocais.map(l => l.id));
+  const meusPlantoes = daqui ? daqui.plantoes.filter(p => !p.exemplo && ids.has(p.localId)) : [];
+  if (meusLocais.length) {
+    confirmar({
+      titulo: 'Levar seus plantões para a conta?',
+      texto: `Este aparelho tem ${plural(meusLocais.length, 'local', 'locais')} e ${plural(meusPlantoes.length, 'plantão', 'plantões')} lançados sem conta. Quer guardar tudo na sua conta?`,
+      ok: 'Levar para a conta',
+      onOk: () => { db.locais = meusLocais; db.plantoes = meusPlantoes; if (daqui.nome) db.nome = daqui.nome; db.ultimoLocal = meusLocais[0].id; fechar(); commit(); toast('Pronto. Seus plantões estão na sua conta.'); },
+      voltar: () => { Object.assign(db, exemplos()); db.ultimoLocal = 'ex-vv'; fechar(); commit(); }
+    });
+  } else {
+    Object.assign(db, exemplos()); db.ultimoLocal = 'ex-vv'; commit();
+  }
+}
+
+async function chamarFuncao(nome, body) {
+  const { data, error } = await sb.functions.invoke(nome, { body });
+  if (error) {
+    let msg = 'Não deu certo agora. Tente de novo em instantes.';
+    try { const j = await error.context.json(); if (j && j.erro) msg = j.erro; } catch (e) { /* resposta sem corpo */ }
+    throw new Error(msg);
+  }
+  return data;
+}
+
+async function atualizarPerfil() {
+  const r = await sb.from('perfis').select(CAMPOS_PERFIL).eq('id', conta.id).maybeSingle();
+  if (!r.error && r.data) { perfil = r.data; guardarCache(); render(); }
+}
+
+function abrirAssinatura() {
+  if (!NUVEM) return;
+  const s = situacaoConta();
+  const temAssinatura = perfil && perfil.asaas_subscription_id;
+  abrir('Assinatura', `
+    <p style="font-size:16px">${s && s.tipo === 'pausada' ? 'Seu acesso está pausado. Seus plantões continuam guardados, e você pode ver e exportar tudo.' : esc(s ? s.txt + '.' : '')}</p>
+    <dl class="well">
+      <div><dt>Plano</dt><dd>${esc(CFG.precoTexto || 'Mensal')}</dd></div>
+      <div><dt>Pagamento</dt><dd>Pix, boleto ou cartão</dd></div>
+      <div><dt>Cancelamento</dt><dd>Quando quiser, em Ajustes</dd></div>
+    </dl>
+    ${temAssinatura ? '' : `<div class="field"><label for="aDoc">CPF ou CNPJ para a cobrança</label>
+      <input class="input" id="aDoc" inputmode="numeric" autocomplete="off" placeholder="Só números" maxlength="18"></div>`}
+    <p class="err" id="aErr" hidden></p>
+    <div id="aLink"></div>
+    <button type="button" class="btn btn-primary btn-block" id="aGerar">${temAssinatura ? 'Ver pagamento em aberto' : 'Assinar'}</button>
+    <button type="button" class="btn btn-ghost btn-block" id="aAtualizar">Já paguei, atualizar</button>`, sh => {
+    const q = x => sh.querySelector(x);
+    q('#aGerar').onclick = async () => {
+      const e = q('#aErr'); e.hidden = true;
+      const doc = q('#aDoc') ? q('#aDoc').value.replace(/\D/g, '') : '';
+      if (q('#aDoc') && doc.length !== 11 && doc.length !== 14) { e.textContent = 'Digite um CPF (11 números) ou CNPJ (14 números).'; e.hidden = false; return; }
+      q('#aGerar').disabled = true; q('#aGerar').textContent = 'Gerando...';
+      try {
+        const r = await chamarFuncao('assinatura', { acao: 'assinar', cpfCnpj: doc });
+        if (r && r.url) q('#aLink').innerHTML = `<a class="btn btn-dark btn-block" href="${esc(r.url)}" target="_blank" rel="noopener">Abrir página de pagamento</a>`;
+        else if (r && r.mensagem) q('#aLink').innerHTML = `<p class="note">${esc(r.mensagem)}</p>`;
+        q('#aGerar').hidden = true;
+        atualizarPerfil();
+      } catch (err) { e.textContent = err.message; e.hidden = false; q('#aGerar').disabled = false; q('#aGerar').textContent = temAssinatura ? 'Ver pagamento em aberto' : 'Assinar'; }
+    };
+    q('#aAtualizar').onclick = async () => {
+      await atualizarPerfil();
+      const s2 = situacaoConta();
+      if (s2 && s2.tipo === 'ativa') { fechar(); toast('Assinatura ativa. Obrigado!'); }
+      else toast('O pagamento ainda não chegou. Pix costuma levar poucos minutos; boleto, até 3 dias úteis.');
+    };
+  });
+}
+
+function ligarLogin() {
+  const q = x => document.querySelector(x);
+  const traduz = e => {
+    const m = String((e && e.message) || '').toLowerCase();
+    if (m.includes('rate') || m.includes('seconds')) return 'Muitas tentativas seguidas. Espere um minuto e tente de novo.';
+    if (m.includes('expired') || m.includes('invalid') || m.includes('token')) return 'Código errado ou vencido. Confira o e-mail ou peça outro.';
+    return 'Não deu certo agora. Confira a internet e tente de novo.';
+  };
+  const enviar = async () => {
+    const email = (q('#lgEmail') ? q('#lgEmail').value : login.email).trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { login.erro = 'Digite um e-mail válido. Ex.: voce@exemplo.com'; render(); return; }
+    login.email = email; login.erro = ''; login.enviando = true; render();
+    const { error } = await sb.auth.signInWithOtp({ email, options: { shouldCreateUser: true, emailRedirectTo: location.href.split('#')[0] } });
+    login.enviando = false;
+    if (error) login.erro = traduz(error); else { login.etapa = 'codigo'; login.erro = ''; }
+    render();
+    if (!error && q('#lgCodigo')) q('#lgCodigo').focus();
+  };
+  if (q('#lgEnviar')) { q('#lgEnviar').onclick = enviar; q('#lgEmail').onkeydown = e => { if (e.key === 'Enter') enviar(); }; }
+  if (q('#lgReenviar')) q('#lgReenviar').onclick = () => { toast('Código reenviado.'); enviar(); };
+  if (q('#lgTrocar')) q('#lgTrocar').onclick = () => { login.etapa = 'email'; login.erro = ''; render(); };
+  const entrarCodigo = async () => {
+    const token = q('#lgCodigo').value.replace(/\D/g, '');
+    if (token.length < 6) { login.erro = 'Digite os 6 números do código.'; render(); return; }
+    login.enviando = true; login.erro = ''; render();
+    const { error } = await sb.auth.verifyOtp({ email: login.email, token, type: 'email' });
+    login.enviando = false;
+    if (error) { login.erro = traduz(error); render(); }
+  };
+  if (q('#lgEntrar')) { q('#lgEntrar').onclick = entrarCodigo; q('#lgCodigo').onkeydown = e => { if (e.key === 'Enter') entrarCodigo(); }; }
+  if (q('#lgGoogle')) q('#lgGoogle').onclick = () => sb.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: location.href.split('#')[0] } });
+}
+
+async function iniciarNuvem() {
+  render();
+  try { await carregarScript(SUPABASE_JS); } catch (e) { erroNuvem = 'Não deu para conectar. Confira a internet e tente de novo.'; carregando = false; render(); return; }
+  sb = window.supabase.createClient(CFG.supabaseUrl, CFG.supabaseAnonKey, { auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true, flowType: 'pkce' } });
+  sb.auth.onAuthStateChange((ev, session) => {
+    if (ev === 'SIGNED_OUT') { sairLocal(); return; }
+    if (session && (!conta || conta.id !== session.user.id)) setTimeout(() => entrar(session.user), 0);
+  });
+  const { data } = await sb.auth.getSession();
+  if (data.session) { if (!conta) await entrar(data.session.user); }
+  else { carregando = false; render(); }
+  window.addEventListener('online', () => { if (mudou()) sincronizar(); });
+}
+
 /* ---------- cliques ---------- */
 document.addEventListener('click', e => {
-  const b = e.target.closest('button, [data-tab]');
+  const b = e.target.closest('button, a[data-act]');
   if (!b) return;
   const d = b.dataset;
   if (d.open) return detalhe(d.open);
   if (d.pagar) return pagarTudo(d.pagar);
   if (d.cobrar) { const p = db.plantoes.find(x => x.id === d.cobrar); return copiar(textoCobranca([p]), 'Cobrança copiada. Cole no WhatsApp.'); }
   if (d.cobrarLocal) {
-    const lista = db.plantoes.filter(p => p.localId === d.cobrarLocal && status(p) === 'atrasado').sort((a, b) => (a.data < b.data ? -1 : 1));
-    return copiar(textoCobranca(lista), `Cobrança de ${lista.length} ${lista.length === 1 ? 'plantão' : 'plantões'} copiada.`);
+    const lista = db.plantoes.filter(p => p.localId === d.cobrarLocal && status(p) === 'atrasado').sort((a, b2) => (a.data < b2.data ? -1 : 1));
+    return copiar(textoCobranca(lista), `Cobrança de ${plural(lista.length, 'plantão', 'plantões')} copiada.`);
   }
   if (d.mes) { ui.mes = addMes(ui.mes, Number(d.mes)); ui.dia = null; return render(); }
   if (d.filtro) { ui.local = d.filtro; return render(); }
@@ -1193,10 +1713,30 @@ document.addEventListener('click', e => {
   if (d.editLocal) return formLocal(d.editLocal);
   switch (d.act) {
     case 'fechar': return fechar();
+    case 'lancar': return formPlantao();
     case 'novo-local': return formLocal();
     case 'lancar-dia': return formPlantao({ data: ui.dia });
     case 'csv': return exportarCSV();
     case 'pdf': return exportarPDF();
+    case 'assinar': return abrirAssinatura();
+    case 'recarregar': return location.reload();
+    case 'sair': return sb && sb.auth.signOut();
+    case 'cancelar-assinatura': return confirmar({
+      titulo: 'Cancelar a assinatura?', texto: `Você não será mais cobrado. ${perfil && perfil.pago_ate ? `Seu acesso continua até ${fmtData(perfil.pago_ate)}. ` : ''}Seus plantões continuam guardados.`,
+      ok: 'Cancelar assinatura', perigo: true,
+      onOk: async () => {
+        try { await chamarFuncao('assinatura', { acao: 'cancelar' }); await atualizarPerfil(); fechar(); toast('Assinatura cancelada.'); }
+        catch (err) { fechar(); toast(err.message); }
+      }
+    });
+    case 'excluir-conta': return confirmar({
+      titulo: 'Excluir sua conta?', texto: 'Sua conta, seus locais, plantões e pagamentos serão apagados para sempre, e a assinatura será cancelada. Exporte antes o que quiser guardar.',
+      ok: 'Excluir minha conta', perigo: true,
+      onOk: async () => {
+        try { await chamarFuncao('excluir-conta', {}); await sb.auth.signOut(); toast('Conta excluída.'); }
+        catch (err) { fechar(); toast(err.message); }
+      }
+    });
     case 'apagar-exemplos': return confirmar({
       titulo: 'Apagar os exemplos?', texto: 'Os hospitais e plantões de exemplo somem. O que você lançou continua aqui.', ok: 'Apagar exemplos',
       onOk: () => {
@@ -1209,16 +1749,15 @@ document.addEventListener('click', e => {
       }
     });
     case 'apagar-tudo': return confirmar({
-      titulo: 'Apagar todos os seus dados?', texto: 'Locais, plantões e pagamentos deste aparelho serão apagados. Isso não pode ser desfeito.', ok: 'Apagar tudo', perigo: true,
-      onOk: () => { db = { nome: '', ultimoLocal: null, locais: [], plantoes: [] }; ui.local = 'todos'; fechar(); commit(); toast('Tudo apagado.'); }
+      titulo: 'Apagar todos os seus plantões e locais?', texto: 'Locais, plantões e pagamentos serão apagados. Isso não pode ser desfeito.', ok: 'Apagar tudo', perigo: true,
+      onOk: () => { db.locais = []; db.plantoes = []; db.ultimoLocal = null; ui.local = 'todos'; fechar(); commit(); toast('Tudo apagado.'); }
     });
   }
 });
-$('#fab').addEventListener('click', () => formPlantao());
 window.addEventListener('hashchange', () => { render(); window.scrollTo(0, 0); });
-document.addEventListener('visibilitychange', () => { if (!document.hidden) render(); });
+document.addEventListener('visibilitychange', () => { if (!document.hidden && db) { render(); if (NUVEM && mudou()) sincronizar(); } });
 
-render();
+if (NUVEM) iniciarNuvem(); else render();
 })();
 </script>
 </body>

@@ -4,20 +4,23 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Atalho Hora</title>
+<meta name="claude:viewport-fit-sides" content="cover">
 <meta name="theme-color" content="#F2EFE6">
 <meta name="description" content="Descubra quanto vale de verdade a sua hora de plantão ou de consultório, depois de imposto, deslocamento, custos e faltas.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=Figtree:wght@400;500;600;700&display=swap">
 <style>
-/* Mesma família visual do Atalho Plantão: chão creme, cartão grafite com o número principal,
-   verde-limão para ação e destaque, roxo para foco e marca. Celular primeiro, uma coluna de até 560px.
-   No computador (960px ou mais): formulário à esquerda, resultado fixo à direita. */
+/* Família visual do Atalho Plantão: chão creme, cartão grafite com o número principal, verde-limão para ação e destaque,
+   roxo para marca e foco. Algarismos em Source Serif 4 (tabulares), texto em Figtree.
+   Celular: uma coluna de até 560px, resultado logo depois do seletor e barra fixa com o valor real quando o cartão sai da tela.
+   Computador (960px ou mais): entradas à esquerda (6fr), resultado e extrato fixos à direita (5fr), vão de 32px. */
 :root {
   --ground: #F2EFE6;
   --surface: #FFFFFF;
   --raised: #F7F4EC;
   --border: #E3DED1;
+  --rule: #EDE9DE;
   --control: #CFC9BA;
   --text: #1E1E24;
   --muted: #5F5C66;
@@ -31,41 +34,56 @@
   --lima-ink: #3B5000;
   --red-ink: #961227;
 
-  --hero-bg: #1E1E24; --hero-fg: #F6F3EC; --hero-muted: rgb(246 243 236 / 0.68); --hero-line: rgb(246 243 236 / 0.18);
-  --hero-accent: #C6F24E;
+  --hero-bg: #1E1E24; --hero-fg: #F6F3EC; --hero-muted: rgb(246 243 236 / 0.68); --hero-line: rgb(246 243 236 / 0.16);
+  --hero-accent: #C6F24E; --hero-chip: rgb(246 243 236 / 0.08);
+  --seg-1: #8F7BFF; --seg-2: #C9BEFF; --seg-3: rgb(246 243 236 / 0.42); --seg-4: rgb(246 243 236 / 0.22);
+
+  --cta-bg: #5B3DF5; --cta-fg: #FFFFFF; --cta-muted: rgb(255 255 255 / 0.78); --cta-field: rgb(255 255 255 / 0.12); --cta-line: rgb(255 255 255 / 0.32);
+
+  --shadow-card: 0 1px 2px rgb(30 30 36 / 0.04), 0 4px 16px rgb(30 30 36 / 0.05);
+  --shadow-float: 0 8px 24px rgb(30 30 36 / 0.18);
 
   --font: "Figtree", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-fig: "Source Serif 4", Georgia, "Times New Roman", serif;
 
   --radius-card: 24px;
   --radius-tile: 18px;
+  --ease: cubic-bezier(0.2, 0, 0, 1);
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --ground: #141318; --surface: #1F1E25; --raised: #26252D;
-    --border: #2E2D36; --control: #46454F;
+    --border: #2E2D36; --rule: #2A2931; --control: #4C4B55;
     --text: #F3F0E8; --muted: #B5B2BC; --faint: #A3A0AA;
     --roxo: #8F7BFF; --roxo-pale: #292345; --roxo-ink: #C7BCFF;
     --lima-ink: #D2F07C; --red-ink: #FF9AA5;
-    --hero-bg: #F3F0E8; --hero-fg: #1E1E24; --hero-muted: rgb(30 30 36 / 0.64); --hero-line: rgb(30 30 36 / 0.14);
-    --hero-accent: #3B5000;
+    --hero-bg: #F3F0E8; --hero-fg: #1E1E24; --hero-muted: rgb(30 30 36 / 0.64); --hero-line: rgb(30 30 36 / 0.12);
+    --hero-accent: #3B5000; --hero-chip: rgb(30 30 36 / 0.06);
+    --seg-1: #5B3DF5; --seg-2: #9C8CF5; --seg-3: rgb(30 30 36 / 0.38); --seg-4: rgb(30 30 36 / 0.18);
+    --cta-bg: #3D29B0;
+    --shadow-card: 0 1px 2px rgb(0 0 0 / 0.2), 0 4px 16px rgb(0 0 0 / 0.18);
+    --shadow-float: 0 8px 24px rgb(0 0 0 / 0.45);
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --ground: #141318; --surface: #1F1E25; --raised: #26252D;
-  --border: #2E2D36; --control: #46454F;
+  --border: #2E2D36; --rule: #2A2931; --control: #4C4B55;
   --text: #F3F0E8; --muted: #B5B2BC; --faint: #A3A0AA;
   --roxo: #8F7BFF; --roxo-pale: #292345; --roxo-ink: #C7BCFF;
   --lima-ink: #D2F07C; --red-ink: #FF9AA5;
-  --hero-bg: #F3F0E8; --hero-fg: #1E1E24; --hero-muted: rgb(30 30 36 / 0.64); --hero-line: rgb(30 30 36 / 0.14);
-  --hero-accent: #3B5000;
+  --hero-bg: #F3F0E8; --hero-fg: #1E1E24; --hero-muted: rgb(30 30 36 / 0.64); --hero-line: rgb(30 30 36 / 0.12);
+  --hero-accent: #3B5000; --hero-chip: rgb(30 30 36 / 0.06);
+  --seg-1: #5B3DF5; --seg-2: #9C8CF5; --seg-3: rgb(30 30 36 / 0.38); --seg-4: rgb(30 30 36 / 0.18);
+  --cta-bg: #3D29B0;
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.2), 0 4px 16px rgb(0 0 0 / 0.18);
+  --shadow-float: 0 8px 24px rgb(0 0 0 / 0.45);
   color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
-html { -webkit-text-size-adjust: 100%; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-block-start: 16px; }
 body {
   margin: 0;
   background: var(--ground);
@@ -81,267 +99,502 @@ button { cursor: pointer; }
 h1, h2, h3, p { margin: 0; }
 h1, h2, h3 { text-wrap: balance; }
 ol, ul { margin: 0; padding: 0; list-style: none; }
-.num { font-variant-numeric: tabular-nums; }
+.num, .fig { font-variant-numeric: tabular-nums; }
+.fig { font-family: var(--font-fig); font-weight: 700; letter-spacing: -0.015em; }
+.fig small { font-size: 0.5em; font-weight: 600; vertical-align: 0.55em; margin-inline-end: 0.1em; opacity: 0.72; letter-spacing: 0; }
+.fig .ct { font-size: 0.55em; font-weight: 600; opacity: 0.7; letter-spacing: 0; }
+svg.i { width: 18px; height: 18px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
-/* ---------- estrutura ---------- */
+/* ---------- topo ---------- */
 .top {
-  display: flex; align-items: center; gap: 10px; min-height: 56px;
+  display: flex; align-items: center; gap: 10px; min-height: 60px;
   max-width: 1120px; margin: 0 auto;
-  padding: env(safe-area-inset-top, 0px) max(16px, env(safe-area-inset-right, 0px)) 0 max(16px, env(safe-area-inset-left, 0px));
+  padding-block: 0; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
 }
-.mark { width: 30px; height: 30px; flex: none; display: block; }
-.wordmark { font-family: var(--font-fig); font-weight: 600; font-size: 18px; letter-spacing: -0.01em; line-height: 1.1; }
+.mark { width: 32px; height: 32px; flex: none; display: block; }
+.wordmark { font-family: var(--font-fig); font-weight: 600; font-size: 18px; letter-spacing: -0.01em; line-height: 1.1; display: block; }
 .brand small { display: block; color: var(--muted); font-size: 12px; font-weight: 500; }
+.icon-btn {
+  margin-inline-start: auto; width: 44px; height: 44px; border-radius: 50%;
+  display: grid; place-items: center; border: 1px solid var(--border); background: var(--surface); color: var(--muted);
+  transition-property: scale, background-color; transition-duration: 150ms; transition-timing-function: ease-out;
+}
+.icon-btn .i { width: 20px; height: 20px; }
+.icon-btn .off { display: none; }
+.icon-btn[aria-pressed="false"] .on { display: none; }
+.icon-btn[aria-pressed="false"] .off { display: block; }
 
+/* ---------- página ---------- */
 .page {
   max-width: 560px; margin: 0 auto;
-  padding: 8px max(16px, env(safe-area-inset-right, 0px)) calc(32px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
-  display: grid; gap: 20px;
+  padding-block: 4px 40px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid; gap: 16px;
 }
-.intro h1 { font-family: var(--font-fig); font-size: 30px; font-weight: 700; letter-spacing: -0.015em; line-height: 1.12; }
-.intro p { color: var(--muted); margin-top: 8px; max-width: 46ch; }
+.colL, .colR { display: contents; }
+.resumo, .extrato, .entradas { min-width: 0; }
+.intro { order: 0; padding-block: 4px 4px; }
+.seg { order: 1; }
+.resumo { order: 2; }
+.entradas { order: 3; }
+.extrato { order: 4; }
+.lista { order: 5; }
 
-.col-form, .col-res { display: grid; gap: 20px; min-width: 0; align-content: start; }
+.intro h1 { font-family: var(--font-fig); font-size: 32px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; }
+.intro p { color: var(--muted); margin-top: 8px; max-width: 44ch; font-size: 16px; }
 
 @media (min-width: 960px) {
   .page {
-    max-width: 1120px; padding-inline: 40px;
-    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); column-gap: 32px; align-items: start;
+    max-width: 1120px; padding-inline: 40px; padding-block: 8px 56px;
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); column-gap: 32px; row-gap: 16px; align-items: start;
   }
-  .intro { grid-column: 1 / -1; padding-top: 8px; }
-  .intro h1 { font-size: 38px; }
-  .col-res { position: sticky; top: 16px; }
+  .intro { grid-column: 1 / -1; padding-block: 12px 8px; }
+  .intro h1 { font-size: 44px; }
+  .colL { display: grid; gap: 16px; grid-column: 1; grid-row: 2; min-width: 0; }
+  .colR { display: grid; gap: 16px; grid-column: 2; grid-row: 2; position: sticky; top: 16px; min-width: 0; }
+  .top { padding-inline: 40px; }
 }
 
 /* ---------- seletor de modo ---------- */
 .seg {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 4px;
-  background: var(--surface); border: 1px solid var(--border); border-radius: 999px;
+  position: relative; display: grid; grid-template-columns: 1fr 1fr; padding: 4px;
+  background: var(--surface); border-radius: 999px; box-shadow: var(--shadow-card); border: 1px solid transparent;
 }
+.seg-thumb {
+  position: absolute; inset: 4px auto 4px 4px; width: calc(50% - 4px); border-radius: 999px; background: var(--text);
+  transition: translate 300ms var(--ease);
+}
+.seg[data-mode="consulta"] .seg-thumb { translate: 100% 0; }
 .seg button {
-  min-height: 44px; border: 0; border-radius: 999px; background: none;
-  font-weight: 600; color: var(--muted);
+  position: relative; z-index: 1; min-height: 48px; border: 0; border-radius: 999px; background: none;
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font-weight: 600; font-size: 15px; color: var(--muted);
+  transition: color 150ms ease-out;
 }
-.seg button[aria-pressed="true"] { background: var(--text); color: var(--surface); }
-
-/* ---------- formulário ---------- */
-.card { background: var(--surface); border-radius: var(--radius-card); padding: 20px; min-width: 0; }
-.card h2 { font-family: var(--font-fig); font-size: 19px; font-weight: 600; margin-bottom: 4px; }
-.card .lede { color: var(--muted); font-size: 14px; margin-bottom: 18px; }
-.fields { display: grid; gap: 16px; }
-@media (min-width: 360px) { .fields { grid-template-columns: 1fr 1fr; } .field.wide { grid-column: 1 / -1; } }
-.field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
-.field label { font-size: 14px; font-weight: 600; }
-.hint { color: var(--muted); font-size: 13px; }
-.box {
-  display: flex; align-items: center; min-height: 48px; border-radius: 10px;
-  border: 1px solid var(--control); background: var(--surface);
-}
-.box:focus-within { outline: 2px solid var(--roxo); outline-offset: 0; border-color: var(--roxo); }
-.box span { padding: 0 12px; color: var(--muted); font-size: 14px; flex: none; }
-.box input {
-  flex: 1; min-width: 0; height: 46px; border: 0; background: none; outline: none; padding: 0 14px;
-  font-family: var(--font-fig); font-size: 20px; font-weight: 700; font-variant-numeric: tabular-nums;
-}
-.box span + input { padding-left: 0; }
-.box input::placeholder { color: var(--faint); font-weight: 600; }
-.more { margin-top: 18px; border-top: 1px solid var(--border); padding-top: 14px; }
-.more summary { cursor: pointer; font-weight: 600; font-size: 14px; color: var(--roxo-ink); min-height: 32px; display: flex; align-items: center; }
-.more[open] summary { margin-bottom: 12px; }
+.seg button[aria-pressed="true"] { color: var(--surface); }
 
 /* ---------- resultado ---------- */
-.hero { background: var(--hero-bg); color: var(--hero-fg); border-radius: var(--radius-card); padding: 22px; display: grid; gap: 18px; }
-.eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--hero-accent); }
-.big { font-family: var(--font-fig); font-size: 46px; font-weight: 700; letter-spacing: -0.02em; line-height: 1; font-variant-numeric: tabular-nums; margin-top: 6px; overflow-wrap: anywhere; }
-.big small, .mid small { font-size: 0.45em; font-weight: 600; vertical-align: 0.6em; margin-inline-end: 0.12em; opacity: 0.75; }
-.big .per, .mid .per { font-family: var(--font); font-size: 15px; font-weight: 500; color: var(--hero-muted); margin-inline-start: 6px; letter-spacing: 0; }
-.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; border-top: 1px solid var(--hero-line); padding-top: 16px; }
-.pair .lbl { font-size: 13px; color: var(--hero-muted); }
-.mid { font-family: var(--font-fig); font-size: 24px; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.15; margin-top: 2px; white-space: nowrap; }
-.mid .per { font-size: 13px; margin-inline-start: 4px; }
-
-.gap-tile { background: var(--lima); color: var(--lima-ink-on); border-radius: var(--radius-tile); padding: 18px 20px; }
-.gap-tile .k { font-size: 14px; font-weight: 600; }
-.gap-tile .v { font-family: var(--font-fig); font-size: 34px; font-weight: 700; line-height: 1.1; font-variant-numeric: tabular-nums; margin-top: 4px; }
-.gap-tile .v small { font-size: 0.5em; vertical-align: 0.45em; margin-inline-end: 0.1em; }
-.gap-tile p { font-size: 14px; margin-top: 6px; }
-.gap-tile.neg { background: var(--surface); color: var(--text); border: 2px solid var(--red-ink); }
-
-.empty { color: var(--hero-muted); font-size: 14px; }
-
-/* passo a passo */
-.steps { counter-reset: s; display: grid; gap: 0; }
-.steps li { counter-increment: s; display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 4px 12px; padding: 14px 0; border-top: 1px solid var(--border); }
-.steps li:first-child { border-top: 0; padding-top: 4px; }
-.steps li::before {
-  content: counter(s); grid-row: span 2; width: 28px; height: 28px; border-radius: 50%;
-  background: var(--roxo-pale); color: var(--roxo-ink); font-weight: 700; font-size: 13px;
-  display: grid; place-items: center; font-variant-numeric: tabular-nums;
+.resumo { display: grid; gap: 12px; }
+.hero {
+  background: var(--hero-bg); color: var(--hero-fg); border-radius: var(--radius-card);
+  padding: 22px 22px 20px; display: grid; gap: 18px; min-width: 0;
 }
-.steps .t { font-weight: 600; }
-.steps .c { color: var(--muted); font-size: 14px; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
-.steps .c b { color: var(--text); font-weight: 700; }
+.hero-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 10px 12px; }
+.hero-top > div { min-width: 0; }
+.eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--hero-accent); }
+.big { font-size: 52px; line-height: 1; margin-top: 8px; white-space: nowrap; }
+.per { font-family: var(--font); font-size: 15px; font-weight: 500; color: var(--hero-muted); margin-inline-start: 6px; letter-spacing: 0; }
+.chip {
+  flex: none; display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 999px;
+  background: var(--hero-chip); color: var(--hero-muted); font-size: 12px; font-weight: 600; white-space: nowrap;
+}
+.vs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.vs > div { min-width: 0; }
+.vs .lbl { font-size: 13px; color: var(--hero-muted); }
+.vs .fig { font-size: 22px; line-height: 1.2; margin-top: 2px; white-space: nowrap; }
 
-/* lista */
-.lista { background: var(--raised); border: 1px solid var(--border); }
-.lista h2 { margin-bottom: 14px; }
+/* para onde vai a hora */
+.bar-wrap { border-top: 1px solid var(--hero-line); padding-top: 16px; display: grid; gap: 12px; }
+.bar-wrap h3 { font-size: 13px; font-weight: 600; color: var(--hero-muted); }
+.bar { display: flex; height: 14px; border-radius: 7px; overflow: hidden; gap: 2px; background: var(--hero-chip); }
+.bar span { height: 100%; flex: none; min-width: 0; transition: width 400ms var(--ease); }
+.leg { display: grid; gap: 8px; }
+.leg li { display: grid; grid-template-columns: 10px minmax(0, 1fr) auto; align-items: center; gap: 10px; font-size: 14px; }
+.leg i { width: 10px; height: 10px; border-radius: 3px; }
+.leg .v { font-variant-numeric: tabular-nums; font-weight: 600; white-space: nowrap; }
+.leg li.real { color: var(--hero-fg); font-weight: 600; }
+.leg li:not(.real) { color: var(--hero-muted); }
+.leg li:not(.real) .v { color: var(--hero-fg); font-weight: 500; }
+
+.gap-tile {
+  background: var(--lima); color: var(--lima-ink-on); border-radius: var(--radius-tile); padding: 18px 20px;
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 4px 16px;
+}
+.gap-tile .k { font-size: 14px; font-weight: 600; }
+.gap-tile .v { font-size: 36px; line-height: 1.05; margin-top: 2px; white-space: nowrap; }
+.gap-tile p.s { grid-column: 1 / -1; font-size: 14px; margin-top: 6px; }
+.ring { width: 64px; height: 64px; grid-row: 1 / span 2; grid-column: 2; position: relative; }
+.ring svg { width: 64px; height: 64px; rotate: -90deg; display: block; }
+.ring circle { fill: none; stroke-width: 7; }
+.ring .tr { stroke: rgb(30 30 36 / 0.14); }
+.ring .fg { stroke: var(--lima-ink-on); stroke-linecap: round; transition: stroke-dashoffset 400ms var(--ease); }
+.ring b { position: absolute; inset: 0; display: grid; place-items: center; font-size: 13px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.gap-tile.neg { background: var(--surface); color: var(--text); border: 2px solid var(--red-ink); grid-template-columns: 1fr; }
+.gap-tile.neg .ring { display: none; }
+
+/* ---------- entradas ---------- */
+.entradas { display: grid; gap: 12px; }
+.card { background: var(--surface); border-radius: var(--radius-card); padding: 20px; min-width: 0; box-shadow: var(--shadow-card); border: 1px solid transparent; }
+.grp + .grp { margin-top: 22px; padding-top: 20px; border-top: 1px solid var(--rule); }
+.grp-h { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.grp-h .ico { width: 32px; height: 32px; border-radius: 10px; display: grid; place-items: center; background: var(--roxo-pale); color: var(--roxo-ink); flex: none; }
+.grp-h h2 { font-family: var(--font-fig); font-size: 18px; font-weight: 600; line-height: 1.2; }
+.grp-h p { color: var(--muted); font-size: 13px; }
+.fields { display: grid; gap: 14px; }
+@media (min-width: 360px) { .fields { grid-template-columns: 1fr 1fr; } .field.wide { grid-column: 1 / -1; } }
+.field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.field label, .field .flabel { font-size: 14px; font-weight: 600; display: flex; justify-content: space-between; gap: 8px; }
+.hint { color: var(--muted); font-size: 13px; font-weight: 400; }
+.box {
+  display: flex; align-items: center; min-height: 52px; border-radius: 12px;
+  border: 1px solid var(--control); background: var(--surface);
+  transition: border-color 150ms ease-out;
+}
+@media (hover: hover) { .box:hover { border-color: var(--muted); } }
+.box:focus-within { outline: 2px solid var(--roxo); outline-offset: 0; border-color: var(--roxo); }
+.box > span { padding: 0 12px; color: var(--muted); font-size: 14px; flex: none; }
+.box input {
+  flex: 1; min-width: 0; height: 50px; border: 0; background: none; outline: none; padding: 0 14px;
+  font-family: var(--font-fig); font-size: 21px; font-weight: 700; font-variant-numeric: tabular-nums;
+}
+.box > span + input { padding-left: 0; }
+
+/* controle deslizante de percentual */
+.slide { display: grid; grid-template-columns: minmax(0, 1fr) 88px; gap: 12px; align-items: center; }
+.slide .box { min-height: 44px; }
+.slide .box input { height: 42px; font-size: 18px; padding: 0 0 0 12px; text-align: end; }
+.slide .box > span { padding: 0 10px 0 4px; }
+input[type="range"] {
+  -webkit-appearance: none; appearance: none; width: 100%; height: 44px; background: none; margin: 0; cursor: pointer;
+}
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 6px; border-radius: 3px;
+  background: linear-gradient(to right, var(--roxo) var(--p, 0%), var(--rule) var(--p, 0%));
+}
+input[type="range"]::-moz-range-track { height: 6px; border-radius: 3px; background: var(--rule); }
+input[type="range"]::-moz-range-progress { height: 6px; border-radius: 3px; background: var(--roxo); }
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 24px; height: 24px; margin-top: -9px; border-radius: 50%;
+  background: var(--surface); border: 2px solid var(--roxo); box-shadow: 0 1px 4px rgb(30 30 36 / 0.2);
+}
+input[type="range"]::-moz-range-thumb {
+  width: 20px; height: 20px; border-radius: 50%; background: var(--surface); border: 2px solid var(--roxo);
+}
+
+/* atalhos de dias */
+.pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.pills button {
+  min-height: 36px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--control); background: var(--surface);
+  font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--muted);
+  transition-property: background-color, color, border-color, scale; transition-duration: 150ms; transition-timing-function: ease-out;
+}
+.pills button[aria-pressed="true"] { background: var(--text); border-color: var(--text); color: var(--surface); }
+
+.more { margin-top: 14px; }
+.more summary {
+  cursor: pointer; list-style: none; font-weight: 600; font-size: 14px; color: var(--roxo-ink);
+  min-height: 40px; display: inline-flex; align-items: center; gap: 6px;
+}
+.more summary::-webkit-details-marker { display: none; }
+.more summary .i { width: 16px; height: 16px; transition: rotate 200ms var(--ease); }
+.more[open] summary .i { rotate: 90deg; }
+.more[open] summary { margin-bottom: 10px; }
+.note-sm { color: var(--muted); font-size: 13px; padding: 2px 4px; display: flex; gap: 8px; align-items: flex-start; }
+.note-sm .i { width: 16px; height: 16px; margin-top: 2px; }
+
+/* ---------- extrato ---------- */
+.extrato h2 { font-family: var(--font-fig); font-size: 20px; font-weight: 600; }
+.extrato .lede { color: var(--muted); font-size: 14px; margin-top: 2px; }
+.bruto-row {
+  margin-top: 16px; padding: 12px 14px; border-radius: 12px; background: var(--raised);
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; align-items: center;
+}
+.bruto-row .t { font-weight: 600; font-size: 14px; }
+.bruto-row .c { color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; grid-column: 1; }
+.bruto-row .fig { grid-row: 1 / span 2; grid-column: 2; font-size: 20px; white-space: nowrap; }
+.rows { margin-top: 8px; }
+.rows li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 16px; padding: 12px 0; border-top: 1px solid var(--rule); align-items: baseline; }
+.rows li:first-child { border-top: 0; }
+.rows .t { font-weight: 600; font-size: 15px; }
+.rows .c { color: var(--muted); font-size: 13px; grid-column: 1; font-variant-numeric: tabular-nums; }
+.rows .a { grid-row: 1; grid-column: 2; font-family: var(--font-fig); font-weight: 700; font-size: 18px; font-variant-numeric: tabular-nums; white-space: nowrap; text-align: end; }
+.rows li.minus .a { color: var(--muted); }
+.rows li.div .a { color: var(--roxo-ink); }
+.rows li.sub { border-top: 1px dashed var(--control); }
+.rows li.sub .t, .rows li.sub .a { font-size: 17px; }
+.rows li.final {
+  margin-top: 8px; border: 0; padding: 14px 16px; border-radius: 14px; background: var(--lima); color: var(--lima-ink-on);
+}
+.rows li.final .c { color: var(--lima-ink-on); opacity: 0.8; }
+.rows li.final .a { font-size: 24px; color: var(--lima-ink-on); }
+
+/* ---------- lista ---------- */
+.lista { background: var(--cta-bg); color: var(--cta-fg); border-radius: var(--radius-card); padding: 22px 20px; display: grid; gap: 14px; }
+.lista-h { display: flex; gap: 12px; align-items: flex-start; }
+.lista-h .ico { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; background: var(--lima); color: var(--lima-ink-on); flex: none; }
+.lista-h .ico .i { width: 20px; height: 20px; }
+.lista h2 { font-family: var(--font-fig); font-size: 20px; font-weight: 600; line-height: 1.25; }
 .lista form { display: grid; gap: 10px; }
 @media (min-width: 420px) { .lista form { grid-template-columns: minmax(0, 1fr) auto; } .lista form .hint, .lista form .msg { grid-column: 1 / -1; } }
 .lista input[type="email"] {
-  width: 100%; min-height: 48px; padding: 0 14px; border-radius: 10px;
-  border: 1px solid var(--control); background: var(--surface); font-size: 16px;
+  width: 100%; min-height: 50px; padding: 0 16px; border-radius: 999px;
+  border: 1px solid var(--cta-line); background: var(--cta-field); color: var(--cta-fg); font-size: 16px;
 }
-.lista input[type="email"]:focus { outline: 2px solid var(--roxo); outline-offset: 0; border-color: var(--roxo); }
+.lista input[type="email"]::placeholder { color: var(--cta-muted); }
+.lista input[type="email"]:focus { outline: 2px solid var(--lima); outline-offset: 1px; border-color: transparent; }
+.lista .hint { color: var(--cta-muted); }
 .btn {
-  min-height: 48px; padding: 0 22px; border-radius: 999px; border: 0;
+  min-height: 50px; padding: 0 22px; border-radius: 999px; border: 0;
   background: var(--lima); color: var(--lima-ink-on); font-weight: 700;
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  transition-property: scale, opacity; transition-duration: 150ms; transition-timing-function: ease-out;
 }
 .btn:disabled { opacity: 0.6; cursor: default; }
-.msg { font-size: 14px; font-weight: 600; }
-.msg.ok { color: var(--lima-ink); }
-.msg.err { color: var(--red-ink); }
+.lista :focus-visible { outline-color: var(--lima); }
+.msg { font-size: 14px; font-weight: 600; display: flex; gap: 8px; align-items: center; }
+.msg .i { width: 18px; height: 18px; }
 
+/* pressionar */
+.seg button:not(:disabled):active, .btn:not(:disabled):active, .pills button:active, .icon-btn:active, .sbar button:active { scale: 0.96; }
+
+/* ---------- barra fixa do celular ---------- */
+.sbar {
+  position: fixed; inset: auto 0 0 0; z-index: 20;
+  padding-block: 10px calc(10px + env(safe-area-inset-bottom, 0px));
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  pointer-events: none;
+}
+.sbar-in {
+  max-width: 528px; margin: 0 auto; pointer-events: auto;
+  background: var(--hero-bg); color: var(--hero-fg); border-radius: 18px; padding: 10px 10px 10px 18px;
+  display: flex; align-items: center; gap: 12px; box-shadow: var(--shadow-float);
+  transition-property: translate, opacity; transition-duration: 300ms; transition-timing-function: var(--ease);
+}
+.sbar[data-show="false"] .sbar-in { translate: 0 calc(100% + 24px); opacity: 0; pointer-events: none; }
+.sbar .l { font-size: 12px; color: var(--hero-muted); line-height: 1.2; }
+.sbar .fig { font-size: 22px; line-height: 1.15; white-space: nowrap; }
+.sbar .fig .per { font-size: 13px; }
+.sbar button {
+  margin-inline-start: auto; min-height: 44px; padding: 0 16px; border-radius: 12px; border: 0;
+  background: var(--lima); color: var(--lima-ink-on); font-weight: 700; font-size: 14px; white-space: nowrap;
+  transition: scale 150ms ease-out;
+}
+@media (min-width: 960px) { .sbar { display: none; } }
+
+/* ---------- rodapé ---------- */
 .foot {
   max-width: 1120px; margin: 0 auto; color: var(--muted); font-size: 13px;
-  padding: 0 max(16px, env(safe-area-inset-right, 0px)) calc(28px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+  padding-block: 0 calc(104px + env(safe-area-inset-bottom, 0px));
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
 }
-.foot p { max-width: 70ch; }
+.foot-in { border-top: 1px solid var(--border); padding-top: 18px; display: flex; gap: 10px; align-items: flex-start; }
+.foot-in .i { width: 18px; height: 18px; margin-top: 1px; color: var(--muted); }
+.foot p { max-width: 72ch; }
 .foot p + p { margin-top: 6px; }
-@media (min-width: 960px) { .foot, .top { padding-inline: 40px; } }
+@media (min-width: 960px) { .foot { padding-inline: 40px; padding-block: 0 40px; } }
 
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ---------- entrada da página ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .rise { animation: rise 300ms ease-out both; }
+  @keyframes rise { from { opacity: 0; filter: blur(4px); translate: 0 12px; } }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rise { animation: fade 300ms ease-out both; }
+  @keyframes fade { from { opacity: 0; } }
+  .seg-thumb, .bar span, .ring .fg, .sbar-in, .more summary .i { transition-property: opacity; }
+}
 </style>
 </head>
 <body>
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></symbol>
+  <symbol id="i-steth" viewBox="0 0 24 24"><path d="M5 3v5a5 5 0 0 0 10 0V3"/><path d="M10 13v2a5 5 0 0 0 10 0v-2"/><circle cx="20" cy="10" r="2"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-car" viewBox="0 0 24 24"><path d="M5 16V11l2-5h10l2 5v5"/><path d="M3 16h18v2H3z"/><circle cx="7.5" cy="13" r="0.5"/><circle cx="16.5" cy="13" r="0.5"/></symbol>
+  <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M4 7h15a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a2 2 0 0 1 2-2h11"/><path d="M16 14h.01"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-build" viewBox="0 0 24 24"><path d="M4 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16"/><path d="M16 9h2a2 2 0 0 1 2 2v10M2 21h20M8 7h4M8 11h4M8 15h4"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10 20a2 2 0 0 0 4 0"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></symbol>
+  <symbol id="i-sound" viewBox="0 0 24 24"><path d="M4 10v4h4l5 4V6L8 10H4Z"/><path d="M16.5 9a4 4 0 0 1 0 6M19 6.5a7.5 7.5 0 0 1 0 11"/></symbol>
+  <symbol id="i-mute" viewBox="0 0 24 24"><path d="M4 10v4h4l5 4V6L8 10H4Z"/><path d="m17 10 4 4M21 10l-4 4"/></symbol>
+</svg>
+
 <header class="top">
   <svg class="mark" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="11" fill="#5B3DF5"/><path d="M22.5 7 12 22.5h7.5L17.5 33 28 17.5h-7.5L22.5 7Z" fill="#C6F24E"/></svg>
   <div class="brand"><span class="wordmark">Atalho Hora</span><small>Dr. Atalho</small></div>
+  <button type="button" class="icon-btn" id="somBtn" aria-pressed="true" aria-label="Som dos toques">
+    <svg class="i on"><use href="#i-sound"/></svg><svg class="i off"><use href="#i-mute"/></svg>
+  </button>
 </header>
 
 <main class="page">
-  <div class="intro">
+  <div class="intro rise">
     <h1>Quanto vale de verdade a sua hora</h1>
     <p>O valor combinado não é o que fica com você. Coloque seus números e veja a conta inteira.</p>
   </div>
 
-  <div class="col-form">
-    <div class="seg" role="group" aria-label="Tipo de trabalho">
-      <button type="button" data-mode="plantao" aria-pressed="true">Plantão</button>
-      <button type="button" data-mode="consulta" aria-pressed="false">Consulta</button>
-    </div>
+  <div class="colL">
+  <div class="seg rise" id="seg" data-mode="plantao" role="group" aria-label="Tipo de trabalho" style="animation-delay:100ms">
+    <span class="seg-thumb" aria-hidden="true"></span>
+    <button type="button" data-mode="plantao" aria-pressed="true"><svg class="i"><use href="#i-moon"/></svg>Plantão</button>
+    <button type="button" data-mode="consulta" aria-pressed="false"><svg class="i"><use href="#i-steth"/></svg>Consulta</button>
+  </div>
 
-    <section class="card" id="formPlantao" aria-labelledby="hPlantao">
-      <h2 id="hPlantao">Seu plantão</h2>
-      <p class="lede">Os números já preenchidos são só um exemplo. Troque pelos seus.</p>
-      <div class="fields">
-        <div class="field wide">
-          <label for="p_valor">Valor do plantão</label>
-          <div class="box"><span>R$</span><input id="p_valor" inputmode="decimal" autocomplete="off" value="1.200"></div>
-        </div>
-        <div class="field">
-          <label for="p_duracao">Duração</label>
-          <div class="box"><input id="p_duracao" inputmode="decimal" autocomplete="off" value="12"><span>horas</span></div>
-        </div>
-        <div class="field">
-          <label for="p_desloc">Deslocamento</label>
-          <div class="box"><input id="p_desloc" inputmode="decimal" autocomplete="off" value="1,5"><span>horas</span></div>
-          <span class="hint">Ida e volta somadas.</span>
-        </div>
-        <div class="field">
-          <label for="p_transp">Transporte</label>
-          <div class="box"><span>R$</span><input id="p_transp" inputmode="decimal" autocomplete="off" value="60"></div>
-          <span class="hint">Ida e volta: combustível, estacionamento, app.</span>
-        </div>
-        <div class="field">
-          <label for="p_imposto">Imposto</label>
-          <div class="box"><input id="p_imposto" inputmode="decimal" autocomplete="off" value="15"><span>%</span></div>
-          <span class="hint">Sobre o valor do plantão.</span>
-        </div>
-        <div class="field wide">
-          <label for="p_dias">Dias até o pagamento</label>
-          <div class="box"><input id="p_dias" inputmode="numeric" autocomplete="off" value="45"><span>dias</span></div>
-          <span class="hint">Do dia do plantão até o dinheiro cair na conta.</span>
-        </div>
-      </div>
-      <details class="more">
-        <summary>Ajustar quanto custa esperar</summary>
+  <div class="entradas rise" style="animation-delay:300ms">
+    <section class="card" id="formPlantao" aria-label="Dados do plantão">
+      <div class="grp">
+        <div class="grp-h"><span class="ico"><svg class="i"><use href="#i-clock"/></svg></span><div><h2>O plantão</h2><p>Os números preenchidos são um exemplo. Troque pelos seus.</p></div></div>
         <div class="fields">
-          <div class="field wide">
-            <label for="p_juros">Rendimento do dinheiro parado</label>
-            <div class="box"><input id="p_juros" inputmode="decimal" autocomplete="off" value="1"><span>% ao mês</span></div>
-            <span class="hint">Quanto esse dinheiro renderia se já estivesse com você. Use o rendimento da sua aplicação.</span>
+          <div class="field">
+            <label for="p_valor">Valor</label>
+            <div class="box"><span>R$</span><input id="p_valor" inputmode="decimal" autocomplete="off" value="1.200"></div>
+          </div>
+          <div class="field">
+            <label for="p_duracao">Duração</label>
+            <div class="box"><input id="p_duracao" inputmode="decimal" autocomplete="off" value="12"><span>horas</span></div>
           </div>
         </div>
-      </details>
+      </div>
+      <div class="grp">
+        <div class="grp-h"><span class="ico"><svg class="i"><use href="#i-car"/></svg></span><div><h2>O caminho</h2><p>Ida e volta somadas.</p></div></div>
+        <div class="fields">
+          <div class="field">
+            <label for="p_desloc">Tempo</label>
+            <div class="box"><input id="p_desloc" inputmode="decimal" autocomplete="off" value="1,5"><span>horas</span></div>
+          </div>
+          <div class="field">
+            <label for="p_transp">Transporte</label>
+            <div class="box"><span>R$</span><input id="p_transp" inputmode="decimal" autocomplete="off" value="60"></div>
+          </div>
+          <span class="hint field wide">Combustível, estacionamento, pedágio ou aplicativo.</span>
+        </div>
+      </div>
+      <div class="grp">
+        <div class="grp-h"><span class="ico"><svg class="i"><use href="#i-wallet"/></svg></span><div><h2>O pagamento</h2><p>O que sai antes e o tempo até o dinheiro cair.</p></div></div>
+        <div class="fields">
+          <div class="field wide">
+            <span class="flabel" id="lbl_p_imp">Imposto <span class="hint">sobre o valor do plantão</span></span>
+            <div class="slide">
+              <input type="range" id="p_imposto_r" min="0" max="30" step="0.5" aria-labelledby="lbl_p_imp" data-for="p_imposto">
+              <div class="box"><input id="p_imposto" inputmode="decimal" autocomplete="off" value="15" aria-labelledby="lbl_p_imp"><span>%</span></div>
+            </div>
+          </div>
+          <div class="field wide">
+            <label for="p_dias">Dias até o pagamento</label>
+            <div class="box"><input id="p_dias" inputmode="numeric" autocomplete="off" value="45"><span>dias</span></div>
+            <div class="pills" data-for="p_dias" aria-label="Atalhos de prazo">
+              <button type="button" data-v="0">No dia</button><button type="button" data-v="30">30</button><button type="button" data-v="45">45</button><button type="button" data-v="60">60</button><button type="button" data-v="90">90</button>
+            </div>
+          </div>
+        </div>
+        <details class="more">
+          <summary><svg class="i"><use href="#i-chev"/></svg>Ajustar quanto custa esperar</summary>
+          <div class="fields">
+            <div class="field wide">
+              <label for="p_juros">Rendimento do dinheiro parado</label>
+              <div class="box"><input id="p_juros" inputmode="decimal" autocomplete="off" value="1"><span>% ao mês</span></div>
+              <span class="hint">Quanto esse dinheiro renderia se já estivesse com você. Use o rendimento da sua aplicação.</span>
+            </div>
+          </div>
+        </details>
+      </div>
     </section>
 
-    <section class="card" id="formConsulta" aria-labelledby="hConsulta" hidden>
-      <h2 id="hConsulta">Seu consultório</h2>
-      <p class="lede">Os números já preenchidos são só um exemplo. Troque pelos seus.</p>
-      <div class="fields">
-        <div class="field">
-          <label for="c_valor">Valor da consulta</label>
-          <div class="box"><span>R$</span><input id="c_valor" inputmode="decimal" autocomplete="off" value="400"></div>
+    <section class="card" id="formConsulta" aria-label="Dados do consultório" hidden>
+      <div class="grp">
+        <div class="grp-h"><span class="ico"><svg class="i"><use href="#i-cal"/></svg></span><div><h2>A agenda</h2><p>Os números preenchidos são um exemplo. Troque pelos seus.</p></div></div>
+        <div class="fields">
+          <div class="field">
+            <label for="c_valor">Valor da consulta</label>
+            <div class="box"><span>R$</span><input id="c_valor" inputmode="decimal" autocomplete="off" value="400"></div>
+          </div>
+          <div class="field">
+            <label for="c_qtd">Marcadas por mês</label>
+            <div class="box"><input id="c_qtd" inputmode="numeric" autocomplete="off" value="80"><span>consultas</span></div>
+          </div>
+          <div class="field wide">
+            <label for="c_duracao">Duração média</label>
+            <div class="box"><input id="c_duracao" inputmode="numeric" autocomplete="off" value="50"><span>minutos</span></div>
+            <div class="pills" data-for="c_duracao" aria-label="Atalhos de duração">
+              <button type="button" data-v="30">30</button><button type="button" data-v="40">40</button><button type="button" data-v="50">50</button><button type="button" data-v="60">60</button>
+            </div>
+            <span class="hint">O horário que fica reservado na agenda.</span>
+          </div>
         </div>
-        <div class="field">
-          <label for="c_qtd">Consultas marcadas</label>
-          <div class="box"><input id="c_qtd" inputmode="numeric" autocomplete="off" value="80"><span>por mês</span></div>
-        </div>
-        <div class="field wide">
-          <label for="c_custos">Custos fixos do consultório</label>
-          <div class="box"><span>R$</span><input id="c_custos" inputmode="decimal" autocomplete="off" value="6.000"><span>por mês</span></div>
-          <span class="hint">Aluguel, condomínio, secretária, sistema, contador, luz, internet.</span>
-        </div>
-        <div class="field">
-          <label for="c_faltas">Faltas</label>
-          <div class="box"><input id="c_faltas" inputmode="decimal" autocomplete="off" value="10"><span>%</span></div>
-          <span class="hint">De cada 100 marcadas, quantas não vêm.</span>
-        </div>
-        <div class="field">
-          <label for="c_duracao">Duração média</label>
-          <div class="box"><input id="c_duracao" inputmode="numeric" autocomplete="off" value="50"><span>minutos</span></div>
-          <span class="hint">O horário que fica reservado na agenda.</span>
-        </div>
-        <div class="field wide">
-          <label for="c_imposto">Imposto</label>
-          <div class="box"><input id="c_imposto" inputmode="decimal" autocomplete="off" value="15"><span>%</span></div>
-          <span class="hint">Sobre o que você recebe.</span>
+      </div>
+      <div class="grp">
+        <div class="grp-h"><span class="ico"><svg class="i"><use href="#i-build"/></svg></span><div><h2>O que sai</h2><p>Faltas, imposto e o custo de manter o consultório.</p></div></div>
+        <div class="fields">
+          <div class="field wide">
+            <label for="c_custos">Custos fixos por mês</label>
+            <div class="box"><span>R$</span><input id="c_custos" inputmode="decimal" autocomplete="off" value="6.000"></div>
+            <span class="hint">Aluguel, condomínio, secretária, sistema, contador, luz, internet.</span>
+          </div>
+          <div class="field wide">
+            <span class="flabel" id="lbl_c_falt">Faltas <span class="hint">de cada 100 marcadas</span></span>
+            <div class="slide">
+              <input type="range" id="c_faltas_r" min="0" max="40" step="1" aria-labelledby="lbl_c_falt" data-for="c_faltas">
+              <div class="box"><input id="c_faltas" inputmode="decimal" autocomplete="off" value="10" aria-labelledby="lbl_c_falt"><span>%</span></div>
+            </div>
+          </div>
+          <div class="field wide">
+            <span class="flabel" id="lbl_c_imp">Imposto <span class="hint">sobre o que você recebe</span></span>
+            <div class="slide">
+              <input type="range" id="c_imposto_r" min="0" max="30" step="0.5" aria-labelledby="lbl_c_imp" data-for="c_imposto">
+              <div class="box"><input id="c_imposto" inputmode="decimal" autocomplete="off" value="15" aria-labelledby="lbl_c_imp"><span>%</span></div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
+    <p class="note-sm"><svg class="i"><use href="#i-info"/></svg>O que você digita fica só neste aparelho.</p>
   </div>
 
-  <div class="col-res">
-    <section class="hero" aria-labelledby="hRes" aria-live="polite">
-      <h2 id="hRes" class="sr">Resultado</h2>
-      <div id="resMain"></div>
-    </section>
-    <div id="resGap"></div>
+  <section class="lista" aria-labelledby="hLista">
+    <div class="lista-h">
+      <span class="ico"><svg class="i"><use href="#i-bell"/></svg></span>
+      <h2 id="hLista">Quer controlar seus plantões? Entre na lista do Atalho Plantão.</h2>
+    </div>
+    <form id="fLista" novalidate>
+      <label for="lEmail" class="sr">Seu e-mail</label>
+      <input id="lEmail" type="email" inputmode="email" autocomplete="email" placeholder="voce@exemplo.com" maxlength="160">
+      <button type="submit" class="btn" id="lBtn">Entrar na lista</button>
+      <span class="hint">Opcional. Só para avisar quando o Atalho Plantão abrir.</span>
+      <p class="msg" id="lMsg" role="status" aria-live="polite" hidden></p>
+    </form>
+  </section>
+  </div>
 
-    <section class="card" aria-labelledby="hSteps">
+  <div class="colR">
+    <section class="resumo rise" id="resumo" aria-labelledby="hRes" style="animation-delay:200ms">
+      <h2 id="hRes" class="sr">Resultado</h2>
+      <div class="hero" aria-live="polite" id="hero"></div>
+      <div id="resGap"></div>
+    </section>
+
+    <section class="card extrato" id="extrato" aria-labelledby="hSteps">
       <h2 id="hSteps">A conta, passo a passo</h2>
       <p class="lede">Do valor combinado até o que sobra por hora.</p>
-      <ol class="steps" id="steps"></ol>
-    </section>
-
-    <section class="card lista" aria-labelledby="hLista">
-      <h2 id="hLista">Quer controlar seus plantões? Entre na lista do Atalho Plantão.</h2>
-      <form id="fLista" novalidate>
-        <label for="lEmail" class="sr">Seu e-mail</label>
-        <input id="lEmail" type="email" inputmode="email" autocomplete="email" placeholder="voce@exemplo.com" maxlength="160">
-        <button type="submit" class="btn" id="lBtn">Entrar na lista</button>
-        <span class="hint">Opcional. Só para avisar quando o Atalho Plantão abrir.</span>
-        <p class="msg" id="lMsg" role="status" aria-live="polite" hidden></p>
-      </form>
+      <div id="brutoRow"></div>
+      <ol class="rows" id="rows"></ol>
     </section>
   </div>
+
 </main>
 
 <footer class="foot">
-  <p>Isto é uma estimativa feita com os números que você informou. Não substitui a orientação de um contador, que conhece o seu regime de imposto e a sua situação.</p>
-  <p>Nada do que você digita sai do seu aparelho, exceto o e-mail, se você escolher enviar.</p>
+  <div class="foot-in">
+    <svg class="i"><use href="#i-info"/></svg>
+    <div>
+      <p>Isto é uma estimativa feita com os números que você informou. Não substitui a orientação de um contador, que conhece o seu regime de imposto e a sua situação.</p>
+      <p>Atalho Hora, do Dr. Atalho.</p>
+    </div>
+  </div>
 </footer>
+
+<div class="sbar" id="sbar" data-show="false" aria-hidden="true">
+  <div class="sbar-in">
+    <div><p class="l">Valor real por hora</p><p class="fig" id="sbarVal"></p></div>
+    <button type="button" id="sbarBtn" tabindex="-1">Ver a conta</button>
+  </div>
+</div>
 
 <script>
 // Para onde vai o e-mail da lista. Enquanto estiver vazio, o formulário não envia nada e avisa isso.
@@ -349,20 +602,45 @@ ol, ul { margin: 0; padding: 0; list-style: none; }
 const CFG = { listaEndpoint: '' };
 
 const $ = (id) => document.getElementById(id);
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const brl = (v) => v.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 const n1 = (v) => v.toLocaleString('pt-BR', { maximumFractionDigits: 1 });
 const n0 = (v) => v.toLocaleString('pt-BR', { maximumFractionDigits: 0 });
 const pct = (v) => v.toLocaleString('pt-BR', { maximumFractionDigits: 1 }) + '%';
 const money = (v) => `R$ ${brl(v)}`;
-const moneyBig = (v, per) => {
+const fig = (v, per) => {
   const neg = v < 0 ? '−' : '';
   const [int, dec] = brl(Math.abs(v)).split(',');
-  return `${neg}<small>R$</small>${int}<small style="vertical-align:0;font-size:0.5em">,${dec}</small>${per ? `<span class="per">${per}</span>` : ''}`;
+  return `${neg}<small>R$</small>${int}<span class="ct">,${dec}</span>${per ? `<span class="per">${per}</span>` : ''}`;
 };
 
-// Aceita 1.200,50 ou 1200.50 ou 1200,5
+// ---------- som leve (Web Audio, só depois de um toque) ----------
+let somOn = true, ac = null;
+try { somOn = localStorage.getItem('atalhoHora.som') !== '0'; } catch (e) {}
+function tom(freq, dur = 0.06, vol = 0.05, type = 'sine', delay = 0) {
+  if (!somOn) return;
+  try {
+    ac = ac || new (window.AudioContext || window.webkitAudioContext)();
+    const t = ac.currentTime + delay, o = ac.createOscillator(), g = ac.createGain();
+    o.type = type; o.frequency.setValueAtTime(freq, t);
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(vol, t + 0.005); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g).connect(ac.destination); o.start(t); o.stop(t + dur + 0.02);
+  } catch (e) {}
+}
+const somToque = () => tom(1250, 0.045, 0.035, 'triangle');
+const somTroca = () => { tom(660, 0.07, 0.04); tom(990, 0.09, 0.035, 'sine', 0.05); };
+const somOk = () => { tom(784, 0.1, 0.045); tom(1046, 0.12, 0.04, 'sine', 0.08); tom(1318, 0.18, 0.035, 'sine', 0.16); };
+const somErro = () => tom(220, 0.14, 0.05, 'triangle');
+function syncSom() { $('somBtn').setAttribute('aria-pressed', String(somOn)); }
+$('somBtn').addEventListener('click', () => {
+  somOn = !somOn; syncSom(); somToque();
+  try { localStorage.setItem('atalhoHora.som', somOn ? '1' : '0'); } catch (e) {}
+});
+syncSom();
+
+// ---------- leitura dos campos: aceita 1.200,50 ou 1200.50 ou 1200,5 ----------
 function num(id) {
-  let s = ($(id).value || '').trim().replace(/\s|R\$/g, '');
+  let s = ($(id).value || '').trim().replace(/\s|R\$|%/g, '');
   if (!s) return NaN;
   if (s.includes(',')) s = s.replace(/\./g, '').replace(',', '.');
   else if (/^\d{1,3}(\.\d{3})+$/.test(s)) s = s.replace(/\./g, '');
@@ -373,6 +651,7 @@ const val = (id, fallback = 0) => { const v = num(id); return Number.isNaN(v) ? 
 
 let mode = 'plantao';
 
+// Cada cálculo devolve a hora bruta, a hora real e as perdas por hora. As perdas somam exatamente bruto − real.
 function calcPlantao() {
   const valor = num('p_valor'), dur = num('p_duracao');
   if (!(valor > 0) || !(dur > 0)) return null;
@@ -391,17 +670,25 @@ function calcPlantao() {
   const horas = dur + desloc;
   const real = hoje / horas;
 
-  const steps = [
-    ['Valor bruto por hora', `${money(valor)} ÷ ${n1(dur)} h de plantão = <b>${money(bruto)} por hora</b>. É o número que costuma vir à cabeça.`],
-    ['Tire o imposto', `${pct(imp * 100)} de ${money(valor)} = ${money(impR)}. Sobram <b>${money(aposImp)}</b>.`],
-    ['Tire o transporte', `${money(aposImp)} − ${money(transp)} de ida e volta = <b>${money(aposTransp)}</b>.`],
-    ['Desconte a espera', dias > 0
-      ? `O dinheiro chega em ${n0(dias)} dias. Se estivesse com você, renderia ${pct(juros * 100)} ao mês. Esperar custa ${money(espera)}. Hoje isso vale <b>${money(hoje)}</b>.`
-      : `O pagamento é no mesmo dia, então a espera não custa nada. Continua <b>${money(hoje)}</b>.`],
-    ['Conte todas as horas', `${n1(dur)} h de plantão + ${n1(desloc)} h de deslocamento = <b>${n1(horas)} horas</b> fora de casa por esse plantão.`],
-    ['Valor real por hora', `${money(hoje)} ÷ ${n1(horas)} h = <b>${money(real)} por hora</b>.`],
-  ];
-  return { bruto, real, steps, total: hoje, totalLbl: 'Fica com você no plantão' };
+  return {
+    bruto, real, total: hoje, totalLbl: 'Fica com você no plantão', chip: `${n1(horas)} h fora de casa`,
+    perdas: [
+      ['Imposto', impR / horas],
+      ['Transporte', transp / horas],
+      ['Espera do pagamento', espera / horas],
+      ['Horas no caminho', valor / dur - valor / horas],
+    ],
+    brutoTxt: `${money(valor)} ÷ ${n1(dur)} h de plantão. É o número que costuma vir à cabeça.`,
+    rows: [
+      ['', 'Valor do plantão', 'O que foi combinado.', money(valor)],
+      ['minus', `Imposto de ${pct(imp * 100)}`, `Sai do valor do plantão.`, `− ${money(impR)}`],
+      ['minus', 'Transporte', 'Ida e volta.', `− ${money(transp)}`],
+      ['minus', dias > 0 ? `Espera de ${n0(dias)} dias` : 'Espera', dias > 0 ? `O que esse dinheiro renderia a ${pct(juros * 100)} ao mês se já estivesse com você.` : 'Pagamento no mesmo dia, sem custo de espera.', `− ${money(espera)}`],
+      ['sub', 'Fica com você', 'Valor de hoje, já descontado tudo.', money(hoje)],
+      ['div', 'Horas fora de casa', `${n1(dur)} h de plantão + ${n1(desloc)} h no caminho.`, `÷ ${n1(horas)} h`],
+      ['final', 'Valor real por hora', 'É quanto cada hora sua vale nesse plantão.', money(real)],
+    ],
+  };
 }
 
 function calcConsulta() {
@@ -413,6 +700,7 @@ function calcConsulta() {
 
   const durH = durMin / 60;
   const bruto = valor / durH;
+  const marcadoR = qtd * valor;
   const atendidas = qtd * (1 - faltas);
   const perdidas = qtd - atendidas;
   const receita = atendidas * valor;
@@ -423,85 +711,196 @@ function calcConsulta() {
   const horas = qtd * durH;
   const real = sobra / horas;
 
-  const steps = [
-    ['Valor bruto por hora', `Uma consulta de ${money(valor)} ocupa ${n0(durMin)} minutos. Numa hora inteira, isso dá <b>${money(bruto)} por hora</b>. É o número que costuma vir à cabeça.`],
-    ['Tire as faltas', `De ${n0(qtd)} consultas marcadas, ${pct(faltas * 100)} faltam: ${n1(perdidas)} consultas sem receber. Você atende ${n1(atendidas)} e recebe <b>${money(receita)}</b> no mês.`],
-    ['Tire o imposto', `${pct(imp * 100)} de ${money(receita)} = ${money(impR)}. Sobram <b>${money(aposImp)}</b>.`],
-    ['Tire os custos fixos', `${money(aposImp)} − ${money(custos)} do consultório = <b>${money(sobra)}</b> que ficam com você no mês.`],
-    ['Conte as horas de agenda', `${n0(qtd)} horários de ${n0(durMin)} minutos = <b>${n1(horas)} horas</b> reservadas no mês. O horário de quem faltou também conta, porque ficou bloqueado.`],
-    ['Valor real por hora', `${money(sobra)} ÷ ${n1(horas)} h = <b>${money(real)} por hora</b>.`],
-  ];
-  return { bruto, real, steps, total: sobra, totalLbl: 'Fica com você no mês' };
+  return {
+    bruto, real, total: sobra, totalLbl: 'Fica com você no mês', chip: `${n1(horas)} h de agenda`,
+    perdas: [
+      ['Faltas', valor / durH - receita / horas],
+      ['Imposto', impR / horas],
+      ['Custos do consultório', custos / horas],
+    ],
+    brutoTxt: `${money(valor)} por consulta de ${n0(durMin)} minutos, levado para uma hora inteira. É o número que costuma vir à cabeça.`,
+    rows: [
+      ['', 'Consultas marcadas', `${n0(qtd)} × ${money(valor)}.`, money(marcadoR)],
+      ['minus', `Faltas de ${pct(faltas * 100)}`, `${n1(perdidas)} consultas sem receber.`, `− ${money(marcadoR - receita)}`],
+      ['minus', `Imposto de ${pct(imp * 100)}`, `Sobre os ${money(receita)} recebidos.`, `− ${money(impR)}`],
+      ['minus', 'Custos fixos', 'Manter o consultório aberto no mês.', `− ${money(custos)}`],
+      ['sub', 'Fica com você no mês', 'Depois de faltas, imposto e custos.', money(sobra)],
+      ['div', 'Horas de agenda', `${n0(qtd)} horários de ${n0(durMin)} minutos. O horário de quem faltou também conta, porque ficou bloqueado.`, `÷ ${n1(horas)} h`],
+      ['final', 'Valor real por hora', 'É quanto cada hora sua vale no consultório.', money(real)],
+    ],
+  };
+}
+
+// ---------- números que contam até o valor novo ----------
+const anim = new WeakMap();
+function countTo(el, to, per) {
+  const st = anim.get(el) || { v: to, raf: 0 };
+  cancelAnimationFrame(st.raf);
+  const from = Number.isFinite(st.v) ? st.v : to;
+  if (reduce || Math.abs(to - from) < 0.005) { el.innerHTML = fig(to, per); st.v = to; anim.set(el, st); return; }
+  const t0 = performance.now(), D = 380;
+  const step = (t) => {
+    const k = Math.min(1, (t - t0) / D), e = 1 - Math.pow(1 - k, 3);
+    st.v = from + (to - from) * e;
+    el.innerHTML = fig(st.v, per);
+    if (k < 1) st.raf = requestAnimationFrame(step); else st.v = to;
+  };
+  st.raf = requestAnimationFrame(step);
+  anim.set(el, st);
+}
+
+const SEG = ['var(--seg-1)', 'var(--seg-2)', 'var(--seg-3)', 'var(--seg-4)'];
+let built = null;
+
+function buildShell() {
+  // Monta a estrutura uma vez por modo; depois só os números e as larguras mudam, para a animação andar.
+  $('hero').innerHTML = `
+    <div class="hero-top">
+      <div><p class="eyebrow">Valor real por hora</p><p class="fig big" id="vReal"></p></div>
+      <span class="chip" id="vChip"></span>
+    </div>
+    <div class="vs">
+      <div><p class="lbl">Valor bruto por hora</p><p class="fig" id="vBruto"></p></div>
+      <div><p class="lbl" id="vTotLbl"></p><p class="fig" id="vTot"></p></div>
+    </div>
+    <div class="bar-wrap">
+      <h3>Para onde vai cada hora bruta</h3>
+      <div class="bar" id="vBar" aria-hidden="true"></div>
+      <ul class="leg" id="vLeg"></ul>
+    </div>`;
+  $('resGap').innerHTML = `
+    <div class="gap-tile" id="gap">
+      <div><p class="k" id="gK">Diferença em cada hora</p><p class="fig v" id="gV"></p></div>
+      <div class="ring" aria-hidden="true"><svg viewBox="0 0 64 64"><circle class="tr" cx="32" cy="32" r="27"/><circle class="fg" id="gRing" cx="32" cy="32" r="27" stroke-dasharray="169.65" stroke-dashoffset="169.65"/></svg><b id="gPct"></b></div>
+      <p class="s" id="gS"></p>
+    </div>`;
+  built = mode;
 }
 
 function render() {
   const r = mode === 'plantao' ? calcPlantao() : calcConsulta();
   if (!r) {
-    $('resMain').innerHTML = `<p class="eyebrow">Valor real por hora</p><p class="empty" style="margin-top:8px">${mode === 'plantao' ? 'Preencha o valor e a duração do plantão para ver a conta.' : 'Preencha o valor, as consultas por mês e a duração para ver a conta.'}</p>`;
-    $('resGap').innerHTML = '';
-    $('steps').innerHTML = '';
+    built = null;
+    $('hero').innerHTML = `<p class="eyebrow">Valor real por hora</p><p style="color:var(--hero-muted);font-size:15px">${mode === 'plantao' ? 'Preencha o valor e a duração do plantão para ver a conta.' : 'Preencha o valor, as consultas por mês e a duração para ver a conta.'}</p>`;
+    $('resGap').innerHTML = ''; $('rows').innerHTML = ''; $('brutoRow').innerHTML = ''; $('sbarVal').innerHTML = '';
     return;
   }
-  const dif = r.bruto - r.real;
-  const perda = r.bruto > 0 ? (dif / r.bruto) * 100 : 0;
+  if (built !== mode) buildShell();
 
-  $('resMain').innerHTML = `
-    <div>
-      <p class="eyebrow">Valor real por hora</p>
-      <p class="big">${moneyBig(r.real, 'por hora')}</p>
-    </div>
-    <div class="pair">
-      <div><p class="lbl">Valor bruto</p><p class="mid">${moneyBig(r.bruto, '/h')}</p></div>
-      <div><p class="lbl">${r.totalLbl}</p><p class="mid">${moneyBig(r.total, '')}</p></div>
-    </div>`;
+  countTo($('vReal'), r.real, 'por hora');
+  countTo($('vBruto'), r.bruto, '');
+  countTo($('vTot'), r.total, '');
+  countTo($('sbarVal'), r.real, '/h');
+  $('vTotLbl').textContent = r.totalLbl;
+  $('vChip').innerHTML = `<svg class="i" style="width:14px;height:14px"><use href="#i-clock"/></svg>${r.chip}`;
 
+  // barra: parte que fica + perdas, proporcional à hora bruta
+  const realPos = Math.max(0, r.real);
+  const parts = [['Fica com você', realPos, 'var(--hero-accent)', true], ...r.perdas.map(([k, v], i) => [k, Math.max(0, v), SEG[i], false])];
+  const soma = parts.reduce((s, p) => s + p[1], 0) || 1;
+  const bar = $('vBar');
+  if (bar.children.length !== parts.length) bar.innerHTML = parts.map((p) => `<span style="background:${p[2]};width:0%"></span>`).join('');
+  requestAnimationFrame(() => parts.forEach((p, i) => { bar.children[i].style.width = `calc(${(p[1] / soma) * 100}% - 2px)`; }));
+  $('vLeg').innerHTML = parts.map((p) => `<li class="${p[3] ? 'real' : ''}"><i style="background:${p[2]}"></i><span>${p[0]}</span><span class="v">${money(p[1])}/h</span></li>`).join('');
+
+  const dif = r.bruto - r.real, perda = r.bruto > 0 ? (dif / r.bruto) * 100 : 0;
+  const gap = $('gap');
   if (r.real < 0) {
-    $('resGap').innerHTML = `<div class="gap-tile neg">
-      <p class="k">Com esses números, cada hora sai do seu bolso</p>
-      <p class="v num">${moneyBig(r.real, '')}</p>
-      <p>Os custos passam do que entra. Vale revisar os números ou conversar com seu contador.</p></div>`;
+    gap.classList.add('neg');
+    $('gK').textContent = 'Com esses números, cada hora sai do seu bolso';
+    countTo($('gV'), r.real, '');
+    $('gS').textContent = 'Os custos passam do que entra. Vale revisar os números ou conversar com seu contador.';
   } else {
-    $('resGap').innerHTML = `<div class="gap-tile">
-      <p class="k">Diferença em cada hora</p>
-      <p class="v num">${moneyBig(dif, '')}</p>
-      <p>De cada hora que você imagina ganhar, ${pct(perda)} não chega até você.</p></div>`;
+    gap.classList.remove('neg');
+    $('gK').textContent = 'Diferença em cada hora';
+    countTo($('gV'), dif, '');
+    $('gS').textContent = `De cada hora que você imagina ganhar, ${pct(perda)} não chega até você.`;
+    $('gPct').textContent = Math.round(perda) + '%';
+    requestAnimationFrame(() => { $('gRing').style.strokeDashoffset = String(169.65 * (1 - Math.min(100, Math.max(0, perda)) / 100)); });
   }
 
-  $('steps').innerHTML = r.steps.map(([t, c]) => `<li><span class="t">${t}</span><span class="c">${c}</span></li>`).join('');
+  $('brutoRow').innerHTML = `<div class="bruto-row"><span class="t">Valor bruto por hora</span><span class="c">${r.brutoTxt}</span><span class="fig">${fig(r.bruto, '')}</span></div>`;
+  $('rows').innerHTML = r.rows.map(([cls, t, c, a]) => `<li class="${cls}"><span class="t">${t}</span><span class="a">${a}</span><span class="c">${c}</span></li>`).join('');
 }
 
 // ---------- modo ----------
-function setMode(m) {
+function setMode(m, user) {
+  if (user && m !== mode) somTroca();
   mode = m;
-  document.querySelectorAll('.seg button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.mode === m)));
+  $('seg').dataset.mode = m;
+  document.querySelectorAll('#seg button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.mode === m)));
   $('formPlantao').hidden = m !== 'plantao';
   $('formConsulta').hidden = m !== 'consulta';
   try { localStorage.setItem('atalhoHora.modo', m); } catch (e) {}
   render();
 }
-document.querySelectorAll('.seg button').forEach((b) => b.addEventListener('click', () => setMode(b.dataset.mode)));
+document.querySelectorAll('#seg button').forEach((b) => b.addEventListener('click', () => setMode(b.dataset.mode, true)));
 
-// ---------- guardar o que a pessoa digitou neste aparelho ----------
+// ---------- campos, deslizantes e atalhos ----------
 const inputs = [...document.querySelectorAll('.box input')];
+function salvar() {
+  try { localStorage.setItem('atalhoHora.campos', JSON.stringify(Object.fromEntries(inputs.map((x) => [x.id, x.value])))); } catch (e) {}
+}
+function syncControls() {
+  document.querySelectorAll('input[type="range"]').forEach((r) => {
+    const v = val(r.dataset.for);
+    r.value = String(Math.min(Number(r.max), v));
+    r.style.setProperty('--p', `${(Math.min(Number(r.max), v) / Number(r.max)) * 100}%`);
+  });
+  document.querySelectorAll('.pills').forEach((g) => {
+    const v = val(g.dataset.for, -1);
+    g.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(Number(b.dataset.v) === v)));
+  });
+}
 try {
   const saved = JSON.parse(localStorage.getItem('atalhoHora.campos') || '{}');
   inputs.forEach((i) => { if (typeof saved[i.id] === 'string') i.value = saved[i.id]; });
 } catch (e) {}
-inputs.forEach((i) => i.addEventListener('input', () => {
-  render();
-  try { localStorage.setItem('atalhoHora.campos', JSON.stringify(Object.fromEntries(inputs.map((x) => [x.id, x.value])))); } catch (e) {}
-}));
+inputs.forEach((i) => i.addEventListener('input', () => { syncControls(); render(); salvar(); }));
+
+document.querySelectorAll('input[type="range"]').forEach((r) => {
+  let last = r.value;
+  r.addEventListener('input', () => {
+    $(r.dataset.for).value = String(r.value).replace('.', ',');
+    if (r.value !== last && Number(r.value) % (r.step === '1' ? 5 : 2.5) === 0) somToque();
+    last = r.value;
+    syncControls(); render(); salvar();
+  });
+});
+document.querySelectorAll('.pills').forEach((g) => g.querySelectorAll('button').forEach((b) => b.addEventListener('click', () => {
+  $(g.dataset.for).value = b.dataset.v; somToque(); syncControls(); render(); salvar();
+})));
 
 let startMode = 'plantao';
 try { if (localStorage.getItem('atalhoHora.modo') === 'consulta') startMode = 'consulta'; } catch (e) {}
-setMode(startMode);
+syncControls();
+setMode(startMode, false);
+
+// ---------- barra fixa do celular: aparece quando o cartão do resultado sai da tela ----------
+if ('IntersectionObserver' in window) {
+  let heroVis = true, extVis = false;
+  const upd = () => {
+    const show = !heroVis && !extVis && window.scrollY > 200;
+    $('sbar').dataset.show = String(show);
+    $('sbar').setAttribute('aria-hidden', String(!show));
+    $('sbarBtn').tabIndex = show ? 0 : -1;
+  };
+  new IntersectionObserver(([e]) => { heroVis = e.isIntersecting; upd(); }).observe($('resumo'));
+  new IntersectionObserver(([e]) => { extVis = e.isIntersecting; upd(); }, { threshold: 0.15 }).observe($('extrato'));
+  addEventListener('scroll', upd, { passive: true });
+}
+$('sbarBtn').addEventListener('click', () => { somToque(); $('extrato').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); });
 
 // ---------- lista do Atalho Plantão ----------
 $('fLista').addEventListener('submit', async (ev) => {
   ev.preventDefault();
   const email = $('lEmail').value.trim();
   const msg = $('lMsg');
-  const show = (t, ok) => { msg.textContent = t; msg.className = 'msg ' + (ok ? 'ok' : 'err'); msg.hidden = false; };
+  const show = (t, ok) => {
+    msg.innerHTML = `<svg class="i"><use href="#${ok ? 'i-check' : 'i-alert'}"/></svg><span></span>`;
+    msg.lastChild.textContent = t; msg.hidden = false;
+    ok ? somOk() : somErro();
+  };
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { show('Confira o e-mail. Parece que falta alguma parte.', false); $('lEmail').focus(); return; }
   if (!CFG.listaEndpoint) { show('A lista ainda não está aberta. Nenhum e-mail foi enviado.', false); return; }
   $('lBtn').disabled = true;

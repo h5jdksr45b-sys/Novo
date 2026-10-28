@@ -1,0 +1,1217 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Atalho Plantão</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="theme-color" content="#5B3DF5">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+<style>
+/* Layout: uma coluna de celular. Números no topo, ações no alcance do polegar (barra inferior e botão flutuante à direita). */
+:root {
+  --roxo: #5B3DF5;
+  --roxo-card: #5B3DF5;
+  --roxo-soft: #ECE8FF;
+  --roxo-text: #4A2DE0;
+  --lima: #C6F24E;
+  --lima-strong: #8DB51F;
+  --lima-ink: #1E1E24;
+  --fg: #1E1E24;
+  --muted: #63617A;
+  --bg: #F5F4FA;
+  --surface: #FFFFFF;
+  --line: #E3E1EE;
+  --red: #D7263D;
+  --red-soft: #FDEBED;
+  --toast-bg: #1E1E24;
+  --toast-fg: #FFFFFF;
+  --backdrop: rgb(24 20 40 / 0.45);
+  --shadow: 0 1px 2px rgb(30 30 36 / 0.06), 0 6px 20px rgb(30 30 36 / 0.07);
+  --shadow-fab: 0 2px 4px rgb(30 30 36 / 0.12), 0 10px 24px rgb(91 61 245 / 0.22);
+
+  --font-display: "Bricolage Grotesque", "Figtree", system-ui, sans-serif;
+  --font-body: "Figtree", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --r-lg: 22px;
+  --r-md: 16px;
+  --r-sm: 12px;
+  --nav-h: 66px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --roxo: #8A75FF; --roxo-soft: #262044; --roxo-text: #B9AEFF;
+    --lima-strong: #A9D63A;
+    --fg: #F1F0F6; --muted: #A9A7BA; --bg: #121116; --surface: #1C1B22; --line: #2E2C38;
+    --red: #FF6474; --red-soft: #3A1A21;
+    --toast-bg: #F1F0F6; --toast-fg: #1E1E24;
+    --backdrop: rgb(0 0 0 / 0.6);
+    --shadow: 0 1px 2px rgb(0 0 0 / 0.4);
+    --shadow-fab: 0 2px 6px rgb(0 0 0 / 0.5);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --roxo: #8A75FF; --roxo-soft: #262044; --roxo-text: #B9AEFF;
+  --lima-strong: #A9D63A;
+  --fg: #F1F0F6; --muted: #A9A7BA; --bg: #121116; --surface: #1C1B22; --line: #2E2C38;
+  --red: #FF6474; --red-soft: #3A1A21;
+  --toast-bg: #F1F0F6; --toast-fg: #1E1E24;
+  --backdrop: rgb(0 0 0 / 0.6);
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.4);
+  --shadow-fab: 0 2px 6px rgb(0 0 0 / 0.5);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.45;
+  -webkit-tap-highlight-color: transparent;
+}
+button, input, select, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 3px solid var(--roxo); outline-offset: 2px; }
+.num { font-variant-numeric: tabular-nums; }
+
+.app {
+  max-width: 560px;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 12px calc(var(--nav-h) + 110px + env(safe-area-inset-bottom, 0px));
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Cabeçalho */
+.top { display: flex; align-items: center; gap: 12px; padding-top: 4px; }
+.mark { width: 40px; height: 40px; flex: none; }
+.brand { display: flex; flex-direction: column; min-width: 0; }
+.brand b { font-family: var(--font-display); font-size: 20px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.1; }
+.brand small { font-size: 12px; color: var(--muted); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+.top-date { margin-inline-start: auto; font-size: 14px; color: var(--muted); text-align: end; }
+
+/* Aviso de exemplos */
+.demo {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px;
+  padding: 12px 14px; border-radius: var(--r-md);
+  background: var(--roxo-soft); color: var(--roxo-text); font-size: 14px; font-weight: 500;
+}
+.demo span { flex: 1 1 200px; }
+
+/* Números da tela inicial */
+.stats { display: flex; flex-direction: column; gap: 12px; }
+.hero {
+  background: var(--roxo-card); color: #FFFFFF;
+  border-radius: var(--r-lg); padding: 20px 20px 18px;
+  display: flex; flex-direction: column; gap: 2px;
+}
+.label { font-size: 14px; font-weight: 600; letter-spacing: 0.02em; }
+.hero .label { opacity: 0.88; }
+.big {
+  font-family: var(--font-display); font-weight: 800; letter-spacing: -0.03em; line-height: 1.05;
+  font-size: clamp(2.4rem, 12vw, 3.4rem);
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+.hero small { font-size: 14px; opacity: 0.88; }
+.duo { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.tile { border-radius: var(--r-lg); padding: 16px; display: flex; flex-direction: column; gap: 2px; min-width: 0; container-type: inline-size; }
+.tile .mid {
+  font-family: var(--font-display); font-weight: 800; letter-spacing: -0.02em; line-height: 1.1;
+  font-size: clamp(1.25rem, 13cqi, 1.9rem); font-variant-numeric: tabular-nums; overflow-wrap: anywhere;
+}
+.tile small { font-size: 13px; }
+.tile-pago { background: var(--lima); color: var(--lima-ink); }
+.tile-pago small { opacity: 0.75; }
+.tile-atraso { background: var(--red-soft); color: var(--red); }
+.tile-atraso .label, .tile-atraso small { color: var(--fg); }
+.tile-atraso small { color: var(--muted); }
+
+/* Seções */
+.sec { display: flex; flex-direction: column; gap: 12px; }
+.sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+h1, h2, h3 { margin: 0; font-family: var(--font-display); letter-spacing: -0.01em; text-wrap: balance; }
+h1 { font-size: 26px; font-weight: 700; }
+h2 { font-size: 19px; font-weight: 700; }
+h3 { font-size: 16px; font-weight: 700; }
+.sec-head small, .hint { color: var(--muted); font-size: 14px; }
+.list { display: flex; flex-direction: column; gap: 8px; }
+
+/* Atrasados */
+.item {
+  background: var(--surface); border-radius: var(--r-md); box-shadow: var(--shadow);
+  border: 1px solid transparent;
+  display: flex; flex-direction: column;
+}
+.item-main {
+  all: unset; box-sizing: border-box; cursor: pointer;
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px;
+  padding: 14px 16px 10px; border-radius: var(--r-md) var(--r-md) 0 0;
+}
+.item-main:focus-visible { outline: 3px solid var(--roxo); outline-offset: -3px; }
+.item-name { font-weight: 700; min-width: 0; overflow-wrap: anywhere; }
+.item-sub { grid-column: 1 / -1; font-size: 14px; color: var(--muted); }
+.item-valor { font-family: var(--font-display); font-weight: 700; font-size: 18px; font-variant-numeric: tabular-nums; text-align: end; }
+.dias { color: var(--red); font-weight: 700; font-size: 14px; }
+.item-actions .btn { white-space: nowrap; }
+.item-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; padding: 0 12px 12px; }
+
+/* Botões */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 52px; padding: 0 18px; border-radius: var(--r-sm);
+  border: 1.5px solid transparent; font-weight: 700; font-size: 16px; text-align: center; line-height: 1.2;
+  text-decoration: none;
+}
+.btn svg { width: 20px; height: 20px; flex: none; }
+.btn-sm { min-height: 44px; font-size: 15px; padding: 0 12px; }
+.btn-block { width: 100%; }
+.btn-lima { background: var(--lima); color: var(--lima-ink); }
+.btn-roxo { background: var(--roxo); color: #FFFFFF; }
+.btn-ghost { background: var(--surface); border-color: var(--line); color: var(--fg); }
+.btn-danger { background: var(--red-soft); color: var(--red); }
+.btn-link { background: none; border: 0; color: var(--roxo-text); padding: 0 4px; min-height: 44px; font-weight: 700; }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.row-btns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+
+/* Etiquetas de status */
+.pill {
+  display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;
+  font-size: 12px; font-weight: 700; padding: 3px 9px; border-radius: 999px; letter-spacing: 0.01em;
+}
+.pill::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.pill-receber { background: var(--roxo-soft); color: var(--roxo-text); }
+.pill-pago { background: var(--lima); color: var(--lima-ink); }
+.pill-parcial { background: var(--roxo-soft); color: var(--roxo-text); }
+.pill-parcial::before { background: linear-gradient(90deg, var(--lima-strong) 50%, var(--roxo) 50%); }
+.pill-atrasado { background: var(--red); color: #FFFFFF; }
+
+/* Filtros */
+.monthbar { display: grid; grid-template-columns: 48px minmax(0, 1fr) 48px; align-items: center; gap: 8px; }
+.monthbar h1 { text-align: center; font-size: 22px; }
+.icon-btn {
+  width: 48px; height: 48px; border-radius: 50%; border: 1.5px solid var(--line); background: var(--surface);
+  display: grid; place-items: center;
+}
+.icon-btn svg { width: 22px; height: 22px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  min-height: 44px; padding: 0 16px; border-radius: 999px;
+  border: 1.5px solid var(--line); background: var(--surface); color: var(--fg);
+  font-weight: 600; font-size: 15px;
+}
+.chip[aria-pressed="true"] { background: var(--roxo); border-color: var(--roxo); color: #FFFFFF; }
+
+.summary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.summary div { container-type: inline-size; background: var(--surface); border-radius: var(--r-sm); padding: 10px 12px; box-shadow: var(--shadow); border: 1px solid transparent; min-width: 0; }
+.summary small { display: block; font-size: 12px; color: var(--muted); font-weight: 600; }
+.summary b { display: block; white-space: nowrap; font-family: var(--font-display); font-size: clamp(12px, 13.5cqi, 17px); font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.summary .s-atraso b { color: var(--red); }
+
+/* Lista de plantões */
+.plt {
+  all: unset; box-sizing: border-box; cursor: pointer;
+  display: grid; grid-template-columns: 48px minmax(0, 1fr) auto; align-items: center; gap: 12px;
+  background: var(--surface); border-radius: var(--r-md); padding: 12px 14px; box-shadow: var(--shadow);
+  border: 1px solid transparent;
+}
+.plt:focus-visible { outline: 3px solid var(--roxo); outline-offset: 2px; }
+.plt-data { display: flex; flex-direction: column; align-items: center; line-height: 1.05; }
+.plt-data b { font-family: var(--font-display); font-size: 22px; font-variant-numeric: tabular-nums; }
+.plt-data small { font-size: 12px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
+.plt-info { display: flex; flex-direction: column; min-width: 0; }
+.plt-info strong { overflow-wrap: anywhere; }
+.plt-info small { color: var(--muted); font-size: 13px; }
+.plt-fim { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+.plt-fim b { font-variant-numeric: tabular-nums; font-size: 15px; }
+
+/* Ranking */
+.rank { background: var(--surface); border-radius: var(--r-md); box-shadow: var(--shadow); border: 1px solid transparent; display: flex; flex-direction: column; }
+.rank-row { display: grid; grid-template-columns: 32px minmax(0, 1fr); gap: 4px 12px; align-items: start; padding: 14px 16px; }
+.rank-row + .rank-row { border-top: 1px solid var(--line); }
+.rank-pos { font-family: var(--font-display); font-weight: 800; font-size: 20px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.rank-row.hot .rank-pos { color: var(--red); }
+.rank-info { display: flex; flex-direction: column; min-width: 0; }
+.rank-info strong { overflow-wrap: anywhere; }
+.rank-info small { color: var(--muted); font-size: 13px; }
+.rank-info .r-val { color: var(--red); font-weight: 700; font-size: 14px; }
+.rank-info .btn { align-self: flex-start; margin-top: 8px; }
+.rank-info .r-ok { color: var(--muted); font-weight: 600; font-size: 14px; }
+
+/* Calendário */
+.cal { background: var(--surface); border-radius: var(--r-lg); padding: 12px; box-shadow: var(--shadow); border: 1px solid transparent; }
+.cal-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; }
+.cal-dow { text-align: center; font-size: 12px; font-weight: 700; color: var(--muted); padding-block: 4px 6px; }
+.day {
+  all: unset; box-sizing: border-box; cursor: pointer; position: relative;
+  min-height: 52px; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+  padding-top: 7px; gap: 5px; font-weight: 600; font-variant-numeric: tabular-nums;
+}
+.day.has { background: var(--bg); }
+.day.today { box-shadow: inset 0 0 0 2px var(--roxo); }
+.day[aria-pressed="true"] { background: var(--roxo); color: #FFFFFF; }
+.day.empty { cursor: default; }
+.day:focus-visible { outline: 3px solid var(--roxo); outline-offset: 1px; }
+.dots { display: flex; gap: 3px; flex-wrap: wrap; justify-content: center; max-width: 34px; }
+.dot { width: 8px; height: 8px; border-radius: 50%; }
+.dot-receber { background: var(--roxo); }
+.dot-pago { background: var(--lima); box-shadow: inset 0 0 0 1.5px var(--lima-strong); }
+.dot-parcial { background: linear-gradient(90deg, var(--lima) 50%, var(--roxo) 50%); }
+.dot-atrasado { background: var(--red); }
+.day[aria-pressed="true"] .dot { box-shadow: 0 0 0 1.5px #FFFFFF; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 13px; color: var(--muted); padding: 10px 4px 2px; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+
+/* Ajustes */
+.panel { background: var(--surface); border-radius: var(--r-md); box-shadow: var(--shadow); border: 1px solid transparent; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+.loc { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 12px; padding-block: 4px; }
+.loc + .loc { border-top: 1px solid var(--line); padding-top: 12px; }
+.loc strong { display: block; overflow-wrap: anywhere; }
+.loc small { color: var(--muted); font-size: 13px; }
+.note { font-size: 14px; color: var(--muted); margin: 0; }
+
+/* Formulários */
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field > label, .field > .flabel { font-size: 14px; font-weight: 700; }
+.input {
+  width: 100%; min-height: 52px; padding: 0 14px; border-radius: var(--r-sm);
+  border: 1.5px solid var(--line); background: var(--surface); font-size: 16px;
+}
+.input:focus { border-color: var(--roxo); outline: none; box-shadow: 0 0 0 3px var(--roxo-soft); }
+.input-money { font-family: var(--font-display); font-size: 22px; font-weight: 700; font-variant-numeric: tabular-nums; }
+textarea.input { min-height: 140px; padding: 12px 14px; line-height: 1.45; resize: vertical; }
+.preview { font-size: 14px; color: var(--muted); }
+.preview b { color: var(--fg); }
+.err { color: var(--red); font-size: 14px; font-weight: 600; }
+
+/* Folha inferior */
+dialog.sheet {
+  margin: auto auto 0; width: 100%; max-width: 560px; border: 0;
+  border-radius: var(--r-lg) var(--r-lg) 0 0;
+  padding: 8px max(16px, env(safe-area-inset-right, 0px)) calc(20px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+  max-height: 92dvh; overflow-y: auto; overscroll-behavior: contain;
+  background: var(--surface); color: var(--fg);
+}
+dialog.sheet::backdrop { background: var(--backdrop); }
+.grab { width: 40px; height: 5px; border-radius: 3px; background: var(--line); margin: 4px auto 10px; }
+.sheet-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
+.sheet-body { display: flex; flex-direction: column; gap: 18px; }
+.close { width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--bg); display: grid; place-items: center; flex: none; }
+.close svg { width: 20px; height: 20px; }
+.dados { margin: 0; display: flex; flex-direction: column; }
+.dados div { display: flex; justify-content: space-between; gap: 16px; padding-block: 10px; border-bottom: 1px solid var(--line); }
+.dados dt { color: var(--muted); }
+.dados dd { margin: 0; font-weight: 600; text-align: end; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; min-width: 0; }
+.dados .red { color: var(--red); }
+.stack { display: flex; flex-direction: column; gap: 10px; }
+
+/* Barra inferior e botão flutuante */
+.nav {
+  position: fixed; inset: auto 0 0 0; z-index: 20;
+  background: var(--surface); border-top: 1px solid var(--line);
+  padding: 0 max(8px, env(safe-area-inset-right, 0px)) env(safe-area-inset-bottom, 0px) max(8px, env(safe-area-inset-left, 0px));
+}
+.nav-in { max-width: 560px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); height: var(--nav-h); }
+.nav a {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
+  color: var(--muted); text-decoration: none; font-size: 12px; font-weight: 700; border-radius: 12px;
+}
+.nav a svg { width: 24px; height: 24px; }
+.nav a[aria-current="page"] { color: var(--roxo-text); }
+.fab {
+  position: fixed; z-index: 21;
+  right: max(16px, calc(env(safe-area-inset-right, 0px) + 16px));
+  bottom: calc(var(--nav-h) + 16px + env(safe-area-inset-bottom, 0px));
+  min-height: 60px; padding: 0 22px 0 18px; border-radius: 999px; border: 0;
+  background: var(--lima); color: var(--lima-ink); box-shadow: var(--shadow-fab);
+  display: inline-flex; align-items: center; gap: 8px; font-weight: 800; font-size: 17px;
+}
+.fab svg { width: 24px; height: 24px; }
+@media (min-width: 600px) {
+  .fab { right: calc(50% - 280px + 16px); }
+}
+
+.toast {
+  position: fixed; z-index: 30; left: 50%; transform: translateX(-50%);
+  bottom: calc(var(--nav-h) + 92px + env(safe-area-inset-bottom, 0px));
+  width: min(528px, calc(100% - 32px));
+  background: var(--toast-bg); color: var(--toast-fg); border-radius: var(--r-sm);
+  padding: 12px 8px 12px 16px; display: flex; align-items: center; gap: 12px; font-weight: 600; font-size: 15px;
+  box-shadow: var(--shadow-fab);
+}
+.toast span { flex: 1; }
+.toast-btn { background: none; border: 0; color: inherit; font-weight: 800; text-decoration: underline; min-height: 40px; padding: 0 10px; }
+
+.empty-state { text-align: center; padding: 28px 16px; background: var(--surface); border-radius: var(--r-md); box-shadow: var(--shadow); border: 1px solid transparent; display: flex; flex-direction: column; gap: 12px; align-items: center; }
+.empty-state p { margin: 0; color: var(--muted); max-width: 34ch; }
+.ok-state { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: var(--r-md); background: var(--surface); box-shadow: var(--shadow); border: 1px solid transparent; font-weight: 600; }
+.ok-state i { width: 32px; height: 32px; border-radius: 50%; background: var(--lima); color: var(--lima-ink); display: grid; place-items: center; flex: none; }
+.ok-state svg { width: 18px; height: 18px; }
+
+@media (hover: hover) {
+  .btn-ghost:hover, .chip:hover, .icon-btn:hover { border-color: var(--roxo); }
+  .plt:hover, .item-main:hover { background: var(--roxo-soft); }
+  .nav a:hover { color: var(--fg); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .btn, .chip, .fab, .icon-btn, .day, .plt { transition-property: scale, background-color, border-color; transition-duration: 150ms; transition-timing-function: ease-out; }
+  .btn:not(:disabled):active, .chip:active, .fab:active, .icon-btn:active, .plt:active, .day:not(.empty):active { scale: 0.96; }
+  dialog.sheet[open] { animation: subir 300ms cubic-bezier(0.2, 0, 0, 1) both; }
+  .toast:not([hidden]) { animation: surgir 200ms ease-out both; }
+}
+@media (prefers-reduced-motion: reduce) {
+  dialog.sheet[open], .toast:not([hidden]) { animation: aparecer 200ms ease-out both; }
+}
+@keyframes subir { from { translate: 0 40px; opacity: 0; } to { translate: 0 0; opacity: 1; } }
+@keyframes surgir { from { translate: 0 12px; opacity: 0; } to { translate: 0 0; opacity: 1; } }
+@keyframes aparecer { from { opacity: 0; } to { opacity: 1; } }
+
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+</style>
+</head>
+<body>
+
+<div class="app">
+  <header class="top">
+    <svg class="mark" viewBox="0 0 40 40" aria-hidden="true">
+      <rect width="40" height="40" rx="12" fill="#5B3DF5"/>
+      <path d="M22.5 7 12 22.5h7.5L17.5 33 28 17.5h-7.5L22.5 7Z" fill="#C6F24E"/>
+    </svg>
+    <div class="brand"><b>Atalho Plantão</b><small>Dr. Atalho</small></div>
+    <div class="top-date num" id="topDate"></div>
+  </header>
+  <main id="view"></main>
+</div>
+
+<button type="button" class="fab" id="fab">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+  Plantão
+</button>
+
+<nav class="nav" aria-label="Seções">
+  <div class="nav-in">
+    <a href="#inicio" data-tab="inicio">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1v-9.5Z"/></svg>
+      Início
+    </a>
+    <a href="#plantoes" data-tab="plantoes">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg>
+      Plantões
+    </a>
+    <a href="#agenda" data-tab="agenda">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>
+      Agenda
+    </a>
+    <a href="#ajustes" data-tab="ajustes">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21v-6.5M4 10.5V3M12 21v-9M12 8V3M20 21v-4.5M20 12.5V3M1.5 14.5h5M9.5 8h5M17.5 16.5h5"/></svg>
+      Ajustes
+    </a>
+  </div>
+</nav>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+<dialog class="sheet" id="sheet" aria-labelledby="sheetTitle"></dialog>
+
+<script>
+(() => {
+'use strict';
+
+/* ---------- utilidades ---------- */
+const KEY = 'atalho-plantao:v1';
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const uid = () => Math.random().toString(36).slice(2, 9) + Date.now().toString(36).slice(-4);
+const pad = n => String(n).padStart(2, '0');
+const iso = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+const parse = s => { const [y, m, d] = s.split('-').map(Number); return new Date(y, m - 1, d); };
+const hoje = () => iso(new Date());
+const addDias = (s, n) => { const d = parse(s); d.setDate(d.getDate() + n); return iso(d); };
+const difDias = (a, b) => Math.round((parse(a) - parse(b)) / 864e5);
+const fmtData = s => { if (!s) return ''; const [y, m, d] = s.split('-'); return `${d}/${m}/${y}`; };
+const BRL = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
+const brl = n => BRL.format(n || 0);
+const r2 = n => Math.round(n * 100) / 100;
+const mesKey = s => s.slice(0, 7);
+const nomeMes = k => {
+  const [y, m] = k.split('-').map(Number);
+  const t = new Intl.DateTimeFormat('pt-BR', { month: 'long', year: 'numeric' }).format(new Date(y, m - 1, 1));
+  return t.charAt(0).toUpperCase() + t.slice(1);
+};
+const mesCurto = s => new Intl.DateTimeFormat('pt-BR', { month: 'short' }).format(parse(s)).replace('.', '');
+const addMes = (k, n) => { const [y, m] = k.split('-').map(Number); const d = new Date(y, m - 1 + n, 1); return `${d.getFullYear()}-${pad(d.getMonth() + 1)}`; };
+const parseValor = s => {
+  s = String(s ?? '').trim().replace(/[R$\s]/g, '');
+  if (!s) return NaN;
+  if (s.includes(',')) s = s.replace(/\./g, '').replace(',', '.');
+  const n = Number(s);
+  return isFinite(n) ? r2(n) : NaN;
+};
+const valorInput = n => (Number.isInteger(n) ? String(n) : n.toFixed(2).replace('.', ','));
+const soma = (arr, f) => r2(arr.reduce((s, x) => s + f(x), 0));
+const diasTxt = n => `${n} ${n === 1 ? 'dia' : 'dias'}`;
+const FORMAS = ['PJ', 'RPA', 'CLT', 'Cooperativa'];
+
+/* ---------- dados ---------- */
+function load() { try { const r = localStorage.getItem(KEY); return r ? JSON.parse(r) : null; } catch (e) { return null; } }
+function save() { try { localStorage.setItem(KEY, JSON.stringify(db)); } catch (e) { /* armazenamento indisponível */ } }
+
+function exemplos() {
+  const T = hoje();
+  const locais = [
+    { id: 'ex-vv', nome: 'Hospital Vale Verde', valor: 1500, prazo: 30, forma: 'PJ', exemplo: true },
+    { id: 'ex-upa', nome: 'UPA Centro Norte', valor: 1200, prazo: 45, forma: 'RPA', exemplo: true },
+    { id: 'ex-hor', nome: 'Clínica Horizonte', valor: 900, prazo: 15, forma: 'PJ', exemplo: true },
+    { id: 'ex-coop', nome: 'Cooperativa MedSul', valor: 1800, prazo: 60, forma: 'Cooperativa', exemplo: true }
+  ];
+  const L = Object.fromEntries(locais.map(l => [l.id, l]));
+  // [local, dias atrás, turno, horas, pagamento]. Pagamento: null, ['total', dias após vencimento] ou ['parte', valor, dias após vencimento]
+  const plano = [
+    ['ex-vv', 95, '12h', 0, ['total', 12]],
+    ['ex-vv', 70, '24h', 0, null],
+    ['ex-vv', 50, '12h', 0, null],
+    ['ex-vv', 20, '12h', 0, null],
+    ['ex-vv', 6, '12h', 0, null],
+    ['ex-vv', 1, 'outro', 6, null],
+    ['ex-upa', 100, '12h', 0, ['total', 0]],
+    ['ex-upa', 80, '12h', 0, ['parte', 600, 5]],
+    ['ex-upa', 52, '24h', 0, null],
+    ['ex-upa', 15, '12h', 0, null],
+    ['ex-hor', 40, '12h', 0, ['total', -2]],
+    ['ex-hor', 25, '12h', 0, ['total', 1]],
+    ['ex-hor', 12, '12h', 0, null],
+    ['ex-hor', 3, '12h', 0, null],
+    ['ex-coop', 90, '24h', 0, null],
+    ['ex-coop', 45, '12h', 0, null],
+    ['ex-coop', 10, '24h', 0, null]
+  ];
+  const plantoes = plano.map(([lid, atras, turno, horas, pg]) => {
+    const l = L[lid];
+    const data = addDias(T, -atras);
+    const venc = addDias(data, l.prazo);
+    const valor = valorPadrao(l, turno, horas);
+    const p = { id: uid(), localId: lid, data, venc, turno, horas: horas || null, valor, obs: '', pagamentos: [], exemplo: true };
+    if (pg) {
+      let quando = addDias(venc, pg[pg.length - 1]);
+      if (quando > T) quando = T;
+      p.pagamentos.push({ data: quando, valor: pg[0] === 'total' ? valor : pg[1] });
+    }
+    return p;
+  });
+  return { locais, plantoes };
+}
+
+function valorPadrao(l, turno, horas) {
+  if (!l) return 0;
+  if (turno === '24h') return l.valor * 2;
+  if (turno === 'outro' && horas > 0) return r2(l.valor / 12 * horas);
+  return l.valor;
+}
+
+let db = load();
+if (!db) { db = { nome: '', ultimoLocal: 'ex-vv', ...exemplos() }; save(); }
+
+/* ---------- regras ---------- */
+const local = id => db.locais.find(l => l.id === id);
+const nomeLocal = id => (local(id) || {}).nome || 'Local removido';
+const recebido = p => soma(p.pagamentos, x => x.valor);
+const aberto = p => Math.max(0, r2(p.valor - recebido(p)));
+function status(p) {
+  const r = recebido(p);
+  if (r >= p.valor - 0.005) return 'pago';
+  if (hoje() > p.venc) return 'atrasado';
+  return r > 0 ? 'parcial' : 'receber';
+}
+const atraso = p => Math.max(0, difDias(hoje(), p.venc));
+const turnoTxt = p => (p.turno === 'outro' ? (p.horas ? `${p.horas}h` : 'outro turno') : p.turno);
+const LABEL = { receber: 'A receber', pago: 'Pago', parcial: 'Pago parcial', atrasado: 'Atrasado' };
+const statusTxt = p => { const s = status(p); return s === 'atrasado' && recebido(p) > 0 ? 'Atrasado, parcial' : LABEL[s]; };
+const pill = p => `<span class="pill pill-${status(p)}">${statusTxt(p)}</span>`;
+const ultimoPgto = p => (p.pagamentos.length ? p.pagamentos[p.pagamentos.length - 1].data : null);
+const temExemplos = () => db.locais.some(l => l.exemplo) || db.plantoes.some(p => p.exemplo);
+
+/* ---------- estado da tela ---------- */
+const ui = { mes: mesKey(hoje()), local: 'todos', dia: null };
+const filtrados = () => db.plantoes
+  .filter(p => mesKey(p.data) === ui.mes && (ui.local === 'todos' || p.localId === ui.local))
+  .sort((a, b) => (a.data < b.data ? 1 : a.data > b.data ? -1 : 0));
+
+/* ---------- ícones ---------- */
+const I = {
+  prev: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>',
+  next: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>',
+  close: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>',
+  check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>',
+  copy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8.5" y="8.5" width="12" height="12" rx="2.5"/><path d="M15.5 8.5V6a2.5 2.5 0 0 0-2.5-2.5H6A2.5 2.5 0 0 0 3.5 6v7A2.5 2.5 0 0 0 6 15.5h2.5"/></svg>',
+  file: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3.5H7A2.5 2.5 0 0 0 4.5 6v12A2.5 2.5 0 0 0 7 20.5h10a2.5 2.5 0 0 0 2.5-2.5V9L14 3.5Z"/><path d="M14 3.5V9h5.5M12 12.5v5M9.5 15l2.5 2.5 2.5-2.5"/></svg>'
+};
+
+/* ---------- telas ---------- */
+function itemAtraso(p) {
+  const d = atraso(p);
+  return `<article class="item">
+    <button type="button" class="item-main" data-open="${p.id}">
+      <span class="item-name">${esc(nomeLocal(p.localId))}</span>
+      <span class="item-valor">${brl(aberto(p))}</span>
+      <span class="item-sub">Plantão de ${esc(turnoTxt(p))} em ${fmtData(p.data)}. Venceu em ${fmtData(p.venc)}.</span>
+      <span class="item-sub dias">${diasTxt(d)} de atraso${recebido(p) > 0 ? `, já recebeu ${brl(recebido(p))}` : ''}</span>
+    </button>
+    <div class="item-actions">
+      <button type="button" class="btn btn-ghost btn-sm" data-cobrar="${p.id}">Copiar cobrança</button>
+      <button type="button" class="btn btn-lima btn-sm" data-pagar="${p.id}">${I.check} Recebi</button>
+    </div>
+  </article>`;
+}
+
+function vInicio() {
+  const abertos = db.plantoes.filter(p => status(p) !== 'pago');
+  const totalAberto = soma(abertos, aberto);
+  const atrasados = abertos.filter(p => status(p) === 'atrasado').sort((a, b) => atraso(b) - atraso(a));
+  const totalAtraso = soma(atrasados, aberto);
+  const mk = mesKey(hoje());
+  const recMes = soma(db.plantoes, p => soma(p.pagamentos.filter(x => mesKey(x.data) === mk), x => x.valor));
+  const nPg = db.plantoes.filter(p => p.pagamentos.some(x => mesKey(x.data) === mk)).length;
+  const proximos = abertos.filter(p => status(p) !== 'atrasado' && difDias(p.venc, hoje()) <= 7)
+    .sort((a, b) => (a.venc < b.venc ? -1 : 1));
+  const mesNome = new Intl.DateTimeFormat('pt-BR', { month: 'long' }).format(new Date());
+
+  let html = '';
+  if (temExemplos()) {
+    html += `<div class="demo"><span>Estes são dados de exemplo para você testar. Nada aqui é real.</span>
+      <button type="button" class="btn btn-roxo btn-sm" data-act="apagar-exemplos">Apagar exemplos</button></div>`;
+  }
+  if (!db.plantoes.length) {
+    html += `<div class="empty-state">
+      <h2>Nenhum plantão lançado</h2>
+      <p>${db.locais.length ? 'Toque em Plantão, escolha o local e salve. São três toques.' : 'Comece cadastrando os hospitais e empresas onde você dá plantão.'}</p>
+      ${db.locais.length ? '' : '<button type="button" class="btn btn-lima" data-act="novo-local">Cadastrar local</button>'}
+    </div>`;
+    return html;
+  }
+  html += `<section class="stats" aria-label="Resumo">
+    <div class="hero">
+      <span class="label">A receber</span>
+      <span class="big">${brl(totalAberto)}</span>
+      <small>${abertos.length} ${abertos.length === 1 ? 'plantão em aberto' : 'plantões em aberto'}, contando os atrasados</small>
+    </div>
+    <div class="duo">
+      <div class="tile tile-pago">
+        <span class="label">Recebido em ${esc(mesNome)}</span>
+        <span class="mid">${brl(recMes)}</span>
+        <small>${nPg} ${nPg === 1 ? 'pagamento' : 'pagamentos'}</small>
+      </div>
+      <div class="tile tile-atraso">
+        <span class="label">Atrasado</span>
+        <span class="mid">${brl(totalAtraso)}</span>
+        <small>${atrasados.length} ${atrasados.length === 1 ? 'plantão' : 'plantões'}</small>
+      </div>
+    </div>
+  </section>`;
+
+  html += `<section class="sec"><div class="sec-head"><h2>Atrasados</h2>${atrasados.length ? '<small>do mais antigo para o mais novo</small>' : ''}</div>`;
+  html += atrasados.length
+    ? `<div class="list">${atrasados.map(itemAtraso).join('')}</div>`
+    : `<div class="ok-state"><i>${I.check}</i>Nenhum plantão atrasado. Tudo em dia.</div>`;
+  html += '</section>';
+
+  if (proximos.length) {
+    html += `<section class="sec"><div class="sec-head"><h2>Vencem nos próximos 7 dias</h2></div>
+      <div class="list">${proximos.map(linhaPlantao).join('')}</div></section>`;
+  }
+  return html;
+}
+
+function linhaPlantao(p) {
+  const s = status(p);
+  const sub = s === 'pago' ? `pago em ${fmtData(ultimoPgto(p))}`
+    : s === 'atrasado' ? `${diasTxt(atraso(p))} de atraso`
+    : `vence em ${fmtData(p.venc)}`;
+  return `<button type="button" class="plt" data-open="${p.id}">
+    <span class="plt-data"><b>${p.data.slice(8)}</b><small>${esc(mesCurto(p.data))}</small></span>
+    <span class="plt-info"><strong>${esc(nomeLocal(p.localId))}</strong><small>${esc(turnoTxt(p))}, ${sub}</small></span>
+    <span class="plt-fim"><b>${brl(s === 'pago' ? p.valor : aberto(p))}</b>${pill(p)}</span>
+  </button>`;
+}
+
+function barraMes() {
+  return `<div class="monthbar">
+    <button type="button" class="icon-btn" data-mes="-1" aria-label="Mês anterior">${I.prev}</button>
+    <h1>${nomeMes(ui.mes)}</h1>
+    <button type="button" class="icon-btn" data-mes="1" aria-label="Próximo mês">${I.next}</button>
+  </div>`;
+}
+
+function chipsLocal() {
+  if (db.locais.length < 2) return '';
+  return `<div class="chips" role="group" aria-label="Filtrar por local">
+    <button type="button" class="chip" data-filtro="todos" aria-pressed="${ui.local === 'todos'}">Todos</button>
+    ${db.locais.map(l => `<button type="button" class="chip" data-filtro="${l.id}" aria-pressed="${ui.local === l.id}">${esc(l.nome)}</button>`).join('')}
+  </div>`;
+}
+
+function ranking() {
+  const linhas = db.locais.map(l => {
+    const ps = db.plantoes.filter(p => p.localId === l.id);
+    const vencidos = ps.filter(p => p.venc < hoje() || status(p) === 'pago');
+    const atrasos = vencidos.map(p => {
+      if (status(p) === 'pago') return Math.max(0, difDias(ultimoPgto(p), p.venc));
+      return atraso(p);
+    });
+    const atrasados = ps.filter(p => status(p) === 'atrasado');
+    return {
+      l, n: atrasados.length,
+      valor: soma(atrasados, aberto),
+      media: atrasos.length ? Math.round(atrasos.reduce((a, b) => a + b, 0) / atrasos.length) : 0,
+      base: atrasos.length
+    };
+  }).filter(r => r.base > 0 || r.n > 0)
+    .sort((a, b) => b.valor - a.valor || b.media - a.media);
+  if (!linhas.length) return '<p class="note">O ranking aparece quando algum plantão passar do vencimento.</p>';
+  return `<div class="rank">${linhas.map((r, i) => `
+    <div class="rank-row${r.n ? ' hot' : ''}">
+      <span class="rank-pos num">${i + 1}</span>
+      <span class="rank-info">
+        <strong>${esc(r.l.nome)}</strong>
+        ${r.n ? `<span class="r-val">${brl(r.valor)} em atraso, ${r.n} ${r.n === 1 ? 'plantão' : 'plantões'}</span>` : '<span class="r-ok">Nada em atraso agora</span>'}
+        <small>Paga em média ${r.media ? `${diasTxt(r.media)} depois do vencimento` : 'no prazo'}</small>
+        ${r.n ? `<button type="button" class="btn btn-ghost btn-sm" data-cobrar-local="${r.l.id}">${I.copy} Copiar cobrança de tudo</button>` : ''}
+      </span>
+    </div>`).join('')}</div>`;
+}
+
+function vPlantoes() {
+  const lista = filtrados();
+  const total = soma(lista, p => p.valor);
+  const rec = soma(lista, recebido);
+  const atr = soma(lista.filter(p => status(p) === 'atrasado'), aberto);
+  return `${barraMes()}
+  ${chipsLocal()}
+  <div class="summary">
+    <div><small>Total do mês</small><b>${brl(total)}</b></div>
+    <div><small>Recebido</small><b>${brl(rec)}</b></div>
+    <div class="s-atraso"><small>Atrasado</small><b>${brl(atr)}</b></div>
+  </div>
+  <section class="sec">
+    <div class="sec-head"><h2>${lista.length} ${lista.length === 1 ? 'plantão' : 'plantões'}</h2></div>
+    ${lista.length ? `<div class="list">${lista.map(linhaPlantao).join('')}</div>`
+      : '<div class="empty-state"><p>Nenhum plantão neste mês com esse filtro.</p></div>'}
+  </section>
+  <section class="sec">
+    <div class="sec-head"><h2>Enviar ao contador</h2><small>${nomeMes(ui.mes)}${ui.local !== 'todos' ? `, ${esc(nomeLocal(ui.local))}` : ''}</small></div>
+    <div class="row-btns">
+      <button type="button" class="btn btn-ghost" data-act="csv" ${lista.length ? '' : 'disabled'}>${I.file} CSV</button>
+      <button type="button" class="btn btn-ghost" data-act="pdf" ${lista.length ? '' : 'disabled'}>${I.file} PDF</button>
+    </div>
+  </section>
+  <section class="sec">
+    <div class="sec-head"><h2>Quem mais atrasa</h2><small>todos os meses</small></div>
+    ${ranking()}
+  </section>`;
+}
+
+function vAgenda() {
+  const [y, m] = ui.mes.split('-').map(Number);
+  const primeiro = new Date(y, m - 1, 1).getDay();
+  const nDias = new Date(y, m, 0).getDate();
+  const doMes = db.plantoes.filter(p => mesKey(p.data) === ui.mes);
+  const porDia = {};
+  doMes.forEach(p => { (porDia[p.data] = porDia[p.data] || []).push(p); });
+  const T = hoje();
+  let cells = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'].map((d, i) =>
+    `<div class="cal-dow" aria-hidden="true">${d}</div>`).join('');
+  for (let i = 0; i < primeiro; i++) cells += '<div class="day empty" aria-hidden="true"></div>';
+  for (let d = 1; d <= nDias; d++) {
+    const k = `${ui.mes}-${pad(d)}`;
+    const ps = porDia[k] || [];
+    const cls = ['day', ps.length ? 'has' : '', k === T ? 'today' : ''].join(' ');
+    const desc = ps.length ? `, ${ps.length} ${ps.length === 1 ? 'plantão' : 'plantões'}: ${ps.map(statusTxt).join(', ')}` : '';
+    cells += `<button type="button" class="${cls}" data-dia="${k}" aria-pressed="${ui.dia === k}" aria-label="${fmtData(k)}${desc}">
+      <span>${d}</span><span class="dots">${ps.slice(0, 4).map(p => `<i class="dot dot-${status(p)}"></i>`).join('')}</span>
+    </button>`;
+  }
+  let detalhe = '';
+  if (ui.dia && mesKey(ui.dia) === ui.mes) {
+    const ps = porDia[ui.dia] || [];
+    detalhe = `<section class="sec">
+      <div class="sec-head"><h2>${fmtData(ui.dia)}</h2></div>
+      ${ps.length ? `<div class="list">${ps.map(linhaPlantao).join('')}</div>` : '<p class="note">Nenhum plantão neste dia.</p>'}
+      <button type="button" class="btn btn-lima btn-block" data-act="lancar-dia">Lançar plantão em ${fmtData(ui.dia)}</button>
+    </section>`;
+  } else {
+    detalhe = '<p class="note">Toque em um dia para ver os plantões ou lançar um novo.</p>';
+  }
+  return `${barraMes()}
+  <div class="cal">
+    <div class="cal-grid">${cells}</div>
+    <div class="legend">
+      <span><i class="dot dot-receber"></i>A receber</span>
+      <span><i class="dot dot-parcial"></i>Parcial</span>
+      <span><i class="dot dot-pago"></i>Pago</span>
+      <span><i class="dot dot-atrasado"></i>Atrasado</span>
+    </div>
+  </div>
+  ${detalhe}`;
+}
+
+function vAjustes() {
+  return `<h1>Ajustes</h1>
+  <section class="sec">
+    <h2>Seu nome</h2>
+    <div class="panel">
+      <div class="field">
+        <label for="nome">Como você assina as cobranças</label>
+        <input class="input" id="nome" type="text" autocomplete="name" placeholder="Ex.: Dra. Ana Souza" value="${esc(db.nome)}">
+      </div>
+    </div>
+  </section>
+  <section class="sec">
+    <div class="sec-head"><h2>Locais de trabalho</h2><small>${db.locais.length}</small></div>
+    <div class="panel">
+      ${db.locais.length ? db.locais.map(l => `<div class="loc">
+        <span><strong>${esc(l.nome)}</strong><small>${brl(l.valor)} o plantão de 12h, paga em ${diasTxt(l.prazo)}, ${esc(l.forma)}</small></span>
+        <button type="button" class="btn btn-ghost btn-sm" data-edit-local="${l.id}">Editar</button>
+      </div>`).join('') : '<p class="note">Nenhum local cadastrado.</p>'}
+      <button type="button" class="btn btn-lima btn-block" data-act="novo-local">Adicionar local</button>
+    </div>
+  </section>
+  ${temExemplos() ? `<section class="sec"><h2>Dados de exemplo</h2><div class="panel">
+    <p class="note">Os hospitais e plantões marcados como exemplo servem só para testar. Seus lançamentos ficam.</p>
+    <button type="button" class="btn btn-roxo btn-block" data-act="apagar-exemplos">Apagar exemplos</button>
+  </div></section>` : ''}
+  <section class="sec">
+    <h2>Privacidade</h2>
+    <div class="panel">
+      <p class="note">Seus dados ficam guardados só neste aparelho e neste navegador. Ninguém mais vê. O app não pede nem guarda nenhum dado de paciente.</p>
+      <button type="button" class="btn btn-danger btn-block" data-act="apagar-tudo">Apagar todos os meus dados</button>
+    </div>
+  </section>`;
+}
+
+const VIEWS = { inicio: vInicio, plantoes: vPlantoes, agenda: vAgenda, ajustes: vAjustes };
+const TABS = Object.keys(VIEWS);
+const tabAtual = () => { const h = location.hash.slice(1); return TABS.includes(h) ? h : 'inicio'; };
+
+function render() {
+  const t = tabAtual();
+  $('#view').innerHTML = `<div class="app-view" style="display:flex;flex-direction:column;gap:24px">${VIEWS[t]()}</div>`;
+  document.querySelectorAll('.nav a').forEach(a => {
+    if (a.dataset.tab === t) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+  });
+  $('#topDate').textContent = fmtData(hoje());
+  const nome = $('#nome');
+  if (nome) nome.addEventListener('input', () => { db.nome = nome.value; save(); });
+}
+
+let refreshSheet = null;
+function commit() { save(); render(); if (refreshSheet && sheet.open) refreshSheet(); }
+
+/* ---------- folha inferior ---------- */
+const sheet = $('#sheet');
+function abrir(titulo, corpo, onMount, refresh) {
+  sheet.innerHTML = `<div class="grab" aria-hidden="true"></div>
+    <div class="sheet-head"><h2 id="sheetTitle">${titulo}</h2>
+    <button type="button" class="close" data-act="fechar" aria-label="Fechar">${I.close}</button></div>
+    <div class="sheet-body">${corpo}</div>`;
+  refreshSheet = refresh || null;
+  if (!sheet.open) sheet.showModal();
+  if (onMount) onMount(sheet);
+}
+function fechar() { refreshSheet = null; if (sheet.open) sheet.close(); }
+sheet.addEventListener('click', e => { if (e.target === sheet) fechar(); });
+sheet.addEventListener('close', () => { refreshSheet = null; });
+
+function confirmar({ titulo, texto, ok, perigo, onOk, voltar }) {
+  abrir(esc(titulo), `<p class="note" style="font-size:16px;color:var(--fg)">${esc(texto)}</p>
+    <div class="stack">
+      <button type="button" class="btn btn-block ${perigo ? 'btn-danger' : 'btn-roxo'}" id="cOk">${esc(ok)}</button>
+      <button type="button" class="btn btn-ghost btn-block" id="cNo">Cancelar</button>
+    </div>`, s => {
+    s.querySelector('#cOk').onclick = () => { onOk(); };
+    s.querySelector('#cNo').onclick = () => { voltar ? voltar() : fechar(); };
+  });
+}
+
+/* ---------- lançar ou editar plantão ---------- */
+function formPlantao({ id = null, data = null } = {}) {
+  if (!db.locais.length) { formLocal(); toast('Cadastre um local antes de lançar o plantão.'); return; }
+  const p = id ? db.plantoes.find(x => x.id === id) : null;
+  const T = hoje(), ontem = addDias(T, -1);
+  const f = p ? { localId: p.localId, data: p.data, turno: p.turno, horas: p.horas || '', valor: p.valor, editado: true, obs: p.obs }
+    : { localId: local(db.ultimoLocal) ? db.ultimoLocal : db.locais[0].id, data: data || T, turno: '12h', horas: '', valor: 0, editado: false, obs: '' };
+  if (!p) f.valor = valorPadrao(local(f.localId), f.turno, f.horas);
+  const qualData = f.data === T ? 'hoje' : f.data === ontem ? 'ontem' : 'outra';
+
+  const corpo = `
+    <div class="field"><span class="flabel" id="lbLocal">Local</span>
+      <div class="chips" role="group" aria-labelledby="lbLocal">
+        ${db.locais.map(l => `<button type="button" class="chip" data-f-local="${l.id}" aria-pressed="${f.localId === l.id}">${esc(l.nome)}</button>`).join('')}
+      </div></div>
+    <div class="field"><span class="flabel" id="lbData">Data</span>
+      <div class="chips" role="group" aria-labelledby="lbData">
+        <button type="button" class="chip" data-f-data="hoje" aria-pressed="${qualData === 'hoje'}">Hoje, ${fmtData(T).slice(0, 5)}</button>
+        <button type="button" class="chip" data-f-data="ontem" aria-pressed="${qualData === 'ontem'}">Ontem, ${fmtData(ontem).slice(0, 5)}</button>
+        <button type="button" class="chip" data-f-data="outra" aria-pressed="${qualData === 'outra'}">Outra data</button>
+      </div>
+      <input class="input" type="date" id="fData" value="${f.data}" aria-label="Data do plantão" ${qualData === 'outra' ? '' : 'hidden'}>
+    </div>
+    <div class="field"><span class="flabel" id="lbTurno">Turno</span>
+      <div class="chips" role="group" aria-labelledby="lbTurno">
+        ${['12h', '24h', 'outro'].map(t => `<button type="button" class="chip" data-f-turno="${t}" aria-pressed="${f.turno === t}">${t === 'outro' ? 'Outro' : t}</button>`).join('')}
+      </div>
+      <input class="input" type="number" inputmode="numeric" min="1" max="48" id="fHoras" placeholder="Quantas horas? Ex.: 6" value="${esc(f.horas)}" aria-label="Horas do turno" ${f.turno === 'outro' ? '' : 'hidden'}>
+    </div>
+    <div class="field"><label for="fValor">Valor (R$)</label>
+      <input class="input input-money" id="fValor" inputmode="decimal" autocomplete="off" value="${valorInput(f.valor)}">
+    </div>
+    <div class="field"><label for="fObs">Observação <span class="hint">(opcional)</span></label>
+      <input class="input" id="fObs" type="text" maxlength="140" placeholder="Ex.: troca com colega. Não escreva dados de paciente." value="${esc(f.obs)}">
+    </div>
+    <p class="preview" id="fPrev"></p>
+    <p class="err" id="fErr" hidden></p>
+    <button type="button" class="btn btn-lima btn-block" id="fSalvar">${p ? 'Salvar alterações' : 'Salvar plantão'}</button>`;
+
+  abrir(p ? 'Editar plantão' : 'Lançar plantão', corpo, s => {
+    const vIn = s.querySelector('#fValor'), dIn = s.querySelector('#fData'), hIn = s.querySelector('#fHoras');
+    const prev = () => {
+      const l = local(f.localId);
+      s.querySelector('#fPrev').innerHTML = l
+        ? `Vence em <b>${fmtData(addDias(f.data, l.prazo))}</b>. ${esc(l.nome)} paga em ${diasTxt(l.prazo)}, ${esc(l.forma)}.`
+        : '';
+    };
+    const recalc = () => { if (!f.editado) { f.valor = valorPadrao(local(f.localId), f.turno, Number(f.horas)); vIn.value = valorInput(f.valor); } prev(); };
+    const marcar = (attr, val) => s.querySelectorAll(`[${attr}]`).forEach(b => b.setAttribute('aria-pressed', String(b.getAttribute(attr) === val)));
+    s.querySelectorAll('[data-f-local]').forEach(b => b.onclick = () => { f.localId = b.dataset.fLocal; marcar('data-f-local', f.localId); f.editado = false; recalc(); });
+    s.querySelectorAll('[data-f-data]').forEach(b => b.onclick = () => {
+      const v = b.dataset.fData; marcar('data-f-data', v);
+      if (v === 'hoje') f.data = T; else if (v === 'ontem') f.data = ontem;
+      dIn.hidden = v !== 'outra'; if (v === 'outra') { dIn.value = f.data; dIn.focus(); }
+      prev();
+    });
+    dIn.onchange = () => { if (dIn.value) { f.data = dIn.value; prev(); } };
+    s.querySelectorAll('[data-f-turno]').forEach(b => b.onclick = () => {
+      f.turno = b.dataset.fTurno; marcar('data-f-turno', f.turno);
+      hIn.hidden = f.turno !== 'outro'; if (f.turno === 'outro') hIn.focus();
+      f.editado = false; recalc();
+    });
+    hIn.oninput = () => { f.horas = hIn.value; f.editado = false; recalc(); };
+    vIn.oninput = () => { f.editado = true; };
+    vIn.onfocus = () => vIn.select();
+    s.querySelector('#fSalvar').onclick = () => {
+      const err = s.querySelector('#fErr');
+      const valor = parseValor(vIn.value);
+      const l = local(f.localId);
+      const problema = !l ? 'Escolha o local.' : !f.data ? 'Escolha a data.' : !(valor > 0) ? 'Digite um valor maior que zero. Ex.: 1500 ou 1.500,00' : '';
+      if (problema) { err.textContent = problema; err.hidden = false; return; }
+      const horas = f.turno === 'outro' && Number(f.horas) > 0 ? Number(f.horas) : null;
+      const dados = { localId: l.id, data: f.data, venc: addDias(f.data, l.prazo), turno: f.turno, horas, valor, obs: s.querySelector('#fObs').value.trim() };
+      if (p) { Object.assign(p, dados); if (recebido(p) > p.valor) p.pagamentos = [{ data: ultimoPgto(p), valor: p.valor }]; }
+      else db.plantoes.push({ id: uid(), ...dados, pagamentos: [], exemplo: false });
+      db.ultimoLocal = l.id;
+      fechar(); commit();
+      toast(p ? 'Plantão atualizado.' : `Plantão lançado. Vence em ${fmtData(dados.venc)}.`);
+    };
+    prev();
+  });
+}
+
+/* ---------- detalhe do plantão ---------- */
+function detalhe(id) {
+  const montar = () => {
+    const p = db.plantoes.find(x => x.id === id);
+    if (!p) { fechar(); return; }
+    const s = status(p), l = local(p.localId);
+    const corpo = `
+      <div>${pill(p)}</div>
+      <dl class="dados">
+        <div><dt>Data</dt><dd>${fmtData(p.data)}</dd></div>
+        <div><dt>Turno</dt><dd>${esc(turnoTxt(p))}</dd></div>
+        <div><dt>Valor</dt><dd>${brl(p.valor)}</dd></div>
+        <div><dt>Recebido</dt><dd>${brl(recebido(p))}${p.pagamentos.length ? ` <span class="hint">(${p.pagamentos.map(x => fmtData(x.data)).join(', ')})</span>` : ''}</dd></div>
+        ${s !== 'pago' ? `<div><dt>Falta receber</dt><dd>${brl(aberto(p))}</dd></div>` : ''}
+        <div><dt>Vencimento</dt><dd>${fmtData(p.venc)}</dd></div>
+        ${s === 'atrasado' ? `<div><dt>Atraso</dt><dd class="red">${diasTxt(atraso(p))}</dd></div>` : ''}
+        <div><dt>Forma</dt><dd>${esc(l ? l.forma : '')}</dd></div>
+        ${p.obs ? `<div><dt>Observação</dt><dd>${esc(p.obs)}</dd></div>` : ''}
+      </dl>
+      ${s !== 'pago' ? `
+      <div class="stack">
+        <button type="button" class="btn btn-lima btn-block" id="dTotal">${I.check} Recebi tudo, ${brl(aberto(p))}</button>
+        <div class="row-btns">
+          <button type="button" class="btn btn-ghost" id="dParte">Recebi uma parte</button>
+          <button type="button" class="btn btn-ghost" data-cobrar="${p.id}">${I.copy} Cobrança</button>
+        </div>
+      </div>
+      <div class="panel" id="dParteForm" hidden style="box-shadow:none;border-color:var(--line)">
+        <div class="field"><label for="pValor">Quanto entrou (R$)</label>
+          <input class="input input-money" id="pValor" inputmode="decimal" placeholder="Ex.: 600"></div>
+        <div class="field"><label for="pData">Quando</label>
+          <input class="input" id="pData" type="date" value="${hoje()}"></div>
+        <p class="err" id="pErr" hidden></p>
+        <button type="button" class="btn btn-lima btn-block" id="pSalvar">Salvar pagamento</button>
+      </div>` : `<button type="button" class="btn btn-ghost btn-block" id="dDesfazer">Desfazer pagamento</button>`}
+      <div class="row-btns">
+        <button type="button" class="btn btn-ghost" id="dEditar">Editar</button>
+        <button type="button" class="btn btn-danger" id="dApagar">Apagar</button>
+      </div>`;
+    abrir(esc(nomeLocal(p.localId)), corpo, sh => {
+      const q = sel => sh.querySelector(sel);
+      if (q('#dTotal')) q('#dTotal').onclick = () => pagarTudo(p.id);
+      if (q('#dParte')) q('#dParte').onclick = () => { q('#dParteForm').hidden = false; q('#pValor').focus(); };
+      if (q('#pSalvar')) q('#pSalvar').onclick = () => {
+        const v = parseValor(q('#pValor').value), d = q('#pData').value;
+        const e = q('#pErr');
+        if (!(v > 0)) { e.textContent = 'Digite quanto entrou. Ex.: 600'; e.hidden = false; return; }
+        if (!d) { e.textContent = 'Escolha a data do pagamento.'; e.hidden = false; return; }
+        p.pagamentos.push({ data: d, valor: Math.min(v, aberto(p)) });
+        commit();
+        toast(status(p) === 'pago' ? 'Plantão quitado.' : `Pagamento registrado. Faltam ${brl(aberto(p))}.`);
+      };
+      if (q('#dDesfazer')) q('#dDesfazer').onclick = () => {
+        const antes = p.pagamentos.slice(); p.pagamentos = []; commit();
+        toast('Pagamento desfeito.', { label: 'Voltar', fn: () => { p.pagamentos = antes; commit(); } });
+      };
+      q('#dEditar').onclick = () => formPlantao({ id: p.id });
+      q('#dApagar').onclick = () => confirmar({
+        titulo: 'Apagar este plantão?', texto: `${nomeLocal(p.localId)}, ${fmtData(p.data)}, ${brl(p.valor)}. Isso não pode ser desfeito.`,
+        ok: 'Apagar plantão', perigo: true, voltar: montar,
+        onOk: () => { db.plantoes = db.plantoes.filter(x => x.id !== p.id); fechar(); commit(); toast('Plantão apagado.'); }
+      });
+    }, montar);
+  };
+  montar();
+}
+
+function pagarTudo(id) {
+  const p = db.plantoes.find(x => x.id === id);
+  if (!p) return;
+  const falta = aberto(p);
+  p.pagamentos.push({ data: hoje(), valor: falta });
+  commit();
+  toast(`${brl(falta)} marcado como recebido.`, { label: 'Desfazer', fn: () => { p.pagamentos.pop(); commit(); } });
+}
+
+/* ---------- local de trabalho ---------- */
+function formLocal(id = null) {
+  const l = id ? local(id) : null;
+  const f = l ? { ...l } : { nome: '', valor: '', prazo: 30, forma: 'PJ' };
+  const corpo = `
+    <div class="field"><label for="lNome">Nome do hospital ou empresa</label>
+      <input class="input" id="lNome" type="text" maxlength="60" placeholder="Ex.: Hospital Municipal" value="${esc(f.nome)}"></div>
+    <div class="field"><label for="lValor">Valor do plantão de 12h (R$)</label>
+      <input class="input input-money" id="lValor" inputmode="decimal" placeholder="Ex.: 1500" value="${f.valor === '' ? '' : valorInput(f.valor)}">
+      <span class="hint">No plantão de 24h o app sugere o dobro. Você pode mudar na hora de lançar.</span></div>
+    <div class="field"><span class="flabel" id="lbPrazo">Paga em quantos dias</span>
+      <div class="chips" role="group" aria-labelledby="lbPrazo">
+        ${[15, 30, 45, 60, 90].map(n => `<button type="button" class="chip" data-l-prazo="${n}" aria-pressed="${Number(f.prazo) === n}">${n} dias</button>`).join('')}
+      </div>
+      <input class="input" id="lPrazo" type="number" inputmode="numeric" min="0" max="365" value="${esc(f.prazo)}" aria-label="Prazo em dias"></div>
+    <div class="field"><span class="flabel" id="lbForma">Forma de pagamento</span>
+      <div class="chips" role="group" aria-labelledby="lbForma">
+        ${FORMAS.map(x => `<button type="button" class="chip" data-l-forma="${x}" aria-pressed="${f.forma === x}">${x}</button>`).join('')}
+      </div></div>
+    <p class="err" id="lErr" hidden></p>
+    <button type="button" class="btn btn-lima btn-block" id="lSalvar">${l ? 'Salvar alterações' : 'Salvar local'}</button>
+    ${l ? '<button type="button" class="btn btn-danger btn-block" id="lApagar">Apagar local</button>' : ''}`;
+  const montar = () => abrir(l ? 'Editar local' : 'Novo local', corpo, s => {
+    const q = sel => s.querySelector(sel);
+    const pIn = q('#lPrazo');
+    const marcar = (attr, val) => s.querySelectorAll(`[${attr}]`).forEach(b => b.setAttribute('aria-pressed', String(b.getAttribute(attr) === String(val))));
+    s.querySelectorAll('[data-l-prazo]').forEach(b => b.onclick = () => { pIn.value = b.dataset.lPrazo; marcar('data-l-prazo', pIn.value); });
+    pIn.oninput = () => marcar('data-l-prazo', pIn.value);
+    s.querySelectorAll('[data-l-forma]').forEach(b => b.onclick = () => { f.forma = b.dataset.lForma; marcar('data-l-forma', f.forma); });
+    q('#lSalvar').onclick = () => {
+      const nome = q('#lNome').value.trim(), valor = parseValor(q('#lValor').value), prazo = parseInt(pIn.value, 10);
+      const e = q('#lErr');
+      const problema = !nome ? 'Digite o nome do local.' : !(valor > 0) ? 'Digite o valor do plantão. Ex.: 1500' : !(prazo >= 0) ? 'Digite o prazo em dias. Ex.: 30' : '';
+      if (problema) { e.textContent = problema; e.hidden = false; return; }
+      if (l) Object.assign(l, { nome, valor, prazo, forma: f.forma, exemplo: false });
+      else { const novo = { id: uid(), nome, valor, prazo, forma: f.forma, exemplo: false }; db.locais.push(novo); db.ultimoLocal = novo.id; }
+      fechar(); commit(); toast(l ? 'Local atualizado.' : 'Local salvo. Já pode lançar plantões nele.');
+    };
+    if (q('#lApagar')) q('#lApagar').onclick = () => {
+      const n = db.plantoes.filter(p => p.localId === l.id).length;
+      if (n) { const e = q('#lErr'); e.textContent = `Este local tem ${n} ${n === 1 ? 'plantão' : 'plantões'}. Apague os plantões antes.`; e.hidden = false; return; }
+      confirmar({ titulo: 'Apagar este local?', texto: l.nome, ok: 'Apagar local', perigo: true, voltar: montar,
+        onOk: () => { db.locais = db.locais.filter(x => x.id !== l.id); fechar(); commit(); toast('Local apagado.'); } });
+    };
+  });
+  montar();
+}
+
+/* ---------- cobrança ---------- */
+function textoCobranca(lista) {
+  const nome = db.nome.trim();
+  const ola = nome ? `Olá, tudo bem? Aqui é ${nome}.` : 'Olá, tudo bem?';
+  const linha = p => {
+    const d = atraso(p);
+    const prazo = d > 0 ? `venceu em ${fmtData(p.venc)}, ${diasTxt(d)} de atraso` : `vence em ${fmtData(p.venc)}`;
+    const parte = recebido(p) > 0 ? ` (restante de ${brl(p.valor)})` : '';
+    return `${fmtData(p.data)}, plantão de ${turnoTxt(p)}, ${brl(aberto(p))}${parte}, ${prazo}`;
+  };
+  const l = nomeLocal(lista[0].localId);
+  if (lista.length === 1) {
+    const p = lista[0], d = atraso(p);
+    return `${ola}\n\nPassando para lembrar de um pagamento em aberto.\n\nLocal: ${l}\nPlantão: ${turnoTxt(p)}, dia ${fmtData(p.data)}\nValor em aberto: ${brl(aberto(p))}${recebido(p) > 0 ? ` (de ${brl(p.valor)})` : ''}\nVencimento: ${fmtData(p.venc)}${d > 0 ? ` (${diasTxt(d)} de atraso)` : ''}\n\nVocê consegue me passar uma previsão de pagamento? Obrigado!`;
+  }
+  return `${ola}\n\nPassando para lembrar dos plantões em aberto em ${l}:\n\n${lista.map(p => `• ${linha(p)}`).join('\n')}\n\nTotal em aberto: ${brl(soma(lista, aberto))}\n\nVocê consegue me passar uma previsão de pagamento? Obrigado!`;
+}
+
+function copiar(texto, okMsg) {
+  const fallback = () => {
+    abrir('Texto da cobrança', `<p class="note">Não deu para copiar sozinho. Segure no texto, toque em Selecionar tudo e depois em Copiar.</p>
+      <textarea class="input" id="cTxt" readonly style="min-height:240px">${esc(texto)}</textarea>
+      <a class="btn btn-lima btn-block" href="https://wa.me/?text=${encodeURIComponent(texto)}" target="_blank" rel="noopener">Abrir no WhatsApp</a>`,
+      s => { const t = s.querySelector('#cTxt'); t.focus(); t.select(); });
+  };
+  try {
+    navigator.clipboard.writeText(texto).then(() => toast(okMsg), fallback);
+  } catch (e) { fallback(); }
+}
+
+/* ---------- exportar ---------- */
+function baixar(nome, blob) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = nome; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 5000);
+}
+const nomeArquivo = ext => `atalho-plantao-${ui.mes}${ui.local !== 'todos' ? '-' + nomeLocal(ui.local).normalize('NFD').replace(/[^\w]+/g, '-').toLowerCase() : ''}.${ext}`;
+
+function exportarCSV() {
+  const num = n => n.toFixed(2).replace('.', ',');
+  const q = s => `"${String(s).replace(/"/g, '""')}"`;
+  const head = ['Data', 'Local', 'Forma de pagamento', 'Turno', 'Valor', 'Recebido', 'Em aberto', 'Vencimento', 'Status', 'Dias de atraso', 'Data do pagamento', 'Observação'];
+  const rows = filtrados().slice().reverse().map(p => [
+    fmtData(p.data), nomeLocal(p.localId), (local(p.localId) || {}).forma || '', turnoTxt(p),
+    num(p.valor), num(recebido(p)), num(aberto(p)), fmtData(p.venc), statusTxt(p),
+    status(p) === 'atrasado' ? atraso(p) : 0, fmtData(ultimoPgto(p)), p.obs || ''
+  ]);
+  const csv = '﻿' + [head, ...rows].map(r => r.map(q).join(';')).join('\r\n');
+  baixar(nomeArquivo('csv'), new Blob([csv], { type: 'text/csv;charset=utf-8' }));
+  toast('Planilha gerada.');
+}
+
+function exportarPDF() {
+  const J = window.jspdf && window.jspdf.jsPDF;
+  if (!J) { toast('Não deu para gerar o PDF agora. Confira a internet e tente de novo.'); return; }
+  const lista = filtrados().slice().reverse();
+  const doc = new J({ unit: 'mm', format: 'a4' });
+  const W = 210, M = 14;
+  let y = 18;
+  doc.setFillColor(91, 61, 245); doc.rect(0, 0, W, 4, 'F');
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(16); doc.setTextColor(30, 30, 36);
+  doc.text('Atalho Plantão', M, y);
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(11);
+  y += 7; doc.text(`Plantões de ${nomeMes(ui.mes)}${ui.local !== 'todos' ? ' - ' + nomeLocal(ui.local) : ''}`, M, y);
+  if (db.nome.trim()) { y += 6; doc.text(db.nome.trim(), M, y); }
+  y += 6; doc.setTextColor(99, 97, 122); doc.text(`Gerado em ${fmtData(hoje())}`, M, y);
+  y += 10;
+  const cols = [
+    { t: 'Data', x: M }, { t: 'Local', x: 34 }, { t: 'Turno', x: 86 },
+    { t: 'Valor', x: 120, r: true }, { t: 'Recebido', x: 144, r: true }, { t: 'Vencimento', x: 148 }, { t: 'Status', x: 172 }
+  ];
+  const cab = () => {
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(9); doc.setTextColor(30, 30, 36);
+    cols.forEach(c => doc.text(c.t, c.x, y, c.r ? { align: 'right' } : undefined));
+    y += 2; doc.setDrawColor(227, 225, 238); doc.line(M, y, W - M, y); y += 5;
+    doc.setFont('helvetica', 'normal');
+  };
+  cab();
+  const corta = (s, w) => doc.splitTextToSize(s, w)[0];
+  lista.forEach(p => {
+    if (y > 278) { doc.addPage(); y = 18; cab(); }
+    const s = status(p);
+    const st = s === 'atrasado' ? `Atrasado ${atraso(p)}d` : LABEL[s];
+    if (s === 'atrasado') doc.setTextColor(215, 38, 61); else doc.setTextColor(30, 30, 36);
+    doc.text(fmtData(p.data), M, y);
+    doc.text(corta(nomeLocal(p.localId), 50), 34, y);
+    doc.text(turnoTxt(p), 86, y);
+    doc.text(brl(p.valor), 120, y, { align: 'right' });
+    doc.text(brl(recebido(p)), 144, y, { align: 'right' });
+    doc.text(fmtData(p.venc), 148, y);
+    doc.text(st, 172, y);
+    y += 6.5;
+  });
+  doc.setTextColor(30, 30, 36);
+  y += 2; doc.line(M, y, W - M, y); y += 7;
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(10);
+  const tot = [
+    ['Total dos plantões', soma(lista, p => p.valor)],
+    ['Recebido', soma(lista, recebido)],
+    ['Em aberto', soma(lista, aberto)],
+    ['Atrasado', soma(lista.filter(p => status(p) === 'atrasado'), aberto)]
+  ];
+  tot.forEach(([k, v]) => { if (y > 285) { doc.addPage(); y = 18; } doc.text(k, M, y); doc.text(brl(v), 70, y, { align: 'right' }); y += 6; });
+  doc.save(nomeArquivo('pdf'));
+  toast('PDF gerado.');
+}
+
+/* ---------- aviso rápido ---------- */
+let toastTimer;
+function toast(msg, acao) {
+  const t = $('#toast');
+  t.innerHTML = `<span>${esc(msg)}</span>${acao ? `<button type="button" class="toast-btn">${esc(acao.label)}</button>` : ''}`;
+  t.hidden = false;
+  if (acao) t.querySelector('button').onclick = () => { acao.fn(); t.hidden = true; };
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { t.hidden = true; }, acao ? 6000 : 3500);
+}
+
+/* ---------- cliques ---------- */
+document.addEventListener('click', e => {
+  const b = e.target.closest('button, [data-tab]');
+  if (!b) return;
+  const d = b.dataset;
+  if (d.open) return detalhe(d.open);
+  if (d.pagar) return pagarTudo(d.pagar);
+  if (d.cobrar) { const p = db.plantoes.find(x => x.id === d.cobrar); return copiar(textoCobranca([p]), 'Cobrança copiada. Cole no WhatsApp.'); }
+  if (d.cobrarLocal) {
+    const lista = db.plantoes.filter(p => p.localId === d.cobrarLocal && status(p) === 'atrasado').sort((a, b) => (a.data < b.data ? -1 : 1));
+    return copiar(textoCobranca(lista), `Cobrança de ${lista.length} ${lista.length === 1 ? 'plantão' : 'plantões'} copiada.`);
+  }
+  if (d.mes) { ui.mes = addMes(ui.mes, Number(d.mes)); ui.dia = null; return render(); }
+  if (d.filtro) { ui.local = d.filtro; return render(); }
+  if (d.dia) { ui.dia = ui.dia === d.dia ? null : d.dia; return render(); }
+  if (d.editLocal) return formLocal(d.editLocal);
+  switch (d.act) {
+    case 'fechar': return fechar();
+    case 'novo-local': return formLocal();
+    case 'lancar-dia': return formPlantao({ data: ui.dia });
+    case 'csv': return exportarCSV();
+    case 'pdf': return exportarPDF();
+    case 'apagar-exemplos': return confirmar({
+      titulo: 'Apagar os exemplos?', texto: 'Os hospitais e plantões de exemplo somem. O que você lançou continua aqui.', ok: 'Apagar exemplos',
+      onOk: () => {
+        const exIds = new Set(db.locais.filter(l => l.exemplo).map(l => l.id));
+        db.plantoes = db.plantoes.filter(p => !p.exemplo && !exIds.has(p.localId));
+        db.locais = db.locais.filter(l => !l.exemplo);
+        if (!local(db.ultimoLocal)) db.ultimoLocal = db.locais[0] ? db.locais[0].id : null;
+        ui.local = 'todos';
+        fechar(); commit(); toast('Exemplos apagados.');
+      }
+    });
+    case 'apagar-tudo': return confirmar({
+      titulo: 'Apagar todos os seus dados?', texto: 'Locais, plantões e pagamentos deste aparelho serão apagados. Isso não pode ser desfeito.', ok: 'Apagar tudo', perigo: true,
+      onOk: () => { db = { nome: '', ultimoLocal: null, locais: [], plantoes: [] }; ui.local = 'todos'; fechar(); commit(); toast('Tudo apagado.'); }
+    });
+  }
+});
+$('#fab').addEventListener('click', () => formPlantao());
+window.addEventListener('hashchange', () => { render(); window.scrollTo(0, 0); });
+document.addEventListener('visibilitychange', () => { if (!document.hidden) render(); });
+
+render();
+})();
+</script>
+</body>
+</html>

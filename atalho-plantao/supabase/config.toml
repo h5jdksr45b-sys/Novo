@@ -1,0 +1,3 @@
+# Só o que muda do padrão do Supabase: o aviso do Asaas chega sem login de usuário.
+[functions.asaas-webhook]
+verify_jwt = false

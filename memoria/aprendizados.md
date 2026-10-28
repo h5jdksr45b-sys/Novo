@@ -66,6 +66,8 @@ O motivo central das reclamações.
 - Nenhum ângulo que reforce estigma, soe ameaçador ou provoque briga. "Vai parecer q tô falando que borderline tem treco de pedir dinheiro", "parece que induz ameaçar", "esse final não tá legal vá dar briga".
 - Sem drama e sem comédia sem querer. "Drama não", "o começo do um é levemente cômico".
 - Feed orgânico é para alcance, não venda. "Para orgânico não venda" (24/10).
+- Recuperar o alcance dos Reels deixou de ser prioridade. "O alcance do Reel está ótimo", "Não é prioridade recuperar algo que já está" (28/10). Não usar como critério nem citar queda.
+- Pedido de temas sem formato dito: Reel falado. "eu falei q era pra reel vídeo falad" (28/10).
 
 ## 4. Carrossel e imagem
 

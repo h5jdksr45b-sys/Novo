@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Atalho Plantão: demonstração</title>
+<style>
+/* 1080x1920, 30 qps. Fundo azul-noite do logo Atalho; celular no centro com as telas reais do app.
+   Texto só no terço de cima. Nada de texto nos 20% de baixo. */
+@font-face { font-family: Montserrat; src: url(fonts/Montserrat.ttf); font-weight: 100 900; }
+@font-face { font-family: Anton; src: url(fonts/Anton-Regular.ttf); }
+:root { --bg: #171043; --lima: #C6F24E; --creme: #F2EFE6; }
+* { box-sizing: border-box; margin: 0; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--bg); }
+#palco { position: absolute; inset: 0; background: var(--bg); }
+#luz { position: absolute; left: 540px; top: 1150px; width: 1400px; height: 1400px; margin: -700px 0 0 -700px; border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(91 61 245 / 0.32), rgb(91 61 245 / 0)); }
+#legenda { position: absolute; left: 70px; right: 70px; top: 120px; height: 300px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+  font-family: Montserrat; font-weight: 800; color: #fff; font-size: 74px; line-height: 1.04; letter-spacing: -0.01em; text-transform: uppercase; text-shadow: 0 4px 18px rgb(0 0 0 / 0.35); }
+#legenda .l { display: block; white-space: nowrap; }
+#legenda em { font-style: normal; color: var(--lima); }
+#cel { position: absolute; left: 204px; top: 450px; width: 672px; height: 1417px; border-radius: 92px; background: #0B0920;
+  padding: 16px; box-shadow: 0 0 0 3px #2B2463, 0 40px 90px rgb(0 0 0 / 0.55); transform-origin: 50% 40%; }
+#tela { position: relative; width: 640px; height: 1385px; border-radius: 76px; overflow: hidden; background: var(--creme); }
+#status { position: absolute; left: 0; right: 0; top: 0; height: 72px; background: var(--creme); z-index: 5; display: flex; align-items: center; justify-content: space-between; padding: 6px 64px 0 70px;
+  font-family: Montserrat; font-weight: 700; font-size: 28px; color: #1E1E24; }
+#status .ilha { position: absolute; left: 50%; top: 18px; width: 190px; height: 52px; margin-left: -95px; border-radius: 30px; background: #0B0920; }
+#status .ic { display: flex; gap: 10px; align-items: center; }
+#app { position: absolute; left: 0; top: 72px; width: 640px; height: 1313px; overflow: hidden; }
+.camada { position: absolute; left: 0; top: 0; width: 640px; opacity: 0; will-change: transform, opacity; }
+.barra { position: absolute; left: 0; bottom: 0; width: 640px; opacity: 0; z-index: 4; }
+.toque { position: absolute; width: 120px; height: 120px; margin: -60px 0 0 -60px; border-radius: 50%; z-index: 6; opacity: 0;
+  border: 6px solid var(--lima); background: rgb(198 242 78 / 0.25); }
+#anel { position: absolute; z-index: 6; border: 6px solid var(--lima); border-radius: 34px; opacity: 0; }
+#fim { position: absolute; inset: 0; opacity: 0; }
+#fim img { width: 1080px; height: 1920px; display: block; }
+#fim .p { position: absolute; left: 0; right: 0; top: 1390px; text-align: center; font-family: Anton; font-size: 150px; letter-spacing: 0.02em; color: var(--lima); opacity: 0; }
+#fim .s { position: absolute; left: 0; right: 0; top: 1600px; text-align: center; font-family: Montserrat; font-weight: 600; font-size: 40px; color: rgb(255 255 255 / 0.82); opacity: 0; }
+#flash { position: absolute; inset: 0; background: #fff; opacity: 0; z-index: 20; }
+#preto { position: absolute; inset: 0; background: #000; opacity: 0; z-index: 21; }
+</style>
+</head>
+<body>
+<div id="palco">
+  <div id="luz"></div>
+  <div id="legenda"></div>
+  <div id="cel"><div id="tela">
+    <div id="status"><span>9:41</span><span class="ilha"></span>
+      <span class="ic"><svg width="34" height="22" viewBox="0 0 34 22"><rect x="0" y="14" width="6" height="8" rx="1.5" fill="#1E1E24"/><rect x="9" y="9" width="6" height="13" rx="1.5" fill="#1E1E24"/><rect x="18" y="4" width="6" height="18" rx="1.5" fill="#1E1E24"/><rect x="27" y="0" width="6" height="22" rx="1.5" fill="#1E1E24"/></svg>
+      <svg width="50" height="24" viewBox="0 0 50 24"><rect x="1" y="1" width="42" height="22" rx="6" fill="none" stroke="#1E1E24" stroke-width="2"/><rect x="5" y="5" width="30" height="14" rx="3" fill="#1E1E24"/><rect x="45" y="8" width="4" height="8" rx="2" fill="#1E1E24"/></svg></span></div>
+    <div id="app"></div>
+    <div id="anel"></div>
+    <div class="toque" id="toque"></div>
+  </div></div>
+  <div id="fim"><img id="fimimg" alt=""><div class="p">PLANTÃO</div><div class="s">da Dr. Atalho</div></div>
+  <div id="flash"></div>
+  <div id="preto"></div>
+</div>
+<script src="telas/info.js"></script>
+<script>
+const B = 60 / 106.95;              // um tempo da Marimba Lift
+const K = 1.641;                    // 1 px do app (390 de largura) = 1,641 px na tela do celular
+const INFO = window.INFO;
+const telas = ['inicio', 'cobranca', 'lancar12', 'lancar24', 'lancado', 'agenda', 'plantoes', 'tour'];
+const barras = ['inicio', 'agenda', 'plantoes'];
+const app = document.getElementById('app');
+const L = {}, BAR = {};
+for (const n of telas) { const im = new Image(); im.src = `telas/${n}.png`; im.className = 'camada'; app.appendChild(im); L[n] = im; }
+for (const n of barras) { const im = new Image(); im.src = `telas/tabbar-${n}.png`; im.className = 'barra'; app.appendChild(im); BAR[n] = im; }
+
+// Cenas em tempos de música. ini e fim em segundos.
+const cenas = [];
+let t0 = 0;
+const cena = (beats, o) => { cenas.push({ ...o, ini: t0, fim: t0 + beats * B }); t0 += beats * B; };
+cena(4, { tela: 'inicio', barra: 'inicio', txt: ['Quanto os hospitais', 'ainda te <em>devem</em>?'] });
+cena(4, { tela: 'inicio', barra: 'inicio', txt: ['Abriu, <em>viu</em>.', 'A receber e atrasado'], anel: 'money' });
+cena(4, { tela: 'inicio', barra: 'inicio', txt: ['Atrasou?', 'O app <em>conta os dias</em>'], rola: [0, INFO.cobrarScroll, 0.15, 1.2] });
+cena(6, { tela: 'inicio', troca: 'cobranca', barra: 'inicio', scroll: INFO.cobrarScroll, txt: ['Cobrança pronta', 'pro <em>WhatsApp</em>'],
+  toque: { x: INFO.cobrar.x, y: INFO.cobrar.y - INFO.cobrarScroll, em: 0.35 } });
+cena(4, { tela: 'inicio', troca: 'lancar12', barra: 'inicio', txt: ['Lança em', '<em>3 toques</em>'], toque: { x: INFO.lancar.x, y: INFO.lancar.y, em: 0.3 } });
+cena(4, { tela: 'lancar12', troca: 'lancar24', txt: ['Plantão de 24h?', 'Valor <em>já dobra</em>'], toque: { x: INFO.b24.x, y: INFO.b24.y, em: 0.45 } });
+cena(4, { tela: 'lancar24', troca: 'lancado', txt: ['O vencimento', '<em>sai sozinho</em>'], toque: { x: INFO.salvar.x, y: INFO.salvar.y, em: 0.3 } });
+cena(6, { tela: 'agenda', barra: 'agenda', txt: ['O mês inteiro', '<em>por cor</em>'], whoosh: true, rola: [0, 70, 1.0, 1.6] });
+cena(8, { tela: 'plantoes', barra: 'plantoes', txt: ['Quem mais <em>atrasa</em>', '+ PDF pro contador'], whoosh: true,
+  toque: { x: INFO.pdf.x, y: INFO.pdf.y, em: 0.5 }, rola: [0, INFO.rank.y - 150, 1.5, 1.4] });
+cena(6, { tela: 'tour', txt: ['Começa <em>guiado</em>.', 'Pula se quiser.'], whoosh: true, toque: { x: INFO.tourOk.x, y: INFO.tourOk.y, em: 2.3 } });
+const FIM_INI = t0, FIM_DUR = 4 * B + 2.26;
+const TOTAL = FIM_INI + FIM_DUR;
+window.TOTAL = TOTAL; window.CENAS = cenas.map(c => ({ ini: c.ini, toque: c.toque ? c.ini + c.toque.em : null, troca: c.troca ? c.ini + c.toque.em + 0.2 : null, whoosh: !!c.whoosh })); window.FIM_INI = FIM_INI;
+
+const ease = x => (x < 0 ? 0 : x > 1 ? 1 : 1 - Math.pow(1 - x, 3));
+const io = x => (x < 0 ? 0 : x > 1 ? 1 : x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
+const $ = id => document.getElementById(id);
+let ultimaLegenda = '';
+
+window.seek = t => {
+  const c = cenas.find(x => t >= x.ini && t < x.fim);
+  const fimT = t - FIM_INI;
+  $('fim').style.opacity = c ? 0 : 1;
+  $('cel').style.opacity = c ? 1 : 0;
+  $('legenda').style.opacity = c ? 1 : 0;
+  $('luz').style.opacity = c ? 1 : 0;
+  if (!c) {
+    const i = Math.min(134, Math.floor(fimT * 30));
+    const src = `logo/quadros/${String(i + 1).padStart(3, '0')}.jpg`;
+    if (!$('fimimg').src.endsWith(src)) $('fimimg').src = src;
+    $('fim').querySelector('.p').style.opacity = ease((fimT - 2.6) / 0.35);
+    $('fim').querySelector('.p').style.transform = `translateY(${(1 - ease((fimT - 2.6) / 0.35)) * 30}px)`;
+    $('fim').querySelector('.s').style.opacity = ease((fimT - 2.9) / 0.35);
+  }
+  $('flash').style.opacity = c ? 0 : Math.max(0, 1 - fimT / 0.12) * 0.9;
+  $('preto').style.opacity = Math.max(0, (t - (TOTAL - 0.12)) / 0.12);
+  if (!c) return;
+  const lt = t - c.ini;
+
+  // legenda: entra com subida curta; na primeira cena já está inteira no quadro zero
+  const html = c.txt.map(l => `<span class="l">${l}</span>`).join('');
+  if (html !== ultimaLegenda) { $('legenda').innerHTML = html; ultimaLegenda = html; }
+  const e = c.ini === 0 ? 1 : ease(lt / 0.22);
+  $('legenda').style.transform = `translateY(${(1 - e) * 26}px)`;
+  $('legenda').style.opacity = 0.0 + e;
+
+  // celular: pequeno pulso a cada corte de tela
+  $('cel').style.transform = `scale(${1 + 0.012 * Math.sin(Math.min(1, lt / 0.25) * Math.PI) * (c.ini === 0 ? 0 : 1)})`;
+
+  // qual tela aparece e com que rolagem
+  let scroll = c.scroll || 0;
+  if (c.rola) { const [a, b, s, d] = c.rola; scroll = a + (b - a) * io((lt - s) / d); }
+  const trocaEm = c.troca ? c.toque.em + 0.2 : Infinity;
+  const mix = c.troca ? ease((lt - trocaEm) / 0.14) : 0;
+  for (const n of telas) {
+    const im = L[n];
+    let op = 0;
+    if (n === c.tela) op = 1;
+    if (c.troca && n === c.troca) op = mix;
+    im.style.opacity = op;
+    im.style.zIndex = n === c.troca ? 2 : 1;
+    const sY = ['lancar12', 'lancar24', 'lancado', 'tour'].includes(n) ? 0 : (n === 'cobranca' ? 0 : scroll);
+    im.style.transform = `translateY(${-sY * K}px)`;
+  }
+  // a tela "cobranca" já foi capturada rolada; as folhas não rolam
+  for (const n of barras) BAR[n].style.opacity = c.barra === n && !(c.troca && ['lancar12'].includes(c.troca) && mix > 0.5) ? 1 : 0;
+
+  // toque
+  const tq = $('toque');
+  if (c.toque) {
+    const k = (lt - c.toque.em) / 0.42;
+    tq.style.left = c.toque.x * K + 'px';
+    tq.style.top = (c.toque.y * K + 72) + 'px';
+    tq.style.opacity = k < -0.35 || k > 1 ? 0 : k < 0 ? (k + 0.35) / 0.35 : 1 - k;
+    tq.style.transform = `scale(${k < 0 ? 0.9 + (k + 0.35) * 0.1 / 0.35 : k < 0.15 ? 1 - k * 1.4 : 0.8 + (k - 0.15) * 0.9})`;
+  } else tq.style.opacity = 0;
+
+  // anel em volta do cartão do dinheiro
+  const an = $('anel');
+  if (c.anel) {
+    const b = INFO[c.anel];
+    an.style.left = ((b.x - b.w / 2) * K - 10) + 'px'; an.style.top = ((b.y - b.h / 2) * K + 72 - 10) + 'px';
+    an.style.width = (b.w * K + 20) + 'px'; an.style.height = (b.h * K + 20) + 'px';
+    an.style.opacity = ease((lt - 0.2) / 0.25) * (1 - ease((lt - 1.9) / 0.3));
+  } else an.style.opacity = 0;
+};
+</script>
+</body>
+</html>

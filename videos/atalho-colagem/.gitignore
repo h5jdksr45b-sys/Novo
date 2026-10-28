@@ -1,2 +1,5 @@
 src/
 __pycache__/
+out/*.wav
+out/*-noaudio.mp4
+musica/full48.wav

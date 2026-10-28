@@ -1,5 +1,6 @@
 """Os 4 vídeos de colagem dos apps Atalho. Uso: python3 videos.py [plantao|hora|encaixe|post]"""
-import sys, math
+import sys, math, subprocess
+import numpy as np
 from PIL import Image, ImageDraw
 from engine import *
 
@@ -395,9 +396,57 @@ def post():
 
 BUILD = {'plantao': plantao, 'hora': hora, 'encaixe': encaixe, 'post': post}
 
+# ---------- música: Marimba Lift (Suno), 106,95 BPM ----------
+BEAT0, BEAT = 0.085, 60 / 106.95
+OUTRO_BEAT, SONG_END = 118, 68.53   # últimos 4 tempos até o final seco
+
+
+def sync_to_music(scenes):
+    """Cada corte cai num tempo par da música; a tela final entra junto com o final da música."""
+    body_sc, end = scenes[:-1], scenes[-1]
+    for sc_ in body_sc:
+        sc_.dur = max(4, round(sc_.dur / BEAT / 2) * 2) * BEAT
+    k = round(sum(x.dur for x in body_sc) / BEAT)
+    if k % 4 == 0:
+        body_sc[-1].dur += 2 * BEAT
+        k += 2
+    end.dur = SONG_END - (BEAT0 + OUTRO_BEAT * BEAT) + 0.3
+    return k
+
+
+def music_track(k, total, path):
+    import wave
+    w = wave.open(f'{ROOT}/musica/full48.wav')
+    sr = w.getframerate()
+    x = np.frombuffer(w.readframes(w.getnframes()), np.int16).reshape(-1, 2).astype(np.float32) / 32768
+    a0, a1 = int(BEAT0 * sr), int((BEAT0 + k * BEAT) * sr)
+    b0 = int((BEAT0 + OUTRO_BEAT * BEAT) * sr)
+    xf = int(0.03 * sr)
+    A, B = x[a0:a1 + xf].copy(), x[b0:].copy()
+    ramp = np.linspace(0, 1, xf)[:, None]
+    A[-xf:] *= 1 - ramp
+    B[:xf] *= ramp
+    y = np.concatenate([A[:-xf], A[-xf:] + B[:xf], B[xf:]])
+    n = int(total * sr)
+    y = y[:n] if len(y) >= n else np.pad(y, ((0, n - len(y)), (0, 0)))
+    with wave.open(path, 'wb') as o:
+        o.setnchannels(2); o.setsampwidth(2); o.setframerate(sr)
+        o.writeframes((np.clip(y, -1, 1) * 32767).astype(np.int16).tobytes())
+
+
 if __name__ == '__main__':
     import os
     os.makedirs(OUT, exist_ok=True)
     for name in sys.argv[1:] or BUILD:
-        f, tot = render_video(f'atalho-{name}', PAL[name], BUILD[name](), OUT)
-        print(f, round(tot, 2))
+        scenes = BUILD[name]()
+        k = sync_to_music(scenes)
+        f, tot = render_video(f'atalho-{name}', PAL[name], scenes, OUT)
+        mus = f'{OUT}/atalho-{name}-musica.wav'
+        music_track(k, tot, mus)
+        final = f'{OUT}/atalho-{name}-com-musica.mp4'
+        subprocess.run(['ffmpeg', '-loglevel', 'error', '-y', '-i', f'{OUT}/atalho-{name}-noaudio.mp4',
+                        '-i', mus, '-i', f'{OUT}/atalho-{name}.wav', '-filter_complex',
+                        '[2:a]volume=12dB[s];[1:a][s]amix=inputs=2:normalize=0,loudnorm=I=-14:TP=-1.5:LRA=11[a]',
+                        '-map', '0:v', '-map', '[a]', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-ar', '48000',
+                        '-shortest', '-movflags', '+faststart', final], check=True)
+        print(final, round(tot, 2), 'tempos até a tela final:', k)

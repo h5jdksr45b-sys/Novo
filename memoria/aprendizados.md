@@ -16,6 +16,8 @@ Leia cada frase de capa e de cada slide e confira as cinco coisas abaixo. Ele j�
 
 Quando corrigir um desses erros, varra o carrossel inteiro, não só o slide apontado.
 
+Depois da auditoria, rode o termômetro de `termometro.md` e diga o resultado (feed, teste ou refazer) junto com o veredito.
+
 ## 1. Como responder
 
 - Responda só o que ele perguntou, curto. "Não perguntei isso", "Só a fórmula", "Só fala OK", "mande escrito só".

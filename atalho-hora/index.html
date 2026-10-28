@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Atalho Hora | Quanto seu plantão paga de verdade</title>
+<meta name="description" content="Calculadora gratuita: some deslocamento, espera, imposto e atraso e veja quanto vale de verdade a sua hora no plantão.">
+<meta property="og:title" content="Atalho Hora | Quanto seu plantão paga de verdade">
+<meta property="og:description" content="Some deslocamento, espera, imposto e atraso. Veja a hora real do seu plantão em 1 minuto.">
+<meta name="theme-color" content="#1E7A55">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@500;600;700;800&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --verde: #1E7A55;
+    --verde-escuro: #155a3f;
+    --creme: #F2EADB;
+    --papel: #FAF6EE;
+    --amarelo: #F4C542;
+    --tinta: #1C1816;
+    --cinza: #6f675f;
+    --linha: #e2d9c8;
+    --coral: #E26050;
+    --raio: 18px;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    font-family: 'Montserrat', system-ui, sans-serif;
+    color: var(--tinta);
+    background: var(--verde);
+    background-image: radial-gradient(rgba(255,255,255,.035) 1px, transparent 1px);
+    background-size: 4px 4px;
+    min-height: 100vh;
+  }
+  .wrap { max-width: 560px; margin: 0 auto; padding: 28px 16px 64px; }
+  header { color: var(--creme); margin-bottom: 22px; }
+  .marca { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 14px; letter-spacing: .02em; opacity: .9; }
+  .marca svg { width: 28px; height: 28px; }
+  h1 {
+    font-family: 'Anton', sans-serif; font-weight: 400; text-transform: uppercase;
+    font-size: clamp(40px, 11vw, 58px); line-height: 1.02; margin: 18px 0 10px; letter-spacing: .005em;
+  }
+  h1 em { font-family: 'Playfair Display', serif; font-style: italic; font-weight: 700; text-transform: none; color: var(--amarelo); }
+  .sub { font-size: 16px; line-height: 1.45; margin: 0; max-width: 34ch; opacity: .95; }
+
+  .card {
+    background: var(--papel); border-radius: var(--raio);
+    box-shadow: 0 0 0 6px var(--creme), 0 18px 40px rgba(0,0,0,.22);
+    padding: 22px 18px; margin: 26px 6px 0;
+  }
+  .card h2 { font-size: 15px; text-transform: uppercase; letter-spacing: .06em; margin: 0 0 14px; color: var(--verde-escuro); display: flex; justify-content: space-between; align-items: center; }
+  .remover { font: 600 13px 'Montserrat'; color: var(--cinza); background: none; border: 0; text-decoration: underline; cursor: pointer; padding: 6px; }
+  .grupo { margin: 0 0 16px; }
+  .grupo:last-child { margin-bottom: 0; }
+  .titulo-grupo { font-size: 12px; font-weight: 700; color: var(--cinza); text-transform: uppercase; letter-spacing: .07em; margin: 18px 0 10px; }
+  label { display: block; font-weight: 700; font-size: 15px; margin-bottom: 6px; }
+  .dica { font-weight: 500; font-size: 13px; color: var(--cinza); margin: -2px 0 6px; line-height: 1.35; }
+  .campo { position: relative; display: flex; align-items: center; background: #fff; border: 2px solid var(--linha); border-radius: 12px; transition: border-color .15s; }
+  .campo:focus-within { border-color: var(--verde); }
+  .campo span { padding: 0 0 0 14px; font-weight: 700; color: var(--cinza); font-size: 16px; white-space: nowrap; }
+  .campo span.fim { padding: 0 14px 0 0; }
+  input {
+    flex: 1; min-width: 0; width: 100%; border: 0; outline: 0; background: transparent;
+    font: 700 20px 'Montserrat'; color: var(--tinta); padding: 13px 14px; -moz-appearance: textfield;
+  }
+  input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  .duas { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 12px; }
+  .duas > div { min-width: 0; }
+
+  .botao-sec {
+    display: block; width: calc(100% - 12px); margin: 18px 6px 0; padding: 15px; border-radius: 14px;
+    border: 2px dashed rgba(242,234,219,.7); background: transparent; color: var(--creme);
+    font: 700 15px 'Montserrat'; cursor: pointer;
+  }
+
+  .resultado { background: var(--tinta); color: var(--creme); }
+  .resultado h2 { color: var(--amarelo); }
+  .linha-res { display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 10px; padding: 10px 0; border-bottom: 1px solid rgba(242,234,219,.14); }
+  .linha-res:last-of-type { border-bottom: 0; }
+  .linha-res .rot { font-size: 14px; opacity: .85; }
+  .valor-anunciado { font: 700 22px 'Montserrat'; text-decoration: line-through; text-decoration-color: var(--coral); text-decoration-thickness: 3px; opacity: .8; }
+  .valor-real { font-family: 'Anton', sans-serif; font-size: clamp(54px, 16vw, 76px); line-height: 1; color: var(--amarelo); }
+  .perda { margin: 12px 0 4px; font-size: 16px; line-height: 1.45; }
+  .perda strong { color: var(--amarelo); }
+  .barras { margin-top: 18px; }
+  .barra-rot { display: flex; justify-content: space-between; font-size: 13px; margin: 10px 0 5px; opacity: .9; }
+  .barra { height: 12px; border-radius: 6px; background: rgba(242,234,219,.14); overflow: hidden; }
+  .barra i { display: block; height: 100%; background: var(--amarelo); border-radius: 6px; transition: width .35s ease; }
+  .barra i.c { background: var(--coral); }
+  .comparacao { margin-top: 14px; padding: 14px; border-radius: 12px; background: rgba(244,197,66,.12); font-size: 15px; line-height: 1.45; }
+  .comparacao strong { color: var(--amarelo); }
+
+  .acoes { margin: 26px 6px 0; display: grid; gap: 12px; }
+  .botao {
+    display: flex; justify-content: center; align-items: center; gap: 10px; text-decoration: none;
+    padding: 17px; border-radius: 14px; border: 0; cursor: pointer;
+    font: 800 16px 'Montserrat'; background: var(--amarelo); color: var(--tinta);
+    box-shadow: 0 0 0 4px var(--creme);
+  }
+  .botao.claro { background: var(--creme); box-shadow: none; }
+  .aviso { color: var(--creme); opacity: .8; font-size: 13px; line-height: 1.5; margin: 28px 8px 0; }
+  .aviso a { color: var(--creme); }
+  [hidden] { display: none !important; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="marca">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><rect x="4" y="4" width="56" height="56" rx="14" fill="#F2EADB"/><path d="M32 13 L49 51 H41 L37.5 43 H26.5 L23 51 H15 Z M29 36 H35 L32 28.5 Z" fill="#1E7A55"/><path d="M24 36 H40 V32 L47 38 L40 44 V40 H24 Z" fill="#F4C542"/></svg>
+      Atalho Hora
+    </div>
+    <h1>Quanto seu plantão paga <em>por hora de verdade?</em></h1>
+    <p class="sub">Some o deslocamento, a espera, o imposto e o atraso no pagamento. A conta leva 1 minuto.</p>
+  </header>
+
+  <main>
+    <div id="plantoes"></div>
+    <button class="botao-sec" id="addB" type="button">+ Comparar com outro plantão</button>
+
+    <section class="card resultado" aria-live="polite">
+      <h2>Resultado</h2>
+      <div id="res"></div>
+    </section>
+
+    <div class="acoes">
+      <button class="botao" id="compartilhar" type="button">Mandar para um colega de plantão</button>
+      <a class="botao claro" id="lista" href="#" hidden>Quero os outros apps do Atalho primeiro</a>
+    </div>
+
+    <p class="aviso">Simulação feita com os números que você informou. Não substitui a orientação do seu contador. Nada do que você digita sai do seu celular.</p>
+  </main>
+</div>
+
+<template id="tpl">
+  <section class="card plantao">
+    <h2><span class="nome">Plantão A</span><button class="remover" type="button" hidden>remover</button></h2>
+    <div class="grupo">
+      <label>Valor combinado</label>
+      <div class="campo"><span>R$</span><input data-k="valor" inputmode="decimal" type="number" min="0" step="10"></div>
+    </div>
+    <div class="grupo">
+      <label>Duração do plantão</label>
+      <div class="campo"><input data-k="horas" inputmode="decimal" type="number" min="1" step="1"><span class="fim">horas</span></div>
+    </div>
+
+    <div class="titulo-grupo">O que fica de fora da conta</div>
+    <div class="grupo duas">
+      <div>
+        <label>Ida e volta</label>
+        <div class="campo"><input data-k="deslocMin" inputmode="numeric" type="number" min="0" step="5"><span class="fim">min</span></div>
+      </div>
+      <div>
+        <label>Custo</label>
+        <div class="campo"><span>R$</span><input data-k="deslocCusto" inputmode="decimal" type="number" min="0" step="5"></div>
+      </div>
+    </div>
+    <p class="dica">Combustível, estacionamento, aplicativo, pedágio.</p>
+    <div class="grupo">
+      <label>Tempo extra sem pagamento</label>
+      <p class="dica">Chegar antes, passagem de plantão, esperar a troca.</p>
+      <div class="campo"><input data-k="extraMin" inputmode="numeric" type="number" min="0" step="5"><span class="fim">min</span></div>
+    </div>
+    <div class="grupo">
+      <label>Imposto e taxas sobre o valor</label>
+      <p class="dica">Use o percentual que você paga de fato, ou pergunte ao seu contador.</p>
+      <div class="campo"><input data-k="imposto" inputmode="decimal" type="number" min="0" max="100" step="0.5"><span class="fim">%</span></div>
+    </div>
+    <div class="grupo duas">
+      <div>
+        <label>Dias até receber</label>
+        <div class="campo"><input data-k="dias" inputmode="numeric" type="number" min="0" step="5"><span class="fim">dias</span></div>
+      </div>
+      <div>
+        <label>Rende no mês</label>
+        <div class="campo"><input data-k="juros" inputmode="decimal" type="number" min="0" step="0.1"><span class="fim">%</span></div>
+      </div>
+    </div>
+    <p class="dica">Quanto o dinheiro renderia por mês se já estivesse com você.</p>
+  </section>
+</template>
+
+<script>
+  // Valores de exemplo, para a primeira conta não aparecer vazia. Tudo é editável.
+  const EXEMPLO = { valor: 1500, horas: 12, deslocMin: 80, deslocCusto: 60, extraMin: 40, imposto: 15, dias: 60, juros: 1 };
+  // Link da lista de espera dos outros apps. Vazio = botão escondido.
+  const LISTA_URL = '';
+
+  const brl = v => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
+  const brlh = v => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 0, maximumFractionDigits: 0 });
+  const box = document.getElementById('plantoes');
+  const tpl = document.getElementById('tpl');
+  const addB = document.getElementById('addB');
+
+  function novoPlantao(dados, nome) {
+    const el = tpl.content.firstElementChild.cloneNode(true);
+    el.querySelector('.nome').textContent = nome;
+    el.querySelectorAll('input').forEach(i => {
+      i.value = dados[i.dataset.k];
+      i.addEventListener('input', calcular);
+    });
+    const rm = el.querySelector('.remover');
+    if (nome !== 'Plantão A') {
+      rm.hidden = false;
+      rm.addEventListener('click', () => { el.remove(); addB.hidden = false; calcular(); });
+    }
+    box.appendChild(el);
+    return el;
+  }
+
+  function ler(el) {
+    const d = {};
+    el.querySelectorAll('input').forEach(i => { d[i.dataset.k] = Math.max(0, parseFloat(String(i.value).replace(',', '.')) || 0); });
+    return d;
+  }
+
+  function conta(d) {
+    const anunciada = d.horas > 0 ? d.valor / d.horas : 0;
+    const imposto = d.valor * Math.min(d.imposto, 100) / 100;
+    const liquido = d.valor - imposto;
+    const atraso = liquido * (d.juros / 100) * (d.dias / 30);
+    const sobra = liquido - d.deslocCusto - atraso;
+    const horasReais = d.horas + (d.deslocMin + d.extraMin) / 60;
+    const real = horasReais > 0 ? sobra / horasReais : 0;
+    return { anunciada, real, imposto, atraso, sobra, horasReais, desloc: d.deslocCusto, horas: d.horas };
+  }
+
+  function bloco(r, nome) {
+    const perdaPct = r.anunciada > 0 ? Math.round((1 - r.real / r.anunciada) * 100) : 0;
+    const total = Math.max(1, r.imposto + r.desloc + r.atraso);
+    const minExtra = Math.round((r.horasReais - r.horas) * 60);
+    const barra = (rot, v, cor) => `
+      <div class="barra-rot"><span>${rot}</span><span>${brl(v)}</span></div>
+      <div class="barra"><i class="${cor || ''}" style="width:${Math.min(100, v / total * 100)}%"></i></div>`;
+    return `
+      ${nome ? `<p class="titulo-grupo" style="color:var(--creme);opacity:.7;margin-top:6px">${nome}</p>` : ''}
+      <div class="linha-res"><span class="rot">Hora que parece</span><span class="valor-anunciado">${brlh(r.anunciada)}</span></div>
+      <div class="linha-res"><span class="rot">Hora real</span><span class="valor-real">${brlh(r.real)}</span></div>
+      <p class="perda">Sua hora vale <strong>${perdaPct > 0 ? perdaPct + '% a menos' : 'o que parece'}</strong>. Você trabalha <strong>${minExtra} min</strong> a mais do que o plantão paga e fica com <strong>${brl(Math.max(0, r.sobra))}</strong> dos valores combinados.</p>
+      <div class="barras">
+        ${barra('Imposto e taxas', r.imposto, 'c')}
+        ${barra('Deslocamento', r.desloc)}
+        ${barra('Esperar para receber', r.atraso)}
+      </div>`;
+  }
+
+  function calcular() {
+    const els = [...box.querySelectorAll('.plantao')];
+    const rs = els.map(e => conta(ler(e)));
+    let html = '';
+    if (rs.length === 1) {
+      html = bloco(rs[0]);
+    } else {
+      html = bloco(rs[0], 'Plantão A') + '<div style="height:18px"></div>' + bloco(rs[1], 'Plantão B');
+      const [a, b] = rs;
+      const melhor = a.real >= b.real ? 'A' : 'B';
+      const pagaMais = (a.anunciada * a.horas) >= (b.anunciada * b.horas) ? 'A' : 'B';
+      const dif = Math.abs(a.real - b.real);
+      html += `<div class="comparacao">Por hora real, o <strong>Plantão ${melhor}</strong> paga ${brlh(dif)} a mais.${pagaMais !== melhor ? ` Mesmo com o valor combinado menor.` : ''}</div>`;
+    }
+    document.getElementById('res').innerHTML = html;
+  }
+
+  addB.addEventListener('click', () => {
+    novoPlantao({ ...EXEMPLO, valor: 1800, deslocMin: 180, deslocCusto: 150, extraMin: 60, dias: 120 }, 'Plantão B');
+    addB.hidden = true;
+    calcular();
+  });
+
+  document.getElementById('compartilhar').addEventListener('click', async () => {
+    const texto = 'Fiz a conta da hora real do meu plantão no Atalho Hora. Faz a sua:';
+    const url = location.href.split('#')[0];
+    if (navigator.share) {
+      try { await navigator.share({ title: 'Atalho Hora', text: texto, url }); } catch (e) {}
+    } else {
+      window.open('https://wa.me/?text=' + encodeURIComponent(texto + ' ' + url), '_blank');
+    }
+  });
+
+  if (LISTA_URL) {
+    const l = document.getElementById('lista');
+    l.href = LISTA_URL; l.hidden = false;
+  }
+
+  novoPlantao(EXEMPLO, 'Plantão A');
+  calcular();
+</script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+src/
+__pycache__/
+out/*.wav
+out/*-noaudio.mp4

@@ -64,3 +64,32 @@ Precisa ter:
 Evitar: acusação como palavra dominante (VOCÊ ESTRAGA); título, diálogo e retrato contando o mesmo fato (22h41); retrato triste genérico (Grudenta); mistério sem entrega; nome clínico na maior hierarquia; absolvição universal pelo diagnóstico; produto no lugar da descoberta; cor forte como solução para tese fraca.
 
 O que o feed dele não comprova: letra gigante, cor saturada, paradoxo e CTA de envio aparecem também nos fracos. O que separa é a crença revista e a imagem participando do argumento.
+
+## Tese do Dr. Fabio sobre as capas que funcionaram (29/10/2026)
+
+Escrita por ele, copiada como ele mandou. Hipótese dele, testada em `analises/diagnostico-carrosseis-capas-2026-10-29.md` (branch `claude/determined-gates-bh0xip`): o intervalo no texto aparece em 18 de 26 gigantes e em 17 de 36 flops; a parte da imagem (cena mal lida ou vestígio do ato) é a que o dado mais sustenta. Vale como ferramenta de criação e como teste obrigatório de capa nova.
+
+O que essas capas têm em comum não é estética. É um mecanismo.
+
+A tese das capas que funcionaram. Cada capa encena um erro de leitura e corrige na mesma tela. Existe o que todo mundo viu e o que estava acontecendo de verdade. Dramática era borderline. Nervosa era borderline. Timidez era a única cadeira vazia da mesa. Love bombing era outra coisa. Briga era declaração de amor. Quem teme o abandono abandona antes. A capa coloca o leitor exatamente no ponto em que ele foi mal lido, ou leu mal alguém, e entrega o nome certo antes dele decidir se quer ler. A microtensão vem desse intervalo. Não vem da palavra borderline nem da imagem forte. Vem de reconhecer a cena e descobrir que o nome que deram a ela estava errado.
+
+Como o texto faz isso. Uma afirmação completa, fechada, sem explicação. Ela faz uma de três coisas: renomeia (riscar dramática e escrever borderline), inverte (a compulsão funciona, por isso você repete) ou obriga a escolher (borderline ou autismo, a família adoece o borderline ou o contrário). Nunca descreve. Nunca apresenta um tema. Sempre toma posição sobre algo que a pessoa já viveu. Quando tem termo que o público repete por aí, o termo aparece riscado. O risco é a tese inteira em um gesto.
+
+Como a imagem faz isso. A imagem não ilustra o texto. Ela mostra a cena que foi mal lida. A família rindo e uma criança tapando os ouvidos. A mesa inteira alegre e uma pessoa olhando pro prato. A foto rasgada entre mãe e filha. A tela do celular dizendo você foi bloqueado. A lata amassada no chão. Em cada uma há um único elemento que carrega a tensão e todo o resto é contexto normal. É isso que faz bater o olho e entender: o olho acha o elemento errado na cena em meio segundo, e o texto diz o que ele significa. Quando a imagem é só objeto, ele é o vestígio de um ato que a pessoa já fez: a xícara vazia ao lado da cheia, a chave no chão, o fio vermelho ligando três gerações.
+
+Como os dois se dividem. O texto manda. A imagem é prova. A pessoa lê a cena primeiro, sem querer, e o texto chega como veredito sobre o que ela acabou de ver. Nunca os dois dizem a mesma coisa. Se o texto diz abandono e a imagem mostra alguém saindo pela porta, morreu. A imagem mostra a plataforma vazia e a chave deixada. O texto diz quem abandona.
+
+Onde as cópias perdem a essência. O texto explica em vez de afirmar. Vira título de aula. A imagem decora em vez de encenar. Pessoa triste genérica, cérebro, coração partido, nada que tenha sido vivido. A imagem repete o texto em vez de mostrar a cena que o texto corrige. Entra metáfora que precisa ser decifrada. Nas capas dele o único símbolo abstrato é o fio vermelho, e ele está preso a três rostos reais. Falta o intervalo. Uma frase verdadeira sobre o borderline não basta. Precisa existir a leitura errada implícita que a frase derruba.
+
+Teste de uma capa nova. Dá para responder em uma linha o que todo mundo viu e o que era de verdade? Se não dá, não tem capa, tem conteúdo. Olhando só a imagem, sem texto, alguém reconhece uma situação que já viveu ou presenciou? Se não, troca a imagem. Tirando a imagem, o texto sozinho ainda derruba uma leitura errada? Se não, troca o texto.
+
+## O que os 118 carrosséis de 180 dias mostram sobre a capa (Windsor, 29/10/2026)
+
+Observação de post, não regra. Gigante = alcance acima de 2x a mediana (12.636) e envios por alcance acima da mediana (1,13%), n 26; flop n 36. Detalhe no arquivo de análise acima.
+
+- Separa: a palavra borderline legível (25 de 26 gigantes, 12 de 36 flops; envios 1,48% contra 0,66%) e a imagem mostrar a coisa que o texto nomeia (cacto, semente, lata, fotos rasgadas, corações no vazio, chave na porta, rosto parado: 8 gigantes, 1 flop; envios 2,21% contra 1,04%).
+- Não separa: fundo preto (16 gigantes, 31 flops, mas 79 das 118 capas são escuras), palavra em vermelho (20 e 19), tipografia dominante (24 e 34), paradoxo no texto (3 e 3), CTA de envio na legenda (22 e 26).
+- Anti-padrões: primeira pessoa ou frase começando com ele ou ela (1 gigante, 10 flops; 17 dos 28 casos também não têm a palavra borderline), metáfora a decifrar (3 contra 11), celular ou mensagem (1 contra 5), fórmula não é X é Y (0 contra 4).
+- Cena vivida na capa dá alcance sem envio: Quieta na mesa 299.731 de alcance e 0,20%; Almoço de domingo 48.421 e 0,41%.
+- Público parceiro rende mais envio (1,36% contra 0,96%); origem e família rende mais alcance (mediana 70.760); portador sozinho concentra os flops (24 de 36).
+- Época confunde: 21 dos 36 flops são de maio e junho. Os padrões acima se mantêm dentro de cada período.

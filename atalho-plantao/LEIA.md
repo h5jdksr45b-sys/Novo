@@ -4,6 +4,16 @@ Sem esta configuração o app funciona só no aparelho, sem conta. Com ela, cada
 
 Tempo estimado: uma hora, sem programar. Você vai criar três contas (Supabase, Asaas e um serviço de e-mail), copiar algumas chaves e colar comandos.
 
+## Agora: senha simples, sem login (29/10/2026)
+
+O app está no modo mais simples: sem conta, sem Supabase, com senha. A pessoa digita a senha uma vez e o aparelho fica liberado. Os plantões ficam guardados no próprio celular.
+
+- Senhas em `senhas`, dentro do `index.html`: uma para quem compra e uma de cortesia. O arquivo guarda só o código de cada senha.
+- Para criar outra senha, abra o app no navegador do computador, abra o console e rode `codigoSenha('NOVA SENHA')`. Acrescente o resultado na lista.
+- Quem já entrou continua entrando mesmo se a senha sair da lista.
+
+Para voltar ao login com conta, preencha `supabaseUrl` com `https://zjhpeiynrkgrudqqxlvl.supabase.co` e `supabaseAnonKey` com a chave anon do projeto (Supabase > Project Settings > API Keys > Legacy). Tudo abaixo continua valendo.
+
 ## Venda: compra única pela Hotmart, acesso liberado à mão
 
 Desde 29/10/2026 o app vende acesso por compra única na Hotmart, sem mensalidade. O Asaas e as funções `assinatura` e `asaas-webhook` ficam guardados, mas o app não usa mais.

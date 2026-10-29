@@ -569,15 +569,22 @@ body.sem-conta .canvas { max-width: none; padding: 0; margin: 0; }
 <dialog class="sheet" id="sheet" aria-labelledby="sheetTitle"></dialog>
 
 <script>
-/* Login e acesso. Deixe supabaseUrl vazio para usar só neste aparelho, sem conta.
+/* Login e acesso. Com supabaseUrl vazio, o app usa só este aparelho, sem conta.
    Para ligar, preencha com a URL e a chave pública (anon) do seu projeto Supabase. Veja LEIA.md.
    linkCompra: link do checkout da Hotmart (compra única). Vazio, o botão de compra não aparece. */
 window.ATALHO_CONFIG = {
-  supabaseUrl: 'https://zjhpeiynrkgrudqqxlvl.supabase.co',
-  supabaseAnonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpqaHBlaXlucmtncnVkcXF4bHZsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMyMDczNTMsImV4cCI6MjEwODc4MzM1M30.zBLeaoGbbWYwVpg6o8CiJXw7TuoBgcXNXqWc-eNGpmg',
+  supabaseUrl: '',
+  supabaseAnonKey: '',
   entrarComGoogle: false,
   linkCompra: '',
-  precoTexto: ''
+  precoTexto: '',
+  /* Senhas de acesso, sem login. Guarda só o código de cada senha, não a senha.
+     Para criar outra, rode codigoSenha('NOVA SENHA') no console do navegador e acrescente o resultado.
+     Quem já entrou continua entrando mesmo se a senha sair da lista. Lista vazia, o app abre sem senha. */
+  senhas: [
+    'dnm80f32zw', // de quem compra
+    'qykkwpqp0w'  // cortesia, para mandar de graça
+  ]
 };
 </script>
 
@@ -629,6 +636,19 @@ const FORMAS = ['PJ', 'RPA', 'CLT', 'Cooperativa'];
 /* ---------- modo: só neste aparelho ou com conta ---------- */
 const CFG = window.ATALHO_CONFIG || {};
 const NUVEM = !!(CFG.supabaseUrl && CFG.supabaseAnonKey);
+
+/* Senha simples: maiúsculas e minúsculas tanto faz, espaços não contam. */
+function codigoSenha(txt) {
+  const t = String(txt).toUpperCase().replace(/\s+/g, '');
+  let h1 = 0xdeadbeef, h2 = 0x41c6ce57;
+  for (let i = 0; i < t.length; i++) { const c = t.charCodeAt(i); h1 = Math.imul(h1 ^ c, 2654435761); h2 = Math.imul(h2 ^ c, 1597334677); }
+  h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+  h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+  return (4294967296 * (2097151 & h2) + (h1 >>> 0)).toString(36);
+}
+window.codigoSenha = codigoSenha;
+const SENHAS = [].concat(CFG.senhas || []).filter(Boolean);
+const bloqueado = () => !NUVEM && SENHAS.length > 0 && lsGet('liberado') !== 'sim';
 
 function lerLocal() { try { const r = localStorage.getItem(KEY_LOCAL); return r ? JSON.parse(r) : null; } catch (e) { return null; } }
 function save() {
@@ -1158,6 +1178,31 @@ function vLogin() {
   </div></div>`;
 }
 
+function vSenha() {
+  return `<div class="login"><div class="login-card">
+    <div class="brand"><span class="mark" aria-hidden="true"></span><span class="wordmark">Atalho Plantão</span></div>
+    <div><h1>Digite a senha</h1><p class="finding">Saiba em segundos quanto você tem a receber dos seus plantões.</p></div>
+    <section class="card" style="padding:20px" aria-label="Senha de acesso"><div class="stack" style="gap:16px">
+      <div class="field"><label for="snSenha">Senha de acesso</label>
+        <input class="input" id="snSenha" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="A senha que você recebeu"></div>
+      <button type="button" class="btn btn-primary btn-block" id="snEntrar">Entrar</button>
+      <p class="err" id="snErr" hidden>Senha errada. Confira e tente de novo.</p>
+    </div></section>
+    ${CFG.linkCompra ? `<a class="btn btn-ghost btn-block" href="${esc(CFG.linkCompra)}" target="_blank" rel="noopener">Ainda não tem? Comprar o acesso</a>` : ''}
+    <p class="note">Você digita a senha só uma vez neste aparelho. Seus plantões ficam guardados nele, e o app não pede nenhum dado de paciente.</p>
+  </div></div>`;
+}
+
+function ligarSenha() {
+  const campo = $('#snSenha');
+  const entrar = () => {
+    if (SENHAS.includes(codigoSenha(campo.value))) { lsSet('liberado', 'sim'); render(); setTimeout(talvezIniciar, 400); }
+    else { $('#snErr').hidden = false; campo.focus(); }
+  };
+  $('#snEntrar').onclick = entrar;
+  campo.addEventListener('keydown', e => { if (e.key === 'Enter') entrar(); });
+}
+
 function vCarregando() {
   if (erroNuvem) return `<div class="login"><div class="login-card"><h1>Sem conexão</h1><p class="finding">${esc(erroNuvem)}</p><button type="button" class="btn btn-primary" data-act="recarregar">Tentar de novo</button></div></div>`;
   return `<div class="title-row"><div><h1>Seu dinheiro</h1><span class="skel" style="width:260px;height:20px"></span></div></div>
@@ -1182,6 +1227,7 @@ function navs(t) {
 function render() {
   const semConta = NUVEM && (!conta || !db);
   document.body.classList.toggle('sem-conta', semConta);
+  if (bloqueado()) { document.body.classList.add('sem-conta'); $('#view').innerHTML = vSenha(); ligarSenha(); return; }
   if (NUVEM && !conta) { $('#view').innerHTML = carregando || erroNuvem ? vCarregando() : vLogin(); ligarLogin(); return; }
   if (!db) { $('#view').innerHTML = vCarregando(); return; }
   const t = tabAtual();
@@ -1254,6 +1300,7 @@ const lsSet = (n, v) => { try { localStorage.setItem(lsKey(n), v); } catch (e) {
 let tourAberto = false;
 
 function talvezIniciar() {
+  if (bloqueado()) return;
   if (tourAberto || !db || lsGet('tour') === 'feito' || sheet.open) return;
   iniciar();
 }

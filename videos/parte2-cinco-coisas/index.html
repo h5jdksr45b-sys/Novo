@@ -28,8 +28,8 @@
   .verm { color: var(--verm); }
   /* título fixo */
   #titulo { top: 64px; text-align: center; height: auto; }
-  #titulo .l1 { font-family: "Inter"; font-weight: 600; font-size: 30px; letter-spacing: .32em; color: #fff; opacity: .92; }
-  #titulo .l2 { font-family: "Montserrat"; font-weight: 800; font-size: 54px; letter-spacing: .02em; color: #fff; margin-top: 6px; }
+  #titulo .l1 { font-family: "Montserrat"; font-weight: 900; font-size: 64px; letter-spacing: .01em; color: #fff; line-height: 1.05; }
+  #titulo .l2 { font-family: "Inter"; font-weight: 600; font-size: 32px; letter-spacing: .3em; color: #fff; margin-top: 10px; }
   /* abertura */
   #abre { top: 1270px; height: auto; text-align: center; }
   #abre .l { font-family: "Montserrat"; font-weight: 900; font-size: 84px; line-height: 1.02; color: #fff; }
@@ -49,7 +49,8 @@
   #num .r { position: absolute; left: 194px; top: 160px; font-family: "Inter"; font-weight: 600; font-size: 24px; letter-spacing: .28em; color: #6b625a; }
   /* cartão parte 1 */
   #p1 .circ { position: absolute; right: -160px; top: 380px; width: 620px; height: 620px; border-radius: 50%; background: var(--verm); opacity: .92; }
-  #p1 .rot { position: absolute; left: 90px; top: 250px; }
+  #p1 .big1 { position: absolute; left: 0; width: 1080px; top: 640px; text-align: center; font-family: "Anton"; font-size: 300px; line-height: 1; color: var(--tinta); }
+  #p1 .sub1 { position: absolute; left: 0; width: 1080px; top: 980px; text-align: center; font-family: "Instrument Serif"; font-style: italic; font-size: 150px; line-height: 1; color: var(--verm); }
   #p1 .lin { position: absolute; left: 90px; width: 940px; line-height: 1; white-space: nowrap; }
   #p1 .a { font-family: "Montserrat"; font-weight: 900; font-size: 104px; letter-spacing: -.01em; }
   #p1 .b { font-family: "Instrument Serif"; font-style: italic; font-size: 124px; }
@@ -127,13 +128,8 @@
 
   <div id="p1" class="abs papel hide">
     <div class="circ"></div>
-    <div class="rot rotulo">Parte 1 · os cinco de lá</div>
-    <div class="lin a" style="top:400px">invade</div>
-    <div class="lin b" style="top:530px">lembra de tudo</div>
-    <div class="lin a" style="top:670px">fica em silêncio</div>
-    <div class="lin b" style="top:800px">surta com você</div>
-    <div class="lin a" style="top:940px">tem pavor</div>
-    <div class="lin b" style="top:1240px; font-size:92px; color:#6b625a">agora os outros cinco</div>
+    <div class="big1">PARTE 1</div>
+    <div class="sub1">já viu?</div>
   </div>
 
   <div id="dois" class="abs preto hide"><div class="g" id="dois-g">2</div><div class="s">DE CINCO</div></div>
@@ -262,9 +258,10 @@ function seek(t) {
   const abre = $('abre');
   abre.classList.toggle('hide', !(t < 2.5 && noRosto));
   if (t < 2.5) {
-    const k1 = back((t - 0.05) / .28), k2 = back((t - 0.30) / .28);
-    $('abre1').style.transform = `scale(${k1.toFixed(3)})`; $('abre1').style.opacity = t > 0.05 ? 1 : 0;
-    $('abre2').style.transform = `scale(${k2.toFixed(3)})`; $('abre2').style.opacity = t > 0.30 ? 1 : 0;
+    // texto inteiro já no primeiro quadro; só um respiro leve de escala
+    const k = 1 + 0.04 * Math.sin(clamp(t / 2.2, 0, 1) * Math.PI);
+    $('abre1').style.transform = `scale(${k.toFixed(3)})`; $('abre1').style.opacity = 1;
+    $('abre2').style.transform = `scale(${k.toFixed(3)})`; $('abre2').style.opacity = 1;
     abre.style.opacity = t > 2.2 ? (1 - (t - 2.2) / .3) : 1;
   }
 

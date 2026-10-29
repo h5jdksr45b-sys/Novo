@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Mais cinco coisas, parte 2</title>
+<style>
+  @font-face { font-family: "Montserrat"; font-weight: 800; src: url("assets/fonts/montserrat-latin-800-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Montserrat"; font-weight: 900; src: url("assets/fonts/montserrat-latin-900-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Montserrat"; font-weight: 500; src: url("assets/fonts/montserrat-latin-500-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Instrument Serif"; font-style: italic; src: url("assets/fonts/instrument-serif-latin-400-italic.woff2") format("woff2"); }
+  @font-face { font-family: "Instrument Serif"; font-style: normal; src: url("assets/fonts/instrument-serif-latin-400-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Inter"; font-weight: 500; src: url("assets/fonts/inter-latin-500-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Inter"; font-weight: 600; src: url("assets/fonts/inter-latin-600-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Anton"; src: url("assets/fonts/anton-latin-400-normal.woff2") format("woff2"); }
+  :root { --creme: #F2EADB; --tinta: #161412; --verm: #CC0000; }
+  html, body { margin: 0; background: #000; }
+  #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: #000; }
+  .abs { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+  #base { object-fit: cover; transform-origin: 50% 0; will-change: transform; }
+  #vin { background: radial-gradient(ellipse at 50% 38%, rgba(0,0,0,0) 55%, rgba(0,0,0,.28) 100%); pointer-events: none; }
+  .hide { display: none !important; }
+  .mont { font-family: "Montserrat"; font-weight: 800; }
+  .serif { font-family: "Instrument Serif"; font-style: italic; }
+  .anton { font-family: "Anton"; }
+  .inter { font-family: "Inter"; font-weight: 500; }
+  .sombra { text-shadow: 0 2px 6px rgba(0,0,0,.85), 0 0 28px rgba(0,0,0,.55); }
+  .branco { color: #fff; }
+  .verm { color: var(--verm); }
+  /* título fixo */
+  #titulo { top: 64px; text-align: center; height: auto; }
+  #titulo .l1 { font-family: "Inter"; font-weight: 600; font-size: 30px; letter-spacing: .32em; color: #fff; opacity: .92; }
+  #titulo .l2 { font-family: "Montserrat"; font-weight: 800; font-size: 54px; letter-spacing: .02em; color: #fff; margin-top: 6px; }
+  /* abertura */
+  #abre { top: 1270px; height: auto; text-align: center; }
+  #abre .l { font-family: "Montserrat"; font-weight: 900; font-size: 84px; line-height: 1.02; color: #fff; }
+  /* legenda cinética */
+  #leg { top: 1232px; height: 220px; display: flex; align-items: center; justify-content: center; gap: 22px; padding: 0 90px; box-sizing: border-box; flex-wrap: wrap; }
+  #leg .w { font-family: "Montserrat"; font-weight: 800; font-size: 66px; color: #fff; line-height: 1; display: inline-block; transform-origin: 50% 70%; }
+  #leg .w.k { font-family: "Instrument Serif"; font-style: italic; font-weight: 400; font-size: 96px; color: #ff2f22; }
+  /* papel */
+  .papel { background: var(--creme); color: var(--tinta); }
+  .papel::after { content: ""; position: absolute; inset: 0; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .07 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>"); pointer-events: none; }
+  .preto { background: #0b0b0b; color: #fff; }
+  .rotulo { font-family: "Inter"; font-weight: 600; font-size: 30px; letter-spacing: .3em; text-transform: uppercase; }
+  /* cartão de número no canto */
+  #num { left: 56px; top: 236px; width: 470px; height: 250px; background: var(--creme); color: var(--tinta); box-shadow: 0 18px 40px rgba(0,0,0,.35); transform-origin: 0 50%; }
+  #num .n { position: absolute; left: 34px; top: 6px; font-family: "Anton"; font-size: 220px; line-height: 1; }
+  #num .k { position: absolute; left: 190px; top: 54px; font-family: "Instrument Serif"; font-style: italic; font-size: 92px; color: var(--verm); line-height: 1; }
+  #num .r { position: absolute; left: 194px; top: 160px; font-family: "Inter"; font-weight: 600; font-size: 24px; letter-spacing: .28em; color: #6b625a; }
+  /* cartão parte 1 */
+  #p1 .circ { position: absolute; right: -160px; top: 380px; width: 620px; height: 620px; border-radius: 50%; background: var(--verm); opacity: .92; }
+  #p1 .rot { position: absolute; left: 90px; top: 250px; }
+  #p1 .lin { position: absolute; left: 90px; width: 940px; line-height: 1; white-space: nowrap; }
+  #p1 .a { font-family: "Montserrat"; font-weight: 900; font-size: 104px; letter-spacing: -.01em; }
+  #p1 .b { font-family: "Instrument Serif"; font-style: italic; font-size: 124px; }
+  /* 2 de 5 */
+  #dois .g { position: absolute; left: 0; width: 1080px; top: 420px; text-align: center; font-family: "Montserrat"; font-weight: 900; font-size: 760px; line-height: .9; color: #fff; }
+  #dois .s { position: absolute; left: 0; width: 1080px; top: 1180px; text-align: center; font-family: "Inter"; font-weight: 500; font-size: 86px; letter-spacing: .25em; color: #fff; }
+  /* lista de conversas */
+  #chat { background: #0d0d0f; color: #fff; }
+  #chat .h { position: absolute; left: 70px; top: 150px; font-family: "Inter"; font-weight: 600; font-size: 84px; }
+  #chat .row { position: absolute; left: 70px; width: 940px; height: 150px; display: flex; align-items: center; gap: 28px; opacity: .32; }
+  #chat .row.on { opacity: 1; }
+  #chat .av { width: 108px; height: 108px; border-radius: 50%; background: #2a2a2e; flex: none; }
+  #chat .row.on .av { background: #e8dcc5; }
+  #chat .nm { font-family: "Inter"; font-weight: 600; font-size: 48px; }
+  #chat .tx { font-family: "Inter"; font-weight: 500; font-size: 38px; color: #9a9aa2; margin-top: 6px; }
+  #chat .row.on .tx { color: #fff; }
+  #chat .dot { margin-left: auto; width: 46px; height: 46px; border-radius: 50%; background: var(--verm); color: #fff; font-family: "Inter"; font-weight: 600; font-size: 30px; display: flex; align-items: center; justify-content: center; }
+  /* esquema lista */
+  #lista .rot { position: absolute; left: 90px; top: 250px; color: #6b625a; }
+  #lista .itens { position: absolute; left: 90px; top: 340px; width: 900px; }
+  #lista .it { font-family: "Montserrat"; font-weight: 500; font-size: 78px; line-height: 1.55; border-bottom: 3px solid rgba(22,20,18,.14); }
+  #lista .it.voce { font-family: "Instrument Serif"; font-style: italic; font-weight: 400; color: var(--verm); border: 0; }
+  /* notificação */
+  #notif { background: #000; }
+  #notif .hora { position: absolute; left: 0; width: 1080px; top: 300px; text-align: center; font-family: "Inter"; font-weight: 500; font-size: 200px; color: #fff; letter-spacing: -.02em; }
+  #notif .card { position: absolute; left: 70px; top: 760px; width: 940px; background: rgba(245,245,247,.96); border-radius: 44px; padding: 34px 40px; box-sizing: border-box; color: #111; }
+  #notif .ic { position: absolute; left: 40px; top: 36px; width: 86px; height: 86px; border-radius: 22px; background: #1fb455; }
+  #notif .t1 { margin-left: 112px; font-family: "Inter"; font-weight: 600; font-size: 40px; }
+  #notif .t2 { margin-left: 112px; font-family: "Inter"; font-weight: 500; font-size: 44px; line-height: 1.25; margin-top: 8px; }
+  #notif .ag { position: absolute; right: 44px; top: 40px; font-family: "Inter"; font-weight: 500; font-size: 30px; color: #6e6e73; }
+  /* defesa */
+  #def .s { position: absolute; left: 0; width: 1080px; top: 520px; text-align: center; font-family: "Instrument Serif"; font-style: italic; font-size: 110px; }
+  #def .g { position: absolute; left: 0; width: 1080px; top: 640px; text-align: center; font-family: "Anton"; font-size: 330px; line-height: 1; color: var(--verm); transform-origin: 50% 50%; }
+  /* inteira */
+  #int .g { position: absolute; left: 0; width: 1080px; top: 780px; text-align: center; font-family: "Instrument Serif"; font-style: italic; font-size: 290px; line-height: 1; color: #fff; }
+  /* parte que importa */
+  #imp .l { position: absolute; left: 0; width: 1080px; text-align: center; font-family: "Montserrat"; font-weight: 800; font-size: 110px; line-height: 1; color: #fff; }
+  /* colagem */
+  #col img { position: absolute; }
+  #col .faixa { position: absolute; left: 400px; top: 640px; width: 280px; height: 860px; background: var(--verm); transform: rotate(6deg); transform-origin: 50% 0; box-shadow: 0 14px 30px rgba(0,0,0,.25); }
+  #col .t1 { position: absolute; left: 0; width: 1080px; top: 1500px; text-align: center; font-family: "Montserrat"; font-weight: 900; font-size: 104px; line-height: 1; }
+  #col .t2 { position: absolute; left: 0; width: 1080px; top: 1610px; text-align: center; font-family: "Instrument Serif"; font-style: italic; font-size: 150px; line-height: 1; color: var(--verm); }
+  /* chip tratamento */
+  #chip { left: 0; top: 1560px; width: 1080px; height: auto; text-align: center; }
+  #chip span { display: inline-block; background: var(--creme); color: var(--tinta); font-family: "Inter"; font-weight: 600; font-size: 44px; padding: 22px 46px; border-radius: 60px; box-shadow: 0 12px 30px rgba(0,0,0,.35); }
+  /* cta */
+  #cta .a { position: absolute; left: 0; width: 1080px; top: 520px; text-align: center; font-family: "Montserrat"; font-weight: 800; font-size: 76px; line-height: 1.1; }
+  #cta .g { position: absolute; left: 0; width: 1080px; top: 720px; text-align: center; font-family: "Anton"; font-size: 330px; line-height: 1; color: var(--verm); transform-origin: 50% 30%; }
+  #cta .seta { position: absolute; left: 490px; top: 1420px; width: 100px; height: 100px; }
+  #cta .ass { position: absolute; left: 0; width: 1080px; top: 1570px; text-align: center; }
+  #cta .ass .n { font-family: "Instrument Serif"; font-style: italic; font-size: 92px; line-height: 1.1; }
+  #cta .ass .h { font-family: "Inter"; font-weight: 600; font-size: 36px; letter-spacing: .22em; color: #6b625a; margin-top: 18px; }
+  #flash { background: #fff; pointer-events: none; }
+  #fade { background: #000; pointer-events: none; }
+</style>
+</head>
+<body>
+<div id="root">
+  <img id="base" class="abs" alt="">
+  <div id="vin" class="abs"></div>
+
+  <div id="titulo" class="abs">
+    <div class="l1 sombra">BORDERLINE E AMOR</div>
+    <div class="l2 sombra">PARTE 2</div>
+  </div>
+
+  <div id="abre" class="abs sombra">
+    <div class="l" id="abre1">QUANTAS DESSAS</div>
+    <div class="l" id="abre2">VOCÊ JÁ VIU?</div>
+  </div>
+
+  <div id="leg" class="abs sombra"></div>
+
+  <div id="num" class="abs hide"><div class="n" id="num-n">1</div><div class="k" id="num-k">some</div><div class="r">SINAL</div></div>
+
+  <div id="p1" class="abs papel hide">
+    <div class="circ"></div>
+    <div class="rot rotulo">Parte 1 · os cinco de lá</div>
+    <div class="lin a" style="top:400px">invade</div>
+    <div class="lin b" style="top:530px">lembra de tudo</div>
+    <div class="lin a" style="top:670px">fica em silêncio</div>
+    <div class="lin b" style="top:800px">surta com você</div>
+    <div class="lin a" style="top:940px">tem pavor</div>
+    <div class="lin b" style="top:1240px; font-size:92px; color:#6b625a">agora os outros cinco</div>
+  </div>
+
+  <div id="dois" class="abs preto hide"><div class="g" id="dois-g">2</div><div class="s">DE CINCO</div></div>
+
+  <div id="chat" class="abs hide">
+    <div class="h">Mensagens</div>
+    <div class="row" style="top:330px"><div class="av"></div><div><div class="nm">Mãe</div><div class="tx">visualizado · ter</div></div></div>
+    <div class="row" style="top:500px"><div class="av"></div><div><div class="nm">Grupo da família</div><div class="tx">visualizado · seg</div></div></div>
+    <div class="row" style="top:670px"><div class="av"></div><div><div class="nm">Colega</div><div class="tx">visualizado · seg</div></div></div>
+    <div class="row on" style="top:840px"><div class="av"></div><div><div class="nm">Você</div><div class="tx">tô aqui. pode falar.</div></div><div class="dot">1</div></div>
+    <div class="row" style="top:1010px"><div class="av"></div><div><div class="nm">Prima</div><div class="tx">visualizado · dom</div></div></div>
+    <div class="row" style="top:1180px"><div class="av"></div><div><div class="nm">Melhor amiga</div><div class="tx">visualizado · sáb</div></div></div>
+    <div class="row" style="top:1350px"><div class="av"></div><div><div class="nm">Chefe</div><div class="tx">visualizado · sex</div></div></div>
+  </div>
+
+  <div id="lista" class="abs papel hide">
+    <div class="rot rotulo">Quem ainda recebe mensagem</div>
+    <div class="itens">
+      <div class="it" data-i="0">Mãe</div>
+      <div class="it" data-i="1">Grupo da família</div>
+      <div class="it" data-i="2">Colega do trabalho</div>
+      <div class="it" data-i="3">Prima</div>
+      <div class="it" data-i="4">Melhor amiga</div>
+      <div class="it" data-i="5">Chefe</div>
+      <div class="it voce" id="lista-voce">você</div>
+    </div>
+  </div>
+
+  <div id="notif" class="abs hide">
+    <div class="hora">23:41</div>
+    <div class="card"><div class="ic"></div><div class="ag">agora</div><div class="t1">Mensagem</div><div class="t2">hoje não tô bem. não é com você.</div></div>
+  </div>
+
+  <div id="def" class="abs papel hide"><div class="s">sai na sua</div><div class="g" id="def-g">DEFESA</div></div>
+  <div id="int" class="abs preto hide"><div class="g" id="int-g">inteira.</div></div>
+
+  <img id="b4" class="abs hide" src="assets/img/b4.jpg" alt="" style="object-fit:cover">
+  <img id="b5" class="abs hide" src="assets/img/b5.jpg" alt="" style="object-fit:cover">
+
+  <div id="imp" class="abs preto hide"><div class="l" id="imp1" style="top:800px">a parte</div><div class="l" id="imp2" style="top:930px">que importa.</div></div>
+
+  <div id="col" class="abs papel hide">
+    <div class="faixa" id="col-faixa"></div>
+    <img id="col-l" src="assets/img/col_l.png" alt="">
+    <img id="col-r" src="assets/img/col_r.png" alt="">
+    <img id="col-h" src="assets/img/col_h.png" alt="">
+    <div class="t1" id="col-t1">NÃO AUTORIZA</div>
+    <div class="t2" id="col-t2">machucar.</div>
+  </div>
+
+  <div id="chip" class="abs hide"><span>tratamento protege os dois</span></div>
+
+  <div id="cta" class="abs papel hide">
+    <div class="a">MANDA PRA QUEM<br>FAZ PELO MENOS</div>
+    <div class="g" id="cta-g">2<br>DESSAS</div>
+    <svg class="seta" viewBox="0 0 100 100"><path d="M50 8v70M22 52l28 28 28-28" fill="none" stroke="#161412" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <div class="ass" id="cta-ass"><div class="n">Dr. Fabio Schmidt</div><div class="h">@DRFABIOSCHMIDT · CRM-SP 183549</div></div>
+  </div>
+
+  <div id="flash" class="abs" style="opacity:0"></div>
+  <div id="fade" class="abs" style="opacity:0"></div>
+</div>
+
+<script src="assets/media/palavras.js"></script>
+<script>
+const FPS = 30, DUR = 58.2, NBASE = 1706;
+window.DUR = DUR;
+const $ = id => document.getElementById(id);
+const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
+const ease = x => 1 - Math.pow(1 - clamp(x, 0, 1), 3);
+const back = x => { x = clamp(x, 0, 1); const c = 1.7; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
+const step = (t, t0, dt) => Math.floor((t - t0) / dt);
+
+// cartões de tela cheia: [id, início, fim]
+const CHEIOS = [
+  ['p1', 1.20, 2.00], ['dois', 5.56, 6.16], ['chat', 7.74, 8.56], ['lista', 10.62, 15.55],
+  ['notif', 17.44, 18.44], ['def', 26.66, 27.30], ['int', 31.84, 32.40], ['b4', 34.68, 35.68],
+  ['b5', 40.22, 41.00], ['imp', 46.00, 47.30], ['col', 47.36, 49.98], ['cta', 54.64, DUR],
+];
+// cartões de número no canto: [n, palavra, início, fim]
+const NUMS = [[1, 'some', 7.08, 10.32], [2, 'avisa', 16.56, 20.16], [3, 'defende', 26.00, 29.16], [4, 'cuida', 32.74, 36.40], [5, 'sente', 39.70, 42.68]];
+// zooms leves: [início, fim, escala]
+const ZOOM = [[15.62, 16.50, 1.10], [20.78, 21.60, 1.08], [23.68, 24.40, 1.08], [29.16, 30.10, 1.06], [36.72, 37.60, 1.06], [39.08, 39.70, 1.09], [42.84, 43.90, 1.06], [49.98, 50.90, 1.06], [53.14, 54.34, 1.08]];
+const KEYS = new Set(['some', 'respondendo', 'curta', 'nela', 'avisa', 'custa', 'culpa', 'defesa', 'inteira', 'cuida', 'falta', 'sente', 'muda', 'machucar', 'tratamento', 'dor', 'dois', 'reconhecer', 'borderline']);
+const norm = w => w.toLowerCase().replace(/[.,?!]/g, '');
+
+// blocos de legenda: até 3 palavras, quebra na pontuação
+const BLOCOS = [];
+{
+  let cur = [];
+  for (const w of window.PALAVRAS) {
+    cur.push(w);
+    const fim = /[.,?!]$/.test(w[0]);
+    if (fim || cur.length === 3) { BLOCOS.push(cur); cur = []; }
+  }
+  if (cur.length) BLOCOS.push(cur);
+}
+
+// efeitos sonoros [tempo, tipo]
+window.SFX = [
+  [1.20, 'whoosh'], [5.56, 'pop'], [7.74, 'whoosh'], [10.62, 'whoosh'], [17.44, 'ping'], [26.66, 'whoosh'], [31.84, 'whoosh'],
+  [34.68, 'whoosh'], [40.22, 'whoosh'], [46.00, 'tap'], [46.60, 'tap'], [47.36, 'whoosh'], [54.64, 'swipe'],
+  [7.08, 'tap'], [16.56, 'tap'], [26.00, 'tap'], [32.74, 'tap'], [39.70, 'tap'],
+  [15.62, 'click'], [20.78, 'click'], [23.68, 'click'], [39.08, 'click'], [53.14, 'click'],
+  [11.90, 'tick'], [12.40, 'tick'], [12.90, 'tick'], [13.40, 'tick'], [13.90, 'tick'], [14.30, 'tick'], [14.60, 'pop'],
+  [47.40, 'paper'], [47.90, 'paper'], [48.30, 'paper'], [48.74, 'paper'], [56.20, 'tick'],
+];
+
+function seek(t) {
+  // base
+  const f = clamp(Math.round(t * FPS) + 1, 1, NBASE);
+  const base = $('base');
+  const src = `renders/base/b${String(f).padStart(5, '0')}.jpg`;
+  if (base.getAttribute('src') !== src) base.setAttribute('src', src);
+  let z = 1.12;
+  for (const [a, b, s] of ZOOM) if (t >= a && t < b) { const k = ease((t - a) / .12); z *= 1 + (s - 1) * k; }
+  base.style.transform = `translateY(-10px) scale(${z.toFixed(4)})`;
+
+  const cheio = CHEIOS.find(([, a, b]) => t >= a && t < b);
+  for (const [id] of CHEIOS) $(id).classList.toggle('hide', !cheio || cheio[0] !== id);
+  const noRosto = !cheio;
+  $('titulo').classList.toggle('hide', !noRosto || t >= 54.64);
+  $('vin').classList.toggle('hide', !noRosto);
+
+  // abertura
+  const abre = $('abre');
+  abre.classList.toggle('hide', !(t < 2.5 && noRosto));
+  if (t < 2.5) {
+    const k1 = back((t - 0.05) / .28), k2 = back((t - 0.30) / .28);
+    $('abre1').style.transform = `scale(${k1.toFixed(3)})`; $('abre1').style.opacity = t > 0.05 ? 1 : 0;
+    $('abre2').style.transform = `scale(${k2.toFixed(3)})`; $('abre2').style.opacity = t > 0.30 ? 1 : 0;
+    abre.style.opacity = t > 2.2 ? (1 - (t - 2.2) / .3) : 1;
+  }
+
+  // legenda cinética
+  const leg = $('leg');
+  const mostraLeg = noRosto && t >= 2.5;
+  leg.classList.toggle('hide', !mostraLeg);
+  if (mostraLeg) {
+    let bi = -1;
+    for (let i = 0; i < BLOCOS.length; i++) if (t >= BLOCOS[i][0][1]) bi = i;
+    const b = bi >= 0 ? BLOCOS[bi] : null;
+    const next = bi + 1 < BLOCOS.length ? BLOCOS[bi + 1][0][1] : DUR;
+    const last = b ? b[b.length - 1][2] : 0;
+    const vivo = b && (t < next) && (t < last + 0.7);
+    leg.innerHTML = '';
+    if (vivo) for (const [w, s] of b) {
+      if (t < s) continue;
+      const el = document.createElement('span');
+      const chave = KEYS.has(norm(w));
+      el.className = 'w' + (chave ? ' k' : '');
+      el.textContent = w;
+      const k = back((t - s) / .16);
+      el.style.transform = `scale(${(0.85 + 0.15 * k).toFixed(3)})`;
+      el.style.opacity = clamp((t - s) / .06, 0, 1);
+      leg.appendChild(el);
+    }
+  }
+
+  // cartão de número
+  const num = $('num');
+  const nn = NUMS.find(([, , a, b]) => t >= a && t < b);
+  num.classList.toggle('hide', !nn || !noRosto);
+  if (nn) {
+    $('num-n').textContent = nn[0]; $('num-k').textContent = nn[1];
+    const k = ease((t - nn[2]) / .18), out = clamp((nn[3] - t) / .14, 0, 1);
+    num.style.transform = `translateX(${(-520 * (1 - k)).toFixed(1)}px) rotate(${(-6 * (1 - k)).toFixed(2)}deg) scale(${(0.9 + 0.1 * out).toFixed(3)})`;
+    num.style.opacity = out;
+  }
+
+  // flash branco na primeira inserção
+  const fl = $('flash');
+  const flt = [1.20, 2.00].map(a => clamp(1 - Math.abs(t - a) / .08, 0, 1)).reduce((m, v) => Math.max(m, v), 0);
+  fl.style.opacity = (0.85 * flt).toFixed(3);
+
+  if (cheio) {
+    const [id, a, b] = cheio; const u = t - a;
+    if (id === 'p1') { /* estático, flash cobre a entrada */ }
+    if (id === 'dois') { const k = back(u / .22); $('dois-g').style.transform = `scale(${k.toFixed(3)})`; }
+    if (id === 'chat') { document.querySelectorAll('#chat .row').forEach((r, i) => { r.style.transform = `translateX(${(60 * (1 - ease((u - i * .04) / .22))).toFixed(1)}px)`; r.style.opacity = i === 3 ? 1 : (0.32 * ease((u - i * .04) / .22)).toFixed(3); }); }
+    if (id === 'lista') {
+      const cortes = [11.90, 12.40, 12.90, 13.40, 13.90, 14.30];
+      document.querySelectorAll('#lista .it[data-i]').forEach((el, i) => { el.classList.toggle('hide', t >= cortes[i]); });
+      const v = $('lista-voce'); const kv = t >= 14.6 ? back((t - 14.6) / .3) : 0;
+      v.style.fontSize = (78 + 132 * kv).toFixed(1) + 'px';
+      v.style.transform = `translateX(${(10 * kv).toFixed(1)}px)`;
+    }
+    if (id === 'notif') { const k = back(u / .3); const c = document.querySelector('#notif .card'); c.style.transform = `translateY(${(-70 * (1 - k)).toFixed(1)}px) scale(${(0.92 + 0.08 * k).toFixed(3)})`; c.style.opacity = clamp(u / .12, 0, 1); }
+    if (id === 'def') { const k = ease(u / .5); $('def-g').style.transform = `scale(${(0.72 + 0.28 * k).toFixed(3)})`; }
+    if (id === 'int') { const k = ease(u / .4); $('int-g').style.letterSpacing = ((0.08 - 0.1 * k)).toFixed(3) + 'em'; $('int-g').style.transform = `scale(${(0.94 + 0.06 * k).toFixed(3)})`; }
+    if (id === 'b4' || id === 'b5') { const k = u / (b - a); $(id).style.transform = `scale(${(1.04 + 0.05 * k).toFixed(4)})`; }
+    if (id === 'imp') { const k1 = back(u / .22), k2 = back((t - 46.60) / .22); $('imp1').style.transform = `scale(${k1.toFixed(3)})`; $('imp2').style.transform = `scale(${(t >= 46.6 ? k2 : 0).toFixed(3)})`; $('imp2').style.opacity = t >= 46.6 ? 1 : 0; }
+    if (id === 'col') {
+      // stop motion a 12 quadros por segundo
+      const q = x => Math.round(x * 12) / 12;
+      const kl = ease(q(clamp((t - 47.40) / .5, 0, 1))), kr = ease(q(clamp((t - 47.90) / .5, 0, 1)));
+      const l = $('col-l'), r = $('col-r'), h = $('col-h');
+      l.style.transform = `translate(${(-620 + 620 * kl).toFixed(0)}px, 0) rotate(${(-8 + 8 * kl).toFixed(1)}deg)`;
+      r.style.transform = `translate(${(620 - 620 * kr).toFixed(0)}px, 0) rotate(${(8 - 8 * kr).toFixed(1)}deg)`;
+      const kh = t >= 48.30 ? back(q(clamp((t - 48.30) / .3, 0, 1))) : 0;
+      h.style.transform = `scale(${kh.toFixed(3)}) rotate(${(-12 + 12 * kh).toFixed(1)}deg)`; h.style.opacity = t >= 48.30 ? 1 : 0;
+      const kf = t >= 48.74 ? ease(q(clamp((t - 48.74) / .25, 0, 1))) : 0;
+      $('col-faixa').style.transform = `rotate(6deg) scaleY(${kf.toFixed(3)})`;
+      const kt = t >= 48.80 ? back(clamp((t - 48.80) / .22, 0, 1)) : 0;
+      $('col-t1').style.transform = `scale(${kt.toFixed(3)})`; $('col-t1').style.opacity = t >= 48.8 ? 1 : 0;
+      const kt2 = t >= 49.20 ? back(clamp((t - 49.20) / .22, 0, 1)) : 0;
+      $('col-t2').style.transform = `scale(${kt2.toFixed(3)})`; $('col-t2').style.opacity = t >= 49.2 ? 1 : 0;
+    }
+    if (id === 'cta') { const k = back(u / .3); $('cta-g').style.transform = `scale(${k.toFixed(3)})`; $('cta-ass').style.opacity = clamp((t - 56.2) / .3, 0, 1); }
+  }
+
+  // chip tratamento
+  const chip = $('chip');
+  const chipOn = noRosto && t >= 51.78 && t < 54.40;
+  chip.classList.toggle('hide', !chipOn);
+  if (chipOn) { const k = back((t - 51.78) / .3); chip.style.transform = `translateY(${(60 * (1 - k)).toFixed(1)}px)`; chip.style.opacity = clamp((t - 51.78) / .1, 0, 1); }
+
+  $('fade').style.opacity = clamp((t - (DUR - 0.25)) / .25, 0, 1).toFixed(3);
+}
+window.seek = seek;
+
+// posições da colagem (definidas depois que as imagens carregam)
+function montaColagem() {
+  const l = $('col-l'), r = $('col-r'), h = $('col-h');
+  l.style.left = '40px'; l.style.top = '560px'; l.style.height = '820px'; l.style.transformOrigin = '50% 100%';
+  r.style.right = '40px'; r.style.top = '560px'; r.style.height = '820px'; r.style.transformOrigin = '50% 100%';
+  h.style.left = '400px'; h.style.top = '300px'; h.style.width = '280px'; h.style.transformOrigin = '50% 50%';
+}
+montaColagem();
+window.__ready = Promise.all([document.fonts.ready]).then(() => { seek(0); return true; });
+</script>
+</body>
+</html>

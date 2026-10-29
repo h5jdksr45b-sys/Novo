@@ -1,33 +1,31 @@
 REMISSÃO E RECUPERAÇÃO NO BORDERLINE
-Reel 1080x1920, 30 fps, 29,5 s. Sem trilha e sem narração no arquivo.
+Reel 1080x1920, 30 fps, 27,6 s. Narração do Dr. Fabio, pausas longas enxugadas, -14,7 LUFS. Sem trilha.
 Público: quem já melhorou das crises e a família. Função: confiança.
 
-FALA POR CENA (tempo de início)
+FALA POR CENA (tempo de início de cada frase no vídeo)
 
-0,0 s  Cena 1
-Você parou de se machucar. E a vida ainda não andou.
+Cena 1
+ 0.08 s  Você parou de se machucar.
+ 1.97 s  E a vida
+ 2.78 s  ainda não andou.
 
-4,0 s  Cena 2
-Um estudo seguiu 290 pessoas com borderline por dezesseis anos. E mediu duas chegadas diferentes.
+Cena 2
+ 3.95 s  Um estudo seguiu 290 pessoas com borderline por dezesseis anos.
+ 9.04 s  E mediu duas chegadas diferentes.
 
-11,0 s  Cena 3
-Quase todas saíram do diagnóstico. Seis em cada dez recuperaram trabalho e vínculo.
+Cena 3
+11.36 s  Quase todas saíram do diagnóstico.
+13.90 s  Seis em cada dez recuperaram trabalho e vínculo.
 
-18,0 s  Cena 4
-O que assusta sai primeiro. O que demora é o vazio e o medo de ficar só.
+Cena 4
+17.35 s  O que assusta sai primeiro.
+19.30 s  O que demora
+20.17 s  é o vazio
+21.17 s  e o medo de ficar só.
 
-24,5 s  Cena 5
-Parar a crise é a primeira chegada. O tratamento não acaba nela.
-
-MARCAS DE TELA (para gravar no ritmo)
-2,0 s   entra A vida não voltou junto (legenda some até o fim da cena 1)
-8,4 s   entra Remissão
-9,3 s   entra Recuperação
-11,9 s  99% começa a contar
-14,6 s  60% começa a contar
-20,0 s  nuvens saem pela direita
-20,6 s  entra Demora mais
-24,5 s  ênfase final na tela toda a cena (sem legenda)
+Cena 5
+22.72 s  Parar a crise é a primeira chegada.
+25.19 s  O tratamento não acaba nela.
 
 FONTES
 Zanarini MC e col. Am J Psychiatry 2012;169(5):476-83. doi:10.1176/appi.ajp.2011.11101550

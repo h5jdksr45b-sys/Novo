@@ -18,7 +18,6 @@ from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 ROOT = __file__.rsplit('/', 1)[0]
 W, H, FPS = 1080, 1920, 30
-TOTAL = 885  # 29,5 s
 SAFE = dict(l=90, r=990, t=220, b=1540)
 CAP_Y0, CAP_Y1 = 1420, 1530
 
@@ -27,8 +26,34 @@ AMBER = (0xE8, 0xA9, 0x2A)
 LABEL = (0xF1, 0xEB, 0xDD)
 TAPE = (0xE6, 0xDA, 0xBC)
 
+# tempos reais da narração (tempo.py)
+import json as _json
+TEMPOS = _json.load(open(f'{ROOT}/build/tempos.json'))
+FR = [(f['ini'], f['fim']) for f in TEMPOS['frases']]
+_ini = [0.0] + [FR[k][0] - 0.30 for k in (3, 5, 7, 11)]
+TOTAL = round((FR[-1][1] + 0.6) * FPS)
 # início de cada cena em quadros
-CUTS = [0, 120, 330, 540, 735, TOTAL]
+CUTS = [round(x * FPS) for x in _ini] + [TOTAL]
+SC0 = [c / FPS for c in CUTS]  # início de cada cena em segundos
+
+
+def loc(i, k, which=0):
+    """Tempo da frase k (0 = início, 1 = fim) relativo ao início da cena i."""
+    return FR[k][which] - SC0[i]
+
+
+def chunks_for(i, plan):
+    """plan: [(frase, [pedaços])]. Distribui os pedaços pela duração real da frase, pelo número de letras."""
+    out = []
+    for k, parts in plan:
+        a, b = loc(i, k), loc(i, k, 1)
+        tot = sum(len(p) for p in parts)
+        t = a
+        for p in parts:
+            d = (b - a) * len(p) / tot
+            out.append((t - 0.05, t + d + (0.2 if p is parts[-1] else 0), p))
+            t += d
+    return out
 TR = 9  # quadros da transição de rasgo
 
 
@@ -343,13 +368,15 @@ def scene1():
     boxes = np.load(f'{ROOT}/build/img1-caixas.npy')
     chk = to_np(icon('sticker-check', 150))
     cx, cy = ph.w / 2, ph.h / 2 + 40
+    T_EMPH = loc(0, 1) - 0.05
+    dur = SC0[1]
 
     def M(t):
-        return ph.M(1.0 + 0.06 * ease_in_out(t / 4.0), cx, cy)
+        return ph.M(1.0 + 0.06 * ease_in_out(t / dur), cx, cy)
 
     els = []
     for i, (bx, by) in enumerate(boxes):
-        els.append(El(None, (lambda bx=bx, by=by: (lambda t: apply(M(t), bx + 8, by - 6)))(), 0.45 + 0.45 * i,
+        els.append(El(None, (lambda bx=bx, by=by: (lambda t: apply(M(t), bx + 8, by - 6)))(), 0.3 + 0.4 * i,
                       'stamp', 0.28, rot=[-6, 4, -3][i]))
         els[-1].img = chk
     top = label(text_block([('Os sintomas', font('fraunces', 88), INK), ('foram embora.', font('fraunces', 88), INK)], gap=14),
@@ -358,9 +385,9 @@ def scene1():
     els.append(El(top, (SAFE['l'] + tw / 2 - 30, 360), -1.0, 'slideD', 0.4))
     emph1 = tape(text_block([('A vida não', font('fraunces', 124), INK)]), seed=12, fill=AMBER, rot=1.5)
     emph2 = tape(text_block([('voltou junto.', font('fraunces', 124), INK)]), seed=13, fill=AMBER, rot=-1.0)
-    els.append(El(emph1, (W / 2 - 60, 1268), 2.0, 'pop', 0.3))
-    els.append(El(emph2, (W / 2 + 20, 1430), 2.25, 'pop', 0.3))
-    chunks = [(0.2, 0.95, 'Você parou'), (0.95, 1.95, 'de se machucar.')]
+    els.append(El(emph1, (W / 2 - 60, 1268), T_EMPH, 'pop', 0.3))
+    els.append(El(emph2, (W / 2 + 20, 1430), T_EMPH + 0.25, 'pop', 0.3))
+    chunks = [c for c in chunks_for(0, [(0, ['Você parou', 'de se machucar.'])]) if c[0] < T_EMPH]
 
     def draw(t, frame_only=False):
         frame = ph.render(M(t))
@@ -373,14 +400,16 @@ def scene1():
 def scene2():
     ph = Photo(f'{ROOT}/src/img2.png')
     # início: perto do homem e da faixa de baixo; fim: estrada inteira
+    T_MOVE = loc(1, 4) - 0.3
+    T_REM, T_REC = loc(1, 4) + 0.05, loc(1, 4) + 0.75
     a = dict(zoom=1.22, fx=ph.w / 2, fy=ph.h - (H / 2) / (ph.base * 1.22))
     b = dict(zoom=1.0, fx=ph.w / 2, fy=ph.h / 2)
 
     def M(t):
-        e = ease_in_out(t / 4.2)
+        e = ease_in_out(t / T_MOVE)
         z = a['zoom'] + (b['zoom'] - a['zoom']) * e
         fy = a['fy'] + (b['fy'] - a['fy']) * e
-        z *= 1.0 + 0.015 * clamp((t - 4.2) / 2.8)
+        z *= 1.0 + 0.015 * clamp((t - T_MOVE) / 3.0)
         return ph.M(z, ph.w / 2, fy)
 
     els = []
@@ -391,17 +420,17 @@ def scene2():
     flag = icon('icone-bandeira', 120)
     rem = label(text_block([('Remissão', font('inter7', 60), INK), ('fora do diagnóstico', font('inter6', 42), INK)], gap=12),
                 seed=22, rot=-1.5)
-    els.append(El(rem, (SAFE['l'] + rem.width / 2 - 20, 1240), 4.4, 'pop', 0.32))
-    els.append(El(flag, (SAFE['l'] + rem.width - 40, 1130), 4.6, 'stamp', 0.3, rot=8))
+    els.append(El(rem, (SAFE['l'] + rem.width / 2 - 20, 1240), T_REM, 'pop', 0.32))
+    els.append(El(flag, (SAFE['l'] + rem.width - 40, 1130), T_REM + 0.2, 'stamp', 0.3, rot=8))
     # faixa do horizonte: Recuperação
     rec = label(text_block([('Recuperação', font('inter7', 60), INK), ('+ trabalho e vínculo', font('inter6', 42), INK)], gap=12),
                 seed=23, rot=1.5)
-    els.append(El(rec, (SAFE['r'] - rec.width / 2 + 20, 880), 5.3, 'pop', 0.32))
+    els.append(El(rec, (SAFE['r'] - rec.width / 2 + 20, 880), T_REC, 'pop', 0.32))
     case, hands = icon('icone-maleta', 112), icon('icone-maos', 112)
-    els.append(El(case, (800, 738), 5.5, 'stamp', 0.3, rot=-6))
-    els.append(El(hands, (912, 732), 5.65, 'stamp', 0.3, rot=5))
-    chunks = [(0.2, 1.1, 'Um estudo seguiu'), (1.1, 2.0, '290 pessoas'), (2.0, 2.8, 'com borderline'),
-              (2.8, 3.9, 'por dezesseis anos.'), (4.2, 4.8, 'E mediu'), (4.8, 5.6, 'duas chegadas'), (5.6, 6.8, 'diferentes.')]
+    els.append(El(case, (800, 738), T_REC + 0.2, 'stamp', 0.3, rot=-6))
+    els.append(El(hands, (912, 732), T_REC + 0.35, 'stamp', 0.3, rot=5))
+    chunks = chunks_for(1, [(3, ['Um estudo seguiu', '290 pessoas', 'com borderline', 'por dezesseis anos.']),
+                            (4, ['E mediu', 'duas chegadas', 'diferentes.'])])
 
     def draw(t):
         frame = ph.render(M(t))
@@ -423,11 +452,12 @@ def scene3():
     els = []
     L = SAFE['l']
     els.append(El(yel, (L - 20 + yel.width / 2, 700), 0.25, 'slideL', 0.55))
-    els.append(El(gry, (L - 20 + gry.width / 2, 1270), 3.0, 'slideL', 0.55))
+    T2 = loc(2, 6) - 0.2
+    els.append(El(gry, (L - 20 + gry.width / 2, 1270), T2, 'slideL', 0.55))
     t_rem = tape(text_block([('Remissão', font('inter7', 60), INK)]), seed=31, rot=-1.5)
     t_rec = tape(text_block([('Recuperação', font('inter7', 60), INK)]), seed=32, rot=1.2)
-    els.append(El(t_rem, (L + t_rem.width / 2 - 10, 280), 0.7, 'pop', 0.3))
-    els.append(El(t_rec, (L + t_rec.width / 2 - 10, 858), 3.4, 'pop', 0.3))
+    els.append(El(t_rem, (L + t_rem.width / 2 - 10, 280), 0.35, 'pop', 0.3))
+    els.append(El(t_rec, (L + t_rec.width / 2 - 10, 858), T2 + 0.3, 'pop', 0.3))
 
     @lru_cache(None)
     def num(v, seed):
@@ -443,16 +473,16 @@ def scene3():
             return num(int(round(target * p)), seed)
         return mk
 
-    n1 = El(None, None, 0.85, 'pop', 0.3, maker=counter(99, 0.95, 33))
-    n2 = El(None, None, 3.55, 'pop', 0.3, maker=counter(60, 3.65, 34))
+    n1 = El(None, None, 0.45, 'pop', 0.3, maker=counter(99, 0.55, 33))
+    n2 = El(None, None, T2 + 0.45, 'pop', 0.3, maker=counter(60, T2 + 0.55, 34))
     w0 = num(99, 33).shape[1]
     n1.pos, n2.pos = (L + w0 / 2 - 20, 455), (L + w0 / 2 - 20, 1045)
     els += [n1, n2]
     foot = label(text_block([('por pelo menos', font('mono', 36), INK), ('2 anos', font('mono', 36), INK)], gap=10),
                  seed=35, pad=(22, 16), rot=2.0)
-    els.append(El(foot, (SAFE['r'] - foot.width / 2 + 14, 1268), 5.0, 'pop', 0.3))
-    chunks = [(0.2, 0.9, 'Quase todas'), (0.9, 1.5, 'saíram do'), (1.5, 2.6, 'diagnóstico.'), (3.0, 3.5, 'Seis em'),
-              (3.5, 4.1, 'cada dez'), (4.1, 4.9, 'recuperaram'), (4.9, 6.4, 'trabalho e vínculo.')]
+    els.append(El(foot, (SAFE['r'] - foot.width / 2 + 14, 1268), T2 + 1.9, 'pop', 0.3))
+    chunks = chunks_for(2, [(5, ['Quase todas', 'saíram do', 'diagnóstico.']),
+                            (6, ['Seis em', 'cada dez', 'recuperaram', 'trabalho e vínculo.'])])
 
     def draw(t):
         frame = bg.render(Mb)
@@ -472,7 +502,8 @@ def scene4():
     pad = 8 * 2 + 8
     cx0 = Mb[0, 2] + px * s + cl.width / 2 - pad
     cy0 = Mb[1, 2] + py * s + cl.height / 2 - pad
-    T_OUT = 2.0
+    T_OUT = loc(3, 7, 1) - 0.1
+    T_DEM = loc(3, 8) - 0.05
 
     def slide(t):
         e = clamp((t - T_OUT) / 0.85)
@@ -491,10 +522,10 @@ def scene4():
                 seed=42, rot=1.2)
     dem_pos = (SAFE['l'] + dem.width / 2 - 14, 1085)
     lab1.exit_at = ic1.exit_at = T_OUT
-    lab2 = El(dem, dem_pos, 2.6, 'pop', 0.32)
-    ic2 = El(amp, (dem_pos[0] + dem.width / 2 - 20, dem_pos[1] - dem.height / 2 - 18), 2.8, 'stamp', 0.3, rot=7)
-    chunks = [(0.2, 1.0, 'O que assusta'), (1.0, 1.9, 'sai primeiro.'), (2.4, 3.2, 'O que demora'), (3.2, 4.0, 'é o vazio'),
-              (4.0, 4.7, 'e o medo'), (4.7, 6.0, 'de ficar só.')]
+    lab2 = El(dem, dem_pos, T_DEM, 'pop', 0.32)
+    ic2 = El(amp, (dem_pos[0] + dem.width / 2 - 20, dem_pos[1] - dem.height / 2 - 18), T_DEM + 0.2, 'stamp', 0.3, rot=7)
+    chunks = chunks_for(3, [(7, ['O que assusta', 'sai primeiro.']), (8, ['O que demora']), (9, ['é o vazio']),
+                            (10, ['e o medo', 'de ficar só.'])])
 
     def draw(t):
         frame = bg.render(Mb)
@@ -513,10 +544,10 @@ def scene4():
 
 def scene5():
     ph = Photo(f'{ROOT}/src/img5.png')
-    fx, fy = 760, 1400
+    fx, fy = 760, 700
 
     def M(t):
-        z = 1.0 + 0.09 * ease_in_out(t / 5.0)
+        z = 1.0 + 0.09 * ease_in_out(t / (SC0[5] - SC0[4]))
         sx, sy = apply(ph.M(1.0, ph.w / 2, ph.h / 2), fx, fy)
         return ph.M(z, fx, fy, sx, sy)
 
@@ -526,14 +557,14 @@ def scene5():
                  seed=51, pad=(30, 22), rot=-1.0)
     els.append(El(head, (SAFE['l'] + head.width / 2 - 24, 220 + head.height / 2 - 18), 0.15, 'slideD', 0.4))
     last = tape(text_block([('Não é a última.', F, INK)]), seed=52, fill=AMBER, pad=(26, 12), rot=1.2)
-    els.append(El(last, (SAFE['l'] + last.width / 2 - 14, 220 + head.height - 34 + last.height / 2), 1.6, 'pop', 0.3))
+    els.append(El(last, (SAFE['l'] + last.width / 2 - 14, 220 + head.height - 34 + last.height / 2), loc(4, 11, 1) - 0.1, 'pop', 0.3))
     arrow = icon('sticker-seta', 250)
-    els.append(El(arrow, lambda t: apply(M(t), 1010, 1320), 2.4, 'stamp', 0.3, rot=24))
+    els.append(El(arrow, lambda t: apply(M(t), 1010, 1320), loc(4, 11, 1) + 0.3, 'stamp', 0.3, rot=24))
     sig = tape(text_block([('Dr. Fabio Schmidt, médico, pós-graduado em psiquiatria.', font('inter6', 30), INK),
                            ('Conteúdo educativo.', font('inter6', 30), INK),
                            ('Zanarini e col., Am J Psychiatry, 2012 e 2016.', font('mono', 26), INK)], gap=10),
                seed=53, fill=LABEL, pad=(26, 16), alpha=240)
-    els.append(El(sig, (W / 2, SAFE['b'] - sig.height / 2 + 6), 2.8, 'slideD', 0.4))
+    els.append(El(sig, (W / 2, SAFE['b'] - sig.height / 2 + 6), loc(4, 11, 1) + 0.6, 'slideD', 0.4))
     chunks = []  # ênfase grande na tela inteira: legenda escondida
 
     def draw(t):
@@ -615,7 +646,7 @@ def main():
 
     if only_frames:
         # quadro representativo de cada cena: tudo já na tela
-        picks = [CUTS[0] + 110, CUTS[1] + 200, CUTS[2] + 200, CUTS[3] + 54, CUTS[4] + 140]
+        picks = [CUTS[1] - 6, CUTS[2] - 8, CUTS[3] - 8, CUTS[3] + 50, CUTS[5] - 6]
         for i, f in enumerate(picks):
             fr = scene_frame(i, f)
             Image.fromarray(np.clip(fr, 0, 255).astype(np.uint8)).save(f'{ROOT}/out/frames/cena-{i + 1}.png')
@@ -642,6 +673,13 @@ def main():
             print('quadro', f, flush=True)
     ff.stdin.close()
     ff.wait()
+    # voz: narração enxugada, -14 LUFS
+    tmp = out.replace('.mp4', '-mudo.mp4')
+    subprocess.run(['mv', out, tmp], check=True)
+    subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', tmp, '-i', f'{ROOT}/audio/narracao.wav', '-map', '0:v', '-map', '1:a',
+                    '-c:v', 'copy', '-af', 'volume=2.6dB,alimiter=limit=0.76:level=false,apad', '-c:a', 'aac',
+                    '-b:a', '192k', '-ar', '48000', '-t', f'{TOTAL / FPS:.3f}', '-movflags', '+faststart', out], check=True)
+    subprocess.run(['rm', tmp])
     print('ok', out)
 
 

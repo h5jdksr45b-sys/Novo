@@ -38,6 +38,16 @@
         signInWithOAuth:async()=>({error:null})
       },
       from:t=>new Q(t),
+      rpc:async(fn,args)=>{const d=load();d.calls.push({fn,args});d.contas=d.contas||[];
+        const sess=JSON.parse(localStorage.getItem('fake-sess')||'null');const admin=!!sess&&sess.user.email==='drfabioschmidt@gmail.com';
+        if(fn==='eh_admin'){save(d);return {data:admin,error:null}}
+        if(!admin){save(d);return {data:null,error:{code:'42501',message:'sem permissão'}}}
+        if(fn==='listar_contas'){save(d);return {data:d.contas,error:null}}
+        if(fn==='liberar_acesso'){const e=args.p_email;if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e))return {data:null,error:{message:'e-mail inválido'}};
+          let c=d.contas.find(x=>x.email===e);if(!c){c={email:e,criado_em:new Date().toISOString(),teste_ate:null,liberado:false,pendente:true};d.contas.push(c)}
+          c.liberado=args.p_liberar;if(sess.user.email===e){d.perfis[UID].pago_ate=args.p_liberar?'2999-12-31':null;d.perfis[UID].status=args.p_liberar?'ativa':'teste'}
+          save(d);return {data:args.p_liberar?(c.pendente?'pendente':'liberado'):'retirado',error:null}}
+        return {data:null,error:{message:'?'}}},
       functions:{invoke:async(nome,{body})=>{const d=load();d.calls.push({fn:nome,body});save(d);
         if(nome==='assinatura'&&body.acao==='assinar'){ if(!body.cpfCnpj)return {data:null,error:{context:{json:async()=>({erro:'Digite um CPF'})}}}; d.perfis[UID].asaas_subscription_id='sub_1';save(d);return {data:{url:'https://sandbox.asaas.com/i/abc'},error:null}}
         return {data:{ok:true},error:null}}}

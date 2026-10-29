@@ -569,12 +569,14 @@ body.sem-conta .canvas { max-width: none; padding: 0; margin: 0; }
 <dialog class="sheet" id="sheet" aria-labelledby="sheetTitle"></dialog>
 
 <script>
-/* Login e assinatura. Deixe vazio para usar só neste aparelho, sem conta.
-   Para ligar, preencha com a URL e a chave pública (anon) do seu projeto Supabase. Veja LEIA.md. */
+/* Login e acesso. Deixe supabaseUrl vazio para usar só neste aparelho, sem conta.
+   Para ligar, preencha com a URL e a chave pública (anon) do seu projeto Supabase. Veja LEIA.md.
+   linkCompra: link do checkout da Hotmart (compra única). Vazio, o botão de compra não aparece. */
 window.ATALHO_CONFIG = {
   supabaseUrl: 'https://zjhpeiynrkgrudqqxlvl.supabase.co',
   supabaseAnonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpqaHBlaXlucmtncnVkcXF4bHZsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMyMDczNTMsImV4cCI6MjEwODc4MzM1M30.zBLeaoGbbWYwVpg6o8CiJXw7TuoBgcXNXqWc-eNGpmg',
   entrarComGoogle: false,
+  linkCompra: '',
   precoTexto: ''
 };
 </script>
@@ -743,6 +745,7 @@ const TABS = [
 
 /* ---------- conta e assinatura (só com Supabase ligado) ---------- */
 let sb = null, conta = null, perfil = null, snap = null, carregando = NUVEM, erroNuvem = '';
+let souAdmin = false, contasAdmin = null;
 let syncTimer = null, sincronizando = false, denovo = false, estadoSync = 'ok';
 const login = { etapa: 'email', email: '', erro: '', enviando: false };
 
@@ -761,9 +764,7 @@ function situacaoConta() {
   const h = hoje();
   if (perfil.status === 'teste' && perfil.teste_ate >= h) return { tipo: 'teste', txt: `Teste grátis até ${fmtData(perfil.teste_ate)}` };
   if (perfil.pago_ate && perfil.pago_ate >= h) {
-    if (perfil.status === 'atrasada') return { tipo: 'atrasada', txt: `Mensalidade em aberto. Acesso até ${fmtData(perfil.pago_ate)}` };
-    if (perfil.status === 'cancelada') return { tipo: 'cancelada', txt: `Assinatura cancelada. Acesso até ${fmtData(perfil.pago_ate)}` };
-    return { tipo: 'ativa', txt: `Assinatura ativa até ${fmtData(perfil.pago_ate)}` };
+    return { tipo: 'ativa', txt: perfil.pago_ate >= '2900-01-01' ? 'Acesso liberado' : `Acesso liberado até ${fmtData(perfil.pago_ate)}` };
   }
   return { tipo: 'pausada', txt: 'Acesso pausado' };
 }
@@ -774,10 +775,9 @@ function avisoConta() {
   if (!s) return '';
   if (s.tipo === 'teste') {
     const n = difDias(perfil.teste_ate, hoje());
-    return n <= 5 ? `<div class="notice"><span>Seu teste grátis acaba em ${diasTxt(n)}, em ${fmtData(perfil.teste_ate)}.</span><button type="button" class="btn btn-text" data-act="assinar">Assinar</button></div>` : '';
+    return n <= 5 ? `<div class="notice"><span>Seu teste grátis acaba em ${diasTxt(n)}, em ${fmtData(perfil.teste_ate)}.</span><button type="button" class="btn btn-text" data-act="assinar">Liberar acesso</button></div>` : '';
   }
-  if (s.tipo === 'atrasada') return `<div class="notice red"><span>A mensalidade do app está em aberto. Seu acesso segue até ${fmtData(perfil.pago_ate)}.</span><button type="button" class="btn btn-text" data-act="assinar">Pagar</button></div>`;
-  if (s.tipo === 'pausada') return `<div class="notice red"><span>Seu acesso está pausado. Seus plantões continuam guardados e você pode ver e exportar tudo. Para lançar e marcar pagamentos, assine.</span><button type="button" class="btn btn-text" data-act="assinar">Assinar</button></div>`;
+  if (s.tipo === 'pausada') return `<div class="notice red"><span>Seu teste grátis acabou. Seus plantões continuam guardados e você pode ver e exportar tudo. Para lançar e marcar pagamentos, libere o acesso.</span><button type="button" class="btn btn-text" data-act="assinar">Liberar acesso</button></div>`;
   return '';
 }
 
@@ -1041,6 +1041,43 @@ function vAgenda() {
   </div>`;
 }
 
+function blocoAdmin() {
+  const linha = c => {
+    const sit = c.pendente ? 'Liberado, esperando criar a conta' : c.liberado ? 'Liberado' : c.teste_ate >= hoje() ? `Teste até ${fmtData(c.teste_ate)}` : 'Teste acabou';
+    return `<div class="loc">
+      <span><strong>${esc(c.email)}</strong><small>${esc(sit)}</small></span>
+      <button type="button" class="btn ${c.liberado ? 'btn-ghost' : 'btn-primary'} btn-sm" data-liberar="${esc(c.email)}" data-sim="${c.liberado ? '0' : '1'}">${c.liberado ? 'Tirar' : 'Liberar'}</button>
+    </div>`;
+  };
+  return `<div class="set">
+    <div class="set-label"><h2>Liberar acesso</h2><p>Só você vê esta parte. Quando chegar uma venda da Hotmart, digite o e-mail do comprador. Se ele ainda não criou a conta, o acesso entra sozinho no primeiro login.</p></div>
+    <div class="panel">
+      <div class="field">
+        <label for="admEmail">E-mail do comprador</label>
+        <input class="input" id="admEmail" type="email" inputmode="email" autocomplete="off" placeholder="comprador@exemplo.com">
+      </div>
+      <button type="button" class="btn btn-primary" data-act="admin-liberar">Liberar acesso</button>
+      ${contasAdmin ? (contasAdmin.length ? contasAdmin.map(linha).join('') : '<p class="note">Nenhuma conta ainda.</p>')
+        : '<button type="button" class="btn btn-ghost" data-act="admin-contas">Ver contas</button>'}
+    </div>
+  </div>`;
+}
+
+async function adminLiberar(email, liberar) {
+  const { data, error } = await sb.rpc('liberar_acesso', { p_email: email, p_liberar: liberar });
+  if (error) return toast(String(error.message).includes('inválido') ? 'Confira o e-mail.' : 'Não deu certo agora. Tente de novo.');
+  toast(data === 'pendente' ? 'Liberado. Entra sozinho quando a pessoa criar a conta.' : data === 'retirado' ? 'Acesso retirado.' : 'Acesso liberado.');
+  if (email === (conta.email || '').toLowerCase()) await atualizarPerfil();
+  await adminCarregar();
+}
+
+async function adminCarregar() {
+  const { data, error } = await sb.rpc('listar_contas');
+  if (error) return toast('Não deu para carregar as contas.');
+  contasAdmin = data || [];
+  render();
+}
+
 function vAjustes() {
   const s = situacaoConta();
   const contaHtml = NUVEM ? `<div class="set">
@@ -1052,8 +1089,7 @@ function vAjustes() {
         <dt>Salvamento</dt><dd>${estadoSync === 'ok' ? 'Tudo salvo' : 'Esperando internet para enviar'}</dd>
       </dl>
       <div class="btn-row">
-        ${s && s.tipo !== 'ativa' ? '<button type="button" class="btn btn-primary btn-sm" data-act="assinar">Assinar</button>' : ''}
-        ${perfil && perfil.asaas_subscription_id ? '<button type="button" class="btn btn-ghost btn-sm" data-act="cancelar-assinatura">Cancelar assinatura</button>' : ''}
+        ${s && s.tipo !== 'ativa' ? '<button type="button" class="btn btn-primary btn-sm" data-act="assinar">Liberar acesso</button>' : ''}
         <button type="button" class="btn btn-ghost btn-sm" data-act="sair">Sair</button>
       </div>
     </div>
@@ -1061,6 +1097,7 @@ function vAjustes() {
   return `<div class="title-row"><div><h1>Ajustes</h1><p class="finding">Seu nome, seus locais de trabalho e seus dados.</p></div></div>
   <section class="card" style="padding:24px var(--card-pad)" aria-label="Ajustes">
   ${contaHtml}
+  ${souAdmin ? blocoAdmin() : ''}
   <div class="set">
     <div class="set-label"><h2>Seu nome</h2><p>Aparece no começo das mensagens de cobrança.</p></div>
     <div class="panel">
@@ -1843,6 +1880,7 @@ async function entrar(user) {
     if (c && mudou()) await sincronizar();
     await baixarDaNuvem();
     marcarSync('ok');
+    sb.rpc('eh_admin').then(r => { if (!r.error && r.data === true) { souAdmin = true; render(); } });
     if (!perfil.iniciado) primeiraVez();
   } catch (e) {
     if (!db) erroNuvem = 'Não deu para abrir sua conta. Confira a internet e tente de novo.';
@@ -1855,7 +1893,7 @@ async function entrar(user) {
 
 function sairLocal() {
   try { if (conta) localStorage.removeItem(cacheKey()); } catch (e) { /* sem armazenamento */ }
-  conta = null; db = null; perfil = null; snap = null; estadoSync = 'ok';
+  conta = null; db = null; perfil = null; snap = null; estadoSync = 'ok'; souAdmin = false; contasAdmin = null;
   login.etapa = 'email'; login.erro = ''; login.enviando = false;
   fechar(); render();
 }
@@ -1899,39 +1937,22 @@ async function atualizarPerfil() {
 function abrirAssinatura() {
   if (!NUVEM) return;
   const s = situacaoConta();
-  const temAssinatura = perfil && perfil.asaas_subscription_id;
-  abrir('Assinatura', `
-    <p style="font-size:16px">${s && s.tipo === 'pausada' ? 'Seu acesso está pausado. Seus plantões continuam guardados, e você pode ver e exportar tudo.' : esc(s ? s.txt + '.' : '')}</p>
+  const link = CFG.linkCompra ? CFG.linkCompra + (CFG.linkCompra.includes('?') ? '&' : '?') + 'email=' + encodeURIComponent(conta.email || '') : '';
+  abrir('Liberar acesso', `
+    <p style="font-size:16px">${s && s.tipo === 'pausada' ? 'Seu teste grátis acabou. Seus plantões continuam guardados, e você pode ver e exportar tudo.' : esc(s ? s.txt + '.' : '')}</p>
     <dl class="well">
-      <div><dt>Plano</dt><dd>${esc(CFG.precoTexto || 'Mensal')}</dd></div>
-      <div><dt>Pagamento</dt><dd>Pix, boleto ou cartão</dd></div>
-      <div><dt>Cancelamento</dt><dd>Quando quiser, em Ajustes</dd></div>
+      ${CFG.precoTexto ? `<div><dt>Valor</dt><dd>${esc(CFG.precoTexto)}</dd></div>` : ''}
+      <div><dt>Pagamento</dt><dd>Uma vez só, pela Hotmart</dd></div>
+      <div><dt>Acesso</dt><dd>Sem mensalidade</dd></div>
     </dl>
-    ${temAssinatura ? '' : `<div class="field"><label for="aDoc">CPF ou CNPJ para a cobrança</label>
-      <input class="input" id="aDoc" inputmode="numeric" autocomplete="off" placeholder="Só números" maxlength="18"></div>`}
-    <p class="err" id="aErr" hidden></p>
-    <div id="aLink"></div>
-    <button type="button" class="btn btn-primary btn-block" id="aGerar">${temAssinatura ? 'Ver pagamento em aberto' : 'Assinar'}</button>
-    <button type="button" class="btn btn-ghost btn-block" id="aAtualizar">Já paguei, atualizar</button>`, sh => {
-    const q = x => sh.querySelector(x);
-    q('#aGerar').onclick = async () => {
-      const e = q('#aErr'); e.hidden = true;
-      const doc = q('#aDoc') ? q('#aDoc').value.replace(/\D/g, '') : '';
-      if (q('#aDoc') && doc.length !== 11 && doc.length !== 14) { e.textContent = 'Digite um CPF (11 números) ou CNPJ (14 números).'; e.hidden = false; return; }
-      q('#aGerar').disabled = true; q('#aGerar').textContent = 'Gerando...';
-      try {
-        const r = await chamarFuncao('assinatura', { acao: 'assinar', cpfCnpj: doc });
-        if (r && r.url) q('#aLink').innerHTML = `<a class="btn btn-dark btn-block" href="${esc(r.url)}" target="_blank" rel="noopener">Abrir página de pagamento</a>`;
-        else if (r && r.mensagem) q('#aLink').innerHTML = `<p class="note">${esc(r.mensagem)}</p>`;
-        q('#aGerar').hidden = true;
-        atualizarPerfil();
-      } catch (err) { e.textContent = err.message; e.hidden = false; q('#aGerar').disabled = false; q('#aGerar').textContent = temAssinatura ? 'Ver pagamento em aberto' : 'Assinar'; }
-    };
-    q('#aAtualizar').onclick = async () => {
+    <p class="note">Na compra, use o mesmo e-mail desta conta: <b>${esc(conta.email || '')}</b>. Assim que a compra for confirmada, o acesso é liberado aqui.</p>
+    ${link ? `<a class="btn btn-primary btn-block" href="${esc(link)}" target="_blank" rel="noopener">Comprar na Hotmart</a>` : '<p class="note">A compra abre em breve.</p>'}
+    <button type="button" class="btn btn-ghost btn-block" id="aAtualizar">Já comprei, atualizar</button>`, sh => {
+    sh.querySelector('#aAtualizar').onclick = async () => {
       await atualizarPerfil();
       const s2 = situacaoConta();
-      if (s2 && s2.tipo === 'ativa') { fechar(); toast('Assinatura ativa. Obrigado!'); }
-      else toast('O pagamento ainda não chegou. Pix costuma levar poucos minutos; boleto, até 3 dias úteis.');
+      if (s2 && s2.tipo === 'ativa') { fechar(); toast('Acesso liberado. Obrigado!'); }
+      else toast('Ainda não foi liberado. Assim que a compra for confirmada, o acesso aparece aqui.');
     };
   });
 }
@@ -2000,6 +2021,7 @@ document.addEventListener('click', e => {
   if (d.filtro) { ui.local = d.filtro; return render(); }
   if (d.dia) { ui.dia = ui.dia === d.dia ? null : d.dia; return render(); }
   if (d.editLocal) return formLocal(d.editLocal);
+  if (d.liberar) return adminLiberar(d.liberar, d.sim === '1');
   switch (d.act) {
     case 'fechar': return fechar();
     case 'ver-entradas': return verEntradas();
@@ -2014,18 +2036,12 @@ document.addEventListener('click', e => {
     case 'csv': return exportarCSV();
     case 'pdf': return exportarPDF();
     case 'assinar': return abrirAssinatura();
+    case 'admin-contas': return adminCarregar();
+    case 'admin-liberar': { const v = ($('#admEmail') || {}).value || ''; if (!v.trim()) return toast('Digite o e-mail do comprador.'); return adminLiberar(v.trim().toLowerCase(), true); }
     case 'recarregar': return location.reload();
     case 'sair': return sb && sb.auth.signOut();
-    case 'cancelar-assinatura': return confirmar({
-      titulo: 'Cancelar a assinatura?', texto: `Você não será mais cobrado. ${perfil && perfil.pago_ate ? `Seu acesso continua até ${fmtData(perfil.pago_ate)}. ` : ''}Seus plantões continuam guardados.`,
-      ok: 'Cancelar assinatura', perigo: true,
-      onOk: async () => {
-        try { await chamarFuncao('assinatura', { acao: 'cancelar' }); await atualizarPerfil(); fechar(); toast('Assinatura cancelada.'); }
-        catch (err) { fechar(); toast(err.message); }
-      }
-    });
     case 'excluir-conta': return confirmar({
-      titulo: 'Excluir sua conta?', texto: 'Sua conta, seus locais, plantões e pagamentos serão apagados para sempre, e a assinatura será cancelada. Exporte antes o que quiser guardar.',
+      titulo: 'Excluir sua conta?', texto: 'Sua conta, seus locais, plantões e pagamentos serão apagados para sempre. Exporte antes o que quiser guardar.',
       ok: 'Excluir minha conta', perigo: true,
       onOk: async () => {
         try { await chamarFuncao('excluir-conta', {}); await sb.auth.signOut(); toast('Conta excluída.'); }

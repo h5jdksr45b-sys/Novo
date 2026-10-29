@@ -1,0 +1,26 @@
+\set ON_ERROR_STOP 0
+insert into auth.users values ('11111111-1111-1111-1111-111111111111','drfabioschmidt@gmail.com'),('22222222-2222-2222-2222-222222222222','b@x.com');
+set role authenticated; set request.jwt.claim.sub = '22222222-2222-2222-2222-222222222222';
+select 'B admin? (f)', eh_admin();
+select 'B libera (falha)'; select liberar_acesso('b@x.com');
+select 'B lista (falha)'; select * from listar_contas();
+reset role; set role anon; select 'anon libera (falha)'; select liberar_acesso('b@x.com');
+reset role; set role authenticated; set request.jwt.claim.sub = '11111111-1111-1111-1111-111111111111';
+select 'admin? (t)', eh_admin();
+select 'libera B', liberar_acesso(' B@X.com ');
+select 'libera novo (pendente)', liberar_acesso('novo@y.com');
+select 'invalido (falha)'; select liberar_acesso('nada');
+select * from listar_contas();
+reset role;
+select 'perfil B', status, pago_ate from perfis where id='22222222-2222-2222-2222-222222222222';
+insert into auth.users values ('33333333-3333-3333-3333-333333333333','Novo@Y.com');
+select 'novo liberado no 1o login', status, pago_ate from perfis where id='33333333-3333-3333-3333-333333333333';
+select 'pendentes', count(*) from acesso_pendente;
+update perfis set teste_ate=current_date-1 where id='22222222-2222-2222-2222-222222222222';
+insert into locais (user_id,id,nome,valor,prazo,forma) values ('22222222-2222-2222-2222-222222222222','l1','H',1,1,'PJ');
+set role authenticated; set request.jwt.claim.sub = '22222222-2222-2222-2222-222222222222';
+select 'B liberado lança (pode)'; insert into plantoes (id,local_id,data,venc,turno,valor) values ('p1','l1','2026-10-01','2026-10-31','12h',1500);
+reset role; set role authenticated; set request.jwt.claim.sub = '11111111-1111-1111-1111-111111111111';
+select 'tira B', liberar_acesso('b@x.com', false);
+reset role; set role authenticated; set request.jwt.claim.sub = '22222222-2222-2222-2222-222222222222';
+select 'B sem acesso lança (falha)'; insert into plantoes (id,local_id,data,venc,turno,valor) values ('p2','l1','2026-10-01','2026-10-31','12h',1500);

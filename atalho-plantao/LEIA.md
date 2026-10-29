@@ -4,6 +4,14 @@ Sem esta configuração o app funciona só no aparelho, sem conta. Com ela, cada
 
 Tempo estimado: uma hora, sem programar. Você vai criar três contas (Supabase, Asaas e um serviço de e-mail), copiar algumas chaves e colar comandos.
 
+## Venda: compra única pela Hotmart, acesso liberado à mão
+
+Desde 29/10/2026 o app vende acesso por compra única na Hotmart, sem mensalidade. O Asaas e as funções `assinatura` e `asaas-webhook` ficam guardados, mas o app não usa mais.
+
+1. Depois do `schema.sql`, rode também `supabase/acesso-liberado-a-mao.sql` no SQL Editor. Ele cria a área Liberar acesso, que só aparece em Ajustes para o e-mail de administrador escrito no começo do arquivo.
+2. Crie o produto na Hotmart e cole o link do checkout em `linkCompra`, no `index.html`. O app abre o checkout com o e-mail da conta já preenchido.
+3. Chegou venda: abra o app com o seu e-mail, vá em Ajustes > Liberar acesso, digite o e-mail do comprador e toque em Liberar acesso. Se a pessoa ainda não criou a conta, o acesso entra sozinho no primeiro login.
+
 ## 1. Supabase (login e banco de dados)
 
 1. Crie a conta em supabase.com e um projeto novo. Região: **São Paulo (sa-east-1)**. Guarde a senha do banco.

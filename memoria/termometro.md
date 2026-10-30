@@ -80,3 +80,51 @@ Base: `historico-borderline-180d` (364 posts, 13/04 a 12/10) e Windsor de 13 a 2
 - Neurobiologia ficou em aberto: carrossel 3 posts bons, Reel 7 posts fracos.
 - Letra gigante, cor forte e paradoxo aparecem também nos carrosséis fracos (leitura de 16 capas). O que separa é a crença revista e a imagem fazendo parte da frase.
 - O mesmo tema pode render o oposto: Inteligência não vira freio (59.565) e Inteligência melhora ou piora (150). Tema sozinho não garante.
+
+## Checklist de gancho de Reel (30/10/2026)
+
+Pedido dele: "Liste tudo que o gancho precisa ter q já sabemos / Tudo q não pode ter senão flopa", depois "Mais detalhada" e "Sim" para gravar aqui. Rode antes de propor qualquer gancho. Confiança como no resto do arquivo.
+
+### Precisa ter
+
+1. Primeira frase com o comportamento do borderline visto de fora, a crença que o vídeo derruba ou uma pergunta-tabu. Prova: Reels autorais de 17 a 30/10, 13 com essa abertura, mediana de 3.217 views; 14 abertos por cena em você, mediana de 264, nenhum acima de 4.822 (classificação do Claude). 4 de 6 gigantes contra 1 de 5 médios. Funcionou: Te chamou de tudo ontem e hoje pediu pra você ficar (95.241); Some, bloqueia e volta (94.516); Some de todo mundo e continua respondendo você (12.399); Borderline tem delírio? (10.275). Flopou: chefe não deu bom dia (1.959), elogio (125), depois a gente conversa (109). Média.
+2. Borderline como sujeito, palavra no começo. Carrossel: 25 de 26 gigantes, 12 de 36 flops. Forte no carrossel, regra dele no Reel.
+3. Leitura errada que a frase corrige: renomeia (love bombing riscado, 60 mil), inverte (a compulsão funciona, 78 mil) ou obriga a escolher (adoece a família, 120 mil; borderline ou autismo, 94.570). Sozinha separa pouco (18 de 26 gigantes, 17 de 36 flops). Fraca isolada; regra dele.
+4. Contraintuitivo verdadeiro, sustentado pelo vídeo e pela ciência. Regra dele e preferência fixa.
+5. Público amplo, quem assiste como protagonista: quem tem ou quem convive de perto (parceiro, mãe). 74,5% mulheres; mães 35 a 54 são 38%. Flopou: homem, adolescência, irmão, filho (248), trabalho (109). Média.
+6. Fala para o outro lado (parceiro, família). 4 de 6 gigantes, 1 de 5 médios. Fraca.
+7. Segunda frase dizendo por que importa para quem assiste (referência brandinsights.ai, 28/10). Fraca.
+8. Rosto e texto no primeiro quadro, texto visível em t=0. Regra dele (Reel do carro).
+9. Texto na tela diferente do gancho falado. Regra dele.
+10. Troca de imagem antes de 1,5 s, corte a cada 2 s. 5 de 6 gigantes, 0 de 5 médios; 33 contra 11 cortes por minuto. "Não exagera heim": subir um degrau. Fraca.
+11. Lista quando couber. Cinco sinais 144.703; 21,9 contra 13,5 envios por mil views. Fraca.
+
+### Não pode ter
+
+1. Cena pequena da rotina em você (chefe, slide, elogio, jantar, "ela comprou um sapato"). Mediana 264 em outubro. Média.
+2. Hora, cenário ou ambientação ("Não vou começar com duas da manhã"). Regra dele.
+3. Abrir com instrução, dica ou tratamento (intensidade continua 280, salvou posts 130, escolha 3 pessoas 1.345). Fraca.
+4. Experiência por dentro sem comportamento visível (elogio 125, chorar mais 123, pediu ajuda 115). Fraca, repetida em todas as leituras.
+5. Família ou origem como tema de Reel: 14 autorais, mediana 1.702 contra 6.880. No carrossel funciona. Média.
+6. Pergunta genérica (inteligência melhora ou piora, 150). Pergunta-tabu é outra coisa (delírio, 10.275). Fraca.
+7. Número ou estudo sem cena (TDAH e TPB 33 a 41%, 8.231). Fraca.
+8. Tese repetida, buscando pela cena e pelo mecanismo. Regra dele.
+9. Fórmula de contraste (não é X, é Y; X, não Y; na A, X, no B, Y; parece X, é Y). Capas: 0 gigantes, 4 flops. Regra dele.
+10. Frase começando com ele, ela ou outro pronome. Capas: 1 gigante, 10 flops. Regra dele.
+11. Duplo sentido ou gíria. Regra dele.
+12. Palavra curta sozinha na linha da tela. Regra dele.
+13. Bordão gasto (mimada, dramática, nervosa). Regra dele.
+14. Metáfora a decifrar (corda vetada, balão passou). Capas: 3 gigantes, 11 flops.
+15. Ligar borderline a agressão, estigma, ameaça ou briga. Regra dele.
+16. Criticar colega ou outro serviço (concorrência desleal). Regra dele.
+17. Venda (COMEÇAR, link, consulta). 7 Reels de oferta, mediana 461. Forte.
+18. Legenda genérica (433) ou fora do tema (290). Forte.
+19. Primeiro quadro sem rosto, câmera ajustando ou escuro. Regra dele.
+20. Neurobiologia. Regra dele, dado misto.
+21. Drama, comédia sem querer, tradução do inglês. Regra dele.
+22. Sem a voz dele: narração por IA com personagem (109), colagem só com música (125 e 1.338). Fraca.
+23. Gancho por fórmula sem cena ou contraste real ("sempre q Pedi isso deu merda"). Regra dele.
+
+### Não separou
+
+Duração (30 a 90 s contra 37 a 63 s), velocidade de fala (178 a 205 contra 165 a 209 ppm), volume (-14 a -18 LUFS). Na capa: letra gigante, vermelho e fundo preto aparecem nos dois grupos.

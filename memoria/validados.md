@@ -41,3 +41,14 @@ Posts mais fortes:
 O que se repete: contradição entre vínculo e experiência entregue na capa (amar e não se sentir seguro; ser amado e virar adversário na briga); ações que o leitor reconhece; texto como elemento principal. O levantamento não prova que objeto na capa, número de slides ou tipo de CTA mudem o alcance.
 
 Anatomia dos 16 carrosséis dele (11 gigantes x 5 fracos), feita pelo Vamos no mesmo dia: `memoria/dados/anatomia-carrosseis-2026-10-27.md`.
+
+## 2026-10-30: temas de Reel falado no padrão dos gigantes (Vamos, chat 91bdcafe, 90 dias)
+
+Posts mais fortes:
+- [Claire JJ, BPD Diaries, impulso de usar as inseguranças do outro](https://www.instagram.com/p/Dd0-9CDPAPX/): 2,7 mi, cerca de 111x a mediana (28/09).
+- [SoftComplexities, 100 to 0: o lado do parceiro](https://www.instagram.com/p/DexBPmQCAxw/): 572 mil, 7,5x (21/10). Itens: reassurance on repeat, hiding your bad days, repair fatigue.
+- [Olivia Pacifico, trava ao tentar explicar](https://www.tiktok.com/@0liviapacifico/video/7691669715793513750): 534 mil, 18x (01/10).
+- [Alyne Molon, não consegue esperar para resolver a briga](https://www.tiktok.com/@alynnemolon/video/7698150015398612244): 493 mil, 36x (18/10). PT-BR.
+- [Matheus Mattos, rituais (dormir abraçado à roupa, guardar objetos, mesma música)](https://www.instagram.com/p/De4czpMhgNa/): 74 mil, 6,4x (24/10). PT-BR.
+
+Filtro do Claude pelo histórico e pelo checklist do termômetro. Ficaram: precisa resolver a briga agora (junto com conversa sem fim), usa seus segredos na briga, trava quando você pede explicação, dorme abraçado à sua roupa, quem convive para de contar os próprios dias ruins. Saíram: pergunta de novo se você ama (repete Você não me ama e o vazio), não conta o que machucou (repete mensagem apagada), cuida de todos e ninguém cuida (repete competência aparente), ensaia brigas (repete o vídeo do diagnóstico), corta o cabelo, guarda objetos, mesma música e medo de sair de casa (não são do borderline), criados juntos (família em Reel e irmão).

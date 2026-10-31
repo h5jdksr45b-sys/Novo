@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="light only">
+<meta name="theme-color" content="#0a0a0a">
+<title>Lojinha TPB | Dr. Fabio Schmidt</title>
+<meta name="description" content="Materiais para quem vive com TPB e para quem convive. Curso, guias clínicos, livro e materiais gratuitos do Dr. Fabio Schmidt, médico, CRM-SP 183549.">
+<link rel="canonical" href="https://drfabioschmidt.net/loja/">
+
+<!-- Open Graph: Instagram, WhatsApp, Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Dr. Fabio Schmidt">
+<meta property="og:title" content="Lojinha TPB">
+<meta property="og:description" content="Materiais para quem vive com TPB e para quem convive.">
+<meta property="og:url" content="https://drfabioschmidt.net/loja/">
+<meta property="og:image" content="https://drfabioschmidt.net/loja/capas/og-loja.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Prateleira com os materiais do Dr. Fabio Schmidt sobre transtorno de personalidade borderline">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Lojinha TPB">
+<meta name="twitter:description" content="Materiais para quem vive com TPB e para quem convive.">
+<meta name="twitter:image" content="https://drfabioschmidt.net/loja/capas/og-loja.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script>
+/* =====================================================================
+   PRODUTOS
+   Edite aqui. Cada item vira uma capa na prateleira e uma janela.
+   - capa:   caminho da imagem (ex.: 'capas/protocolo-7-dias.jpg').
+             Se o arquivo ainda não existir, a página mostra a capa em CSS.
+   - video:  mp4 curto, mudo, em loop (ex.: 'videos/protocolo-7-dias.mp4').
+             Deixe '' para mostrar só a capa.
+   - poster: imagem que aparece enquanto o vídeo carrega.
+   - rotulo (opcional): texto pequeno no topo da capa.
+   - para (opcional): para quem é, na etiqueta da prateleira.
+   - formato (opcional): 'caixa' (curso), 'livro' ou 'guia' (mais fino).
+   - corAcento: cor da capa em CSS e do fundo da janela.
+   - seguranca: true mostra o bloco 188 / 192 na janela.
+   - gratuito: true vai para a segunda prateleira, com selo Grátis.
+   ===================================================================== */
+var PRODUTOS = [
+  {
+    id: 'protocolo-7-dias',
+    rotulo: 'Curso em vídeo', para: 'Família e parceiros',
+    nome: 'Protocolo 7 Dias',
+    subtitulo: 'Curso em vídeo para familiares e parceiros de quem tem TPB.',
+    publico: 'Pais, cônjuges, filhos e irmãos que convivem com a crise dentro de casa.',
+    naoE: 'Quem procura tratamento ou diagnóstico para si.',
+    itens: [
+      '7 aulas em vídeo, uma por dia',
+      'Frase de presença',
+      'Limite sem briga',
+      'Pausa de 20 minutos',
+      'Pós-crise de 10 minutos',
+      'Parar de discutir detalhe no auge',
+      'Previsibilidade',
+      'Autocuidado de quem cuida',
+      'A pessoa com TPB não precisa assistir nem concordar',
+      'Acesso vitalício e garantia de 7 dias'
+    ],
+    preco: 'R$ 219',
+    link: 'https://pay.hotmart.com/S104212285E',
+    linkExtra: 'https://curso.drfabioschmidt.net/',
+    capa: 'capas/protocolo-7-dias.jpg',
+    video: 'videos/protocolo-7-dias.mp4',
+    poster: 'videos/protocolo-7-dias.jpg',
+    corAcento: '#e9e1d6',
+    formato: 'caixa',
+    seguranca: false,
+    gratuito: false
+  },
+  {
+    id: 'protocolo-da-crise',
+    rotulo: 'Guia Clínico · Vol. I', para: 'Família e parceiros',
+    nome: 'Guia Clínico Volume I: Protocolo da Crise',
+    subtitulo: 'O que fazer nos 60 minutos da crise. Para parceiros e familiares.',
+    publico: 'Parceiros e familiares que estão ao lado de alguém com TPB na hora da crise.',
+    naoE: 'Quem tem TPB e procura ferramentas para usar em si. Para isso existe o Volume II.',
+    itens: [
+      'O passo a passo dos 60 minutos da crise',
+      'O que dizer, frase por frase',
+      'Acesso imediato depois da compra'
+    ],
+    preco: 'R$ 27',
+    link: 'https://pay.hotmart.com/H105440271K',
+    linkExtra: '',
+    capa: 'capas/protocolo-da-crise.jpg',
+    video: 'videos/protocolo-da-crise.mp4',
+    poster: 'videos/protocolo-da-crise.jpg',
+    corAcento: '#9a3a26',
+    formato: 'guia',
+    seguranca: true,
+    gratuito: false
+  },
+  {
+    id: 'kit-de-regulacao',
+    rotulo: 'Guia Clínico · Vol. II', para: 'Para quem tem TPB',
+    nome: 'Guia Clínico Volume II: Kit de Regulação',
+    subtitulo: 'Dez ferramentas da DBT para usar sozinho, antes do pico.',
+    publico: 'Quem tem TPB e quer ferramentas para usar sozinho, antes de a emoção chegar no pico.',
+    naoE: 'Familiares que procuram conduzir a crise de outra pessoa. Para isso existe o Volume I. O kit não substitui terapia nem tratamento.',
+    itens: [
+      '10 ferramentas da DBT, a terapia comportamental dialética',
+      'Escala de desconforto, para você ver em que ponto está',
+      'Plano de segurança pessoal',
+      'Feito para usar sozinho, sem depender de ninguém na hora'
+    ],
+    preco: 'R$ 27',
+    link: 'https://pay.hotmart.com/M105447307K',
+    linkExtra: '',
+    capa: 'capas/kit-de-regulacao.jpg',
+    video: 'videos/kit-de-regulacao.mp4',
+    poster: 'videos/kit-de-regulacao.jpg',
+    corAcento: '#c9a24f',
+    formato: 'guia',
+    seguranca: true,
+    gratuito: false
+  },
+  {
+    id: 'quando-escolher',
+    rotulo: 'Livro', para: 'Família e parceiros',
+    nome: 'Quando Escolher Não É Possível',
+    subtitulo: 'Conviver com borderline sem se perder: entender o ciclo, conduzir a crise, proteger quem cuida.',
+    publico: 'Quem convive com alguém com TPB: pais, parceiros, filhos e irmãos.',
+    naoE: 'Quem procura tratamento ou diagnóstico para si.',
+    itens: [
+      'Entender o ciclo',
+      'Conduzir a crise',
+      'Proteger quem cuida',
+      '2ª edição expandida, 160 páginas, 21 capítulos'
+    ],
+    preco: 'R$ 69',
+    link: 'https://pay.hotmart.com/U103950622S?off=3xv992tf',
+    linkExtra: '',
+    capa: 'capas/quando-escolher.jpg',
+    video: 'videos/quando-escolher.mp4',
+    poster: 'videos/quando-escolher.jpg',
+    corAcento: '#b5603c',
+    formato: 'livro',
+    seguranca: false,
+    gratuito: false
+  },
+  {
+    id: 'comecar',
+    rotulo: 'PDF', para: 'Primeiro passo',
+    nome: 'Começar',
+    subtitulo: 'PDF gratuito para dar o primeiro passo.',
+    publico: '',
+    naoE: '',
+    itens: [],
+    preco: '',
+    link: 'https://drive.google.com/file/d/1aXqQc6aTmEieHbJSu3xxPOsmbLYrOEkM/view?usp=drivesdk',
+    linkExtra: '',
+    capa: 'capas/comecar.jpg',
+    video: '',
+    poster: '',
+    corAcento: '#2f5a55',
+    formato: 'guia',
+    seguranca: false,
+    gratuito: true
+  },
+  {
+    id: 'tpb-no-caps',
+    rotulo: 'Livro', para: '',
+    nome: 'TPB no CAPS',
+    subtitulo: 'Livro gratuito.',
+    publico: '',
+    naoE: '',
+    itens: [],
+    preco: '',
+    link: 'https://drive.google.com/file/d/13dvlbl-KGja6l9R3R7D72mPUS5f8UNcK/view?usp=drivesdk',
+    linkExtra: '',
+    capa: 'capas/tpb-no-caps.jpg',
+    video: '',
+    poster: '',
+    corAcento: '#3b4250',
+    formato: 'livro',
+    seguranca: false,
+    gratuito: true
+  }
+];
+</script>
+
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+img,video{display:block;max-width:100%}
+
+:root{
+  --bg:#0a0a0a;
+  --ink:#F5F0EB;
+  --red:#cc3a1e;
+  --red-2:#e0492b;
+  --ember:#3a1008;
+  --dim:rgba(245,240,235,.62);
+  --muted:rgba(245,240,235,.42);
+  --line:rgba(245,240,235,.10);
+  --line-2:rgba(245,240,235,.18);
+  --card:#131313;
+  --gutter:clamp(16px,5vw,64px);
+  --max:1240px;
+  --ease:cubic-bezier(.2,.8,.2,1);
+}
+html{-webkit-font-smoothing:antialiased;background:var(--bg);scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'DM Sans',system-ui,sans-serif;line-height:1.6;overflow-x:hidden}
+:focus-visible{outline:2px solid var(--red-2);outline-offset:3px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- FAIXA FIXA ---------- */
+.aviso-topo{position:sticky;top:0;z-index:300;background:#151210;border-bottom:1px solid var(--line);padding:9px var(--gutter);font-size:.76rem;line-height:1.4;color:rgba(245,240,235,.82);text-align:center}
+
+/* ---------- HEADER (igual ao site) ---------- */
+header{height:64px;padding:0 var(--gutter);display:flex;align-items:center;justify-content:space-between;max-width:calc(var(--max) + 2*var(--gutter));margin:0 auto}
+.h-brand{font-family:'Fraunces',serif;font-style:italic;font-size:1.05rem;font-weight:500;letter-spacing:-.01em;line-height:1.05}
+.h-brand small{display:block;font-style:normal;font-family:'DM Sans',sans-serif;font-size:.62rem;font-weight:500;letter-spacing:.05em;opacity:.6;margin-top:2px}
+nav{display:flex;align-items:center;gap:22px}
+nav a{font-size:.82rem;font-weight:500;opacity:.75;transition:opacity .2s}
+nav a:hover{opacity:1}
+nav a.cta{opacity:1;padding:9px 16px;border:1px solid currentColor;border-radius:999px}
+
+/* ---------- TOPO DA LOJA ---------- */
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gutter)}
+.intro{padding:clamp(36px,8vw,96px) 0 clamp(20px,3vw,32px)}
+.intro .eyebrow{display:block;font-size:.76rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--red-2);margin-bottom:18px}
+.intro h1{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(44px,9vw,104px);line-height:.95;letter-spacing:-.035em}
+.intro p{margin-top:16px;font-size:clamp(17px,1.6vw,20px);color:rgba(245,240,235,.86);max-width:34ch;line-height:1.5}
+.intro .dica{margin-top:10px;font-size:.84rem;color:var(--muted)}
+
+/* ---------- PRATELEIRA ---------- */
+.estante{margin-top:clamp(28px,5vw,56px)}
+.estante-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:8px}
+.estante-head h2{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(26px,4vw,40px);letter-spacing:-.025em;line-height:1.05}
+.estante-head span{font-size:.8rem;color:var(--muted)}
+
+.parede{position:relative;padding:4px clamp(8px,2vw,20px) clamp(18px,3vw,28px);border-radius:10px;border:1px solid var(--line);background:radial-gradient(90% 60% at 50% 0%,rgba(245,240,235,.045),transparent 70%),linear-gradient(180deg,#121110 0%,#0d0c0b 100%);box-shadow:inset 0 30px 40px -30px rgba(0,0,0,.9),inset 0 -1px 0 rgba(255,255,255,.03)}
+.fileira{position:relative;padding-top:clamp(28px,5vw,48px)}
+.itens{display:grid;grid-template-columns:repeat(var(--n,2),1fr);align-items:end;gap:0 clamp(10px,3vw,40px);padding:0 clamp(6px,3vw,36px);position:relative;z-index:2}
+.tabua{position:relative;z-index:1;height:14px;margin:-2px calc(-1 * clamp(8px,2vw,20px)) 0;border-radius:0;
+  background:linear-gradient(180deg,#5a4130 0,#4a3424 3px,#3a281b 4px,#2b1d13 100%);
+  box-shadow:0 1px 0 rgba(255,255,255,.04) inset,0 14px 24px -8px rgba(0,0,0,.85),0 4px 6px rgba(0,0,0,.55)}
+.tabua::before{content:"";position:absolute;left:0;right:0;top:-7px;height:8px;background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.35));pointer-events:none}
+.etiquetas{display:grid;grid-template-columns:repeat(var(--n,2),1fr);gap:0 clamp(10px,3vw,40px);padding:10px clamp(6px,3vw,36px) 0}
+.etq{text-align:center;font-size:.78rem;line-height:1.3;color:var(--dim)}
+.etq b{display:block;color:var(--ink);font-weight:500;font-size:.84rem;margin-bottom:3px;line-height:1.25}
+.etq .para{display:block;color:var(--muted);font-size:.72rem;letter-spacing:.02em;margin-bottom:1px}
+.etq .gratis{color:#9fd3c7;font-weight:600}
+
+.item{position:relative;display:flex;justify-content:center;align-items:flex-end;perspective:1000px;perspective-origin:50% 40%}
+.item::after{content:"";position:absolute;left:12%;right:6%;bottom:-6px;height:14px;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.75),transparent);z-index:-1;transition:transform .35s var(--ease),opacity .35s}
+.livro{--d:16px;--w:74%;position:relative;width:var(--w);aspect-ratio:2/3;transform-style:preserve-3d;transform:rotateY(22deg);transition:transform .45s var(--ease);will-change:transform;border-radius:2px 4px 4px 2px}
+.livro[data-formato="guia"]{--d:9px;--w:70%}
+.livro[data-formato="livro"]{--d:18px}
+.livro[data-formato="caixa"]{--d:28px;--w:84%;aspect-ratio:3/4}
+.livro:focus-visible{outline-offset:6px}
+.lombada{position:absolute;top:0;bottom:0;right:100%;width:var(--d);transform-origin:right center;transform:rotateY(-90deg);background:var(--a);filter:brightness(.62);border-radius:2px 0 0 2px;box-shadow:inset -3px 0 6px rgba(0,0,0,.35),inset 2px 0 0 rgba(255,255,255,.08)}
+.livro[data-formato="caixa"] .lombada{filter:brightness(.55)}
+@media (hover:hover) and (pointer:fine){
+  .item:hover .livro,.livro:focus-visible{transform:translateY(-12px) rotateY(14deg)}
+  .item:hover::after{transform:scale(.86);opacity:.6}
+}
+.livro:active{transform:translateY(-6px) rotateY(16deg)}
+.livro.saiu{visibility:hidden}
+
+/* capa em CSS (vale enquanto não houver imagem) */
+.capa{position:absolute;inset:0;border-radius:inherit;overflow:hidden;background:var(--a);color:var(--t);display:flex;flex-direction:column;padding:11% 10% 10% 14%;text-align:left;
+  box-shadow:0 18px 30px -12px rgba(0,0,0,.8),0 2px 4px rgba(0,0,0,.4)}
+.capa::before{content:"";position:absolute;inset:0;pointer-events:none;background:
+  linear-gradient(90deg,rgba(0,0,0,.26) 0,rgba(0,0,0,.06) 3.5%,rgba(255,255,255,.09) 5%,rgba(255,255,255,0) 8%),
+  linear-gradient(170deg,rgba(255,255,255,.07) 0%,rgba(255,255,255,0) 45%,rgba(0,0,0,.10) 100%)}
+.capa::after{content:"";position:absolute;top:5.5%;bottom:5.5%;left:10%;right:6%;border:1px solid currentColor;opacity:.22;pointer-events:none}
+.capa img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2}
+.capa .k{position:relative;font-size:clamp(6.5px,1.45vw,10px);font-weight:600;letter-spacing:.16em;text-transform:uppercase;opacity:.78;line-height:1.35;padding:2% 0 7%;border-bottom:1px solid currentColor;border-bottom-color:rgba(127,127,127,.4)}
+.capa .t{position:relative;font-family:'Fraunces',serif;font-weight:300;font-size:clamp(14px,3.5vw,24px);line-height:1.04;letter-spacing:-.02em;margin:auto 0;padding:8% 0}
+.capa .a{position:relative;font-family:'Fraunces',serif;font-style:italic;font-size:clamp(8px,1.8vw,12.5px);font-weight:400;opacity:.85;padding-bottom:2%}
+.livro[data-formato="caixa"] .capa .t{font-size:clamp(17px,4.4vw,30px)}
+.selo{position:absolute;z-index:3;top:3.5%;right:-4px;background:#9fd3c7;color:#0a0a0a;font-size:clamp(8px,1.7vw,10.5px);font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:4px 8px 4px 9px;border-radius:2px 0 0 2px;box-shadow:0 2px 6px rgba(0,0,0,.4)}
+
+/* ---------- SEGURANÇA ---------- */
+.seguranca{display:flex;gap:14px;align-items:flex-start;border:1px solid rgba(224,73,43,.45);background:linear-gradient(135deg,#1d0c07,#131313 70%);border-radius:14px;padding:18px 20px;font-size:.95rem;line-height:1.5}
+.seguranca svg{flex-shrink:0;width:22px;height:22px;margin-top:1px;fill:none;stroke:var(--red-2);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.seguranca a{font-weight:600;border-bottom:1px solid var(--red-2);white-space:nowrap}
+.bloco-seg{margin-top:clamp(40px,7vw,80px)}
+
+/* ---------- BOTÕES (iguais ao site) ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 22px;border-radius:999px;font-size:.92rem;font-weight:600;background:var(--red);color:#fff;transition:background .2s,transform .2s;text-align:center}
+.btn:hover{background:var(--red-2)}
+.btn:active{transform:scale(.98)}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line-2)}
+.btn.ghost:hover{background:rgba(245,240,235,.06);border-color:var(--dim)}
+.btn.free{background:#9fd3c7;color:#0a0a0a}
+.btn.free:hover{background:#b8e2d8}
+
+/* ---------- JANELA DO PRODUTO ---------- */
+.modal{position:fixed;inset:0;z-index:500;display:none}
+.modal.on{display:block}
+.fundo{position:absolute;inset:0;background:rgba(5,5,5,.8);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);opacity:0;transition:opacity .35s}
+.modal.vis .fundo{opacity:1}
+.painel{position:absolute;left:0;right:0;bottom:0;top:max(4vh,24px);background:var(--bg);border:1px solid var(--line);border-bottom:0;border-radius:18px 18px 0 0;display:flex;flex-direction:column;overflow:hidden;transform:translateY(24px);opacity:0;transition:transform .45s var(--ease),opacity .3s}
+.modal.vis .painel{transform:none;opacity:1}
+.fechar{position:absolute;top:12px;right:12px;z-index:5;width:44px;height:44px;border-radius:50%;background:rgba(10,10,10,.72);border:1px solid var(--line-2);display:grid;place-items:center;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.fechar svg{width:18px;height:18px;stroke:var(--ink);stroke-width:1.8;stroke-linecap:round}
+.fechar:hover{border-color:var(--dim)}
+.rolagem{flex:1;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.m-midia{position:relative;aspect-ratio:4/5;max-height:52vh;width:100%;overflow:hidden;display:grid;place-items:center;
+  background:radial-gradient(90% 70% at 50% 35%,var(--a2) 0%,transparent 75%),#0d0d0d}
+.m-midia::after{content:"";position:absolute;left:0;right:0;bottom:0;height:30%;background:linear-gradient(to bottom,transparent,rgba(10,10,10,.6));pointer-events:none;z-index:3}
+.m-capa{position:relative;height:72%;aspect-ratio:2/3;border-radius:3px 6px 6px 3px;z-index:1}
+.m-capa[data-formato="caixa"]{aspect-ratio:3/4;height:66%}
+.m-capa .capa{box-shadow:0 30px 60px -18px rgba(0,0,0,.9),0 4px 10px rgba(0,0,0,.5)}
+.m-capa .capa .k{font-size:clamp(9px,2.4vw,13px)}
+.m-capa .capa .t{font-size:clamp(22px,6vw,36px)}
+.m-capa .capa .a{font-size:clamp(11px,3vw,16px)}
+.m-midia video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;opacity:0;transition:opacity .6s}
+.m-midia video.tocando{opacity:1}
+.m-info{padding:24px var(--gutter) 40px;display:flex;flex-direction:column;gap:22px}
+.m-tag{font-size:.76rem;color:var(--muted);letter-spacing:.04em}
+.m-info h2{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(28px,6vw,42px);line-height:1.04;letter-spacing:-.025em;margin-top:6px}
+.m-sub{font-size:1.02rem;color:rgba(245,240,235,.82);line-height:1.5;margin-top:10px;max-width:46ch}
+.m-bloco h3{font-size:.74rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.m-bloco p{font-size:.98rem;line-height:1.55;color:rgba(245,240,235,.9)}
+.m-bloco ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.m-bloco li{position:relative;padding-left:18px;font-size:.96rem;line-height:1.45;color:rgba(245,240,235,.9)}
+.m-bloco li::before{content:"";position:absolute;left:2px;top:.58em;width:6px;height:6px;border-radius:50%;background:var(--red)}
+.m-bloco.nao p{color:var(--dim)}
+.m-compra{display:flex;flex-direction:column;gap:14px;padding-top:20px;border-top:1px solid var(--line)}
+.m-preco{font-family:'Fraunces',serif;font-size:2.2rem;line-height:1;letter-spacing:-.01em}
+.m-preco small{font-family:'DM Sans',sans-serif;font-size:.8rem;color:var(--muted);display:block;margin-top:6px;letter-spacing:0}
+.m-aviso{font-size:.8rem;line-height:1.45;color:var(--dim);padding:12px 14px;border:1px solid var(--line);border-radius:10px}
+.m-btns{display:flex;flex-direction:column;gap:10px}
+.m-btns .btn{width:100%;padding:16px 22px;font-size:1rem}
+
+/* ---------- FOOTER (igual ao site) ---------- */
+footer{margin-top:clamp(56px,9vw,110px);padding:40px var(--gutter) calc(40px + env(safe-area-inset-bottom));border-top:1px solid var(--line)}
+.f-inner{max-width:var(--max);margin:0 auto;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px}
+.f-brand{font-family:'Fraunces',serif;font-style:italic;font-size:1.05rem;font-weight:500;margin-bottom:6px}
+.f-copy{font-size:.8rem;color:var(--dim);display:block;max-width:46ch;line-height:1.5}
+.f-copy+.f-copy{margin-top:6px;color:var(--muted);font-size:.74rem}
+.f-links{display:flex;gap:22px;flex-wrap:wrap}
+.f-links a{font-size:.82rem;color:var(--dim);transition:color .2s}
+.f-links a:hover{color:var(--ink)}
+.f-links a.discreto{color:var(--muted)}
+
+/* ---------- RESPONSIVO ---------- */
+@media (min-width:860px){
+  .painel{left:50%;right:auto;top:50%;bottom:auto;width:min(1000px,92vw);max-height:88vh;border-radius:18px;border:1px solid var(--line);transform:translate(-50%,-46%);}
+  .modal.vis .painel{transform:translate(-50%,-50%)}
+  .rolagem{display:grid;grid-template-columns:1fr 1fr;align-items:start}
+  .m-midia{position:sticky;top:0;max-height:88vh;height:min(88vh,625px);aspect-ratio:auto}
+  .m-info{padding:40px 40px 40px 36px}
+  .m-btns{flex-direction:row}
+  .m-btns .btn{width:auto;flex:1}
+}
+@media (max-width:620px){
+  nav a:not(.cta){display:none}
+  .etq{font-size:.74rem}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .livro,.item::after,.fundo,.painel,.m-midia video{transition:none}
+}
+</style>
+</head>
+<body>
+
+<div class="aviso-topo" role="note">Materiais educativos. Não fazem diagnóstico e não substituem avaliação nem tratamento.</div>
+
+<div id="pagina">
+<header>
+  <a class="h-brand" href="/">Dr. Fabio Schmidt<small>Médico · CRM-SP 183549</small></a>
+  <nav aria-label="Navegação">
+    <a href="#gratuitos">Gratuitos</a>
+    <a href="https://www.instagram.com/drfabioschmidt" target="_blank" rel="noopener">Instagram</a>
+    <a href="/" class="cta">Voltar ao site</a>
+  </nav>
+</header>
+
+<main>
+  <div class="wrap">
+    <section class="intro">
+      <span class="eyebrow">Loja · Borderline Sem Estigma</span>
+      <h1>Lojinha TPB</h1>
+      <p>Materiais para quem vive com TPB e para quem convive.</p>
+      <p class="dica">Toque numa capa para ver para quem é e o que tem dentro.</p>
+    </section>
+
+    <section class="estante" aria-labelledby="t-pagos">
+      <div class="estante-head">
+        <h2 id="t-pagos">Na prateleira</h2>
+        <span>Curso, guias e livro</span>
+      </div>
+      <div class="parede" id="prateleira-pagos"></div>
+    </section>
+
+    <section class="estante" id="gratuitos" aria-labelledby="t-gratis">
+      <div class="estante-head">
+        <h2 id="t-gratis">Gratuitos</h2>
+        <span>Para baixar sem custo</span>
+      </div>
+      <div class="parede" id="prateleira-gratis"></div>
+    </section>
+
+    <div class="bloco-seg">
+      <div class="seguranca" role="note">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 16H3l9-16z"/><path d="M12 10v4"/><path d="M12 17h.01"/></svg>
+        <p>Se existe risco agora, ligue <a href="tel:188">188 (CVV)</a> ou <a href="tel:192">192 (SAMU)</a>.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="f-inner">
+    <div>
+      <div class="f-brand">Dr. Fabio Schmidt</div>
+      <span class="f-copy">Médico, CRM-SP 183549, pós-graduado em psiquiatria, com foco em transtorno de personalidade borderline.</span>
+      <span class="f-copy">© 2026 · Mogi das Cruzes, SP. Conteúdo educativo.</span>
+    </div>
+    <div class="f-links">
+      <a href="/">Site</a>
+      <a href="https://www.instagram.com/drfabioschmidt" target="_blank" rel="noopener">Instagram @drfabioschmidt</a>
+      <a class="discreto" href="https://consultadrfabio.base44.app/" target="_blank" rel="noopener">Consulta</a>
+    </div>
+  </div>
+</footer>
+</div>
+
+<!-- JANELA DO PRODUTO -->
+<div class="modal" id="modal" aria-hidden="true">
+  <div class="fundo" data-fechar></div>
+  <div class="painel" role="dialog" aria-modal="true" aria-labelledby="m-titulo">
+    <button type="button" class="fechar" data-fechar aria-label="Fechar">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <div class="rolagem" id="m-conteudo"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var reduz = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- utilidades ---------- */
+  function esc(s){return String(s||'').replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function corTexto(hex){
+    var h=hex.replace('#','');if(h.length===3)h=h.replace(/./g,'$&$&');
+    var r=parseInt(h.substr(0,2),16)/255,g=parseInt(h.substr(2,2),16)/255,b=parseInt(h.substr(4,2),16)/255;
+    function l(c){return c<=.03928?c/12.92:Math.pow((c+.055)/1.055,2.4);}
+    var L=.2126*l(r)+.7152*l(g)+.0722*l(b);
+    return L>.32?'#141210':'#F7F2EC';
+  }
+  function partes(nome){
+    var i=nome.indexOf(':');
+    return i>-1?{k:nome.slice(0,i).trim(),t:nome.slice(i+1).trim()}:{k:'',t:nome};
+  }
+
+  /* ---------- UTM: repassa utm_* para Hotmart e para a página do curso ---------- */
+  var utms=[];
+  try{
+    new URLSearchParams(location.search).forEach(function(v,k){if(/^utm_/i.test(k))utms.push([k,v]);});
+  }catch(e){}
+  function linkFinal(url){
+    if(!url)return url;
+    try{
+      var u=new URL(url);
+      var hotmart=/(^|\.)hotmart\.com$/.test(u.hostname);
+      var proprio=/(^|\.)drfabioschmidt\.net$/.test(u.hostname);
+      if(hotmart||proprio){
+        utms.forEach(function(p){if(!u.searchParams.has(p[0]))u.searchParams.set(p[0],p[1]);});
+      }
+      if(hotmart&&!u.searchParams.has('src'))u.searchParams.set('src','loja');
+      return u.toString();
+    }catch(e){return url;}
+  }
+
+  /* ---------- capa ---------- */
+  function capaHTML(p,lazy){
+    var pt=partes(p.nome);
+    var img=p.capa?'<img src="'+esc(p.capa)+'" alt="" '+(lazy?'loading="lazy" ':'')+'decoding="async" onerror="this.remove()">':'';
+    return '<div class="capa">'+
+      '<span class="k">'+esc(p.rotulo||pt.k||'Borderline')+'</span>'+
+      '<span class="t">'+esc(pt.t)+'</span>'+
+      '<span class="a">Dr. Fabio Schmidt</span>'+img+
+    '</div>';
+  }
+
+  /* ---------- prateleiras ---------- */
+  var pagos=PRODUTOS.filter(function(p){return !p.gratuito;});
+  var gratis=PRODUTOS.filter(function(p){return p.gratuito;});
+  function porFileira(){
+    if(window.matchMedia('(min-width:900px)').matches)return 4;
+    if(window.matchMedia('(min-width:600px)').matches)return 3;
+    return 2;
+  }
+  function montar(alvo,lista){
+    var el=document.getElementById(alvo);if(!el)return;
+    var n=porFileira(),html='';
+    for(var i=0;i<lista.length;i+=n){
+      var linha=lista.slice(i,i+n);
+      html+='<div class="fileira" style="--n:'+n+'"><div class="itens">';
+      linha.forEach(function(p){
+        var a=p.corAcento||'#333';
+        var rotulo=p.nome+(p.gratuito?', grátis':', '+p.preco)+'. Abrir detalhes';
+        html+='<div class="item">'+
+          '<button type="button" class="livro" data-id="'+esc(p.id)+'" data-formato="'+esc(p.formato||'livro')+'" style="--a:'+a+';--t:'+corTexto(a)+'" aria-label="'+esc(rotulo)+'" aria-haspopup="dialog">'+
+            '<span class="lombada" aria-hidden="true"></span>'+capaHTML(p,true)+
+            (p.gratuito?'<span class="selo" aria-hidden="true">Grátis</span>':'')+
+          '</button></div>';
+      });
+      html+='</div><div class="tabua" aria-hidden="true"></div><div class="etiquetas" aria-hidden="true">';
+      linha.forEach(function(p){
+        html+='<div class="etq"><b>'+esc(partes(p.nome).t)+'</b>'+(p.para?'<span class="para">'+esc(p.para)+'</span>':'')+(p.gratuito?'<span class="gratis">Grátis</span>':esc(p.preco))+'</div>';
+      });
+      html+='</div></div>';
+    }
+    el.innerHTML=html;
+  }
+  var nAtual=0;
+  function render(){var n=porFileira();if(n===nAtual)return;nAtual=n;montar('prateleira-pagos',pagos);montar('prateleira-gratis',gratis);}
+  render();
+  window.addEventListener('resize',render);
+
+  /* ---------- janela ---------- */
+  var modal=document.getElementById('modal'),painel=modal.querySelector('.painel'),conteudo=document.getElementById('m-conteudo'),pagina=document.getElementById('pagina');
+  var aberto=null,origem=null,video=null;
+
+  function conteudoHTML(p){
+    var a=p.corAcento||'#333',pt=partes(p.nome);
+    var h='<div class="m-midia" style="--a2:'+a+'66">'+
+      '<div class="m-capa" data-formato="'+esc(p.formato||'livro')+'" style="--a:'+a+';--t:'+corTexto(a)+'">'+capaHTML(p,false)+'</div>'+
+      (p.video?'<video muted loop playsinline preload="none" aria-hidden="true"'+(p.poster?' poster="'+esc(p.poster)+'"':'')+'></video>':'')+
+    '</div><div class="m-info">';
+    h+='<div><span class="m-tag">'+(p.gratuito?'Material gratuito':esc(pt.k||'Dr. Fabio Schmidt'))+'</span>'+
+       '<h2 id="m-titulo">'+esc(pt.t)+'</h2>'+
+       (p.subtitulo?'<p class="m-sub">'+esc(p.subtitulo)+'</p>':'')+'</div>';
+    if(p.publico)h+='<div class="m-bloco"><h3>Para quem é</h3><p>'+esc(p.publico)+'</p></div>';
+    if(p.naoE)h+='<div class="m-bloco nao"><h3>Para quem não é</h3><p>'+esc(p.naoE)+'</p></div>';
+    if(p.itens&&p.itens.length)h+='<div class="m-bloco"><h3>O que tem dentro</h3><ul>'+p.itens.map(function(i){return '<li>'+esc(i)+'</li>';}).join('')+'</ul></div>';
+    if(p.seguranca)h+='<div class="seguranca" role="note"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 16H3l9-16z"/><path d="M12 10v4"/><path d="M12 17h.01"/></svg><p>Se existe risco agora, ligue <a href="tel:188">188 (CVV)</a> ou <a href="tel:192">192 (SAMU)</a>.</p></div>';
+    h+='<div class="m-compra">';
+    if(!p.gratuito&&p.preco)h+='<div class="m-preco">'+esc(p.preco)+'<small>Pagamento pela Hotmart</small></div>';
+    h+='<p class="m-aviso">Material educativo. Não faz diagnóstico e não substitui avaliação nem tratamento.</p><div class="m-btns">';
+    if(p.gratuito){
+      h+='<a class="btn free" href="'+esc(p.link)+'" target="_blank" rel="noopener">Baixar grátis<span class="sr"> (abre em nova aba)</span></a>';
+    }else{
+      h+='<a class="btn" href="'+esc(linkFinal(p.link))+'" target="_blank" rel="noopener">Comprar<span class="sr"> '+esc(pt.t)+' (abre em nova aba)</span></a>';
+      if(p.linkExtra)h+='<a class="btn ghost" href="'+esc(linkFinal(p.linkExtra))+'" target="_blank" rel="noopener">Ver página completa<span class="sr"> (abre em nova aba)</span></a>';
+    }
+    h+='</div></div></div>';
+    return h;
+  }
+
+  /* animação: capa sai da prateleira e cresce até a janela */
+  function voar(de,para,volta){
+    if(reduz||!de||!para||!para.animate)return null;
+    var r1=de.getBoundingClientRect(),r2=para.getBoundingClientRect();
+    if(!r2.width)return null;
+    var dx=(r1.left+r1.width/2)-(r2.left+r2.width/2),dy=(r1.top+r1.height/2)-(r2.top+r2.height/2);
+    var s=r1.height/r2.height;
+    var ini='translate('+dx+'px,'+dy+'px) scale('+s+') rotateY(22deg)',fim='none';
+    return para.animate(volta?[{transform:fim},{transform:ini}]:[{transform:ini},{transform:fim}],{duration:volta?380:560,easing:'cubic-bezier(.2,.8,.2,1)',fill:'both'});
+  }
+
+  function focaveis(){return Array.prototype.filter.call(painel.querySelectorAll('a[href],button:not([disabled]),[tabindex]:not([tabindex="-1"])'),function(el){return el.offsetParent!==null;});}
+
+  function abrir(id,empurrar,botao){
+    var p=PRODUTOS.filter(function(x){return x.id===id;})[0];if(!p)return;
+    if(aberto)fecharJa();
+    aberto=p;origem=botao||document.querySelector('.livro[data-id="'+id+'"]');
+    conteudo.innerHTML=conteudoHTML(p);conteudo.scrollTop=0;
+    modal.classList.add('on');modal.setAttribute('aria-hidden','false');
+    pagina.setAttribute('aria-hidden','true');
+    if('inert' in pagina)pagina.inert=true;
+    document.documentElement.style.overflow='hidden';
+    if(empurrar)history.pushState({loja:id},'','#'+id);
+
+    requestAnimationFrame(function(){
+      modal.classList.add('vis');
+      var mc=conteudo.querySelector('.m-capa');
+      if(origem&&!reduz)origem.classList.add('saiu');
+      var an=voar(origem&&origem.querySelector('.capa'),mc,false);
+      var mostra=function(){if(origem)origem.classList.remove('saiu');};
+      if(an)an.onfinish=mostra;else mostra();
+      var x=painel.querySelector('.fechar');if(x)x.focus({preventScroll:true});
+    });
+
+    /* vídeo só carrega aqui */
+    video=conteudo.querySelector('video');
+    if(video&&p.video){
+      video.addEventListener('playing',function(){video.classList.add('tocando');});
+      video.addEventListener('error',function(){video.remove();video=null;});
+      video.src=p.video;
+      var tentativa=video.play();
+      if(tentativa&&tentativa.catch)tentativa.catch(function(){});
+    }
+  }
+
+  function fecharJa(){
+    if(video){try{video.pause();video.removeAttribute('src');video.load();}catch(e){}video=null;}
+    modal.classList.remove('on','vis');modal.setAttribute('aria-hidden','true');
+    pagina.removeAttribute('aria-hidden');
+    if('inert' in pagina)pagina.inert=false;
+    document.documentElement.style.overflow='';
+    conteudo.innerHTML='';
+    var o=origem;aberto=null;origem=null;
+    if(o){o.classList.remove('saiu');o.focus({preventScroll:true});}
+  }
+  function fecharAnimado(){
+    if(!aberto)return;
+    modal.classList.remove('vis');
+    var mc=conteudo.querySelector('.m-capa');
+    var an=voar(origem&&origem.querySelector('.capa'),mc,true);
+    if(an){an.onfinish=fecharJa;}else{setTimeout(fecharJa,reduz?0:260);}
+  }
+  function fechar(){
+    if(!aberto)return;
+    if(history.state&&history.state.loja)history.back(); /* popstate fecha */
+    else fecharAnimado();
+  }
+
+  document.addEventListener('click',function(e){
+    var b=e.target.closest&&e.target.closest('.livro');
+    if(b){abrir(b.getAttribute('data-id'),true,b);return;}
+    if(aberto&&e.target.closest('[data-fechar]'))fechar();
+  });
+  window.addEventListener('popstate',function(e){
+    var st=e.state;
+    if(st&&st.loja){if(!aberto||aberto.id!==st.loja)abrir(st.loja,false);}
+    else if(aberto)fecharAnimado();
+  });
+  document.addEventListener('keydown',function(e){
+    if(!aberto)return;
+    if(e.key==='Escape'){e.preventDefault();fechar();return;}
+    if(e.key==='Tab'){
+      var f=focaveis();if(!f.length)return;
+      var primeiro=f[0],ultimo=f[f.length-1];
+      if(e.shiftKey&&document.activeElement===primeiro){e.preventDefault();ultimo.focus();}
+      else if(!e.shiftKey&&document.activeElement===ultimo){e.preventDefault();primeiro.focus();}
+      else if(!painel.contains(document.activeElement)){e.preventDefault();primeiro.focus();}
+    }
+  });
+
+  /* link direto: drfabioschmidt.net/loja/#kit-de-regulacao abre a janela */
+  var alvo=decodeURIComponent(location.hash.replace('#',''));
+  if(alvo&&PRODUTOS.some(function(p){return p.id===alvo;})){
+    history.replaceState(null,'',location.pathname+location.search);
+    abrir(alvo,true);
+  }
+})();
+</script>
+</body>
+</html>

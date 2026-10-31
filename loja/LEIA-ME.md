@@ -20,7 +20,7 @@ Basta subir com o mesmo nome. Enquanto o arquivo não existir, a página mostra 
 | Protocolo 7 Dias | capas/protocolo-7-dias.jpg | videos/protocolo-7-dias.mp4 | videos/protocolo-7-dias.jpg |
 | Protocolo da Crise | capas/protocolo-da-crise.jpg | videos/protocolo-da-crise.mp4 | videos/protocolo-da-crise.jpg |
 | Kit de Regulação | capas/kit-de-regulacao.jpg | videos/kit-de-regulacao.mp4 | videos/kit-de-regulacao.jpg |
-| Quando Escolher Não É Possível | capas/quando-escolher.jpg | videos/quando-escolher.mp4 | videos/quando-escolher.jpg |
+| Quem Sofre Não Escolhe Como Gritar | capas/quando-escolher.jpg | videos/quando-escolher.mp4 | videos/quando-escolher.jpg |
 | Começar | capas/comecar.jpg | sem vídeo | sem vídeo |
 | TPB no CAPS | capas/tpb-no-caps.jpg | sem vídeo | sem vídeo |
 

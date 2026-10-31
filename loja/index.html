@@ -43,6 +43,7 @@
    - formato (opcional): 'caixa' (curso), 'livro' ou 'guia' (mais fino).
    - corAcento: cor da capa em CSS e do fundo da janela.
    - seguranca: true mostra o bloco 188 / 192 na janela.
+   - botao (opcional): texto do botão nos gratuitos. Padrão: Baixar grátis.
    - gratuito: true vai para a segunda prateleira, com selo Grátis.
    ===================================================================== */
 var PRODUTOS = [
@@ -183,6 +184,26 @@ var PRODUTOS = [
     corAcento: '#3b4250',
     formato: 'livro',
     seguranca: false,
+    gratuito: true
+  },
+  {
+    id: 'radar-de-crise',
+    rotulo: 'Ferramenta', para: '',
+    nome: 'Radar de Crise',
+    subtitulo: 'Ferramenta gratuita.',
+    publico: '',
+    naoE: '',
+    itens: [],
+    preco: '',
+    link: 'https://radar-crise-flow.base44.app/',
+    linkExtra: '',
+    botao: 'Abrir grátis',
+    capa: 'capas/radar-de-crise.jpg',
+    video: '',
+    poster: '',
+    corAcento: '#4a3f5c',
+    formato: 'guia',
+    seguranca: true,
     gratuito: true
   }
 ];
@@ -550,7 +571,7 @@ footer{margin-top:clamp(56px,9vw,110px);padding:40px var(--gutter) calc(40px + e
     if(!p.gratuito&&p.preco)h+='<div class="m-preco">'+esc(p.preco)+'<small>Pagamento pela Hotmart</small></div>';
     h+='<p class="m-aviso">Material educativo. Não faz diagnóstico e não substitui avaliação nem tratamento.</p><div class="m-btns">';
     if(p.gratuito){
-      h+='<a class="btn free" href="'+esc(p.link)+'" target="_blank" rel="noopener">Baixar grátis<span class="sr"> (abre em nova aba)</span></a>';
+      h+='<a class="btn free" href="'+esc(p.link)+'" target="_blank" rel="noopener">'+esc(p.botao||'Baixar grátis')+'<span class="sr"> (abre em nova aba)</span></a>';
     }else{
       h+='<a class="btn" href="'+esc(linkFinal(p.link))+'" target="_blank" rel="noopener">Comprar<span class="sr"> '+esc(pt.t)+' (abre em nova aba)</span></a>';
       if(p.linkExtra)h+='<a class="btn ghost" href="'+esc(linkFinal(p.linkExtra))+'" target="_blank" rel="noopener">Ver página completa<span class="sr"> (abre em nova aba)</span></a>';

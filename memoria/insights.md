@@ -18,6 +18,14 @@ Conector `instagram`, conta 17841401503370732. Janela de até 14 dias por chamad
 - Retenção, em chamada separada: `media_permalink, media_reel_avg_watch_time, media_reel_skip_rate`.
 - Curtidas e comentários vieram vazios em 26/10. Se precisar deles, pedir print a ele.
 
+## Leitura parcial de 31/10/2026 (Windsor, carrossel FRÁGIL, poucas horas de vida)
+
+| Data | Código | Tema | Views | Alcance | Envios | Salvos |
+|---|---|---|---|---|---|---|
+| 31/10 | DfKmnrVFBjp | Depois do diagnóstico, ninguém mais discordou dela (FRÁGIL, 8 slides) | 6.697 | 2.993 | 18 | 39 |
+
+Ele classificou como flop. Envios por mil views: 2,7, contra 10,4 de referência. Ainda acumulando; reler em 48 h.
+
 ## Leitura de 30/10/2026 (Windsor, posts de 17 a 30/10, para a meta-análise)
 
 Registrada em 31/10, atrasada: os números foram puxados em 30/10 e não entraram aqui na hora. Posts novos desde 28/10 (ainda acumulando):

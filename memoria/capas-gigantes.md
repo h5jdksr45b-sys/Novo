@@ -93,3 +93,13 @@ Observação de post, não regra. Gigante = alcance acima de 2x a mediana (12.63
 - Cena vivida na capa dá alcance sem envio: Quieta na mesa 299.731 de alcance e 0,20%; Almoço de domingo 48.421 e 0,41%.
 - Público parceiro rende mais envio (1,36% contra 0,96%); origem e família rende mais alcance (mediana 70.760); portador sozinho concentra os flops (24 de 36).
 - Época confunde: 21 dos 36 flops são de maio e junho. Os padrões acima se mantêm dentro de cada período.
+
+## Checklist de capa consolidado (31/10/2026)
+
+Pedido dele: "Liste tudo que as capas precisam ter / E o que não podem ter". Junta a tese dele (29/10), os 118 carrosséis (29/10), as correções de `aprendizados.md` e o diagnóstico das 57 capas do acervo da Higgsfield (31/10). Crivo de 0 a 10 em fricção, consonância, legibilidade em 3 s e estética; aprova com 32 de 40 e nada abaixo de 7.
+
+Precisa ter: borderline legível, como sujeito da frase (25 de 26 gigantes); uma leitura errada que a capa corrige (renomeia, inverte, obriga a escolher); imagem que mostra a cena mal lida ou o vestígio do ato, com um único elemento carregando a tensão (8 gigantes, 1 flop); imagem e texto sem dizer a mesma coisa; uma entrada visual dominante, legível na miniatura; tipografia ocupando boa parte da capa, serifa e sem serifa misturadas; vermelho só no ponto de tensão; número específico quando houver; pergunta deixada aberta para o slide 2 pagar; público amplo (quem tem ou quem convive de perto); destinatário possível para o envio; imagem com texto embutido gerada no GPT Image 2.5 Sunburst alta, conferida letra por letra.
+
+Não pode ter: frase começando com ele, ela ou outro pronome (1 gigante, 10 flops); fórmula de contraste (0 e 4); metáfora a decifrar (3 e 11; corda vetada, balão aprovado); celular, mão e celular (1 e 5); imagem que repete o texto (boca tapada para não se fala, orelhas para explicar, máscaras para humor); clichê visual (relógio derretendo, Criação de Adão, lâmpada, cabeça entre as mãos, pessoa de costas na cama, eletrocardiograma); resposta entregue na capa; duas ou mais camadas de texto pequeno; palavra curta sozinha na linha; duplo sentido (dar, ficar, caras); bordão gasto (dramática, nervosa, mimada); acusação como palavra dominante; nome clínico na maior hierarquia; borderline ligado a crime ou agressão; substância glamourizada; comédia sem querer; venda; aspas; fundo preto no carrossel (regra dele, ainda em `a-decidir.md`); neurobiologia; erro de ortografia, pele com cara de IA, rosto distorcido, sangue; público estreito no feed (irmão, homem, adolescente, trabalho).
+
+Correção em `ganchos-50-2026-10-30.md`: Borderline ou TPM já saiu em 11/09 (Reel, 8.314 views). Sai da fila.

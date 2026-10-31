@@ -119,3 +119,6 @@ Toda correção, rejeição ou aprovação nova do Dr. Fabio entra aqui na hora,
 
 ## 31/10/2026: tema TDAH rejeitado
 Dr. Fabio: "Não já foi esse". Propus carrossel Borderline ou TDAH? como substituto do FRÁGIL e ele rejeitou por já ter saído. Lição: antes de propor tema, checar ja-produzido.md e o histórico pela cena e pelo mecanismo, não só pelo termo. Borderline ou TDAH não propor de novo.
+
+## 31/10/2026: capas de sono em azul noturno rejeitadas
+Dr. Fabio: "descarta tudo, tá tudo uma bosta". Gerei 3 capas (sono) em 4K com fundo azul noturno liso, texto branco e âmbar, sem ter visto as imagens (CDN do Higgsfield bloqueado aqui). Divergiam do sistema visual dos gigantes. Segundo o Vamos, os gigantes usam creme, preto e vermelho, tipografia condensada gigante, uma manchete por slide. Lição: capa nova parte do sistema dos gigantes (creme, preto, vermelho, condensada), não de paleta inventada; não entregar imagem que não consegui ver sem avisar antes. Pediu ao Vamos padrões dos gigantes aplicados a outros temas; resultado em entregas/2026-10-31 do branch e no arquivo carrosseis-vamos-2026-10-31.md.

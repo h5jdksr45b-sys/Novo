@@ -390,11 +390,11 @@ def s1(cv, t):
     scene_table(cv, t, s0)
     tq = q(t)
     # mão entra do topo e solta
-    hand = fit(piece('hand_throw'), w=520)
+    hand = fit(piece('hand_throw'), w=400)
     p = clamp((tq - s0) / 0.4)
-    hy = -300 + (420) * ease_out(p)
+    hy = -300 + (300 + SAFE_TOP + hand.height / 2) * ease_out(p)
     lift = clamp((tq - s0 - 1.1) / 0.4)
-    hy -= 600 * lift * lift
+    hy -= 1400 * lift * lift
     for i, (x, y, rot, side) in enumerate(SCATTER):
         t0 = s0 + 0.45 + i * 0.09
         if tq < t0:
@@ -402,7 +402,7 @@ def s1(cv, t):
         pp = clamp((tq - t0) / 0.32)
         e = ease_out(pp)
         cx = W / 2 + (x - W / 2) * e
-        cy = 260 + (y - 260) * e
+        cy = 520 + (y - 520) * e
         sc = 1.35 - 0.35 * e
         flip_coin(cv, t, 1e9, cx, cy, int(170 * sc), rot + (1 - e) * 140, 900 + i, start_side=1 if side else 0)
     if hy > -400:
@@ -495,6 +495,7 @@ def s6(cv, t):
 
 
 HEAD = None
+WHOLE = None
 
 
 def s7(cv, t):
@@ -506,6 +507,9 @@ def s7(cv, t):
     g = ease_out(clamp((tq - tr) / 0.5))
     cy = 820 + (1 - ease_out(p)) * 1200
     bx, by, br = boil(t, 70, 1.4)
+    if tq < tr:
+        place(cv, WHOLE, W / 2 + bx, cy + by, br)
+        return
     place(cv, L, W / 2 - 150 * g + bx, cy + 40 * g + by, 9 * g + br)
     place(cv, R, W / 2 + 150 * g + bx, cy - 30 * g + by, -8 * g + br)
 
@@ -561,7 +565,9 @@ def setup():
     SCATTER = scatter_positions()
     r = random.Random(9)
     SHEETS = [grid_sheet(set(r.sample(range(9), r.choice([5, 5, 6, 7]))), 100 + k) for k in range(14)]
-    HEAD = tear_halves(faceless_head())
+    global WHOLE
+    WHOLE = faceless_head()
+    HEAD = tear_halves(WHOLE)
     CAPS = captions()
     HIDE = [(T['e256'], T['s5']), (T['ecomum'], T['s6'])]
 

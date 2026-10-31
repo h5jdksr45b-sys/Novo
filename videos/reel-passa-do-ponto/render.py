@@ -134,96 +134,53 @@ def zoom_at(t):
     return 1.0 + 0.035 * (t / DUR)
 
 def draw_small(cv, t):
-    if in_emph(t) or BR0 - 0.05 <= t < BR1: return
+    # um estilo so: mesma fonte, mesmo lugar, mesmo movimento, nunca some
     for ci, c in enumerate(chunks):
         if c[0]["s"] - 0.04 <= t < c[-1]["cend"]:
-            mode = MODES[ci % len(MODES)]
             f = F(INTER, 64)
-            txts = [w["t"].strip(",.") for w in c]
-            line = " ".join(txts).upper()
-            total = f.getlength(line); x = W / 2 - total / 2; y = 1300
+            txts = [w["t"].strip(",.").upper() for w in c]
+            total = f.getlength(" ".join(txts)); x = W / 2 - total / 2; y = 1300
             for w, tx in zip(c, txts):
-                tx = tx.upper(); wl = f.getlength(tx)
+                wl = f.getlength(tx)
                 lt = t - (w["s"] - 0.04)
                 if lt >= 0:
                     active = w["s"] <= t < w["e"] + 0.05
                     col = (255, 214, 0) if active and len(c) > 1 else (255, 255, 255)
-                    letters(cv, tx, INTER, 64, col, x + wl / 2, y, lt, mode, stroke=2, stagger=0.012, dur=0.16)
+                    letters(cv, tx, INTER, 64, col, x + wl / 2, y, lt, "up", stroke=2, stagger=0.012, dur=0.16)
                 x += wl + f.getlength(" ")
             return
 
+# molde unico de enfase: palavra grande + complemento em serifa vermelha na tira creme
+CUES = [  # (inicio, fim, palavra, complemento, inicio do complemento)
+    (0.0, 2.45, "REAGIU DEMAIS", "e se arrependeu depois", 0.55),
+    (3.32, 5.05, "AMEAÇA", None, 0),
+    (8.46, 10.75, "INDIGNAÇÃO", "legítima", 9.18 - 8.46),
+    (12.12, 13.80, "PUTZ", None, 0),
+    (13.84, BR1, "PASSEI", "do ponto", 0.2),
+    (18.16, 19.95, "EM PERIGO", "alguém que você ama", 0.3),
+    (21.56, A_END, "PARA PROTEGER", None, 0),
+    (o(26.42), o(27.30), "NÃO ERA", "bem aquilo", 0.3),
+    (o(28.70), o(29.85), "BORDERLINE", "na mente do", 0.25),
+    (o(31.45), DUR, "PRA FALAR", "alguma coisa", 0.3),
+]
 def draw_emph(cv, t):
-    # 0  gancho em texto (nao repete a fala)
-    a, b = EMPH[0]
-    if t < b:
-        lt = t
-        letters(cv, "REAGIU DEMAIS", ANTON, 128, (255, 255, 255), W / 2, 250, lt, "up", stagger=0.03, dur=0.3)
-        strip(cv, W / 2, 372, 650, 92, CREAM, lt - 0.45)
-        if lt > 0.5:
-            letters(cv, "e se arrependeu depois", FR9, 58, RED, W / 2, 368, lt - 0.55, "right", stagger=0.015, dur=0.25)
-    # 1  AMEACA
-    a, b = EMPH[1]
-    if a <= t < b:
-        lt = t - a
-        letters(cv, "AMEAÇA", ANTON, 190, (255, 255, 255), W / 2, 270, lt, "down", stagger=0.04, dur=0.25)
-        bar(cv, W / 2 - 250, 375, 500, 16, RED, lt - 0.35)
-        if lt > 0.56:
-            letters(cv, "capta bem a", INTER, 50, (255, 255, 255), W / 2, 160, lt - 0.56, "pop", stroke=2, stagger=0.012, dur=0.2)
-    # 2  INDIGNACAO legitima
-    a, b = EMPH[2]
-    if a <= t < b:
-        lt = t - a
-        strip(cv, W / 2, 262, 820, 150, CREAM, lt, rot=2.0)
-        letters(cv, "indignação", FR9, 128, RED, W / 2, 255, lt - 0.12, "up", stagger=0.025, dur=0.28)
-        if t >= 9.18:
-            letters(cv, "LEGÍTIMA", INTER, 70, (255, 255, 255), W / 2, 400, t - 9.18, "pop", stroke=2, stagger=0.02, dur=0.22)
-    # 3  B-roll: PUTZ. / PASSEI do ponto
-    a, b = EMPH[3]
-    if a <= t < b:
-        if t < 13.80:
-            letters(cv, "PUTZ", ANTON, 160, (20, 20, 20), W / 2, 255, t - 12.12, "pop", stagger=0.04, dur=0.25)
-        else:
-            lt = t - 13.84
-            letters(cv, "PASSEI", ANTON, 130, (20, 20, 20), 325, 250, lt, "up", stagger=0.03, dur=0.22)
-            letters(cv, "do ponto", FR9, 100, RED, 720, 240, lt - 0.15, "up", stagger=0.02, dur=0.22)
-    # 4  EM PERIGO (pilula vermelha)
-    a, b = EMPH[4]
-    if a <= t < b:
-        lt = t - a
-        p = back(lt / 0.25)
-        if p > 0:
-            pw, ph = 720 * p, 170
-            ImageDraw.Draw(cv).rounded_rectangle((W / 2 - pw / 2, 265 - ph / 2, W / 2 + pw / 2, 265 + ph / 2), radius=30, fill=RED + (255,))
-        letters(cv, "EM PERIGO", ANTON, 150, (255, 255, 255), W / 2, 262, lt - 0.12, "up", stagger=0.03, dur=0.22)
-        letters(cv, "alguém que você ama", FR6, 54, (255, 255, 255), W / 2, 400, lt - 0.3, "left", stroke=0, stagger=0.012, dur=0.2)
-    # 5  PARA PROTEGER
-    a, b = EMPH[5]
-    if a <= t < b:
-        lt = t - a
-        letters(cv, "PARA", INTER, 70, (255, 255, 255), W / 2, 175, lt, "right", stroke=2, stagger=0.02, dur=0.2)
-        letters(cv, "proteger", FR9, 150, (255, 255, 255), W / 2, 300, lt - 0.12, "up", stagger=0.03, dur=0.26)
-        bar(cv, W / 2 - 290, 395, 580, 14, RED, lt - 0.4)
-    # 6  NAO ERA bem aquilo
-    a, b = EMPH[6]
-    if a <= t < b:
-        lt = t - a
-        letters(cv, "NÃO ERA", ANTON, 170, (255, 255, 255), W / 2, 235, lt, "left", stagger=0.035, dur=0.24)
-        if lt > 0.3:
-            strip(cv, W / 2, 372, 520, 96, CREAM, lt - 0.3, rot=-1.5)
-            letters(cv, "bem aquilo", FR9, 70, RED, W / 2, 366, lt - 0.38, "up", stagger=0.02, dur=0.22)
-    # 7  BORDERLINE
-    a, b = EMPH[7]
-    if a <= t < b:
-        lt = t - a
-        letters(cv, "NA MENTE DO", INTER, 58, (255, 255, 255), W / 2, 175, lt, "down", stroke=2, stagger=0.015, dur=0.2)
-        strip(cv, W / 2, 300, 860, 160, CREAM, lt - 0.1, rot=-2.0)
-        letters(cv, "borderline", FR9, 140, RED, W / 2, 292, lt - 0.18, "pop", stagger=0.025, dur=0.25)
-    # 8  final
-    a, b = EMPH[8]
-    if a <= t < b:
-        lt = t - a
-        letters(cv, "PRA FALAR", ANTON, 170, (255, 255, 255), W / 2, 235, lt, "up", stagger=0.035, dur=0.24)
-        letters(cv, "alguma coisa", FR9, 84, RED, W / 2, 370, lt - 0.3, "right", stagger=0.02, dur=0.24)
+    for a, b, word, comp, cs in CUES:
+        if a <= t < b:
+            lt = t - a
+            out = min(1.0, (b - t) / 0.12) if b < DUR else 1.0
+            on_paper = BR0 <= t < BR1
+            col = (20, 20, 20) if on_paper else (255, 255, 255)
+            size = 150 if len(word) <= 9 else 118
+            tmp = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+            letters(tmp, word, ANTON, size, col, W / 2, 250, lt, "up", stagger=0.03, dur=0.24)
+            if comp and lt >= cs:
+                fc = F(FR9, 62); cw = fc.getlength(comp) + 70
+                strip(tmp, W / 2, 378, cw, 92, CREAM, lt - cs, rot=0)
+                letters(tmp, comp, FR9, 62, RED, W / 2, 372, lt - cs - 0.08, "up", stagger=0.015, dur=0.22)
+            if out < 1.0:
+                tmp.putalpha(tmp.split()[3].point(lambda v: int(v * out)))
+            cv.alpha_composite(tmp)
+            return
 
 # ---------- b-roll ----------
 BR = sorted(os.listdir(os.path.join(D, "broll")))

@@ -311,6 +311,7 @@ nav a.cta{opacity:1;padding:9px 16px;border:1px solid currentColor;border-radius
 .rolagem{flex:1;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
 .m-midia{position:relative;aspect-ratio:4/5;max-height:52vh;width:100%;overflow:hidden;display:grid;place-items:center;
   background:radial-gradient(90% 70% at 50% 35%,var(--a2) 0%,transparent 75%),#0d0d0d}
+.m-midia.tem-video{max-height:68vh}
 .m-midia::after{content:"";position:absolute;left:0;right:0;bottom:0;height:30%;background:linear-gradient(to bottom,transparent,rgba(10,10,10,.6));pointer-events:none;z-index:3}
 .m-capa{position:relative;height:72%;aspect-ratio:2/3;border-radius:3px 6px 6px 3px;z-index:1}
 .m-capa[data-formato="caixa"]{aspect-ratio:3/4;height:66%}
@@ -534,7 +535,7 @@ footer{margin-top:clamp(56px,9vw,110px);padding:40px var(--gutter) calc(40px + e
 
   function conteudoHTML(p){
     var a=p.corAcento||'#333',pt=partes(p.nome);
-    var h='<div class="m-midia" style="--a2:'+a+'66">'+
+    var h='<div class="m-midia'+(p.video?' tem-video':'')+'" style="--a2:'+a+'66">'+
       '<div class="m-capa" data-formato="'+esc(p.formato||'livro')+'" style="--a:'+a+';--t:'+corTexto(a)+'">'+capaHTML(p,false)+'</div>'+
       (p.video?'<video muted loop playsinline preload="none" aria-hidden="true"'+(p.poster?' poster="'+esc(p.poster)+'"':'')+'></video>':'')+
     '</div><div class="m-info">';

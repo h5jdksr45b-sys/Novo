@@ -88,3 +88,10 @@ Reels de baixo alcance, para não reaproveitar sem mudar o ângulo: fica calma, 
 
 - Página Respire Agora (`respirar/`): respirações por situação para a véspera do segundo turno. Respiração lenta 5-5 (apuração), suspiro duplo, 4-7-8 (dormir), sopro lento (conversa sobre política), respiração pequena e lenta (crise de ansiedade), quadrada (antes de sair), respiração com as mãos (emoção que sobe rápido, DBT), respirar junto (alguém da casa em crise). Link de prévia: claude.ai/artifact/UWhYe9JFa1XhWw8q6EaEcp. Vídeos dele ainda não colocados. Ele publicou a versão dele no Base44: respira.base44.app (RESPIRA JÁ!).
 - 28 temas de Reels curtos falados propostos, ainda não gravados: `temas/reels-curtos-falados-2026-10-25.md`. Antes de propor tema novo, confira essa lista também.
+
+## Feito em 30 e 31/10/2026
+
+- Meta-análise e 5 roteiros (enterro e o ok; falar em morrer na briga; amor da vida em cinco dias; indireta no story; borderline ou TDAH): `temas/meta-analise-e-roteiros-2026-10-30.md` no branch `claude/confident-davinci-ao7n0d`. Ele pediu começar do zero; nenhum gravado.
+- 50 ganchos passados pelo painel: `memoria/ganchos-50-2026-10-30.md`. Nenhum gravado.
+- Reel Por que o borderline exige resolver a briga agora? Roteiro fechado com ele em 30/10 (gancho, teimosia, radar ligado, a gente não terminou, eu continuo aqui, o resto a gente conversa depois). Gravado por ele e editado em outra sessão (ver `correcoes.md`, 30/10).
+- Reel Nove moedas (colagem sem rosto, 30,9 s): 9 critérios como moedas, 5 de 9 dá 256 combinações, duas pessoas dividindo um critério só, você não tem cara de borderline não quer dizer nada. Legenda em `videos/moedas-borderline/legenda.txt`. Versão final media 95a720b3 (mixagem v2). Ainda não publicado na data do registro.

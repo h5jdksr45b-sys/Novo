@@ -18,6 +18,25 @@ Conector `instagram`, conta 17841401503370732. Janela de até 14 dias por chamad
 - Retenção, em chamada separada: `media_permalink, media_reel_avg_watch_time, media_reel_skip_rate`.
 - Curtidas e comentários vieram vazios em 26/10. Se precisar deles, pedir print a ele.
 
+## Leitura de 30/10/2026 (Windsor, posts de 17 a 30/10, para a meta-análise)
+
+Registrada em 31/10, atrasada: os números foram puxados em 30/10 e não entraram aqui na hora. Posts novos desde 28/10 (ainda acumulando):
+
+| Data | Código | Tema | Views | Envios | Salvos | Ret s | Pulo |
+|---|---|---|---|---|---|---|---|
+| 29/10 | DfDw-Jtuo17 | Parte 2: mais 5 coisas que faz quando gosta (Some de todo mundo e continua respondendo você) | 12.399 | 274 | 214 | 25,7 | 0,48 |
+| 28/10 | DfDQcp3uWtg | Borderline tem delírio? (corte Metropolitana) | 10.275 | 60 | 93 | 12,6 | 0,45 |
+| 29/10 | DfF0UcAlK0X | Carrossel adolescência difícil ou borderline (ele diz que apagou) | 10.432 | 41 | 70 | | |
+| 29/10 | DfGEJUkOOW8 | Médico cortou o bendito, DBT | 1.539 | 2 | 1 | 8,7 | 0,49 |
+| 30/10 | DfIQIA-OixR | Concorda para não perder (horas de vida) | 1.053 | 5 | 1 | 5,7 | 0,58 |
+| 30/10 | DfGcV4-ujfA | Prometeu que com seu filho ia ser diferente | 248 | 1 | 1 | 3,6 | 0,60 |
+| 29/10 | DfGJfNluv5w | Salvou dezenas de posts e não marcou consulta | 130 | 2 | 0 | 3,5 | 0,75 |
+| 30/10 | DfIVd-3uZPO | Depois a gente conversa (narração IA, personagem) | 109 | 0 | 0 | 3,9 | 0,65 |
+
+Atualizados: Borderline ou autismo 94.570 views e 1.804 envios; vazio do sábado 81.274 e 965; almoço de domingo 76.610.
+
+Leitura da meta-análise de 30/10 (classificação do Claude, observação, não regra): nos 27 Reels autorais de 17 a 30/10, os 14 que abriram com cena da rotina em você tiveram mediana de 264 views, nenhum acima de 4.822; os 13 que abriram com comportamento do borderline visto de fora, acusação ou pergunta-tabu tiveram mediana de 3.217. O segundo grupo inclui corte de podcast e carrossel virado vídeo. Virou o checklist de gancho em `termometro.md`.
+
 ## Leitura de 28/10/2026 (Windsor, posts de 15 a 28/10, para o painel de conteúdo)
 
 39 publicações. Painel ao vivo em claude.ai/artifact/Jc3hE4KzSkR11oAro7C2HM: puxa os últimos 14 dias do Windsor a cada abertura e agrupa por tipo de conteúdo. A classificação de tipo e tema é do Claude, em arquivo fixo no próprio painel; post novo aparece como sem classificação até a lista ser atualizada.

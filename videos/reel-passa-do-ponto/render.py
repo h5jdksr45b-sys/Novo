@@ -96,7 +96,7 @@ def src2out(s):
     if s < A_END: return s
     if s >= B_IN: return s - OFF
     return None
-fix = {"Passo": "Passou", "Borderline,": "borderline,", "Borderline": "borderline"}
+fix = {"Passo": "Passou", "Borderline,": "borderline,", "Borderline": "borderline", "border,": "borderline,"}
 W2 = []
 for w in words:
     o = src2out(w["start"])
@@ -126,15 +126,47 @@ EMPH = [  # (inicio, fim)
     (o(26.42), o(27.30)), (o(28.70), o(29.85)), (o(31.45), DUR)]
 def in_emph(t): return any(a <= t < b for a, b in EMPH[1:])
 
-ZOOM = [(3.32, 5.05, 1.10), (8.46, 10.75, 1.14), (18.16, 19.95, 1.09), (21.56, A_END, 1.15),
-        (o(26.42), o(27.30), 1.10), (o(28.70), o(29.85), 1.12), (o(31.45), DUR, 1.08)]
+# Enfases: sempre a fala daquele instante, na ordem dita. (inicio_src, fim_src, linha de cima, palavra-chave na caixa)
+def o_(src): return src if src < A_END else src - OFF
+CUESRC = [
+    (0.0, 1.25, "O QUE ACONTECE NO", "BORDERLINE"),
+    (2.10, 3.85, "CAPTA BEM A", "AMEAÇA"),
+    (8.30, 9.65, "UMA INDIGNAÇÃO", "LEGÍTIMA"),
+    (12.14, 13.25, "", "PUTZ"),
+    (13.28, 13.82, "", "EXAGEREI"),
+    (13.84, 14.70, "PASSEI DO", "PONTO"),
+    (17.70, 18.68, "ESTÁ EM", "PERIGO"),
+    (21.56, 22.30, "PARA", "PROTEGER"),
+    (26.44, 27.10, "NÃO ERA", "BEM AQUILO"),
+    (28.20, 29.22, "NA MENTE DO", "BORDERLINE"),
+    (31.50, 32.70, "PRA FALAR", "ALGUMA COISA"),
+]
+def wtime(text, a, b):
+    """tempo de saida em que a palavra e falada dentro da janela [a,b] (tempo de saida)."""
+    key = text.lower()
+    for w in W2:
+        if a - 0.05 <= w["s"] <= b + 0.05 and w["t"].strip(".,").lower().startswith(key[:4]):
+            return w["s"]
+    return a
+CUES = []
+for a_, b_, top, key in CUESRC:
+    a, b = o_(a_), min(o_(b_) + 0.35, DUR)
+    tops = [(tw, wtime(tw, a, b)) for tw in top.split()]
+    CUES.append((a, b, tops, key, wtime(key.split()[0], a, b)))
+# a janela de uma enfase termina quando a proxima comeca
+CUES = [(a, min(b, CUES[i + 1][0]) if i + 1 < len(CUES) else b, tops, key, kt) for i, (a, b, tops, key, kt) in enumerate(CUES)]
+def in_emph(t): return any(a <= t < b for a, b, *_ in CUES)
+
+ZOOM = [(o_(2.10), o_(3.85) + 0.35, 1.10), (o_(8.30), o_(9.65) + 0.35, 1.14), (o_(17.70), o_(18.68) + 0.35, 1.09),
+        (o_(21.56), A_END, 1.15), (o_(26.44), o_(27.10) + 0.35, 1.10), (o_(28.20), o_(29.22) + 0.35, 1.12),
+        (o_(31.50), DUR, 1.08)]
 def zoom_at(t):
     for a, b, z in ZOOM:
         if a <= t < b: return z
     return 1.0 + 0.035 * (t / DUR)
 
 def draw_small(cv, t):
-    # um estilo so: mesma fonte, mesmo lugar, mesmo movimento, nunca some
+    if in_emph(t): return
     for ci, c in enumerate(chunks):
         if c[0]["s"] - 0.04 <= t < c[-1]["cend"]:
             f = F(INTER, 64)
@@ -150,37 +182,39 @@ def draw_small(cv, t):
                 x += wl + f.getlength(" ")
             return
 
-# molde unico de enfase: palavra grande + complemento em serifa vermelha na tira creme
-CUES = [  # (inicio, fim, palavra, complemento, inicio do complemento)
-    (0.0, 2.45, "REAGIU DEMAIS", "e se arrependeu depois", 0.55),
-    (3.32, 5.05, "AMEAÇA", None, 0),
-    (8.46, 10.75, "INDIGNAÇÃO", "legítima", 9.18 - 8.46),
-    (12.12, 13.80, "PUTZ", None, 0),
-    (13.84, BR1, "PASSEI", "do ponto", 0.2),
-    (18.16, 19.95, "EM PERIGO", "alguém que você ama", 0.3),
-    (21.56, A_END, "PARA PROTEGER", None, 0),
-    (o(26.42), o(27.30), "NÃO ERA", "bem aquilo", 0.3),
-    (o(28.70), o(29.85), "BORDERLINE", "na mente do", 0.25),
-    (o(31.45), DUR, "PRA FALAR", "alguma coisa", 0.3),
-]
 def draw_emph(cv, t):
-    for a, b, word, comp, cs in CUES:
-        if a <= t < b:
-            lt = t - a
-            out = min(1.0, (b - t) / 0.12) if b < DUR else 1.0
-            on_paper = BR0 <= t < BR1
-            col = (20, 20, 20) if on_paper else (255, 255, 255)
-            size = 150 if len(word) <= 9 else 118
-            tmp = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-            letters(tmp, word, ANTON, size, col, W / 2, 250, lt, "up", stagger=0.03, dur=0.24)
-            if comp and lt >= cs:
-                fc = F(FR9, 62); cw = fc.getlength(comp) + 70
-                strip(tmp, W / 2, 378, cw, 92, CREAM, lt - cs, rot=0)
-                letters(tmp, comp, FR9, 62, RED, W / 2, 372, lt - cs - 0.08, "up", stagger=0.015, dur=0.22)
-            if out < 1.0:
-                tmp.putalpha(tmp.split()[3].point(lambda v: int(v * out)))
-            cv.alpha_composite(tmp)
-            return
+    """Molde unico: linha de cima em Inter Black (palavra entra quando e falada) +
+    palavra-chave em Anton branca dentro de caixa vermelha chapada, que abre quando a palavra e dita."""
+    for a, b, tops, key, kt in CUES:
+        if not (a <= t < b): continue
+        on_paper = BR0 <= t < BR1
+        col = (20, 20, 20) if on_paper else (255, 255, 255)
+        tmp = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+        y_key = 348
+        if tops:
+            ft = F(INTER, 66)
+            line = " ".join(w for w, _ in tops)
+            x = W / 2 - ft.getlength(line) / 2
+            for w, wt in tops:
+                wl = ft.getlength(w)
+                if t >= wt - 0.04:
+                    letters(tmp, w, INTER, 66, col, x + wl / 2, 185, t - (wt - 0.04), "up", stroke=0 if on_paper else 2, stagger=0.012, dur=0.16)
+                x += wl + ft.getlength(" ")
+        if t >= kt - 0.04:
+            lt = t - (kt - 0.04)
+            size = 150 if len(key) <= 8 else 120
+            fk = F(ANTON, size); kw = fk.getlength(key)
+            l, tp, r, bt = fk.getbbox(key)
+            bw, bh = kw + 70, (bt - tp) + 56
+            p = ease(lt / 0.16)
+            d = ImageDraw.Draw(tmp)
+            d.rectangle((W / 2 - bw / 2, y_key - bh / 2, W / 2 - bw / 2 + bw * p, y_key + bh / 2), fill=RED + (255,))
+            letters(tmp, key, ANTON, size, (255, 255, 255), W / 2, y_key, lt, "up", stagger=0.02, dur=0.18)
+        out = min(1.0, (b - t) / 0.12) if b < DUR else 1.0
+        if out < 1.0:
+            tmp.putalpha(tmp.split()[3].point(lambda v: int(v * out)))
+        cv.alpha_composite(tmp)
+        return
 
 # ---------- b-roll ----------
 BR = sorted(os.listdir(os.path.join(D, "broll")))
@@ -194,7 +228,10 @@ def broll_frame(t):
     if z > 1.0:
         cw, ch = W / z, H / z
         im = im.crop((int((W - cw) / 2), int((H - ch) / 2), int((W + cw) / 2), int((H + ch) / 2))).resize((W, H), Image.LANCZOS)
-    return im
+    # desce a colagem 230 px para o texto do topo nao bater no medidor
+    bg = im.getpixel((20, 20))
+    out = Image.new("RGB", (W, H), bg); out.paste(im, (0, 230))
+    return out
 
 # ---------- leitura da base ----------
 def reader():

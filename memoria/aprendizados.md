@@ -93,6 +93,7 @@ Estas cinco vêm de anotações de sessão, não de fala dele copiada inteira (b
 
 ## 5. Vídeo
 
+- Antes de propor gancho, roteiro ou edição de Reel, leia `memoria/reels-certeiros.md`: o consolidado do que mais funciona e do que mais flopa, com confiança e prova (01/11).
 - Profissional, dinâmico, cinematográfico, sem exagero. "Está muito simples e pouco dinâmico e lento", "Precisa ser profissional mas não deixar assim", "Mais curto".
 - Legenda: no máximo três palavras por vez, destaques maiores, sem quebrar feio, com hierarquia, destaques em vermelho e alternando serifada com sem serifa. "Três palavras por vez na legenda no máximo", "E destaques maiores", "A legenda pequena tudo errado também quebrando".
 - Tipografia forte e movimento que desliza. "melhore a porra das topografias bold", "Tipografia e movimentos tem q deslizar".

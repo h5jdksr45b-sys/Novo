@@ -8,8 +8,6 @@
 <title>Lojinha TPB | Dr. Fabio Schmidt</title>
 <meta name="description" content="Materiais para quem vive com TPB e para quem convive. Curso, guias clínicos, livro e materiais gratuitos do Dr. Fabio Schmidt, médico, CRM-SP 183549.">
 <link rel="canonical" href="https://drfabioschmidt.net/loja/">
-
-<!-- Open Graph: Instagram, WhatsApp, Facebook -->
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:site_name" content="Dr. Fabio Schmidt">
@@ -24,31 +22,26 @@
 <meta name="twitter:title" content="Lojinha TPB">
 <meta name="twitter:description" content="Materiais para quem vive com TPB e para quem convive.">
 <meta name="twitter:image" content="https://drfabioschmidt.net/loja/og-loja.jpg">
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js');</script>
 
 <script>
 /* =====================================================================
-   PRODUTOS
-   Edite aqui. Cada item vira uma capa na prateleira e uma janela.
-   - capa:   caminho da imagem (ex.: 'capa-protocolo-7-dias.jpg').
-             Se o arquivo ainda não existir, a página mostra a capa em CSS.
-   - video:  mp4 curto, mudo, em loop (ex.: 'protocolo-7-dias.mp4').
-             Deixe '' para mostrar só a capa.
-   - poster: imagem que aparece enquanto o vídeo carrega.
-   - rotulo (opcional): texto pequeno no topo da capa.
-   - para (opcional): para quem é, na etiqueta da prateleira.
-   - formato (opcional): 'caixa' (curso), 'livro' ou 'guia' (mais fino).
-   - corAcento: cor da capa em CSS e do fundo da janela.
-   - seguranca: true mostra o bloco 188 / 192 na janela.
-   - botao (opcional): texto do botão nos gratuitos. Padrão: Baixar grátis.
-   - gratuito: true vai para a segunda prateleira, com selo Grátis.
+   PRODUTOS. Edite aqui. Todos os arquivos ficam na mesma pasta da página.
+   - perfil: ['familia'] quem convive, ['tpb'] quem tem TPB, ou os dois.
+   - capa: imagem da capa. Se não existir, a página desenha a capa em CSS.
+   - video / poster: mp4 curto e mudo, e a imagem de espera. '' para não ter vídeo.
+   - rotulo: texto pequeno no topo da capa em CSS. para: etiqueta da prateleira.
+   - formato: 'caixa' (curso), 'livro' ou 'guia'. corAcento: cor da capa em CSS.
+   - botao: texto do botão nos gratuitos (padrão: Baixar grátis).
+   - seguranca: true mostra 188 / 192 na janela. gratuito: true vai para Grátis.
    ===================================================================== */
 var PRODUTOS = [
   {
     id: 'protocolo-7-dias',
+    perfil: ['familia'],
     rotulo: 'Curso em vídeo', para: 'Família e parceiros',
     nome: 'Protocolo 7 Dias',
     subtitulo: 'Curso em vídeo para familiares e parceiros de quem tem TPB.',
@@ -79,6 +72,7 @@ var PRODUTOS = [
   },
   {
     id: 'protocolo-da-crise',
+    perfil: ['familia'],
     rotulo: 'Guia Clínico · Vol. I', para: 'Família e parceiros',
     nome: 'Guia Clínico Volume I: Protocolo da Crise',
     subtitulo: 'O que fazer nos 60 minutos da crise. Para parceiros e familiares.',
@@ -102,6 +96,7 @@ var PRODUTOS = [
   },
   {
     id: 'kit-de-regulacao',
+    perfil: ['tpb'],
     rotulo: 'Guia Clínico · Vol. II', para: 'Para quem tem TPB',
     nome: 'Guia Clínico Volume II: Kit de Regulação',
     subtitulo: 'Dez ferramentas da DBT para usar sozinho, antes do pico.',
@@ -126,6 +121,7 @@ var PRODUTOS = [
   },
   {
     id: 'quando-escolher',
+    perfil: ['familia'],
     rotulo: 'Livro', para: 'Família e parceiros',
     nome: 'Quem Sofre Não Escolhe Como Gritar',
     subtitulo: 'Conviver com borderline sem se perder: entender o ciclo, conduzir a crise, proteger quem cuida.',
@@ -150,6 +146,7 @@ var PRODUTOS = [
   },
   {
     id: 'comecar',
+    perfil: ['familia','tpb'],
     rotulo: 'PDF', para: 'Primeiro passo',
     nome: 'Começar',
     subtitulo: 'PDF gratuito para dar o primeiro passo.',
@@ -169,6 +166,7 @@ var PRODUTOS = [
   },
   {
     id: 'tpb-no-caps',
+    perfil: ['familia','tpb'],
     rotulo: 'Livro', para: '',
     nome: 'TPB no CAPS',
     subtitulo: 'Livro gratuito.',
@@ -188,6 +186,7 @@ var PRODUTOS = [
   },
   {
     id: 'radar-de-crise',
+    perfil: ['familia'],
     rotulo: 'Ferramenta', para: '',
     nome: 'Radar de Crise',
     subtitulo: 'Escolha o que aconteceu e copie a resposta.',
@@ -214,6 +213,9 @@ var PRODUTOS = [
     gratuito: true
   }
 ];
+
+/* Material em destaque para cada escolha do topo */
+var DESTAQUE = { todos: 'protocolo-7-dias', familia: 'protocolo-7-dias', tpb: 'kit-de-regulacao' };
 </script>
 
 <style>
@@ -224,176 +226,223 @@ img,video{display:block;max-width:100%}
 
 :root{
   --bg:#0a0a0a;
+  --bg-2:#131313;
+  --bg-3:#1b1b1b;
   --ink:#F5F0EB;
+  --ink-2:rgba(245,240,235,.78);
+  --ink-3:rgba(245,240,235,.58);
   --red:#cc3a1e;
   --red-2:#e0492b;
-  --ember:#3a1008;
-  --dim:rgba(245,240,235,.62);
-  --muted:rgba(245,240,235,.42);
-  --line:rgba(245,240,235,.10);
-  --line-2:rgba(245,240,235,.18);
-  --card:#131313;
+  --ember:#24100b;
+  --free:#9fd3c7;
+  --wood-top:#5a4130;
+  --wood:#2e1f15;
   --gutter:clamp(16px,5vw,64px);
   --max:1240px;
   --ease:cubic-bezier(.2,.8,.2,1);
+  --iw:clamp(150px,44vw,230px);
 }
 html{-webkit-font-smoothing:antialiased;background:var(--bg);scroll-behavior:smooth}
-body{background:var(--bg);color:var(--ink);font-family:'DM Sans',system-ui,sans-serif;line-height:1.6;overflow-x:hidden}
+body{background:var(--bg);color:var(--ink);font-family:'DM Sans',system-ui,sans-serif;font-size:17px;line-height:1.55;overflow-x:hidden}
 :focus-visible{outline:2px solid var(--red-2);outline-offset:3px}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wrap{max-width:calc(var(--max) + 2*var(--gutter));margin:0 auto;padding:0 var(--gutter)}
 
-/* ---------- FAIXA FIXA ---------- */
-.aviso-topo{position:sticky;top:0;z-index:300;background:#151210;border-bottom:1px solid var(--line);padding:9px var(--gutter);font-size:.76rem;line-height:1.4;color:rgba(245,240,235,.82);text-align:center}
+/* ---------- faixa fixa ---------- */
+.aviso-topo{position:sticky;top:0;z-index:300;background:#18120f;padding:9px var(--gutter);font-size:.78rem;line-height:1.4;color:var(--ink-2);text-align:center}
 
-/* ---------- HEADER (igual ao site) ---------- */
-header{height:64px;padding:0 var(--gutter);display:flex;align-items:center;justify-content:space-between;max-width:calc(var(--max) + 2*var(--gutter));margin:0 auto}
-.h-brand{font-family:'Fraunces',serif;font-style:italic;font-size:1.05rem;font-weight:500;letter-spacing:-.01em;line-height:1.05}
-.h-brand small{display:block;font-style:normal;font-family:'DM Sans',sans-serif;font-size:.62rem;font-weight:500;letter-spacing:.05em;opacity:.6;margin-top:2px}
-nav{display:flex;align-items:center;gap:22px}
-nav a{font-size:.82rem;font-weight:500;opacity:.75;transition:opacity .2s}
-nav a:hover{opacity:1}
-nav a.cta{opacity:1;padding:9px 16px;border:1px solid currentColor;border-radius:999px}
+/* ---------- topo ---------- */
+.topo{display:flex;align-items:center;justify-content:space-between;height:64px}
+.marca{font-family:'Fraunces',serif;font-style:italic;font-size:1.06rem;font-weight:500;line-height:1.05}
+.marca small{display:block;font-style:normal;font-family:'DM Sans',sans-serif;font-size:.68rem;font-weight:500;color:var(--ink-3);margin-top:3px}
+.topo nav{display:flex;gap:20px;font-size:.88rem;font-weight:500}
+.topo nav a{color:var(--ink-2);transition:color .2s}
+.topo nav a:hover{color:var(--ink)}
 
-/* ---------- TOPO DA LOJA ---------- */
-.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gutter)}
-.intro{padding:clamp(36px,8vw,96px) 0 clamp(20px,3vw,32px)}
-.intro .eyebrow{display:block;font-size:.76rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--red-2);margin-bottom:18px}
-.intro h1{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(44px,9vw,104px);line-height:.95;letter-spacing:-.035em}
-.intro p{margin-top:16px;font-size:clamp(17px,1.6vw,20px);color:rgba(245,240,235,.86);max-width:34ch;line-height:1.5}
-.intro .dica{margin-top:10px;font-size:.84rem;color:var(--muted)}
+/* ---------- abertura ---------- */
+.abertura{padding-top:clamp(28px,6vw,72px)}
+.abertura h1{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(52px,12vw,128px);line-height:.92;letter-spacing:-.04em}
+.abertura .lead{margin-top:16px;font-size:clamp(18px,2vw,22px);color:var(--ink);max-width:30ch;line-height:1.4}
+.escolha{margin-top:clamp(26px,4vw,40px)}
+.escolha>p{font-size:.95rem;color:var(--ink-2);margin-bottom:12px}
+.opcoes{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:640px}
+.opcao{position:relative;text-align:left;background:var(--bg-3);border-radius:18px;padding:16px 16px 18px;min-height:96px;display:flex;flex-direction:column;justify-content:space-between;gap:10px;transition:background .3s var(--ease),color .3s,transform .2s var(--ease)}
+.opcao b{padding-right:22px;font-family:'Fraunces',serif;font-weight:400;font-size:clamp(19px,4.6vw,24px);line-height:1.08;letter-spacing:-.01em}
+.opcao span{font-size:.82rem;color:var(--ink-3);transition:color .3s}
+.opcao::after{content:"";position:absolute;top:16px;right:16px;width:12px;height:12px;border-radius:50%;background:var(--bg);transition:background .3s,transform .3s var(--ease)}
+.opcao:hover{background:#232323}
+.opcao:active{transform:scale(.98)}
+.opcao[aria-pressed="true"]{background:var(--ink);color:#141210}
+.opcao[aria-pressed="true"] span{color:rgba(20,18,16,.68)}
+.opcao[aria-pressed="true"]::after{background:var(--red);transform:scale(1.15)}
+.ver-tudo{margin-top:12px;font-size:.92rem;font-weight:500;color:var(--ink-2);padding:8px 2px;border-bottom:2px solid transparent;transition:color .2s,border-color .2s}
+.ver-tudo[aria-pressed="true"]{color:var(--ink);border-bottom-color:var(--red)}
 
-/* ---------- PRATELEIRA ---------- */
-.estante{margin-top:clamp(28px,5vw,56px)}
-.estante-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:8px}
-.estante-head h2{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(26px,4vw,40px);letter-spacing:-.025em;line-height:1.05}
-.estante-head span{font-size:.8rem;color:var(--muted)}
+/* ---------- destaque ---------- */
+.destaque{margin-top:clamp(36px,6vw,72px)}
+.destaque-in{display:grid;grid-template-columns:1fr;gap:22px;background:var(--bg-2);border-radius:22px;overflow:hidden}
+.d-midia{position:relative;aspect-ratio:4/5;max-height:72vh;width:100%;overflow:hidden;display:grid;place-items:center;background:var(--a2,#1a1a1a);cursor:pointer}
+.d-midia .m-capa{position:relative;height:74%;aspect-ratio:2/3;border-radius:3px 6px 6px 3px}
+.d-midia .m-capa[data-formato="caixa"]{aspect-ratio:3/4;height:68%}
+.d-midia video{position:absolute;inset:0;z-index:2;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s}
+.d-midia video.tocando{opacity:1}
+.d-midia .toque{position:absolute;left:14px;bottom:14px;z-index:3;background:rgba(10,10,10,.82);color:var(--ink);font-size:.8rem;font-weight:500;padding:8px 12px;border-radius:999px;pointer-events:none}
+.d-texto{padding:4px 22px 26px;display:flex;flex-direction:column;gap:14px}
+.d-texto h2{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(32px,6.4vw,56px);line-height:1;letter-spacing:-.03em}
+.d-sub{font-size:1.06rem;color:var(--ink)}
+.d-para{font-size:.98rem;color:var(--ink-2)}
+.d-preco{font-family:'Fraunces',serif;font-size:2.1rem;line-height:1;margin-top:4px}
+.d-preco small{display:block;font-family:'DM Sans',sans-serif;font-size:.8rem;color:var(--ink-3);margin-top:6px}
+.d-aviso{font-size:.8rem;color:var(--ink-3);line-height:1.45}
+.d-btns{display:flex;flex-direction:column;gap:10px}
+.troca{animation:troca .55s var(--ease)}
+@keyframes troca{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 
-.parede{position:relative;padding:4px clamp(8px,2vw,20px) clamp(18px,3vw,28px);border-radius:10px;border:1px solid var(--line);background:radial-gradient(90% 60% at 50% 0%,rgba(245,240,235,.045),transparent 70%),linear-gradient(180deg,#121110 0%,#0d0c0b 100%);box-shadow:inset 0 30px 40px -30px rgba(0,0,0,.9),inset 0 -1px 0 rgba(255,255,255,.03)}
-.fileira{position:relative;padding-top:clamp(28px,5vw,48px)}
-.itens{display:grid;grid-template-columns:repeat(var(--n,2),1fr);align-items:end;gap:0 clamp(10px,3vw,40px);padding:0 clamp(6px,3vw,36px);position:relative;z-index:2}
-.tabua{position:relative;z-index:1;height:14px;margin:-2px calc(-1 * clamp(8px,2vw,20px)) 0;border-radius:0;
-  background:linear-gradient(180deg,#5a4130 0,#4a3424 3px,#3a281b 4px,#2b1d13 100%);
-  box-shadow:0 1px 0 rgba(255,255,255,.04) inset,0 14px 24px -8px rgba(0,0,0,.85),0 4px 6px rgba(0,0,0,.55)}
-.tabua::before{content:"";position:absolute;left:0;right:0;top:-7px;height:8px;background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.35));pointer-events:none}
-.etiquetas{display:grid;grid-template-columns:repeat(var(--n,2),1fr);gap:0 clamp(10px,3vw,40px);padding:10px clamp(6px,3vw,36px) 0}
-.etq{text-align:center;font-size:.78rem;line-height:1.3;color:var(--dim)}
-.etq b{display:block;color:var(--ink);font-weight:500;font-size:.84rem;margin-bottom:3px;line-height:1.25}
-.etq .para{display:block;color:var(--muted);font-size:.72rem;letter-spacing:.02em;margin-bottom:1px}
-.etq .gratis{color:#9fd3c7;font-weight:600}
-
-.item{position:relative;display:flex;justify-content:center;align-items:flex-end;perspective:1000px;perspective-origin:50% 40%}
-.item::after{content:"";position:absolute;left:12%;right:6%;bottom:-6px;height:14px;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.75),transparent);z-index:-1;transition:transform .35s var(--ease),opacity .35s}
-.livro{--d:16px;--w:74%;position:relative;width:var(--w);aspect-ratio:2/3;transform-style:preserve-3d;transform:rotateY(22deg);transition:transform .45s var(--ease);will-change:transform;border-radius:2px 4px 4px 2px}
-.livro[data-formato="guia"]{--d:9px;--w:70%}
-.livro[data-formato="livro"]{--d:18px}
-.livro[data-formato="caixa"]{--d:28px;--w:84%;aspect-ratio:3/4}
-.livro:focus-visible{outline-offset:6px}
-.lombada{position:absolute;top:0;bottom:0;right:100%;width:var(--d);transform-origin:right center;transform:rotateY(-90deg);background:var(--a);filter:brightness(.62);border-radius:2px 0 0 2px;box-shadow:inset -3px 0 6px rgba(0,0,0,.35),inset 2px 0 0 rgba(255,255,255,.08)}
-.livro[data-formato="caixa"] .lombada{filter:brightness(.55)}
-@media (hover:hover) and (pointer:fine){
-  .item:hover .livro,.livro:focus-visible{transform:translateY(-12px) rotateY(14deg)}
-  .item:hover::after{transform:scale(.86);opacity:.6}
-}
-.livro:active{transform:translateY(-6px) rotateY(16deg)}
-.livro.saiu{visibility:hidden}
-
-/* capa em CSS (vale enquanto não houver imagem) */
-.capa{position:absolute;inset:0;border-radius:inherit;overflow:hidden;background:var(--a);color:var(--t);display:flex;flex-direction:column;padding:11% 10% 10% 14%;text-align:left;
-  box-shadow:0 18px 30px -12px rgba(0,0,0,.8),0 2px 4px rgba(0,0,0,.4)}
-.capa::before{content:"";position:absolute;inset:0;pointer-events:none;background:
-  linear-gradient(90deg,rgba(0,0,0,.26) 0,rgba(0,0,0,.06) 3.5%,rgba(255,255,255,.09) 5%,rgba(255,255,255,0) 8%),
-  linear-gradient(170deg,rgba(255,255,255,.07) 0%,rgba(255,255,255,0) 45%,rgba(0,0,0,.10) 100%)}
-.capa::after{content:"";position:absolute;top:5.5%;bottom:5.5%;left:10%;right:6%;border:1px solid currentColor;opacity:.22;pointer-events:none}
-.capa img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2}
-.capa .k{position:relative;font-size:clamp(6.5px,1.45vw,10px);font-weight:600;letter-spacing:.16em;text-transform:uppercase;opacity:.78;line-height:1.35;padding:2% 0 7%;border-bottom:1px solid currentColor;border-bottom-color:rgba(127,127,127,.4)}
-.capa .t{position:relative;font-family:'Fraunces',serif;font-weight:300;font-size:clamp(14px,3.5vw,24px);line-height:1.04;letter-spacing:-.02em;margin:auto 0;padding:8% 0}
-.capa .a{position:relative;font-family:'Fraunces',serif;font-style:italic;font-size:clamp(8px,1.8vw,12.5px);font-weight:400;opacity:.85;padding-bottom:2%}
-.livro[data-formato="caixa"] .capa .t{font-size:clamp(17px,4.4vw,30px)}
-.selo{position:absolute;z-index:3;top:3.5%;right:-4px;background:#9fd3c7;color:#0a0a0a;font-size:clamp(8px,1.7vw,10.5px);font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:4px 8px 4px 9px;border-radius:2px 0 0 2px;box-shadow:0 2px 6px rgba(0,0,0,.4)}
-
-/* ---------- SEGURANÇA ---------- */
-.seguranca{display:flex;gap:14px;align-items:flex-start;border:1px solid rgba(224,73,43,.45);background:linear-gradient(135deg,#1d0c07,#131313 70%);border-radius:14px;padding:18px 20px;font-size:.95rem;line-height:1.5}
-.seguranca svg{flex-shrink:0;width:22px;height:22px;margin-top:1px;fill:none;stroke:var(--red-2);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
-.seguranca a{font-weight:600;border-bottom:1px solid var(--red-2);white-space:nowrap}
-.bloco-seg{margin-top:clamp(40px,7vw,80px)}
-
-/* ---------- BOTÕES (iguais ao site) ---------- */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 22px;border-radius:999px;font-size:.92rem;font-weight:600;background:var(--red);color:#fff;transition:background .2s,transform .2s;text-align:center}
+/* ---------- botões ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:15px 22px;border-radius:999px;font-size:.98rem;font-weight:600;background:var(--red);color:#fff;transition:background .2s,transform .2s var(--ease);text-align:center}
 .btn:hover{background:var(--red-2)}
-.btn:active{transform:scale(.98)}
-.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line-2)}
-.btn.ghost:hover{background:rgba(245,240,235,.06);border-color:var(--dim)}
-.btn.free{background:#9fd3c7;color:#0a0a0a}
+.btn:active{transform:scale(.97)}
+.btn.ghost{background:var(--bg-3);color:var(--ink)}
+.btn.ghost:hover{background:#262626}
+.btn.free{background:var(--free);color:#0a0a0a}
 .btn.free:hover{background:#b8e2d8}
 
-/* ---------- JANELA DO PRODUTO ---------- */
+/* ---------- prateleiras ---------- */
+.estante{margin-top:clamp(56px,9vw,120px)}
+.estante-h{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:6px}
+.estante-h h2{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(30px,5vw,48px);line-height:1;letter-spacing:-.03em}
+.estante-h p{font-size:.92rem;color:var(--ink-2);margin-top:8px}
+.setas{display:none;gap:8px}
+.seta{width:46px;height:46px;border-radius:50%;background:var(--bg-3);display:grid;place-items:center;transition:background .2s,opacity .2s,transform .2s}
+.seta:hover{background:#2a2a2a}
+.seta:active{transform:scale(.94)}
+.seta:disabled{opacity:.3;cursor:default}
+.seta svg{width:18px;height:18px;stroke:var(--ink);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.rolo{overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-padding-inline:var(--gutter);-webkit-overflow-scrolling:touch;scrollbar-width:none;margin:0 calc(-1*var(--gutter));padding:0 var(--gutter)}
+.rolo::-webkit-scrollbar{display:none}
+.trilho{display:flex;width:max-content;padding-bottom:6px}
+.item{flex:0 0 var(--iw);scroll-snap-align:start;display:flex;flex-direction:column;cursor:pointer}
+.palco{height:calc(var(--iw)*1.3);display:flex;align-items:flex-end;justify-content:center;perspective:1000px;perspective-origin:50% 40%;padding-top:22px;position:relative}
+.palco::after{content:"";position:absolute;left:16%;right:8%;bottom:-5px;height:12px;border-radius:50%;background:rgba(0,0,0,.7);filter:blur(5px);z-index:0;transition:transform .35s var(--ease),opacity .35s}
+.tabua{height:15px;background:var(--wood);border-top:4px solid var(--wood-top);position:relative;z-index:1}
+.etq{padding:12px 10px 0;text-align:center;font-size:.86rem;line-height:1.3;color:var(--ink-2)}
+.etq b{display:block;color:var(--ink);font-weight:500;font-size:.95rem;margin-bottom:3px}
+.etq .preco{display:block;margin-top:4px;color:var(--ink);font-weight:600}
+.etq .gratis{color:var(--free)}
+.dica{display:flex;align-items:center;gap:10px;margin-top:14px;font-size:.86rem;color:var(--ink-3)}
+.dica i{display:block;width:26px;height:2px;background:var(--ink-3);position:relative;animation:empurra 1.6s var(--ease) infinite}
+.dica i::after{content:"";position:absolute;right:0;top:-4px;width:8px;height:8px;border-right:2px solid var(--ink-3);border-top:2px solid var(--ink-3);transform:rotate(45deg)}
+@keyframes empurra{0%,100%{transform:translateX(0)}50%{transform:translateX(8px)}}
+.vazio{padding:28px 0;color:var(--ink-2)}
+
+/* entrada das capas na tábua */
+.js .item .livro{opacity:0;transform:translateY(-34px) rotateY(22deg)}
+.js .item.in .livro{opacity:1;transform:rotateY(22deg);transition:transform .7s var(--ease) calc(var(--i,0)*90ms),opacity .45s calc(var(--i,0)*90ms)}
+
+/* livro em pé */
+.livro{--d:16px;--w:74%;position:relative;width:var(--w);aspect-ratio:2/3;transform-style:preserve-3d;transform:rotateY(22deg);transition:transform .45s var(--ease);will-change:transform;border-radius:2px 4px 4px 2px;z-index:1}
+.livro[data-formato="guia"]{--d:9px;--w:70%}
+.livro[data-formato="livro"]{--d:18px}
+.livro[data-formato="caixa"]{--d:28px;--w:86%;aspect-ratio:3/4}
+.livro:focus-visible{outline-offset:6px}
+.lombada{position:absolute;top:0;bottom:0;right:100%;width:var(--d);transform-origin:right center;transform:rotateY(-90deg);background:var(--a);filter:brightness(.6);border-radius:2px 0 0 2px}
+@media (hover:hover) and (pointer:fine){
+  .js .item.in:hover .livro,.item:hover .livro{transform:translateY(-12px) rotateY(12deg);transition-delay:0s}
+  .item:hover .palco::after{transform:scale(.85);opacity:.6}
+}
+.item:active .livro{transform:translateY(-6px) rotateY(14deg)!important;transition-delay:0s!important}
+.saiu{visibility:hidden}
+
+/* capa em CSS */
+.capa{position:absolute;inset:0;border-radius:inherit;overflow:hidden;background:var(--a);color:var(--t);display:flex;flex-direction:column;padding:11% 10% 10% 14%;text-align:left;box-shadow:0 18px 30px -12px rgba(0,0,0,.8),0 2px 4px rgba(0,0,0,.4)}
+.capa::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(0,0,0,.26) 0,rgba(0,0,0,.06) 3.5%,rgba(255,255,255,.09) 5%,rgba(255,255,255,0) 8%)}
+.capa::after{content:"";position:absolute;top:5.5%;bottom:5.5%;left:10%;right:6%;border:1px solid currentColor;opacity:.22;pointer-events:none}
+.capa img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2}
+.capa .k{position:relative;font-size:clamp(7px,1.5vw,10px);font-weight:600;letter-spacing:.06em;opacity:.8;line-height:1.35;padding:2% 0 7%}
+.capa .t{position:relative;font-family:'Fraunces',serif;font-weight:300;font-size:clamp(14px,3.5vw,24px);line-height:1.04;letter-spacing:-.02em;margin:auto 0;padding:8% 0}
+.capa .a{position:relative;font-family:'Fraunces',serif;font-style:italic;font-size:clamp(8px,1.8vw,12.5px);opacity:.85;padding-bottom:2%}
+.livro[data-formato="caixa"] .capa .t{font-size:clamp(17px,4.2vw,30px)}
+.m-capa .capa .k{font-size:clamp(9px,2.4vw,13px)}
+.m-capa .capa .t{font-size:clamp(22px,6vw,38px)}
+.m-capa .capa .a{font-size:clamp(11px,3vw,16px)}
+.selo{position:absolute;z-index:3;top:3.5%;right:-4px;background:var(--free);color:#0a0a0a;font-size:clamp(9px,1.9vw,11px);font-weight:600;padding:4px 8px 4px 9px;border-radius:3px 0 0 3px}
+
+/* ---------- segurança ---------- */
+.seguranca{display:flex;gap:14px;align-items:flex-start;background:var(--ember);border-radius:18px;padding:20px 22px;font-size:1rem;line-height:1.5}
+.seguranca svg{flex-shrink:0;width:22px;height:22px;margin-top:2px;fill:none;stroke:var(--red-2);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.seguranca a{font-weight:600;border-bottom:2px solid var(--red-2);white-space:nowrap}
+.bloco-seg{margin-top:clamp(56px,9vw,110px)}
+
+/* ---------- janela ---------- */
 .modal{position:fixed;inset:0;z-index:500;display:none}
 .modal.on{display:block}
-.fundo{position:absolute;inset:0;background:rgba(5,5,5,.8);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);opacity:0;transition:opacity .35s}
+.fundo{position:absolute;inset:0;background:rgba(5,5,5,.86);opacity:0;transition:opacity .35s}
 .modal.vis .fundo{opacity:1}
-.painel{position:absolute;left:0;right:0;bottom:0;top:max(4vh,24px);background:var(--bg);border:1px solid var(--line);border-bottom:0;border-radius:18px 18px 0 0;display:flex;flex-direction:column;overflow:hidden;transform:translateY(24px);opacity:0;transition:transform .45s var(--ease),opacity .3s}
+.painel{position:absolute;left:0;right:0;bottom:0;top:max(4vh,24px);background:var(--bg);border-radius:22px 22px 0 0;display:flex;flex-direction:column;overflow:hidden;transform:translateY(40px);opacity:0;transition:transform .5s var(--ease),opacity .3s}
 .modal.vis .painel{transform:none;opacity:1}
-.fechar{position:absolute;top:12px;right:12px;z-index:5;width:44px;height:44px;border-radius:50%;background:rgba(10,10,10,.72);border:1px solid var(--line-2);display:grid;place-items:center;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
-.fechar svg{width:18px;height:18px;stroke:var(--ink);stroke-width:1.8;stroke-linecap:round}
-.fechar:hover{border-color:var(--dim)}
+.puxador{position:absolute;top:8px;left:50%;width:44px;height:5px;margin-left:-22px;border-radius:3px;background:rgba(245,240,235,.3);z-index:6}
+.fechar{position:absolute;top:14px;right:14px;z-index:6;width:44px;height:44px;border-radius:50%;background:rgba(10,10,10,.82);display:grid;place-items:center;transition:transform .2s,background .2s}
+.fechar:hover{background:#000}
+.fechar:active{transform:scale(.92)}
+.fechar svg{width:18px;height:18px;stroke:var(--ink);stroke-width:2;stroke-linecap:round}
 .rolagem{flex:1;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
-.m-midia{position:relative;aspect-ratio:4/5;max-height:52vh;width:100%;overflow:hidden;display:grid;place-items:center;
-  background:radial-gradient(90% 70% at 50% 35%,var(--a2) 0%,transparent 75%),#0d0d0d}
+.m-midia{position:relative;aspect-ratio:4/5;max-height:56vh;width:100%;overflow:hidden;display:grid;place-items:center;background:var(--a2,#151515)}
 .m-midia.tem-video{max-height:68vh}
-.m-midia::after{content:"";position:absolute;left:0;right:0;bottom:0;height:30%;background:linear-gradient(to bottom,transparent,rgba(10,10,10,.6));pointer-events:none;z-index:3}
 .m-capa{position:relative;height:72%;aspect-ratio:2/3;border-radius:3px 6px 6px 3px;z-index:1}
 .m-capa[data-formato="caixa"]{aspect-ratio:3/4;height:66%}
-.m-capa .capa{box-shadow:0 30px 60px -18px rgba(0,0,0,.9),0 4px 10px rgba(0,0,0,.5)}
-.m-capa .capa .k{font-size:clamp(9px,2.4vw,13px)}
-.m-capa .capa .t{font-size:clamp(22px,6vw,36px)}
-.m-capa .capa .a{font-size:clamp(11px,3vw,16px)}
 .m-midia video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;opacity:0;transition:opacity .6s}
 .m-midia video.tocando{opacity:1}
-.m-info{padding:24px var(--gutter) 40px;display:flex;flex-direction:column;gap:22px}
-.m-tag{font-size:.76rem;color:var(--muted);letter-spacing:.04em}
-.m-info h2{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(28px,6vw,42px);line-height:1.04;letter-spacing:-.025em;margin-top:6px}
-.m-sub{font-size:1.02rem;color:rgba(245,240,235,.82);line-height:1.5;margin-top:10px;max-width:46ch}
-.m-bloco h3{font-size:.74rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
-.m-bloco p{font-size:.98rem;line-height:1.55;color:rgba(245,240,235,.9)}
-.m-bloco ul{list-style:none;display:flex;flex-direction:column;gap:8px}
-.m-bloco li{position:relative;padding-left:18px;font-size:.96rem;line-height:1.45;color:rgba(245,240,235,.9)}
-.m-bloco li::before{content:"";position:absolute;left:2px;top:.58em;width:6px;height:6px;border-radius:50%;background:var(--red)}
-.m-bloco.nao p{color:var(--dim)}
-.m-compra{display:flex;flex-direction:column;gap:14px;padding-top:20px;border-top:1px solid var(--line)}
-.m-preco{font-family:'Fraunces',serif;font-size:2.2rem;line-height:1;letter-spacing:-.01em}
-.m-preco small{font-family:'DM Sans',sans-serif;font-size:.8rem;color:var(--muted);display:block;margin-top:6px;letter-spacing:0}
-.m-aviso{font-size:.8rem;line-height:1.45;color:var(--dim);padding:12px 14px;border:1px solid var(--line);border-radius:10px}
-.m-btns{display:flex;flex-direction:column;gap:10px}
-.m-btns .btn{width:100%;padding:16px 22px;font-size:1rem}
+.m-info{padding:24px var(--gutter) 0;display:flex;flex-direction:column;gap:22px}
+.m-info h2{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(30px,6.4vw,44px);line-height:1.02;letter-spacing:-.025em}
+.m-tag{display:block;font-size:.88rem;color:var(--ink-3);margin-bottom:6px}
+.m-sub{font-size:1.04rem;color:var(--ink);line-height:1.5;margin-top:10px;max-width:46ch}
+.m-bloco h3{font-size:1rem;font-weight:600;color:var(--ink);margin-bottom:6px}
+.m-bloco p{font-size:1rem;line-height:1.55;color:var(--ink-2)}
+.m-bloco ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.m-bloco li{position:relative;padding-left:20px;font-size:1rem;line-height:1.45;color:var(--ink)}
+.m-bloco li::before{content:"";position:absolute;left:2px;top:.55em;width:7px;height:7px;border-radius:50%;background:var(--red)}
+.m-barra{position:sticky;bottom:0;margin:6px calc(-1*var(--gutter)) 0;padding:14px var(--gutter) calc(16px + env(safe-area-inset-bottom));background:var(--bg-2);display:flex;flex-direction:column;gap:12px;z-index:4}
+.m-aviso{font-size:.78rem;line-height:1.4;color:var(--ink-3)}
+.m-linha{display:flex;align-items:center;gap:12px}
+.m-preco{font-family:'Fraunces',serif;font-size:1.9rem;line-height:1;white-space:nowrap}
+.m-btns{display:flex;flex:1;gap:8px}
+.m-btns .btn{flex:1;padding:15px 14px}
 
-/* ---------- FOOTER (igual ao site) ---------- */
-footer{margin-top:clamp(56px,9vw,110px);padding:40px var(--gutter) calc(40px + env(safe-area-inset-bottom));border-top:1px solid var(--line)}
-.f-inner{max-width:var(--max);margin:0 auto;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px}
-.f-brand{font-family:'Fraunces',serif;font-style:italic;font-size:1.05rem;font-weight:500;margin-bottom:6px}
-.f-copy{font-size:.8rem;color:var(--dim);display:block;max-width:46ch;line-height:1.5}
-.f-copy+.f-copy{margin-top:6px;color:var(--muted);font-size:.74rem}
-.f-links{display:flex;gap:22px;flex-wrap:wrap}
-.f-links a{font-size:.82rem;color:var(--dim);transition:color .2s}
+/* ---------- rodapé ---------- */
+footer{margin-top:clamp(64px,10vw,130px);background:var(--bg-2);padding:44px 0 calc(44px + env(safe-area-inset-bottom))}
+.f-in{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px}
+.f-nome{font-family:'Fraunces',serif;font-style:italic;font-size:clamp(28px,5vw,44px);font-weight:400;line-height:1;margin-bottom:12px}
+.f-txt{font-size:.92rem;color:var(--ink-2);max-width:46ch;line-height:1.5}
+.f-txt+.f-txt{margin-top:6px;color:var(--ink-3);font-size:.84rem}
+.f-links{display:flex;gap:22px;flex-wrap:wrap;font-size:.92rem}
+.f-links a{color:var(--ink-2);transition:color .2s}
 .f-links a:hover{color:var(--ink)}
-.f-links a.discreto{color:var(--muted)}
 
-/* ---------- RESPONSIVO ---------- */
-@media (min-width:860px){
-  .painel{left:50%;right:auto;top:50%;bottom:auto;width:min(1000px,92vw);max-height:88vh;border-radius:18px;border:1px solid var(--line);transform:translate(-50%,-46%);}
+/* ---------- maior que celular ---------- */
+@media (min-width:760px){
+  :root{--iw:220px}
+  .opcoes{grid-template-columns:1fr 1fr}
+  .destaque-in{grid-template-columns:1.05fr 1fr;align-items:center;gap:0}
+  .d-midia{max-height:none;height:100%;min-height:560px;aspect-ratio:auto}
+  .d-texto{padding:44px clamp(28px,4vw,56px)}
+  .d-btns{flex-direction:row}
+  .d-btns .btn{flex:1}
+  .setas{display:flex}
+  .dica{display:none}
+  .painel{left:50%;right:auto;top:50%;bottom:auto;width:min(1020px,92vw);max-height:88vh;border-radius:22px;transform:translate(-50%,-46%)}
   .modal.vis .painel{transform:translate(-50%,-50%)}
+  .puxador{display:none}
   .rolagem{display:grid;grid-template-columns:1fr 1fr;align-items:start}
-  .m-midia{position:sticky;top:0;max-height:88vh;height:min(88vh,625px);aspect-ratio:auto}
-  .m-info{padding:40px 40px 40px 36px}
-  .m-btns{flex-direction:row}
-  .m-btns .btn{width:auto;flex:1}
+  .m-midia,.m-midia.tem-video{position:sticky;top:0;max-height:88vh;height:min(88vh,640px);aspect-ratio:auto}
+  .m-info{padding:40px 36px 0}
+  .m-barra{margin:6px -36px 0;padding:16px 36px 18px}
 }
-@media (max-width:620px){
-  nav a:not(.cta){display:none}
-  .etq{font-size:.74rem}
-}
+@media (min-width:1100px){:root{--iw:236px}}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .livro,.item::after,.fundo,.painel,.m-midia video{transition:none}
+  *{animation:none!important}
+  .livro,.palco::after,.fundo,.painel,video,.opcao{transition:none!important}
+  .js .item .livro{opacity:1;transform:rotateY(22deg)}
 }
 </style>
 </head>
@@ -402,72 +451,79 @@ footer{margin-top:clamp(56px,9vw,110px);padding:40px var(--gutter) calc(40px + e
 <div class="aviso-topo" role="note">Materiais educativos. Não fazem diagnóstico e não substituem avaliação nem tratamento.</div>
 
 <div id="pagina">
-<header>
-  <a class="h-brand" href="/">Dr. Fabio Schmidt<small>Médico · CRM-SP 183549</small></a>
+<header class="wrap topo">
+  <a class="marca" href="/">Dr. Fabio Schmidt<small>Médico · CRM-SP 183549</small></a>
   <nav aria-label="Navegação">
-    <a href="#gratuitos">Gratuitos</a>
-    <a href="https://www.instagram.com/drfabioschmidt" target="_blank" rel="noopener">Instagram</a>
-    <a href="/" class="cta">Voltar ao site</a>
+    <a href="#gratuitos">Grátis</a>
+    <a href="/">Site</a>
   </nav>
 </header>
 
 <main>
-  <div class="wrap">
-    <section class="intro">
-      <span class="eyebrow">Loja · Borderline Sem Estigma</span>
-      <h1>Lojinha TPB</h1>
-      <p>Materiais para quem vive com TPB e para quem convive.</p>
-      <p class="dica">Toque numa capa para ver para quem é e o que tem dentro.</p>
-    </section>
-
-    <section class="estante" aria-labelledby="t-pagos">
-      <div class="estante-head">
-        <h2 id="t-pagos">Na prateleira</h2>
-        <span>Curso, guias e livro</span>
+  <section class="wrap abertura" aria-labelledby="t-loja">
+    <h1 id="t-loja">Lojinha TPB</h1>
+    <p class="lead">Materiais para quem vive com TPB e para quem convive.</p>
+    <div class="escolha">
+      <p id="t-escolha">Para quem você procura?</p>
+      <div class="opcoes" role="group" aria-labelledby="t-escolha">
+        <button type="button" class="opcao" data-perfil="familia" aria-pressed="false"><b>Convivo com alguém com TPB</b><span>Pais, parceiros, filhos, irmãos</span></button>
+        <button type="button" class="opcao" data-perfil="tpb" aria-pressed="false"><b>Eu tenho TPB</b><span>Ferramentas para usar sozinho</span></button>
       </div>
-      <div class="parede" id="prateleira-pagos"></div>
-    </section>
+      <button type="button" class="ver-tudo" data-perfil="todos" aria-pressed="true">Ver tudo</button>
+    </div>
+  </section>
 
-    <section class="estante" id="gratuitos" aria-labelledby="t-gratis">
-      <div class="estante-head">
-        <h2 id="t-gratis">Gratuitos</h2>
-        <span>Para baixar sem custo</span>
-      </div>
-      <div class="parede" id="prateleira-gratis"></div>
-    </section>
+  <section class="wrap destaque" aria-labelledby="t-dest">
+    <div class="destaque-in" id="destaque"></div>
+  </section>
 
-    <div class="bloco-seg">
-      <div class="seguranca" role="note">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 16H3l9-16z"/><path d="M12 10v4"/><path d="M12 17h.01"/></svg>
-        <p>Se existe risco agora, ligue <a href="tel:188">188 (CVV)</a> ou <a href="tel:192">192 (SAMU)</a>.</p>
-      </div>
+  <section class="wrap estante" aria-labelledby="t-pagos">
+    <div class="estante-h">
+      <div><h2 id="t-pagos">Na prateleira</h2><p id="c-pagos"></p></div>
+      <div class="setas"><button type="button" class="seta" data-alvo="rolo-pagos" data-dir="-1" aria-label="Voltar"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><button type="button" class="seta" data-alvo="rolo-pagos" data-dir="1" aria-label="Avançar"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button></div>
+    </div>
+    <div class="rolo" id="rolo-pagos"><div class="trilho"></div></div>
+    <p class="dica" id="dica-pagos"><i aria-hidden="true"></i>Arraste para o lado</p>
+  </section>
+
+  <section class="wrap estante" id="gratuitos" aria-labelledby="t-gratis">
+    <div class="estante-h">
+      <div><h2 id="t-gratis">Grátis para começar</h2><p id="c-gratis"></p></div>
+      <div class="setas"><button type="button" class="seta" data-alvo="rolo-gratis" data-dir="-1" aria-label="Voltar"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><button type="button" class="seta" data-alvo="rolo-gratis" data-dir="1" aria-label="Avançar"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button></div>
+    </div>
+    <div class="rolo" id="rolo-gratis"><div class="trilho"></div></div>
+    <p class="dica" id="dica-gratis"><i aria-hidden="true"></i>Arraste para o lado</p>
+  </section>
+
+  <div class="wrap bloco-seg">
+    <div class="seguranca" role="note">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 16H3l9-16z"/><path d="M12 10v4"/><path d="M12 17h.01"/></svg>
+      <p>Se existe risco agora, ligue <a href="tel:188">188 (CVV)</a> ou <a href="tel:192">192 (SAMU)</a>.</p>
     </div>
   </div>
 </main>
 
 <footer>
-  <div class="f-inner">
+  <div class="wrap f-in">
     <div>
-      <div class="f-brand">Dr. Fabio Schmidt</div>
-      <span class="f-copy">Médico, CRM-SP 183549, pós-graduado em psiquiatria, com foco em transtorno de personalidade borderline.</span>
-      <span class="f-copy">© 2026 · Mogi das Cruzes, SP. Conteúdo educativo.</span>
+      <p class="f-nome">Dr. Fabio Schmidt</p>
+      <p class="f-txt">Médico, CRM-SP 183549, pós-graduado em psiquiatria, com foco em transtorno de personalidade borderline.</p>
+      <p class="f-txt">© 2026 · Mogi das Cruzes, SP. Conteúdo educativo.</p>
     </div>
-    <div class="f-links">
+    <nav class="f-links" aria-label="Rodapé">
       <a href="/">Site</a>
       <a href="https://www.instagram.com/drfabioschmidt" target="_blank" rel="noopener">Instagram @drfabioschmidt</a>
-      <a class="discreto" href="https://consultadrfabio.base44.app/" target="_blank" rel="noopener">Consulta</a>
-    </div>
+      <a href="https://consultadrfabio.base44.app/" target="_blank" rel="noopener">Consulta</a>
+    </nav>
   </div>
 </footer>
 </div>
 
-<!-- JANELA DO PRODUTO -->
 <div class="modal" id="modal" aria-hidden="true">
   <div class="fundo" data-fechar></div>
   <div class="painel" role="dialog" aria-modal="true" aria-labelledby="m-titulo">
-    <button type="button" class="fechar" data-fechar aria-label="Fechar">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
-    </button>
+    <span class="puxador" aria-hidden="true"></span>
+    <button type="button" class="fechar" data-fechar aria-label="Fechar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
     <div class="rolagem" id="m-conteudo"></div>
   </div>
 </div>
@@ -475,142 +531,184 @@ footer{margin-top:clamp(56px,9vw,110px);padding:40px var(--gutter) calc(40px + e
 <script>
 (function(){
   'use strict';
-  var reduz = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var reduz=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var AVISO='Material educativo. Não faz diagnóstico e não substitui avaliação nem tratamento.';
+  var SEG='<div class="seguranca" role="note"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 16H3l9-16z"/><path d="M12 10v4"/><path d="M12 17h.01"/></svg><p>Se existe risco agora, ligue <a href="tel:188">188 (CVV)</a> ou <a href="tel:192">192 (SAMU)</a>.</p></div>';
 
-  /* ---------- utilidades ---------- */
   function esc(s){return String(s||'').replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
   function corTexto(hex){
     var h=hex.replace('#','');if(h.length===3)h=h.replace(/./g,'$&$&');
-    var r=parseInt(h.substr(0,2),16)/255,g=parseInt(h.substr(2,2),16)/255,b=parseInt(h.substr(4,2),16)/255;
-    function l(c){return c<=.03928?c/12.92:Math.pow((c+.055)/1.055,2.4);}
-    var L=.2126*l(r)+.7152*l(g)+.0722*l(b);
+    function l(c){c=parseInt(c,16)/255;return c<=.03928?c/12.92:Math.pow((c+.055)/1.055,2.4);}
+    var L=.2126*l(h.substr(0,2))+.7152*l(h.substr(2,2))+.0722*l(h.substr(4,2));
     return L>.32?'#141210':'#F7F2EC';
   }
-  function partes(nome){
-    var i=nome.indexOf(':');
-    return i>-1?{k:nome.slice(0,i).trim(),t:nome.slice(i+1).trim()}:{k:'',t:nome};
-  }
+  function partes(nome){var i=nome.indexOf(':');return i>-1?{k:nome.slice(0,i).trim(),t:nome.slice(i+1).trim()}:{k:'',t:nome};}
+  function achar(id){for(var i=0;i<PRODUTOS.length;i++)if(PRODUTOS[i].id===id)return PRODUTOS[i];return null;}
+  function serve(p,perfil){return perfil==='todos'||(p.perfil||[]).indexOf(perfil)>-1;}
 
-  /* ---------- UTM: repassa utm_* para Hotmart e para a página do curso ---------- */
+  /* UTM: repassa utm_* para Hotmart e para a página do curso */
   var utms=[];
-  try{
-    new URLSearchParams(location.search).forEach(function(v,k){if(/^utm_/i.test(k))utms.push([k,v]);});
-  }catch(e){}
+  try{new URLSearchParams(location.search).forEach(function(v,k){if(/^utm_/i.test(k))utms.push([k,v]);});}catch(e){}
   function linkFinal(url){
     if(!url)return url;
     try{
-      var u=new URL(url);
-      var hotmart=/(^|\.)hotmart\.com$/.test(u.hostname);
-      var proprio=/(^|\.)drfabioschmidt\.net$/.test(u.hostname);
-      if(hotmart||proprio){
-        utms.forEach(function(p){if(!u.searchParams.has(p[0]))u.searchParams.set(p[0],p[1]);});
-      }
-      if(hotmart&&!u.searchParams.has('src'))u.searchParams.set('src','loja');
+      var u=new URL(url),hot=/(^|\.)hotmart\.com$/.test(u.hostname),meu=/(^|\.)drfabioschmidt\.net$/.test(u.hostname);
+      if(hot||meu)utms.forEach(function(p){if(!u.searchParams.has(p[0]))u.searchParams.set(p[0],p[1]);});
+      if(hot&&!u.searchParams.has('src'))u.searchParams.set('src','loja');
       return u.toString();
     }catch(e){return url;}
   }
 
-  /* ---------- capa ---------- */
+  /* som curto e baixo ao abrir um material */
+  var ctx=null;
+  function som(){
+    if(reduz)return;
+    try{
+      ctx=ctx||new (window.AudioContext||window.webkitAudioContext)();
+      var t=ctx.currentTime,o=ctx.createOscillator(),g=ctx.createGain();
+      o.type='sine';o.frequency.setValueAtTime(660,t);o.frequency.exponentialRampToValueAtTime(990,t+.09);
+      g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.035,t+.012);g.gain.exponentialRampToValueAtTime(.0001,t+.16);
+      o.connect(g).connect(ctx.destination);o.start(t);o.stop(t+.18);
+    }catch(e){}
+  }
+
   function capaHTML(p,lazy){
     var pt=partes(p.nome);
     var img=p.capa?'<img src="'+esc(p.capa)+'" alt="" '+(lazy?'loading="lazy" ':'')+'decoding="async" onerror="this.remove()">':'';
-    return '<div class="capa">'+
-      '<span class="k">'+esc(p.rotulo||pt.k||'Borderline')+'</span>'+
-      '<span class="t">'+esc(pt.t)+'</span>'+
-      '<span class="a">Dr. Fabio Schmidt</span>'+img+
-    '</div>';
+    return '<div class="capa"><span class="k">'+esc(p.rotulo||pt.k||'Borderline')+'</span><span class="t">'+esc(pt.t)+'</span><span class="a">Dr. Fabio Schmidt</span>'+img+'</div>';
+  }
+  function estilo(p){var a=p.corAcento||'#333';return '--a:'+a+';--t:'+corTexto(a);}
+  function botaoCompra(p,extra){
+    var pt=partes(p.nome);
+    if(p.gratuito)return '<a class="btn free" href="'+esc(p.link)+'" target="_blank" rel="noopener">'+esc(p.botao||'Baixar grátis')+'<span class="sr"> '+esc(pt.t)+' (abre em nova aba)</span></a>';
+    return '<a class="btn" href="'+esc(linkFinal(p.link))+'" target="_blank" rel="noopener">Comprar<span class="sr"> '+esc(pt.t)+' (abre em nova aba)</span></a>'+(extra||'');
+  }
+
+  /* ---------- destaque ---------- */
+  var dVideo=null,dObs=null;
+  function destaque(p,animar){
+    var el=document.getElementById('destaque'),pt=partes(p.nome),a=p.corAcento||'#333';
+    var h='<div class="d-midia" data-abrir="'+esc(p.id)+'" style="--a2:'+a+'40" role="button" tabindex="0" aria-label="Ver detalhes de '+esc(pt.t)+'">'+
+      '<div class="m-capa" data-formato="'+esc(p.formato||'livro')+'" style="'+estilo(p)+'">'+capaHTML(p,false)+'</div>'+
+      (p.video?'<video muted loop playsinline preload="none" aria-hidden="true"'+(p.poster?' poster="'+esc(p.poster)+'"':'')+'></video>':'')+
+      '<span class="toque">Toque para ver o que tem dentro</span></div>'+
+      '<div class="d-texto"><h2 id="t-dest">'+esc(pt.t)+'</h2>'+
+      '<p class="d-sub">'+esc(p.subtitulo)+'</p>'+(p.publico?'<p class="d-para">Para '+esc(p.publico.charAt(0).toLowerCase()+p.publico.slice(1))+'</p>':'')+
+      (p.gratuito?'':'<p class="d-preco">'+esc(p.preco)+'<small>Pagamento pela Hotmart</small></p>')+
+      '<p class="d-aviso">'+AVISO+'</p>'+
+      '<div class="d-btns">'+botaoCompra(p,'')+'<button type="button" class="btn ghost" data-abrir="'+esc(p.id)+'">Ver o que tem dentro</button></div></div>';
+    el.innerHTML=h;
+    if(animar&&!reduz){el.classList.remove('troca');void el.offsetWidth;el.classList.add('troca');}
+    dVideo=el.querySelector('video');
+    if(dVideo){
+      var v=dVideo,src=p.video;
+      v.addEventListener('playing',function(){v.classList.add('tocando');});
+      v.addEventListener('error',function(){v.remove();});
+      if(dObs)dObs.disconnect();
+      dObs=new IntersectionObserver(function(en){en.forEach(function(e){
+        if(e.isIntersecting){if(!v.getAttribute('src'))v.src=src;var t=v.play();if(t&&t.catch)t.catch(function(){});}
+        else{v.pause();}
+      });},{threshold:.35});
+      dObs.observe(el.querySelector('.d-midia'));
+    }
   }
 
   /* ---------- prateleiras ---------- */
-  var pagos=PRODUTOS.filter(function(p){return !p.gratuito;});
-  var gratis=PRODUTOS.filter(function(p){return p.gratuito;});
-  function porFileira(){
-    if(window.matchMedia('(min-width:900px)').matches)return 4;
-    if(window.matchMedia('(min-width:600px)').matches)return 3;
-    return 2;
+  var obsItens=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');obsItens.unobserve(e.target);}});},{threshold:.2});
+  function prateleira(idRolo,lista){
+    var rolo=document.getElementById(idRolo),tr=rolo.querySelector('.trilho'),h='';
+    if(!lista.length){tr.innerHTML='<p class="vazio">Nada aqui para esta escolha.</p>';return;}
+    lista.forEach(function(p,i){
+      var pt=partes(p.nome),rot=pt.t+(p.gratuito?', grátis':', '+p.preco)+'. Ver detalhes';
+      h+='<div class="item" data-abrir="'+esc(p.id)+'" style="--i:'+i+'">'+
+        '<div class="palco"><button type="button" class="livro" data-abrir="'+esc(p.id)+'" data-formato="'+esc(p.formato||'livro')+'" style="'+estilo(p)+'" aria-label="'+esc(rot)+'" aria-haspopup="dialog">'+
+        '<span class="lombada" aria-hidden="true"></span>'+capaHTML(p,true)+(p.gratuito?'<span class="selo" aria-hidden="true">Grátis</span>':'')+'</button></div>'+
+        '<div class="tabua" aria-hidden="true"></div>'+
+        '<div class="etq" aria-hidden="true"><b>'+esc(pt.t)+'</b>'+(p.para?esc(p.para):'')+'<span class="preco'+(p.gratuito?' gratis':'')+'">'+(p.gratuito?'Grátis':esc(p.preco))+'</span></div></div>';
+    });
+    tr.innerHTML=h;
+    rolo.scrollLeft=0;
+    tr.querySelectorAll('.item').forEach(function(it){if(reduz)it.classList.add('in');else obsItens.observe(it);});
+    atualizaSetas(rolo);
   }
-  function montar(alvo,lista){
-    var el=document.getElementById(alvo);if(!el)return;
-    var n=porFileira(),html='';
-    for(var i=0;i<lista.length;i+=n){
-      var linha=lista.slice(i,i+n);
-      html+='<div class="fileira" style="--n:'+n+'"><div class="itens">';
-      linha.forEach(function(p){
-        var a=p.corAcento||'#333';
-        var rotulo=p.nome+(p.gratuito?', grátis':', '+p.preco)+'. Abrir detalhes';
-        html+='<div class="item">'+
-          '<button type="button" class="livro" data-id="'+esc(p.id)+'" data-formato="'+esc(p.formato||'livro')+'" style="--a:'+a+';--t:'+corTexto(a)+'" aria-label="'+esc(rotulo)+'" aria-haspopup="dialog">'+
-            '<span class="lombada" aria-hidden="true"></span>'+capaHTML(p,true)+
-            (p.gratuito?'<span class="selo" aria-hidden="true">Grátis</span>':'')+
-          '</button></div>';
-      });
-      html+='</div><div class="tabua" aria-hidden="true"></div><div class="etiquetas" aria-hidden="true">';
-      linha.forEach(function(p){
-        html+='<div class="etq"><b>'+esc(partes(p.nome).t)+'</b>'+(p.para?'<span class="para">'+esc(p.para)+'</span>':'')+(p.gratuito?'<span class="gratis">Grátis</span>':esc(p.preco))+'</div>';
-      });
-      html+='</div></div>';
-    }
-    el.innerHTML=html;
+  function atualizaSetas(rolo){
+    var id=rolo.id,max=rolo.scrollWidth-rolo.clientWidth-2,cabe=max<=0;
+    document.querySelectorAll('.seta[data-alvo="'+id+'"]').forEach(function(b){
+      b.disabled=cabe||(b.dataset.dir==='-1'?rolo.scrollLeft<=2:rolo.scrollLeft>=max);
+    });
+    var dica=document.getElementById(id==='rolo-pagos'?'dica-pagos':'dica-gratis');
+    if(dica)dica.style.visibility=cabe?'hidden':'visible';
   }
-  var nAtual=0;
-  function render(){var n=porFileira();if(n===nAtual)return;nAtual=n;montar('prateleira-pagos',pagos);montar('prateleira-gratis',gratis);}
-  render();
-  window.addEventListener('resize',render);
+  document.querySelectorAll('.rolo').forEach(function(r){r.addEventListener('scroll',function(){atualizaSetas(r);},{passive:true});});
+  window.addEventListener('resize',function(){document.querySelectorAll('.rolo').forEach(atualizaSetas);});
+  document.querySelectorAll('.seta').forEach(function(b){b.addEventListener('click',function(){
+    var r=document.getElementById(b.dataset.alvo),it=r.querySelector('.item'),w=it?it.getBoundingClientRect().width:220;
+    r.scrollBy({left:(+b.dataset.dir)*w*2,behavior:reduz?'auto':'smooth'});
+  });});
 
-  /* ---------- janela ---------- */
+  /* ---------- escolha do topo ---------- */
+  var perfilAtual='todos';
+  var ROTULO={todos:'para quem vive com TPB e para quem convive',familia:'para quem convive com alguém com TPB',tpb:'para quem tem TPB'};
+  function aplicar(perfil,animar){
+    perfilAtual=perfil;
+    document.querySelectorAll('[data-perfil]').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.perfil===perfil?'true':'false');});
+    var pagos=PRODUTOS.filter(function(p){return !p.gratuito&&serve(p,perfil);});
+    var gratis=PRODUTOS.filter(function(p){return p.gratuito&&serve(p,perfil);});
+    prateleira('rolo-pagos',pagos);prateleira('rolo-gratis',gratis);
+    document.getElementById('c-pagos').textContent=pagos.length+(pagos.length===1?' material ':' materiais ')+ROTULO[perfil];
+    document.getElementById('c-gratis').textContent=gratis.length+(gratis.length===1?' material para baixar sem custo':' materiais para baixar sem custo');
+    var d=achar(DESTAQUE[perfil])||pagos[0];if(d)destaque(d,animar);
+    try{localStorage.setItem('loja-perfil',perfil);}catch(e){}
+  }
+  document.querySelectorAll('[data-perfil]').forEach(function(b){b.addEventListener('click',function(){
+    if(b.dataset.perfil===perfilAtual)return;
+    aplicar(b.dataset.perfil,true);
+    if(b.dataset.perfil!=='todos'){var alvo=document.getElementById('destaque');var top=alvo.getBoundingClientRect().top;if(top>window.innerHeight*.7)alvo.scrollIntoView({behavior:reduz?'auto':'smooth',block:'start'});}
+  });});
+  var inicial='todos';
+  try{var q=new URLSearchParams(location.search).get('para');if(q==='tpb'||q==='familia')inicial=q;else{var s=localStorage.getItem('loja-perfil');if(s==='tpb'||s==='familia'||s==='todos')inicial=s;}}catch(e){}
+  aplicar(inicial,false);
+
+  /* ---------- janela do produto ---------- */
   var modal=document.getElementById('modal'),painel=modal.querySelector('.painel'),conteudo=document.getElementById('m-conteudo'),pagina=document.getElementById('pagina');
-  var aberto=null,origem=null,video=null;
+  var aberto=null,origem=null,gatilho=null,video=null;
 
-  function conteudoHTML(p){
+  function janelaHTML(p){
     var a=p.corAcento||'#333',pt=partes(p.nome);
-    var h='<div class="m-midia'+(p.video?' tem-video':'')+'" style="--a2:'+a+'66">'+
-      '<div class="m-capa" data-formato="'+esc(p.formato||'livro')+'" style="--a:'+a+';--t:'+corTexto(a)+'">'+capaHTML(p,false)+'</div>'+
-      (p.video?'<video muted loop playsinline preload="none" aria-hidden="true"'+(p.poster?' poster="'+esc(p.poster)+'"':'')+'></video>':'')+
-    '</div><div class="m-info">';
-    h+='<div><span class="m-tag">'+(p.gratuito?'Material gratuito':esc(pt.k||'Dr. Fabio Schmidt'))+'</span>'+
-       '<h2 id="m-titulo">'+esc(pt.t)+'</h2>'+
-       (p.subtitulo?'<p class="m-sub">'+esc(p.subtitulo)+'</p>':'')+'</div>';
+    var h='<div class="m-midia'+(p.video?' tem-video':'')+'" style="--a2:'+a+'40"><div class="m-capa" data-formato="'+esc(p.formato||'livro')+'" style="'+estilo(p)+'">'+capaHTML(p,false)+'</div>'+
+      (p.video?'<video muted loop playsinline preload="none" aria-hidden="true"'+(p.poster?' poster="'+esc(p.poster)+'"':'')+'></video>':'')+'</div><div class="m-info">';
+    h+='<div><span class="m-tag">'+(p.gratuito?'Material gratuito':esc(pt.k||p.rotulo||'Dr. Fabio Schmidt'))+'</span><h2 id="m-titulo">'+esc(pt.t)+'</h2>'+(p.subtitulo?'<p class="m-sub">'+esc(p.subtitulo)+'</p>':'')+'</div>';
     if(p.publico)h+='<div class="m-bloco"><h3>Para quem é</h3><p>'+esc(p.publico)+'</p></div>';
-    if(p.naoE)h+='<div class="m-bloco nao"><h3>Para quem não é</h3><p>'+esc(p.naoE)+'</p></div>';
+    if(p.naoE)h+='<div class="m-bloco"><h3>Para quem não é</h3><p>'+esc(p.naoE)+'</p></div>';
     if(p.itens&&p.itens.length)h+='<div class="m-bloco"><h3>O que tem dentro</h3><ul>'+p.itens.map(function(i){return '<li>'+esc(i)+'</li>';}).join('')+'</ul></div>';
-    if(p.seguranca)h+='<div class="seguranca" role="note"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 16H3l9-16z"/><path d="M12 10v4"/><path d="M12 17h.01"/></svg><p>Se existe risco agora, ligue <a href="tel:188">188 (CVV)</a> ou <a href="tel:192">192 (SAMU)</a>.</p></div>';
-    h+='<div class="m-compra">';
-    if(!p.gratuito&&p.preco)h+='<div class="m-preco">'+esc(p.preco)+'<small>Pagamento pela Hotmart</small></div>';
-    h+='<p class="m-aviso">Material educativo. Não faz diagnóstico e não substitui avaliação nem tratamento.</p><div class="m-btns">';
-    if(p.gratuito){
-      h+='<a class="btn free" href="'+esc(p.link)+'" target="_blank" rel="noopener">'+esc(p.botao||'Baixar grátis')+'<span class="sr"> (abre em nova aba)</span></a>';
-    }else{
-      h+='<a class="btn" href="'+esc(linkFinal(p.link))+'" target="_blank" rel="noopener">Comprar<span class="sr"> '+esc(pt.t)+' (abre em nova aba)</span></a>';
-      if(p.linkExtra)h+='<a class="btn ghost" href="'+esc(linkFinal(p.linkExtra))+'" target="_blank" rel="noopener">Ver página completa<span class="sr"> (abre em nova aba)</span></a>';
-    }
-    h+='</div></div></div>';
+    if(p.seguranca)h+=SEG;
+    var extra=p.linkExtra?'<a class="btn ghost" href="'+esc(linkFinal(p.linkExtra))+'" target="_blank" rel="noopener">Página completa<span class="sr"> (abre em nova aba)</span></a>':'';
+    h+='<div class="m-barra"><p class="m-aviso">'+AVISO+'</p><div class="m-linha">'+(p.gratuito?'':'<span class="m-preco">'+esc(p.preco)+'</span>')+'<div class="m-btns">'+botaoCompra(p,extra)+'</div></div></div></div>';
     return h;
   }
-
-  /* animação: capa sai da prateleira e cresce até a janela */
   function voar(de,para,volta){
     if(reduz||!de||!para||!para.animate)return null;
     var r1=de.getBoundingClientRect(),r2=para.getBoundingClientRect();
-    if(!r2.width)return null;
-    var dx=(r1.left+r1.width/2)-(r2.left+r2.width/2),dy=(r1.top+r1.height/2)-(r2.top+r2.height/2);
-    var s=r1.height/r2.height;
-    var ini='translate('+dx+'px,'+dy+'px) scale('+s+') rotateY(22deg)',fim='none';
-    return para.animate(volta?[{transform:fim},{transform:ini}]:[{transform:ini},{transform:fim}],{duration:volta?380:560,easing:'cubic-bezier(.2,.8,.2,1)',fill:'both'});
+    if(!r1.width||!r2.width)return null;
+    var dx=(r1.left+r1.width/2)-(r2.left+r2.width/2),dy=(r1.top+r1.height/2)-(r2.top+r2.height/2),s=r1.height/r2.height;
+    var ini='translate('+dx+'px,'+dy+'px) scale('+s+')';
+    return para.animate(volta?[{transform:'none'},{transform:ini}]:[{transform:ini},{transform:'none'}],{duration:volta?360:560,easing:'cubic-bezier(.2,.8,.2,1)',fill:'both'});
   }
-
   function focaveis(){return Array.prototype.filter.call(painel.querySelectorAll('a[href],button:not([disabled]),[tabindex]:not([tabindex="-1"])'),function(el){return el.offsetParent!==null;});}
 
-  function abrir(id,empurrar,botao){
-    var p=PRODUTOS.filter(function(x){return x.id===id;})[0];if(!p)return;
+  function abrir(id,empurrar,el){
+    var p=achar(id);if(!p)return;
     if(aberto)fecharJa();
-    aberto=p;origem=botao||document.querySelector('.livro[data-id="'+id+'"]');
-    conteudo.innerHTML=conteudoHTML(p);conteudo.scrollTop=0;
+    aberto=p;gatilho=el||null;
+    origem=el?(el.closest('.item')?el.closest('.item').querySelector('.livro'):el.closest('.d-midia')?el.closest('.d-midia').querySelector('.m-capa'):null):null;
+    if(!origem){var lv=document.querySelector('.livro[data-abrir="'+id+'"]');origem=lv||null;}
+    conteudo.innerHTML=janelaHTML(p);conteudo.scrollTop=0;
     modal.classList.add('on');modal.setAttribute('aria-hidden','false');
-    pagina.setAttribute('aria-hidden','true');
-    if('inert' in pagina)pagina.inert=true;
+    pagina.setAttribute('aria-hidden','true');if('inert' in pagina)pagina.inert=true;
     document.documentElement.style.overflow='hidden';
+    if(dVideo)dVideo.pause();
     if(empurrar)history.pushState({loja:id},'','#'+id);
-
+    som();
     requestAnimationFrame(function(){
       modal.classList.add('vis');
       var mc=conteudo.querySelector('.m-capa');
@@ -620,69 +718,62 @@ footer{margin-top:clamp(56px,9vw,110px);padding:40px var(--gutter) calc(40px + e
       if(an)an.onfinish=mostra;else mostra();
       var x=painel.querySelector('.fechar');if(x)x.focus({preventScroll:true});
     });
-
-    /* vídeo só carrega aqui */
     video=conteudo.querySelector('video');
     if(video&&p.video){
-      video.addEventListener('playing',function(){video.classList.add('tocando');});
-      video.addEventListener('error',function(){video.remove();video=null;});
-      video.src=p.video;
-      var tentativa=video.play();
-      if(tentativa&&tentativa.catch)tentativa.catch(function(){});
+      var v=video;
+      v.addEventListener('playing',function(){v.classList.add('tocando');});
+      v.addEventListener('error',function(){v.remove();if(video===v)video=null;});
+      v.src=p.video;var t=v.play();if(t&&t.catch)t.catch(function(){});
     }
   }
-
   function fecharJa(){
     if(video){try{video.pause();video.removeAttribute('src');video.load();}catch(e){}video=null;}
     modal.classList.remove('on','vis');modal.setAttribute('aria-hidden','true');
-    pagina.removeAttribute('aria-hidden');
-    if('inert' in pagina)pagina.inert=false;
+    pagina.removeAttribute('aria-hidden');if('inert' in pagina)pagina.inert=false;
     document.documentElement.style.overflow='';
     conteudo.innerHTML='';
-    var o=origem;aberto=null;origem=null;
-    if(o){o.classList.remove('saiu');o.focus({preventScroll:true});}
+    if(origem)origem.classList.remove('saiu');
+    var g=gatilho;aberto=null;origem=null;gatilho=null;
+    if(g&&document.body.contains(g))g.focus({preventScroll:true});
+    if(dVideo){var t=dVideo.play();if(t&&t.catch)t.catch(function(){});}
   }
   function fecharAnimado(){
     if(!aberto)return;
     modal.classList.remove('vis');
-    var mc=conteudo.querySelector('.m-capa');
-    var an=voar(origem&&origem.querySelector('.capa'),mc,true);
-    if(an){an.onfinish=fecharJa;}else{setTimeout(fecharJa,reduz?0:260);}
+    var an=voar(origem&&origem.querySelector('.capa'),conteudo.querySelector('.m-capa'),true);
+    if(an)an.onfinish=fecharJa;else setTimeout(fecharJa,reduz?0:260);
   }
-  function fechar(){
-    if(!aberto)return;
-    if(history.state&&history.state.loja)history.back(); /* popstate fecha */
-    else fecharAnimado();
-  }
+  function fechar(){if(!aberto)return;if(history.state&&history.state.loja)history.back();else fecharAnimado();}
 
   document.addEventListener('click',function(e){
-    var b=e.target.closest&&e.target.closest('.livro');
-    if(b){abrir(b.getAttribute('data-id'),true,b);return;}
-    if(aberto&&e.target.closest('[data-fechar]'))fechar();
+    if(aberto){if(e.target.closest('[data-fechar]'))fechar();return;}
+    if(e.target.closest('a'))return;
+    var alvo=e.target.closest('[data-abrir]');
+    if(alvo){var b=alvo.closest('.item')?alvo.closest('.item').querySelector('.livro'):alvo;abrir(alvo.getAttribute('data-abrir'),true,b);}
+  });
+  document.addEventListener('keydown',function(e){
+    if(!aberto){
+      if((e.key==='Enter'||e.key===' ')&&e.target.classList&&e.target.classList.contains('d-midia')){e.preventDefault();abrir(e.target.getAttribute('data-abrir'),true,e.target);}
+      return;
+    }
+    if(e.key==='Escape'){e.preventDefault();fechar();return;}
+    if(e.key==='Tab'){
+      var f=focaveis();if(!f.length)return;
+      var pri=f[0],ult=f[f.length-1];
+      if(e.shiftKey&&document.activeElement===pri){e.preventDefault();ult.focus();}
+      else if(!e.shiftKey&&document.activeElement===ult){e.preventDefault();pri.focus();}
+      else if(!painel.contains(document.activeElement)){e.preventDefault();pri.focus();}
+    }
   });
   window.addEventListener('popstate',function(e){
     var st=e.state;
     if(st&&st.loja){if(!aberto||aberto.id!==st.loja)abrir(st.loja,false);}
     else if(aberto)fecharAnimado();
   });
-  document.addEventListener('keydown',function(e){
-    if(!aberto)return;
-    if(e.key==='Escape'){e.preventDefault();fechar();return;}
-    if(e.key==='Tab'){
-      var f=focaveis();if(!f.length)return;
-      var primeiro=f[0],ultimo=f[f.length-1];
-      if(e.shiftKey&&document.activeElement===primeiro){e.preventDefault();ultimo.focus();}
-      else if(!e.shiftKey&&document.activeElement===ultimo){e.preventDefault();primeiro.focus();}
-      else if(!painel.contains(document.activeElement)){e.preventDefault();primeiro.focus();}
-    }
-  });
 
   /* link direto: drfabioschmidt.net/loja/#kit-de-regulacao abre a janela */
-  var alvo=decodeURIComponent(location.hash.replace('#',''));
-  if(alvo&&PRODUTOS.some(function(p){return p.id===alvo;})){
-    history.replaceState(null,'',location.pathname+location.search);
-    abrir(alvo,true);
-  }
+  var alvoHash=decodeURIComponent(location.hash.replace('#',''));
+  if(alvoHash&&achar(alvoHash)){history.replaceState(null,'',location.pathname+location.search);abrir(alvoHash,true);}
 })();
 </script>
 </body>

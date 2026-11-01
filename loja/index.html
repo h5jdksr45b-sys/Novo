@@ -35,6 +35,7 @@
    - video / poster: mp4 curto e mudo, e a imagem de espera. '' para não ter vídeo.
    - rotulo: texto pequeno no topo da capa em CSS. para: etiqueta da prateleira.
    - formato: 'caixa' (curso), 'livro' ou 'guia'. corAcento: cor da capa em CSS.
+   - som: true mostra o botão de ligar o som (o vídeo sempre começa mudo).
    - botao: texto do botão nos gratuitos (padrão: Baixar grátis).
    - seguranca: true mostra 188 / 192 na janela. gratuito: true vai para Grátis.
    ===================================================================== */
@@ -72,6 +73,7 @@ var PRODUTOS = [
   },
   {
     id: 'protocolo-da-crise',
+    som: true,
     perfil: ['familia'],
     rotulo: 'Guia Clínico · Vol. I', para: 'Família e parceiros',
     nome: 'Guia Clínico Volume I: Protocolo da Crise',
@@ -96,6 +98,7 @@ var PRODUTOS = [
   },
   {
     id: 'kit-de-regulacao',
+    som: true,
     perfil: ['tpb'],
     rotulo: 'Guia Clínico · Vol. II', para: 'Para quem tem TPB',
     nome: 'Guia Clínico Volume II: Kit de Regulação',
@@ -293,6 +296,11 @@ p,li{text-wrap:pretty}
 .play{position:absolute;left:50%;top:50%;z-index:4;width:76px;height:76px;margin:-38px 0 0 -38px;border-radius:50%;background:rgba(10,10,10,.78);display:grid;place-items:center;transition:transform .2s var(--ease)}
 .play:active{transform:scale(.92)}
 .play svg{width:30px;height:30px;fill:var(--ink);margin-left:4px}
+.som{position:absolute;right:14px;top:14px;z-index:5;display:flex;align-items:center;gap:8px;background:rgba(10,10,10,.82);color:var(--ink);font-size:.86rem;font-weight:600;padding:10px 14px 10px 12px;border-radius:999px;transition:transform .2s var(--ease),background .2s}
+.som:active{transform:scale(.95)}
+.som svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.som[aria-pressed="true"]{background:var(--ink);color:#141210}
+.m-midia .som{top:auto;bottom:14px;right:auto;left:14px}
 .d-midia .toque{position:absolute;left:14px;bottom:14px;z-index:3;background:rgba(10,10,10,.82);color:var(--ink);font-size:.8rem;font-weight:500;padding:8px 12px;border-radius:999px;pointer-events:none}
 .d-texto{padding:4px 22px 26px;display:flex;flex-direction:column;gap:14px}
 .d-texto h2{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(38px,8vw,64px);line-height:.98;letter-spacing:-.035em}
@@ -605,6 +613,17 @@ footer{margin-top:clamp(64px,10vw,130px);background:var(--bg-2);padding:44px 0 c
     c.style.translate=dx+'px '+dy+'px';c.style.scale=k;
   }
 
+  /* botão de som: o vídeo começa mudo e a pessoa liga se quiser */
+  var ICON_MUDO='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M17 9l4 6M21 9l-4 6"/></svg>';
+  var ICON_SOM='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg>';
+  function botaoSom(v,box){
+    if(!v||!box||box.querySelector('.som'))return;
+    var b=document.createElement('button');b.type='button';b.className='som';b.setAttribute('aria-pressed','false');
+    function pinta(){var on=!v.muted;b.setAttribute('aria-pressed',on?'true':'false');b.innerHTML=(on?ICON_SOM+'Som ligado':ICON_MUDO+'Ligar som');b.setAttribute('aria-label',on?'Desligar o som do vídeo':'Ligar o som do vídeo');}
+    b.addEventListener('click',function(e){e.stopPropagation();v.muted=!v.muted;if(!v.muted){v.volume=1;if(v.paused){var t=v.play();if(t&&t.catch)t.catch(function(){});}}pinta();});
+    pinta();box.appendChild(b);
+  }
+
   function capaHTML(p,lazy){
     var pt=partes(p.nome);
     var img=p.capa?'<img src="'+esc(p.capa)+'" alt="" '+(lazy?'loading="lazy" ':'')+'decoding="async" onerror="this.remove()">':'';
@@ -643,6 +662,7 @@ footer{margin-top:clamp(64px,10vw,130px);background:var(--bg-2);padding:44px 0 c
         else{v.pause();}
       });},{threshold:.35});
       dObs.observe(el.querySelector('.d-midia'));
+      if(p.som)botaoSom(v,el.querySelector('.d-midia'));
     }
   }
 
@@ -758,6 +778,7 @@ footer{margin-top:clamp(64px,10vw,130px);background:var(--bg-2);padding:44px 0 c
       v.addEventListener('playing',function(){v.classList.add('tocando');encosta(v.parentNode);});
       v.addEventListener('error',function(){v.remove();if(video===v)video=null;});
       prepara(v);v.src=p.video;tocar(v,conteudo.querySelector('.m-midia'));
+      if(p.som)botaoSom(v,conteudo.querySelector('.m-midia'));
     }
   }
   function fecharJa(){

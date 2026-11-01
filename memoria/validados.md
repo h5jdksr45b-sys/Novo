@@ -52,3 +52,31 @@ Posts mais fortes:
 - [Matheus Mattos, rituais (dormir abraçado à roupa, guardar objetos, mesma música)](https://www.instagram.com/p/De4czpMhgNa/): 74 mil, 6,4x (24/10). PT-BR.
 
 Filtro do Claude pelo histórico e pelo checklist do termômetro. Ficaram: precisa resolver a briga agora (junto com conversa sem fim), usa seus segredos na briga, trava quando você pede explicação, dorme abraçado à sua roupa, quem convive para de contar os próprios dias ruins. Saíram: pergunta de novo se você ama (repete Você não me ama e o vazio), não conta o que machucou (repete mensagem apagada), cuida de todos e ninguém cuida (repete competência aparente), ensaia brigas (repete o vídeo do diagnóstico), corta o cabelo, guarda objetos, mesma música e medo de sair de casa (não são do borderline), criados juntos (família em Reel e irmão).
+
+## 2026-11-01: Reels falados sobre borderline, inglês e português (Vamos, 4 chats)
+
+Pedido dele: roteiros com prova, só talking head, depois de rejeitar 10 roteiros feitos só da memória.
+
+Posts mais fortes, inglês (40 talking heads acima do usual, chat f375ecab):
+- [@hedefapsychotherapy, cinco coisas depois da crise que nunca explicou](https://www.tiktok.com/@hedefapsychotherapy/video/7684082171484572935): 308 mil, 135x, 6,9 mil compartilhamentos (11/09). O perfil tem 8 dos 17 primeiros, todos abrindo com Here are five things someone with BPD...
+- [@shrink.think, vergonha do diagnóstico](https://www.tiktok.com/@shrink.think/video/7678160203182787871): 643 mil, 130x (26/08).
+- [@docamen, borderline, TDAH ou bipolar?](https://www.tiktok.com/@docamen/video/7686880573012462879): 265 mil, 75x (19/09).
+- [@consciouslycarissa, amor da vida na segunda, demônio na terça](https://www.tiktok.com/@consciouslycarissa/video/7698435500276763934): 62 mil, 39x (19/10).
+- [@megzeenatwamithi, queria te dizer o que sinto e não consigo](https://www.tiktok.com/@megzeenatwamithi/video/7694724576550391062): 446 mil, 24x (09/10). Abre sempre com I have BPD, and...
+- [@splittingseason, corta alguém e nunca mais volta](https://www.tiktok.com/@splittingseason/video/7700248127030234398): 25 mil, 9,9x (24/10).
+- [@drkibby, esqueceu tudo de bom sobre você](https://www.instagram.com/p/Dd5QgiXMUnX/): 163 mil, 14x (30/09).
+
+Posts mais fortes, português (28 posts, chat 227c79fb):
+- [@_ariadne_andrade, sou borderline e é claro que qualquer mudança no seu jeito de falar comigo](https://www.instagram.com/p/DcePsNVtA08/): 1,3 mi, 13x (25/08).
+- [@dracarlapsiquiatra, borderline e narcisismo no amor, comparação encenada](https://www.instagram.com/p/DcvaJUQtYYv/): 728 mil, 19x, 10,5 mil compartilhamentos (01/09).
+- [@alynnemolon, coisas que eu fazia e achava normal](https://www.tiktok.com/@alynnemolon/video/7698150015398612244): 565 mil, 51x (18/10).
+- [@dr.willarantess, bipolar x borderline encenado](https://www.instagram.com/p/DcjyFl-s67c/): 483 mil, 17x (27/08).
+- [@psi.luanafontana, profecia autorrealizável, cobrança que afasta](https://www.instagram.com/p/Ddpkm7FAqm7/): 409 mil, 23x (24/09).
+- [@dracarlapsiquiatra, dependência emocional x borderline](https://www.instagram.com/p/Dd3dd8AtVLB/): 86 mil, 2,2x (29/09).
+- Controles que ficaram no usual ou abaixo: lista de três sinais (0,5x), o sintoma mais comum é medo de abandono (0,89x), ama mais do que é amada (1x), ninguém nasce com borderline (1,1x), implode em vez de explodir (0,5x).
+
+O que se repete: ato do borderline dirigido a você e explicado; lista em que cada item traduz um ato; comparação encenada entre duas experiências parecidas; relato em primeira pessoa de quem tem o diagnóstico (não é a voz dele). Lista genérica de sinais e abertura pelo nome do sintoma ficam no usual.
+
+Também pedido ao Vamos: 10 roteiros com prova (chat 1c77d446) e a leitura dos Reels dele (chat a98cbf23, refeita só com talking head). Achados dos talking heads dele em `reels-certeiros.md`.
+
+Descartados por repetição no escrutínio: trata pior quem mais ama (desabar perto de quem é seguro), esquece tudo de bom (dia perfeito não protege), paranoia confirmada (risco clínico), profecia autorrealizável (amar alguém com borderline, 15/09), desrealização (dissociação), splitting (R01 rejeitado), vergonha do diagnóstico (23/05 e 07/09), alto funcionamento, bipolar, TDAH, narcisismo. Tabela completa em `analises/escrutinio-reels-2026-11-01.md`.

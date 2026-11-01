@@ -81,3 +81,19 @@ Confiança: Forte = grupo de 30 posts ou mais, diferença estável. Média = 10 
 - Duração de cada Reel, para virar tempo assistido em percentual.
 - Views dos 6 gigantes que ele mandou em 26/10.
 - Legenda palavra a palavra grande no centro apareceu em 3 de 6 gigantes; a preferência fixa dele é legenda pequena abaixo do queixo e texto grande só na ênfase. Sem dado para decidir; seguir a preferência dele.
+
+## Leitura do Vamos de 01/11/2026, só talking head (90 dias, mediana pública de 13.164 views)
+
+Observação do Vamos sobre 33 Reels em que ele fala para a câmera. Views públicas, que não batem com o Windsor (incluem impulsionado); servem para o padrão, não para o número.
+
+Acima do usual: Amar alguém com borderline, pede para ficar e age para você ir (66.530, 5x); Pessoa favorita (44.861, 3,4x); A dor que volta (33.841, 2,6x); Nunca faltou no trabalho (25.351); Uma piada depois do dia perfeito (23.499); Virar o que o outro quer (21.541); Ficar sozinho até melhorar? (21.280); Estabilizador (19.892); Some do nada, versão nova (19.882); Áudios (18.106); Termina e implora (18.015); Testemunha do próprio surto (17.390); Resolver a briga agora (16.097); Mais cinco coisas (15.985).
+
+Abaixo de 0,5x: Frases da infância (7.069); Borderline mente (7.018); Perdi o direito de ser gente (6.166); Deixaram de acreditar em você (6.097); Limite com hora de volta (5.843); Falar mais alto na crise (5.710); Chorar mais ao receber cuidado (5.650); Pega o jeito de quem ama (5.017).
+
+O que separa, segundo o Vamos (observação, não regra):
+- Os que funcionam explicam uma contradição vivida no vínculo: dois fatos que parecem incompatíveis na mesma pessoa (pede para ficar e age para ir; cumpre a rotina e desaba no carro). O comportamento vem antes da função. Os dois lados se reconhecem. A pergunta inicial é sustentada até o fim.
+- Os que flopam chegam cedo ao conceito ou à orientação (o cerne é a identidade; limite com hora de volta na primeira frase), ou explicam uma reação sem desenvolver o efeito dela na relação (falar mais alto, chorar ao receber cuidado).
+- Cena concreta, paradoxo e abertura provocativa aparecem nos dois grupos. Sozinhos não salvam. Lista também: a de atos no vínculo é gigante (5 coisas), a de frases da infância flopou.
+- Rosto, edição e duração não separam os grupos.
+- Dois pares com fala quase igual tiveram alcance muito diferente (Te chamou de tudo ontem 103 mil x 66 mil; Some do nada 163 mil x 20 mil). Roteiro forte não garante o alcance; não inventar causa.
+- Título, legenda e fala não são o mesmo gancho. Comparar gancho falado com gancho falado.

@@ -20,6 +20,7 @@ words=[]
 for i,x in enumerate(W):
     s,e = nt(x["s"]), nt(min(x["e"], x["s"]+0.9))
     if s is None: continue
+    if any(a <= x["s"] <= b and (b - x["s"]) < 0.16 for a,b in K): continue
     if e is None: e = s+0.25
     w = FIX.get(x["w"], x["w"])
     if x["w"]=="e" and abs(x["s"]-4.60)<0.05: w="que"
@@ -34,7 +35,7 @@ groups=[]; cur=[]
 for i,x in enumerate(words):
     if cur:
         prev=cur[-1]
-        if len(cur)>=3 or (re.search(r"[,.?!]$",prev["w"]) and not (len(cur)==1 and len(key(prev["w"]))<=2)) or x["s"]-prev["e"]>0.35 or x["s"]-cur[0]["s"]>1.5:
+        if x["enum"] or len(cur)>=3 or (re.search(r"[,.?!]$",prev["w"]) and not (len(cur)==1 and len(key(prev["w"]))<=2)) or x["s"]-prev["e"]>0.35 or x["s"]-cur[0]["s"]>1.5:
             groups.append(cur); cur=[]
     cur.append(x)
 if cur: groups.append(cur)
@@ -65,6 +66,8 @@ for k,(name,a,b,flt) in enumerate(BR):
     br_html.append(f'<div class="clip broll" id="br{k}" data-start="{s:.3f}" data-duration="{d:.3f}" data-track-index="1"><div class="kb" id="kb{k}"><img src="assets/img/{name}.jpg" style="filter:{flt}" /></div><div class="vign"></div></div>')
     br_tl.append(f'tl.fromTo("#kb{k}",{{scale:1.04,y:0}},{{scale:1.13,y:-30,duration:{d:.3f},ease:"none"}},{s:.3f});')
     br_tl.append(f'tl.fromTo("#kb{k}",{{opacity:0.35}},{{opacity:1,duration:0.12,ease:"power1.out"}},{s:.3f});')
+    br_html.append(f'<div class="clip" id="fl{k}" data-start="{s-0.034:.3f}" data-duration="0.16" data-track-index="4" style="left:0;top:0;width:1080px;height:1920px"><div id="fl{k}in" style="width:1080px;height:1920px;background:#fff"></div></div>')
+    br_tl.append(f'tl.fromTo("#fl{k}in",{{opacity:0.7}},{{opacity:0,duration:0.12,ease:"power1.out"}},{s-0.034:.3f});')
 BRS=[(nt_near(a),nt_near(b)) for _,a,b,_ in BR]
 # ---- esquema: banda superior (mesmo molde sempre)
 # (id, num, [(t_src, label, big, style)], strike_src, end_src, sub)
@@ -88,7 +91,7 @@ for sid,tnum,num,states,strike,end,sub in SCH:
         inner.append(f'<div class="st" id="{sid}st{j}"><div class="lab">{html.escape(lab)}</div><div class="{cls}"><span class="bw" id="{sid}b{j}">{html.escape(big)}</span>{"<i class=strike id="+sid+"k></i>" if (j==0 and strike) else ""}</div></div>')
     if sub: inner.append(f'<div class="sub" id="{sid}sub">{html.escape(sub[0])}</div>')
     sch_html.append(f'<div class="clip band" id="{sid}" data-start="{s0:.3f}" data-duration="{e0-s0:.3f}" data-track-index="2">{"".join(inner)}</div>')
-    if num: sch_tl.append(f'tl.fromTo("#{sid}c",{{x:-24,opacity:0}},{{x:0,opacity:1,duration:0.22,ease:"power3.out"}},{s0:.3f});')
+    if num: sch_tl.append(f'tl.fromTo("#{sid}c",{{scale:0.5,opacity:0}},{{scale:1,opacity:1,duration:0.28,ease:"back.out(2.2)"}},{s0:.3f});')
     for j,(t,lab,big,sty) in enumerate(states):
         tt=nt_near(t)
         sch_tl.append(f'tl.fromTo("#{sid}st{j}",{{x:-40,opacity:0}},{{x:0,opacity:1,duration:0.26,ease:"power3.out"}},{tt:.3f});')
@@ -118,17 +121,41 @@ for i,g in enumerate(groups):
             cap_tl.append(f'tl.fromTo("#c{i}w{j}",{{opacity:0,scale:0.7,y:10}},{{opacity:1,scale:1,y:0,duration:0.22,ease:"back.out(2)"}},{t:.3f});')
         else:
             cap_tl.append(f'tl.fromTo("#c{i}w{j}",{{opacity:0,y:14}},{{opacity:1,y:0,duration:0.14,ease:"power2.out"}},{t:.3f});')
-# ---- zoom nos trechos de câmera (alternado, mascara jump cut)
-cuts_src=[3.6,19.8,45.3333]
+# ---- zoom: movimento contínuo por trecho, com punch nos números
+cuts_src=[19.8,45.3333]
 bounds=sorted(set([0.0]+[o for _,_,o in offs][1:]+[nt(c) for c in cuts_src if nt(c) is not None]+[TOTAL]))
 segs=[(bounds[i],bounds[i+1]) for i in range(len(bounds)-1) if bounds[i+1]-bounds[i]>0.05]
-zoom_tl=[]; clicks=[]
+nums=[nt_near(t) for t in [8.72,16.62,24.72,36.82,45.38]]
+pts=[]  # (t, scale, kind)
+clicks=[]; punches=[]
 for i,(a,b) in enumerate(segs):
-    sc = 1.0 if i%2==0 else 1.1
-    if a>=nt_near(66.16)-0.01: sc=1.14
-    zoom_tl.append(f'tl.set("#arollz",{{scale:{sc}}},{a+0.02:.3f});')
+    base = 1.0 if i%2==0 else 1.07
+    if a>=nt_near(66.16)-0.01: base=1.12
+    covered=any(s<=a+0.05 and b-0.05<=e for s,e in BRS)
+    grow = 0.0 if covered else 0.07
+    seq=[(a,base)]
+    inside=[t for t in nums if a+0.05<t<b-0.3]
+    cur=base; t0=a
+    for t in inside:
+        frac=(t-t0)/(b-t0); cur=cur+grow*frac*0 + (cur-base)  # keep simple: linear overall
+        seq.append((t, base+grow*((t-a)/(b-a))))
+        seq.append((t+0.14, base+grow*((t-a)/(b-a))+0.05)); punches.append(round(t,3))
+        base+=0.05
+    seq.append((b, base+grow))
+    pts.append(seq)
     if i>0: clicks.append(round(a,3))
-json.dump({"total":TOTAL,"brolls":BRS,"clicks":clicks,"segs":segs},open("timing.json","w"),indent=1)
+zoom_tl=[]
+for seq in pts:
+    zoom_tl.append(f'tl.set("#arollz",{{scale:{seq[0][1]:.4f}}},{seq[0][0]+0.02:.3f});')
+    for (t0,s0),(t1,s1) in zip(seq,seq[1:]):
+        d=t1-t0
+        if d<=0.001: continue
+        ease = "power3.out" if d<0.3 else "none"
+        zoom_tl.append(f'tl.to("#arollz",{{scale:{s1:.4f},duration:{d:.3f},ease:"{ease}"}},{t0+0.02:.3f});')
+ticks=[nt_near(tnum) for sid,tnum,num,states,strike,end,sub in SCH if tnum]
+tags=[nt_near(states[-1][0]) for sid,tnum,num,states,strike,end,sub in SCH]
+swipes=[nt_near(strike) for sid,tnum,num,states,strike,end,sub in SCH if strike]
+json.dump({"total":TOTAL,"brolls":BRS,"clicks":clicks,"punches":punches,"ticks":ticks,"tags":tags,"swipes":swipes,"segs":segs},open("timing.json","w"),indent=1)
 # ---- gancho
 hook = '''<div class="clip hook" id="hook" data-start="0" data-duration="3.10" data-track-index="2"><div id="hookin"><div class="hl">DEPOIS DA CRISE,</div><div class="hl">QUASE TODO MUNDO LÊ</div><div class="hl">O <span class="redh">BORDERLINE</span> ERRADO.</div></div></div>'''
 CSS = '''
@@ -151,7 +178,7 @@ html,body { width:1080px; height:1920px; overflow:hidden; background:#000; }
 .cap-in .w { text-transform:uppercase; letter-spacing:.015em; }
 .cap-in .em { font-family:"Fraunces"; font-style:italic; font-weight:900; font-size:112px; color:#E0141B; text-transform:uppercase; letter-spacing:-.01em; -webkit-text-stroke:8px #0d0d0d; }
 .band { left:64px; top:128px; width:880px; height:330px; }
-.chip { display:inline-flex; align-items:baseline; gap:3px; background:#0d0d0d; color:#fff; font-family:"Fraunces"; font-style:italic; font-weight:900; font-size:58px; line-height:1; padding:8px 18px 12px; border-radius:14px; border:3px solid #fff; box-shadow:0 6px 18px rgba(0,0,0,.45); }
+.chip { transform-origin:0 50%; display:inline-flex; align-items:baseline; gap:3px; background:#0d0d0d; color:#fff; font-family:"Fraunces"; font-style:italic; font-weight:900; font-size:58px; line-height:1; padding:8px 18px 12px; border-radius:14px; border:3px solid #fff; box-shadow:0 6px 18px rgba(0,0,0,.45); }
 .chip span { font-family:"Inter"; font-style:normal; font-weight:700; font-size:26px; opacity:.8; }
 .st { position:absolute; left:0; top:92px; width:880px; }
 .lab { display:block; font-family:"Inter"; font-weight:700; font-size:36px; letter-spacing:.12em; color:#fff; -webkit-text-stroke:5px #0d0d0d; paint-order:stroke fill; text-shadow:0 4px 12px rgba(0,0,0,.5); }
@@ -182,7 +209,6 @@ page=f'''<!doctype html>
   {hook}
   {"".join(sch_html)}
   {"".join(cap_html)}
-  <div class="clip" id="flash" data-start="{f1s-0.04:.3f}" data-duration="0.2" data-track-index="4"><div id="flash-in"></div></div>
   <div class="clip" id="flash2" data-start="{f1e-0.04:.3f}" data-duration="0.2" data-track-index="4" style="left:0;top:0;width:1080px;height:1920px"><div id="flash2-in" style="width:1080px;height:1920px;background:#fff"></div></div>
   <div class="clip" id="fade" data-start="{TOTAL-0.16:.3f}" data-duration="0.16" data-track-index="5"><div id="fade-in"></div></div>
 </div>
@@ -190,7 +216,6 @@ page=f'''<!doctype html>
 const tl = gsap.timeline({{ paused:true }});
 {chr(10).join(zoom_tl)}
 tl.to("#hookin",{{x:-60,opacity:0,duration:0.24,ease:"power2.in"}},2.86);
-tl.fromTo("#flash-in",{{opacity:0.85}},{{opacity:0,duration:0.12,ease:"power1.out"}},{f1s-0.04:.3f});
 tl.fromTo("#flash2-in",{{opacity:0.85}},{{opacity:0,duration:0.12,ease:"power1.out"}},{f1e-0.04:.3f});
 tl.fromTo("#fade-in",{{opacity:0}},{{opacity:1,duration:0.15,ease:"power1.in"}},{TOTAL-0.16:.3f});
 {chr(10).join(br_tl)}

@@ -58,11 +58,14 @@ Cinco coisas que o borderline faz depois da crise e nunca explicou.
 Se você vive com alguém com borderline, você já viu as cinco. E leu quase todas errado.
 Um. Fica quieto e evita o seu olhar. Você lê como frieza. O que existe ali é vergonha do que saiu da boca.
 Dois. Volta ao normal rápido demais. Parece que não sentiu nada. A pessoa está tentando apagar a cena para conseguir ficar no mesmo cômodo que você.
-Três. Pede desculpa de um jeito que parece exagerado. Dez vezes, chorando. Teatro seria se a pessoa escolhesse. O que manda ali é o medo de que, dessa vez, você não fique.
+Três. Pede desculpa de um jeito que parece exagerado. Dez vezes, chorando. O que manda ali é o medo de que, dessa vez, você não fique.
 Quatro. Dorme o dia inteiro ou fica doente. A crise gasta o corpo. O dia seguinte é ressaca.
 Cinco. Compra um presente, limpa a casa, cozinha o seu prato. É o pedido de desculpa que não conseguiu virar palavra.
-Entender isso não apaga o que a crise causou. Você pode cobrar o que foi dito. Só não cobre no dia da ressaca. Cobre quando a pessoa conseguir olhar para você de novo.
-Manda para quem acha que o borderline esquece a crise no dia seguinte.
+Nenhuma das cinco vem com explicação. Agora você tem as cinco.
+Isso não apaga o que a crise causou. Você pode cobrar o que foi dito. Só espere a pessoa conseguir olhar para você de novo.
+Manda para quem viu essas cinco na última crise e leu tudo errado.
+
+Versão definitiva fechada com ele em 01/11 (escolhido entre os 10; fecho em três partes: volta ao gancho, limite, envio a pessoa da cena).
 
 Prova: @hedefapsychotherapy, 308 mil views, 135x, 6,9 mil compartilhamentos (11/09). Estrutura do gigante 5 coisas que o borderline faz se gosta de verdade (cada item: ato estranho, função no vínculo). Parente de culpa do dia seguinte (15/07); os cinco atos são novos.
 

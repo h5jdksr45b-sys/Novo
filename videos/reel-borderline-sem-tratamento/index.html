@@ -16,13 +16,13 @@ html, body { width:1080px; height:1920px; overflow:hidden; background:#000; }
 .zoom { position:absolute; inset:0; width:1080px; height:1920px; transform-origin:50% 42%; }
 .zoom video, .zoom img { position:absolute; inset:0; width:1080px; height:1920px; object-fit:cover; display:block; }
 .cap { left:60px; width:840px; top:1300px; height:220px; display:flex; align-items:center; justify-content:center; }
-.cap-in { display:block; width:840px; text-align:center; line-height:1.0; color:#141414; font-family:"Anton"; font-size:78px; word-spacing:.12em; text-shadow:0 0 22px rgba(242,234,219,.6); }
+.cap-in { display:block; width:840px; text-align:center; line-height:1.0; color:#FFFFFF; font-family:"Anton"; font-size:78px; word-spacing:.12em; -webkit-text-stroke:3px #141414; paint-order:stroke fill; text-shadow:0 4px 14px rgba(0,0,0,.35); }
 .cap-in .w { font-family:"Anton"; font-size:78px; letter-spacing:.015em; text-transform:uppercase; display:inline-block; vertical-align:baseline; margin:0 .09em; }
-.cap-in .em { font-family:"Fraunces"; font-style:italic; font-weight:900; font-size:110px; color:#CC0000; display:inline-block; vertical-align:baseline; margin:0 .10em; }
+.cap-in .em { font-family:"Fraunces"; font-style:italic; font-weight:900; font-size:118px; text-transform:uppercase; letter-spacing:-.01em; color:#CC0000; display:inline-block; vertical-align:baseline; margin:0 .10em; -webkit-text-stroke:4px #141414; text-shadow:0 5px 18px rgba(0,0,0,.55); }
 .up { left:72px; top:120px; width:840px; height:520px; }
-.dark { color:#141414; }
-.light { color:#F2EADB; }
-.red { color:#CC0000; }
+.dark { color:#FFFFFF; -webkit-text-stroke:3px #141414; paint-order:stroke fill; text-shadow:0 4px 14px rgba(0,0,0,.35); }
+.light { color:#FFFFFF; -webkit-text-stroke:3px #141414; paint-order:stroke fill; text-shadow:0 4px 14px rgba(0,0,0,.35); }
+.red { color:#CC0000; -webkit-text-stroke:4px #141414; text-shadow:0 5px 18px rgba(0,0,0,.55); }
 .hook-in { display:block; width:840px; }
 .h { display:block; font-family:"Anton"; font-size:108px; line-height:1.0; letter-spacing:.01em; text-transform:uppercase; }
 .li { display:flex; align-items:baseline; gap:22px; width:840px; margin-bottom:10px; }
@@ -30,7 +30,7 @@ html, body { width:1080px; height:1920px; overflow:hidden; background:#000; }
 .li .big { font-family:"Anton"; font-size:104px; line-height:1.0; letter-spacing:.01em; display:inline-block; }
 .ps-label { font-family:"Inter"; font-weight:700; font-size:40px; letter-spacing:.14em; margin-bottom:22px; display:block; width:840px; }
 .chips { display:flex; gap:26px; width:840px; }
-.chip { width:150px; height:150px; border:6px solid #F2EADB; border-radius:26px; display:flex; align-items:center; justify-content:center; font-family:"Fraunces"; font-style:italic; font-weight:900; font-size:96px; color:#CC0000; background:#F2EADB; }
+.chip { width:150px; height:150px; border:5px solid #141414; -webkit-text-stroke:0; text-shadow:none; border-radius:26px; display:flex; align-items:center; justify-content:center; font-family:"Fraunces"; font-style:italic; font-weight:900; font-size:96px; color:#CC0000; background:#FFFFFF; }
 .ps-sub { font-family:"Fraunces"; font-style:italic; font-weight:900; font-size:64px; margin-top:26px; display:block; width:840px; }
 .big2 { display:block; width:840px; }
 .big2 .h { font-size:104px; }

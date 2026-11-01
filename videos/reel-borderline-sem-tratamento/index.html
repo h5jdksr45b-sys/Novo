@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" />
+<title>Borderline sem tratamento</title>
+<script src="assets/vendor/gsap.min.js"></script>
+<style>
+@font-face { font-family: "Anton"; src: url("assets/fonts/anton.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "Fraunces"; src: url("assets/fonts/fraunces-italic-900.woff2") format("woff2"); font-weight: 900; font-style: italic; }
+@font-face { font-family: "Inter"; src: url("assets/fonts/inter-700.woff2") format("woff2"); font-weight: 700; font-style: normal; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body { width:1080px; height:1920px; overflow:hidden; background:#000; }
+#root { position:relative; width:100%; height:100%; overflow:hidden; background:#000; }
+.clip { position:absolute; }
+.zoom { position:absolute; inset:0; width:1080px; height:1920px; transform-origin:50% 42%; }
+.zoom video, .zoom img { position:absolute; inset:0; width:1080px; height:1920px; object-fit:cover; display:block; }
+.cap { left:60px; width:840px; top:1300px; height:220px; display:flex; align-items:center; justify-content:center; }
+.cap-in { display:block; width:840px; text-align:center; line-height:1.0; color:#141414; font-family:"Anton"; font-size:78px; word-spacing:.12em; text-shadow:0 0 22px rgba(242,234,219,.6); }
+.cap-in .w { font-family:"Anton"; font-size:78px; letter-spacing:.015em; text-transform:uppercase; display:inline-block; vertical-align:baseline; margin:0 .09em; }
+.cap-in .em { font-family:"Fraunces"; font-style:italic; font-weight:900; font-size:110px; color:#CC0000; display:inline-block; vertical-align:baseline; margin:0 .10em; }
+.up { left:72px; top:120px; width:840px; height:520px; }
+.dark { color:#141414; }
+.light { color:#F2EADB; }
+.red { color:#CC0000; }
+.hook-in { display:block; width:840px; }
+.h { display:block; font-family:"Anton"; font-size:108px; line-height:1.0; letter-spacing:.01em; text-transform:uppercase; }
+.li { display:flex; align-items:baseline; gap:22px; width:840px; margin-bottom:10px; }
+.li .num { font-family:"Fraunces"; font-style:italic; font-weight:900; font-size:86px; color:#CC0000; width:70px; display:inline-block; }
+.li .big { font-family:"Anton"; font-size:104px; line-height:1.0; letter-spacing:.01em; display:inline-block; }
+.ps-label { font-family:"Inter"; font-weight:700; font-size:40px; letter-spacing:.14em; margin-bottom:22px; display:block; width:840px; }
+.chips { display:flex; gap:26px; width:840px; }
+.chip { width:150px; height:150px; border:6px solid #F2EADB; border-radius:26px; display:flex; align-items:center; justify-content:center; font-family:"Fraunces"; font-style:italic; font-weight:900; font-size:96px; color:#CC0000; background:#F2EADB; }
+.ps-sub { font-family:"Fraunces"; font-style:italic; font-weight:900; font-size:64px; margin-top:26px; display:block; width:840px; }
+.big2 { display:block; width:840px; }
+.big2 .h { font-size:104px; }
+.comp { display:block; font-family:"Fraunces"; font-style:italic; font-weight:900; font-size:64px; margin-top:14px; }
+.cta { left:72px; top:130px; width:900px; height:700px; }
+.cta-in { display:block; width:900px; }
+.cta-in .h { font-size:112px; }
+.handle { display:block; font-family:"Inter"; font-weight:700; font-size:44px; letter-spacing:.06em; margin-top:34px; }
+#fade { left:0; top:0; width:1080px; height:1920px; background:#000; }
+#fade-in { width:1080px; height:1920px; background:#000; }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-width="1080" data-height="1920" data-fps="24" data-duration="32.0">
+  <div class="zoom" id="z1"><video id="v1" class="clip" src="assets/video/01-quarto.mp4" muted playsinline data-start="0" data-duration="10" data-media-start="0" data-track-index="0"></video></div>
+  <div class="zoom" id="z2"><video id="v2" class="clip" src="assets/video/02-corredor.mp4" muted playsinline data-start="10" data-duration="10" data-media-start="0" data-track-index="0"></video></div>
+  <div class="zoom" id="z3"><video id="v3" class="clip" src="assets/video/03-cozinha.mp4" muted playsinline data-start="20" data-duration="10.02" data-media-start="0" data-track-index="0"></video><img id="hold3" class="clip" src="assets/video/freeze-cozinha.png" data-start="30.0" data-duration="2.0" data-track-index="0" /></div>
+
+<!-- gancho -->
+<div class="clip up dark" id="hook" data-start="0" data-duration="3.2" data-track-index="2">
+  <div class="hook-in" id="hookin"><span class="h">SEM TRATAMENTO,</span><span class="h">O <span class="red">BORDERLINE</span> PERDE</span><span class="h">NESTA ORDEM.</span></div>
+</div>
+<!-- contador PS -->
+<div class="clip up light" id="ps" data-start="15.05" data-duration="3.9" data-track-index="2">
+  <div class="ps-label" id="pslabel">PRONTO-SOCORRO</div>
+  <div class="chips"><div class="chip" id="chip1">1</div><div class="chip" id="chip2">2</div><div class="chip" id="chip3">3</div></div>
+  <div class="ps-sub" id="pssub">no mesmo mês</div>
+</div>
+<!-- medo de abandono -->
+<div class="clip up dark" id="medo" data-start="22.95" data-duration="3.7" data-track-index="2">
+  <div class="big2" id="medoin"><span class="h">MEDO DE</span><span class="h red">ABANDONO</span></div>
+</div>
+<!-- tratamento -->
+<div class="clip up dark" id="trat" data-start="26.80" data-duration="2.5" data-track-index="2">
+  <div class="big2" id="tratin"><span class="h">TRATAMENTO</span><span class="comp">devolve o volante</span></div>
+</div>
+<!-- CTA -->
+<div class="clip cta dark" id="cta" data-start="29.35" data-duration="2.6" data-track-index="2">
+  <div class="cta-in" id="ctain"><span class="h">MANDA PRA QUEM</span><span class="h">ESTÁ ADIANDO</span><span class="h"><span class="red">O TRATAMENTO.</span></span><span class="handle">@drfabioschmidt</span></div>
+</div>
+
+<div class="clip cap" id="cap0" data-start="0.300" data-duration="0.880" data-track-index="3"><div class="cap-in" id="capin0"><span class="w">O</span> <span class="w">que</span> <span class="w">acontece</span> </div></div><div class="clip cap" id="cap1" data-start="1.180" data-duration="1.100" data-track-index="3"><div class="cap-in" id="capin1"><span class="w">se</span> <span class="em">borderline</span> </div></div><div class="clip cap" id="cap2" data-start="2.280" data-duration="1.580" data-track-index="3"><div class="cap-in" id="capin2"><span class="w">nunca</span> <span class="w">tratar?</span> </div></div><div class="clip cap" id="cap3" data-start="3.860" data-duration="1.000" data-track-index="3"><div class="cap-in" id="capin3"><span class="w">Primeiro</span> <span class="w">o</span> <span class="em">sono</span> </div></div><div class="clip cap" id="cap4" data-start="4.860" data-duration="1.200" data-track-index="3"><div class="cap-in" id="capin4"><span class="w">vira</span> <span class="em">caos,</span> </div></div><div class="clip cap" id="cap5" data-start="6.060" data-duration="1.320" data-track-index="3"><div class="cap-in" id="capin5"><span class="w">depois</span> <span class="w">o</span> <span class="em">trabalho,</span> </div></div><div class="clip cap" id="cap6" data-start="7.380" data-duration="0.600" data-track-index="3"><div class="cap-in" id="capin6"><span class="w">e</span> <span class="w">por</span> <span class="w">último</span> </div></div><div class="clip cap" id="cap7" data-start="7.980" data-duration="1.720" data-track-index="3"><div class="cap-in" id="capin7"><span class="w">quem</span> <span class="w">você</span> <span class="em">ama.</span> </div></div><div class="clip cap" id="cap8" data-start="10.700" data-duration="1.300" data-track-index="3"><div class="cap-in" id="capin8"><span class="w">Sem</span> <span class="em">terapia,</span> </div></div><div class="clip cap" id="cap9" data-start="12.000" data-duration="0.840" data-track-index="3"><div class="cap-in" id="capin9"><span class="w">a</span> <span class="w">crise</span> <span class="w">deixa</span> </div></div><div class="clip cap" id="cap10" data-start="12.840" data-duration="0.920" data-track-index="3"><div class="cap-in" id="capin10"><span class="w">de</span> <span class="w">ser</span> <span class="w">episódio</span> </div></div><div class="clip cap" id="cap11" data-start="13.760" data-duration="1.340" data-track-index="3"><div class="cap-in" id="capin11"><span class="w">e</span> <span class="w">vira</span> <span class="em">rotina,</span> </div></div><div class="clip cap" id="cap12" data-start="15.100" data-duration="0.400" data-track-index="3"><div class="cap-in" id="capin12"><span class="w">uma</span> <span class="w">ida</span> </div></div><div class="clip cap" id="cap13" data-start="15.500" data-duration="1.020" data-track-index="3"><div class="cap-in" id="capin13"><span class="w">ao</span> <span class="w">pronto-socorro,</span> </div></div><div class="clip cap" id="cap14" data-start="16.520" data-duration="0.720" data-track-index="3"><div class="cap-in" id="capin14"><span class="em">duas,</span> </div></div><div class="clip cap" id="cap15" data-start="17.240" data-duration="0.220" data-track-index="3"><div class="cap-in" id="capin15"><span class="em">três</span> </div></div><div class="clip cap" id="cap16" data-start="17.460" data-duration="1.440" data-track-index="3"><div class="cap-in" id="capin16"><span class="w">no</span> <span class="w">mesmo</span> <span class="w">mês.</span> </div></div><div class="clip cap" id="cap17" data-start="20.700" data-duration="1.020" data-track-index="3"><div class="cap-in" id="capin17"><span class="w">O</span> <span class="w">que</span> <span class="w">mais</span> <span class="w">dói</span> </div></div><div class="clip cap" id="cap18" data-start="21.720" data-duration="1.080" data-track-index="3"><div class="cap-in" id="capin18"><span class="w">não</span> <span class="w">é</span> <span class="w">a</span> <span class="w">crise,</span> </div></div><div class="clip cap" id="cap19" data-start="22.800" data-duration="0.460" data-track-index="3"><div class="cap-in" id="capin19"><span class="w">é</span> <span class="w">o</span> <span class="em">medo</span> </div></div><div class="clip cap" id="cap20" data-start="23.260" data-duration="0.800" data-track-index="3"><div class="cap-in" id="capin20"><span class="w">de</span> <span class="em">abandono</span> </div></div><div class="clip cap" id="cap21" data-start="24.060" data-duration="0.580" data-track-index="3"><div class="cap-in" id="capin21"><span class="w">empurrando</span> </div></div><div class="clip cap" id="cap22" data-start="24.640" data-duration="0.980" data-track-index="3"><div class="cap-in" id="capin22"><span class="w">cada</span> <span class="w">relação</span> </div></div><div class="clip cap" id="cap23" data-start="25.620" data-duration="1.200" data-track-index="3"><div class="cap-in" id="capin23"><span class="w">ao</span> <span class="em">fim.</span> </div></div><div class="clip cap" id="cap24" data-start="26.820" data-duration="0.480" data-track-index="3"><div class="cap-in" id="capin24"><span class="em">Tratamento</span> </div></div><div class="clip cap" id="cap25" data-start="27.300" data-duration="1.800" data-track-index="3"><div class="cap-in" id="capin25"><span class="w">devolve</span> <span class="w">o</span> <span class="em">volante.</span> </div></div>
+  <div class="clip" id="fade" data-start="31.7" data-duration="0.3" data-track-index="4"><div id="fade-in"></div></div>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+// zoom punches, leves, um trecho inteiro entre cortes
+tl.fromTo("#z1",{scale:1},{scale:1.06,duration:2.0,ease:"power1.out"},8.0);
+tl.fromTo("#z2",{scale:1},{scale:1.05,duration:2.0,ease:"power1.out"},16.0);
+tl.fromTo("#z3",{scale:1},{scale:1.06,duration:2.0,ease:"power1.out"},24.0);
+tl.set("#z3",{scale:1},26.0);
+tl.set("#z1",{scale:1},10.0); tl.set("#z2",{scale:1},20.0);
+// gancho: visível já no quadro 0 (sem fade de entrada), sai deslizando
+tl.to("#hookin",{x:-60,opacity:0,duration:0.26,ease:"power2.in"},2.9);
+// contador PS
+tl.fromTo("#pslabel",{opacity:0,y:-16},{opacity:1,y:0,duration:0.25},15.1);
+tl.fromTo("#chip1",{scale:0.6,opacity:0},{scale:1,opacity:1,duration:0.3,ease:"back.out(1.8)"},15.24);
+tl.fromTo("#chip2",{scale:0.6,opacity:0},{scale:1,opacity:1,duration:0.3,ease:"back.out(1.8)"},16.52);
+tl.fromTo("#chip3",{scale:0.6,opacity:0},{scale:1,opacity:1,duration:0.3,ease:"back.out(1.8)"},17.24);
+tl.fromTo("#pssub",{opacity:0,x:-30},{opacity:1,x:0,duration:0.28,ease:"power3.out"},17.5);
+tl.to("#ps > *",{opacity:0,duration:0.2},18.72);
+// medo de abandono / tratamento
+tl.fromTo("#medoin .h",{x:-50,opacity:0},{x:0,opacity:1,duration:0.32,ease:"power3.out",stagger:0.3},22.95);
+tl.to("#medoin",{opacity:0,duration:0.2},26.42);
+tl.fromTo("#tratin",{x:-50,opacity:0},{x:0,opacity:1,duration:0.32,ease:"power3.out"},26.82);
+tl.to("#tratin",{opacity:0,duration:0.2},29.08);
+// CTA
+tl.fromTo("#ctain > .h",{y:30,opacity:0},{y:0,opacity:1,duration:0.3,ease:"power3.out",stagger:0.12},29.4);
+tl.fromTo("#ctain .handle",{opacity:0},{opacity:1,duration:0.3},29.9);
+// fade final
+tl.fromTo("#fade-in",{opacity:0},{opacity:1,duration:0.3,ease:"power1.in"},31.7);
+// legendas
+tl.fromTo("#capin0",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},0.300);
+tl.fromTo("#capin1",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},1.180);
+tl.fromTo("#capin2",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},2.280);
+tl.fromTo("#capin3",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},3.860);
+tl.fromTo("#capin4",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},4.860);
+tl.fromTo("#capin5",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},6.060);
+tl.fromTo("#capin6",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},7.380);
+tl.fromTo("#capin7",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},7.980);
+tl.fromTo("#capin8",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},10.700);
+tl.fromTo("#capin9",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},12.000);
+tl.fromTo("#capin10",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},12.840);
+tl.fromTo("#capin11",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},13.760);
+tl.fromTo("#capin12",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},15.100);
+tl.fromTo("#capin13",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},15.500);
+tl.fromTo("#capin14",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},16.520);
+tl.fromTo("#capin15",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},17.240);
+tl.fromTo("#capin16",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},17.460);
+tl.fromTo("#capin17",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},20.700);
+tl.fromTo("#capin18",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},21.720);
+tl.fromTo("#capin19",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},22.800);
+tl.fromTo("#capin20",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},23.260);
+tl.fromTo("#capin21",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},24.060);
+tl.fromTo("#capin22",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},24.640);
+tl.fromTo("#capin23",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},25.620);
+tl.fromTo("#capin24",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},26.820);
+tl.fromTo("#capin25",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},27.300);
+tl.fromTo("#capin1 .em",{scale:0.86},{scale:1,duration:0.26,ease:"back.out(1.6)"},1.180);
+tl.fromTo("#capin3 .em",{scale:0.86},{scale:1,duration:0.26,ease:"back.out(1.6)"},3.860);
+tl.fromTo("#capin4 .em",{scale:0.86},{scale:1,duration:0.26,ease:"back.out(1.6)"},4.860);
+tl.fromTo("#capin5 .em",{scale:0.86},{scale:1,duration:0.26,ease:"back.out(1.6)"},6.060);
+tl.fromTo("#capin7 .em",{scale:0.86},{scale:1,duration:0.26,ease:"back.out(1.6)"},7.980);
+tl.fromTo("#capin8 .em",{scale:0.86},{scale:1,duration:0.26,ease:"back.out(1.6)"},10.700);
+tl.fromTo("#capin11 .em",{scale:0.86},{scale:1,duration:0.26,ease:"back.out(1.6)"},13.760);
+tl.fromTo("#capin14 .em",{scale:0.86},{scale:1,duration:0.26,ease:"back.out(1.6)"},16.520);
+tl.fromTo("#capin15 .em",{scale:0.86},{scale:1,duration:0.26,ease:"back.out(1.6)"},17.240);
+tl.fromTo("#capin19 .em",{scale:0.86},{scale:1,duration:0.26,ease:"back.out(1.6)"},22.800);
+tl.fromTo("#capin20 .em",{scale:0.86},{scale:1,duration:0.26,ease:"back.out(1.6)"},23.260);
+tl.fromTo("#capin23 .em",{scale:0.86},{scale:1,duration:0.26,ease:"back.out(1.6)"},25.620);
+tl.fromTo("#capin24 .em",{scale:0.86},{scale:1,duration:0.26,ease:"back.out(1.6)"},26.820);
+tl.fromTo("#capin25 .em",{scale:0.86},{scale:1,duration:0.26,ease:"back.out(1.6)"},27.300);
+window.__timelines["main"] = tl;
+</script>
+</body>
+</html>

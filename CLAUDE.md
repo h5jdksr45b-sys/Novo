@@ -13,6 +13,7 @@ Leia, nesta ordem:
 6. Para vídeo: `memoria/efeitos-video-aprovados.md`.
 7. Skill `historico-borderline-180d` para não repetir tese.
 8. Para tema, ideia ou formato que já funcionou fora: skill `pesquisa-validados` (Vamos + memória + histórico).
+9. Para Reel ou carrossel, antes do veredito: skill `mecanismos-gigantes` (o que os 5 gigantes dele têm em comum, medido) e `memoria/mecanismos-gigantes.md`.
 
 Se a peça bater em algo que ele já rejeitou, refaça antes de entregar.
 

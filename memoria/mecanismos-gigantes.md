@@ -59,6 +59,14 @@ Limites: 5 posts escolhidos por ele como gigantes. O grupo de controle é a mem�
 9. **Capa escolhida diferente do primeiro quadro** em 3 de 5. Capa com negação ou contraste explícito em 3 de 5 (O SUMIÇO BORDERLINE; QUANDO A DOR VIRA ALÍVIO; NADA DISSO PARECE AMOR, MAS É ASSIM QUE ELA AMA). A regra dele de 24/10 proíbe a fórmula de contraste. Dado, não veto. Decisão dele pendente em [[a-decidir]].
 10. **Repost igual não repete** (sumiço, 8 vezes menos). Continuação com a mesma estrutura também cai (parte 2 do 5 coisas, 10 vezes menos). 2 casos.
 
+## Réplicas (engenharia reversa completa de 02/11/2026, `relatorio.md` no branch da sessão)
+
+Linha de base pelo Windsor: mediana dos Reels nas 2 semanas antes e 2 depois de cada vencedor. Sumiço: 32x a mediana em views, 121x em envios, retenção abaixo da mediana (8,7 s contra 12,5 s). Autolesão (DVhb2JZjvph, 06/03/2026): 30x em views, 162x em envios, 32 envios por mil contra 6. 5 coisas: 85x em views, 492x em envios, tempo médio 2,4x a mediana.
+
+Réplicas com dado: repost idêntico do sumiço (06/08): 8x menos views, com MAIS envios por mil (19,8 contra 15,7), mais salvos por mil e mais tempo médio (12,4 s contra 8,7). Parte 2 do 5 coisas (29/10): 8,5x menos views, mesmo tempo médio (25,7 s), 21,7 envios por mil contra 30. Regravação da vida sexual (08/10): 28x menos views, curtida 4% contra 2,9%. Por que a autolesão acontece (18/09): 9x menos, legenda genérica.
+
+Leitura (hipótese sustentada por 5 pares): o conteúdo se copia bem; o que não se copia é a primeira exposição da tese àquele público. Em duas réplicas (parte 2 e 18/09) também faltou a acusação desfeita no gancho. Continuação e repost vão como teste, nunca como feed. Molde de 13 perguntas e plano de teste de uma variável por vez em `relatorio.md` e `plano-de-teste.md`.
+
 ## O que não dá para afirmar
 
 - Que juntar os itens acima produz um gigante. O FRÁGIL tinha lista, cena e borderline na capa, e flopou; faltava o item 2.

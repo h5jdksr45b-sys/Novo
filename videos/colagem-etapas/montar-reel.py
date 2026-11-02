@@ -7,7 +7,9 @@
 #    voz, final em -14 LUFS, mesma duração do vídeo.
 # 4. Legenda: até três palavras por vez, tempo de cada palavra estimado pelas
 #    sílabas dentro da frase.
-# Uso: python3 montar-reel.py
+# Uso (a partir de reels-remotion, para exportar os tempos dos frames 3 e 4):
+#   node --experimental-strip-types -e "Promise.all([import('./src/Frame3/config.ts'),import('./src/Frame4/config.ts')]).then(([a,b])=>{const fs=require('fs');fs.writeFileSync('../videos/colagem-etapas/_cfg3.json',JSON.stringify(a.CONFIG_FRAME3));fs.writeFileSync('../videos/colagem-etapas/_cfg4.json',JSON.stringify(b.CONFIG_FRAME4))})"
+#   python3 ../videos/colagem-etapas/montar-reel.py
 import json, os, re, subprocess
 import numpy as np
 
@@ -90,8 +92,10 @@ def cortar(b, a, z):
 
 def gravar(p, x):
     tmp = p + ".f32"
-    np.asarray(x, dtype=np.float32).tofile(tmp)
-    subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "f32le", "-ar", str(SR), "-ac", "1", "-i", tmp,
+    x = np.asarray(x, dtype=np.float32)
+    canais = 1 if x.ndim == 1 else x.shape[1]
+    x.tofile(tmp)
+    subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "f32le", "-ar", str(SR), "-ac", str(canais), "-i", tmp,
                     "-c:a", "pcm_f32le", p], check=True)
     os.remove(tmp)
 
@@ -259,13 +263,15 @@ def lufs(x):
 
 def limitar(x, teto_db):
     teto = 10 ** (teto_db / 20)
-    g = np.minimum(1.0, teto / np.maximum(np.abs(x), 1e-9))
+    pico = np.abs(x) if x.ndim == 1 else np.abs(x).max(axis=1)
+    g = np.minimum(1.0, teto / np.maximum(pico, 1e-9))
     n = int(0.004 * SR)  # 4 ms antes e depois de cada pico
     from numpy.lib.stride_tricks import sliding_window_view
     gp = np.pad(g, (n, n), constant_values=1.0)
     g = sliding_window_view(gp, 2 * n + 1).min(axis=1)
     g = np.convolve(g, np.ones(n) / n, "same")
-    return x * np.minimum(g, 1.0)
+    g = np.minimum(g, 1.0)
+    return x * (g if x.ndim == 1 else g[:, None])
 
 
 def ao_alvo(x, alvo, teto_db):
@@ -281,21 +287,76 @@ voz = ao_alvo(voz[:N], -15.0, -2.0)
 fx = fx[:N]
 gravar(f"{AQUI}/_voz.wav", voz)
 gravar(f"{AQUI}/_fx.wav", fx)
+
+# TRILHA: Cold Silence (Suno). Mapa da faixa a 150 BPM: parte calma de
+# 128,3 a 141,1 s, clímax de 141,1 a 153 s, final de 153 a 157 s.
+# Um trecho contínuo vai do começo do vídeo até o GRITO, com a batida
+# 151,46 s da faixa caindo no quadro em que o círculo cola. Assim a parte
+# calma entra na etapa 1 e o clímax entra junto com o frame 4.
+# Depois do grito: silêncio, pad da introdução no clone com a etiqueta e o
+# final real da música na chamada final.
+r = subprocess.run(["ffmpeg", "-v", "error", "-i", os.path.join(AQUI, "trilha/cold-silence.m4a"),
+                    "-ac", "2", "-ar", str(SR), "-f", "f32le", "-"], capture_output=True, check=True)
+musica = np.frombuffer(r.stdout, dtype=np.float32).reshape(-1, 2).copy()
+
+
+def trecho(a, b, fin, fout):
+    seg = musica[int(round(a * SR)):int(round(b * SR))].copy()
+    ni, no = int(fin * SR), int(fout * SR)
+    if ni:
+        seg[:ni] *= np.linspace(0, 1, ni)[:, None]
+    if no:
+        seg[-no:] *= np.linspace(1, 0, no)[:, None]
+    return seg
+
+
+trilha = np.zeros((N, 2), dtype=np.float32)
+
+
+def poe_trilha(seg, t):
+    i0 = int(round(t * SR))
+    seg = seg[: max(0, N - i0)]
+    trilha[i0:i0 + len(seg)] += seg
+
+
+GRITO = B4 + c4["circulo"]
+BATIDA_GRITO = 151.46
+desloc = BATIDA_GRITO - GRITO
+poe_trilha(trecho(desloc, BATIDA_GRITO, 0.12, 0.012), 0.0)
+FINAL_FAIXA = (152.25, 157.04)  # do último compasso do clímax ao fim da música
+inicio_final = TOTAL - (FINAL_FAIXA[1] - FINAL_FAIXA[0])  # termina junto com o vídeo
+poe_trilha(trecho(6.0 - (inicio_final - B5), 6.0 + 0.15, 0.25, 0.15), B5)
+poe_trilha(trecho(FINAL_FAIXA[0], FINAL_FAIXA[1], 0.15, 0.05), inicio_final)
+print(f"trilha: faixa {desloc:.2f} a {BATIDA_GRITO:.2f} s no vídeo 0 a {GRITO:.2f} s; "
+      f"calma entra em {128.32 - desloc:.2f} s, clímax em {141.08 - desloc:.2f} s")
+alvo_trilha = -15.0 - 13.0  # 13 dB abaixo da voz, antes do ducking
+trilha = trilha * 10 ** ((alvo_trilha - lufs(trilha)) / 20)
+# quando a última fala termina, a trilha sobe 7 dB até o fim
+fim_fala = frases_t[-1][1] + 0.15
+ganho = np.ones(N, dtype=np.float32)
+i0, i1 = int(fim_fala * SR), int((fim_fala + 0.5) * SR)
+ganho[i0:i1] = np.linspace(1, 10 ** (7 / 20), i1 - i0)
+ganho[i1:] = 10 ** (7 / 20)
+trilha = trilha * ganho[:, None]
+gravar(f"{AQUI}/_trilha.wav", trilha)
+
 r = subprocess.run(["ffmpeg", "-v", "error", "-i", f"{AQUI}/_voz.wav", "-i", f"{AQUI}/_fx.wav",
-                    "-filter_complex",
-                    "[1:a]treble=g=-6:f=6000[f];[0:a]asplit=2[v][sc];"
-                    "[f][sc]sidechaincompress=threshold=0.03:ratio=6:attack=15:release=250[fd];"
-                    "[v][fd]amix=inputs=2:normalize=0:duration=first[m]",
-                    "-map", "[m]", "-ac", "1", "-ar", str(SR), "-f", "f32le", "-"], capture_output=True, check=True)
-mix = np.frombuffer(r.stdout, dtype=np.float32).copy()
-mix = np.pad(mix, (0, max(0, N - len(mix))))[:N]
+                    "-i", f"{AQUI}/_trilha.wav", "-filter_complex",
+                    "[1:a]treble=g=-6:f=6000,pan=stereo|c0=c0|c1=c0[f];"
+                    "[2:a]treble=g=-4:f=6000[t];"
+                    "[0:a]pan=stereo|c0=c0|c1=c0,asplit=3[v][sc1][sc2];"
+                    "[f][sc1]sidechaincompress=threshold=0.03:ratio=6:attack=15:release=250[fd];"
+                    "[t][sc2]sidechaincompress=threshold=0.05:ratio=3:attack=30:release=400[td];"
+                    "[v][fd][td]amix=inputs=3:normalize=0:duration=first[m]",
+                    "-map", "[m]", "-ac", "2", "-ar", str(SR), "-f", "f32le", "-"], capture_output=True, check=True)
+mix = np.frombuffer(r.stdout, dtype=np.float32).reshape(-1, 2).copy()
+mix = np.pad(mix, ((0, max(0, N - len(mix))), (0, 0)))[:N]
 mix = ao_alvo(mix, -14.0, -1.5)
 os.makedirs(PUB, exist_ok=True)
-tmp = f"{AQUI}/_mix.f32"
-mix.astype(np.float32).tofile(tmp)
-subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "f32le", "-ar", str(SR), "-ac", "1", "-i", tmp,
-                "-c:a", "pcm_s16le", f"{PUB}/mix.wav"], check=True)
-os.remove(tmp)
+gravar(f"{PUB}/_mix_f32.wav", mix)
+subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", f"{PUB}/_mix_f32.wav", "-c:a", "pcm_s16le", f"{PUB}/mix.wav"],
+               check=True)
+os.remove(f"{PUB}/_mix_f32.wav")
 
 # 4. LEGENDA --------------------------------------------------------------
 def silabas(p):

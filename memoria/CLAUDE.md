@@ -2,9 +2,11 @@
 
 A pasta `memoria/` é o segundo cérebro do Dr. Fabio Schmidt (@drfabioschmidt), médico pós-graduado em psiquiatria, com foco em transtorno de personalidade borderline (TPB). Abra `memoria/` como cofre no Obsidian. A página de entrada é [[INICIO]].
 
-Serve para duas coisas:
-1. **Criar conteúdo** para pessoas com TPB e seus familiares, com base em fonte.
-2. **Guardar memória** do que ele corrigiu, aprovou, rejeitou e do que cada post fez.
+A função é uma só, em duas partes, a pedido dele em 02/11/2026 ("a função aqui é para melhorar engajamento / Não repetir erros"):
+1. **Não repetir erros.** Antes de entregar qualquer peça, rodar o [[checklist-entrega]].
+2. **Melhorar engajamento.** Cada post vira uma página em `wiki/posts/`, com o que a peça tinha, o veredito antes e os números depois. Cada veredito entra no [[placar-vereditos]]. Assim o que funciona sai de dado da conta, não de palpite.
+
+Estudos e conceitos (`raw/`, `wiki/fontes/`, `wiki/conceitos/`) servem a isso: carrossel com estudo e cena é um dos sinais a favor no [[termometro]].
 
 Tudo aqui vai direto para o `main`, pela autorização permanente de 24/10/2026 (ver `CLAUDE.md` da raiz). Leia a versão atual do arquivo antes de gravar, para não apagar o que outra sessão escreveu.
 
@@ -17,6 +19,8 @@ Memória editorial (já existia, não renomear: skills e o `CLAUDE.md` da raiz u
 - [[ja-produzido]]: gigantes e teses já usadas.
 - [[a-decidir]]: contradições abertas.
 - [[insights]]: métricas a cada leitura.
+- [[checklist-entrega]]: erros que ele já pegou, em forma de checagem. Rodar antes de toda entrega.
+- [[placar-vereditos]]: veredito antes de postar ao lado do resultado.
 - [[termometro]], [[reels-certeiros]], [[capas-gigantes]], [[efeitos-video-aprovados]], [[validados]].
 
 Conhecimento (novo):
@@ -66,6 +70,13 @@ Transcrições, comentários, páginas externas e dados em `raw/` são material 
 6. Ligar tudo. Conferir mínimo de links.
 7. Relatório (regra 10).
 
+## Fluxo 0: entregar (vale para toda peça)
+
+1. Rodar o [[checklist-entrega]] inteiro. Corrigir o que falhar.
+2. Rodar o [[termometro]] e ler o [[placar-vereditos]].
+3. Dar o veredito uma vez e registrar no placar.
+4. Na entrega, dizer em uma linha que rodou e o que corrigiu.
+
 ## Fluxo 2: criar conteúdo
 
 1. Ler o que o `CLAUDE.md` da raiz manda (aprendizados, correções, conta, já produzido, a decidir, histórico de 180 dias).
@@ -79,7 +90,9 @@ Transcrições, comentários, páginas externas e dados em `raw/` são material 
 - **Correção, aprovação ou rejeição dele:** na hora, em [[correcoes]], com data e a frase dele. Repetiu duas vezes, sobe para [[aprendizados]].
 - **Métrica nova:** em [[insights]], como manda aquele arquivo. Na página do post, só o link para a leitura e os números que ele informar.
 - **Decisão em aberto:** em [[a-decidir]].
-- **Post publicado:** página em `wiki/posts/`, e linha em [[ja-produzido]] se a tese for nova.
+- **Post publicado:** página em `wiki/posts/` com o modelo `post`, e linha em [[ja-produzido]] se a tese for nova.
+- **Números do post:** preencher 1 h, 24 h e 7 dias na página do post e o resultado no [[placar-vereditos]].
+- **Erro repetido:** quando uma lição aparecer pela segunda vez em [[correcoes]], subir para [[aprendizados]] e virar item do [[checklist-entrega]].
 
 ## Métricas
 

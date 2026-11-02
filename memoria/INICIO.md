@@ -40,7 +40,7 @@ Temas (mapas). Cada tema novo entra aqui.
 
 ## Posts e ideias
 
-- Posts publicados: pasta `wiki/posts/`
+- Posts publicados: pasta `wiki/posts/`. Engenharia reversa: [[reel-o-sumico-borderline]], [[reel-mini-manual-para-familia]]
 - Ideias e roteiros: pasta `wiki/ideias/`
 
 ## Material bruto

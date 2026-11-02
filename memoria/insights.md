@@ -18,6 +18,17 @@ Conector `instagram`, conta 17841401503370732. Janela de até 14 dias por chamad
 - Retenção, em chamada separada: `media_permalink, media_reel_avg_watch_time, media_reel_skip_rate`.
 - Curtidas e comentários vieram vazios em 26/10. Se precisar deles, pedir print a ele.
 
+## Leitura de 02/11/2026 (prints dele, Insights do app, engenharia reversa dos gigantes)
+
+Ele mandou os Insights completos de dois Reels gigantes e os arquivos de vídeo. Análise completa em `wiki/posts/`. Taxas e comparações (mais alto, mais baixo, típico) são do próprio app.
+
+| Reel | Views | Alcance | Não seg. | Tempo médio | Pulo | Envios | Reposts | Curtidas | Salvos | Coment. | Seguidores | Stories como fonte |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| O sumiço borderline (DWrHk3yjuV8, 03/04) | 163.445 | 125.469 | 67% | 8 s de 26 | 65,1% (mais alto) | 2.500 (2,0%) | 1.100 | 8.309 (6,4%, mais baixo) | 1.500 (1,2%, mais baixo) | 476 | 369 | 27,5% |
+| Mini-manual para família (64 s) | 118.682 | 92.340 | 70,8% | 20 s de 64 | 47,1% (mais baixo) | 4.400 (4,7%) | 1.100 | 11.191 (11,9%) | 2.400 (2,6%) | 159 | 657 | 12,6% |
+
+Observação, 2 posts: dois motores diferentes. O sumiço não prendeu e viajou por repost (Stories 27,5% das views). O mini-manual prendeu, foi salvo e deu 5,5 seguidores por mil views, o maior visto em orgânico. O repost igual do sumiço em 06/08 fez 19.891 views, 8 vezes menos: repost igual não repete resultado.
+
 ## Leitura de 02/11/2026, 13h36 UTC (Vamos, contador público do Instagram, 26/10 a 02/11)
 
 Origem: Vamos lendo o perfil público, a pedido dele ("Peça o que precisar de dados a mais pro Vamos"). Views aqui são o contador público do app, que não é `media_views` do Windsor: o carro marcava 1.974 no Windsor em 30/10 e 11.889 no contador público em 02/11. Não comparar entre fontes. Curtidas e comentários entram pela primeira vez. Esta origem não traz alcance, envios, salvos nem retenção. Hora exata da leitura só ficou registrada para o Reel de 02/11; os outros foram lidos em 02/11 sem hora.

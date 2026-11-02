@@ -392,7 +392,7 @@ const Numero4: React.FC = () => {
   return (
     <svg width={w} height={h} style={{ overflow: "visible", display: "block" }}>
       <defs>
-        <filter id="rasgo4" x="-10%" y="-10%" width="120%" height="120%">
+        <filter id="rasgo4" x="-10%" y="-10%" width="120%" height="120%" colorInterpolationFilters="sRGB">
           <feTurbulence type="fractalNoise" baseFrequency="0.06" numOctaves={2} seed={4} result="n" />
           <feDisplacementMap in="SourceGraphic" in2="n" scale={9} xChannelSelector="R" yChannelSelector="G" result="d" />
           <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves={3} seed={9} result="g" />

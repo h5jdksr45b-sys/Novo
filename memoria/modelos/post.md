@@ -3,10 +3,10 @@ titulo:
 tipo: post
 criado: {{date:YYYY-MM-DD}}
 fonte: informado pelo Dr. Fabio em AAAA-MM-DD
-status: rascunho
-publicado: AAAA-MM-DD
+status: aguardando números | 24h | 7 dias | fechado
+publicado: AAAA-MM-DD HH:MM
 formato: reel | carrossel | imagem | stories
-link:
+codigo:
 publico: pessoa com TPB | familiar | parceiro | profissional
 funcao: alcance | confiança | venda
 ---
@@ -17,23 +17,37 @@ funcao: alcance | confiança | venda
 
 Texto exato da capa ou da primeira fala.
 
-## Tema e tese
+## Tese
 
-- Tema: [[]]
-- Tese central, em uma frase:
-- Conceitos usados: [[]], [[]]
+Uma frase. Tema: [[]]
 
-## Estrutura
+## O que a peça tem
 
-Slides ou blocos da fala, em uma linha cada.
+Preencher sim ou não. Serve para comparar posts depois, com os itens do [[termometro]].
 
-## Chamada para ação
+- Borderline como sujeito da capa:
+- Protagonista: quem sofre | quem convive | terceiro
+- Cena concreta do dia a dia:
+- Estudo com fonte:
+- Lista em itens:
+- Rosto dele (Reel):
+- Primeiro quadro com rosto e texto (Reel):
+- Troca de imagem antes de 1,5 s (Reel):
+- COMEÇAR ou palavra-chave:
+- Slides ou duração:
+- Música:
+
+## Veredito antes de postar
+
+- Claude: feed | teste | refazer. Saldo do termômetro: . Vizinho usado: 
+- Leitura dele: 
+- Copiado no [[placar-vereditos]]: sim | não
 
 ## Números
 
-Só o que ele informou ou o que veio de leitura registrada em [[insights]]. Cada métrica separada.
+Cada métrica separada. Fonte: ele ou leitura em [[insights]].
 
-| Métrica | Valor | Data da coleta | Idade do post |
+| Métrica | 1 h | 24 h | 7 dias |
 |---|---|---|---|
 | Visualizações |  |  |  |
 | Alcance |  |  |  |
@@ -45,12 +59,8 @@ Só o que ele informou ou o que veio de leitura registrada em [[insights]]. Cada
 
 ## O que ele disse
 
-Frases dele sobre o post, com data. Copiar também em [[correcoes]].
+Frases dele, com data. Copiar também em [[correcoes]].
 
-## Observações
+## Lição
 
-Marcar cada linha como observação de post ou hipótese editorial. Sem regra de causa.
-
-## A verificar
-
-- [verificar]
+Uma linha. Marcar como observação ou hipótese editorial. Se for erro que se repetiu, levar para o [[checklist-entrega]].

@@ -18,6 +18,30 @@ Conector `instagram`, conta 17841401503370732. Janela de até 14 dias por chamad
 - Retenção, em chamada separada: `media_permalink, media_reel_avg_watch_time, media_reel_skip_rate`.
 - Curtidas e comentários vieram vazios em 26/10. Se precisar deles, pedir print a ele.
 
+## Leitura de 02/11/2026, 13h36 UTC (Vamos, contador público do Instagram, 26/10 a 02/11)
+
+Origem: Vamos lendo o perfil público, a pedido dele ("Peça o que precisar de dados a mais pro Vamos"). Views aqui são o contador público do app, que não é `media_views` do Windsor: o carro marcava 1.974 no Windsor em 30/10 e 11.889 no contador público em 02/11. Não comparar entre fontes. Curtidas e comentários entram pela primeira vez. Esta origem não traz alcance, envios, salvos nem retenção. Hora exata da leitura só ficou registrada para o Reel de 02/11; os outros foram lidos em 02/11 sem hora.
+
+| Data | Código | Tema | Formato | Views públicas | Curtidas | Comentários |
+|---|---|---|---|---|---|---|
+| 26/10 | De-bmfjug_u | Pega o carro e some na briga | Reel | 11.889 | 366 | 17 |
+| 27/10 | Dd6SAnhO_Ia | Borderline silencioso (animação) | Reel | 11.139 (lido em 30/10) | 588 (30/10) | 1 (30/10) |
+| 28/10 | DfDQcp3uWtg | Borderline tem delírio? | Reel | 11.238 | 306 | 31 |
+| 29/10 | DfDw-Jtuo17 | Mais 5 coisas se gosta de você | Reel | 16.683 | 1.169 | 18 |
+| 29/10 | DfF0UcAlK0X | Adolescência difícil ou borderline | Carrossel | não mostra | 496 | 7 |
+| 30/10 | DfIQIA-OixR | Tudo o que você perde por ser verdadeiro era falso | Reel | 4.017 | 134 | 2 |
+| 30/10 | DfIyTyHOogt | Por que o borderline exige resolver a briga agora? | Reel | 16.894 | 1.013 | 21 |
+| 31/10 | DfKmnrVFBjp | FRÁGIL | Carrossel | não mostra | 442 | 12 |
+| 02/11 | DfODDwCuoMG | 5 coisas depois da crise | Reel | 5.176 (13 h de vida) | 240 | 5 |
+
+Fatos a conferir com ele:
+- O carrossel da adolescência (DfF0UcAlK0X) estava acessível em 02/11, com 496 curtidas. Em 29/10 ele disse "Eu até apaguei de vergonha". Ou não apagou, ou voltou. [verificar]
+- O carrossel do irmão quieto não foi encontrado no perfil. [verificar: foi publicado?]
+- "Resolver a briga agora" (30/10, 16.894) e "Borderline silencioso" (27/10) não estão nas leituras anteriores do Windsor. Entram na próxima puxada. [verificar: feitos por ele ou por equipe?]
+- Vamos leu "Tudo o que você perde por ser verdadeiro era falso" como abertura de DfIQIA-OixR; a leitura de 30/10 chamou o mesmo código de "Concorda para não perder (horas de vida)". Conferir qual é o Reel. [verificar]
+
+Observação, não regra: entre os Reels de 26 a 30/10, os dois com mais views públicas e curtidas são pergunta ou lista sobre comportamento visto de fora (resolver a briga agora; mais 5 coisas). Dois posts. O carro, que ele chamou de pior flop na primeira hora, marcava 11.889 views públicas e 366 curtidas uma semana depois. Leitura de primeira hora e leitura de 7 dias são coisas diferentes; registrar as duas.
+
 ## Leitura parcial de 31/10/2026 (Windsor, carrossel FRÁGIL, poucas horas de vida)
 
 | Data | Código | Tema | Views | Alcance | Envios | Salvos |

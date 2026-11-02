@@ -19,7 +19,6 @@ import {
   ETIQUETA_BRANCA,
   EtiquetaEmBranco,
   FRAME2,
-  FRAME3_TOTAL,
   FaixaEtapa,
   LinhaFrame2,
   Subtitulo,
@@ -36,45 +35,8 @@ import {
 // [Ainda não tem raiva. Não tem briga.]
 // [É um incômodo tão rápido que você nem dá nome.]
 
-// Tempos em segundos. Ajuste aqui para alinhar com a narração.
-export const CONFIG_FRAME3 = {
-  fps: 30,
-  duracao: 12,
-  cenas: {
-    mergulho: { inicio: 0, fim: 2.0 },
-    relogio: { inicio: 2.0, fim: 5.2 },
-    aperto: { inicio: 5.2, fim: 7.0 },
-    semNome: { inicio: 7.0, fim: 9.0 },
-    branco: { inicio: 9.0, fim: 12.0 },
-  },
-  // Cena 1
-  mergulhoFim: 1.0,
-  discoRaioFinal: 400,
-  discoCentro: { x: 540, y: 900 },
-  faixaEtapa1: 1.0,
-  subtitulo: 1.45,
-  // Cena 2
-  sobeTopo: 2.0,
-  sobeTopoDuracao: 0.5,
-  discoSai: 2.0,
-  relogioCola: 2.5,
-  ponteirosParam: 4.3,
-  mais40: 3.05,
-  // Cena 3
-  relogioSai: 5.2,
-  folhaCola: 5.4,
-  trancosAmassado: [5.85, 6.25, 6.65],
-  // Cena 4
-  raiva: 7.55,
-  briga: 8.45,
-  riscoAtraso: 0.13,
-  riscoDuracao: 0.25,
-  // Cena 5
-  raivaSai: 9.05,
-  brigaSai: 9.15,
-  etiquetaBranca: 9.6,
-  tudoPara: 11.0,
-};
+export { CONFIG_FRAME3 } from "./config";
+import { CONFIG_FRAME3 } from "./config";
 
 const C = CONFIG_FRAME3;
 const q = (s: number) => Math.round(s * C.fps);
@@ -337,4 +299,4 @@ export const Frame3: React.FC = () => {
   );
 };
 
-export const FRAME3_DURACAO = FRAME3_TOTAL;
+export const FRAME3_DURACAO = Math.round(CONFIG_FRAME3.fps * CONFIG_FRAME3.duracao);

@@ -2,7 +2,6 @@ import React from "react";
 import { AbsoluteFill, interpolate, random, useCurrentFrame } from "remotion";
 import { COR, CirculoVermelho, Etiqueta, Fita, Fundo, Relogio, Seta } from "../Colagem/papel";
 import {
-  PASSO_PADRAO,
   POSE_ZERO,
   Peca,
   Pose,
@@ -26,6 +25,7 @@ import {
   poseBolinhaFinalFrame3,
 } from "../Colagem/layout";
 import escrita from "./escrita.json";
+import { FRAME3_DURACAO } from "../Frame3";
 
 // FRAME 4: ETAPA 2 e ETAPA 3, até o grito
 // Narração:
@@ -34,51 +34,12 @@ import escrita from "./escrita.json";
 // [Etapa três. O corpo acelera, e tudo precisa ser resolvido agora.]
 // [E aí vem o grito.]
 
-// Tempos em segundos. Ajuste aqui para alinhar com a narração.
-export const CONFIG_FRAME4 = {
-  fps: 30,
-  duracao: 10,
-  cenas: {
-    etapa2: { inicio: 0, fim: 1.6 },
-    piorVersao: { inicio: 1.6, fim: 4.8 },
-    etapa3: { inicio: 4.8, fim: 7.8 },
-    grito: { inicio: 7.8, fim: 10.0 },
-  },
-  // Cena 1
-  etapa1Arranca: 0.5,
-  etapa2Cola: 1.05,
-  // Cena 2
-  escritaInicio: 2.2,
-  escritaFim: 4.6, // termina junto com a palavra comigo
-  bolinhaTrancos: [3.0, 3.9],
-  bolinhaEscalas: [1, 1.28, 1.58],
-  // Cena 3
-  etapa2Arranca: 4.8,
-  etapa3Cola: 5.0,
-  recortes: {
-    relogio: 5.25,
-    seta1: 5.5,
-    fita1: 5.65,
-    seta2: 5.8,
-    fita2: 5.95,
-    seta3: 6.1,
-    fita3: 6.3,
-    fita4: 6.5,
-  },
-  agora: 7.3,
-  // Cena 4
-  limpa: 7.8,
-  limpaQuadros: 4,
-  circulo: 8.15,
-  semTremorQuadrosFinais: 10,
-  // Tremor de stop motion: troca de pose a cada N quadros
-  passoNormal: PASSO_PADRAO,
-  passoAcelerado: 1,
-};
+export { CONFIG_FRAME4 } from "./config";
+import { CONFIG_FRAME4 } from "./config";
 
 const C = CONFIG_FRAME4;
 const q = (s: number) => Math.round(s * C.fps);
-const TOTAL = C.fps * C.duracao;
+const TOTAL = Math.round(C.fps * C.duracao);
 
 const RELOGIO = { x: 235, y: 440, r: 125, rot: -9 };
 const SETAS = [
@@ -185,7 +146,7 @@ export const Frame4: React.FC = () => {
       : C.passoNormal;
   // O primeiro quadro repete o último do frame 3: só a bolinha tem pose.
   const pose = (id: string): Pose => (f === 0 ? POSE_ZERO : tremor(id, f, passo));
-  const poseBola = f === 0 ? poseBolinhaFinalFrame3() : tremor("bolinha", f, passo);
+  const poseBola = f === 0 ? poseBolinhaFinalFrame3(FRAME3_DURACAO) : tremor("bolinha", f, passo);
 
   // Limpeza da cena 4: tudo sai em 4 quadros
   const limpa = (id: string, x: number, y: number) => {

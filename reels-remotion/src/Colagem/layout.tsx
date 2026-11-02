@@ -46,9 +46,8 @@ export const EtiquetaEmBranco: React.FC<{ children?: React.ReactNode }> = ({ chi
 
 // Tremor leve da bolinha no fim do frame 3.
 export const TREMOR_LEVE = { desloc: 1.6, giro: 0.45 };
-export const FRAME3_TOTAL = 360;
-export const poseBolinhaFinalFrame3 = (): Pose =>
-  tremor("bolinha", FRAME3_TOTAL - 1, PASSO_PADRAO, TREMOR_LEVE);
+export const poseBolinhaFinalFrame3 = (totalQuadrosFrame3: number): Pose =>
+  tremor("bolinha", totalQuadrosFrame3 - 1, PASSO_PADRAO, TREMOR_LEVE);
 
 // Último quadro do frame 2: linha com os círculos 1, 2, 3 e 4, ponto âmbar
 // e seta AQUI. Medidas tiradas do vídeo colagem-etapas.

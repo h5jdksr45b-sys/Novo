@@ -12,6 +12,7 @@ import { MitoApego } from "./MitoApego";
 import { MitoRindo } from "./MitoRindo";
 import { CONFIG_FRAME3, Frame3 } from "./Frame3";
 import { CONFIG_FRAME4, Frame4 } from "./Frame4";
+import { REEL_ETAPAS_DURACAO, ReelEtapas } from "./ReelEtapas";
 
 // Each <Composition> is an entry in the sidebar!
 
@@ -62,7 +63,7 @@ export const RemotionRoot: React.FC = () => {
       <Composition
         id="Frame3"
         component={Frame3}
-        durationInFrames={CONFIG_FRAME3.fps * CONFIG_FRAME3.duracao}
+        durationInFrames={Math.round(CONFIG_FRAME3.fps * CONFIG_FRAME3.duracao)}
         fps={CONFIG_FRAME3.fps}
         width={1080}
         height={1920}
@@ -70,8 +71,16 @@ export const RemotionRoot: React.FC = () => {
       <Composition
         id="Frame4"
         component={Frame4}
-        durationInFrames={CONFIG_FRAME4.fps * CONFIG_FRAME4.duracao}
+        durationInFrames={Math.round(CONFIG_FRAME4.fps * CONFIG_FRAME4.duracao)}
         fps={CONFIG_FRAME4.fps}
+        width={1080}
+        height={1920}
+      />
+      <Composition
+        id="ReelEtapas"
+        component={ReelEtapas}
+        durationInFrames={REEL_ETAPAS_DURACAO}
+        fps={30}
         width={1080}
         height={1920}
       />

@@ -75,16 +75,16 @@
     </style>
   </head>
   <body>
-    <div id="root" data-composition-id="main" data-start="0" data-width="1080" data-height="1920" data-duration="20">
+    <div id="root" data-composition-id="main" data-start="0" data-width="1080" data-height="1920" data-duration="31.5">
 
       <!-- 1. abertura -->
-      <section id="c1" class="clip" data-start="0" data-duration="3.6" data-track-index="0">
+      <section id="c1" class="clip" data-start="0" data-duration="3.9" data-track-index="0">
         <img id="c1-img" class="fill" src="assets/img/nossa-loja-1080.jpg" alt="" />
         <div class="over brand" id="c1-brand">Borderline sem estigma</div>
       </section>
 
       <!-- 2. Protocolo da Crise -->
-      <section id="c2" class="clip" data-start="3.4" data-duration="5.1" data-track-index="0">
+      <section id="c2" class="clip" data-start="3.6" data-duration="8.4" data-track-index="0">
         <div class="over brand">Borderline sem estigma</div>
         <div class="vidro" id="c2-vidro">
           <img class="painel" src="assets/img/vidro-painel.jpg" alt="" />
@@ -102,7 +102,7 @@
       </section>
 
       <!-- 3. Kit de Regulação -->
-      <section id="c3" class="clip" data-start="8.3" data-duration="5.1" data-track-index="0">
+      <section id="c3" class="clip" data-start="11.8" data-duration="9.5" data-track-index="0">
         <div class="over brand">Borderline sem estigma</div>
         <div class="vidro" id="c3-vidro">
           <img class="painel" src="assets/img/vidro-painel.jpg" alt="" />
@@ -120,7 +120,7 @@
       </section>
 
       <!-- 4. os outros dois -->
-      <section id="c4" class="clip" data-start="13.2" data-duration="4.0" data-track-index="0">
+      <section id="c4" class="clip" data-start="21.1" data-duration="7.1" data-track-index="0">
         <div class="over brand">Borderline sem estigma</div>
         <div class="outros" id="c4-t"><div class="t">Na loja tem <em>também</em></div></div>
         <div class="dupla">
@@ -140,7 +140,7 @@
       </section>
 
       <!-- 5. fecho -->
-      <section id="c5" class="clip" data-start="17.0" data-duration="3.0" data-track-index="0">
+      <section id="c5" class="clip" data-start="28.0" data-duration="3.5" data-track-index="0">
         <div class="over brand">Borderline sem estigma</div>
         <div class="fim" id="c5-f">
           <div class="url">drfabioschmidt.net/loja</div>
@@ -151,13 +151,15 @@
         </div>
       </section>
 
-      <audio id="sfx-w1" src="assets/sfx/whoosh.mp3" data-start="3.45" data-duration="0.8" data-track-index="2" data-volume="0.055"></audio>
-      <audio id="sfx-w2" src="assets/sfx/whoosh.mp3" data-start="8.35" data-duration="0.8" data-track-index="2" data-volume="0.055"></audio>
-      <audio id="sfx-w3" src="assets/sfx/whoosh.mp3" data-start="13.25" data-duration="0.8" data-track-index="2" data-volume="0.055"></audio>
-      <audio id="sfx-w4" src="assets/sfx/whoosh.mp3" data-start="17.05" data-duration="0.8" data-track-index="2" data-volume="0.055"></audio>
-      <audio id="sfx-c1" src="assets/sfx/click-soft.mp3" data-start="5.0" data-duration="0.3" data-track-index="3" data-volume="0.06"></audio>
-      <audio id="sfx-c2" src="assets/sfx/click-soft.mp3" data-start="9.9" data-duration="0.3" data-track-index="3" data-volume="0.06"></audio>
-      <audio id="sfx-c3" src="assets/sfx/click-soft.mp3" data-start="14.8" data-duration="0.3" data-track-index="3" data-volume="0.06"></audio>
+      <audio id="voz-0" src="assets/voz/v0.wav" data-start="0.5" data-duration="2.96" data-track-index="1" data-volume="1"></audio>
+      <audio id="voz-1" src="assets/voz/v1.wav" data-start="4.0" data-duration="7.67" data-track-index="1" data-volume="1"></audio>
+      <audio id="voz-2" src="assets/voz/v2.wav" data-start="12.2" data-duration="8.74" data-track-index="1" data-volume="1"></audio>
+      <audio id="voz-3" src="assets/voz/v3.wav" data-start="21.4" data-duration="6.49" data-track-index="1" data-volume="1"></audio>
+      <audio id="voz-4" src="assets/voz/v4.wav" data-start="28.3" data-duration="2.1" data-track-index="1" data-volume="1"></audio>
+      <audio id="sfx-w1" src="assets/sfx/whoosh.mp3" data-start="3.65" data-duration="0.8" data-track-index="2" data-volume="0.04"></audio>
+      <audio id="sfx-w2" src="assets/sfx/whoosh.mp3" data-start="11.85" data-duration="0.8" data-track-index="2" data-volume="0.04"></audio>
+      <audio id="sfx-w3" src="assets/sfx/whoosh.mp3" data-start="21.15" data-duration="0.8" data-track-index="2" data-volume="0.04"></audio>
+      <audio id="sfx-w4" src="assets/sfx/whoosh.mp3" data-start="28.05" data-duration="0.8" data-track-index="2" data-volume="0.04"></audio>
     </div>
 
     <script>
@@ -165,34 +167,34 @@
       const out = "power3.out";
 
       // 1. abertura: zoom lento, marca sobe
-      tl.fromTo("#c1-img", { scale: 1.06 }, { scale: 1, duration: 3.6, ease: "none" }, 0);
+      tl.fromTo("#c1-img", { scale: 1.06 }, { scale: 1, duration: 3.9, ease: "none" }, 0);
       tl.fromTo("#c1-brand", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.7, ease: out }, 0.3);
-      tl.to("#c1-img", { opacity: 0, duration: 0.4, ease: "power2.in" }, 3.2);
-      tl.to("#c1-brand", { opacity: 0, duration: 0.3 }, 3.2);
+      tl.to("#c1-img", { opacity: 0, duration: 0.4, ease: "power2.in" }, 3.5);
+      tl.to("#c1-brand", { opacity: 0, duration: 0.3 }, 3.5);
 
       // produto em destaque: vidro aparece, capa sobe por dentro, textos em cascata
-      function produto(id, at) {
+      function produto(id, at, len) {
         tl.fromTo(`#${id}-vidro`, { opacity: 0, scale: 0.94 }, { opacity: 1, scale: 1, duration: 0.6, ease: out }, at);
         tl.fromTo(`#${id}-capa`, { y: 90, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: out }, at + 0.25);
         tl.fromTo(`#${id}-ref`, { opacity: 0 }, { opacity: 1, duration: 0.5 }, at + 0.6);
         tl.fromTo(`#${id}-bri`, { opacity: 0, x: -120 }, { opacity: 1, x: 0, duration: 0.9, ease: out }, at + 0.5);
         tl.fromTo(`#${id}-info > *`, { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.5, ease: out, stagger: 0.12 }, at + 0.7);
-        tl.to(`#${id}-capa`, { y: -8, duration: 3.2, ease: "sine.inOut" }, at + 1.0);
-        tl.to(`#${id}-vidro, #${id}-info`, { opacity: 0, duration: 0.35, ease: "power2.in" }, at + 4.7);
+        tl.to(`#${id}-capa`, { y: -10, duration: len - 1.4, ease: "sine.inOut" }, at + 1.0);
+        tl.to(`#${id}-vidro, #${id}-info`, { opacity: 0, duration: 0.35, ease: "power2.in" }, at + len - 0.4);
       }
-      produto("c2", 3.4);
-      produto("c3", 8.3);
+      produto("c2", 3.6, 8.4);
+      produto("c3", 11.8, 9.5);
 
       // 4. os outros dois
-      tl.fromTo("#c4-t", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: out }, 13.2);
-      tl.fromTo("#c4-a", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.6, ease: out }, 13.5);
-      tl.fromTo("#c4-b", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.6, ease: out }, 13.75);
-      tl.to("#c4-t, #c4-a, #c4-b", { opacity: 0, duration: 0.35, ease: "power2.in" }, 16.8);
+      tl.fromTo("#c4-t", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: out }, 21.1);
+      tl.fromTo("#c4-a", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.6, ease: out }, 23.0);
+      tl.fromTo("#c4-b", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.6, ease: out }, 24.3);
+      tl.to("#c4-t, #c4-a, #c4-b", { opacity: 0, duration: 0.35, ease: "power2.in" }, 27.8);
 
       // 5. fecho
-      tl.fromTo("#c5-f > *", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.5, ease: out, stagger: 0.12 }, 17.1);
-      tl.fromTo("#c5-l", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: out, transformOrigin: "center" }, 17.2);
-      tl.to("#c5-seta", { y: 14, duration: 0.5, ease: "sine.inOut", yoyo: true, repeat: 3 }, 18.0);
+      tl.fromTo("#c5-f > *", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.5, ease: out, stagger: 0.12 }, 28.1);
+      tl.fromTo("#c5-l", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: out, transformOrigin: "center" }, 28.2);
+      tl.to("#c5-seta", { y: 14, duration: 0.5, ease: "sine.inOut", yoyo: true, repeat: 4 }, 29.0);
 
       window.__timelines["main"] = tl;
     </script>

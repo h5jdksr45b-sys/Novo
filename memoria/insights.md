@@ -26,8 +26,9 @@ Ele mandou os Insights completos de dois Reels gigantes e os arquivos de vídeo.
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
 | O sumiço borderline (DWrHk3yjuV8, 03/04) | 163.445 | 125.469 | 67% | 8 s de 26 | 65,1% (mais alto) | 2.500 (2,0%) | 1.100 | 8.309 (6,4%, mais baixo) | 1.500 (1,2%, mais baixo) | 476 | 369 | 27,5% |
 | Mini-manual para família (64 s) | 118.682 | 92.340 | 70,8% | 20 s de 64 | 47,1% (mais baixo) | 4.400 (4,7%) | 1.100 | 11.191 (11,9%) | 2.400 (2,6%) | 159 | 657 | 12,6% |
+| Quando a dor vira alívio, autolesão (73 s) | 187.949 | 149.619 | 88,3% | 16 s de 73 | 52,4% (mais baixo) | 6.000 (3,9%) | 2.900 | 21.612 (14,0%) | 3.100 (2,0%) | 326 | 869 | 6,5% (aba Reels 70,5%) |
 
-Observação, 2 posts: dois motores diferentes. O sumiço não prendeu e viajou por repost (Stories 27,5% das views). O mini-manual prendeu, foi salvo e deu 5,5 seguidores por mil views, o maior visto em orgânico. O repost igual do sumiço em 06/08 fez 19.891 views, 8 vezes menos: repost igual não repete resultado.
+Observação, 3 posts: três motores diferentes. A autolesão foi distribuída pela aba Reels (70,5%) para 88% de não seguidores, com a maior taxa de curtida da conta e 12,9% de público de 13 a 17 anos. O sumiço não prendeu e viajou por repost (Stories 27,5% das views). O mini-manual prendeu, foi salvo e deu 5,5 seguidores por mil views, o maior visto em orgânico. O repost igual do sumiço em 06/08 fez 19.891 views, 8 vezes menos: repost igual não repete resultado.
 
 ## Leitura de 02/11/2026, 13h36 UTC (Vamos, contador público do Instagram, 26/10 a 02/11)
 

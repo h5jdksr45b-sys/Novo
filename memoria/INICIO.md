@@ -26,6 +26,7 @@ Página de entrada do cofre. Regras em `CLAUDE.md` desta pasta.
 
 ## O que já funcionou
 
+- [[mecanismos-gigantes]]
 - [[reels-certeiros]]
 - [[termometro]]
 - [[capas-gigantes]]
@@ -40,7 +41,7 @@ Temas (mapas). Cada tema novo entra aqui.
 
 ## Posts e ideias
 
-- Posts publicados: pasta `wiki/posts/`. Engenharia reversa: [[reel-o-sumico-borderline]], [[reel-mini-manual-para-familia]], [[reel-quando-a-dor-vira-alivio]], [[reel-borderline-vida-sexual-e-abusos]]
+- Posts publicados: pasta `wiki/posts/`. Engenharia reversa: [[reel-o-sumico-borderline]], [[reel-mini-manual-para-familia]], [[reel-quando-a-dor-vira-alivio]], [[reel-borderline-vida-sexual-e-abusos]], [[reel-5-coisas-se-gosta-de-verdade]]. Síntese: [[mecanismos-gigantes]]
 - Ideias e roteiros: pasta `wiki/ideias/`
 
 ## Material bruto

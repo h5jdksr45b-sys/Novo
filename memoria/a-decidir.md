@@ -21,3 +21,7 @@ Os oito pontos de 24/10/2026 foram decididos e estão em `aprendizados.md`, seç
 - `conta.md`, fatos informados por ele: livro "Quem sofre não escolhe como gritar", R$69.
 - `novo/hub.html` e anotações antigas: "Quando Escolher Não É Possível", R$69, 2ª edição expandida, link pay.hotmart.com/U103950622S?off=3xv992tf.
 - Regra provisória: a página Respire Agora usou o título e o link do hub. Perguntar qual é o nome atual antes da próxima peça que cite o livro.
+
+## Capa com contraste nos gigantes (02/11/2026)
+
+A regra de 24/10 proíbe fórmula de contraste (não é X, é Y) e frase começando com ela. A engenharia reversa de 02/11 achou contraste explícito na capa de 3 dos 5 gigantes (NADA DISSO PARECE AMOR. MAS É ASSIM QUE ELA AMA.; QUANDO A DOR VIRA ALÍVIO) e legendas começando com "ela" no 5 coisas. Dado contra regra. Decisão dele pendente: a regra vale para capa nova mesmo assim, ou contraste verdadeiro e sustentado pelo vídeo pode voltar? Ver `mecanismos-gigantes.md`, item 9.

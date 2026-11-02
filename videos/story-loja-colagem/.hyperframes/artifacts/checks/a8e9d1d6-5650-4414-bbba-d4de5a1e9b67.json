@@ -1,0 +1,551 @@
+{
+  "ok": true,
+  "strict": false,
+  "browserSkipped": false,
+  "lint": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 7,
+    "infoCount": 0,
+    "findings": [
+      {
+        "code": "duplicate_media_discovery_risk",
+        "severity": "warning",
+        "message": "Detected 2 matching img entries with the same source/start/duration.",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {},
+        "sourceFile": "/home/user/Novo/videos/story-loja-colagem/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Avoid duplicated media nodes that can be discovered twice during compilation."
+      },
+      {
+        "code": "timeline_track_too_dense",
+        "severity": "warning",
+        "message": "Track 0 has 5 timed elements in this HTML file. Smaller sub-compositions keep timelines easier to read, iterate on, and diff.",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {},
+        "sourceFile": "/home/user/Novo/videos/story-loja-colagem/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move coherent scene groups into separate .html files under compositions/ and mount them from the parent with data-composition-src so the timeline stays easier to inspect, revise, and validate."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<section id=\"c1\"> is a timeline element that contains nested <img id=\"c1-img\">. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#c1",
+        "dataAttributes": {},
+        "sourceFile": "/home/user/Novo/videos/story-loja-colagem/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <section id=\"c1\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<section id=\"c2\"> is a timeline element that contains nested <div>. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#c2",
+        "dataAttributes": {},
+        "sourceFile": "/home/user/Novo/videos/story-loja-colagem/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <section id=\"c2\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<section id=\"c3\"> is a timeline element that contains nested <div>. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#c3",
+        "dataAttributes": {},
+        "sourceFile": "/home/user/Novo/videos/story-loja-colagem/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <section id=\"c3\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<section id=\"c4\"> is a timeline element that contains nested <div>. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#c4",
+        "dataAttributes": {},
+        "sourceFile": "/home/user/Novo/videos/story-loja-colagem/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <section id=\"c4\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<section id=\"c5\"> is a timeline element that contains nested <div>. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#c5",
+        "dataAttributes": {},
+        "sourceFile": "/home/user/Novo/videos/story-loja-colagem/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <section id=\"c5\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      }
+    ],
+    "filesScanned": 1
+  },
+  "runtime": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 4,
+    "infoCount": 0,
+    "findings": [
+      {
+        "code": "clip_media_fit",
+        "severity": "warning",
+        "message": "Audio \"sfx-w1\" is 0.57s but its slot (data-duration) is 0.80s — the slot is shortened to the media length when rendered. Set data-duration to ~0.57s if that isn't intended.",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-width": "1080",
+          "data-height": "1920",
+          "data-duration": "20"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1080,
+          "height": 1920
+        },
+        "time": 0
+      },
+      {
+        "code": "clip_media_fit",
+        "severity": "warning",
+        "message": "Audio \"sfx-w2\" is 0.57s but its slot (data-duration) is 0.80s — the slot is shortened to the media length when rendered. Set data-duration to ~0.57s if that isn't intended.",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-width": "1080",
+          "data-height": "1920",
+          "data-duration": "20"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1080,
+          "height": 1920
+        },
+        "time": 0
+      },
+      {
+        "code": "clip_media_fit",
+        "severity": "warning",
+        "message": "Audio \"sfx-w3\" is 0.57s but its slot (data-duration) is 0.80s — the slot is shortened to the media length when rendered. Set data-duration to ~0.57s if that isn't intended.",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-width": "1080",
+          "data-height": "1920",
+          "data-duration": "20"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1080,
+          "height": 1920
+        },
+        "time": 0
+      },
+      {
+        "code": "clip_media_fit",
+        "severity": "warning",
+        "message": "Audio \"sfx-w4\" is 0.57s but its slot (data-duration) is 0.80s — the slot is shortened to the media length when rendered. Set data-duration to ~0.57s if that isn't intended.",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-width": "1080",
+          "data-height": "1920",
+          "data-duration": "20"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1080,
+          "height": 1920
+        },
+        "time": 0
+      }
+    ]
+  },
+  "layout": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 2,
+    "infoCount": 2,
+    "findings": [
+      {
+        "code": "content_overlap",
+        "severity": "warning",
+        "time": 13.25,
+        "selector": "#c3 > div:nth-of-type(1)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 254.39,
+          "top": 150,
+          "right": 825.61,
+          "bottom": 182,
+          "width": 571.22,
+          "height": 32
+        },
+        "containerSelector": "#c4 > div:nth-of-type(1)",
+        "text": "BORDERLINE SEM ESTIGMA",
+        "fixHint": "Give each block its own zone, or put data-layout-allow-overlap on the text or on a container inside the scene. A marker on the scene root does not apply.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 254.39,
+          "y": 150,
+          "width": 571.22,
+          "height": 32
+        },
+        "firstSeen": 13.25,
+        "lastSeen": 13.375,
+        "occurrences": 2,
+        "heldMs": 125,
+        "times": [
+          13.25,
+          13.375
+        ]
+      },
+      {
+        "code": "content_overlap",
+        "severity": "warning",
+        "time": 17,
+        "selector": "#c4 > div:nth-of-type(1)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 254.39,
+          "top": 150,
+          "right": 825.61,
+          "bottom": 182,
+          "width": 571.22,
+          "height": 32
+        },
+        "containerSelector": "#c5 > div:nth-of-type(1)",
+        "text": "BORDERLINE SEM ESTIGMA",
+        "fixHint": "Give each block its own zone, or put data-layout-allow-overlap on the text or on a container inside the scene. A marker on the scene root does not apply.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 254.39,
+          "y": 150,
+          "width": 571.22,
+          "height": 32
+        },
+        "firstSeen": 17,
+        "lastSeen": 17.125,
+        "occurrences": 2,
+        "heldMs": 125,
+        "times": [
+          17,
+          17.125
+        ]
+      },
+      {
+        "code": "container_overflow",
+        "severity": "info",
+        "time": 1.111,
+        "selector": "#c1-img",
+        "message": "Element extends outside a clipping layout container.",
+        "rect": {
+          "left": -22.52,
+          "top": -40.03,
+          "right": 1102.52,
+          "bottom": 1960.03,
+          "width": 1125.04,
+          "height": 2000.06
+        },
+        "containerSelector": "#c1",
+        "fixHint": "Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "left": 22.52,
+          "right": 22.52,
+          "top": 40.03,
+          "bottom": 40.03
+        },
+        "dataAttributes": {
+          "data-hf-render-id": "c1-img",
+          "data-hf-authored-opacity": ""
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": -22.52,
+          "y": -40.03,
+          "width": 1125.04,
+          "height": 2000.06
+        },
+        "firstSeen": 1.111,
+        "lastSeen": 3.333,
+        "occurrences": 2,
+        "heldMs": 0,
+        "times": [
+          1.111,
+          3.333
+        ]
+      },
+      {
+        "code": "content_overlap",
+        "severity": "info",
+        "time": 8.375,
+        "selector": "#c2 > div:nth-of-type(1)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 254.39,
+          "top": 150,
+          "right": 825.61,
+          "bottom": 182,
+          "width": 571.22,
+          "height": 32
+        },
+        "containerSelector": "#c3 > div:nth-of-type(1)",
+        "text": "BORDERLINE SEM ESTIGMA",
+        "fixHint": "Give each block its own zone, or put data-layout-allow-overlap on the text or on a container inside the scene. A marker on the scene root does not apply.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 254.39,
+          "y": 150,
+          "width": 571.22,
+          "height": 32
+        },
+        "firstSeen": 8.375,
+        "lastSeen": 8.375,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          8.375
+        ]
+      }
+    ],
+    "duration": 20,
+    "samples": [
+      1.111,
+      3.333,
+      5.556,
+      7.778,
+      10,
+      12.222,
+      14.444,
+      16.667,
+      18.889
+    ],
+    "transitionSamples": [],
+    "transitionSamplesDropped": 0,
+    "tolerance": 2,
+    "totalIssueCount": 4,
+    "truncated": false
+  },
+  "motion": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "enabled": false,
+    "samples": 0
+  },
+  "contrast": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "enabled": true,
+    "samples": [
+      1.111,
+      5.556,
+      10,
+      14.444,
+      18.889
+    ],
+    "checked": 26,
+    "passed": 26
+  },
+  "craft": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 1,
+    "infoCount": 0,
+    "findings": [
+      {
+        "code": "text_below_floor",
+        "severity": "warning",
+        "message": "Type floor is 28 px (2.6% of the 1080 px short side, what a phone can read) and 10 text elements stay under it for 0.5 s or more, the smallest \"Guia clínico · volume I\" at 24 px: set reading text to at least 28 px, or put data-layout-ignore on text that is texture rather than reading; see references/look.md.",
+        "text": "Guia clínico · volume I",
+        "selector": "#c2-info > div:nth-of-type(1)",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 291.48,
+          "y": 1196.36,
+          "width": 497.04,
+          "height": 29
+        },
+        "time": 4.25,
+        "times": [
+          0.5,
+          3.5,
+          4.25,
+          8.375,
+          9.125,
+          13.25,
+          13.625,
+          13.875,
+          17,
+          17.75
+        ],
+        "fontPx": 24,
+        "floorPx": 28,
+        "seconds": 4.25,
+        "elements": [
+          {
+            "selector": "#c2-info > div:nth-of-type(1)",
+            "text": "Guia clínico · volume I",
+            "fontPx": 24,
+            "time": 4.25,
+            "seconds": 4.25
+          },
+          {
+            "selector": "#c3-info > div:nth-of-type(1)",
+            "text": "Guia clínico · volume II",
+            "fontPx": 24,
+            "time": 9.125,
+            "seconds": 4.25
+          },
+          {
+            "selector": "#c1-brand",
+            "text": "Borderline sem estigma",
+            "fontPx": 26,
+            "time": 0.5,
+            "seconds": 2.875
+          },
+          {
+            "selector": "#c2 > div:nth-of-type(1)",
+            "text": "Borderline sem estigma",
+            "fontPx": 26,
+            "time": 3.5,
+            "seconds": 5
+          },
+          {
+            "selector": "#c3 > div:nth-of-type(1)",
+            "text": "Borderline sem estigma",
+            "fontPx": 26,
+            "time": 8.375,
+            "seconds": 5.125
+          },
+          {
+            "selector": "#c4 > div:nth-of-type(1)",
+            "text": "Borderline sem estigma",
+            "fontPx": 26,
+            "time": 13.25,
+            "seconds": 4
+          },
+          {
+            "selector": "#c4-a > div:nth-of-type(3)",
+            "text": "para quem convive",
+            "fontPx": 26,
+            "time": 13.625,
+            "seconds": 3.5
+          },
+          {
+            "selector": "#c4-b > div:nth-of-type(3)",
+            "text": "livro, 160 páginas",
+            "fontPx": 26,
+            "time": 13.875,
+            "seconds": 3.25
+          },
+          {
+            "selector": "#c5 > div:nth-of-type(1)",
+            "text": "Borderline sem estigma",
+            "fontPx": 26,
+            "time": 17,
+            "seconds": 3
+          },
+          {
+            "selector": "div.cita",
+            "text": "@drfabioschmidt",
+            "fontPx": 26,
+            "time": 17.75,
+            "seconds": 2.25
+          }
+        ]
+      }
+    ],
+    "enabled": true,
+    "step": 0.125,
+    "samples": 160
+  },
+  "audio": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": []
+  },
+  "hdr": {
+    "autoPromotion": null,
+    "inspection": "available"
+  },
+  "snapshots": {
+    "enabled": false,
+    "files": [],
+    "times": [],
+    "findingFiles": []
+  }
+}

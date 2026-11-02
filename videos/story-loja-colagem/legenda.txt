@@ -1,12 +1,12 @@
-STORY (vídeo de 15 s, 9:16)
+STORY (vídeo de 20 s, 9:16, sem narração)
 
 Adesivo de link: drfabioschmidt.net/loja
-Posição: na faixa vazia entre a seta e a barra de resposta (do meio para baixo, abaixo de TOQUE NO LINK).
-Texto do adesivo: VER MATERIAIS
+Posição: no espaço vazio abaixo da seta, no fecho (do meio da tela para baixo).
+Texto do adesivo: VER NA LOJA
 
 Se for anúncio (Stories), texto principal:
-A briga acabou e ninguém dormiu.
-Na loja tem um material para cada momento: o Protocolo 7 Dias para quem convive, o livro Quem sofre não escolhe como gritar, o Protocolo da Crise e o Kit de Regulação para quem tem borderline.
+Dois guias novos de R$27 na loja: o Protocolo da Crise, para parceiros e familiares, com o que fazer nos 60 minutos mais difíceis. E o Kit de Regulação, para quem tem borderline, com dez ferramentas para usar sozinho antes que a crise chegue.
+Na loja também estão o Protocolo 7 Dias e o livro Quem sofre não escolhe como gritar.
 drfabioschmidt.net/loja
 
 Conteúdo educativo. Não substitui avaliação nem tratamento.

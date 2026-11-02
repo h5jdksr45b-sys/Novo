@@ -26,6 +26,6 @@ Grave direto no branch `main`, não no branch da sessão. O Dr. Fabio autorizou 
 
 Até 24/10/2026 cada sessão salvava o aprendizado no próprio branch, que nunca entrava no principal. A sessão seguinte começava do principal e não via nada. A memória só funciona se `memoria/` estiver no branch principal.
 
-## Segundo cérebro
+## Cofre (segundo cérebro)
 
-O cofre de conhecimento (estudos, transcrições, conceitos, desempenho de posts) fica em `cerebro/`. Antes de ingerir material ou criar página ali, leia `cerebro/CLAUDE.md`. Nunca edite nem apague nada em `cerebro/raw/`.
+`memoria/` também é o cofre do Obsidian: memória editorial e conhecimento (estudos, transcrições, conceitos, posts, ideias). Antes de ingerir material, criar peça ou registrar post, leia `memoria/CLAUDE.md` e `memoria/INICIO.md`. Nunca edite nem apague nada em `memoria/raw/`.

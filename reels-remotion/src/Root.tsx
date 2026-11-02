@@ -13,6 +13,7 @@ import { MitoRindo } from "./MitoRindo";
 import { CONFIG_FRAME3, Frame3 } from "./Frame3";
 import { CONFIG_FRAME4, Frame4 } from "./Frame4";
 import { REEL_ETAPAS_DURACAO, ReelEtapas } from "./ReelEtapas";
+import { CapaEtapas } from "./ReelEtapas/Capa";
 
 // Each <Composition> is an entry in the sidebar!
 
@@ -84,6 +85,7 @@ export const RemotionRoot: React.FC = () => {
         width={1080}
         height={1920}
       />
+      <Composition id="CapaEtapas" component={CapaEtapas} durationInFrames={1} fps={30} width={1080} height={1920} />
     </>
   );
 };

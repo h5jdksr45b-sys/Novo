@@ -30,12 +30,14 @@ export const ReelEtapas: React.FC = () => {
   });
   return (
     <AbsoluteFill style={{ backgroundColor: "#000" }}>
-      <Sequence from={B["1"]} durationInFrames={B["2"] - B["1"]}>
+      <Sequence from={B["1"]} durationInFrames={(B["2"] ?? B["3"]) - B["1"]}>
         <Video arquivo="clone-a.mp4" />
       </Sequence>
-      <Sequence from={B["2"]} durationInFrames={B["3"] - B["2"]}>
-        <Video arquivo="frame2-remap.mp4" />
-      </Sequence>
+      {B["2"] !== undefined ? (
+        <Sequence from={B["2"]} durationInFrames={B["3"] - B["2"]}>
+          <Video arquivo="frame2-remap.mp4" />
+        </Sequence>
+      ) : null}
       <Sequence from={B["3"]} durationInFrames={FRAME3_DURACAO}>
         <Frame3 />
       </Sequence>

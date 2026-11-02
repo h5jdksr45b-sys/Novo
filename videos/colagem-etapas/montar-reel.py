@@ -28,8 +28,7 @@ PAUSA_PONTO, PAUSA_VIRGULA = ns["PAUSA_PONTO"], ns["PAUSA_VIRGULA"]
 
 # Blocos do vídeo, em quadros, e onde a fala começa dentro de cada bloco.
 BLOCOS = [  # (bloco, quadros, início da fala no bloco em s)
-    (1, 322, None),   # clone na mesa (fala original do clipe)
-    (2, 237, 0.30),   # frame 2 remapeado
+    (1, 140, None),   # clone na mesa, só a primeira frase
     (3, 435, 0.45),   # frame 3
     (4, 333, 0.00),   # frame 4
     (5, 182, None),   # clone com a etiqueta (fala original do clipe)
@@ -50,12 +49,9 @@ CLONES = {
     1: {"arquivo": "clones/voz-fabio-a.mp4", "desloc": 0.958,
         "palavras": [("A", 1.20), ("CRISE", 2.04), ("DO", 2.38), ("BORDERLINE", 2.60), ("NÃO", 3.30),
                      ("COMEÇA", 3.62), ("NO", 4.04), ("GRITO", 4.24), ("NEM", 4.60), ("NA", 4.78),
-                     ("BRIGA", 4.96), ("ELA", 5.56), ("TEM", 6.38), ("EXATAMENTE", 6.60), ("QUATRO", 7.18),
-                     ("ETAPAS", 7.72), ("E", 8.84), ("VOCÊ", 9.26), ("SÓ", 9.50), ("CONSEGUE", 9.72),
-                     ("INTERROMPER", 10.28), ("NA", 10.92), ("PRIMEIRA", 11.10)],
-        "fim": 11.52,
-        "legenda": "A CRISE|DO *BORDERLINE*|NÃO COMEÇA|NO *GRITO*|NEM NA *BRIGA*|ELA TEM|EXATAMENTE|"
-                   "*QUATRO* ETAPAS|E VOCÊ SÓ|CONSEGUE INTERROMPER|NA *PRIMEIRA*"},
+                     ("BRIGA", 4.96)],
+        "fim": 5.45,
+        "legenda": "A CRISE|DO *BORDERLINE*|NÃO COMEÇA|NO *GRITO*|NEM NA *BRIGA*"},
     5: {"arquivo": "clones/voz-fabio-e.mp4", "desloc": 0.067,
         "palavras": [("SABE", 0.00), ("AQUELA", 0.22), ("ETIQUETA", 0.38), ("EM", 0.72), ("BRANCO", 0.78),
                      ("NA", 1.28), ("ETAPA", 1.38), ("UM", 1.66), ("O", 1.88), ("TRABALHO", 1.94), ("É", 2.18),
@@ -243,16 +239,18 @@ def poe(seg, t):
     fx[i0:i0 + len(seg)] += seg
 
 
-B2, B3, B4 = inicio_bloco[2], inicio_bloco[3], inicio_bloco[4]
+B2, B3, B4 = inicio_bloco.get(2), inicio_bloco[3], inicio_bloco[4]
 B5, B6 = inicio_bloco[5], inicio_bloco[6]
 # troca de bloco
 for t in (B2, B6):  # depois do grito fica o silêncio
-    poe(whoosh(0.22, -30), t - 0.11)
-# frame 2 (tempos do remapeamento)
-for dt, kind in [(0.55, 1.0), (1.45, 1.0), (3.3, 1.6), (3.7, 1.0), (5.15, 0.9), (6.05, 0.9), (7.6, 1.2)]:
-    poe(colar(kind), B2 + dt)
-poe(whoosh(0.35, -31), B2 + 4.05)
-poe(whoosh(0.2, -32), B2 + 6.95)
+    if t is not None:
+        poe(whoosh(0.22, -30), t - 0.11)
+# frame 2 (tempos do remapeamento), só se o frame 2 estiver no corte
+if B2 is not None:
+    for dt, kind in [(0.55, 1.0), (1.45, 1.0), (3.3, 1.6), (3.7, 1.0), (5.15, 0.9), (6.05, 0.9), (7.6, 1.2)]:
+        poe(colar(kind), B2 + dt)
+    poe(whoosh(0.35, -31), B2 + 4.05)
+    poe(whoosh(0.2, -32), B2 + 6.95)
 # frame 3
 c3 = {k: v for k, v in json.load(open(os.path.join(AQUI, "_cfg3.json"))).items()}
 poe(whoosh(0.7, -31), B3 + 0.05)

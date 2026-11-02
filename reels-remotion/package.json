@@ -8,6 +8,7 @@
   "dependencies": {
     "@remotion/animation-utils": "4.0.535",
     "@remotion/cli": "4.0.535",
+    "@remotion/google-fonts": "^4.0.535",
     "@remotion/layout-utils": "4.0.535",
     "@remotion/media-utils": "4.0.535",
     "@remotion/zod-types": "4.0.535",

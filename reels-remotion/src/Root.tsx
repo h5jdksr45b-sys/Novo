@@ -10,6 +10,7 @@ import {
 } from "./ComparacaoLadoALado";
 import { MitoApego } from "./MitoApego";
 import { MitoRindo } from "./MitoRindo";
+import { ColagemEtapas, DURACAO_FRAMES } from "./ColagemEtapas";
 
 // Each <Composition> is an entry in the sidebar!
 
@@ -53,6 +54,14 @@ export const RemotionRoot: React.FC = () => {
         id="MitoApego"
         component={MitoApego}
         durationInFrames={450}
+        fps={30}
+        width={1080}
+        height={1920}
+      />
+      <Composition
+        id="ColagemEtapas"
+        component={ColagemEtapas}
+        durationInFrames={DURACAO_FRAMES}
         fps={30}
         width={1080}
         height={1920}

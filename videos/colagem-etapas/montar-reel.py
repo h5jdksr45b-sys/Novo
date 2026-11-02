@@ -47,7 +47,7 @@ TOTAL = TOTAL_Q / FPS
 # Higgsfield, alinhado com a montagem (desloc = tempo no clipe no início do
 # bloco). Palavras e tempos vêm da transcrição (faster-whisper).
 CLONES = {
-    1: {"arquivo": "clones/clone-a-mesa.mp4", "desloc": 0.958,
+    1: {"arquivo": "clones/voz-fabio-a.mp4", "desloc": 0.958,
         "palavras": [("A", 1.20), ("CRISE", 2.04), ("DO", 2.38), ("BORDERLINE", 2.60), ("NÃO", 3.30),
                      ("COMEÇA", 3.62), ("NO", 4.04), ("GRITO", 4.24), ("NEM", 4.60), ("NA", 4.78),
                      ("BRIGA", 4.96), ("ELA", 5.56), ("TEM", 6.38), ("EXATAMENTE", 6.60), ("QUATRO", 7.18),
@@ -56,7 +56,7 @@ CLONES = {
         "fim": 11.52,
         "legenda": "A CRISE|DO *BORDERLINE*|NÃO COMEÇA|NO *GRITO*|NEM NA *BRIGA*|ELA TEM|EXATAMENTE|"
                    "*QUATRO* ETAPAS|E VOCÊ SÓ|CONSEGUE INTERROMPER|NA *PRIMEIRA*"},
-    5: {"arquivo": "clones/clone-e-etiqueta.mp4", "desloc": 0.067,
+    5: {"arquivo": "clones/voz-fabio-e.mp4", "desloc": 0.067,
         "palavras": [("SABE", 0.00), ("AQUELA", 0.22), ("ETIQUETA", 0.38), ("EM", 0.72), ("BRANCO", 0.78),
                      ("NA", 1.28), ("ETAPA", 1.38), ("UM", 1.66), ("O", 1.88), ("TRABALHO", 1.94), ("É", 2.18),
                      ("ESCREVER", 2.30), ("NELA", 2.48), ("ISSO", 3.06), ("ME", 3.20), ("INCOMODOU", 3.32),
@@ -65,7 +65,7 @@ CLONES = {
         "fim": 5.86,
         "legenda": "SABE AQUELA|ETIQUETA|EM *BRANCO*|NA ETAPA *UM*|O TRABALHO|É ESCREVER NELA|ISSO ME|"
                    "*INCOMODOU*|SE VOCÊ|NÃO ESCREVE|A CABEÇA ESCREVE|A *PIOR* VERSÃO"},
-    6: {"arquivo": "clones/clone-f-apontando.mp4", "desloc": 0.04,
+    6: {"arquivo": "clones/voz-fabio-f.mp4", "desloc": 0.04,
         "palavras": [("ESSE", 0.00), ("PONTINHO", 0.26), ("AQUI", 0.68), ("É", 0.86), ("A", 1.10),
                      ("ETAPA", 1.34), ("UM", 1.64), ("EM", 2.24), ("QUE", 2.32), ("NÚMERO", 2.40),
                      ("VOCÊ", 2.64), ("COSTUMA", 2.88), ("PERCEBER", 3.22), ("ME", 3.88), ("RESPONDE", 4.06),

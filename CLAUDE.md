@@ -28,4 +28,4 @@ Até 24/10/2026 cada sessão salvava o aprendizado no próprio branch, que nunca
 
 ## Cofre (segundo cérebro)
 
-`memoria/` também é o cofre do Obsidian: memória editorial e conhecimento (estudos, transcrições, conceitos, posts, ideias). Antes de ingerir material, criar peça ou registrar post, leia `memoria/CLAUDE.md` e `memoria/INICIO.md`. Nunca edite nem apague nada em `memoria/raw/`.
+`memoria/` também é o cofre do Obsidian: memória editorial e conhecimento (estudos, transcrições, conceitos, posts, ideias). Antes de entregar qualquer peça, rode `memoria/checklist-entrega.md` e confira `memoria/placar-vereditos.md`. Regras do cofre em `memoria/CLAUDE.md`. Nunca edite nem apague nada em `memoria/raw/`.

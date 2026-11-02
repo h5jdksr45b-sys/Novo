@@ -1,0 +1,35 @@
+BLOCO 1 gancho-clone: 9.24 s
+   0.00 a  1.87  Você gritou por causa de um atraso.
+   2.22 a  4.43  Quem estava do lado levou um susto.
+   4.78 a  5.61  E você também.
+   5.96 a  6.89  Não veio do nada.
+   7.24 a  9.24  Esse grito começou bem antes.
+BLOCO 2 frame2: 7.59 s
+   0.00 a  0.63  O grito.
+   0.98 a  1.35  A briga.
+   1.70 a  3.39  Isso já é a etapa quatro.
+   3.74 a  5.14  Antes dela teve a três.
+   5.49 a  6.01  A dois.
+   6.36 a  7.59  E a primeira começa aqui.
+BLOCO 3 frame3: 13.73 s
+   0.00 a  0.64  Etapa um.
+   0.99 a  1.83  O primeiro aperto.
+   2.18 a  6.27  A pessoa chega quarenta minutos atrasada e diz que pegou trânsito.
+   6.62 a  8.47  Alguma coisa aperta por dentro.
+   8.82 a  9.79  Ainda não tem raiva.
+  10.14 a 10.78  Não tem briga.
+  11.13 a 13.73  É um incômodo tão rápido que você nem dá nome.
+BLOCO 4 frame4: 10.81 s
+   0.00 a  1.14  Se ninguém percebe,
+   1.29 a  2.17  etapa dois.
+   2.52 a  4.39  A cabeça escolhe a pior versão:
+   4.54 a  5.68  não se importa comigo.
+   6.03 a  6.75  Etapa três.
+   7.10 a  8.16  O corpo acelera.
+   8.51 a  9.58  Tem que resolver agora.
+   9.93 a 10.81  E aí vem o grito.
+BLOCO 5 clone-etiqueta: 3.51 s
+   0.00 a  1.57  Dá pra agir nessa etiqueta em branco:
+   1.72 a  3.51  pôr nome no aperto enquanto ele ainda é pequeno.
+BLOCO 6 clone-cta: 2.62 s
+   0.00 a  2.62  Manda pra quem só conhece a sua etapa quatro.

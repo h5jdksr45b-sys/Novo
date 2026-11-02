@@ -28,12 +28,12 @@ PAUSA_PONTO, PAUSA_VIRGULA = ns["PAUSA_PONTO"], ns["PAUSA_VIRGULA"]
 
 # Blocos do vídeo, em quadros, e onde a fala começa dentro de cada bloco.
 BLOCOS = [  # (bloco, quadros, início da fala no bloco em s)
-    (1, 310, 1.00),   # clone na mesa
+    (1, 322, None),   # clone na mesa (fala original do clipe)
     (2, 237, 0.30),   # frame 2 remapeado
     (3, 435, 0.45),   # frame 3
     (4, 333, 0.00),   # frame 4
-    (5, 116, 0.15),   # clone com a etiqueta
-    (6, 151, 0.15),   # clone apontando
+    (5, 182, None),   # clone com a etiqueta (fala original do clipe)
+    (6, 151, None),   # clone apontando (fala original do clipe)
 ]
 inicio_bloco = {}
 acc = 0
@@ -42,6 +42,38 @@ for b, n, _ in BLOCOS:
     acc += n
 TOTAL_Q = acc
 TOTAL = TOTAL_Q / FPS
+
+# Cenas em que ele aparece falando: usa o áudio original do clipe do
+# Higgsfield, alinhado com a montagem (desloc = tempo no clipe no início do
+# bloco). Palavras e tempos vêm da transcrição (faster-whisper).
+CLONES = {
+    1: {"arquivo": "clones/clone-a-mesa.mp4", "desloc": 0.958,
+        "palavras": [("A", 1.20), ("CRISE", 2.04), ("DO", 2.38), ("BORDERLINE", 2.60), ("NÃO", 3.30),
+                     ("COMEÇA", 3.62), ("NO", 4.04), ("GRITO", 4.24), ("NEM", 4.60), ("NA", 4.78),
+                     ("BRIGA", 4.96), ("ELA", 5.56), ("TEM", 6.38), ("EXATAMENTE", 6.60), ("QUATRO", 7.18),
+                     ("ETAPAS", 7.72), ("E", 8.84), ("VOCÊ", 9.26), ("SÓ", 9.50), ("CONSEGUE", 9.72),
+                     ("INTERROMPER", 10.28), ("NA", 10.92), ("PRIMEIRA", 11.10)],
+        "fim": 11.52,
+        "legenda": "A CRISE|DO *BORDERLINE*|NÃO COMEÇA|NO *GRITO*|NEM NA *BRIGA*|ELA TEM|EXATAMENTE|"
+                   "*QUATRO* ETAPAS|E VOCÊ SÓ|CONSEGUE INTERROMPER|NA *PRIMEIRA*"},
+    5: {"arquivo": "clones/clone-e-etiqueta.mp4", "desloc": 0.067,
+        "palavras": [("SABE", 0.00), ("AQUELA", 0.22), ("ETIQUETA", 0.38), ("EM", 0.72), ("BRANCO", 0.78),
+                     ("NA", 1.28), ("ETAPA", 1.38), ("UM", 1.66), ("O", 1.88), ("TRABALHO", 1.94), ("É", 2.18),
+                     ("ESCREVER", 2.30), ("NELA", 2.48), ("ISSO", 3.06), ("ME", 3.20), ("INCOMODOU", 3.32),
+                     ("SE", 3.96), ("VOCÊ", 4.02), ("NÃO", 4.20), ("ESCREVE", 4.30), ("A", 4.70),
+                     ("CABEÇA", 4.74), ("ESCREVE", 4.94), ("A", 5.34), ("PIOR", 5.38), ("VERSÃO", 5.54)],
+        "fim": 5.86,
+        "legenda": "SABE AQUELA|ETIQUETA|EM *BRANCO*|NA ETAPA *UM*|O TRABALHO|É ESCREVER NELA|ISSO ME|"
+                   "*INCOMODOU*|SE VOCÊ|NÃO ESCREVE|A CABEÇA ESCREVE|A *PIOR* VERSÃO"},
+    6: {"arquivo": "clones/clone-f-apontando.mp4", "desloc": 0.04,
+        "palavras": [("ESSE", 0.00), ("PONTINHO", 0.26), ("AQUI", 0.68), ("É", 0.86), ("A", 1.10),
+                     ("ETAPA", 1.34), ("UM", 1.64), ("EM", 2.24), ("QUE", 2.32), ("NÚMERO", 2.40),
+                     ("VOCÊ", 2.64), ("COSTUMA", 2.88), ("PERCEBER", 3.22), ("ME", 3.88), ("RESPONDE", 4.06),
+                     ("AQUI", 4.44), ("EMBAIXO", 4.54)],
+        "fim": 4.76,
+        "legenda": "ESSE *PONTINHO*|AQUI É A|ETAPA *UM*|EM QUE NÚMERO|VOCÊ COSTUMA|*PERCEBER*|"
+                   "ME RESPONDE|AQUI *EMBAIXO*"},
+}
 
 # Legenda: | separa os grupos (até três palavras), * marca o destaque.
 LEGENDA = [
@@ -102,15 +134,26 @@ def gravar(p, x):
 
 # 1. VOZ ------------------------------------------------------------------
 voz = np.zeros(int(TOTAL * SR) + SR, dtype=np.float32)
-frases_t = []  # (ini, fim, texto, legenda)
+partes_clone = []  # (início, áudio) das cenas com fala original
+frases_t = []  # (ini, fim, texto, legenda, tempos das palavras ou None)
+dur_bloco = {b: n / FPS for b, n, _ in BLOCOS}
 for b, _, fala in BLOCOS:
+    if b in CLONES:
+        c = CLONES[b]
+        x = ffmpeg_f32(["-ss", str(c["desloc"]), "-t", f"{dur_bloco[b]:.4f}", "-i", os.path.join(AQUI, c["arquivo"]),
+                        "-af", "afade=t=in:d=0.01,areverse,afade=t=in:d=0.03,areverse"])
+        partes_clone.append((inicio_bloco[b], x))
+        t0 = inicio_bloco[b] - c["desloc"]
+        tempos = [max(inicio_bloco[b], t0 + w[1]) for w in c["palavras"]]
+        frases_t.append((tempos[0], t0 + c["fim"], " ".join(w[0] for w in c["palavras"]), c["legenda"], tempos))
+        continue
     t = inicio_bloco[b] + fala
     lista = [(i, f) for i, f in enumerate(FRASES) if f[0] == b]
     for k, (i, (_, a, z, txt)) in enumerate(lista):
         x = cortar(b, a, z)
         i0 = int(round(t * SR))
         voz[i0:i0 + len(x)] += x
-        frases_t.append((t, t + len(x) / SR, txt, LEGENDA[i]))
+        frases_t.append((t, t + len(x) / SR, txt, LEGENDA[i], None))
         t += len(x) / SR
         if k < len(lista) - 1:
             t += PAUSA_VIRGULA if txt.endswith((",", ":")) else PAUSA_PONTO
@@ -203,7 +246,7 @@ def poe(seg, t):
 B2, B3, B4 = inicio_bloco[2], inicio_bloco[3], inicio_bloco[4]
 B5, B6 = inicio_bloco[5], inicio_bloco[6]
 # troca de bloco
-for t in (B2, B5, B6):
+for t in (B2, B6):  # depois do grito fica o silêncio
     poe(whoosh(0.22, -30), t - 0.11)
 # frame 2 (tempos do remapeamento)
 for dt, kind in [(0.55, 1.0), (1.45, 1.0), (3.3, 1.6), (3.7, 1.0), (5.15, 0.9), (6.05, 0.9), (7.6, 1.2)]:
@@ -283,7 +326,12 @@ def ao_alvo(x, alvo, teto_db):
 
 
 N = int(round(TOTAL * SR))
-voz = ao_alvo(voz[:N], -15.0, -2.0)
+voz = ao_alvo(voz[:N], -15.0, -2.0)  # narração (frames 2, 3 e 4)
+for t0, x in partes_clone:  # fala original dos clones, cada uma em -15 LUFS
+    x = ao_alvo(x, -15.0, -2.0)
+    i0 = int(round(t0 * SR))
+    x = x[: N - i0]
+    voz[i0:i0 + len(x)] += x
 fx = fx[:N]
 gravar(f"{AQUI}/_voz.wav", voz)
 gravar(f"{AQUI}/_fx.wav", fx)
@@ -325,7 +373,8 @@ desloc = BATIDA_GRITO - GRITO
 poe_trilha(trecho(desloc, BATIDA_GRITO, 0.12, 0.012), 0.0)
 FINAL_FAIXA = (152.25, 157.04)  # do último compasso do clímax ao fim da música
 inicio_final = TOTAL - (FINAL_FAIXA[1] - FINAL_FAIXA[0])  # termina junto com o vídeo
-poe_trilha(trecho(6.0 - (inicio_final - B5), 6.0 + 0.15, 0.25, 0.15), B5)
+intro = min(6.0, inicio_final - B5)  # pad da introdução, até a batida entrar
+poe_trilha(trecho(6.0 - intro, 6.0 + 0.15, 0.3, 0.15), inicio_final - intro)
 poe_trilha(trecho(FINAL_FAIXA[0], FINAL_FAIXA[1], 0.15, 0.05), inicio_final)
 print(f"trilha: faixa {desloc:.2f} a {BATIDA_GRITO:.2f} s no vídeo 0 a {GRITO:.2f} s; "
       f"calma entra em {128.32 - desloc:.2f} s, clímax em {141.08 - desloc:.2f} s")
@@ -334,9 +383,10 @@ trilha = trilha * 10 ** ((alvo_trilha - lufs(trilha)) / 20)
 # quando a última fala termina, a trilha sobe 7 dB até o fim
 fim_fala = frases_t[-1][1] + 0.15
 ganho = np.ones(N, dtype=np.float32)
-i0, i1 = int(fim_fala * SR), int((fim_fala + 0.5) * SR)
-ganho[i0:i1] = np.linspace(1, 10 ** (7 / 20), i1 - i0)
-ganho[i1:] = 10 ** (7 / 20)
+i0 = min(N, int(fim_fala * SR))
+rampa = np.linspace(1, 10 ** (7 / 20), int(0.5 * SR))[: N - i0]
+ganho[i0:i0 + len(rampa)] = rampa
+ganho[i0 + len(rampa):] = 10 ** (7 / 20)
 trilha = trilha * ganho[:, None]
 gravar(f"{AQUI}/_trilha.wav", trilha)
 
@@ -365,15 +415,19 @@ def silabas(p):
 
 grupos = []
 destaque_n = 0
-for ini, fim, txt, leg in frases_t:
+for ini, fim, txt, leg, tempos_reais in frases_t:
     partes = [g.split() for g in leg.split("|")]
     palavras = [w for g in partes for w in g]
-    pesos = [silabas(w.strip("*")) + 0.4 for w in palavras]
-    tot = sum(pesos)
-    tempos, acc_ = [], ini
-    for w in pesos:
-        tempos.append(acc_)
-        acc_ += (fim - ini) * w / tot
+    if tempos_reais is not None:
+        assert len(tempos_reais) == len(palavras), (leg, len(tempos_reais), len(palavras))
+        tempos = tempos_reais
+    else:
+        pesos = [silabas(w.strip("*")) + 0.4 for w in palavras]
+        tot = sum(pesos)
+        tempos, acc_ = [], ini
+        for w in pesos:
+            tempos.append(acc_)
+            acc_ += (fim - ini) * w / tot
     k = 0
     for g in partes:
         ws = []
@@ -383,7 +437,7 @@ for ini, fim, txt, leg in frases_t:
             fonte = None
             if d:
                 if aberto is None:
-                    aberto = "serifa" if destaque_n % 2 == 0 else "sem"
+                    aberto = "sem"  # uma fonte só no destaque (pedido de 02/11)
                     destaque_n += 1
                 fonte = aberto
                 if w.endswith("*"):
@@ -406,5 +460,5 @@ def db(x):
 
 
 print(f"total {TOTAL:.3f} s, {TOTAL_Q} quadros, {len(grupos)} grupos de legenda")
-for ini, fim, txt, _ in frases_t:
+for ini, fim, txt, *_ in frases_t:
     print(f"  {ini:6.2f} a {fim:6.2f}  {txt}")

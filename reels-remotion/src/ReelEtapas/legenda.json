@@ -1,1072 +1,1048 @@
 {
- "total": 1582,
+ "total": 1660,
  "blocos": {
   "1": 0,
-  "2": 310,
-  "3": 547,
-  "4": 982,
-  "5": 1315,
-  "6": 1431
+  "2": 322,
+  "3": 559,
+  "4": 994,
+  "5": 1327,
+  "6": 1509
  },
  "grupos": [
   {
-   "ini": 30,
+   "ini": 7,
    "palavras": [
     {
-     "q": 30,
-     "t": "VOCÊ",
-     "d": false,
-     "f": null
-    },
-    {
-     "q": 39,
-     "t": "GRITOU",
-     "d": false,
-     "f": null
-    }
-   ],
-   "fim": 48
-  },
-  {
-   "ini": 48,
-   "palavras": [
-    {
-     "q": 48,
-     "t": "POR",
-     "d": false,
-     "f": null
-    },
-    {
-     "q": 54,
-     "t": "CAUSA",
-     "d": false,
-     "f": null
-    },
-    {
-     "q": 63,
-     "t": "DE",
-     "d": false,
-     "f": null
-    }
-   ],
-   "fim": 68
-  },
-  {
-   "ini": 68,
-   "palavras": [
-    {
-     "q": 68,
-     "t": "UM",
-     "d": false,
-     "f": null
-    },
-    {
-     "q": 73,
-     "t": "ATRASO",
-     "d": true,
-     "f": "serifa"
-    }
-   ],
-   "fim": 95
-  },
-  {
-   "ini": 97,
-   "palavras": [
-    {
-     "q": 97,
-     "t": "QUEM",
-     "d": false,
-     "f": null
-    },
-    {
-     "q": 103,
-     "t": "ESTAVA",
-     "d": false,
-     "f": null
-    }
-   ],
-   "fim": 118
-  },
-  {
-   "ini": 118,
-   "palavras": [
-    {
-     "q": 118,
-     "t": "DO",
-     "d": false,
-     "f": null
-    },
-    {
-     "q": 124,
-     "t": "LADO",
-     "d": false,
-     "f": null
-    }
-   ],
-   "fim": 135
-  },
-  {
-   "ini": 135,
-   "palavras": [
-    {
-     "q": 135,
-     "t": "LEVOU",
-     "d": false,
-     "f": null
-    },
-    {
-     "q": 146,
-     "t": "UM",
-     "d": false,
-     "f": null
-    },
-    {
-     "q": 152,
-     "t": "SUSTO",
-     "d": true,
-     "f": "sem"
-    }
-   ],
-   "fim": 172
-  },
-  {
-   "ini": 173,
-   "palavras": [
-    {
-     "q": 173,
-     "t": "E",
-     "d": false,
-     "f": null
-    },
-    {
-     "q": 179,
-     "t": "VOCÊ",
-     "d": false,
-     "f": null
-    },
-    {
-     "q": 189,
-     "t": "TAMBÉM",
-     "d": true,
-     "f": "serifa"
-    }
-   ],
-   "fim": 207
-  },
-  {
-   "ini": 209,
-   "palavras": [
-    {
-     "q": 209,
-     "t": "NÃO",
-     "d": false,
-     "f": null
-    },
-    {
-     "q": 215,
-     "t": "VEIO",
-     "d": false,
-     "f": null
-    }
-   ],
-   "fim": 221
-  },
-  {
-   "ini": 221,
-   "palavras": [
-    {
-     "q": 221,
-     "t": "DO",
-     "d": false,
-     "f": null
-    },
-    {
-     "q": 227,
-     "t": "NADA",
-     "d": true,
-     "f": "sem"
-    }
-   ],
-   "fim": 246
-  },
-  {
-   "ini": 247,
-   "palavras": [
-    {
-     "q": 247,
-     "t": "ESSE",
-     "d": false,
-     "f": null
-    },
-    {
-     "q": 259,
-     "t": "GRITO",
-     "d": true,
-     "f": "serifa"
-    }
-   ],
-   "fim": 271
-  },
-  {
-   "ini": 271,
-   "palavras": [
-    {
-     "q": 271,
-     "t": "COMEÇOU",
-     "d": false,
-     "f": null
-    },
-    {
-     "q": 288,
-     "t": "BEM",
-     "d": false,
-     "f": null
-    },
-    {
-     "q": 295,
-     "t": "ANTES",
-     "d": true,
-     "f": "sem"
-    }
-   ],
-   "fim": 316
-  },
-  {
-   "ini": 319,
-   "palavras": [
-    {
-     "q": 319,
-     "t": "O",
-     "d": false,
-     "f": null
-    },
-    {
-     "q": 326,
-     "t": "GRITO",
-     "d": true,
-     "f": "serifa"
-    }
-   ],
-   "fim": 347
-  },
-  {
-   "ini": 348,
-   "palavras": [
-    {
-     "q": 348,
+     "q": 7,
      "t": "A",
      "d": false,
      "f": null
     },
     {
-     "q": 352,
+     "q": 32,
+     "t": "CRISE",
+     "d": false,
+     "f": null
+    }
+   ],
+   "fim": 43
+  },
+  {
+   "ini": 43,
+   "palavras": [
+    {
+     "q": 43,
+     "t": "DO",
+     "d": false,
+     "f": null
+    },
+    {
+     "q": 49,
+     "t": "BORDERLINE",
+     "d": true,
+     "f": "sem"
+    }
+   ],
+   "fim": 70
+  },
+  {
+   "ini": 70,
+   "palavras": [
+    {
+     "q": 70,
+     "t": "NÃO",
+     "d": false,
+     "f": null
+    },
+    {
+     "q": 80,
+     "t": "COMEÇA",
+     "d": false,
+     "f": null
+    }
+   ],
+   "fim": 92
+  },
+  {
+   "ini": 92,
+   "palavras": [
+    {
+     "q": 92,
+     "t": "NO",
+     "d": false,
+     "f": null
+    },
+    {
+     "q": 98,
+     "t": "GRITO",
+     "d": true,
+     "f": "sem"
+    }
+   ],
+   "fim": 109
+  },
+  {
+   "ini": 109,
+   "palavras": [
+    {
+     "q": 109,
+     "t": "NEM",
+     "d": false,
+     "f": null
+    },
+    {
+     "q": 115,
+     "t": "NA",
+     "d": false,
+     "f": null
+    },
+    {
+     "q": 120,
      "t": "BRIGA",
      "d": true,
      "f": "sem"
     }
    ],
-   "fim": 369
+   "fim": 138
   },
   {
-   "ini": 370,
+   "ini": 138,
    "palavras": [
     {
-     "q": 370,
+     "q": 138,
+     "t": "ELA",
+     "d": false,
+     "f": null
+    },
+    {
+     "q": 163,
+     "t": "TEM",
+     "d": false,
+     "f": null
+    }
+   ],
+   "fim": 169
+  },
+  {
+   "ini": 169,
+   "palavras": [
+    {
+     "q": 169,
+     "t": "EXATAMENTE",
+     "d": false,
+     "f": null
+    }
+   ],
+   "fim": 187
+  },
+  {
+   "ini": 187,
+   "palavras": [
+    {
+     "q": 187,
+     "t": "QUATRO",
+     "d": true,
+     "f": "sem"
+    },
+    {
+     "q": 203,
+     "t": "ETAPAS",
+     "d": false,
+     "f": null
+    }
+   ],
+   "fim": 236
+  },
+  {
+   "ini": 236,
+   "palavras": [
+    {
+     "q": 236,
+     "t": "E",
+     "d": false,
+     "f": null
+    },
+    {
+     "q": 249,
+     "t": "VOCÊ",
+     "d": false,
+     "f": null
+    },
+    {
+     "q": 256,
+     "t": "SÓ",
+     "d": false,
+     "f": null
+    }
+   ],
+   "fim": 263
+  },
+  {
+   "ini": 263,
+   "palavras": [
+    {
+     "q": 263,
+     "t": "CONSEGUE",
+     "d": false,
+     "f": null
+    },
+    {
+     "q": 280,
+     "t": "INTERROMPER",
+     "d": false,
+     "f": null
+    }
+   ],
+   "fim": 299
+  },
+  {
+   "ini": 299,
+   "palavras": [
+    {
+     "q": 299,
+     "t": "NA",
+     "d": false,
+     "f": null
+    },
+    {
+     "q": 304,
+     "t": "PRIMEIRA",
+     "d": true,
+     "f": "sem"
+    }
+   ],
+   "fim": 326
+  },
+  {
+   "ini": 331,
+   "palavras": [
+    {
+     "q": 331,
+     "t": "O",
+     "d": false,
+     "f": null
+    },
+    {
+     "q": 338,
+     "t": "GRITO",
+     "d": true,
+     "f": "sem"
+    }
+   ],
+   "fim": 359
+  },
+  {
+   "ini": 360,
+   "palavras": [
+    {
+     "q": 360,
+     "t": "A",
+     "d": false,
+     "f": null
+    },
+    {
+     "q": 364,
+     "t": "BRIGA",
+     "d": true,
+     "f": "sem"
+    }
+   ],
+   "fim": 381
+  },
+  {
+   "ini": 382,
+   "palavras": [
+    {
+     "q": 382,
      "t": "ISSO",
      "d": false,
      "f": null
     },
     {
-     "q": 380,
+     "q": 392,
      "t": "JÁ",
      "d": false,
      "f": null
     },
     {
-     "q": 386,
+     "q": 398,
      "t": "É",
      "d": false,
      "f": null
     }
    ],
-   "fim": 391
+   "fim": 403
   },
   {
-   "ini": 391,
+   "ini": 403,
    "palavras": [
     {
-     "q": 391,
+     "q": 403,
      "t": "A",
      "d": false,
      "f": null
     },
     {
-     "q": 397,
+     "q": 409,
      "t": "ETAPA",
      "d": false,
      "f": null
     },
     {
-     "q": 411,
+     "q": 423,
      "t": "QUATRO",
      "d": true,
-     "f": "serifa"
+     "f": "sem"
     }
    ],
-   "fim": 430
+   "fim": 442
   },
   {
-   "ini": 431,
+   "ini": 443,
    "palavras": [
     {
-     "q": 431,
+     "q": 443,
      "t": "ANTES",
      "d": false,
      "f": null
     },
     {
-     "q": 441,
+     "q": 453,
      "t": "DELA",
      "d": false,
      "f": null
     }
    ],
-   "fim": 451
+   "fim": 463
   },
   {
-   "ini": 451,
+   "ini": 463,
    "palavras": [
     {
-     "q": 451,
+     "q": 463,
      "t": "TEVE",
      "d": false,
      "f": null
     },
     {
-     "q": 461,
+     "q": 473,
      "t": "A",
      "d": false,
      "f": null
     },
     {
-     "q": 467,
+     "q": 479,
      "t": "TRÊS",
      "d": true,
      "f": "sem"
     }
    ],
-   "fim": 482
+   "fim": 494
   },
   {
-   "ini": 484,
+   "ini": 496,
    "palavras": [
     {
-     "q": 484,
+     "q": 496,
      "t": "A",
      "d": false,
      "f": null
     },
     {
-     "q": 492,
+     "q": 503,
      "t": "DOIS",
      "d": true,
-     "f": "serifa"
+     "f": "sem"
     }
    ],
-   "fim": 508
+   "fim": 520
   },
   {
-   "ini": 510,
+   "ini": 522,
    "palavras": [
     {
-     "q": 510,
+     "q": 522,
      "t": "E",
      "d": false,
      "f": null
     },
     {
-     "q": 514,
+     "q": 526,
      "t": "A",
      "d": false,
      "f": null
     },
     {
-     "q": 518,
+     "q": 530,
      "t": "PRIMEIRA",
      "d": false,
      "f": null
     }
    ],
-   "fim": 529
+   "fim": 541
   },
   {
-   "ini": 529,
+   "ini": 541,
    "palavras": [
     {
-     "q": 529,
+     "q": 541,
      "t": "COMEÇA",
      "d": false,
      "f": null
     },
     {
-     "q": 539,
+     "q": 551,
      "t": "AQUI",
      "d": true,
      "f": "sem"
     }
    ],
-   "fim": 556
+   "fim": 568
   },
   {
-   "ini": 560,
+   "ini": 572,
    "palavras": [
     {
-     "q": 560,
+     "q": 572,
      "t": "ETAPA",
      "d": false,
      "f": null
     },
     {
-     "q": 574,
+     "q": 586,
      "t": "UM",
      "d": true,
-     "f": "serifa"
+     "f": "sem"
     }
    ],
-   "fim": 589
+   "fim": 601
   },
   {
-   "ini": 590,
+   "ini": 602,
    "palavras": [
     {
-     "q": 590,
+     "q": 602,
      "t": "O",
      "d": false,
      "f": null
     },
     {
-     "q": 595,
+     "q": 607,
      "t": "PRIMEIRO",
      "d": false,
      "f": null
     },
     {
-     "q": 605,
+     "q": 617,
      "t": "APERTO",
      "d": true,
      "f": "sem"
     }
    ],
-   "fim": 624
+   "fim": 636
   },
   {
-   "ini": 626,
+   "ini": 638,
    "palavras": [
     {
-     "q": 626,
+     "q": 638,
      "t": "A",
      "d": false,
      "f": null
     },
     {
-     "q": 632,
+     "q": 644,
      "t": "PESSOA",
      "d": false,
      "f": null
     },
     {
-     "q": 643,
+     "q": 655,
      "t": "CHEGA",
      "d": false,
      "f": null
     }
    ],
-   "fim": 654
+   "fim": 666
   },
   {
-   "ini": 654,
+   "ini": 666,
    "palavras": [
     {
-     "q": 654,
+     "q": 666,
      "t": "QUARENTA",
      "d": true,
-     "f": "serifa"
+     "f": "sem"
     },
     {
-     "q": 669,
+     "q": 681,
      "t": "MINUTOS",
      "d": false,
      "f": null
     }
    ],
-   "fim": 684
+   "fim": 696
   },
   {
-   "ini": 684,
+   "ini": 696,
    "palavras": [
     {
-     "q": 684,
+     "q": 696,
      "t": "ATRASADA",
      "d": false,
      "f": null
     }
    ],
-   "fim": 704
+   "fim": 716
   },
   {
-   "ini": 704,
+   "ini": 716,
    "palavras": [
     {
-     "q": 704,
+     "q": 716,
      "t": "E",
      "d": false,
      "f": null
     },
     {
-     "q": 710,
+     "q": 722,
      "t": "DIZ",
      "d": false,
      "f": null
     },
     {
-     "q": 716,
+     "q": 728,
      "t": "QUE",
      "d": false,
      "f": null
     }
    ],
-   "fim": 723
+   "fim": 735
   },
   {
-   "ini": 723,
+   "ini": 735,
    "palavras": [
     {
-     "q": 723,
+     "q": 735,
      "t": "PEGOU",
      "d": false,
      "f": null
     },
     {
-     "q": 733,
+     "q": 745,
      "t": "TRÂNSITO",
      "d": true,
      "f": "sem"
     }
    ],
-   "fim": 758
+   "fim": 770
   },
   {
-   "ini": 759,
+   "ini": 771,
    "palavras": [
     {
-     "q": 759,
+     "q": 771,
      "t": "ALGUMA",
      "d": false,
      "f": null
     },
     {
-     "q": 774,
+     "q": 786,
      "t": "COISA",
      "d": false,
      "f": null
     }
    ],
-   "fim": 784
+   "fim": 796
   },
   {
-   "ini": 784,
+   "ini": 796,
    "palavras": [
     {
-     "q": 784,
+     "q": 796,
      "t": "APERTA",
      "d": true,
-     "f": "serifa"
+     "f": "sem"
     },
     {
-     "q": 798,
+     "q": 810,
      "t": "POR",
      "d": false,
      "f": null
     },
     {
-     "q": 804,
+     "q": 816,
      "t": "DENTRO",
      "d": false,
      "f": null
     }
    ],
-   "fim": 824
+   "fim": 836
   },
   {
-   "ini": 825,
+   "ini": 837,
    "palavras": [
     {
-     "q": 825,
+     "q": 837,
      "t": "AINDA",
      "d": false,
      "f": null
     },
     {
-     "q": 834,
+     "q": 846,
      "t": "NÃO",
      "d": false,
      "f": null
     },
     {
-     "q": 840,
+     "q": 852,
      "t": "TEM",
      "d": false,
      "f": null
     }
    ],
-   "fim": 845
+   "fim": 857
   },
   {
-   "ini": 845,
+   "ini": 857,
    "palavras": [
     {
-     "q": 845,
+     "q": 857,
      "t": "RAIVA",
      "d": true,
      "f": "sem"
     }
    ],
-   "fim": 863
+   "fim": 875
   },
   {
-   "ini": 865,
+   "ini": 877,
    "palavras": [
     {
-     "q": 865,
+     "q": 877,
      "t": "NÃO",
      "d": false,
      "f": null
     },
     {
-     "q": 870,
+     "q": 882,
      "t": "TEM",
      "d": false,
      "f": null
     },
     {
-     "q": 875,
+     "q": 887,
      "t": "BRIGA",
      "d": true,
-     "f": "serifa"
+     "f": "sem"
     }
    ],
-   "fim": 893
+   "fim": 905
   },
   {
-   "ini": 894,
+   "ini": 906,
    "palavras": [
     {
-     "q": 894,
+     "q": 906,
      "t": "É",
      "d": false,
      "f": null
     },
     {
-     "q": 900,
+     "q": 912,
      "t": "UM",
      "d": false,
      "f": null
     },
     {
-     "q": 905,
+     "q": 917,
      "t": "INCÔMODO",
      "d": true,
      "f": "sem"
     }
    ],
-   "fim": 921
+   "fim": 933
   },
   {
-   "ini": 921,
+   "ini": 933,
    "palavras": [
     {
-     "q": 921,
+     "q": 933,
      "t": "TÃO",
      "d": false,
      "f": null
     },
     {
-     "q": 926,
+     "q": 938,
      "t": "RÁPIDO",
      "d": false,
      "f": null
     },
     {
-     "q": 939,
+     "q": 951,
      "t": "QUE",
      "d": false,
      "f": null
     }
    ],
-   "fim": 944
+   "fim": 956
   },
   {
-   "ini": 944,
+   "ini": 956,
    "palavras": [
     {
-     "q": 944,
+     "q": 956,
      "t": "VOCÊ",
      "d": false,
      "f": null
     },
     {
-     "q": 953,
+     "q": 965,
      "t": "NEM",
      "d": false,
      "f": null
     }
    ],
-   "fim": 958
+   "fim": 970
   },
   {
-   "ini": 958,
+   "ini": 970,
    "palavras": [
     {
-     "q": 958,
+     "q": 970,
      "t": "DÁ",
      "d": false,
      "f": null
     },
     {
-     "q": 963,
+     "q": 975,
      "t": "NOME",
      "d": true,
-     "f": "serifa"
+     "f": "sem"
     }
    ],
-   "fim": 981
+   "fim": 993
   },
   {
-   "ini": 982,
+   "ini": 994,
    "palavras": [
     {
-     "q": 982,
+     "q": 994,
      "t": "SE",
      "d": false,
      "f": null
     },
     {
-     "q": 989,
+     "q": 1001,
      "t": "NINGUÉM",
      "d": false,
      "f": null
     }
    ],
-   "fim": 1000
+   "fim": 1012
   },
   {
-   "ini": 1000,
+   "ini": 1012,
    "palavras": [
     {
-     "q": 1000,
+     "q": 1012,
      "t": "PERCEBE",
      "d": true,
      "f": "sem"
     }
    ],
-   "fim": 1021
+   "fim": 1033
   },
   {
-   "ini": 1021,
+   "ini": 1033,
    "palavras": [
     {
-     "q": 1021,
+     "q": 1033,
      "t": "ETAPA",
      "d": false,
      "f": null
     },
     {
-     "q": 1039,
+     "q": 1051,
      "t": "DOIS",
      "d": true,
-     "f": "serifa"
+     "f": "sem"
     }
    ],
-   "fim": 1056
+   "fim": 1068
   },
   {
-   "ini": 1058,
+   "ini": 1070,
    "palavras": [
     {
-     "q": 1058,
+     "q": 1070,
      "t": "A",
      "d": false,
      "f": null
     },
     {
-     "q": 1063,
+     "q": 1075,
      "t": "CABEÇA",
      "d": false,
      "f": null
     },
     {
-     "q": 1078,
+     "q": 1090,
      "t": "ESCOLHE",
      "d": false,
      "f": null
     }
    ],
-   "fim": 1092
+   "fim": 1104
   },
   {
-   "ini": 1092,
+   "ini": 1104,
    "palavras": [
     {
-     "q": 1092,
+     "q": 1104,
      "t": "A",
      "d": false,
      "f": null
     },
     {
-     "q": 1098,
+     "q": 1110,
      "t": "PIOR",
      "d": true,
      "f": "sem"
     },
     {
-     "q": 1104,
+     "q": 1116,
      "t": "VERSÃO",
      "d": false,
      "f": null
     }
    ],
-   "fim": 1118
+   "fim": 1130
   },
   {
-   "ini": 1118,
+   "ini": 1130,
    "palavras": [
     {
-     "q": 1118,
+     "q": 1130,
      "t": "NÃO",
      "d": false,
      "f": null
     },
     {
-     "q": 1123,
+     "q": 1135,
      "t": "SE",
      "d": false,
      "f": null
     },
     {
-     "q": 1128,
+     "q": 1140,
      "t": "IMPORTA",
      "d": false,
      "f": null
     }
    ],
-   "fim": 1140
+   "fim": 1152
   },
   {
-   "ini": 1140,
+   "ini": 1152,
    "palavras": [
     {
-     "q": 1140,
+     "q": 1152,
      "t": "COMIGO",
      "d": true,
-     "f": "serifa"
+     "f": "sem"
     }
    ],
-   "fim": 1161
+   "fim": 1173
   },
   {
-   "ini": 1163,
+   "ini": 1175,
    "palavras": [
     {
-     "q": 1163,
+     "q": 1175,
      "t": "ETAPA",
      "d": false,
      "f": null
     },
     {
-     "q": 1178,
+     "q": 1190,
      "t": "TRÊS",
      "d": true,
      "f": "sem"
     }
    ],
-   "fim": 1193
+   "fim": 1205
   },
   {
-   "ini": 1195,
+   "ini": 1207,
    "palavras": [
     {
-     "q": 1195,
+     "q": 1207,
      "t": "O",
      "d": false,
      "f": null
     },
     {
-     "q": 1200,
+     "q": 1212,
      "t": "CORPO",
      "d": false,
      "f": null
     },
     {
-     "q": 1210,
+     "q": 1222,
      "t": "ACELERA",
      "d": true,
-     "f": "serifa"
+     "f": "sem"
     }
    ],
-   "fim": 1236
+   "fim": 1248
   },
   {
-   "ini": 1237,
+   "ini": 1249,
    "palavras": [
     {
-     "q": 1237,
+     "q": 1249,
      "t": "TEM",
      "d": false,
      "f": null
     },
     {
-     "q": 1242,
+     "q": 1254,
      "t": "QUE",
      "d": false,
      "f": null
     },
     {
-     "q": 1247,
+     "q": 1259,
      "t": "RESOLVER",
      "d": false,
      "f": null
     }
    ],
-   "fim": 1258
+   "fim": 1270
   },
   {
-   "ini": 1258,
+   "ini": 1270,
    "palavras": [
     {
-     "q": 1258,
+     "q": 1270,
      "t": "AGORA",
      "d": true,
      "f": "sem"
     }
    ],
-   "fim": 1278
+   "fim": 1290
   },
   {
-   "ini": 1280,
+   "ini": 1292,
    "palavras": [
     {
-     "q": 1280,
+     "q": 1292,
      "t": "E",
      "d": false,
      "f": null
     },
     {
-     "q": 1285,
+     "q": 1297,
      "t": "AÍ",
      "d": false,
      "f": null
     },
     {
-     "q": 1289,
+     "q": 1301,
      "t": "VEM",
      "d": false,
      "f": null
     }
    ],
-   "fim": 1294
+   "fim": 1306
   },
   {
-   "ini": 1294,
+   "ini": 1306,
    "palavras": [
     {
-     "q": 1294,
+     "q": 1306,
      "t": "O",
      "d": false,
      "f": null
     },
     {
-     "q": 1298,
+     "q": 1310,
      "t": "GRITO",
      "d": true,
-     "f": "serifa"
+     "f": "sem"
     }
    ],
-   "fim": 1315
+   "fim": 1327
   },
   {
-   "ini": 1320,
+   "ini": 1327,
    "palavras": [
     {
-     "q": 1320,
-     "t": "DÁ",
+     "q": 1327,
+     "t": "SABE",
      "d": false,
      "f": null
     },
     {
-     "q": 1324,
-     "t": "PRA",
-     "d": false,
-     "f": null
-    },
-    {
-     "q": 1328,
-     "t": "AGIR",
+     "q": 1332,
+     "t": "AQUELA",
      "d": false,
      "f": null
     }
    ],
-   "fim": 1335
+   "fim": 1336
   },
   {
-   "ini": 1335,
+   "ini": 1336,
    "palavras": [
     {
-     "q": 1335,
-     "t": "NESSA",
-     "d": false,
-     "f": null
-    },
-    {
-     "q": 1342,
+     "q": 1336,
      "t": "ETIQUETA",
      "d": false,
      "f": null
     }
    ],
-   "fim": 1355
+   "fim": 1347
   },
   {
-   "ini": 1355,
+   "ini": 1347,
    "palavras": [
     {
-     "q": 1355,
+     "q": 1347,
      "t": "EM",
      "d": false,
      "f": null
     },
     {
-     "q": 1359,
+     "q": 1348,
      "t": "BRANCO",
      "d": true,
      "f": "sem"
     }
    ],
-   "fim": 1371
+   "fim": 1363
   },
   {
-   "ini": 1371,
+   "ini": 1363,
    "palavras": [
     {
-     "q": 1371,
-     "t": "PÔR",
+     "q": 1363,
+     "t": "NA",
+     "d": false,
+     "f": null
+    },
+    {
+     "q": 1366,
+     "t": "ETAPA",
      "d": false,
      "f": null
     },
     {
      "q": 1375,
-     "t": "NOME",
+     "t": "UM",
      "d": true,
-     "f": "serifa"
+     "f": "sem"
     }
    ],
    "fim": 1381
@@ -1076,138 +1052,306 @@
    "palavras": [
     {
      "q": 1381,
-     "t": "NO",
+     "t": "O",
      "d": false,
      "f": null
     },
     {
-     "q": 1384,
-     "t": "APERTO",
+     "q": 1383,
+     "t": "TRABALHO",
      "d": false,
      "f": null
     }
    ],
-   "fim": 1392
+   "fim": 1390
   },
   {
-   "ini": 1392,
+   "ini": 1390,
    "palavras": [
     {
-     "q": 1392,
-     "t": "ENQUANTO",
-     "d": false,
-     "f": null
-    },
-    {
-     "q": 1401,
-     "t": "ELE",
-     "d": false,
-     "f": null
-    }
-   ],
-   "fim": 1407
-  },
-  {
-   "ini": 1407,
-   "palavras": [
-    {
-     "q": 1407,
-     "t": "AINDA",
-     "d": false,
-     "f": null
-    },
-    {
-     "q": 1413,
+     "q": 1390,
      "t": "É",
      "d": false,
      "f": null
     },
     {
-     "q": 1416,
-     "t": "PEQUENO",
+     "q": 1394,
+     "t": "ESCREVER",
+     "d": false,
+     "f": null
+    },
+    {
+     "q": 1399,
+     "t": "NELA",
+     "d": false,
+     "f": null
+    }
+   ],
+   "fim": 1417
+  },
+  {
+   "ini": 1417,
+   "palavras": [
+    {
+     "q": 1417,
+     "t": "ISSO",
+     "d": false,
+     "f": null
+    },
+    {
+     "q": 1421,
+     "t": "ME",
+     "d": false,
+     "f": null
+    }
+   ],
+   "fim": 1425
+  },
+  {
+   "ini": 1425,
+   "palavras": [
+    {
+     "q": 1425,
+     "t": "INCOMODOU",
      "d": true,
      "f": "sem"
     }
    ],
-   "fim": 1434
+   "fim": 1444
   },
   {
-   "ini": 1436,
+   "ini": 1444,
    "palavras": [
     {
-     "q": 1436,
-     "t": "MANDA",
+     "q": 1444,
+     "t": "SE",
      "d": false,
      "f": null
     },
     {
      "q": 1446,
-     "t": "PRA",
-     "d": false,
-     "f": null
-    },
-    {
-     "q": 1452,
-     "t": "QUEM",
+     "t": "VOCÊ",
      "d": false,
      "f": null
     }
    ],
-   "fim": 1457
+   "fim": 1451
   },
   {
-   "ini": 1457,
+   "ini": 1451,
    "palavras": [
     {
-     "q": 1457,
-     "t": "SÓ",
+     "q": 1451,
+     "t": "NÃO",
      "d": false,
      "f": null
     },
     {
-     "q": 1463,
-     "t": "CONHECE",
+     "q": 1454,
+     "t": "ESCREVE",
      "d": false,
      "f": null
     }
    ],
-   "fim": 1478
+   "fim": 1466
   },
   {
-   "ini": 1478,
+   "ini": 1466,
    "palavras": [
     {
-     "q": 1478,
+     "q": 1466,
      "t": "A",
      "d": false,
      "f": null
     },
     {
-     "q": 1484,
-     "t": "SUA",
+     "q": 1467,
+     "t": "CABEÇA",
+     "d": false,
+     "f": null
+    },
+    {
+     "q": 1473,
+     "t": "ESCREVE",
      "d": false,
      "f": null
     }
    ],
-   "fim": 1490
+   "fim": 1485
   },
   {
-   "ini": 1490,
+   "ini": 1485,
    "palavras": [
     {
-     "q": 1490,
-     "t": "ETAPA",
-     "d": true,
-     "f": "serifa"
+     "q": 1485,
+     "t": "A",
+     "d": false,
+     "f": null
     },
     {
-     "q": 1504,
-     "t": "QUATRO",
+     "q": 1486,
+     "t": "PIOR",
      "d": true,
-     "f": "serifa"
+     "f": "sem"
+    },
+    {
+     "q": 1491,
+     "t": "VERSÃO",
+     "d": false,
+     "f": null
     }
    ],
-   "fim": 1523
+   "fim": 1509
+  },
+  {
+   "ini": 1509,
+   "palavras": [
+    {
+     "q": 1509,
+     "t": "ESSE",
+     "d": false,
+     "f": null
+    },
+    {
+     "q": 1516,
+     "t": "PONTINHO",
+     "d": true,
+     "f": "sem"
+    }
+   ],
+   "fim": 1528
+  },
+  {
+   "ini": 1528,
+   "palavras": [
+    {
+     "q": 1528,
+     "t": "AQUI",
+     "d": false,
+     "f": null
+    },
+    {
+     "q": 1534,
+     "t": "É",
+     "d": false,
+     "f": null
+    },
+    {
+     "q": 1541,
+     "t": "A",
+     "d": false,
+     "f": null
+    }
+   ],
+   "fim": 1548
+  },
+  {
+   "ini": 1548,
+   "palavras": [
+    {
+     "q": 1548,
+     "t": "ETAPA",
+     "d": false,
+     "f": null
+    },
+    {
+     "q": 1557,
+     "t": "UM",
+     "d": true,
+     "f": "sem"
+    }
+   ],
+   "fim": 1575
+  },
+  {
+   "ini": 1575,
+   "palavras": [
+    {
+     "q": 1575,
+     "t": "EM",
+     "d": false,
+     "f": null
+    },
+    {
+     "q": 1577,
+     "t": "QUE",
+     "d": false,
+     "f": null
+    },
+    {
+     "q": 1580,
+     "t": "NÚMERO",
+     "d": false,
+     "f": null
+    }
+   ],
+   "fim": 1587
+  },
+  {
+   "ini": 1587,
+   "palavras": [
+    {
+     "q": 1587,
+     "t": "VOCÊ",
+     "d": false,
+     "f": null
+    },
+    {
+     "q": 1594,
+     "t": "COSTUMA",
+     "d": false,
+     "f": null
+    }
+   ],
+   "fim": 1604
+  },
+  {
+   "ini": 1604,
+   "palavras": [
+    {
+     "q": 1604,
+     "t": "PERCEBER",
+     "d": true,
+     "f": "sem"
+    }
+   ],
+   "fim": 1624
+  },
+  {
+   "ini": 1624,
+   "palavras": [
+    {
+     "q": 1624,
+     "t": "ME",
+     "d": false,
+     "f": null
+    },
+    {
+     "q": 1630,
+     "t": "RESPONDE",
+     "d": false,
+     "f": null
+    }
+   ],
+   "fim": 1641
+  },
+  {
+   "ini": 1641,
+   "palavras": [
+    {
+     "q": 1641,
+     "t": "AQUI",
+     "d": false,
+     "f": null
+    },
+    {
+     "q": 1644,
+     "t": "EMBAIXO",
+     "d": true,
+     "f": "sem"
+    }
+   ],
+   "fim": 1660
   }
  ]
 }

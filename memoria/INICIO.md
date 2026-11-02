@@ -10,6 +10,11 @@ status: revisado
 
 Página de entrada do cofre. Regras em `CLAUDE.md` desta pasta.
 
+## Antes de entregar qualquer peça
+
+- [[checklist-entrega]]
+- [[placar-vereditos]]
+
 ## Antes de criar qualquer peça
 
 1. [[aprendizados]]

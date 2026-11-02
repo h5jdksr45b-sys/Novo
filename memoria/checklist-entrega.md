@@ -29,6 +29,7 @@ Esta página junta os erros que ele já pegou mais de uma vez. Não traz regra n
 - [ ] Lida em voz alta, sem duplo sentido ou gíria (dar, comer, pegar, ficar). (24/10, VOCÊ DÁ TUDO)
 - [ ] Sem clichê, sem drama, sem comédia sem querer, sem metáfora que precise ser decifrada. (30/10, corda)
 - [ ] A palavra borderline está na capa ou no título.
+- [ ] Envio para quem a pessoa quer que entenda, nunca para quem acusou ou errou (arruma briga). (28/10, 02/11)
 - [ ] Sem venda no feed orgânico. Sem COMEÇAR no carrossel de alcance. (24/10; [[termometro]])
 - [ ] Não cita queda de alcance dos Reels. (28/10, terceira vez)
 

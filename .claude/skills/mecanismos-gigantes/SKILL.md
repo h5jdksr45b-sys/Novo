@@ -20,6 +20,9 @@ Leia `memoria/mecanismos-gigantes.md` inteiro e responda por escrito, em uma lin
 5. **CTA.** Pede a ação que o motor precisa? Comentário nunca foi motor nos gigantes. Salvar rendeu salvos. Enviar para uma pessoa específica continua a regra dele.
 6. **Lista e fonte.** Tem lista numerada visível sem som? Tem dado com fonte conferida? Ajudam, não são condição. Não forçar.
 7. **Segurança.** Autolesão, abuso, suicídio: sem CTA de identificação nos comentários, com saída e CVV 188 na legenda. O público da autolesão tinha 12,9% de 13 a 17 anos. Segurança prevalece sobre alcance.
+8. **Primeira vez.** A tese é nova na conta, ou é repost, parte 2 ou regravação? Na engenharia reversa de 02/11 (`relatorio.md`), toda réplica teve ação por view igual ou melhor que o original e 8 a 28 vezes menos views. Novidade da tese é metade do mecanismo. Continuação vai como teste, nunca como feed.
+
+O molde completo, com 13 perguntas, está em `relatorio.md`, seção 6. Os testes de uma variável por vez estão em `plano-de-teste.md`.
 
 Depois rode o `memoria/termometro.md` e o `memoria/checklist-entrega.md` como sempre. Esta skill não substitui os dois.
 

@@ -1,0 +1,11 @@
+# O que faltou (02/11/2026)
+
+- **Vídeos das réplicas.** Não estão nesta sessão e não dá para baixar do Instagram daqui. As réplicas foram analisadas pela legenda (Windsor), pelas métricas (Windsor e histórico de 180 dias) e, quando existia, pelo registro do roteiro e da edição em `memoria/correcoes.md`. Para fechar a análise da réplica, mandar o arquivo de vídeo e os prints de Insights de: Dbssy3iudgI (repost do sumiço, 06/08), DfDw-Jtuo17 (Mais 5 coisas, 29/10), DfODDwCuoMG (5 coisas depois da crise, 02/11), DdcFbafORcD (Por que a autolesão acontece, 18/09), DeNtB4nu3ck (Sexualidade, 08/10).
+- **Mini-manual para família: data e código.** O print do app não mostra a data. O Vamos não achou. A busca por legenda no Windsor (2025 a fevereiro de 2026) não achou "inteligência emocional", "manual" nem "paciência" num Reel; duas buscas deram timeout. Sem a data não há linha de base do período para este vídeo. Resolver: colar o link do Reel.
+- **Vida sexual e abusos (2024): linha de base.** Código achado: C5uQNTqOh_7 (14/04/2024 01:03 UTC). O Windsor devolve para abril de 2024 alcance entre 28 e 2.052 em posts de 10 mil a 260 mil views, envios quase zero e 29.743 views para este Reel contra 1,4 milhão no app. Dado inconsistente ou parcial. Não usado como linha de base. Sem Insights do app para posts dessa idade.
+- **Retenção.** O app não mostrou a curva "por quanto tempo as pessoas assistiram" em nenhum dos vencedores ("dados indisponíveis"). Só tempo médio e taxa de pulo. A curva de curtidas ao longo do vídeo foi usada como aproximação, e não é retenção.
+- **Insights orgânicos separados do 5 coisas.** O print mostra total com anúncio (22/08). Orgânico foi estimado por subtração e pelo Windsor (147.851 views).
+- **Comentários.** Lidos só no sumiço (88 de 476, pelo Vamos). Nos outros quatro não foram lidos.
+- **Música.** Nenhum vencedor identifica a faixa. O piso de áudio entre falas (-30 a -50 dBFS) indica fundo contínuo em todos; não dá para dizer qual música nem o volume exato.
+- **Curtidas e comentários no Windsor.** Vieram vazios, como em 26/10. Usados os do app.
+- **Horário de publicação.** Windsor e Vamos divergem para o sumiço (14:59 UTC no Windsor, 23:17 UTC no Vamos). Usado o Windsor.

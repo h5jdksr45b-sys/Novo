@@ -107,3 +107,20 @@ Ele escreveu tintinpedro; o Vamos achou @tintimpedro, com M, e marcou que o perf
 Maiores dos últimos 90 dias (todos Reels, mediana recente 549.828 views): Eu não te segui por isso, 2,99 mi (21/10); Vamos desenhar?, 2,92 mi (17/10); Você não precisa de uma última conversa, 1,61 mi (10/09); Respeite a disposição do outro de te perder, 1,45 mi (13/08); Deixe as pessoas estarem erradas sobre quem você é, 1,17 mi (22/08). Os dois maiores são comentário político; os mais próximos do nosso tema são última conversa e disposição de te perder. Os números não isolam o efeito da capa: não há carrossel editorial recente comprovado.
 
 Adaptação gerada para a capa de dependência emocional: foto colorida natural, casal na porta, ela segurando o braço, ele com mochila e chave, verde-sálvia e bege, parede creme (jobs 8e29d253 e f861276b). Sem precedente na conta dele de capa com foto colorida de casal.
+
+## 2026-11-03: outliers de Reel falado, temas raros e contraintuitivos (Vamos, chat 9080e905, 2 rodadas, 120 créditos)
+
+Pedido dele: Reels falados com assunto que quase ninguém ouviu, abertura contraintuitiva forte, "de preferência outliers", sem partir do zero.
+
+Rodada 1 (raridade primeiro): só 9 ângulos acima do usual; o Vamos não fechou 15. Rodada 2 (outlier primeiro, 30 vídeos, 120 dias).
+
+Mais fortes que sobraram depois do filtro pelo histórico:
+- [@splittingseason, o sintoma que tiraram do diagnóstico (tédio, 1994)](https://www.instagram.com/p/Dct-pFFvK3y/): 345 mil, perfil com posts de 0,8 a 11 mil (multiplicador não calculado, acima de 30x). Único tema raro da rodada 2. Conferido no PubMed: Masland, Shah e Choi-Kain 2020, doi 10.1159/000511312 (tédio saiu dos critérios em 1994 com dados limitados e não publicados; continua relevante na clínica; tédio e vazio são distintos).
+- [@carterpmhnp, mesma queixa, borderline ou TEPT complexo](https://www.instagram.com/p/Dd2aIMKxk8d/): 141 mil, cerca de 43x (28/09). Apoio: Cloitre 2013, doi 10.3402/ejpt.v4i0.20706 (TEPT complexo com autoconceito negativo; classes estáveis com ou sem TPB).
+- [@doctormicky2, o borderline não se apaixona como a maioria](https://www.tiktok.com/@doctormicky2/video/7702472292109929750): 76 mil, pelo menos 23x (30/10, medido aos 4 dias).
+- [@hedefapsychotherapy, cinco coisas quando se sente anestesiado](https://www.tiktok.com/@hedefapsychotherapy/video/7698541783994699014): 86 mil, cerca de 20x (20/10). Apoio: D'Agostino 2020, doi 10.1097/HRP.0000000000000269 (vazio se sobrepõe a entorpecimento e tédio).
+- Rodada 1, novos mas abaixo de 10x: metáfora da queimadura de Linehan tratada como medida (7x); diagnóstico usado para desacreditar vítima (3x).
+
+O que se repete nos outliers: primeira pessoa com afirmação dura (Meg, I have BPD, and..., 11x a 24x; os outros posts dela de 0,1x a 1,6x); o mesmo molde de lista do hedefapsychotherapy vai de 0,3x a 20x, o que muda é o ato concreto. Contas muito pequenas inflam o multiplicador (656x e 483x partem de medianas de 434 e 900). Controles da rodada 1: tema raro aberto pela definição de um termo ou por atualização pessoal ficou de 0,16x a 0,25x (remissão, queda depois de encontro bom, trabalho, idade mental, espelhamento). Raridade sozinha não basta.
+
+Descartados pelo histórico: custo físico do alto funcionamento (01/09, 13/05, 04/05); lê raiva no rosto com menos sinal (carrossel 19/08 e Reel 20/08, e neurobiologia); cala o que magoou (mil dias engolindo); não consegue disfarçar com quem é próximo e ama a versão forte (competência aparente, desabar perto de quem é seguro); placar silencioso dos amigos (perto do Reel do segredo, 03/11); parecer indiferente (cinco gestos lidos ao contrário, 01/11); bipolar x TLP, TDAH, pessoa favorita, splitting, profecia autorrealizável, vazio com abandono (já feitos); CID-11 e nome do diagnóstico (Vinte anos com o nome trocado; Matheus Mattos 28/10); irmão (Kibby 54x, família em Reel e irmãos já feito); medicação (Estabilizador 12/10); EUPD na trituradora e cringe no TikTok (critica colega ou terceiro); histamina e expectativa de vida (boato sem presença confirmada no Brasil, refutar apresentaria o boato).

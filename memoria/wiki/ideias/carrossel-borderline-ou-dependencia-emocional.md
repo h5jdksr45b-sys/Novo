@@ -70,3 +70,7 @@ Ele: "Presido que seja melhor carrossel que já postei / Revise tudo pra garanti
 ## Zip final de 03/11 (segundo zip, substitui o primeiro)
 
 Capa fechada com o Vamos: só a pergunta grande (BORDERLINE OU DEPENDÊNCIA EMOCIONAL?, dependência emocional em vermelho), cena na itálica (Pediu mais cinco minutos na porta.), sem a linha do tratamento, gravura sépia fechada do peito pra cima, ele virado pra porta com a chave, ela segurando o braço com o rosto visível (job 190bac86, margem corrigida por código). Miolo igual ao da entrega anterior, com o slide 7 refeito. Pacote em PNG 1080x1350 (11,7 MB): 01 a 11, legenda.txt, musica-e-story.txt. Veredito mantido no placar: teste alto; o Vamos disse que a evidência sustenta a escolha e não sustenta prever recorde. Aguardando publicação e números.
+
+## Capa final com a direção de arte dele (03/11, terceiro zip)
+
+Mesmo texto da capa fechada com o Vamos. Gravura sépia com luz dura vinda da porta, sombras fundas, ele em dúvida olhando pra trás, ela triste segurando o braço, foto do casal e planta na sombra, chaves em vermelho como único acento de cor (job 8db49aaa, margem corrigida por código). Versão em foto P&B com o mesmo tratamento gerada e enviada (job 40e7bce6), não entrou no zip. Sem grão, sem olhos coloridos, sem texto de promessa. Zip de 11,5 MB.

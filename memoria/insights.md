@@ -18,6 +18,31 @@ Conector `instagram`, conta 17841401503370732. Janela de até 14 dias por chamad
 - Retenção, em chamada separada: `media_permalink, media_reel_avg_watch_time, media_reel_skip_rate`.
 - Curtidas e comentários vieram vazios em 26/10. Se precisar deles, pedir print a ele.
 
+## Leitura de 03/11/2026, noite (print dele, Insights do app, Conteúdo > Seguidores, 180 dias)
+
+Ranking do app por seguidores ganhos nos últimos 180 dias, os 11 primeiros da tela. Todos carrosséis; nenhum Reel entre eles (o ranking de 26/10, em outro período, tinha 4 Reels impulsionados). Esta tela não traz views, então não dá para calcular seguidores por mil views. Colunas do app: curtidas, comentários, repostagens, envios. Pedido dele junto com o print: "Qual deles ou quais mais faz sentido refazer melhor".
+
+| # | Post | Data | Curtidas | Coment. | Reposts | Envios | Seguidores |
+|---|---|---|---|---|---|---|---|
+| 1 | Sua avó chorava trancada no quarto (nervosa era borderline, três gerações) | 08/09 | 8,4 mil | 359 | 716 | 4,1 mil | 532 |
+| 2 | Não foi a semente que veio com defeito (a genética entrega a semente) | 11/09 | 4,9 mil | 203 | 510 | 2,2 mil | 420 |
+| 3 | A crise borderline tem 4 etapas | 05/09 | 3 mil | 136 | 250 | 1,6 mil | 303 |
+| 4 | O mundo só vê o espinho (o borderline é um cacto) | 08/05 | 5,6 mil | 313 | 686 | 2,4 mil | 290 |
+| 5 | Borderline adoece a família ou a família adoece o borderline? | 26/09 | 4 mil | 221 | 304 | 1,6 mil | 255 |
+| 6 | O bloqueio, o sumiço e a volta (borderline e narcisista) | 12/10 | 1,8 mil | 60 | 133 | 653 | 212 |
+| 7 | O adulto com borderline... (quem mais teme o abandono abandona antes) | 28/09 | 8,1 mil | 138 | 1,1 mil | 1,9 mil | 188 |
+| 8 | Em segundos ela decide (decide a vida no pior segundo da briga) | 09/06 | 3 mil | 67 | 292 | 953 | 164 |
+| 9 | A mesma pessoa que passa... (hipersexual riscado, a outra ninguém sabe nomear) | 17/09 | 4,3 mil | 97 | 468 | 1,2 mil | 152 |
+| 10 | Tapou os ouvidos na festa (borderline ou autismo?) | 27/10, 6 dias de vida | 4,2 mil | 159 | 324 | 2,1 mil | 141 |
+| 11 | Manda pra quem já brigou (5 brigas que eram declarações de amor) | 25/09 | não lido | | | | 99 |
+
+Observações (fato do print, não regra):
+- Os cinco primeiros são família e origem (avó, semente, família adoece) ou esquema com nome próprio (4 etapas, cacto).
+- Borderline ou autismo, com 6 dias, já tem mais envios (2,1 mil) que Adoece a família em 180 dias (1,6 mil) e já entrou em 10º em seguidores. Ainda acumulando.
+- Abandona antes tem as curtidas (8,1 mil) e os reposts (1,1 mil) entre os maiores e fica em 7º em seguidores. Repete a leitura de 26/10: identificação dá alcance e envio, não seguidor.
+- Com as views do ranking de 26/10 (podem ter subido): família 2,1, abandono 1,2 e bloqueio 3,9 seguidores por mil views. Aproximação.
+- Réplicas já feitas de posts desta lista, para a pergunta dele: avó em Reel (22/10) 14.156 views e 482 envios; cacto em Reel (19/10) 11.767 e 208; hipersexual em Reel (07/10) 49.012 views com anúncio e 243 seguidores; em segundos em Reel (21/10) 2.022 views. Nenhuma chegou perto do carrossel original em views; avó e cacto mantiveram envio por view alto (ver `mecanismos-gigantes.md`, réplicas).
+
 ## Leitura de 03/11/2026 (prints dele, Insights do app, Reel de teste "No meio da briga")
 
 Reel de teste (trial, distribuído só para não seguidores; post cruzado no Facebook), 39,7 s, sem rosto, animação de tela de mensagens com narração. Tese: no meio da briga ela diz que você não ama, você lista provas e a briga dobra; a frase fala de um medo agora; responda ao medo e mantenha o limite. Idade do post na leitura: não informada. Taxas e comparações (mais baixo, típico) são do próprio app.

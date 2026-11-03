@@ -58,3 +58,7 @@ Miolo, 10 slides no mesmo sistema (creme, Anton, uma palavra vermelha, foto P&B 
 Checklist rodado: sem fórmula de contraste (slide 10 reescrito em uma frase só por isso), sem frase começando com pronome, sem venda, sem COMEÇAR, sem fundo preto, borderline na capa, estudo com cena, esquema visual, interativo, salvar e enviar. Arquivos: `scratchpad/miolo/slide-01-capa.png` a `slide-11.png` desta sessão, entregues no chat.
 
 Falta: legenda no molde dos gigantes (3 a 6 linhas, abre na cena, envio específico, assinatura), Story no minuto da postagem, música (Bachianinha nº 1 ou Autumn Journey).
+
+## Correção de 03/11, depois da primeira entrega do miolo
+
+Ele: "Capa confira se não está uma bosta", "E não é pra ter imagem em todas nem", "PQP". Conferida em tamanho real, a capa das sombras lê como criança segurando a mão de um adulto que sai: descartada. Capa final: a gravura sépia da porta (job ae0e3c63, margem corrigida por código). Miolo refeito no ritmo da seção 4 de aprendizados: 2 puro, 3 imagem (silhuetas), 4 puro, 5 imagem (sombra saindo pela porta), 6 esquema, 7 puro, 8 puro em serifa, 9 checklist, 10 vermelho, 11 puro com assinatura. Jobs novos: 6390cb51, c21fcba5, 09f62ea9, 92769760, 67d72bfe, 215f100d. Arquivos `scratchpad/miolo/final/01-capa.png` a `11.png`, entregues no chat. Aguardando a reação dele.

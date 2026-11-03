@@ -3,7 +3,7 @@ titulo: Carrossel Borderline ou dependência emocional?
 tipo: ideia
 criado: 2026-11-03
 fonte: informado pelo Dr. Fabio em 2026-11-03 (escolha da tese e do caso Abramović); PubMed em 2026-11-03; [[insights]] (ranking de seguidores, 180 dias)
-status: rascunho
+status: revisado
 ---
 
 # Carrossel: Borderline ou dependência emocional?
@@ -38,3 +38,23 @@ Regras desta peça: sem fórmula de contraste nos slides 4, 5 e 9 (reescrever se
 Veredito antes de postar: teste, vizinho com dado é Borderline ou autismo (94.570 views, 1.804 envios). Registrar no [[placar-vereditos]] quando ele fechar a capa.
 
 Ligações: [[placar-vereditos]] [[checklist-entrega]] [[mecanismos-gigantes]] [[capas-gigantes]]
+
+## Peça fechada em 03/11/2026 (aguardando a reação dele)
+
+Capa escolhida depois de 65 capas e do consenso com o Vamos: molde do Borderline ou autismo. Linha em itálica Pediu mais cinco minutos na porta. Título BORDERLINE OU DEPENDÊNCIA EMOCIONAL? com dependência emocional em vermelho. Linha pequena O nome muda o que precisa ser tratado. Imagem: só as sombras dos dois no chão pela luz da porta, uma saindo, a outra segurando o braço (foto P&B, variável nova sem precedente na conta; alternativa com dado é a mesma cena em gravura sépia, job 4d3dbc48). Margens corrigidas por código (escala sobre o creme) porque o GPT Image não respeitou o pedido de 12%.
+
+Miolo, 10 slides no mesmo sistema (creme, Anton, uma palavra vermelha, foto P&B de sombras), jobs 0e8ae839, 9c92985a (slide 3 refeito pela vírgula), 683fecdd, f0cceca7, 55d5c83c, 4fdf0c69, f6df0f46, 1ea2d4df, da039cf6, 7aedf30a:
+2. Segura o braço porque, por dentro, você já foi embora. A mesma cena tem dois nomes. O tratamento muda com o nome.
+3. Em 1977, dois artistas respiraram só o ar um do outro. Boca na boca, 22 minutos, até o oxigênio acabar. Marina Abramović e Ulay, Breathing In Breathing Out. (silhuetas geradas, não a foto original)
+4. A dependência emocional fica até o fim. Respira o que sobrar pra não ficar sem o outro. Precisa de você por perto.
+5. O borderline solta no meio. Tem certeza de que foi abandonado. E volta pedindo o mesmo ar.
+6. Esquema: Um estudo separou a dependência em duas partes. Medo de ser deixado (o borderline pontua aqui) / Não me acho capaz sozinho. Gude e colaboradores, 2004. 182 pacientes.
+7. Os dois podem morar na mesma pessoa. Uma revisão de estudos confirmou. Por isso o nome vem da avaliação, e não do print da conversa. Bornstein e colaboradores, 2010.
+8. Frase pra mostrar: Fico de pé sem você. O que eu não aguento é a certeza de que você vai embora. Se essa frase é sua, mostra pra quem chama de carência.
+9. Interativo: Marque o que já viu. Aceita tudo pra não perder / Solta e volta na mesma noite / Sente o abandono antes de acontecer / Pede desculpa pelo que não fez. Resposta só pra você.
+10. Fundo vermelho: O nome certo muda o tratamento. Só a avaliação diz se o tratamento começa pela autoestima ou pelo medo de abandono.
+11. Salva pra ler depois da próxima briga. E manda pra quem você queria que entendesse. Dr. Fabio Schmidt, médico, CRM-SP 183549.
+
+Checklist rodado: sem fórmula de contraste (slide 10 reescrito em uma frase só por isso), sem frase começando com pronome, sem venda, sem COMEÇAR, sem fundo preto, borderline na capa, estudo com cena, esquema visual, interativo, salvar e enviar. Arquivos: `scratchpad/miolo/slide-01-capa.png` a `slide-11.png` desta sessão, entregues no chat.
+
+Falta: legenda no molde dos gigantes (3 a 6 linhas, abre na cena, envio específico, assinatura), Story no minuto da postagem, música (Bachianinha nº 1 ou Autumn Journey).

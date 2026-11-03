@@ -18,6 +18,20 @@ Conector `instagram`, conta 17841401503370732. Janela de até 14 dias por chamad
 - Retenção, em chamada separada: `media_permalink, media_reel_avg_watch_time, media_reel_skip_rate`.
 - Curtidas e comentários vieram vazios em 26/10. Se precisar deles, pedir print a ele.
 
+## Leitura de 03/11/2026 (prints dele, Insights do app, Reel de teste "No meio da briga")
+
+Reel de teste (trial, distribuído só para não seguidores; post cruzado no Facebook), 39,7 s, sem rosto, animação de tela de mensagens com narração. Tese: no meio da briga ela diz que você não ama, você lista provas e a briga dobra; a frase fala de um medo agora; responda ao medo e mantenha o limite. Idade do post na leitura: não informada. Taxas e comparações (mais baixo, típico) são do próprio app.
+
+| Views | Visualizadores | Tempo médio | Seguidores | Pulo | Envios | Reposts | Curtidas | Salvos | Coment. | Visitas ao perfil | Fonte |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 3.354 | 2.696 | 18 s de 40 (45%) | 3 | 58,0% (mais baixo) | 11 (0,4%, mais baixo; 3,3 por mil views) | 3 (0,1%, mais baixo) | 94 (2,8%) | 5 (1,5 por mil) | 0 (típico) | 2 | Aba Reels 94,4%, Explorar 3,1%, Perfil 0,1% |
+
+Curva de retenção: cai para cerca de 50% nos 2 primeiros segundos e depois desce devagar até cerca de 20% no fim. Curtidas concentradas no primeiro segundo (gráfico de quando curtiram).
+
+Medidas do arquivo (ffmpeg): 720x1280, 30 fps, -13,8 LUFS, pico 0,1 dBFS (acima do teto de -1 dBFS do padrão), 1 corte de cena em 40 s (detector a 0,2), primeiro quadro em branco (só fundo desfocado), cartão de mensagens aparece aos 0,2 s, balão "Você não me ama" aos 2,2 s, primeiro texto grande ("No meio da briga.") só aos 3,5 s. A palavra borderline não aparece em nenhum quadro.
+
+Observação, não regra: mesma tese do Reel de 23/10 (De0Oq07u6bI, Você não me ama: responder ao medo, não com provas; 2.580 views, 10 envios, 20,8 s, pulo 0,57). Segunda vez da tese, em formato novo, com resultado parecido em envios por mil. Tempo médio em percentual (45%) fica acima dos gigantes medidos (22% a 31%); o que está abaixo é a ação por view (curtida 2,8% contra 6,4% a 14%; envio 3,3 por mil contra 14,2 de referência dos Reels). Em Reel de teste não existe o motor de Stories e perfil (sumiço: 27,5% das views por Stories).
+
 ## Leitura de 02/11/2026 (prints dele, Insights do app, engenharia reversa dos gigantes)
 
 Ele mandou os Insights completos de dois Reels gigantes e os arquivos de vídeo. Análise completa em `wiki/posts/`. Taxas e comparações (mais alto, mais baixo, típico) são do próprio app.

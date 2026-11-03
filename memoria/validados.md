@@ -80,3 +80,22 @@ O que se repete: ato do borderline dirigido a você e explicado; lista em que ca
 Também pedido ao Vamos: 10 roteiros com prova (chat 1c77d446) e a leitura dos Reels dele (chat a98cbf23, refeita só com talking head). Achados dos talking heads dele em `reels-certeiros.md`.
 
 Descartados por repetição no escrutínio: trata pior quem mais ama (desabar perto de quem é seguro), esquece tudo de bom (dia perfeito não protege), paranoia confirmada (risco clínico), profecia autorrealizável (amar alguém com borderline, 15/09), desrealização (dissociação), splitting (R01 rejeitado), vergonha do diagnóstico (23/05 e 07/09), alto funcionamento, bipolar, TDAH, narcisismo. Tabela completa em `analises/escrutinio-reels-2026-11-01.md`.
+
+## 03/11/2026: dependência emocional e borderline (Vamos, chat b65c921d)
+
+Pedido dele: vídeo em colagem sobre como a dependência emocional se forma e quando pode ser sinal de borderline.
+
+- [@neuronvisuals, ansioso x evitante em bonecos que se afastam](https://www.instagram.com/p/De2EnNyxiIt/): 11,9 mi, 434x (24/10). Ciclo mostrado em movimento, sem fala.
+- [@psi.melanyabraz, cuidado que não vem](https://www.instagram.com/p/DeF__JeMNux/): 648 mil, 196x (05/10). Tema vizinho; abre pela infância (não usar a abertura).
+- [@psi.danielasposito, discussão faz querer sumir ou terminar](https://www.instagram.com/p/Dexs2GMt4IP/): 385 mil, 166x (22/10).
+- [@aglainepsicanalista, expulsa e não consegue ficar longe](https://www.tiktok.com/@aglainepsicanalista/video/7688727646934551816): 306 mil, 41,8x (23/09). A pergunta geral do mesmo perfil (por que a gente fica) teve 0,16x.
+- [@therapyjeff, raiva no reencontro depois da saudade](https://www.tiktok.com/@therapyjeff/video/7697249233052732685): 569 mil, 21x (16/10).
+- [@dracarlapsiquiatra, dependência emocional x borderline encenado](https://www.instagram.com/p/Dd3dd8AtVLB/): 87 mil, 2,2x (29/09).
+
+No usual ou abaixo: lista de 3 sinais de borderline (0,51x), apego ansioso abrindo pelo rótulo (0,33x), aula de 5 coisas sobre TPB (0,44x), diferencial amplo de medo de abandono (1x).
+
+O que se repete: contradição vivida na relação mostrada antes do nome; ciclo em movimento repetido; experiência antes do termo. Abrir pelo rótulo ou por lista de sinais fica no usual.
+
+Vizinhos no histórico dele: Pessoa favorita (Reels 13/05 e 28/08, carrossel 15/08: uma pessoa responde e salva o dia) e Reel de 15/10 Dependência emocional e identidade (205 views, legenda genérica). Diferença da peça nova: o mecanismo é a rede encolhendo até uma pessoa só, e a virada é o diferencial com borderline.
+
+Fontes clínicas: DSM-5-TR, diagnóstico diferencial do transtorno de personalidade dependente (diante da ameaça de abandono, cede e busca substituto; no TPB, vazio, raiva e exigência, relações instáveis). Bornstein 2010, doi 10.1521/pedi.2010.24.1.109 (dependência alta é comum no TPB e os dois coexistem). Gunderson 1996, doi 10.1176/ajp.153.6.752 (intolerância a ficar só no TPB).

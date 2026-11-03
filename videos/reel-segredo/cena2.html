@@ -1,0 +1,108 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Anton;src:url(assets/fonts/anton.woff2) format('woff2')}
+@font-face{font-family:Bodoni;src:url(assets/fonts/bodoni-700.woff2) format('woff2');font-weight:700}
+html,body{margin:0;padding:0;background:#EFE6D5}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;background:url(assets/pecas/papel.png)}
+#world{position:absolute;inset:0;transform-origin:540px 800px}
+.p{position:absolute;left:0;top:0;transform-origin:50% 50%;will-change:transform}
+#stamp{position:absolute;left:0;width:1080px;top:190px;text-align:center;font-family:Anton;font-size:200px;line-height:1;color:transparent;letter-spacing:2px;
+ background:url(assets/pecas/tinta-rgba.png) center/1080px 300px no-repeat;-webkit-background-clip:text;background-clip:text;transform-origin:540px 110px}
+#strike{position:absolute;left:0;top:0;width:1080px;height:600px;overflow:visible}
+#medo{position:absolute;left:0;width:1080px;top:432px;text-align:center;font-family:Bodoni;font-weight:700;font-size:78px;color:#1C1916}
+#medo span{display:inline-block;opacity:0}
+</style></head>
+<body>
+<div id="stage"><div id="world">
+  <img id="balao" class="p" src="assets/pecas/balao.png">
+  <img id="n0" class="p" src="assets/pecas/bilhete1.png">
+  <img id="n1" class="p" src="assets/pecas/bilhete2.png">
+  <img id="n2" class="p" src="assets/pecas/bilhete3.png">
+  <img id="n3" class="p" src="assets/pecas/bilhete4.png">
+  <img id="n4" class="p" src="assets/pecas/bilhete1.png">
+  <img id="n5" class="p" src="assets/pecas/bilhete3.png">
+  <img id="fita" class="p" src="assets/pecas/fita.png">
+  <img id="aberto" class="p" src="assets/pecas/bilhete-aberto.png">
+  <img id="pote" class="p" src="assets/pecas/pote.png">
+  <div id="stamp">CALCULADO</div>
+  <svg id="strike" viewBox="0 0 1080 600"><path id="sp" d="M118 318 C 330 296, 560 312, 760 290 S 930 284, 968 278" fill="none" stroke="#CC0000" stroke-width="30" stroke-linecap="round"/></svg>
+  <div id="medo"><span>medo</span> <span>de ser</span> <span>deixado</span></div>
+</div></div>
+<script>
+const T={calc:1.95,guard:2.89,briga:4.786,medo:5.695,deser:6.0,deix:6.295,sai:9.035,frase:9.506,doi:10.326,end:12.776};
+const FPS_STOP=12;
+const $=id=>document.getElementById(id);
+const els={};
+function rnd(seed){let x=Math.sin(seed*127.1+311.7)*43758.5453;return x-Math.floor(x)}
+const size={};
+function place(id,cx,cy,scale,rot,op){
+  const e=$(id),w=e.naturalWidth,h=e.naturalHeight;
+  e.style.transform=`translate(${cx-w/2}px,${cy-h/2}px) rotate(${rot}deg) scale(${scale})`;
+  e.style.opacity=op;
+}
+const ease=x=>1-Math.pow(1-x,3);
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const MOUTH=[436,1290];
+const TARGET=[[392,722,-14],[596,688,9],[728,806,-6],[452,892,12],[648,912,-18],[548,804,4]];
+const START=i=>0.2+i*0.26;
+window.setTime=function(t){
+  const ts=Math.floor(t*FPS_STOP)/FPS_STOP;        // tempo em passos de stop motion
+  const step=Math.floor(t*FPS_STOP);
+  const tre=(t>=T.briga?2.6:1.1);
+  const jx=(s,k)=> (rnd(step*7+k)-0.5)*2*tre*s;
+  // pote: sempre presente (corte casado com o gancho)
+  place('pote',254+jx(1,1),1324+jx(1,2),1,jx(0.25,3),1);
+  // balao cresce a partir do rabicho
+  const bs=[0,0.32,0.72,1.07,1.0];
+  const bi=clamp(Math.floor((ts+0.02)*FPS_STOP)+1,0,4);
+  const b=$('balao'); const bw=b.naturalWidth,bh=b.naturalHeight;
+  const bscale=bs[bi];
+  b.style.transformOrigin='250px 714px';
+  b.style.transform=`translate(${96+jx(1,4)}px,${470+jx(1,5)}px) rotate(${jx(0.3,6)}deg) scale(${bscale})`;
+  b.style.opacity=bscale>0?1:0;
+  // bilhetes saem do pote e entram no balao
+  for(let i=0;i<6;i++){
+    const s0=START(i),d=0.62;
+    let u=clamp((ts-s0)/d,0,1);
+    const [tx,ty,tr]=TARGET[i];
+    if(ts<s0){ $('n'+i).style.opacity=0; continue; }
+    const e=ease(u);
+    const c=[MOUTH[0]+260,MOUTH[1]-260];
+    const x=(1-e)*(1-e)*MOUTH[0]+2*(1-e)*e*c[0]+e*e*tx;
+    const y=(1-e)*(1-e)*MOUTH[1]+2*(1-e)*e*c[1]+e*e*ty;
+    const sc=0.45+0.33*e;
+    const rot=(1-e)*(tr+ (i%2?60:-60))+e*tr;
+    place('n'+i,x+jx(1,10+i),y+jx(1,20+i),sc,rot+jx(0.4,30+i),1);
+  }
+  // fita prende os bilhetes no "guardado"
+  if(ts<T.guard){$('fita').style.opacity=0}else{
+    const k=Math.floor((ts-T.guard)*FPS_STOP); const sc=[1.95,1.55,1.6][Math.min(k,2)];
+    place('fita',560+jx(1,40),770+jx(1,41),sc,-7+jx(0.3,42),1);
+  }
+  // carimbo CALCULADO
+  const st=$('stamp');
+  if(ts<T.calc){st.style.opacity=0}else{
+    const k=Math.floor((ts-T.calc)*FPS_STOP); const sc=[1.16,0.97,1.0][Math.min(k,2)];
+    st.style.opacity=k===0?0.75:1;
+    st.style.transform=`translate(${jx(0.8,50)}px,${jx(0.8,51)}px) rotate(${-4+jx(0.2,52)}deg) scale(${sc})`;
+  }
+  // risco vermelho no medo
+  const sp=$('sp'); const L=sp.getTotalLength(); sp.style.strokeDasharray=L;
+  const ku=clamp((ts-T.medo)/0.34,0,1); sp.style.strokeDashoffset=L*(1-ku); sp.style.opacity=ts>=T.medo?1:0;
+  // medo de ser deixado, na ordem da fala
+  const sp2=document.querySelectorAll('#medo span'); const tw=[T.medo,T.deser,T.deix];
+  sp2.forEach((s,i)=>{const on=ts>=tw[i]; const k=Math.floor((ts-tw[i])*FPS_STOP); s.style.opacity=on?1:0; s.style.transform=on&&k<1?'translateY(14px)':'translateY(0)';});
+  // bilhete aberto sai do balao: a frase que mais doi
+  if(ts<T.sai){$('aberto').style.opacity=0}else{
+    const u=clamp((ts-T.sai)/0.5,0,1),e=ease(u);
+    place('aberto',548+jx(1,60),800+jx(1,61),0.22+0.83*e,-12+9*e+jx(0.3,62),1);
+  }
+  // punch leve no doi
+  $('world').style.transform=t>=T.doi?'scale(1.06)':'scale(1)';
+  // tremor do carimbo na batida
+  const shake=(ts>=T.calc&&ts<T.calc+2/FPS_STOP)?6:0;
+  $('stage').style.transform=`translate(${shake*(rnd(step)-0.5)}px,${shake*(rnd(step+9)-0.5)}px)`;
+};
+window.ready=Promise.all([document.fonts.ready,...[...document.images].map(i=>i.decode())]);
+</script></body></html>

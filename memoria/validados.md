@@ -99,3 +99,11 @@ O que se repete: contradição vivida na relação mostrada antes do nome; ciclo
 Vizinhos no histórico dele: Pessoa favorita (Reels 13/05 e 28/08, carrossel 15/08: uma pessoa responde e salva o dia) e Reel de 15/10 Dependência emocional e identidade (205 views, legenda genérica). Diferença da peça nova: o mecanismo é a rede encolhendo até uma pessoa só, e a virada é o diferencial com borderline.
 
 Fontes clínicas: DSM-5-TR, diagnóstico diferencial do transtorno de personalidade dependente (diante da ameaça de abandono, cede e busca substituto; no TPB, vazio, raiva e exigência, relações instáveis). Bornstein 2010, doi 10.1521/pedi.2010.24.1.109 (dependência alta é comum no TPB e os dois coexistem). Gunderson 1996, doi 10.1176/ajp.153.6.752 (intolerância a ficar só no TPB).
+
+## 2026-11-03: estilo do @tintimpedro (Pedro Tupinambá), pedido dele para uma capa (Vamos, chat 99b32f69, 30 créditos)
+
+Ele escreveu tintinpedro; o Vamos achou @tintimpedro, com M, e marcou que o perfil com N não foi confirmado. Estilo: foto e vídeo de pessoa real em casa, close ou plano médio, rosto e mãos carregando a expressão, ambiente doméstico (sofá, cortina, planta, madeira), cor que vem da roupa e da casa, luz doméstica; legendas brancas sem serifa; desenhos de marcador só para explicar no miolo. Alguns posts com filtro analógico de grão, que fica fora pelas regras dele.
+
+Maiores dos últimos 90 dias (todos Reels, mediana recente 549.828 views): Eu não te segui por isso, 2,99 mi (21/10); Vamos desenhar?, 2,92 mi (17/10); Você não precisa de uma última conversa, 1,61 mi (10/09); Respeite a disposição do outro de te perder, 1,45 mi (13/08); Deixe as pessoas estarem erradas sobre quem você é, 1,17 mi (22/08). Os dois maiores são comentário político; os mais próximos do nosso tema são última conversa e disposição de te perder. Os números não isolam o efeito da capa: não há carrossel editorial recente comprovado.
+
+Adaptação gerada para a capa de dependência emocional: foto colorida natural, casal na porta, ela segurando o braço, ele com mochila e chave, verde-sálvia e bege, parede creme (jobs 8e29d253 e f861276b). Sem precedente na conta dele de capa com foto colorida de casal.

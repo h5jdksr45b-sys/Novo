@@ -1,0 +1,15 @@
+ref_*
+fonts/
+src/*_prev.jpg
+src/contact.jpg
+out/still_*
+out/sheet*
+out/q*
+out/capa_*
+out/video_mudo.mp4
+__pycache__/
+src/
+!audio/
+audio/b*.wav
+audio/fundo.wav
+audio/mix.wav

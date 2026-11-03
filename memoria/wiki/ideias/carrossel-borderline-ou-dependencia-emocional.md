@@ -66,3 +66,7 @@ Ele: "Capa confira se não está uma bosta", "E não é pra ter imagem em todas 
 ## Entrega final de 03/11 (zip no chat)
 
 Ele: "Presido que seja melhor carrossel que já postei / Revise tudo pra garantir máximo isso". Revisão final contra o checklist: slide 7 refeito por fórmula de contraste ("e não do print da conversa" virou "avaliação com profissional, feita com tempo", job eb0fe70d). Pacote: 11 JPG em 1080x1350, `legenda.txt` (abre na cena, envio específico para os dois lados, fontes, assinatura, sem COMEÇAR) e `musica-e-story.txt` (Bachianinha nº 1; Story com a capa e enquete no minuto da postagem). Veredito final no placar: teste alto, vizinho Borderline ou autismo. Risco apontado antes de postar: slide 3 (silhuetas de Abramović e Ulay) lê como beijo na miniatura; o texto chega antes. Aguardando a publicação e os números de 1 h, 24 h e 7 dias.
+
+## Zip final de 03/11 (segundo zip, substitui o primeiro)
+
+Capa fechada com o Vamos: só a pergunta grande (BORDERLINE OU DEPENDÊNCIA EMOCIONAL?, dependência emocional em vermelho), cena na itálica (Pediu mais cinco minutos na porta.), sem a linha do tratamento, gravura sépia fechada do peito pra cima, ele virado pra porta com a chave, ela segurando o braço com o rosto visível (job 190bac86, margem corrigida por código). Miolo igual ao da entrega anterior, com o slide 7 refeito. Pacote em PNG 1080x1350 (11,7 MB): 01 a 11, legenda.txt, musica-e-story.txt. Veredito mantido no placar: teste alto; o Vamos disse que a evidência sustenta a escolha e não sustenta prever recorde. Aguardando publicação e números.

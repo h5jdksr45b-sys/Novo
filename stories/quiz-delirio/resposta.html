@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<style>
+@font-face { font-family: Maquina; src: url(fontes/SpecialElite.ttf); }
+@font-face { font-family: Letreiro; src: url(fontes/PatrickHand.ttf); }
+:root {
+  --papel: #EFE3D0;
+  --papel-claro: #F6EEE2;
+  --tinta: #1E1B18;
+  --sepia: #6F604F;
+  --sombra: #D8C7AE;
+  --sirene: #B8231B;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { width: 1080px; height: 1920px; background: var(--papel); overflow: hidden; }
+#tela {
+  position: relative; width: 1080px; height: 1920px; padding: 230px 70px 0;
+  background:
+    radial-gradient(ellipse at 50% 35%, var(--papel-claro) 0%, var(--papel) 60%, #E6D7C0 100%);
+  font-family: Letreiro; color: var(--tinta);
+}
+.selo { font-family: Maquina; font-size: 40px; letter-spacing: 3px; color: var(--sepia); }
+.titulo { display: flex; align-items: flex-end; justify-content: space-between; margin-top: 34px; }
+.titulo h1 { font-family: Maquina; font-weight: normal; font-size: 150px; line-height: 1; letter-spacing: 2px; }
+.titulo .pct { font-family: Maquina; font-size: 44px; color: var(--sirene); text-align: right; line-height: 1.1; }
+.quadro {
+  margin-top: 34px; border: 5px solid var(--tinta); background: #fff;
+  box-shadow: 8px 8px 0 var(--sombra);
+}
+.quadro img { display: block; width: 100%; }
+.linhas { margin-top: 40px; display: flex; flex-direction: column; gap: 26px; }
+.caixa {
+  position: relative; border: 4px solid var(--tinta); border-radius: 34px;
+  background: var(--papel-claro); padding: 22px 34px 24px;
+}
+.caixa h2 { font-family: Maquina; font-weight: normal; font-size: 46px; letter-spacing: 1px; }
+.caixa p { font-size: 40px; line-height: 1.18; margin-top: 6px; }
+.caixa.certa { border-color: var(--sirene); border-width: 6px; background: #FBF4EA; }
+.caixa.certa h2 { color: var(--sirene); }
+.caixa.certa::after {
+  content: "RESPOSTA"; position: absolute; top: -22px; right: 34px;
+  font-family: Maquina; font-size: 30px; letter-spacing: 2px; color: var(--papel-claro);
+  background: var(--sirene); padding: 4px 16px; border-radius: 8px;
+}
+.rodape { margin-top: 30px; font-size: 36px; line-height: 1.2; color: var(--sepia); text-align: center; }
+</style>
+</head>
+<body>
+<div id="tela">
+  <div class="selo">RESPOSTA DO QUIZ</div>
+  <div class="titulo">
+    <h1>DELÍRIO</h1>
+    <div class="pct">66%<br>acertaram</div>
+  </div>
+  <div class="quadro"><img src="quadro-ambulancia.png"></div>
+  <div class="linhas">
+    <div class="caixa">
+      <h2>ALUCINAÇÃO</h2>
+      <p>Ouvir uma sirene que não existe. Escuta sem nada lá fora.</p>
+    </div>
+    <div class="caixa">
+      <h2>ILUSÃO</h2>
+      <p>A sirene existe, mas soa como outra coisa: alguém chamando o seu nome.</p>
+    </div>
+    <div class="caixa certa">
+      <h2>DELÍRIO</h2>
+      <p>A sirene existe e foi ouvida certo. Errada é a certeza: vieram me pegar, e você está com eles. Mesmo com a ambulância passando, a certeza fica.</p>
+    </div>
+  </div>
+  <div class="rodape">Medo assim, mudando o comportamento,<br>pede avaliação médica.</div>
+</div>
+</body>
+</html>

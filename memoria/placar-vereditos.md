@@ -31,6 +31,8 @@ Cada veredito dado antes de postar, ao lado do resultado. Serve para saber quand
 | 02/11 | 13 capas enviadas por ele no chat (velas, TDAH, injustiça x3, crítica e elogio, boia, voltar da briga, leu tudo x2, pronto-socorro, cada namorado, cacto melhorou) | Nenhuma para o feed pela regra. Injustiça (variante 4, foto limpa) é a única com força de gigante, barrada só pela repetição do Reel de 09/10 (781 envios); se ele aceitar repetir, feed. Voltar da briga: refazer texto (vírgula errada, contraste) e imagem. Velas: teste no máximo (tese do Natal vetado). As outras: não saem (TDAH rejeitado em 31/10; crítica e elogio e boia já publicados; leu tudo, pronto-socorro e cacto criticam família ou serviço; cada namorado em primeira pessoa e sem borderline) | [verificar] | | |
 | 02/11 | 6 capas novas do painel (série, cabelo, dia bom, cama, chuveiro, chamar atenção riscado) | Teste para todas, sem vizinho com dado. Mais fortes: chamar atenção riscado com pulso de scrunchies e cabelo no dia do término | [verificar] | | |
 
+| 03/11 | Carrossel Borderline ou dependência emocional? (capa: Pediu mais cinco minutos na porta, gravura sépia, molde do autismo; escolhida entre 57 capas, com parecer do Vamos) | Teste alto. Saldo de feed no termômetro; o placar diz que o saldo errou 3 vezes em outubro. Vizinho: Borderline ou autismo (94.570 views, 1.804 envios). Motor mirado: envio pelos dois lados e seguidor por utilidade | [verificar] | | |
+
 ## O que o placar mostra até aqui
 
 Observação, não regra.

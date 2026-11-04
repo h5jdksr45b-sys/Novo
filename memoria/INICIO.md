@@ -17,6 +17,7 @@ Página de entrada do cofre. Regras em `CLAUDE.md` desta pasta.
 
 ## Antes de criar qualquer peça
 
+0. [[premissas-consolidadas-2026-11-04]]: tudo o que sabemos até 04/11, em um arquivo só.
 1. [[aprendizados]]
 2. [[correcoes]]
 3. [[conta]]

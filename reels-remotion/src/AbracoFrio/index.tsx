@@ -22,6 +22,8 @@ const SOMBRA_FORTE = "0 4px 26px rgba(0,0,0,.7), 0 0 3px rgba(0,0,0,.5)";
 const OUT = Easing.bezier(0.22, 1, 0.36, 1);
 const IN = Easing.bezier(0.55, 0, 1, 0.45);
 const TRACO = "drop-shadow(0 2px 6px rgba(0,0,0,.55))";
+// brilho leve das referências + sombra para ler em fundo claro
+const BRILHO = "0 0 18px rgba(255,255,255,.28), 0 3px 18px rgba(0,0,0,.55), 0 0 2px rgba(0,0,0,.4)";
 
 const ESQ = Math.round(1080 * 0.07);
 const DIR = Math.round(1080 * 0.12);
@@ -58,6 +60,15 @@ const entrada = (t: number, a: number, d = 0.22, sobe = 14): React.CSSProperties
   };
 };
 
+const TRANSICOES = [
+  { t: 9.3, tipo: "zoom" },
+  { t: 10.4333, tipo: "chicote" },
+  { t: 17.5667, tipo: "zoom" },
+  { t: 18.9333, tipo: "chicote" },
+  { t: 25.4667, tipo: "zoom" },
+  { t: 28.6333, tipo: "chicote" },
+];
+
 // ---------- base: zoom contínuo, cor de cinema, vinheta e grão ----------
 const Base: React.FC<{ t: number; frame: number }> = ({ t, frame }) => {
   const seg = SEGMENTOS.find((s) => t >= s.ini && t < s.fim) ?? SEGMENTOS[SEGMENTOS.length - 1];
@@ -65,6 +76,12 @@ const Base: React.FC<{ t: number; frame: number }> = ({ t, frame }) => {
     ...cl,
     easing: Easing.inOut(Easing.sin),
   });
+  // entrada do b-roll: zoom com desfoque; volta para o rosto: chicote lateral
+  const tr = TRANSICOES.find((x) => t >= x.t && t < x.t + 0.24);
+  const kt = tr ? ent(t, tr.t, 0.24) : 1;
+  const extraEscala = tr?.tipo === "zoom" ? 1 + 0.14 * (1 - kt) : 1;
+  const desliza = tr?.tipo === "chicote" ? (1 - kt) * -110 : 0;
+  const borrao = tr ? (1 - kt) * 14 : 0;
   return (
     <AbsoluteFill style={{ overflow: "hidden", backgroundColor: "#0D0D0D" }}>
       <OffthreadVideo
@@ -74,9 +91,9 @@ const Base: React.FC<{ t: number; frame: number }> = ({ t, frame }) => {
           width: "100%",
           height: "100%",
           objectFit: "cover",
-          transform: `scale(${escala})`,
+          transform: `translateX(${desliza}px) scale(${escala * extraEscala})`,
           transformOrigin: "50% 38%",
-          filter: "saturate(0.68) contrast(1.1) brightness(0.93) sepia(0.14)",
+          filter: `saturate(0.68) contrast(1.1) brightness(0.93) sepia(0.14) blur(${borrao}px)`,
         }}
       />
       <AbsoluteFill
@@ -111,9 +128,9 @@ const Etiqueta: React.FC<{ t: number; a: number; texto: string; tamanho: number;
         style={{
           position: "absolute",
           inset: `${tamanho * 0.08}px 0 ${tamanho * 0.02}px 0`,
-          background: VERMELHO,
-          borderRadius: 4,
-          transform: `scaleX(${kb})`,
+          background: "rgba(204,0,0,.9)",
+          borderRadius: 2,
+          transform: `scaleX(${kb}) rotate(-0.6deg)`,
           transformOrigin: "left center",
           boxShadow: "0 6px 18px rgba(0,0,0,.35)",
         }}
@@ -135,81 +152,132 @@ const Etiqueta: React.FC<{ t: number; a: number; texto: string; tamanho: number;
   );
 };
 
-// ---------- gancho ----------
+// ---------- gancho: grande, no topo, em dois tamanhos ----------
 const Gancho: React.FC<{ t: number }> = ({ t }) => {
   if (t >= GANCHO.fim) return null;
-  const s = interpolate(t, [0, 0.4], [1.03, 1], { ...cl, easing: OUT });
+  const s = interpolate(t, [0, 0.5], [1.04, 1], { ...cl, easing: OUT });
   return (
-    <div style={{ position: "absolute", top: 170, left: ESQ, width: LARGURA, textAlign: "center", transform: `scale(${s})` }}>
-      <div style={{ fontFamily: SERIF, fontSize: 118, lineHeight: 1, color: "#fff", textShadow: SOMBRA_FORTE, letterSpacing: -1 }}>
-        Abraço frio.
-      </div>
-      <div style={{ marginTop: 14, whiteSpace: "nowrap", textShadow: SOMBRA_FORTE }}>
-        <span style={{ fontFamily: SERIF, fontStyle: "italic", fontSize: 84, color: "#fff" }}>o amor </span>
-        <Etiqueta t={t} a={-1} texto="acabou?" tamanho={84} />
+    <div style={{ position: "absolute", top: 150, left: ESQ, width: LARGURA, textAlign: "left", transform: `scale(${s})`, transformOrigin: "0% 0%" }}>
+      <div style={{ fontFamily: SERIF, fontStyle: "italic", fontSize: 92, lineHeight: 1, color: "#fff", textShadow: BRILHO }}>Abraço</div>
+      <div style={{ fontFamily: SERIF, fontSize: 230, lineHeight: 0.86, color: "#fff", textShadow: BRILHO, letterSpacing: -4 }}>frio.</div>
+      <div style={{ marginTop: 18, whiteSpace: "nowrap" }}>
+        <Etiqueta t={t} a={-1} texto="o amor acabou?" tamanho={104} />
       </div>
     </div>
   );
 };
 
-// ---------- legenda ----------
+// ---------- texto da fala, dentro da cena ----------
+// Cada página (até 3 palavras) vira um bloco de dois tamanhos: o começo pequeno em itálico
+// e a palavra-chave enorme. O bloco alterna lado e sobe para o alto quando o alto está livre.
+const ALTO_OCUPADO: [number, number][] = [
+  [0, 6.4667],
+  [9.86, 15.6],
+  [15.6, 17.5667], // punch: rosto alto
+  [17.5667, 18.9333],
+  [19.44, 24.8],
+  [25.4667, 38.5],
+];
+const altoLivre = (t0: number, t1: number) => !ALTO_OCUPADO.some(([a, b]) => t0 < b && t1 > a);
+
 const Legenda: React.FC<{ t: number }> = ({ t }) => {
   const idx = CAPTIONS.findIndex((p, i) => {
     const fim = p.fim ?? CAPTIONS[i + 1]?.palavras[0].t ?? 99;
     return t >= p.palavras[0].t && t < fim;
   });
   if (idx < 0) return null;
+  if (ENFASES.some((e) => t >= e.ini && t < e.fim)) return null;
   const p = CAPTIONS[idx];
+  const ini = p.palavras[0].t;
   const fim = p.fim ?? CAPTIONS[idx + 1]?.palavras[0].t ?? 99;
-  const k = sai(t, fim, 0.08);
-  const larguraEm =
-    p.palavras.reduce((a, w) => a + w.w.length * (w.d ? 0.5 * 1.3 : 0.48) + (w.d === "box" ? 0.5 : 0), 0) +
-    (p.palavras.length - 1) * 0.28;
-  const corpo = Math.min(88, Math.floor(LARGURA / larguraEm));
+  const k = sai(t, fim, 0.12);
+  const estilo = idx % 3; // 0: sobe e desfoca, 1: desliza para o lado, 2: encolhe
+  const saida =
+    estilo === 0
+      ? `translateY(${(1 - k) * -40}px)`
+      : estilo === 1
+        ? `translateX(${(1 - k) * (idx % 2 ? 90 : -90)}px)`
+        : `scale(${0.9 + 0.1 * k})`;
+  // palavra-chave: a marcada, ou a última da página
+  let ki = p.palavras.findIndex((w) => w.d);
+  if (ki < 0) ki = p.palavras.length - 1;
+  const lead = p.palavras.slice(0, ki);
+  const key = p.palavras.slice(ki);
+  const keyTxt = key.map((w) => w.w).join(" ");
+  const caixa = key.some((w) => w.d === "box");
+  const tamKey = Math.min(caixa ? 165 : 205, Math.floor(860 / (keyTxt.length * 0.42 + (caixa ? 0.4 : 0))));
+  const tamLead = Math.min(84, Math.max(64, Math.round(tamKey * 0.5)));
+  const direita = idx % 2 === 1;
+  const alto = altoLivre(ini, fim);
+  const kk = ent(t, key[0].t, 0.26);
   return (
     <div
       style={{
         position: "absolute",
-        top: 1240,
         left: ESQ,
         width: LARGURA,
-        height: 150,
-        display: "flex",
-        flexWrap: "nowrap",
-        whiteSpace: "nowrap",
-        justifyContent: "center",
-        alignItems: "center",
-        columnGap: corpo * 0.24,
+        ...(alto ? { top: 190 } : { bottom: 1920 - 1500 }),
+        textAlign: direita ? "right" : "left",
         opacity: k,
-        filter: `blur(${(1 - k) * 4}px)`,
+        filter: `blur(${(1 - k) * 10}px)`,
+        transform: saida,
+        transformOrigin: direita ? "100% 100%" : "0% 100%",
       }}
     >
-      {p.palavras.map((w, i) => {
-        if (w.d === "box") {
-          return (
-            <span key={i}>
-              <Etiqueta t={t} a={w.t} texto={w.w} tamanho={Math.round(corpo * 1.18)} />
+      {lead.length ? (
+        <div style={{ whiteSpace: "nowrap", marginBottom: 4 }}>
+          {lead.map((w, i) => (
+            <span
+              key={i}
+              style={{
+                display: "inline-block",
+                marginRight: i < lead.length - 1 ? tamLead * 0.22 : 0,
+                ...entrada(t, w.t, 0.22),
+                fontFamily: SERIF,
+                fontStyle: "italic",
+                fontSize: tamLead,
+                lineHeight: 1,
+                color: "#fff",
+                textShadow: BRILHO,
+              }}
+            >
+              {w.w}
             </span>
-          );
-        }
-        return (
-          <span
-            key={i}
-            style={{
-              display: "inline-block",
-              ...entrada(t, w.t),
-              fontFamily: SERIF,
-              fontStyle: w.d ? "italic" : "normal",
-              fontSize: w.d ? Math.round(corpo * 1.3) : corpo,
-              lineHeight: 1,
-              color: "#fff",
-              textShadow: SOMBRA,
-            }}
-          >
-            {w.w}
-          </span>
-        );
-      })}
+          ))}
+        </div>
+      ) : null}
+      {caixa ? (
+        <div style={{ transform: `translateX(${(1 - kk) * (direita ? 50 : -50)}px)` }}>
+          <Etiqueta t={t} a={key[0].t} texto={keyTxt} tamanho={tamKey} italico={false} />
+        </div>
+      ) : (
+        <div
+          style={{
+            whiteSpace: "nowrap",
+            fontFamily: SERIF,
+            fontStyle: key[0].d ? "italic" : "normal",
+            fontSize: tamKey,
+            lineHeight: 0.92,
+            letterSpacing: -3,
+            color: "#fff",
+            textShadow: BRILHO,
+            opacity: kk,
+            filter: `blur(${(1 - kk) * 14}px)`,
+            transform:
+              estilo === 2
+                ? `scale(${1.25 - 0.25 * kk})`
+                : `translateX(${(1 - kk) * (direita ? 70 : -70)}px)`,
+            transformOrigin: direita ? "100% 50%" : "0% 50%",
+          }}
+        >
+          {key.map((w, i) => (
+            <span key={i} style={{ opacity: ent(t, w.t, 0.18) }}>
+              {i ? " " : ""}
+              {w.w}
+            </span>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
@@ -375,18 +443,18 @@ const Medidor: React.FC<{ t: number }> = ({ t }) => {
         })}
         <line x1={cx} y1={cy} x2={xn} y2={yn} stroke="#fff" strokeWidth={4} strokeLinecap="round" />
         <circle cx={cx} cy={cy} r={10} fill="#fff" />
-        <text x={x0 - 6} y={cy + 46} fill="#fff" fontFamily={SERIF} fontStyle="italic" fontSize={36}>
+        <text x={x0 - 6} y={cy + 46} fill="#fff" fontFamily={SERIF} fontStyle="italic" fontSize={46}>
           desligado
         </text>
-        <text x={x1 + 6} y={cy + 46} fill="#fff" fontFamily={SERIF} fontStyle="italic" fontSize={36} textAnchor="end">
+        <text x={x1 + 6} y={cy + 46} fill="#fff" fontFamily={SERIF} fontStyle="italic" fontSize={46} textAnchor="end">
           intenso
         </text>
       </svg>
-      <div style={{ marginTop: -36, height: 110 }}>
+      <div style={{ marginTop: -30, height: 130 }}>
         {rot.serif ? (
-          <Etiqueta t={t} a={rot.t} texto={rot.texto.toLowerCase()} tamanho={92} />
+          <Etiqueta t={t} a={rot.t} texto={rot.texto.toLowerCase()} tamanho={116} />
         ) : (
-          <span style={{ ...entrada(t, rot.t), display: "inline-block", fontFamily: SERIF, fontSize: 72, color: "#fff", textShadow: SOMBRA }}>
+          <span style={{ ...entrada(t, rot.t), display: "inline-block", fontFamily: SERIF, fontSize: 100, color: "#fff", textShadow: BRILHO }}>
             {rot.texto.toLowerCase()}
           </span>
         )}
@@ -402,7 +470,7 @@ const LadoBorder: React.FC<{ t: number }> = ({ t }) => {
   const o = sai(t, c.fim, 0.16);
   return (
     <div style={{ position: "absolute", top: 120, left: ESQ, width: LARGURA, textAlign: "center", opacity: o }}>
-      <Etiqueta t={t} a={c.ini} texto="se você tem borderline" tamanho={66} />
+      <Etiqueta t={t} a={c.ini} texto="se você tem borderline" tamanho={84} />
       <div
         style={{
           ...entrada(t, c.texto, 0.26),
@@ -414,7 +482,7 @@ const LadoBorder: React.FC<{ t: number }> = ({ t }) => {
         }}
       >
         <Check t={t} a={c.marca} tam={84} />
-        <div style={{ fontFamily: SERIF, fontSize: 76, lineHeight: 1.0, color: "#fff", textShadow: SOMBRA_FORTE, textAlign: "left" }}>
+        <div style={{ fontFamily: SERIF, fontSize: 92, lineHeight: 0.98, color: "#fff", textShadow: BRILHO, textAlign: "left" }}>
           um dia sem sentir
           <br />
           <span style={{ fontStyle: "italic" }}>não apaga o afeto</span>
@@ -464,7 +532,7 @@ const LadoConvive: React.FC<{ t: number }> = ({ t }) => {
         }}
       />
       <div style={{ position: "absolute", top: 836, left: ESQ, width: LARGURA, textAlign: "center" }}>
-        <Etiqueta t={t} a={c.ini} texto="se você convive" tamanho={62} />
+        <Etiqueta t={t} a={c.ini} texto="se você convive" tamanho={84} />
         {c.itens.map((it, i) => (
           <div key={i} style={{ marginTop: i ? 10 : 22 }}>
             <span
@@ -474,9 +542,9 @@ const LadoConvive: React.FC<{ t: number }> = ({ t }) => {
                 ...entrada(t, it.t, 0.24),
                 fontFamily: SERIF,
                 fontStyle: i ? "italic" : "normal",
-                fontSize: 60,
+                fontSize: 68,
                 color: "#fff",
-                textShadow: SOMBRA_FORTE,
+                textShadow: BRILHO,
                 whiteSpace: "nowrap",
               }}
             >
@@ -497,12 +565,12 @@ const Alerta: React.FC<{ t: number }> = ({ t }) => {
   const o = sai(t, a.fim, 0.16);
   const k = ent(t, a.ini, 0.3);
   const f = interpolate(t, [a.encheDe, a.encheAte], [0, 1], { ...cl, easing: Easing.inOut(Easing.cubic) });
-  const L = 640;
+  const L = 760;
   return (
     <div style={{ position: "absolute", top: 120, left: CX - L / 2, width: L, textAlign: "center", opacity: o }}>
       <div style={{ display: "flex", justifyContent: "space-between", ...entrada(t, a.ini, 0.3) }}>
-        <span style={{ fontFamily: SERIF, fontStyle: "italic", fontSize: 52, color: "#fff", textShadow: SOMBRA }}>1 dia</span>
-        <span style={{ fontFamily: SERIF, fontStyle: "italic", fontSize: 52, color: f > 0.97 ? "#fff" : "rgba(255,255,255,.7)", textShadow: SOMBRA }}>
+        <span style={{ fontFamily: SERIF, fontStyle: "italic", fontSize: 70, color: "#fff", textShadow: BRILHO }}>1 dia</span>
+        <span style={{ fontFamily: SERIF, fontStyle: "italic", fontSize: 70, color: f > 0.97 ? "#fff" : "rgba(255,255,255,.7)", textShadow: SOMBRA }}>
           semanas
         </span>
       </div>
@@ -512,10 +580,10 @@ const Alerta: React.FC<{ t: number }> = ({ t }) => {
         <circle cx={10} cy={20} r={9} fill="#fff" opacity={k} />
         <circle cx={10 + (L - 20) * f} cy={20} r={13} fill={VERMELHO} stroke="#fff" strokeWidth={3} opacity={f > 0.02 ? 1 : 0} />
       </svg>
-      <div style={{ ...entrada(t, a.alerta, 0.26), marginTop: 22, fontFamily: SERIF, fontSize: 60, color: "#fff", textShadow: SOMBRA_FORTE }}>
+      <div style={{ ...entrada(t, a.alerta, 0.26), marginTop: 22, fontFamily: SERIF, fontSize: 78, color: "#fff", textShadow: BRILHO }}>
         ou algum <span style={{ fontStyle: "italic" }}>sinal de alerta</span>
       </div>
-      <div style={{ marginTop: 16 }}>{t >= a.ajuda ? <Etiqueta t={t} a={a.ajuda} texto="procure ajuda" tamanho={84} /> : null}</div>
+      <div style={{ marginTop: 16 }}>{t >= a.ajuda ? <Etiqueta t={t} a={a.ajuda} texto="procure ajuda" tamanho={112} /> : null}</div>
     </div>
   );
 };

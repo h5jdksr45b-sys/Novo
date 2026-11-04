@@ -37,7 +37,7 @@ export const ENFASES = [
   { ini: 17.76, fim: 18.9333, grande: "Não sinto,", comp: "eu não amo.", compT: 18.08, centro: true, risco: 18.55 },
   { ini: 28.96, fim: 29.7333, grande: "Ficar", comp: "por perto.", compT: 29.24, check: 29.4 },
   { ini: 35.9, fim: 36.38, grande: "te ama." },
-  { ini: 36.4, fim: 38.45, grande: "Manda", comp: "pra quem você queria que entendesse", compT: 36.64 },
+  { ini: 36.4, fim: 38.45, grande: "Manda", comp: "pra quem você queria que entendesse nesse dia", compT: 36.64 },
 ];
 
 // Esquemas interativos (cartão escuro no terço de cima).

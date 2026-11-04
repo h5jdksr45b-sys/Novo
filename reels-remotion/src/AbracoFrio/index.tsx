@@ -121,7 +121,7 @@ const Etiqueta: React.FC<{ t: number; a: number; texto: string; tamanho: number;
   italico = true,
 }) => {
   const kb = ent(t, a, 0.2);
-  const kt = ent(t, a + 0.06, 0.2);
+  const kt = kb;
   return (
     <span style={{ position: "relative", display: "inline-block", padding: `0 ${tamanho * 0.18}px`, lineHeight: 1.08 }}>
       <span
@@ -170,16 +170,6 @@ const Gancho: React.FC<{ t: number }> = ({ t }) => {
 // ---------- texto da fala, dentro da cena ----------
 // Cada página (até 3 palavras) vira um bloco de dois tamanhos: o começo pequeno em itálico
 // e a palavra-chave enorme. O bloco alterna lado e sobe para o alto quando o alto está livre.
-const ALTO_OCUPADO: [number, number][] = [
-  [0, 6.4667],
-  [9.86, 15.6],
-  [15.6, 17.5667], // punch: rosto alto
-  [17.5667, 18.9333],
-  [19.44, 24.8],
-  [25.4667, 38.5],
-];
-const altoLivre = (t0: number, t1: number) => !ALTO_OCUPADO.some(([a, b]) => t0 < b && t1 > a);
-
 const Legenda: React.FC<{ t: number }> = ({ t }) => {
   const idx = CAPTIONS.findIndex((p, i) => {
     const fim = p.fim ?? CAPTIONS[i + 1]?.palavras[0].t ?? 99;
@@ -188,7 +178,6 @@ const Legenda: React.FC<{ t: number }> = ({ t }) => {
   if (idx < 0) return null;
   if (ENFASES.some((e) => t >= e.ini && t < e.fim)) return null;
   const p = CAPTIONS[idx];
-  const ini = p.palavras[0].t;
   const fim = p.fim ?? CAPTIONS[idx + 1]?.palavras[0].t ?? 99;
   const k = sai(t, fim, 0.12);
   const estilo = idx % 3; // 0: sobe e desfoca, 1: desliza para o lado, 2: encolhe
@@ -196,7 +185,7 @@ const Legenda: React.FC<{ t: number }> = ({ t }) => {
     estilo === 0
       ? `translateY(${(1 - k) * -40}px)`
       : estilo === 1
-        ? `translateX(${(1 - k) * (idx % 2 ? 90 : -90)}px)`
+        ? `translateX(${(1 - k) * -90}px)`
         : `scale(${0.9 + 0.1 * k})`;
   // palavra-chave: a marcada, ou a última da página
   let ki = p.palavras.findIndex((w) => w.d);
@@ -205,10 +194,11 @@ const Legenda: React.FC<{ t: number }> = ({ t }) => {
   const key = p.palavras.slice(ki);
   const keyTxt = key.map((w) => w.w).join(" ");
   const caixa = key.some((w) => w.d === "box");
-  const tamKey = Math.min(caixa ? 165 : 205, Math.floor(860 / (keyTxt.length * 0.42 + (caixa ? 0.4 : 0))));
-  const tamLead = Math.min(84, Math.max(64, Math.round(tamKey * 0.5)));
-  const direita = idx % 2 === 1;
-  const alto = altoLivre(ini, fim);
+  // tamanho constante; só encolhe quando a frase não cabe na largura
+  const tamKey = Math.min(caixa ? 140 : 156, Math.floor(860 / (keyTxt.length * 0.42 + (caixa ? 0.4 : 0))));
+  const tamLead = 80;
+  const direita = false;
+  const alto = false;
   const kk = ent(t, key[0].t, 0.26);
   return (
     <div
@@ -216,7 +206,7 @@ const Legenda: React.FC<{ t: number }> = ({ t }) => {
         position: "absolute",
         left: ESQ,
         width: LARGURA,
-        ...(alto ? { top: 190 } : { bottom: 1920 - 1500 }),
+        ...(alto ? { top: 190 } : { bottom: 1920 - 1480 }),
         textAlign: direita ? "right" : "left",
         opacity: k,
         filter: `blur(${(1 - k) * 10}px)`,
@@ -372,7 +362,6 @@ const Enfase: React.FC<{ t: number }> = ({ t }) => {
             {e.comp}
             {e.risco ? <Risco t={t} a={e.risco} /> : null}
           </div>
-          {e.check ? <Check t={t} a={e.check} tam={78} /> : null}
         </div>
       ) : null}
     </div>

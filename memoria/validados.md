@@ -134,3 +134,21 @@ Pedido dele: Vamos olhar vários vídeos, de preferência antigos, e dizer quais
 4. Sintoma ou efeito do remédio? ([DVwzvNZjumJ](https://www.instagram.com/p/DVwzvNZjumJ/), 11/03/2026): 9.968 views. Risco: crítica a colega e prescrição; reserva.
 5. Estabilizador funciona para quê? ([DeX-a1AO86E](https://www.instagram.com/p/DeX-a1AO86E/), 12/10/2026): 17.829 views. Mesmo risco; reserva.
 Descartados pelo Vamos por repetição ou veto: React Felca (252 mil, 2025), relato fictício do século passado (390 mil, 2025), por que se cortar, sumiço, cinco sinais de amor, te chamou de tudo ontem, vê o padrão e não para, busca imediata por justiça, contar tudo logo de cara, melhora silenciosa.
+
+## 2026-11-04: borderline, mais procurados e menos esclarecidos (Vamos, chat d8a1110c, 48 créditos)
+
+Pedido dele: "Temas mais falados de borderline", depois "Mais procurados hoje é menos esclarecidos". Demanda medida por perguntas nos comentários e engajamento; o Vamos não mediu volume de busca.
+
+Posts mais fortes:
+- [@alynnemolon, coisas que eu fazia e achava normal](https://www.tiktok.com/@alynnemolon/video/7698150015398612244): 627 mil, cerca de 54x (18/10). Comentário Me identifiquei com tudo. Devo me preocupar? com 7.868 curtidas; como fazer o diagnóstico, psicólogo ou psiquiatra? com 387.
+- [@drfelipepsi, como agir na crise](https://www.instagram.com/p/DeVrg3wtDHj/): 424 mil, cerca de 3,4x (11/10). Comentários pedem o implosivo; a continuação sobre quem implode teve 0,32x.
+- [@dr.willarantess, bipolar x borderline](https://www.instagram.com/p/DcjyFl-s67c/): 490 mil (27/08). Queria que falasse mais da euforia do borderline, 508 curtidas; pode ter os dois?
+- [@drkibby, splitting](https://www.instagram.com/p/Dd5QgiXMUnX/): pergunta como validar quando dizem que você fez coisas que não fez, 30 curtidas (01/10).
+- [@megzeenatwamithi, ser minha amiga é confuso](https://www.tiktok.com/@megzeenatwamithi/video/7693216001034489090): 259 mil, cerca de 13x (05/10).
+- [@psi.luanafontana, desrealização](https://www.instagram.com/p/Dd_yoGQgqm2/): 173 mil, cerca de 10x (02/10). Comentários misturam estranheza, falha de memória e desmaio.
+
+O que se repete: a pergunta que sobra é o passo seguinte ao reconhecimento (como confirmar, o que fazer, posso ter os dois). Os vídeos que mais circulam entregam identificação e deixam a decisão sem resposta.
+
+Ficaram, com ângulo novo: validar sem confessar acusação falsa (parente de Raciocínio emocional e Borderline mente); me identifiquei com tudo, e agora? (parente de Nove moedas); o que fazer quando a pessoa se fecha (parente de Borderline silencioso 30/09); euforia depois de uma mensagem e bipolar junto (parente de Estabilizador 12/10); TPB com TDAH ou TEPT complexo ao mesmo tempo; remissão, sentir menos ou segurar melhor (demanda fraca).
+
+Descartados: narcisismo e relação abusiva (carrossel 12/10, PCL-R, lote de estigmas); suspeita confirmada e intuição (paranoia confirmada já descartada em 01/11 por risco clínico); splitting permanente (R01 rejeitado); dissociação (descartada em 01/11; só volta se o ângulo for quando procurar avaliação).

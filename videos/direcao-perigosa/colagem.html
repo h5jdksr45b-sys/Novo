@@ -135,10 +135,10 @@ html,body{margin:0;padding:0;background:transparent}
  <div id="fade"></div>
 </div>
 <script>
-const OFF=8.17;                 // narração começa aqui no vídeo final
+const OFF=7.75;                 // narração começa aqui no vídeo final
 const W=__WORDS__;              // [palavra, ini, fim] no tempo da narração
 const HL=new Set(['perigosa','impulsividade','briga','rejeição','afunda','abafa','você','responsabilidade','sozinho','cinco','sumir','188']);
-const CUT=10.06, END=__END__;
+const CUT=9.967, END=__END__;
 const SC=[['s1',CUT],['s2',OFF+9.70],['s3',OFF+15.45],['s4',OFF+23.30],['s5',OFF+28.90],['s6',OFF+34.40],['s7',OFF+39.95],['s8',OFF+48.80],['s9',OFF+55.00],['x',99]];
 const $=id=>document.getElementById(id);
 const cl=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
@@ -177,7 +177,7 @@ window.ready=document.fonts.ready;
 window.setTime=function(t){
   const inClip=t<CUT; $('col').style.display=inClip?'none':'block';
   // gancho em texto 0.15 a 5.9
-  const hk=$('hook'); hk.style.opacity=(t>0.12&&t<5.95)?1:0; hk.style.transform=`translateY(${(1-eo((t-0.12)/0.3))*30}px)`;
+  const hk=$('hook'); hk.style.opacity=(t>0.12&&t<5.6)?1:0; hk.style.transform=`translateY(${(1-eo((t-0.12)/0.3))*30}px)`;
   // cenas
   let cur=null;for(let i=0;i<SC.length-1;i++){if(t>=SC[i][1]&&t<SC[i+1][1])cur=SC[i][0]}
   document.querySelectorAll('.sc').forEach(s=>s.style.display=(s.id===cur)?'block':'none');
@@ -214,7 +214,7 @@ window.setTime=function(t){
   if(cur==='s8'){ enter($('z_t'),t,SC[7][1],0,50,0); enter($('z_e'),t,wt('encosta'),0,30,0); enter($('z_n'),t,wt('188'),0,40,0); enter($('z_s'),t,wt('188')+0.4,0,20,0); }
   if(cur==='s9'){ enter($('f_car'),t,SC[8][1],0,60,2); enter($('f_t'),t,wt('manda'),0,40,0); enter($('f_s'),t,wt('antes'),0,30,0); }
   $('cap').className=inClip?'':'ink';
-  caption(t); if(t<10.45) $('cap').innerHTML='';
+  caption(t);
   // flash branco curto na entrada da colagem
   const fl=$('flash'); fl.style.opacity=(t>=CUT&&t<CUT+0.1)?0.85*(1-(t-CUT)/0.1):0;
   $('fade').style.opacity=cl((t-(END-0.12))/0.12);

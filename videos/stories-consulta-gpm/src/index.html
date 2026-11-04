@@ -1,0 +1,222 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Fr;src:url(Fraunces.ttf);font-weight:100 900;font-style:normal}
+:root{--cream:#F2EADB;--paper:#FBF7EF;--ink:#151312;--red:#CC0000;--mute:#6E655A;--tape:rgba(226,208,170,.82)}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--cream)}
+body{font-family:"Inter Display","Inter",sans-serif;color:var(--ink)}
+.sheet{position:absolute;inset:0;background:var(--cream);will-change:transform}
+.kick{position:absolute;left:108px;top:250px;font:800 26px "Inter Display";letter-spacing:.32em;color:var(--red);text-transform:uppercase}
+.handle{position:absolute;right:108px;top:252px;font:700 22px "Inter Display";letter-spacing:.14em;color:var(--mute)}
+.rule{position:absolute;left:108px;right:108px;top:300px;height:3px;background:var(--ink)}
+.foot{position:absolute;left:108px;right:108px;top:1560px;font:500 22px "Inter Display";color:var(--mute);line-height:1.45}
+.ser{font-family:Fr;font-style:italic;font-weight:400;font-variation-settings:"SOFT" 100,"WONK" 1,"opsz" 144}
+.blk{display:inline-block;background:var(--ink);color:var(--cream);padding:6px 22px 12px;font:900 112px/1 "Inter Display";letter-spacing:-.02em;text-transform:uppercase}
+.tape{position:absolute;width:190px;height:54px;background:var(--tape);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.paper{position:absolute;background:var(--paper);box-shadow:0 18px 30px -14px rgba(40,30,20,.35)}
+.card{position:absolute;left:108px;right:108px;height:118px;background:var(--paper);box-shadow:0 14px 24px -14px rgba(40,30,20,.35);display:flex;align-items:center;padding:0 34px;gap:30px}
+.card .n{font:900 30px "Inter Display";color:var(--red);width:52px}
+.card .ic{width:54px;height:54px;flex:none}
+.card .t{font:900 40px/1.05 "Inter Display";letter-spacing:-.01em}
+.card .s{font:500 27px/1.2 "Inter Display";color:var(--mute);margin-top:6px}
+#cap{position:absolute;left:108px;right:108px;top:1420px;text-align:center;font:900 50px/1.1 "Inter Display";text-transform:uppercase;letter-spacing:-.005em}
+#cap b{color:var(--red);font-weight:900}
+.emph{position:absolute;left:108px;right:108px;text-align:center}
+</style></head><body>
+
+<!-- A: entrevista -->
+<div class="sheet" id="A">
+  <div class="kick">Na crise</div><div class="handle">@DRFABIOSCHMIDT</div><div class="rule"></div>
+  <div class="emph" id="emA" style="top:430px"></div>
+  <div id="win" style="position:absolute;left:108px;top:690px;width:864px;height:644px;transform:rotate(-1.2deg)">
+    <div class="paper" id="winPaper" style="inset:-18px"></div>
+    <img id="vid" style="position:absolute;inset:0;width:864px;height:644px;display:block">
+    <div class="tape" style="left:-50px;top:-28px;transform:rotate(-32deg)"></div>
+    <div class="tape" style="right:-54px;bottom:-26px;transform:rotate(-28deg)"></div>
+  </div>
+  <div id="cap"></div>
+</div>
+
+<!-- G: medidor -->
+<div class="sheet" id="G">
+  <div class="kick">Depois</div><div class="handle">@DRFABIOSCHMIDT</div><div class="rule"></div>
+  <div class="emph" id="emG" style="top:470px"></div>
+  <svg id="gauge" width="720" height="720" viewBox="-360 -360 720 720" style="position:absolute;left:180px;top:780px"></svg>
+  <div id="capG" style="position:absolute;left:108px;right:108px;top:1560px;text-align:center;font:900 50px/1.1 'Inter Display';text-transform:uppercase"></div>
+</div>
+
+<!-- B: tratável -->
+<div class="sheet" id="B">
+  <div class="kick">Tratamento</div><div class="handle">@DRFABIOSCHMIDT</div><div class="rule"></div>
+  <div style="position:absolute;left:108px;top:450px" id="b1"><span class="blk">Borderline</span></div>
+  <div class="ser" id="b2" style="position:absolute;left:108px;top:590px;font-size:150px;line-height:1;color:var(--red)">é tratável.</div>
+  <div id="cal" style="position:absolute;left:300px;top:900px;width:480px;height:520px;transform:rotate(3deg)">
+    <div class="paper" style="inset:0"></div>
+    <div style="position:absolute;left:0;right:0;top:0;height:120px;background:var(--ink);color:var(--cream);font:900 40px/120px 'Inter Display';text-align:center;letter-spacing:.2em">AGENDA</div>
+    <div id="calnum" style="position:absolute;left:0;right:0;top:250px;text-align:center;font:900 150px/1 'Inter Display';letter-spacing:-.03em">HOJE</div>
+    <svg id="circ" width="480" height="420" viewBox="0 0 480 420" style="position:absolute;left:0;top:110px"><path id="circp" d="M240 40 C 400 30, 450 160, 420 260 C 390 370, 120 390, 60 280 C 10 190, 80 50, 250 52" fill="none" stroke="#CC0000" stroke-width="12" stroke-linecap="round"/></svg>
+        <div class="tape" style="left:145px;top:-26px;transform:rotate(-4deg)"></div>
+  </div>
+  <div class="ser" id="b3" style="position:absolute;left:108px;right:108px;top:1500px;text-align:center;font-size:84px;line-height:1">Quanto antes, melhor.</div>
+</div>
+
+<!-- C: GPM -->
+<div class="sheet" id="C">
+  <div class="kick">Como eu trabalho</div><div class="handle">@DRFABIOSCHMIDT</div><div class="rule"></div>
+  <div style="position:absolute;left:108px;top:360px;font:900 112px/1 'Inter Display';letter-spacing:-.02em">Modelo <span class="ser" style="color:var(--red);font-weight:400">GPM.</span></div>
+  <div style="position:absolute;left:108px;right:108px;top:500px;font:500 30px/1.35 'Inter Display';color:var(--mute)">Good Psychiatric Management. Criado no McLean Hospital, ligado a Harvard, para tratar borderline.</div>
+  <div id="cards"></div>
+</div>
+
+<!-- D: gráfico -->
+<div class="sheet" id="D">
+  <div class="kick">Objetivo</div><div class="handle">@DRFABIOSCHMIDT</div><div class="rule"></div>
+  <div id="d1" style="position:absolute;left:108px;right:108px;top:360px;font:900 64px/1.08 'Inter Display';letter-spacing:-.015em">Os colegas amadurecem.<br><span class="ser" style="color:var(--red);font-weight:400">A distância aumenta.</span></div>
+  <div id="d2" style="position:absolute;left:108px;right:108px;top:360px;font:900 64px/1.08 'Inter Display';letter-spacing:-.015em">O tratamento busca<br><span class="ser" style="color:var(--red);font-weight:400">diminuir essa distância.</span></div>
+  <div class="paper" style="left:108px;top:660px;width:864px;height:840px;transform:rotate(-.8deg)">
+    <div class="tape" style="left:337px;top:-26px;transform:rotate(3deg)"></div>
+    <svg id="chart" width="864" height="840" viewBox="0 0 864 840" style="position:absolute;inset:0"></svg>
+  </div>
+  <div class="foot" style="top:1530px">Fontes: Johnson et al. 2000; Stepp et al. 2014; Haltigan et al. 2016.<br>Conteúdo educativo. Dr. Fabio Schmidt, CRM-SP 183549.</div>
+</div>
+
+<!-- E: consulta -->
+<div class="sheet" id="E">
+  <div class="kick">Atendimento</div><div class="handle">@DRFABIOSCHMIDT</div><div class="rule"></div>
+  <div style="position:absolute;left:108px;top:360px;font:900 140px/1 'Inter Display';letter-spacing:-.03em">Consulta</div>
+  <div class="ser" style="position:absolute;left:108px;top:500px;font-size:150px;line-height:1;color:var(--red)">online.</div>
+  <div id="ecards"></div>
+</div>
+
+<!-- F: assinatura -->
+<div class="sheet" id="F">
+  <div class="kick">Agenda</div><div class="handle">@DRFABIOSCHMIDT</div><div class="rule"></div>
+  <div id="f1" style="position:absolute;left:108px;right:108px;top:520px;font:900 96px/1 'Inter Display';letter-spacing:-.01em">Dr.&nbsp;Fabio<br>Schmidt</div>
+  <div id="f2" style="position:absolute;left:108px;top:760px;width:120px;height:8px;background:var(--red)"></div>
+  <div id="f3" style="position:absolute;left:108px;right:108px;top:810px;font:600 40px/1.3 'Inter Display'">Médico com foco em borderline.<br><span style="color:var(--mute);font-weight:500;font-size:32px">CRM-SP 183549 · Individual e casal</span></div>
+  <div id="f4" class="ser" style="position:absolute;left:108px;right:108px;top:1080px;font-size:120px;line-height:1;color:var(--red)">Agende pelo link.</div>
+  <svg id="arrow" width="90" height="150" viewBox="0 0 90 150" style="position:absolute;left:495px;top:1250px"><path d="M45 6 V128 M12 96 L45 132 L78 96" fill="none" stroke="#CC0000" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <div id="f5" style="position:absolute;left:108px;right:108px;top:1440px;text-align:center;font:600 28px 'Inter Display';color:var(--mute);letter-spacing:.04em">consultadrfabio.base44.app</div>
+</div>
+
+<script>
+const W = window.WORDS || [];
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const ease=x=>{x=clamp(x);return 1-Math.pow(1-x,3)};
+const easeIO=x=>{x=clamp(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2};
+const back=x=>{x=clamp(x);const c=1.5;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+const $=id=>document.getElementById(id);
+
+// seeded torn edge
+function rng(s){return()=>{s=(s*16807)%2147483647;return s/2147483647}}
+function torn(w,h,seed,amp){const r=rng(seed),p=[];const st=18;
+  for(let x=0;x<=w;x+=st)p.push([x,r()*amp]);for(let y=0;y<=h;y+=st)p.push([w-r()*amp,y]);
+  for(let x=w;x>=0;x-=st)p.push([x,h-r()*amp]);for(let y=h;y>=0;y-=st)p.push([r()*amp,y]);
+  return 'polygon('+p.map(([x,y])=>`${(x/w*100).toFixed(2)}% ${(y/h*100).toFixed(2)}%`).join(',')+')'}
+$('winPaper').style.clipPath=torn(900,680,7,10);
+$('vid').style.clipPath=torn(864,644,3,6);
+document.querySelectorAll('#cal .paper').forEach(e=>e.style.clipPath=torn(480,520,11,7));
+
+// cards
+const ICON={
+ user:'<svg class="ic" viewBox="0 0 54 54"><circle cx="27" cy="18" r="10" fill="none" stroke="#CC0000" stroke-width="4"/><path d="M8 48c3-11 11-16 19-16s16 5 19 16" fill="none" stroke="#CC0000" stroke-width="4" stroke-linecap="round"/></svg>',
+ two:'<svg class="ic" viewBox="0 0 54 54"><circle cx="19" cy="18" r="8" fill="none" stroke="#CC0000" stroke-width="4"/><circle cx="37" cy="20" r="7" fill="none" stroke="#CC0000" stroke-width="4"/><path d="M4 46c2-9 8-13 15-13s13 4 15 13M32 33c8 0 15 4 17 13" fill="none" stroke="#CC0000" stroke-width="4" stroke-linecap="round"/></svg>',
+ cal:'<svg class="ic" viewBox="0 0 54 54"><rect x="6" y="10" width="42" height="38" rx="3" fill="none" stroke="#CC0000" stroke-width="4"/><path d="M6 21h42M17 5v10M37 5v10" stroke="#CC0000" stroke-width="4" stroke-linecap="round"/><rect x="15" y="29" width="8" height="8" fill="#CC0000"/></svg>'};
+const GPM=[['Diagnóstico','dito com clareza, sem mitos'],['Vida real','escola, trabalho e relações'],['Família','como parte do cuidado'],['Medicação','com alvo e prazo definidos'],['Sentido','dar nome ao que se sente']];
+$('cards').innerHTML=GPM.map((c,i)=>`<div class="card" id="g${i}" style="top:${640+i*150}px"><div class="n">0${i+1}</div><div><div class="t">${c[0]}</div><div class="s">${c[1]}</div></div></div>`).join('');
+const EC=[['user','Individual','adolescentes e adultos'],['two','De casal','para quem convive'],['cal','Agenda aberta','todos os dias']];
+$('ecards').innerHTML=EC.map((c,i)=>`<div class="card" id="e${i}" style="top:${760+i*160}px;height:132px">${ICON[c[0]]}<div><div class="t">${c[1]}</div><div class="s">${c[2]}</div></div></div>`).join('');
+
+// gauge
+(function(){const g=$('gauge');let s='<circle r="300" fill="#FBF7EF"/><circle r="300" fill="none" stroke="#151312" stroke-width="22"/>';
+ const A0=-135,A1=135,ang=a=>(a-90)*Math.PI/180;
+ const arc=(r,a,b)=>{const p=t=>[r*Math.cos(ang(t)),r*Math.sin(ang(t))];const[x1,y1]=p(a),[x2,y2]=p(b);return `M${x1} ${y1} A${r} ${r} 0 ${b-a>180?1:0} 1 ${x2} ${y2}`};
+ s+=`<path d="${arc(232,60,135)}" fill="none" stroke="#CC0000" stroke-width="56"/>`;
+ for(let a=A0;a<=A1;a+=13.5){const big=Math.round((a-A0)/13.5)%2==0;const r1=big?208:222,r2=262;s+=`<line x1="${r1*Math.cos(ang(a))}" y1="${r1*Math.sin(ang(a))}" x2="${r2*Math.cos(ang(a))}" y2="${r2*Math.sin(ang(a))}" stroke="#151312" stroke-width="${big?8:5}" stroke-linecap="round"/>`}
+ s+='<g id="needle"><path d="M-12 30 L0 -250 L12 30 Z" fill="#151312"/></g><circle r="30" fill="#151312"/><circle r="10" fill="#FBF7EF"/>';
+ g.innerHTML=s})();
+
+// chart
+const CH={x0:90,x1:800,y0:600,y1:120};
+const ages=[9,14,18,28,38];
+const ax=a=>CH.x0+(a-9)/(38-9)*(CH.x1-CH.x0);
+function curve(f,n=120){const p=[];for(let i=0;i<=n;i++){const a=9+29*i/n;p.push([ax(a),f(a)])}return p}
+const bump=(a,c,w)=>Math.exp(-Math.pow((a-c)/w,2));
+const expF=a=>{const up=1/(1+Math.exp(-(a-11.2)*1.6));const down=a<14?1:Math.exp(-Math.pow((a-14)/7.5,2));return CH.y0-(CH.y0-CH.y1-40)*(.12+.88*up*down*(.88+.12*bump(a,14,2)))*(a<14?1:1)};
+const redF=a=>{const up=1/(1+Math.exp(-(a-11)*1.6));return CH.y0-(CH.y0-CH.y1)*(.12+.86*up)*(1-.08*clamp((a-15)/5))+Math.sin(a*1.4)*7*clamp((a-16)/4)};
+const tgtF=a=>{const k=clamp((a-15)/10);const s=k*k*(3-2*k);return redF(a)*(1-s)+(expF(a)-14)*s};
+const pts={e:curve(expF),r:curve(redF),t:curve(tgtF)};
+const P=p=>'M'+p.map(q=>q[0].toFixed(1)+' '+q[1].toFixed(1)).join(' L');
+(function(){const c=$('chart');let s='';
+ s+=`<text x="${CH.x0}" y="70" font-family="Inter Display" font-weight="700" font-size="24" fill="#6E655A" letter-spacing="1">intensidade dos traços</text>`;
+ s+=`<line x1="${CH.x0}" y1="${CH.y0}" x2="${CH.x1}" y2="${CH.y0}" stroke="#151312" stroke-width="3"/>`;
+ ages.forEach(a=>{s+=`<line x1="${ax(a)}" y1="${CH.y0}" x2="${ax(a)}" y2="${CH.y0+12}" stroke="#151312" stroke-width="3"/><text x="${ax(a)}" y="${CH.y0+46}" text-anchor="middle" font-family="Inter Display" font-weight="700" font-size="28" fill="#151312">${a}</text>`});
+ s+=`<text x="${CH.x1}" y="${CH.y0+84}" text-anchor="end" font-family="Inter Display" font-weight="600" font-size="22" fill="#6E655A">idade</text>`;
+ s+=`<path id="gap" fill="#CC0000" fill-opacity=".14"/>`;
+ s+=`<path id="le" d="${P(pts.e)}" fill="none" stroke="#151312" stroke-width="7" stroke-linecap="round"/>`;
+ s+=`<path id="lr" d="${P(pts.r)}" fill="none" stroke="#CC0000" stroke-width="8" stroke-linecap="round"/>`;
+ s+=`<path id="lt" d="${P(pts.t)}" fill="none" stroke="#151312" stroke-width="6" stroke-dasharray="18 14" stroke-linecap="round"/>`;
+ s+=`<g id="gapLbl" font-family="Fr" font-style="italic" font-size="44" fill="#CC0000"><text x="${ax(31)}" y="${(redF(31)+expF(31))/2+14}" text-anchor="middle">distância</text></g>`;
+ const lg=[['#151312','','curso esperado'],['#CC0000','','quando os traços não cedem'],['#151312','12 9','objetivo do tratamento']];
+ lg.forEach((l,i)=>{s+=`<g id="lg${i}"><line x1="${CH.x0}" y1="${720+i*40}" x2="${CH.x0+50}" y2="${720+i*40}" stroke="${l[0]}" stroke-width="6" stroke-dasharray="${l[1]}"/><text x="${CH.x0+70}" y="${728+i*40}" font-family="Inter Display" font-weight="600" font-size="25" fill="#151312">${l[2]}</text></g>`});
+ c.innerHTML=s})();
+function sub(p,k){const n=Math.max(1,Math.round((p.length-1)*clamp(k)));return p.slice(0,n+1)}
+function gapPath(k){const a0=18,a1=18+20*clamp(k);const top=[],bot=[];for(let a=a0;a<=a1+1e-6;a+=.25){top.push([ax(a),redF(a)]);bot.push([ax(a),expF(a)])}if(top.length<2)return'';return P(top.concat(bot.reverse()))+' Z'}
+
+// captions (A)
+const groups=[];(function(){let g=[];W.forEach((w,i)=>{if(w.start>14.6)return;g.push(w);const end=/[.,?!]$/.test(w.word)||g.length===3;if(end){const last=g[g.length-1];if(g.length>1&&!/[.,?!]$/.test(last.word)&&last.word.length<=3){g.pop();groups.push(g);g=[last]}else{groups.push(g);g=[]}}});if(g.length)groups.push(g)})();
+groups.forEach((g,i)=>{g.t0=g[0].start;g.t1=(groups[i+1]?groups[i+1][0].start:g[g.length-1].start+.6)});
+function capHTML(t){const g=groups.find(g=>t>=g.t0&&t<g.t1);if(!g)return'';return g.map(w=>{const s=w.word.replace(/[.,]$/,'');return t>=w.start?`<b>${s}</b>`:`<span>${s}</span>`}).join(' ').replace(/<b>(.*?)<\/b>/g,(m,s)=>m)}
+function capHTML2(t){const g=groups.find(g=>t>=g.t0&&t<g.t1);if(!g)return'';let last=-1;g.forEach((w,i)=>{if(t>=w.start)last=i});return g.map((w,i)=>{const s=w.word.replace(/[.,]$/,'');return i===last?`<b>${s}</b>`:s}).join(' ')}
+
+const EMPH=[ // [t0,t1,html,top]
+ [3.30,5.10,'<span class="blk" style="font-size:118px">Ameaça</span>'],
+ [8.40,10.70,'<div style="font:900 56px/1 Inter Display;text-transform:uppercase;margin-bottom:6px">uma indignação</div><span class="ser" style="font-size:132px;color:#CC0000;line-height:1">legítima.</span>'],
+];
+const EMG=[[12.10,12.90,'<span class="blk">Putz.</span>'],[13.22,13.80,'<span class="blk">Exagerei.</span>'],[13.80,14.70,'<div style="font:900 58px/1 Inter Display;text-transform:uppercase;margin-bottom:8px">passei do</div><span class="blk" style="background:#CC0000">Ponto.</span>']];
+function emph(list,t,el){const e=list.find(e=>t>=e[0]&&t<e[1]);if(!e){el.innerHTML='';el.style.opacity=0;return}
+ if(el._k!==e[0]){el.innerHTML=e[2];el._k=e[0]}const k=(t-e[0])/.22;el.style.opacity=clamp(k);el.style.transform=`translateY(${(1-ease(k))*40}px) scale(${.92+.08*back(k)})`}
+
+// scenes
+const SC=[['A',0,12.05],['G',12.05,14.6],['B',14.6,18.6],['C',18.6,23.0],['D',23.0,31.0],['E',31.0,35.3],['F',35.3,40.4]];
+const TR=.36;
+window.render=async function(t){
+ SC.forEach(([id,a,b],i)=>{const el=$(id);const vis=t>=a-1e-6&&t<b+TR&&!(i<SC.length-1&&t>=SC[i+1][1]+TR);
+  el.style.display=vis?'block':'none';el.style.zIndex=i;
+  if(i>0){const k=easeIO((t-a)/TR);el.style.transform=`translateY(${(1-k)*1960}px) rotate(${(1-k)*3}deg)`;el.style.boxShadow=k<1?'0 -20px 40px rgba(40,30,20,.25)':'none'}});
+ // A
+ if(t<12.05+TR){const f=Math.min(365,Math.floor(t*30)+1);const src=`fr/${String(f).padStart(4,'0')}.jpg`;const v=$('vid');if(v._s!==src){v.src=src;v._s=src;try{await v.decode()}catch(e){}}
+  const k=ease(t/.5);$('win').style.transform=`rotate(${-1.2-(1-k)*4}deg) scale(${.94+.06*k})`;$('win').style.opacity=clamp(t/.25);
+  $('cap').innerHTML=capHTML2(t);emph(EMPH,t,$('emA'))}
+ // G
+ if(t>=12.05&&t<14.6+TR){let a;const n=$('needle');
+  if(t<13.2)a=-70+90*ease((t-12.05)/1.1); else if(t<13.84)a=20+40*ease((t-13.2)/.6); else a=60+52*back((t-13.84)/.5);
+  a+=Math.sin(t*38)*(t>13.84?1.6:.6);n.setAttribute('transform',`rotate(${a})`);
+  emph(EMG,t,$('emG'));const g=groups.find(g=>t>=g.t0&&t<g.t1);$('capG').innerHTML=capHTML2(t)}
+ // B
+ if(t>=14.6&&t<18.6+TR){const l=t-14.6;
+  $('b1').style.opacity=clamp((l-.3)/.2);$('b1').style.transform=`translateX(${(1-ease((l-.3)/.4))*-60}px)`;
+  $('b2').style.opacity=clamp((l-.6)/.25);$('b2').style.transform=`translateY(${(1-ease((l-.6)/.4))*30}px)`;
+  const ck=ease((l-.9)/.5);$('cal').style.opacity=clamp((l-.9)/.2);$('cal').style.transform=`rotate(${3+(1-ck)*8}deg) translateY(${(1-ck)*80}px)`;
+  const cp=$('circp');const L=cp.getTotalLength();cp.style.strokeDasharray=L;cp.style.strokeDashoffset=L*(1-easeIO((l-1.5)/.7));
+  $('b3').style.opacity=clamp((l-2.1)/.3);$('b3').style.transform=`translateY(${(1-ease((l-2.1)/.4))*30}px)`}
+ // C
+ if(t>=18.6&&t<23.0+TR){const l=t-18.6;GPM.forEach((c,i)=>{const e=$('g'+i);const k=(l-.45-i*.42)/.38;e.style.opacity=clamp(k*1.5);e.style.transform=`translateX(${(1-ease(k))*120}px) rotate(${(i%2?.6:-.6)*(1)}deg)`})}
+ // D
+ if(t>=23.0&&t<31.0+TR){const l=t-23.0;
+  $('le').setAttribute('d',P(sub(pts.e,(l-.4)/1.4)));$('lr').setAttribute('d',P(sub(pts.r,(l-.9)/1.6)));
+  $('gap').setAttribute('d',gapPath((l-2.5)/1.2));$('gapLbl').style.opacity=clamp((l-3.4)/.3);
+  const sw=clamp((l-4.3)/.35);$('d1').style.opacity=1-sw;$('d2').style.opacity=clamp((l-4.5)/.35);$('d2').style.transform=`translateY(${(1-ease((l-4.5)/.4))*24}px)`;
+  $('lt').setAttribute('d',l>4.9?P(sub(pts.t,(l-4.9)/1.8)):'M0 0');$('lt').style.opacity=l>4.9?1:0;
+  $('lg0').style.opacity=clamp((l-.6)/.3);$('lg1').style.opacity=clamp((l-1.2)/.3);$('lg2').style.opacity=clamp((l-5.0)/.3);
+  $('gap').style.opacity=1-.6*clamp((l-6.2)/.8)}
+ // E
+ if(t>=31.0&&t<35.3+TR){const l=t-31.0;EC.forEach((c,i)=>{const e=$('e'+i);const k=(l-.5-i*.45)/.38;e.style.opacity=clamp(k*1.5);e.style.transform=`translateY(${(1-ease(k))*60}px) rotate(${(i%2?.5:-.5)}deg)`})}
+ // F
+ if(t>=35.3){const l=t-35.3;const fx=(id,d)=>{const e=$(id);e.style.opacity=clamp((l-d)/.3);e.style.transform=`translateY(${(1-ease((l-d)/.45))*30}px)`};
+  fx('f1',.35);$('f2').style.width=(120*ease((l-.7)/.4))+'px';fx('f3',.8);fx('f4',1.3);fx('f5',1.7);
+  const ar=$('arrow');ar.style.opacity=clamp((l-1.6)/.3);ar.style.transform=`translateY(${Math.sin(Math.max(0,l-1.6)*5)*14}px)`}
+ await new Promise(r=>requestAnimationFrame(()=>r()));
+};
+</script></body></html>

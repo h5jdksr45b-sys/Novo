@@ -34,6 +34,8 @@ Cada veredito dado antes de postar, ao lado do resultado. Serve para saber quand
 | 03/11 | Carrossel Borderline ou dependência emocional? (capa final: pergunta grande, Pediu mais cinco minutos na porta em itálica, gravura sépia fechada no gesto; escolhida entre 82 capas em dois pareceres do Vamos) | Teste alto. Saldo de feed no termômetro; o placar diz que o saldo errou 3 vezes em outubro. Vizinho: Borderline ou autismo (94.570 views, 1.804 envios). Motor mirado: envio pelos dois lados e seguidor por utilidade | [verificar] | | |
 | 03/11 | 4 Reels falados de outliers (tédio que saiu do manual; duas frases, borderline ou trauma complexo; e ainda ama?, anestesia; amor e pavor juntos). Pesquisa em `validados.md` 03/11 | Claude antes do Vamos: 2 feed, 1 e 3 teste alto, 4 teste. Vamos (chat 9080e905, comparando com o único falado grande dos últimos 120 dias, bloqueio de 21/06, 102 mil, 8,2x): 4 feed e gravar primeiro, 3 feed, 1 teste, 2 refazer. Final, ajustado: 4 feed, 3 feed, 1 teste, 2 teste. Vizinho de 3: posts de vazio 0,59x a 0,99x (risco) | [verificar] | | |
 
+| 04/11 | Carrossel A ajuda do borderline se combina num dia bom (rede de apoio, 8 slides, de Reel de 10/04 com 94.985 views e 2.501 compartilhamentos) | Teste alto. Mecanismo do mini-manual (fala pronta, utilidade, salvar); crença tirada do comentário mais curtido do Reel. Sem vizinho de carrossel com o tema | [verificar] | | |
+
 ## O que o placar mostra até aqui
 
 Observação, não regra.

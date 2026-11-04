@@ -84,7 +84,7 @@ O motivo central das reclamações.
 - Use os estilos de referência que ele manda, um de cada, sem copiar o conteúdo deles e sem exagerar no uso. "Use os estilos q mandei um de cada", "sem considerar conteúdo deles", "Não precisa usar tanto q mandei".
 - Stories de venda precisam de imagem, ícone ou gráfico, não só texto. "Não quero só texto na tela".
 - Texto embutido na imagem gerada, não montado por cima depois. "montar flopa".
-- Carrossel com pelo menos 8 slides, com um esquema visual e um interativo (24/10, substitui o antigo máximo de 7). Antes ele tinha rejeitado um de 11: "muito slide".
+- Carrossel com 8 slides, no máximo, com um esquema visual e um interativo. "Máximo 8 slides" (04/11, substitui o pelo menos 8 de 24/10). Antes ele tinha rejeitado um de 11: "muito slide".
 - Capa concreta: cena, gesto, objeto ou número. Nada de sensação, paz ou caos. Rejeitou mulher de costas na cama com celular ("clichê") e aprovou rosto pintado em retrato a óleo.
 - Sem frase entre aspas atribuída a alguém.
 - Ele mede o post na primeira hora.

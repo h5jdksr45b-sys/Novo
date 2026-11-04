@@ -14,3 +14,10 @@ Para atualizar, copie de novo a pasta do repositório de origem.
 
 Regra: estas skills cuidam do visual. Texto, voz e sistema visual da marca seguem
 memoria/ e o arquivo de voz e formatos, que prevalecem em caso de conflito.
+
+## Atualização de 04/11/2026
+
+Arquivadas em `referencias/skills-arquivadas/` (ver README de lá): hallmark, frontend-slides, diagram-design, ui-ux-pro-max, design-system, ui-styling, better-accessibility, better-interface, interface-review, explain-interface, build-design, variant.
+Continuam ativas: design-taste-frontend, banner-design, better-ui, better-colors, better-typography, better-layout.
+
+Adicionada: earshot (github.com/Leonxlnx/earshot, commit 591fa3e, MIT). Ouvido para o agente: mede áudio, escolhe e confere efeitos sonoros. Instalação e limites no topo do SKILL.md.

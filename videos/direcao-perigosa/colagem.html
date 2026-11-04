@@ -29,8 +29,17 @@ html,body{margin:0;padding:0;background:transparent}
 </style></head>
 <body>
 <div id="stage">
- <div id="hook">DEPOIS DA BRIGA,<br>O PÉ NO FUNDO.</div>
+ <div id="hook">DIREÇÃO PERIGOSA<br>ESTÁ NO MANUAL<br>DO BORDERLINE</div>
  <div id="col">
+  <!-- S0 pergunta -->
+  <div class="sc" id="s0">
+   <img class="abs" id="q_car" src="assets/car.png" style="left:150px;top:230px;width:780px">
+   <div class="abs mont ink" id="q_a" style="left:90px;top:930px;font-size:92px">O QUE</div>
+   <div class="abs mont ink" id="q_b" style="left:90px;top:1024px;font-size:92px">DIREÇÃO</div>
+   <div class="abs mont ink" id="q_c" style="left:90px;top:1118px;font-size:92px">PERIGOSA</div>
+   <div class="abs mont ink" id="q_l2" style="left:90px;right:150px;top:1230px;font-size:60px;text-align:left">TEM A VER COM</div>
+   <div class="abs fr red" id="q_l3" style="left:80px;right:120px;top:1300px;font-size:120px;text-align:left">BORDERLINE?</div>
+  </div>
   <!-- S1 manual -->
   <div class="sc" id="s1">
    <div class="abs paper" id="m_page" style="left:150px;top:230px;width:780px;height:860px">
@@ -175,7 +184,8 @@ window.setTime=function(t){
   const s0=SC.find(s=>s[0]===cur); const ts=s0?t-s0[1]:0;
   // zoom lento continuo em cada cena
   if(cur){ $(cur).style.transform=`scale(${1+0.04*cl(ts/6)})`; $(cur).style.transformOrigin='540px 800px'; }
-  if(cur==='s1'){ enter($('m_page'),t,CUT,0,120,-3,0.4);
+  if(cur==='s0'){ enter($('q_car'),t,CUT,0,-90,3,0.35); enter($('q_a'),t,OFF-1.42,-80,0,0,0.28); enter($('q_b'),t,OFF-1.16,-80,0,0,0.28); enter($('q_c'),t,OFF-0.64,-80,0,0,0.28); enter($('q_l2'),t,OFF+0.18,-60,0,0,0.28); enter($('q_l3'),t,OFF+1.18,0,50,-2,0.32); }
+  if(cur==='s1'){ enter($('m_page'),t,SC[0][1],0,120,-3,0.4);
     const d=wt('direção')||0; const dd=W.filter(a=>a[0].toLowerCase().startsWith('direção'))[1]; const td=OFF+dd[1];
     $('m_dir').style.opacity=t>=td?1:0.0; $('m_item').style.opacity=t>=td-0.2?0.6:0;
     const cp=$('m_cp'); const L=1900; cp.style.strokeDasharray=L; cp.style.strokeDashoffset=L*(1-eo((t-(td+0.35))/0.45));
@@ -204,7 +214,7 @@ window.setTime=function(t){
   if(cur==='s8'){ enter($('z_t'),t,SC[7][1],0,50,0); enter($('z_e'),t,wt('encosta'),0,30,0); enter($('z_n'),t,wt('188'),0,40,0); enter($('z_s'),t,wt('188')+0.4,0,20,0); }
   if(cur==='s9'){ enter($('f_car'),t,SC[8][1],0,60,2); enter($('f_t'),t,wt('manda'),0,40,0); enter($('f_s'),t,wt('antes'),0,30,0); }
   $('cap').className=inClip?'':'ink';
-  caption(t);
+  caption(t); if(t<10.45) $('cap').innerHTML='';
   // flash branco curto na entrada da colagem
   const fl=$('flash'); fl.style.opacity=(t>=CUT&&t<CUT+0.1)?0.85*(1-(t-CUT)/0.1):0;
   $('fade').style.opacity=cl((t-(END-0.12))/0.12);

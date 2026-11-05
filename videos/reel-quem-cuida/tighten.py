@@ -1,68 +1,41 @@
-# Aperta pausas: 0,35 s depois de ponto/interrogação, 0,15 s depois de vírgula, 0,12 s entre palavras.
-# Entrada: words_raw.json (tempos por arquivo). Saída: audio/<nome>-t.wav + words_tight.json
-import json, subprocess, numpy as np, sys, os
-SR=48000
+# Aperta pausas cortando SÓ dentro de silêncios detectados pelo ffmpeg (-40 dB, >= 0,18 s),
+# com margem de 0,06 s em cada lado. Alvo: 0,35 s depois de ponto/interrogação, 0,15 s depois de vírgula,
+# 0,12 s nas outras. Nunca encosta na fala. Saída: audio/<nome>-t.wav e words_tight.json (tempos por transcrição do arquivo final).
+import json, subprocess, re, sys, os, numpy as np
+SR=48000; MARG=0.06
 raw=json.load(open("words_raw.json"))
-out=json.load(open("words_tight.json")) if os.path.exists("words_tight.json") else {}
 os.makedirs("audio",exist_ok=True)
+out=json.load(open("words_tight.json")) if os.path.exists("words_tight.json") else {}
+def silences(f):
+    o=subprocess.run(["ffmpeg","-v","info","-i",f,"-af","silencedetect=n=-40dB:d=0.18","-f","null","-"],capture_output=True,text=True).stderr
+    st=[float(x) for x in re.findall(r"silence_start: ([\d.]+)",o)]; en=[float(x) for x in re.findall(r"silence_end: ([\d.]+)",o)]
+    return list(zip(st,en))
 def load(f):
-    b=subprocess.run(["ffmpeg","-v","error","-i",f,"-f","f32le","-ac","1","-ar",str(SR),"-"],capture_output=True).stdout
-    return np.frombuffer(b,dtype=np.float32)
-def rms_env(a,win=int(0.01*SR)):
-    n=len(a)//win; e=np.sqrt((a[:n*win].reshape(n,win)**2).mean(1)); return e
+    return np.frombuffer(subprocess.run(["ffmpeg","-v","error","-i",f,"-f","f32le","-ac","1","-ar",str(SR),"-"],capture_output=True).stdout,dtype=np.float32)
 for f in sys.argv[1:]:
-    words=raw[f]; a=load(f); env=rms_env(a); thr=env.max()*0.04
-    # refina início/fim de cada palavra pelo envelope (whisper erra em pausas longas)
-    def speech_bounds(s,e):
-        i0=int(s*100); i1=int(e*100)
-        seg=env[i0:i1+1]
-        idx=np.where(seg>thr)[0]
-        if len(idx)==0: return s,e
-        return (i0+idx[0])/100.0,(i0+idx[-1]+1)/100.0
-    segs=[]
-    for w in words:
-        s,e=speech_bounds(w["s"],w["e"])
-        segs.append([w["w"],s,e])
-    # junta segmentos de fala contínua e calcula cortes
-    pieces=[]; t_out=0.0; newwords=[]
-    LEAD=0.05
-    cur_start=max(0.0,segs[0][1]-LEAD); 
-    prev_end=None; prev_word=None
-    # construir lista de (src_start, src_end) e mapear palavras
-    cuts=[]  # (src_from, src_to) trechos a remover
-    for i,(w,s,e) in enumerate(segs):
-        if prev_end is not None:
-            gap=s-prev_end
-            target=0.35 if prev_word[-1] in ".?!" else (0.15 if prev_word[-1] in ",;:" else 0.12)
-            if gap>target+0.02:
-                cuts.append((prev_end+target*0.5, s-target*0.5))
-        prev_end=e; prev_word=w
-    src_end=min(len(a)/SR, segs[-1][2]+0.12)
-    # montar áudio
-    keep=[]; pos=cur_start
-    for c0,c1 in cuts:
-        keep.append((pos,c0)); pos=c1
-    keep.append((pos,src_end))
-    chunks=[]; 
-    def map_t(t):
-        o=0.0
-        for k0,k1 in keep:
-            if t<=k1: return o+max(0.0,t-k0)
-            o+=k1-k0
-        return o
+    a=load(f); total=len(a)/SR; words=raw[f]; sil=silences(f)
+    keep=[]; pos=0.0
+    for s,e in sil:
+        if s<=0.01:            # silêncio inicial: deixa 0,05 s
+            pos=max(0.0,e-0.05); continue
+        if e>=total-0.12:      # silêncio final: deixa 0,12 s
+            keep.append((pos,min(total,s+0.12))); pos=None; break
+        # palavra antes do silêncio
+        prev=[w for w in words if w["e"]<=s+0.15]
+        pw=prev[-1]["w"] if prev else ""
+        target=0.35 if pw[-1:] in ".?!" else (0.15 if pw[-1:] in ",;:" else 0.12)
+        gap=e-s
+        if gap-2*MARG>target:
+            cut0=s+MARG; cut1=e-MARG; excess=(cut1-cut0)-target
+            keep.append((pos,cut0+ (cut1-cut0-excess)/2)); pos=cut1-(cut1-cut0-excess)/2
+    if pos is not None: keep.append((pos,total))
+    chunks=[]
     for k0,k1 in keep:
-        seg=a[int(k0*SR):int(k1*SR)]
-        # fade curto nas emendas
-        n=min(int(0.004*SR),len(seg)//2)
-        if n>0:
-            seg=seg.copy(); seg[:n]*=np.linspace(0,1,n); seg[-n:]*=np.linspace(1,0,n)
+        seg=a[int(k0*SR):int(k1*SR)].copy(); n=min(int(0.004*SR),len(seg)//2)
+        if n>0: seg[:n]*=np.linspace(0,1,n); seg[-n:]*=np.linspace(1,0,n)
         chunks.append(seg)
-    y=np.concatenate(chunks)
-    for w,s,e in segs:
-        newwords.append({"w":w,"s":round(map_t(s),3),"e":round(map_t(e),3)})
-    name=os.path.splitext(os.path.basename(f))[0]
-    outf=f"audio/{name}-t.wav"
-    subprocess.run(["ffmpeg","-v","error","-y","-f","f32le","-ar",str(SR),"-ac","1","-i","-","-c:a","pcm_s16le",outf],input=y.astype(np.float32).tobytes())
-    out[name]={"file":outf,"dur":round(len(y)/SR,3),"words":newwords}
-    print(name, "dur", round(len(y)/SR,2), "cuts", len(cuts), " ".join(f"{w['w']}[{w['s']}]" for w in newwords))
+    y=np.concatenate(chunks); name=os.path.splitext(os.path.basename(f))[0]; outf=f"audio/{name}-t.wav"
+    subprocess.run(["ffmpeg","-v","error","-y","-f","f32le","-ar",str(SR),"-ac","1","-i","-","-c:a","pcm_s16le",outf],input=y.astype(np.float32).tobytes(),check=True)
+    out[name]={"file":outf,"dur":round(len(y)/SR,3),"words":[]}
+    print(name,"dur",round(len(y)/SR,2),"trechos",len(keep),"cortes em",[(round(s,2),round(e,2)) for s,e in sil])
 json.dump(out,open("words_tight.json","w"),ensure_ascii=False,indent=1)

@@ -1,0 +1,18 @@
+[
+ {"cena":"01-pia","job":"015a064e-e381-4fc7-839a-245c6fd38256","dur":5,
+  "prompt":"Flat 2D cartoon animation, keep the exact drawing style, thick black outlines, flat colors. The woman at the sink slowly rinses a glass with small hand movements, her head stays still, back to the table. Everything else is still. Locked camera, no camera movement, no zoom, no shake."},
+ {"cena":"02-despertador","job":"1c02c4a6-b2a0-44e5-82ed-277c4144b87d","dur":4,
+  "prompt":"Flat 2D cartoon animation, keep the exact drawing style. Night, still bedroom. The digital alarm clock display changes from 3:12 to 3:13 once; a tiny slow movement of the blanket corner at the left edge as someone turns in bed. Everything else is still. Locked camera, no camera movement, no zoom, no shake."},
+ {"cena":"03-olhos","job":"024d11db-5139-4772-b9e1-efdea0b7df6a","dur":4,
+  "prompt":"Flat 2D cartoon animation, keep the exact drawing style. The woman lies still in bed in the dark, eyes open; her eyes slowly shift to the side toward the window, then back to the ceiling; one slow blink. The blanket rises and falls very slightly with her breathing. Locked camera, no camera movement, no zoom, no shake."},
+ {"cena":"04-convite","job":"32584673-f413-4d5a-9252-02a7649d2fe5","dur":5,
+  "prompt":"Flat 2D cartoon animation, keep the exact drawing style and the exact text on the card. The hand with the pen draws one straight line across the date, slowly from left to right, then the hand lowers out of the frame to the right. The card and the fridge stay still. Locked camera, no camera movement, no zoom, no shake."},
+ {"cena":"05-calendario","job":"2eec4a3e-fac1-4c47-b871-123524252963","dur":5,
+  "prompt":"Flat 2D cartoon animation, keep the exact drawing style, the numbers and the CONSULTA note exactly as drawn. The hand lifts the bottom corner of the calendar page and flips it up and over, revealing the next page with the same empty grid, the note staying on the page as it turns. One slow, simple page flip. Locked camera, no camera movement, no zoom, no shake."},
+ {"cena":"06-copo-maos","job":"6391503e-f310-4f68-896f-ea6ebaece7fa","dur":5,
+  "prompt":"Flat 2D cartoon animation, keep the exact drawing style. The woman sits at the table holding the glass with both hands; she slowly looks down at the glass, then lifts her gaze toward the viewer, a small slow head movement, one blink. Everything else is still. Locked camera, no camera movement, no zoom, no shake."},
+ {"cena":"07-cadeira","job":"1cf622c2-9e76-42c8-bcec-f9fc8d05bb3e","dur":7,
+  "prompt":"Flat 2D cartoon animation, keep the exact drawing style. The woman sits on the chair turned toward the window; she slowly straightens her back and lifts her head a little toward the light, hands resting on her lap. The rectangle of light on the floor brightens very slightly. Everything else is still. Locked camera, no camera movement, no zoom, no shake."},
+ {"cena":"08-copo","job":"789728f4-d244-4ac0-a853-f95c1f12626b","dur":5,
+  "prompt":"Flat 2D cartoon animation, keep the exact drawing style and the plain light blue background. The glass of water stands alone on the table; the water surface trembles very slightly and settles, then everything is still. Locked camera, no camera movement, no zoom, no shake."}
+]

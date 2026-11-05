@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" />
+<title>Quem cuida do borderline</title>
+<script src="assets/vendor/gsap.min.js"></script>
+<style>
+@font-face { font-family: "Anton"; src: url("assets/fonts/anton.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "Fraunces"; src: url("assets/fonts/fraunces-italic-900.woff2") format("woff2"); font-weight: 900; font-style: italic; }
+@font-face { font-family: "Inter"; src: url("assets/fonts/inter-700.woff2") format("woff2"); font-weight: 700; font-style: normal; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body { width:1080px; height:1920px; overflow:hidden; background:#000; }
+#root { position:relative; width:100%; height:100%; overflow:hidden; background:#000; }
+.clip { position:absolute; }
+.zoom { position:absolute; inset:0; width:1080px; height:1920px; transform-origin:50% 45%; }
+.zoom video, .zoom img, #final { position:absolute; inset:0; width:1080px; height:1920px; object-fit:cover; display:block; }
+.cap { left:60px; width:960px; top:1300px; height:220px; display:flex; align-items:center; justify-content:center; }
+.cap-in { display:block; width:960px; text-align:center; line-height:1.0; color:#FFFFFF; font-family:"Anton"; font-size:76px; word-spacing:.12em; -webkit-text-stroke:3px #141414; paint-order:stroke fill; text-shadow:0 4px 14px rgba(0,0,0,.35); }
+.cap-in .w { font-family:"Anton"; font-size:76px; letter-spacing:.015em; text-transform:uppercase; display:inline-block; vertical-align:baseline; margin:0 .09em; }
+.cap-in .em { font-family:"Fraunces"; font-style:italic; font-weight:900; font-variation-settings:"WONK" 0,"SOFT" 0; font-size:118px; text-transform:uppercase; letter-spacing:-.01em; color:#CC0000; display:inline-block; vertical-align:baseline; margin:0 .10em; -webkit-text-stroke:0; text-shadow:0 6px 20px rgba(0,0,0,.6), 0 0 2px rgba(0,0,0,.6); }
+.up { left:72px; top:120px; width:900px; height:560px; color:#FFFFFF; -webkit-text-stroke:3px #141414; paint-order:stroke fill; text-shadow:0 4px 14px rgba(0,0,0,.35); }
+.red { color:#CC0000; }
+.h { display:block; font-family:"Anton"; font-size:100px; line-height:1.02; letter-spacing:.01em; text-transform:uppercase; }
+.ps-label { font-family:"Inter"; font-weight:700; font-size:40px; letter-spacing:.14em; margin-bottom:22px; display:block; width:900px; }
+.chips { display:flex; gap:26px; width:900px; }
+.chip { width:150px; height:150px; border:5px solid #141414; -webkit-text-stroke:0; text-shadow:none; border-radius:26px; display:flex; align-items:center; justify-content:center; font-family:"Fraunces"; font-style:italic; font-weight:900; font-variation-settings:"WONK" 0,"SOFT" 0; font-size:96px; color:#CC0000; background:#FFFFFF; }
+.cta-in .h { font-size:96px; }
+.wm { position:absolute; left:780px; top:430px; width:260px; display:flex; flex-direction:column; align-items:center; gap:8px; }
+.wm span { font-family:"Anton"; font-size:26px; letter-spacing:.06em; color:#FFFFFF; -webkit-text-stroke:1.5px #141414; paint-order:stroke fill; text-shadow:0 2px 8px rgba(0,0,0,.45); }
+#zs8 { transform: translateY(-260px) scale(1.14); }
+#fade { left:0; top:0; width:1080px; height:1920px; background:#000; }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-width="1080" data-height="1920" data-fps="30" data-duration="34.11">
+<div class="zoom" id="zs1"><img class="clip" src="cenas/01-pia.png" data-start="0.000" data-duration="4.420" data-track-index="0" /></div>
+<div class="zoom" id="zs2"><img class="clip" src="cenas/02-despertador.png" data-start="4.420" data-duration="2.060" data-track-index="0" /></div>
+<div class="zoom" id="zs3"><img class="clip" src="cenas/03-olhos.png" data-start="6.480" data-duration="1.760" data-track-index="0" /></div>
+<div class="zoom" id="zs4"><img class="clip" src="cenas/04-convite.png" data-start="8.240" data-duration="3.510" data-track-index="0" /></div>
+<div class="zoom" id="zs5"><img class="clip" src="cenas/05-calendario.png" data-start="11.750" data-duration="4.690" data-track-index="0" /></div>
+<div class="zoom" id="zs6"><img class="clip" src="cenas/06-copo-maos.png" data-start="16.440" data-duration="4.440" data-track-index="0" /></div>
+<div class="zoom" id="zs7"><img class="clip" src="cenas/07-cadeira.png" data-start="20.880" data-duration="6.220" data-track-index="0" /></div>
+<div class="zoom" id="zs8"><img class="clip" src="cenas/08-copo.png" data-start="27.100" data-duration="4.010" data-track-index="0" /></div>
+<video class="clip" id="final" src="assets/video/tela-final.mp4" muted playsinline data-start="31.110" data-duration="3.000" data-media-start="0" data-track-index="0"></video>
+<!-- marca d'água -->
+<div class="clip wm" data-start="0" data-duration="31.110" data-track-index="1"><svg viewBox="0 0 24 24" width="56" height="56" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1" fill="#FFFFFF" stroke="none"/></svg><span>@DRFABIOSCHMIDT</span></div>
+<!-- capa -->
+<div class="clip up" id="hook" data-start="0" data-duration="3.2" data-track-index="2">
+  <div id="hookin"><span class="h">SEM AJUDA,</span><span class="h">QUEM CUIDA DO</span><span class="h"><span class="red">BORDERLINE</span> PERDE</span><span class="h">NESTA ORDEM.</span></div>
+</div>
+<!-- contador -->
+<div class="clip up" id="ps" data-start="13.160" data-duration="3.130" data-track-index="2">
+  <div class="ps-label" id="pslabel">CONSULTA ADIADA</div>
+  <div class="chips"><div class="chip" id="chip1">1</div><div class="chip" id="chip2">2</div><div class="chip" id="chip3">3</div></div>
+</div>
+<!-- CTA -->
+<div class="clip up cta-in" id="cta" data-start="27.100" data-duration="4.010" data-track-index="2">
+  <div id="ctain"><span class="h">MANDA PRA QUEM</span><span class="h">CUIDA DE TODO MUNDO</span><span class="h">E NÃO MARCA</span><span class="h red">CONSULTA PRA SI.</span></div>
+</div>
+<div class="clip cap" data-start="0.150" data-duration="0.590" data-track-index="3"><div class="cap-in" id="capin0"><span class="w">O</span> <span class="w">que</span> <span class="w">acontece</span> </div></div>
+<div class="clip cap" data-start="0.740" data-duration="1.000" data-track-index="3"><div class="cap-in" id="capin1"><span class="w">com</span> <span class="w">quem</span> <span class="w">cuida</span> </div></div>
+<div class="clip cap" data-start="1.740" data-duration="1.040" data-track-index="3"><div class="cap-in" id="capin2"><span class="w">sozinho</span> <span class="w">de</span> <span class="w">alguém</span> </div></div>
+<div class="clip cap" data-start="2.780" data-duration="1.640" data-track-index="3"><div class="cap-in" id="capin3"><span class="w">com</span> <span class="w">borderline?</span> </div></div>
+<div class="clip cap" data-start="4.420" data-duration="1.190" data-track-index="3"><div class="cap-in" id="capin4"><span class="w">Primeiro</span> <span class="w">o</span> <span class="em">sono,</span> </div></div>
+<div class="clip cap" data-start="5.610" data-duration="0.870" data-track-index="3"><div class="cap-in" id="capin5"><span class="w">fica</span> <span class="w">acordada</span> </div></div>
+<div class="clip cap" data-start="6.480" data-duration="0.890" data-track-index="3"><div class="cap-in" id="capin6"><span class="w">esperando</span> <span class="w">o</span> <span class="w">barulho</span> </div></div>
+<div class="clip cap" data-start="7.370" data-duration="0.870" data-track-index="3"><div class="cap-in" id="capin7"><span class="w">do</span> <span class="w">carro.</span> </div></div>
+<div class="clip cap" data-start="8.240" data-duration="0.870" data-track-index="3"><div class="cap-in" id="capin8"><span class="w">Depois</span> <span class="w">os</span> <span class="em">amigos,</span> </div></div>
+<div class="clip cap" data-start="9.110" data-duration="0.560" data-track-index="3"><div class="cap-in" id="capin9"><span class="w">para</span> <span class="w">de</span> <span class="w">sair</span> </div></div>
+<div class="clip cap" data-start="9.670" data-duration="0.730" data-track-index="3"><div class="cap-in" id="capin10"><span class="w">pra</span> <span class="w">não</span> <span class="w">deixar</span> </div></div>
+<div class="clip cap" data-start="10.400" data-duration="1.350" data-track-index="3"><div class="cap-in" id="capin11"><span class="w">a</span> <span class="w">pessoa</span> <span class="w">sozinha.</span> </div></div>
+<div class="clip cap" data-start="11.750" data-duration="0.580" data-track-index="3"><div class="cap-in" id="capin12"><span class="w">Por</span> <span class="w">último,</span> </div></div>
+<div class="clip cap" data-start="12.330" data-duration="1.130" data-track-index="3"><div class="cap-in" id="capin13"><span class="w">a</span> <span class="w">própria</span> <span class="w">saúde,</span> </div></div>
+<div class="clip cap" data-start="13.460" data-duration="1.400" data-track-index="3"><div class="cap-in" id="capin14"><span class="w">a</span> <span class="w">consulta</span> <span class="w">dela</span> </div></div>
+<div class="clip cap" data-start="14.860" data-duration="1.580" data-track-index="3"><div class="cap-in" id="capin15"><span class="w">adiada</span> <span class="w">de</span> <span class="w">novo.</span> </div></div>
+<div class="clip cap" data-start="16.440" data-duration="1.300" data-track-index="3"><div class="cap-in" id="capin16"><span class="w">O</span> <span class="w">que</span> <span class="w">mais</span> <span class="w">dói</span> </div></div>
+<div class="clip cap" data-start="17.740" data-duration="0.740" data-track-index="3"><div class="cap-in" id="capin17"><span class="w">não</span> <span class="w">é</span> <span class="w">cansar,</span> </div></div>
+<div class="clip cap" data-start="18.480" data-duration="0.690" data-track-index="3"><div class="cap-in" id="capin18"><span class="w">é</span> <span class="w">achar</span> <span class="w">que</span> </div></div>
+<div class="clip cap" data-start="19.170" data-duration="0.770" data-track-index="3"><div class="cap-in" id="capin19"><span class="w">cansar</span> <span class="w">é</span> <span class="w">amar</span> </div></div>
+<div class="clip cap" data-start="19.940" data-duration="0.940" data-track-index="3"><div class="cap-in" id="capin20"><span class="em">pouco.</span> </div></div>
+<div class="clip cap" data-start="20.880" data-duration="0.900" data-track-index="3"><div class="cap-in" id="capin21"><span class="w">Cuidar</span> <span class="w">de</span> <span class="w">você</span> </div></div>
+<div class="clip cap" data-start="21.780" data-duration="1.600" data-track-index="3"><div class="cap-in" id="capin22"><span class="w">não</span> <span class="w">é</span> <span class="w">abandonar</span> </div></div>
+<div class="clip cap" data-start="23.380" data-duration="0.420" data-track-index="3"><div class="cap-in" id="capin23"><span class="w">ninguém,</span> </div></div>
+<div class="clip cap" data-start="23.800" data-duration="1.910" data-track-index="3"><div class="cap-in" id="capin24"><span class="w">família</span> <span class="w">também</span> <span class="w">pode</span> </div></div>
+<div class="clip cap" data-start="25.710" data-duration="1.390" data-track-index="3"><div class="cap-in" id="capin25"><span class="w">ter</span> <span class="w">acompanhamento.</span> </div></div>
+<div class="clip cap" data-start="27.100" data-duration="0.690" data-track-index="3"><div class="cap-in" id="capin26"><span class="w">Manda</span> <span class="w">pra</span> <span class="w">quem</span> </div></div>
+<div class="clip cap" data-start="27.790" data-duration="0.600" data-track-index="3"><div class="cap-in" id="capin27"><span class="w">cuida</span> <span class="w">de</span> <span class="w">todo</span> </div></div>
+<div class="clip cap" data-start="28.390" data-duration="0.700" data-track-index="3"><div class="cap-in" id="capin28"><span class="w">mundo</span> <span class="w">e</span> <span class="w">não</span> </div></div>
+<div class="clip cap" data-start="29.090" data-duration="1.970" data-track-index="3"><div class="cap-in" id="capin29"><span class="w">marca</span> <span class="w">consulta</span> <span class="w">pra</span> <span class="w">si.</span> </div></div>
+<div class="clip" id="fade" data-start="30.810" data-duration="0.3" data-track-index="4"><div id="fade-in" style="width:1080px;height:1920px;background:#000"></div></div>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+// zoom leve em três planos
+tl.fromTo("#zs1",{scale:1},{scale:1.05,duration:4.420,ease:"none"},0);
+tl.fromTo("#zs6",{scale:1},{scale:1.06,duration:4.440,ease:"none"},16.440);
+tl.fromTo("#zs7",{scale:1.04},{scale:1.0,duration:6.220,ease:"none"},20.880);
+// capa: fixa desde o quadro 0, sai deslizando
+tl.to("#hookin",{x:-60,opacity:0,duration:0.26,ease:"power2.in"},2.9000000000000004);
+// contador
+tl.fromTo("#pslabel",{opacity:0,y:-16},{opacity:1,y:0,duration:0.25},13.160);
+tl.fromTo("#chip1",{scale:0.6,opacity:0},{scale:1,opacity:1,duration:0.3,ease:"back.out(1.8)"},13.460);
+tl.fromTo("#chip2",{scale:0.6,opacity:0},{scale:1,opacity:1,duration:0.3,ease:"back.out(1.8)"},14.260);
+tl.fromTo("#chip3",{scale:0.6,opacity:0},{scale:1,opacity:1,duration:0.3,ease:"back.out(1.8)"},15.060);
+tl.to("#ps > *",{opacity:0,duration:0.2},16.090);
+// CTA
+tl.fromTo("#ctain > .h",{y:30,opacity:0},{y:0,opacity:1,duration:0.3,ease:"power3.out",stagger:0.12},27.150);
+// fade para a tela final
+tl.fromTo("#fade-in",{opacity:0},{opacity:1,duration:0.3,ease:"power1.in"},30.810);
+tl.fromTo("#capin0",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},0.150);
+tl.fromTo("#capin1",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},0.740);
+tl.fromTo("#capin2",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},1.740);
+tl.fromTo("#capin3",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},2.780);
+tl.fromTo("#capin4",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},4.420);
+tl.fromTo("#capin5",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},5.610);
+tl.fromTo("#capin6",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},6.480);
+tl.fromTo("#capin7",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},7.370);
+tl.fromTo("#capin8",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},8.240);
+tl.fromTo("#capin9",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},9.110);
+tl.fromTo("#capin10",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},9.670);
+tl.fromTo("#capin11",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},10.400);
+tl.fromTo("#capin12",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},11.750);
+tl.fromTo("#capin13",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},12.330);
+tl.fromTo("#capin14",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},13.460);
+tl.fromTo("#capin15",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},14.860);
+tl.fromTo("#capin16",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},16.440);
+tl.fromTo("#capin17",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},17.740);
+tl.fromTo("#capin18",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},18.480);
+tl.fromTo("#capin19",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},19.170);
+tl.fromTo("#capin20",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},19.940);
+tl.fromTo("#capin21",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},20.880);
+tl.fromTo("#capin22",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},21.780);
+tl.fromTo("#capin23",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},23.380);
+tl.fromTo("#capin24",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},23.800);
+tl.fromTo("#capin25",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},25.710);
+tl.fromTo("#capin26",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},27.100);
+tl.fromTo("#capin27",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},27.790);
+tl.fromTo("#capin28",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},28.390);
+tl.fromTo("#capin29",{y:26,opacity:0},{y:0,opacity:1,duration:0.16,ease:"power2.out"},29.090);
+tl.fromTo("#capin4 .em",{scale:0.86},{scale:1,duration:0.26,ease:"back.out(1.6)"},4.420);
+tl.fromTo("#capin8 .em",{scale:0.86},{scale:1,duration:0.26,ease:"back.out(1.6)"},8.240);
+tl.fromTo("#capin20 .em",{scale:0.86},{scale:1,duration:0.26,ease:"back.out(1.6)"},19.940);
+window.__timelines["main"] = tl;
+</script>
+</body>
+</html>

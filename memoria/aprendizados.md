@@ -80,6 +80,7 @@ O motivo central das reclamações.
 - Criativo sem exagero. "Seja criativo sem exageros".
 - Imagens: GPT Image 2.5, alta qualidade, 9:16 em Stories. "Gpt image 2.5 sunbust sempre alta qualidade".
 - Nada de textura estranha, pele com cara de IA, rosto distorcido ou sangue. "sem deixar a imagem com textura estranha", "a textura das pessoas", "rosto vermelho distorcido", "O sangue não atrapalha?".
+- Personagem em pé não pode flutuar. Os pés ficam abaixo da linha em que a parede ou o móvel de trás encontra o chão, e todo móvel encostado na parede toca o chão. "a primeira imagem a mulher parece flutuando", "Thumb flutuando de novo" (05/11).
 - Chega de mão e celular. "não aguento mais mão e celular". Sem motivo de eletrocardiograma.
 - Use os estilos de referência que ele manda, um de cada, sem copiar o conteúdo deles e sem exagerar no uso. "Use os estilos q mandei um de cada", "sem considerar conteúdo deles", "Não precisa usar tanto q mandei".
 - Stories de venda precisam de imagem, ícone ou gráfico, não só texto. "Não quero só texto na tela".

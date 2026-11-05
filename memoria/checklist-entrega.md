@@ -38,6 +38,7 @@ Esta página junta os erros que ele já pegou mais de uma vez. Não traz regra n
 - [ ] Sem fundo preto.
 - [ ] Pelo menos 8 slides, com um slide de esquema visual e um interativo. (24/10)
 - [ ] Imagem é a própria frase da capa. Tipografia ocupa mais da metade. (24/10)
+- [ ] Personagem em pé com os pés abaixo da linha do chão da parede ou do móvel de trás; nada flutua. (05/11, duas vezes)
 - [ ] Imagens abertas em tamanho real: sem erro de ortografia, sem pele de IA, sem rosto distorcido, sem sangue, sem mão com celular.
 
 ## 4. Vídeo

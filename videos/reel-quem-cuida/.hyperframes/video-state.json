@@ -1,7 +1,7 @@
 {
   "version": 1,
   "historyId": "217f765c-997f-4a3a-8934-03caffe4af2b",
-  "currentRevision": "dc5b9336-b845-4741-a701-403bd64a727b",
+  "currentRevision": "ae851363-61d5-4644-8965-c4bb781fe08c",
   "pendingChanges": false,
   "files": {
     "assets/fonts/anton.woff2": {
@@ -113,8 +113,8 @@
       "content": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/2f/2f7729460f4eb79d5dcf4903b79458bf2f1b41f97a9accdb9103d80a0ef23ee8"
     },
     "cenas/01-pia.png": {
-      "hash": "d99eb51388cbc44bff37bd44527fadb7e7cc6999098fc7afed1d470d66a5083d",
-      "content": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/d9/d99eb51388cbc44bff37bd44527fadb7e7cc6999098fc7afed1d470d66a5083d"
+      "hash": "8aef4d7e1634ff9d63d6f4ce2fd43b5bcdbdbce1e61442a7f0152eb40d08f681",
+      "content": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/8a/8aef4d7e1634ff9d63d6f4ce2fd43b5bcdbdbce1e61442a7f0152eb40d08f681"
     },
     "cenas/02-despertador.png": {
       "hash": "07d3cc080186566de15a9bb4d0858e71df5b83cbadd18132b5794db7c642fe12",
@@ -201,12 +201,12 @@
       "content": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/81/81f10dcf31fd9c8c166ce7ebf443b54cfd33626fd6e2eb7b2ced417f232236df"
     },
     "anima.json": {
-      "hash": "2698850cf7e98719ebabdb34a61d672c03eca30afa506216f5a917aceebc2eee",
-      "content": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/26/2698850cf7e98719ebabdb34a61d672c03eca30afa506216f5a917aceebc2eee"
+      "hash": "91e5692581ce2583d6f7d8d2995a7ac5e8e8b019b3fedf398f0740dba3b652ea",
+      "content": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/91/91e5692581ce2583d6f7d8d2995a7ac5e8e8b019b3fedf398f0740dba3b652ea"
     },
     "assets/video/01-pia.mp4": {
-      "hash": "af4340ec77b3dd003ed192ffe007b533069a9d43f48bc192fc186bd363d3ae83",
-      "content": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/af/af4340ec77b3dd003ed192ffe007b533069a9d43f48bc192fc186bd363d3ae83"
+      "hash": "32e8ad63dd28c3344e36f513402b85d1e2ebce165b630352cc3a9d5b561bbc84",
+      "content": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/32/32e8ad63dd28c3344e36f513402b85d1e2ebce165b630352cc3a9d5b561bbc84"
     },
     "assets/video/02-despertador.mp4": {
       "hash": "a8e10e417a82151298167b9785d5c671ffbcc4a8cae7639da6c6f6a49ebb0005",
@@ -240,10 +240,6 @@
       "hash": "0635c97d328396844cb61fd19df9177648520f8d4438b42bcd48db2e482fa252",
       "content": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/06/0635c97d328396844cb61fd19df9177648520f8d4438b42bcd48db2e482fa252"
     },
-    "cenas-alternativas/01-pia-v2a.png": {
-      "hash": "d99eb51388cbc44bff37bd44527fadb7e7cc6999098fc7afed1d470d66a5083d",
-      "content": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/d9/d99eb51388cbc44bff37bd44527fadb7e7cc6999098fc7afed1d470d66a5083d"
-    },
     "cenas-alternativas/01-pia-v2b.png": {
       "hash": "c40f98ede47d79761dee22557b77c7a17bd53c12da8371706b4228bb12629047",
       "content": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/c4/c40f98ede47d79761dee22557b77c7a17bd53c12da8371706b4228bb12629047"
@@ -253,8 +249,8 @@
       "content": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/51/51c11f379fa018f9cecd8bcacc08dbaac48a4f58060f9679f085172f7b1bcb4d"
     },
     "src/01-pia-orig.mp4": {
-      "hash": "2708cdc4161c784a1d15d9b20c57183f272733e0accb0c358df65eb7d91bd2d5",
-      "content": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/27/2708cdc4161c784a1d15d9b20c57183f272733e0accb0c358df65eb7d91bd2d5"
+      "hash": "32964329908688adba003d5991995e551a0b8b06cae628528015563fb285eaa9",
+      "content": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/32/32964329908688adba003d5991995e551a0b8b06cae628528015563fb285eaa9"
     },
     "src/02-despertador-orig.mp4": {
       "hash": "f23103c219d1c090f4851b9d938f108b95c49841d189c6a8cc8acca91d198a07",
@@ -287,6 +283,66 @@
     "src/08-copo-orig.mp4": {
       "hash": "02a59c21dbec28ad168e97df1ffabc08ce914d0f442fa6fd5985405e7471edbb",
       "content": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/02/02a59c21dbec28ad168e97df1ffabc08ce914d0f442fa6fd5985405e7471edbb"
+    },
+    "reel_quem_cuida.mp4": {
+      "hash": "337d12577b0a8b7867b03ad1bf4c5ff254ff1573e225c689b3b4a46a62fe7af2",
+      "content": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/33/337d12577b0a8b7867b03ad1bf4c5ff254ff1573e225c689b3b4a46a62fe7af2"
+    },
+    "README.md": {
+      "hash": "dc65c114dcf3bedfcca7f5ff933ee4958245771b49d78a1cda5172dabf4e4a40",
+      "content": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/dc/dc65c114dcf3bedfcca7f5ff933ee4958245771b49d78a1cda5172dabf4e4a40"
+    },
+    "prompt-suno.txt": {
+      "hash": "1a46ddd0ec171f675e9bfea993a0cc5611f73f3b8b8eb774b2f42f35f2fa74c6",
+      "content": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/1a/1a46ddd0ec171f675e9bfea993a0cc5611f73f3b8b8eb774b2f42f35f2fa74c6"
+    },
+    "src/suno-morning-plucks-gravacao.m4a": {
+      "hash": "f5ae455c7dbcb0efb73a340f7c7011179bd34b2f5de8f8383dd671e5b8377885",
+      "content": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/f5/f5ae455c7dbcb0efb73a340f7c7011179bd34b2f5de8f8383dd671e5b8377885"
+    },
+    "musica-corte-morning-plucks.m4a": {
+      "hash": "1d19d242e9898f81f8de31220478acd7ef87e76b18fe5b015e03884336a80346",
+      "content": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/1d/1d19d242e9898f81f8de31220478acd7ef87e76b18fe5b015e03884336a80346"
+    },
+    "capa.html": {
+      "hash": "fdfafdb45b4d6a2c863b36cf2840f17cd4992cb6dfb362faddce38c01abf1ba6",
+      "content": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/fd/fdfafdb45b4d6a2c863b36cf2840f17cd4992cb6dfb362faddce38c01abf1ba6"
+    },
+    "cenas-alternativas/01-pia-v3b.png": {
+      "hash": "795e1c8786cb7b801db3ed073e61dba924b3434163c0f70815b6408fa607f412",
+      "content": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/79/795e1c8786cb7b801db3ed073e61dba924b3434163c0f70815b6408fa607f412"
+    },
+    "cenas-alternativas/01-pia-v3c.png": {
+      "hash": "3c0d4bd30c7567a8af0d2526ad65f34d10c68a0927493abe81e6ed5b61967502",
+      "content": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/3c/3c0d4bd30c7567a8af0d2526ad65f34d10c68a0927493abe81e6ed5b61967502"
+    },
+    "cenas-alternativas/01-pia-v3a.png": {
+      "hash": "8aef4d7e1634ff9d63d6f4ce2fd43b5bcdbdbce1e61442a7f0152eb40d08f681",
+      "content": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/8a/8aef4d7e1634ff9d63d6f4ce2fd43b5bcdbdbce1e61442a7f0152eb40d08f681"
+    },
+    "cenas-alternativas/01-pia-v3d.png": {
+      "hash": "9aca30c68555562fac32aef47263a47f06adb906297e4b3a2762dfb9d5173757",
+      "content": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/9a/9aca30c68555562fac32aef47263a47f06adb906297e4b3a2762dfb9d5173757"
+    },
+    "cenas-alternativas/01-pia-v2a-flutuando.png": {
+      "hash": "d99eb51388cbc44bff37bd44527fadb7e7cc6999098fc7afed1d470d66a5083d",
+      "content": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/d9/d99eb51388cbc44bff37bd44527fadb7e7cc6999098fc7afed1d470d66a5083d"
+    },
+    "capa-quem-cuida.png": {
+      "hash": "48cc0b878d48c4935f1baeaf8d53daadf177eb10969286a79a47256e8cb05b5c",
+      "content": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/48/48cc0b878d48c4935f1baeaf8d53daadf177eb10969286a79a47256e8cb05b5c"
+    },
+    "mix2.py": {
+      "hash": "4bd0c33ae2090194fb20d467e749e3f95267ddc17fc2e6967593a3a7158d2230",
+      "content": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/4b/4bd0c33ae2090194fb20d467e749e3f95267ddc17fc2e6967593a3a7158d2230"
+    },
+    "audio/mix2-raw.wav": {
+      "hash": "8dea79069a92e04175a78430b2ebdedf8f261041576f634ec2bbd37a1ac2b3af",
+      "content": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/8d/8dea79069a92e04175a78430b2ebdedf8f261041576f634ec2bbd37a1ac2b3af"
+    },
+    "audio/final2.wav": {
+      "hash": "54713785936b7b2c1ba3286121ca94bc3aa245638de9b8da4c93d48af3a2e275",
+      "content": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/54/54713785936b7b2c1ba3286121ca94bc3aa245638de9b8da4c93d48af3a2e275"
     }
   },
   "revisions": {
@@ -507,6 +563,97 @@
           "after": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/2f/2f7729460f4eb79d5dcf4903b79458bf2f1b41f97a9accdb9103d80a0ef23ee8"
         }
       }
+    },
+    "ae851363-61d5-4644-8965-c4bb781fe08c": {
+      "actor": {
+        "kind": "outside",
+        "name": "Outside"
+      },
+      "label": "Changed outside the app",
+      "startedAt": 1793891839097,
+      "endedAt": 1793891839264,
+      "files": {
+        "anima.json": {
+          "before": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/26/2698850cf7e98719ebabdb34a61d672c03eca30afa506216f5a917aceebc2eee",
+          "after": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/91/91e5692581ce2583d6f7d8d2995a7ac5e8e8b019b3fedf398f0740dba3b652ea"
+        },
+        "assets/video/01-pia.mp4": {
+          "before": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/af/af4340ec77b3dd003ed192ffe007b533069a9d43f48bc192fc186bd363d3ae83",
+          "after": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/32/32e8ad63dd28c3344e36f513402b85d1e2ebce165b630352cc3a9d5b561bbc84"
+        },
+        "audio/final2.wav": {
+          "before": null,
+          "after": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/54/54713785936b7b2c1ba3286121ca94bc3aa245638de9b8da4c93d48af3a2e275"
+        },
+        "audio/mix2-raw.wav": {
+          "before": null,
+          "after": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/8d/8dea79069a92e04175a78430b2ebdedf8f261041576f634ec2bbd37a1ac2b3af"
+        },
+        "capa-quem-cuida.png": {
+          "before": null,
+          "after": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/48/48cc0b878d48c4935f1baeaf8d53daadf177eb10969286a79a47256e8cb05b5c"
+        },
+        "capa.html": {
+          "before": null,
+          "after": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/fd/fdfafdb45b4d6a2c863b36cf2840f17cd4992cb6dfb362faddce38c01abf1ba6"
+        },
+        "cenas-alternativas/01-pia-v2a-flutuando.png": {
+          "before": null,
+          "after": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/d9/d99eb51388cbc44bff37bd44527fadb7e7cc6999098fc7afed1d470d66a5083d"
+        },
+        "cenas-alternativas/01-pia-v2a.png": {
+          "before": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/d9/d99eb51388cbc44bff37bd44527fadb7e7cc6999098fc7afed1d470d66a5083d",
+          "after": null
+        },
+        "cenas-alternativas/01-pia-v3a.png": {
+          "before": null,
+          "after": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/8a/8aef4d7e1634ff9d63d6f4ce2fd43b5bcdbdbce1e61442a7f0152eb40d08f681"
+        },
+        "cenas-alternativas/01-pia-v3b.png": {
+          "before": null,
+          "after": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/79/795e1c8786cb7b801db3ed073e61dba924b3434163c0f70815b6408fa607f412"
+        },
+        "cenas-alternativas/01-pia-v3c.png": {
+          "before": null,
+          "after": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/3c/3c0d4bd30c7567a8af0d2526ad65f34d10c68a0927493abe81e6ed5b61967502"
+        },
+        "cenas-alternativas/01-pia-v3d.png": {
+          "before": null,
+          "after": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/9a/9aca30c68555562fac32aef47263a47f06adb906297e4b3a2762dfb9d5173757"
+        },
+        "cenas/01-pia.png": {
+          "before": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/d9/d99eb51388cbc44bff37bd44527fadb7e7cc6999098fc7afed1d470d66a5083d",
+          "after": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/8a/8aef4d7e1634ff9d63d6f4ce2fd43b5bcdbdbce1e61442a7f0152eb40d08f681"
+        },
+        "mix2.py": {
+          "before": null,
+          "after": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/4b/4bd0c33ae2090194fb20d467e749e3f95267ddc17fc2e6967593a3a7158d2230"
+        },
+        "musica-corte-morning-plucks.m4a": {
+          "before": null,
+          "after": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/1d/1d19d242e9898f81f8de31220478acd7ef87e76b18fe5b015e03884336a80346"
+        },
+        "prompt-suno.txt": {
+          "before": null,
+          "after": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/1a/1a46ddd0ec171f675e9bfea993a0cc5611f73f3b8b8eb774b2f42f35f2fa74c6"
+        },
+        "README.md": {
+          "before": null,
+          "after": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/dc/dc65c114dcf3bedfcca7f5ff933ee4958245771b49d78a1cda5172dabf4e4a40"
+        },
+        "reel_quem_cuida.mp4": {
+          "before": null,
+          "after": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/33/337d12577b0a8b7867b03ad1bf4c5ff254ff1573e225c689b3b4a46a62fe7af2"
+        },
+        "src/01-pia-orig.mp4": {
+          "before": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/27/2708cdc4161c784a1d15d9b20c57183f272733e0accb0c358df65eb7d91bd2d5",
+          "after": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/32/32964329908688adba003d5991995e551a0b8b06cae628528015563fb285eaa9"
+        },
+        "src/suno-morning-plucks-gravacao.m4a": {
+          "before": null,
+          "after": "/root/.cache/hyperframes/history/217f765c-997f-4a3a-8934-03caffe4af2b/blobs/f5/f5ae455c7dbcb0efb73a340f7c7011179bd34b2f5de8f8383dd671e5b8377885"
+        }
+      }
     }
   },
   "checks": {
@@ -582,13 +729,14 @@
   },
   "renders": {
     "latest": {
-      "id": "17c659b5-b849-44d6-ada0-84fe4a611790",
-      "completedAt": 1793887651808,
+      "id": "b3d34776-c83c-4480-9fc0-f730e13736b5",
+      "completedAt": 1793891945499,
       "output": "/home/user/Novo/videos/reel-quem-cuida/renders/final-mudo.mp4",
       "status": "completed",
-      "revision": "dc5b9336-b845-4741-a701-403bd64a727b"
+      "revision": "ae851363-61d5-4644-8965-c4bb781fe08c"
     },
     "retainedRevisions": [
+      "ae851363-61d5-4644-8965-c4bb781fe08c",
       "dc5b9336-b845-4741-a701-403bd64a727b"
     ]
   },

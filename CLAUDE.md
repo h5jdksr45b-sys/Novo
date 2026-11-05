@@ -13,6 +13,7 @@ Leia, nesta ordem:
 6. Para vídeo: `memoria/efeitos-video-aprovados.md`.
 7. Skill `historico-borderline-180d` para não repetir tese.
 8. Para tema, ideia ou formato que já funcionou fora: skill `pesquisa-validados` (Vamos + memória + histórico).
+9. Para Reel ou carrossel, antes do veredito: skill `mecanismos-gigantes` (o que os 5 gigantes dele têm em comum, medido) e `memoria/mecanismos-gigantes.md`.
 
 Se a peça bater em algo que ele já rejeitou, refaça antes de entregar.
 
@@ -25,3 +26,7 @@ Grave direto no branch `main`, não no branch da sessão. O Dr. Fabio autorizou 
 ## Por que isto existe
 
 Até 24/10/2026 cada sessão salvava o aprendizado no próprio branch, que nunca entrava no principal. A sessão seguinte começava do principal e não via nada. A memória só funciona se `memoria/` estiver no branch principal.
+
+## Cofre (segundo cérebro)
+
+`memoria/` também é o cofre do Obsidian: memória editorial e conhecimento (estudos, transcrições, conceitos, posts, ideias). Antes de entregar qualquer peça, rode `memoria/checklist-entrega.md` e confira `memoria/placar-vereditos.md`. Regras do cofre em `memoria/CLAUDE.md`. Nunca edite nem apague nada em `memoria/raw/`.

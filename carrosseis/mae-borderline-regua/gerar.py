@@ -80,7 +80,7 @@ def group_metrics(g):
     assert size >= 62, g
     return font, size, round(size * 1.15)
 
-def render(nome, bg, groups, pos):
+def render(nome, bg, groups, pos, reforco_vermelho=0):
     ms = [group_metrics(g) for g in groups]
     h = sum(len(g['lines']) * lh + g.get('gap', 0) for g, (_, _, lh) in zip(groups, ms)) - groups[-1].get('gap', 0)
     im = bg.copy()
@@ -98,6 +98,13 @@ def render(nome, bg, groups, pos):
     for x, y, t, font, c in ops: ds.text((x, y + 3), t, font=font, fill=255)
     sh = sh.filter(ImageFilter.GaussianBlur(14)).point(lambda v: int(v * .7))
     im = Image.composite(Image.new('RGB', (W, H)), im, sh)
+    if reforco_vermelho:
+        # halo escuro mais largo só atrás das palavras em vermelho, para o vermelho saltar sobre a luz da foto
+        hv = Image.new('L', (W, H), 0); dh = ImageDraw.Draw(hv)
+        for x, y, t, font, c in ops:
+            if c == RED: dh.text((x, y), t, font=font, fill=255, stroke_width=10, stroke_fill=255)
+        hv = hv.filter(ImageFilter.GaussianBlur(40)).point(lambda v: int(min(255, v * 2.2) * reforco_vermelho))
+        im = Image.composite(Image.new('RGB', (W, H)), im, hv)
     d = ImageDraw.Draw(im)
     minx = miny = 9999; maxx = maxy = 0
     for x, y, t, font, c in ops:
@@ -114,7 +121,7 @@ render('02.png', bg_foto('slide2.png', .95, .78, desce=230), [
     G(66, 34, 'Leva o filho na escola todo dia.', 'Num dia ruim, chorou no carro', 'antes de entrar.'),
     G(66, 22, 'A família do ex viu e decretou:'),
     G(92, 0, 'borderline [não tem', '[condição de criar filho.]'),
-], 'top')
+], 'top', reforco_vermelho=.85)
 
 render('03.png', bg_blur(), [
     G(76, 40, 'Ninguém olhou para os', 'outros dias do ano.'),

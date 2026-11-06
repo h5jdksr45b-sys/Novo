@@ -40,15 +40,24 @@ def capa_baixo():
     return cover(im.crop((0, int(im.height * .4), im.width, im.height)))
 
 def bg_blur():
-    return darken(capa_baixo().filter(ImageFilter.GaussianBlur(35)), .5)
+    return darken(capa_baixo().filter(ImageFilter.GaussianBlur(25)), .3)
 
 def bg_07():
-    # capa sem título: foto inteira, descida para mãe e filho caírem no terço de baixo
-    im = cover(Image.open(CAPA).convert('RGB'))
-    desce = 330
-    topo = im.crop((0, 0, W, desce)).transpose(Image.FLIP_TOP_BOTTOM).filter(ImageFilter.GaussianBlur(30))
-    novo = Image.new('RGB', (W, H)); novo.paste(im, (0, desce)); novo.paste(topo, (0, 0))
-    return top_gradient(darken(novo, .12), .88, .66)
+    # fundo: o mesmo recorte da capa (de 40% para baixo), desfocado e escurecido no topo para o texto.
+    # sobre ele, o recorte nítido em largura total, posto no terço de baixo com a borda de cima esfumada,
+    # para mãe, filho e banco ficarem inteiros e longe das bordas.
+    src = Image.open(CAPA).convert('RGB')
+    crop = src.crop((0, int(src.height * .4), src.width, src.height))
+    sc = W / crop.width
+    nit = crop.resize((W, round(crop.height * sc)), Image.LANCZOS)
+    y = 720                                       # onde começa o recorte nítido
+    fundo = darken(capa_baixo().filter(ImageFilter.GaussianBlur(25)), .3)
+    mask = Image.new('L', nit.size, 255); pm = mask.load()
+    fade = 60
+    for yy in range(fade):
+        for xx in range(W): pm[xx, yy] = int(255 * yy / fade)
+    fundo.paste(nit, (0, y), mask)
+    return top_gradient(fundo, .6, .58)
 
 
 def spans(line):

@@ -26,8 +26,12 @@ def top_gradient(im, a_top, end):
         for x in range(W): px[x, y] = a
     return Image.composite(Image.new('RGB', (W, H)), im, ov)
 
-def bg_foto(nome, a=.75, end=.55):
+def bg_foto(nome, a=.75, end=.55, desce=0):
     im = cover(Image.open(os.path.join(F, nome)).convert('RGB'))
+    if desce:
+        # desce a foto para a cabeça da pessoa não ficar sob o texto; o topo vira extensão espelhada e desfocada, coberta pelo gradiente
+        topo = im.crop((0, 0, W, desce)).transpose(Image.FLIP_TOP_BOTTOM).filter(ImageFilter.GaussianBlur(25))
+        novo = Image.new('RGB', (W, H)); novo.paste(im, (0, desce)); novo.paste(topo, (0, 0)); im = novo
     return top_gradient(darken(im, .35), a, end)
 
 def capa_baixo():
@@ -39,95 +43,103 @@ def bg_blur():
     return darken(capa_baixo().filter(ImageFilter.GaussianBlur(35)), .5)
 
 def bg_07():
-    return top_gradient(capa_baixo(), .45, .55)
+    # capa sem título: foto inteira, descida para mãe e filho caírem no terço de baixo
+    im = cover(Image.open(CAPA).convert('RGB'))
+    desce = 330
+    topo = im.crop((0, 0, W, desce)).transpose(Image.FLIP_TOP_BOTTOM).filter(ImageFilter.GaussianBlur(30))
+    novo = Image.new('RGB', (W, H)); novo.paste(im, (0, desce)); novo.paste(topo, (0, 0))
+    return top_gradient(darken(novo, .12), .88, .66)
 
-def parse(s):
-    toks, red = [], False
-    for w in s.replace('[', ' [ ').replace(']', ' ] ').split():
-        if w == '[': red = True
-        elif w == ']': red = False
-        else: toks.append((w, red))
-    # cola pontuação que ficou solta depois do colchete
-    out = []
-    for w, r in toks:
-        if out and w in ',.:;' : out[-1] = (out[-1][0], out[-1][1], out[-1][2] + [(w, r)])
-        else: out.append((w, r, []))
+
+def spans(line):
+    out, red, buf = [], False, ''
+    for ch in line:
+        if ch in '[]':
+            if buf: out.append((buf, red)); buf = ''
+            red = ch == '['
+        else: buf += ch
+    if buf: out.append((buf, red))
     return out
 
-def wrap(par, font, maxw):
-    sp = font.getlength(' ')
-    lines, cur, cw = [], [], 0
-    for w, r, tail in par:
-        ww = font.getlength(w) + sum(font.getlength(t) for t, _ in tail)
-        add = ww if not cur else cw + sp + ww
-        if cur and add > maxw:
-            lines.append(cur); cur, cw = [(w, r, tail)], ww
-        else:
-            cur.append((w, r, tail)); cw = add
-    if cur: lines.append(cur)
-    return lines
-
-def layout(pars, size, gap):
-    font = ImageFont.truetype(FONT, size)
-    lh = round(size * 1.15)
-    blocks, h = [], 0
-    for i, p in enumerate(pars):
-        ls = wrap(parse(p), font, W - 2 * M)
-        blocks.append(ls); h += len(ls) * lh + (gap if i < len(pars) - 1 else 0)
-    return font, lh, blocks, h
-
-def render(nome, bg, pars, pos, max_h, start=96, gap=0):
-    size = start
+def group_metrics(g):
+    size = g['size']
     while True:
-        font, lh, blocks, h = layout(pars, size, round(gap * size))
-        if h <= max_h or size <= 62: break
+        font = ImageFont.truetype(FONT, size)
+        wmax = max(sum(font.getlength(t) for t, _ in spans(l)) for l in g['lines'])
+        if wmax <= W - 2 * M or size <= 62: break
         size -= 2
-    assert size >= 62
-    im = bg.copy(); d = ImageDraw.Draw(im)
+    assert size >= 62, g
+    return font, size, round(size * 1.15)
+
+def render(nome, bg, groups, pos):
+    ms = [group_metrics(g) for g in groups]
+    h = sum(len(g['lines']) * lh + g.get('gap', 0) for g, (_, _, lh) in zip(groups, ms)) - groups[-1].get('gap', 0)
+    im = bg.copy()
     sh = Image.new('L', (W, H), 0); ds = ImageDraw.Draw(sh)
-    asc, desc = font.getmetrics()
-    y = M if pos == 'top' else (H - h) // 2
-    sp = font.getlength(' ')
-    minx, maxx, miny, maxy = W, 0, H, 0
-    for bi, ls in enumerate(blocks):
-        for line in ls:
+    y0 = M if pos == 'top' else (H - h) // 2
+    ops, y = [], y0
+    for g, (font, size, lh) in zip(groups, ms):
+        # compensa o respiro do topo da fonte para alinhar a tinta à margem
+        for l in g['lines']:
             x = M
-            for i, (w, r, tail) in enumerate(line):
-                if i: x += sp
-                for t, rr in [(w, r)] + tail:
-                    d.text((x, y), t, font=font, fill=RED if rr else OFF)
-                    ds.text((x, y + 3), t, font=font, fill=255)
-                    bb = d.textbbox((x, y), t, font=font)
-                    minx, maxx, miny, maxy = min(minx, bb[0]), max(maxx, bb[2]), min(miny, bb[1]), max(maxy, bb[3])
-                    x += font.getlength(t)
+            for t, r in spans(l):
+                ops.append((x, y, t, font, RED if r else OFF)); x += font.getlength(t)
             y += lh
-        y += round(gap * size)
-    # sombra suave só para leitura sobre áreas claras, aplicada por baixo do texto
-    txt = im; base = bg.copy()
+        y += g.get('gap', 0)
+    for x, y, t, font, c in ops: ds.text((x, y + 3), t, font=font, fill=255)
     sh = sh.filter(ImageFilter.GaussianBlur(14)).point(lambda v: int(v * .7))
-    base = Image.composite(Image.new('RGB', (W, H)), base, sh)
-    mask = Image.new('L', (W, H), 0); dm = ImageDraw.Draw(mask)
-    im = base; d = ImageDraw.Draw(im); y = M if pos == 'top' else (H - h) // 2
-    for bi, ls in enumerate(blocks):
-        for line in ls:
-            x = M
-            for i, (w, r, tail) in enumerate(line):
-                if i: x += sp
-                for t, rr in [(w, r)] + tail:
-                    d.text((x, y), t, font=font, fill=RED if rr else OFF)
-                    x += font.getlength(t)
-            y += lh
-        y += round(gap * size)
+    im = Image.composite(Image.new('RGB', (W, H)), im, sh)
+    d = ImageDraw.Draw(im)
+    minx = miny = 9999; maxx = maxy = 0
+    for x, y, t, font, c in ops:
+        d.text((x, y), t, font=font, fill=c)
+        bb = d.textbbox((x, y), t, font=font)
+        minx, miny, maxx, maxy = min(minx, bb[0]), min(miny, bb[1]), max(maxx, bb[2]), max(maxy, bb[3])
     im.save(os.path.join(D, nome))
     ok = minx >= M and maxx <= W - M and miny >= M and maxy <= H - M
-    log.append(f'{nome}: fonte {size}px, tinta x {minx}-{maxx}, y {miny}-{maxy}, margens {"OK" if ok else "FALHA"}')
+    log.append(f'{nome}: tamanhos {[s for _, s, _ in ms]}px, tinta x {minx:.0f}-{maxx:.0f}, y {miny}-{maxy}, margens {"OK" if ok else "FALHA"}')
 
-TOP = int(H * .45) - M
-render('02.png', bg_foto('slide2.png', .9, .68), ['Leva o filho na escola todo dia. Num dia ruim, chorou no carro antes de entrar. A família do ex viu e decretou: borderline [não tem condição de criar filho.]'], 'top', TOP)
-render('03.png', bg_blur(), ['Ninguém olhou para os outros dias do ano. Diagnóstico não diz se alguém é boa mãe. [O cuidado diz.]'], 'mid', H - 2 * M)
-render('04.png', bg_foto('slide4.png'), ['Outra mãe atrasou duas horas [de propósito] para entregar o filho, só para o pai esperar. E disseram: é o borderline.'], 'top', TOP)
-render('05.png', bg_blur(), ['Não é. Borderline pode explicar uma reação impulsiva na crise. Fazer o outro sofrer de propósito [é escolha,] e se julga como a de qualquer pessoa.'], 'mid', H - 2 * M)
-render('06.png', bg_blur(), ['[O que pesa de verdade:]', 'A criança está segura?', 'Existe rede de apoio?', 'A impulsividade traz risco?', 'Ela segue o tratamento e tem acesso a ele?'], 'mid', H - 2 * M, start=84, gap=.35)
-render('07.png', bg_07(), ['Toda mãe erra. Quem tem borderline não merece régua mais dura. [Nem mais leve.] Manda para a mãe que tem medo de contar o diagnóstico.'], 'top', int(H * .6))
+G = lambda size, gap, *lines: {'size': size, 'gap': gap, 'lines': list(lines)}
+
+render('02.png', bg_foto('slide2.png', .95, .78, desce=230), [
+    G(66, 34, 'Leva o filho na escola todo dia.', 'Num dia ruim, chorou no carro', 'antes de entrar.'),
+    G(66, 22, 'A família do ex viu e decretou:'),
+    G(92, 0, 'borderline [não tem', '[condição de criar filho.]'),
+], 'top')
+
+render('03.png', bg_blur(), [
+    G(76, 40, 'Ninguém olhou para os', 'outros dias do ano.'),
+    G(76, 56, 'Diagnóstico não diz se', 'alguém é boa mãe.'),
+    G(140, 0, '[O cuidado diz.]'),
+], 'mid')
+
+render('04.png', bg_foto('slide4.png', .85, .62, desce=60), [
+    G(74, 34, 'Outra mãe atrasou duas', 'horas [de propósito] para', 'entregar o filho, só para', 'o pai esperar.'),
+    G(74, 0, 'E disseram:'),
+    G(108, 0, 'é o borderline.'),
+], 'top')
+
+render('05.png', bg_blur(), [
+    G(150, 44, 'Não é.'),
+    G(68, 44, 'Borderline pode explicar uma', 'reação impulsiva na crise.'),
+    G(68, 6, 'Fazer o outro sofrer de propósito'),
+    G(118, 6, '[é escolha,]'),
+    G(68, 0, 'e se julga como a de', 'qualquer pessoa.'),
+], 'mid')
+
+render('06.png', bg_blur(), [
+    G(108, 56, '[O que pesa]', '[de verdade:]'),
+    G(70, 30, 'A criança está segura?'),
+    G(70, 30, 'Existe rede de apoio?'),
+    G(70, 30, 'A impulsividade traz risco?'),
+    G(70, 0, 'Ela segue o tratamento', 'e tem acesso a ele?'),
+], 'mid')
+
+render('07.png', bg_07(), [
+    G(110, 30, 'Toda mãe erra.'),
+    G(72, 0, 'Quem tem borderline não', 'merece régua mais dura.'),
+    G(110, 44, '[Nem mais leve.]'),
+    G(64, 0, 'Manda para a mãe que tem medo', 'de contar o diagnóstico.'),
+], 'top')
 print('PROVISORIO (sem capa.png)' if PROVISORIO else 'capa.png usada')
 print('\n'.join(log))

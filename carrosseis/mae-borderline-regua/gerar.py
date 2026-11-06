@@ -3,7 +3,7 @@ from PIL import Image, ImageDraw, ImageFont, ImageFilter
 D = os.path.dirname(os.path.abspath(__file__))
 F = os.path.join(D, 'fontes')
 W, H, M = 1080, 1350, 70
-OFF, RED = (245, 239, 230), (192, 57, 43)
+OFF, RED = (245, 239, 230), (232, 58, 42)
 FONT = os.path.join(F, 'DMSerifDisplay-Regular.ttf')
 CAPA = os.path.join(F, 'capa.png')
 PROVISORIO = not os.path.exists(CAPA)

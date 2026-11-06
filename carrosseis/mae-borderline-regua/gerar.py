@@ -103,7 +103,7 @@ def render(nome, bg, groups, pos, reforco_vermelho=0):
         hv = Image.new('L', (W, H), 0); dh = ImageDraw.Draw(hv)
         for x, y, t, font, c in ops:
             if c == RED: dh.text((x, y), t, font=font, fill=255, stroke_width=10, stroke_fill=255)
-        hv = hv.filter(ImageFilter.GaussianBlur(40)).point(lambda v: int(min(255, v * 2.2) * reforco_vermelho))
+        hv = hv.filter(ImageFilter.GaussianBlur(34)).point(lambda v: int(min(255, v * 1.4) * reforco_vermelho))
         im = Image.composite(Image.new('RGB', (W, H)), im, hv)
     d = ImageDraw.Draw(im)
     minx = miny = 9999; maxx = maxy = 0
@@ -121,7 +121,7 @@ render('02.png', bg_foto('slide2.png', .95, .78, desce=230), [
     G(66, 34, 'Leva o filho na escola todo dia.', 'Num dia ruim, chorou no carro', 'antes de entrar.'),
     G(66, 22, 'A família do ex viu e decretou:'),
     G(92, 0, 'borderline [não tem', '[condição de criar filho.]'),
-], 'top', reforco_vermelho=.85)
+], 'top', reforco_vermelho=.45)
 
 render('03.png', bg_blur(), [
     G(76, 40, 'Ninguém olhou para os', 'outros dias do ano.'),

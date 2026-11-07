@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>O script de 3 passos</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  @page { size: A4; margin: 0; }
+  :root {
+    --bg: #EDE3D3;
+    --ink: #1B1B1B;
+    --muted: #5E5850;
+    --red: #A82A25;
+    --line: #CDBFAA;
+    --soft: #E4D7C3;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--bg); color: var(--ink); }
+  body { font-family: 'Inter', sans-serif; font-size: 10.6pt; line-height: 1.5; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page { width: 210mm; height: 297mm; padding: 14mm 18mm 10mm; position: relative; overflow: hidden; page-break-after: always; display: flex; flex-direction: column; }
+  .page:last-child { page-break-after: auto; }
+  a { color: inherit; text-decoration: none; }
+
+  .top { display: flex; justify-content: space-between; font-size: 7.6pt; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; }
+  .top .l { color: var(--red); }
+  .top .r { color: var(--muted); }
+
+  h1 { font-family: 'Lora', serif; font-weight: 700; font-size: 29pt; line-height: 1.1; margin-top: 7mm; letter-spacing: -.01em; }
+  h1 em { color: var(--red); font-style: italic; font-weight: 600; }
+  .lede { color: var(--muted); font-size: 11pt; margin-top: 5mm; max-width: 150mm; }
+  .rule { height: 2px; background: var(--ink); margin: 5mm 0 5mm; }
+
+  .safety { border: 1.4px solid var(--red); padding: 4.2mm 5mm; background: rgba(168,42,37,.05); }
+  .safety h3 { font-size: 7.6pt; letter-spacing: .16em; color: var(--red); font-weight: 600; text-transform: uppercase; margin-bottom: 1.8mm; }
+  .safety p { font-size: 9.6pt; line-height: 1.5; }
+  .safety p + p { margin-top: 1.6mm; }
+  .phones { display: flex; gap: 3mm; margin-top: 3mm; flex-wrap: wrap; }
+  .phone { display: inline-flex; align-items: baseline; gap: 2mm; background: var(--red); color: #fff; padding: 1.6mm 3.2mm; font-size: 8.6pt; font-weight: 500; }
+  .phone b { font-size: 11pt; font-weight: 600; }
+
+  .steps { margin-top: 5mm; display: flex; flex-direction: column; gap: 4.2mm; }
+  .step { display: grid; grid-template-columns: 22mm 1fr; }
+  .num { font-family: 'Lora', serif; font-weight: 700; font-size: 44pt; line-height: .9; color: var(--red); }
+  .step h2 { font-family: 'Lora', serif; font-weight: 700; font-size: 15pt; line-height: 1.25; }
+  .step p { margin-top: 1.6mm; }
+  .say { margin-top: 2.4mm; display: flex; flex-direction: column; gap: 2mm; }
+  .say-label { font-size: 7.2pt; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin-top: 3mm; }
+  .quote { border-left: 3px solid var(--red); padding: .6mm 0 .6mm 4mm; font-family: 'Lora', serif; font-style: italic; font-weight: 500; font-size: 12pt; line-height: 1.45; }
+  .note { color: var(--muted); font-size: 9.6pt; margin-top: 2.6mm; }
+
+  .foot { margin-top: auto; display: flex; justify-content: space-between; align-items: flex-end; font-size: 7.6pt; color: var(--muted); border-top: 1px solid var(--line); padding-top: 3mm; }
+  .foot .pg { font-weight: 600; letter-spacing: .2em; }
+
+  h2.sec { font-family: "Lora", serif; font-weight: 700; font-size: 16.5pt; }
+  .sec-sub { color: var(--muted); margin-top: 1.5mm; font-size: 10pt; }
+
+  table { width: 100%; border-collapse: collapse; margin-top: 4mm; border-top: 2px solid var(--ink); }
+  th { text-align: left; font-size: 7.2pt; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); font-weight: 600; padding: 2.4mm 3mm 2.4mm 0; border-bottom: 1px solid var(--line); }
+  td { vertical-align: top; padding: 2.3mm 3mm 2.3mm 0; border-bottom: 1px solid var(--line); font-size: 9.4pt; line-height: 1.45; }
+  td.avoid { width: 31%; font-family: 'Lora', serif; font-style: italic; font-size: 10.6pt; color: var(--ink); }
+  td.avoid s { text-decoration-color: var(--red); text-decoration-thickness: 1.6px; }
+  td.why { width: 35%; color: var(--muted); }
+  td.try { width: 34%; font-family: 'Lora', serif; font-style: italic; font-size: 10.6pt; color: var(--red); padding-right: 0; }
+  td.act { font-family: 'Inter', sans-serif; font-style: normal; font-size: 9.4pt; color: var(--ink); }
+  td.act s { text-decoration-color: var(--red); text-decoration-thickness: 1.6px; }
+
+  .block { margin-top: 4.5mm; }
+  .block p { margin-top: 2.2mm; }
+  .block .quote { margin-top: 3.2mm; }
+  .self { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3mm; margin-top: 3.5mm; }
+  .self div { background: var(--soft); padding: 3.2mm 3.6mm; font-size: 9.2pt; line-height: 1.4; }
+  .self b { display: block; font-weight: 600; margin-bottom: .8mm; }
+
+  .cta { margin-top: auto; background: var(--ink); color: #EFE6D8; padding: 5.5mm 8mm; display: grid; grid-template-columns: 1fr auto; gap: 6mm; align-items: center; }
+  .cta .k { font-size: 7.4pt; letter-spacing: .2em; color: #E49A8E; font-weight: 600; }
+  .cta h3 { font-family: 'Lora', serif; font-size: 16pt; font-weight: 700; margin-top: 1.5mm; }
+  .cta p { font-size: 9.6pt; margin-top: 1.5mm; color: #D9CFBF; }
+  .btn { display: inline-block; background: var(--red); color: #fff; font-weight: 600; font-size: 9.6pt; padding: 3.2mm 5mm; white-space: nowrap; }
+  .btn small { display: block; font-weight: 400; font-size: 7.6pt; opacity: .85; margin-top: .6mm; text-align: center; }
+  .page2 .foot { margin-top: 4mm; }
+</style>
+</head>
+<body>
+
+<section class="page">
+  <div class="top"><span class="l">Guia gratuito para quem convive</span><span class="r">Dr. Fabio Schmidt</span></div>
+
+  <h1>O script de 3 passos para atravessar uma crise <em>sem entrar nela junto</em></h1>
+  <p class="lede">Para quem convive com uma pessoa com borderline. Use na hora da crise, nesta ordem. O áudio que acompanha este PDF explica por que a ordem importa.</p>
+
+  <div class="rule"></div>
+
+  <div class="safety">
+    <h3>Antes de tudo: segurança</h3>
+    <p>Se a pessoa fala em se matar, está se machucando, tem um objeto de risco na mão ou alguém corre perigo, este script para aqui. Ligue para o socorro.</p>
+    <p>Se quem corre perigo é você, saia do ambiente primeiro. Nenhuma frase deste guia vale mais que a sua segurança.</p>
+    <div class="phones">
+      <a class="phone" href="tel:192"><b>192</b> SAMU</a>
+      <a class="phone" href="tel:190"><b>190</b> Polícia</a>
+      <a class="phone" href="tel:188"><b>188</b> CVV, 24 horas</a>
+    </div>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="num">1</div>
+      <div>
+        <h2>Baixe o seu volume antes de falar qualquer coisa</h2>
+        <p>Na crise, a pessoa reage mais ao seu tom do que às suas palavras. Respire uma vez, abaixe a voz, fale devagar e pouco. Não discuta quem tem razão agora. O assunto da briga fica para depois.</p>
+        <div class="say"><div class="quote">Eu estou aqui. Vou falar baixo com você.</div></div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">2</div>
+      <div>
+        <h2>Valide o que a pessoa sente, sem concordar com a acusação</h2>
+        <p>Validar é dizer que você vê a dor. Dá para fazer isso sem aceitar a acusação e sem pedir desculpa pelo que você não fez. Diga em voz alta a emoção que está na sua frente, com uma frase curta.</p>
+        <div class="say">
+          <div class="quote">Eu vejo que você está com muita raiva. Isso está doendo muito em você.</div>
+          <div class="quote">Faz sentido você ter medo de que eu vá embora.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">3</div>
+      <div>
+        <h2>Diga o limite e o próximo passo concreto</h2>
+        <p>O próximo passo diz à pessoa quando você volta. Sem ele, o limite soa como abandono.</p>
+        <div class="say"><div class="quote">Eu não vou continuar essa conversa com gritos. Vou ficar na sala do lado. Daqui a vinte minutos eu volto e a gente tenta de novo.</div></div>
+        <p class="note">Se a pessoa vier atrás, repita a mesma frase uma vez, sem nova explicação. Volte no horário que disse. Cumprir o que falou faz parte do script.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot"><span>Material educativo. Não substitui avaliação nem tratamento individual.</span><span class="pg">1 / 2</span></div>
+</section>
+
+<section class="page page2">
+  <div class="top"><span class="l">O script de 3 passos</span><span class="r">Dr. Fabio Schmidt</span></div>
+
+  <div style="margin-top:5mm">
+    <h2 class="sec">O que costuma piorar a crise</h2>
+    <p class="sec-sub">E o que dá para dizer no lugar.</p>
+    <table>
+      <thead><tr><th>Evite</th><th>Por que piora</th><th>Tente</th></tr></thead>
+      <tbody>
+        <tr><td class="avoid"><s>Calma.</s></td><td class="why">Soa como ordem e como se a dor não fosse real.</td><td class="try">Eu estou aqui com você.</td></tr>
+        <tr><td class="avoid"><s>Você está exagerando.</s></td><td class="why">A pessoa ouve que está sozinha no que sente.</td><td class="try">Isso está muito pesado para você.</td></tr>
+        <tr><td class="avoid"><s>De novo isso?</s></td><td class="why">Transforma o momento em julgamento de toda a história.</td><td class="try">Estou ouvindo. Me fala do agora.</td></tr>
+        <tr><td class="avoid"><s>Se continuar assim, eu vou embora.</s></td><td class="why">Ameaça de abandono no meio da crise costuma aumentar a intensidade.</td><td class="try">Vou para a sala do lado e volto em vinte minutos.</td></tr>
+        <tr><td class="avoid act"><s>Rebater os fatos, um por um</s></td><td class="why">Na crise, cada argumento vira mais um motivo para brigar.</td><td class="try">A gente fala disso amanhã, com calma.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="block">
+    <h2 class="sec">Depois que a crise passa</h2>
+    <p>Espere a pessoa estar calma, de preferência no dia seguinte. Aí sim fale do que aconteceu, começando pelo que você sentiu.</p>
+    <div class="quote">Ontem eu me assustei quando a porta bateu. Quero entender o que estava acontecendo com você.</div>
+  </div>
+
+  <div class="block">
+    <h2 class="sec">Cuide de você também</h2>
+    <p>Quem convive com a crise também se desgasta. Estas três coisas não são luxo. São o que permite você continuar presente sem se perder.</p>
+    <div class="self">
+      <div><b>Alguém para conversar</b>Uma pessoa fora da relação, que escute sem tomar partido.</div>
+      <div><b>Seu próprio acompanhamento</b>Um espaço só seu, separado do tratamento da pessoa.</div>
+      <div><b>Combinados claros em casa</b>Feitos num dia tranquilo, para os dois saberem o que fazer na próxima crise.</div>
+    </div>
+  </div>
+
+  <div class="cta" style="margin-top:5mm">
+    <div>
+      <div class="k">PROTOCOLO 7 DIAS</div>
+      <h3>Quer ir além da crise?</h3>
+      <p>Para quem convive e quer saber o que dizer e o que fazer no dia a dia, entre uma crise e outra.</p>
+    </div>
+    <a class="btn" href="https://curso.drfabioschmidt.net">Conhecer o Protocolo<small>curso.drfabioschmidt.net</small></a>
+  </div>
+
+  <div class="foot"><span>Dr. Fabio Schmidt. Médico, CRM-SP 183549, pós-graduado em psiquiatria, com foco em transtorno de personalidade borderline.<br>Material educativo. Não substitui avaliação nem tratamento individual.</span><span class="pg">2 / 2</span></div>
+</section>
+
+</body>
+</html>

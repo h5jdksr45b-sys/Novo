@@ -21,7 +21,7 @@ O detalhe fica nos arquivos de `memoria/`. Aqui só o que muda decisão. Linhas 
 ## REGRAS INVIOLÁVEIS
 
 1. Tese aprovada por ele antes de gerar imagem ou montar vídeo. (checklist-entrega.md:21)
-2. Assunto novo vem do Vamos, com prova de post validado. Claude repassa sem opinar sobre o tema. (correcoes.md:225, correcoes.md:134)
+2. Assunto novo vem do Vamos, com prova de post validado. Desde 07/11 Claude também pode criar tema ("Ou crie vc também"), com prova e pelo mesmo corte. (correcoes.md:225, correcoes.md:134)
 3. Entrega sempre em alta: imagem 2k, vídeo 1080p. Rascunho em baixa só se ele pedir. (correcoes.md:168)
 4. Imagem com texto: GPT Image 2.5 Sunburst (`gpt_image_2_5`, variant sunburst), alta, conferida letra por letra. (aprendizados.md:37, aprendizados.md:81, correcoes.md:219)
 5. Quantidade exata: pediu N, são N. Carrossel tem 8 slides, salvo pedido. (aprendizados.md:31, aprendizados.md:88, correcoes.md:197)

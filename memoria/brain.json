@@ -10,8 +10,8 @@
     },
     {
       "id": "r2",
-      "texto": "Assunto novo vem do Vamos, com prova de post validado. Claude repassa sem opinar sobre o tema.",
-      "desde": "2026-11-06",
+      "texto": "Assunto novo vem do Vamos, com prova de post validado. Desde 07/11 Claude também pode criar tema (Ou crie vc também), com prova e pelo mesmo corte.",
+      "desde": "2026-11-07",
       "fonte": "memoria/correcoes.md:225"
     },
     {

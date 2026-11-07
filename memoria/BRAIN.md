@@ -1,12 +1,19 @@
 ---
-titulo: Cérebro
+titulo: BRAIN
 tipo: tema
 criado: 2026-11-07
 fonte: "[[aprendizados]], [[correcoes]], [[checklist-entrega]], [[efeitos-video-aprovados]], [[a-decidir]]"
 status: rascunho
 ---
 
-# CÉREBRO: Borderline Sem Estigma
+# BRAIN: Borderline Sem Estigma
+
+Ordem dele em 07/11/2026: "Antes de qualquer resposta ou tarefa, leia BRAIN.md e brain.json. / Regras do BRAIN.md prevalecem sobre preferência sua. / Se violar um anti-pattern, registre em brain-log.md."
+
+- Ler este arquivo e `brain.json` antes de qualquer resposta ou tarefa.
+- As regras daqui prevalecem sobre preferência do Claude.
+- Violou um anti-pattern: registrar em `brain-log.md` na hora (data, id, o que aconteceu, frase dele se houver, correção).
+- Este arquivo e `brain.json` têm o mesmo conteúdo. Mudou um, mude o outro.
 
 Objetivo: produzir Reel, carrossel, capa e Stories para quem tem borderline e quem convive de perto, sem repetir erro que ele já pegou.
 O detalhe fica nos arquivos de `memoria/`. Aqui só o que muda decisão. Linhas citadas pela versão do `main` de 07/11/2026.

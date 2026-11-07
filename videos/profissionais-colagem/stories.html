@@ -1,0 +1,40 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>Stories Quantas</title>
+<style>
+@font-face{font-family:Mont;font-weight:700;src:url(fonts/montserrat-latin-700-normal.woff2)}
+@font-face{font-family:Mont;font-weight:800;src:url(fonts/montserrat-latin-800-normal.woff2)}
+@font-face{font-family:Fr;src:url(fonts/Fraunces.ttf)}
+:root{--paper:#F6F0E4;--key:#FAF6EC;--ink:#1A1A1A;--red:#A62B24}
+html,body{margin:0;background:#EDE4D3}
+.st{position:relative;width:1080px;height:1920px;overflow:hidden;background:url(assets/bg.jpg)}
+.strip{position:absolute;white-space:nowrap;padding:16px 30px 14px;background:var(--paper);color:var(--ink);
+ box-shadow:0 0 0 6px var(--key),4px 8px 10px rgba(26,26,26,.25);clip-path:polygon(0 3%,100% 0,99% 97%,1% 100%);transform:translateX(-50%)}
+.big{font-family:Mont;font-weight:800;text-transform:uppercase;line-height:1;letter-spacing:-.01em}
+.fr{font-family:Fr;font-style:italic;font-weight:900;font-variation-settings:"WONK" 0,"SOFT" 0,"opsz" 144;color:var(--red);line-height:1.05}
+img{position:absolute;filter:drop-shadow(5px 9px 8px rgba(26,26,26,.3))}
+.card{position:absolute;left:90px;width:900px;box-sizing:border-box;background:var(--paper);box-shadow:0 0 0 6px var(--key),5px 9px 12px rgba(26,26,26,.25);
+ padding:30px 36px;font-family:Mont;font-weight:700;font-size:44px;line-height:1.25;color:var(--ink);display:flex;gap:26px;align-items:flex-start}
+.card b{font-family:Fr;font-style:italic;font-weight:900;font-variation-settings:"WONK" 0,"SOFT" 0;color:var(--red);font-size:64px;line-height:.9;min-width:44px}
+.foot{position:absolute;left:540px;transform:translateX(-50%);background:var(--paper);padding:14px 0;box-shadow:0 0 0 5px var(--key);font-family:Mont;font-weight:700;font-size:26px;color:#4a443c;text-align:center;width:760px}
+</style></head><body>
+<!-- STORY 1: antes do Reel -->
+<div class="st" id="s1">
+ <div class="strip big" style="left:540px;top:300px;font-size:82px;transform:translateX(-50%) rotate(-2deg)">JÁ OUVIU</div>
+ <div class="strip big" style="left:540px;top:415px;font-size:62px;transform:translateX(-50%) rotate(1deg)">QUE ALI NÃO ATENDE</div>
+ <div class="strip fr" style="left:540px;top:515px;font-size:104px;transform:translateX(-50%) rotate(-1.5deg)">borderline?</div>
+ <img src="assets/frame_big.png" style="left:337px;top:720px">
+ <img src="assets/door_big.png" style="left:370px;top:752px">
+ <img src="assets/plaque.png" style="left:439px;top:960px;width:202px;transform:rotate(-5deg)">
+ <img src="assets/tape_m.png" style="left:485px;top:945px;transform:rotate(-8deg)">
+</div>
+<!-- STORY 2: depois do Reel -->
+<div class="st" id="s2">
+ <div class="strip big" style="left:540px;top:290px;font-size:66px;transform:translateX(-50%) rotate(-2deg)">ANTES DE MARCAR,</div>
+ <div class="strip fr" style="left:460px;top:395px;font-size:100px;transform:translateX(-50%) rotate(1deg)">pergunte</div>
+ <img src="assets/card.png" style="left:770px;top:420px;width:190px;transform:rotate(9deg)">
+ <div class="card" style="top:600px;transform:rotate(-1deg)"><b>1</b><span>Quantas pessoas com borderline você já atendeu?</span></div>
+ <div class="card" style="top:830px;transform:rotate(.8deg)"><b>2</b><span>Que tipo de psicoterapia você usa para borderline?</span></div>
+ <div class="card" style="top:1060px;transform:rotate(-.6deg)"><b>3</b><span>O que fazemos se eu entrar em crise entre as consultas?</span></div>
+ <div class="strip big" style="left:540px;top:1310px;font-size:40px;transform:translateX(-50%) rotate(-1deg)">MANDA PRA QUEM ESTÁ PROCURANDO</div>
+ <div class="foot" style="top:1420px">Dr. Fabio Schmidt, médico, CRM-SP 183549<br>Conteúdo educativo, não substitui consulta.</div>
+</div>
+</body></html>

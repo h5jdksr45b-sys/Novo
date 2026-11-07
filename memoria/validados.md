@@ -177,3 +177,14 @@ Passaram 2:
 - Querer ficar perfeitamente regulado como cobrança nova ([post](https://www.instagram.com/p/DfMeGBbD7nr/), 2,2x sobre 9,4 mil). 24/30.
 Recusado por 1 ponto: não sei como resposta na conversa difícil ([@0liviapacifico](https://www.tiktok.com/@0liviapacifico/video/7691669715793513750), 570 mil, 18x, 7.629 envios). Novidade 3 (carrossel Alexitimia de 26/04) e prova 3 (Modasi 2025, DOI 10.1037/per0000744, liga alexitimia mais a perturbação de identidade). Ajuste: ângulo de quem convive lendo o não sei como descaso.
 Os outros 17 ficaram abaixo do corte (prova fraca ou ausente, tensão baixa ou tese já feita).
+
+## 2026-11-07: prova de alcance dos temas da rodada 3 e rodada 4 (Vamos, chat 85cc434e, 57 + 60 créditos)
+
+Prova de alcance pedida por ele ("Faça"):
+- Dor física descartada pelo diagnóstico: [@ryanmitchelbrown](https://www.instagram.com/p/DecJ1L-p3VF/), 1.561.175 views, cerca de 53x, 17.860 envios (TOC e depressão, não borderline). Comentário com EUPD no [post de @doc_martin_gp](https://www.instagram.com/p/DehVqSGhzRp/) (9,8x). PubMed: Molloy 2021, revisão de diagnostic overshadowing, DOI 10.1111/jocn.16151.
+- Regulação com raiva presente: [@devin.the.one](https://www.instagram.com/p/DfXOXcORzwk/), 1.128.424 views, cerca de 18x, 26.607 envios. Sem prova direta de "raiva lida como recaída". PubMed: Neacsiu, Rizvi e Linehan 2010, DOI 10.1016/j.brat.2010.05.017 (uso de habilidades da DBT mediou o aumento do controle da raiva).
+Rodada 4, 7 temas novos; passaram 3 no corte do radar:
+- Arrepender-se de ter contado depois de uma conversa acolhedora ([@olamolam8](https://www.instagram.com/p/DeXDZhxKWEN/), 4,1x; vergonha no TPB, DOI 10.1037/per0000655). 26/30.
+- Descanso que vira inquietação ([@wellnesscoachjulia](https://www.tiktok.com/@wellnesscoachjulia/video/7691496342169947399), 2,7 mi, 24.404 envios; evitação experiencial, DOI 10.1186/s40479-024-00248-1). 25/30. Vizinho: carrossel O domingo expõe (17/05).
+- Duvidar se tinha direito de sofrer depois de relação abusiva ([@therapy.with.blake](https://www.instagram.com/p/DfGatmKN8uT/), 22x, 13.321 envios; autoinvalidação, DOI 10.1080/10503307.2022.2025627). 25/30.
+Recusados: parceiro fez depois de pedir (prova clínica 2), hipervigilância (Reel 28/04 e prova 2), contestar elogio (tese de 11/10 e 09/08), visita sem vestígio (prova 2).

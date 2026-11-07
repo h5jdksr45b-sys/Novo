@@ -61,6 +61,7 @@ O detalhe fica nos arquivos de `memoria/`. Aqui só o que muda decisão. Linhas 
 
 ## ATALHOS DE DECISÃO
 
+- Capa de carrossel → rodar `capas-base-tecnica.md` (G × P). N de 80 a 100 posta; 60 a 79 ajusta; abaixo de 60 ou G = 0 barra. Registrar N e envios por mil de alcance no placar. (capas-base-tecnica.md:25-77)
 - Pediu roteiros ou temas virais → Vamos primeiro, com prova por tema, depois escrever. (correcoes.md:134)
 - Pediu só legenda e capa → entregar só isso; erro do vídeo em uma linha, sem reeditar. (correcoes.md:70)
 - Pediu para não mudar o texto → nem uma palavra. (aprendizados.md:48)
@@ -74,6 +75,7 @@ O detalhe fica nos arquivos de `memoria/`. Aqui só o que muda decisão. Linhas 
 
 ## LACUNAS CONHECIDAS
 
+- Capa base técnica contra regras antigas: G4 conta BORDERLINE SEM ESTIGMA no topo como texto pequeno, mas o molde de capa de 28/10 usa essa linha (correcoes.md:71); a negação que corrige crença (Funcional não é leve) é o mecanismo nº 1 do documento e bate no anti-pattern de contraste (aprendizados.md:11, a-decidir.md:25-27). Provisório: seguir a base técnica (é a mais nova) e evitar só a fórmula de dois polos não é X, é Y.
 - Prioridade dos Reels: as preferências fixas dizem que recuperar o alcance é prioridade; ele disse em 28/10 que não é ("O alcance do Reel está ótimo"). Trava a função de cada peça. (aprendizados.md:69, checklist-entrega.md:34)
 - Contraste na capa: 3 dos 5 gigantes usam contraste explícito, contra a regra de 24/10. Trava capa nova. (a-decidir.md:25-27)
 - Fundo preto e neurobiologia no feed: gigantes escuros e o do cérebro (109 mil) contra as regras dele. Regra provisória: seguir a regra e perguntar. (a-decidir.md:7-17)
@@ -83,4 +85,4 @@ O detalhe fica nos arquivos de `memoria/`. Aqui só o que muda decisão. Linhas 
 
 ## PONTEIROS
 
-Regras com prova: `aprendizados.md` · Correções novas: `correcoes.md` · Checagem antes de entregar: `checklist-entrega.md` · Veredito: `termometro.md`, `placar-vereditos.md` · Reel: `reels-certeiros.md`, `efeitos-video-aprovados.md` · Capa: `capas-gigantes.md`, `mecanismos-gigantes.md` · Teses usadas: `ja-produzido.md` e skill `historico-borderline-180d` · Oferta e preços: `conta.md` · Em aberto: `a-decidir.md`
+Regras com prova: `aprendizados.md` · Correções novas: `correcoes.md` · Checagem antes de entregar: `checklist-entrega.md` · Veredito: `termometro.md`, `placar-vereditos.md` · Reel: `reels-certeiros.md`, `efeitos-video-aprovados.md` · Capa: `capas-base-tecnica.md` (nota G × P), `capas-gigantes.md`, `mecanismos-gigantes.md` · Teses usadas: `ja-produzido.md` e skill `historico-borderline-180d` · Oferta e preços: `conta.md` · Em aberto: `a-decidir.md`

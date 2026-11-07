@@ -267,6 +267,11 @@
   ],
   "atalhos": [
     {
+      "se": "Capa de carrossel",
+      "entao": "Rodar capas-base-tecnica.md (G × P). N de 80 a 100 posta; 60 a 79 ajusta; abaixo de 60 ou G = 0 barra. Registrar N e envios por mil de alcance no placar.",
+      "fonte": "memoria/capas-base-tecnica.md:25-77"
+    },
+    {
       "se": "Pediu roteiros ou temas virais",
       "entao": "Vamos primeiro, com prova por tema, depois escrever.",
       "fonte": "memoria/correcoes.md:134"
@@ -318,6 +323,7 @@
     }
   ],
   "lacunas": [
+    "Capa base técnica contra regras antigas: G4 conta BORDERLINE SEM ESTIGMA no topo como texto pequeno, mas o molde de 28/10 usa essa linha (correcoes.md:71); a negação que corrige crença é o mecanismo nº 1 do documento e bate no anti-pattern de contraste (aprendizados.md:11, a-decidir.md:25-27). Provisório: seguir a base técnica e evitar só a fórmula de dois polos não é X, é Y.",
     "Prioridade dos Reels: preferências fixas dizem que recuperar alcance é prioridade; em 28/10 ele disse que não é (aprendizados.md:69). Trava a função de cada peça.",
     "Contraste na capa: 3 dos 5 gigantes usam contraste explícito, contra a regra de 24/10 (a-decidir.md:25-27).",
     "Fundo preto e neurobiologia no feed: gigantes contra as regras dele. Provisório: seguir a regra e perguntar (a-decidir.md:7-17).",

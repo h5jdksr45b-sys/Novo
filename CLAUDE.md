@@ -2,6 +2,10 @@
 
 Repositório do Dr. Fabio Schmidt (@drfabioschmidt).
 
+## Antes de qualquer resposta ou tarefa
+
+Leia `memoria/BRAIN.md` e `memoria/brain.json`. As regras do BRAIN.md prevalecem sobre preferência do Claude. Se violar um anti-pattern, registre na hora em `memoria/brain-log.md` (direto no `main`, como o resto de `memoria/`) e atualize `ultima_violacao` no `brain.json`. Pedido dele em 07/11/2026.
+
 ## Antes de criar ou revisar qualquer peça
 
 Leia, nesta ordem:

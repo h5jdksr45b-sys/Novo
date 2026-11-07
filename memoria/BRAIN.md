@@ -75,7 +75,6 @@ O detalhe fica nos arquivos de `memoria/`. Aqui só o que muda decisão. Linhas 
 ## LACUNAS CONHECIDAS
 
 - Prioridade dos Reels: as preferências fixas dizem que recuperar o alcance é prioridade; ele disse em 28/10 que não é ("O alcance do Reel está ótimo"). Trava a função de cada peça. (aprendizados.md:69, checklist-entrega.md:34)
-- Contagem de slides: `checklist-entrega.md:39` ainda diz pelo menos 8; a regra de 04/11 é no máximo 8. Checklist desatualizado. (aprendizados.md:88)
 - Contraste na capa: 3 dos 5 gigantes usam contraste explícito, contra a regra de 24/10. Trava capa nova. (a-decidir.md:25-27)
 - Fundo preto e neurobiologia no feed: gigantes escuros e o do cérebro (109 mil) contra as regras dele. Regra provisória: seguir a regra e perguntar. (a-decidir.md:7-17)
 - Nome do livro: "Quem sofre não escolhe como gritar" ou "Quando Escolher Não É Possível". Trava qualquer peça que cite o livro. (a-decidir.md:19-23)

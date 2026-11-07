@@ -152,3 +152,10 @@ O que se repete: a pergunta que sobra é o passo seguinte ao reconhecimento (com
 Ficaram, com ângulo novo: validar sem confessar acusação falsa (parente de Raciocínio emocional e Borderline mente); me identifiquei com tudo, e agora? (parente de Nove moedas); o que fazer quando a pessoa se fecha (parente de Borderline silencioso 30/09); euforia depois de uma mensagem e bipolar junto (parente de Estabilizador 12/10); TPB com TDAH ou TEPT complexo ao mesmo tempo; remissão, sentir menos ou segurar melhor (demanda fraca).
 
 Descartados: narcisismo e relação abusiva (carrossel 12/10, PCL-R, lote de estigmas); suspeita confirmada e intuição (paranoia confirmada já descartada em 01/11 por risco clínico); splitting permanente (R01 rejeitado); dissociação (descartada em 01/11; só volta se o ângulo for quando procurar avaliação).
+
+## 2026-11-07: radar de pauta, rodada 1 (Vamos, chat 85cc434e, 57 créditos)
+
+Pedido dele: protocolo radar de pauta (ver `radar-pauta.md`), modo SINALIZAR. O Vamos fechou 3, não 5, para não repetir ângulo.
+- [@softcomplexities, ruminação](https://www.instagram.com/p/De4gy-tvLpD/): 484.411 views, cerca de 7,1x (24/10). Ângulo: repassar a briga na cabeça até senti-la de novo. Vizinho no histórico: carrossel de 14/05 Mulher que parece dura ensaiou a frase por três horas (ensaio antes, não repetição depois). Prova sugerida: DOI 10.1016/j.cpr.2012.03.002, conferir o trecho sobre ruminação. Nota do radar 25/30, passou.
+- [@psi.matheusmattos, borderline e maconha](https://www.instagram.com/p/DfQb1Dlg7NO/): 39.285 views, pelo menos 3,4x em 4 dias (02/11), 313 comentários com relatos opostos. Prova sugerida: DOI 10.1186/s40479-018-0093-9 (TPB e uso de substância, geral; não sustenta que cannabis sempre piora). Nota do radar 25/30, passou.
+- [@myborderlineview, imagem cerebral](https://www.instagram.com/p/DeUkmv7mahJ/): 139.041 views, cerca de 10x (10/10). Ângulo: querer exame para ser acreditado. Nota do radar 22/30, recusado (novidade 3, vizinho do gigante do cérebro e da regra sem neurobiologia no feed).

@@ -6,6 +6,7 @@ import { Tape } from "../components/Tape";
 import { TitleStrips } from "../components/TitleStrips";
 import { C, SAFE, TITLE_FONT } from "../lib/theme";
 import { progress, stepped, useLayout } from "../lib/stop";
+import { useTiming } from "../lib/timing";
 
 type Band = { label: string; n: number; bg: string; fg: string };
 const BANDS: Band[] = [
@@ -16,13 +17,11 @@ const BANDS: Band[] = [
 ];
 // Ordem em que os dez bonecos caem (indice da camada).
 const ORDER = [0, 0, 1, 0, 2, 0, 1, 3, 0, 1];
-const FIRST_DROP = 30;
-const INTERVAL = 13;
-const FALL = 12;
 
 export const Scene3Funil: React.FC = () => {
   const frame = useCurrentFrame();
   const { horiz } = useLayout();
+  const { firstDrop: FIRST_DROP, interval: INTERVAL, fall: FALL } = useTiming().sc3;
   const L = horiz
     ? { cx: 1360, top: 200, bandH: 168, gap: 18, widths: [800, 680, 560, 440], inset: 50, fig: 98, label: 74, title: { x: SAFE, y: 300, size: 100, maxWidth: 780 } }
     : { cx: 540, top: 660, bandH: 236, gap: 22, widths: [840, 720, 600, 480], inset: 60, fig: 124, label: 90, title: { x: SAFE, y: 150, size: 112, maxWidth: 840 } };
@@ -113,7 +112,7 @@ export const Scene3Funil: React.FC = () => {
         const y = interpolate(g, [0, 1], [L.top + L.bandH * 0.45, d.slot.y]);
         const landed = stepped(frame) - d.at >= FALL;
         const sinceLand = stepped(frame) - d.at - FALL;
-        const wobble = landed ? (sinceLand < 3 ? 6 : sinceLand < 6 ? -3 : 0) : (d.k % 2 ? 14 : -14) * (1 - t);
+        const wobble = landed ? (sinceLand < 3 ? 6 : sinceLand < 5 ? -3 : 0) : (d.k % 2 ? 14 : -14) * (1 - t);
         return (
           <PaperFigure
             key={d.k}

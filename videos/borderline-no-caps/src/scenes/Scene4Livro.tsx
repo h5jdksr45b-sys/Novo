@@ -7,13 +7,10 @@ import { Tape } from "../components/Tape";
 import { Typed } from "../components/Typed";
 import { C, TITLE_FONT } from "../lib/theme";
 import { FrozenCtx, progress, stepIndex, useLayout, useShake } from "../lib/stop";
+import { useTiming } from "../lib/timing";
 
 export const BOOK_W = 640;
 export const BOOK_H = 900;
-const STAMP_AT = 40;
-const HANDLE_AT = 62;
-/** A partir deste quadro local a cena fica parada (ultimos 2 s). */
-export const FREEZE_AT = 90;
 
 const Cover: React.FC = () => (
   <PaperCutout x={0} y={0} width={BOOK_W} height={BOOK_H} seed={501} color={C.cream} rough={9} lift={0.25}>
@@ -46,6 +43,7 @@ const Scene4Inner: React.FC = () => {
   const L = horiz
     ? { bx: 300, by: 180, scale: 0.82, hx: 960, hy: 480, hsize: 86, stamp: { x: 150, y: 540 } }
     : { bx: 220, by: 350, scale: 1, hx: 0, hy: 1360, hsize: 96, stamp: { x: 150, y: 540 } };
+  const { stampAt: STAMP_AT, handleAt: HANDLE_AT } = useTiming().sc4;
   const shake = useShake([0 + 14, STAMP_AT + STAMP_IMPACT]);
   const p = Easing.out(Easing.cubic)(progress(frame, 0, 14));
   const rot = interpolate(p, [0, 1], [14, -2]);
@@ -95,7 +93,7 @@ const Scene4Inner: React.FC = () => {
 export const Scene4Livro: React.FC = () => {
   const frame = useCurrentFrame();
   return (
-    <FrozenCtx.Provider value={frame >= FREEZE_AT}>
+    <FrozenCtx.Provider value={frame >= useTiming().sc4.freezeAt}>
       <Scene4Inner />
     </FrozenCtx.Provider>
   );

@@ -8,8 +8,9 @@ import { TitleStrips } from "../components/TitleStrips";
 import { Typed } from "../components/Typed";
 import { C, SAFE, TITLE_FONT } from "../lib/theme";
 import { progress, useLayout, useShake } from "../lib/stop";
+import { useTiming } from "../lib/timing";
 
-const STAMPS = [
+const STAMP_DEFS = [
   { text: "ACOLHIMENTO", at: 40, x: 50, y: 575, fontSize: 70, color: C.red, rotate: -7 },
   { text: "PS", at: 72, x: 535, y: 548, fontSize: 116, color: C.ink, rotate: 9 },
   { text: "RETORNO", at: 104, x: 70, y: 790, fontSize: 84, color: C.red, rotate: 5 },
@@ -22,8 +23,15 @@ const BOX = 96;
 const BOX_X = (i: number) => 52 + i * 140;
 const BOX_Y = 405;
 
+const useStamps = () => {
+  const t = useTiming();
+  return STAMP_DEFS.map((s, i) => ({ ...s, at: t.sc1.stamps[i] }));
+};
+
 const Ficha: React.FC = () => {
   const frame = useCurrentFrame();
+  const STAMPS = useStamps();
+  const t = useTiming();
   return (
     <PaperCutout x={0} y={0} width={FICHA_W} height={FICHA_H} seed={11} color={C.cream} rough={9} lift={0.2}>
       <PaperCutout x={40} y={44} width={700} height={118} seed={12} color={C.ink} rough={5} jitter={0.4}>
@@ -75,7 +83,7 @@ const Ficha: React.FC = () => {
       {/* A quinta: circulo de caneta */}
       <PenArrow
         d={`M ${BOX_X(4) + 48} ${BOX_Y - 22} C ${BOX_X(4) + 140} ${BOX_Y - 24}, ${BOX_X(4) + 132} ${BOX_Y + 124}, ${BOX_X(4) + 46} ${BOX_Y + 122} C ${BOX_X(4) - 34} ${BOX_Y + 120}, ${BOX_X(4) - 40} ${BOX_Y - 16}, ${BOX_X(4) + 60} ${BOX_Y - 30}`}
-        progress={progress(frame, 152, 10)}
+        progress={progress(frame, t.sc1.circle, 10)}
         color={C.red}
         width={9}
         seed={41}
@@ -92,6 +100,7 @@ const Ficha: React.FC = () => {
 export const Scene1Ficha: React.FC = () => {
   const frame = useCurrentFrame();
   const { horiz } = useLayout();
+  const STAMPS = useStamps();
   const shake = useShake(STAMPS.map((s) => s.at + STAMP_IMPACT));
   const p = Easing.out(Easing.cubic)(progress(frame, 0, 20));
   const rot = interpolate(p, [0, 1], [-30, -3]);

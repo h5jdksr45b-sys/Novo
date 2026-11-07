@@ -8,11 +8,12 @@ import { TitleStrips } from "../components/TitleStrips";
 import { Typed } from "../components/Typed";
 import { C, SAFE } from "../lib/theme";
 import { progress, stepIndex, stepped, useLayout } from "../lib/stop";
+import { useTiming } from "../lib/timing";
 
 // Trajeto do boneco em unidades do raio da porta, a partir do centro.
 // Entra pela esquerda, gira ate o lado do servico, volta e sai pela direita. Duas vezes.
 type Key = { t: number; p: [number, number] };
-const path = (svcY: number, streetY: number): Key[] => {
+const path = (svcY: number, streetY: number, k: number): Key[] => {
   const sL: [number, number] = [-0.72, streetY];
   const sR: [number, number] = [0.72, streetY];
   const inL: [number, number] = [-0.46, 0.46];
@@ -20,7 +21,7 @@ const path = (svcY: number, streetY: number): Key[] => {
   const upL: [number, number] = [-0.46, -0.46];
   const upR: [number, number] = [0.46, -0.46];
   const svc: [number, number] = [0.68, svcY];
-  return [
+  const keys: Key[] = [
     { t: 4, p: sL },
     { t: 16, p: inL },
     { t: 28, p: upR },
@@ -38,6 +39,7 @@ const path = (svcY: number, streetY: number): Key[] => {
     { t: 150, p: inR },
     { t: 160, p: sR },
   ];
+  return keys.map((x) => ({ ...x, t: x.t * k }));
 };
 
 const sample = (keys: Key[], f: number): { p: [number, number]; moving: boolean } => {
@@ -118,11 +120,12 @@ export const Scene2Porta: React.FC = () => {
   const L = horiz
     ? { cx: 1420, cy: 540, r: 250, svcY: -1.16, streetY: 1.42, fig: 100, wallFrom: 1040, title: { x: SAFE, y: 250, size: 92, maxWidth: 820 } }
     : { cx: 540, cy: 1200, r: 300, svcY: -1.4, streetY: 1.5, fig: 128, wallFrom: SAFE, title: { x: SAFE, y: 150, size: 84, maxWidth: 840 } };
-  const keys = path(L.svcY, L.streetY);
+  const tm = useTiming();
+  const keys = path(L.svcY, L.streetY, tm.sc2.pathScale);
   const { p, moving } = sample(keys, stepped(frame));
   const fx = L.cx + p[0] * L.r;
   const fy = L.cy + p[1] * L.r;
-  const arrowP = Easing.out(Easing.quad)(progress(frame, 18, 12));
+  const arrowP = Easing.out(Easing.quad)(progress(frame, 18 * tm.sc2.pathScale, 12));
   const ar = L.r + 46;
 
   return (
@@ -135,7 +138,7 @@ export const Scene2Porta: React.FC = () => {
         lines={[
           { text: "NA MAIORIA DAS VEZES,", at: 4, size: L.title.size },
           { text: "O PROBLEMA É O FLUXO.", at: 10, size: L.title.size },
-          { text: "NÃO A PACIENTE.", at: 92, size: L.title.size * 1.15, bg: C.red, color: C.cream },
+          { text: "NÃO A PACIENTE.", at: tm.sc2.thirdLine, size: L.title.size * 1.15, bg: C.red, color: C.cream },
         ]}
       />
       <Door cx={L.cx} cy={L.cy} r={L.r} wallFrom={L.wallFrom} wallTo={W - SAFE} />

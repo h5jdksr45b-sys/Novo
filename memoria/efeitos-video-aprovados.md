@@ -42,6 +42,7 @@ Nenhum outro preset ou efeito deve ser usado sem pedido explícito.
   foram removidos na versão corrigida.
 
 ## Som
+- Biblioteca padrão de efeitos: `memoria/sfx/` (pacote EditorPro dele, 07/11). Usar esses arquivos sempre que houver necessidade; ver `memoria/sfx/README.md`.
 - Whoosh curto e baixo (0,22 s, pico em −27 dBFS) na entrada de cada b-roll.
 - Clique seco e baixo (12 ms, pico em −26 dBFS) nos zooms.
 - Sem graves ("boom") nem efeitos chamativos.

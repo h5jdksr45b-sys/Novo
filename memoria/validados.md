@@ -168,3 +168,12 @@ Vamos fechou 4 e disse que faltaram 16.
 - [@devonplaster, queimadura de Linehan como falsa medida](https://www.tiktok.com/@devonplaster/video/7696011357468101901): 5,7x. Radar 23/30, recusado.
 - [@devonplaster, boato de não passar dos 25](https://www.tiktok.com/@devonplaster/video/7697006258276044045): 3,6x. Prova: DOI 10.4088/JCP.18m12436. Radar 24/30, só com print do público.
 Temas do Claude que passaram: remissão e recuperação (Zanarini 2010, DOI 10.1176/appi.ajp.2009.09081130, 290 internados, 93% com remissão de 2 anos, 50% com recuperação), 26/30; me identifiquei com tudo e agora (prova do Vamos de 04/11, @alynnemolon 54x), 25/30; validar sem confessar acusação falsa (Vamos 04/11), 25/30. Recusados: aniversário que vira crise, demissão no impulso, corte de cabelo de madrugada (sem prova); pessoa que se fecha (prova contra, 0,32x); comorbidades (tensão 3). Prova da ruminação da rodada 1 achada no PubMed: Richman Czégel 2022, metanálise, DOI 10.1521/pedi.2022.36.4.399.
+
+## 2026-11-07: radar de pauta, rodada 3, 20 do Vamos passados pelo filtro (chat 85cc434e, 60 créditos)
+
+Pedido dele: "Agora peça 20 temas ao vamos e passe pelo filtro". O Vamos entregou 20 (15 com post de prova, 5 sem). Filtro: corte do radar (24/30, nenhum abaixo de 3), G1 da base de capas (tese nos últimos 30 posts) e histórico de 180 dias.
+Passaram 2:
+- Dor física que ouve que é só o borderline (sem post de prova de alcance; PubMed: Nance 2024, DOI 10.1007/s11920-024-01498-0, dificuldades entre paciente com TPB e profissional atrapalham o tratamento da dor crônica; Klein 2022, DOI 10.1186/s13033-022-00558-3, estigma estrutural no atendimento). 26/30.
+- Querer ficar perfeitamente regulado como cobrança nova ([post](https://www.instagram.com/p/DfMeGBbD7nr/), 2,2x sobre 9,4 mil). 24/30.
+Recusado por 1 ponto: não sei como resposta na conversa difícil ([@0liviapacifico](https://www.tiktok.com/@0liviapacifico/video/7691669715793513750), 570 mil, 18x, 7.629 envios). Novidade 3 (carrossel Alexitimia de 26/04) e prova 3 (Modasi 2025, DOI 10.1037/per0000744, liga alexitimia mais a perturbação de identidade). Ajuste: ângulo de quem convive lendo o não sei como descaso.
+Os outros 17 ficaram abaixo do corte (prova fraca ou ausente, tensão baixa ou tese já feita).
